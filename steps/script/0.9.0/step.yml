@@ -1,0 +1,95 @@
+title: "Script"
+summary: Run a script
+description: |
+  Specify the script content and (optionally) the script runner
+  binary and this step will execute it.
+
+  The *runner* can even be a command, if it's available in the PATH
+  and can execute the script it will work.
+
+  For example to run a [Go](https://golang.org/) Hello World "script"
+  you can define the content:
+
+      package main
+      import "fmt"
+      func main() {
+          fmt.Println("hello world")
+      }
+
+  Set the *Execute with* parameter to `go run` and specify
+  a *script file path* because `go run` can only accept (at the moment)
+  files with a .go extension (just specify `step.go` as the script path).
+
+  If the `go` binary can be found in the PATH your Hello World
+  script will run without any problem.
+website: https://github.com/bitrise-io/steps-script
+fork_url: https://github.com/bitrise-io/steps-script
+source:
+  git: https://github.com/bitrise-io/steps-script.git
+host_os_tags:
+  - osx-10.10
+project_type_tags: []
+type_tags:
+  - script
+is_requires_admin_user: true
+inputs:
+- content: |
+    #!/bin/bash
+    echo "Welcome to Bitrise!!"
+  opts:
+    title: "Script content"
+    description: |
+      Type your script here.
+    is_expand: false
+    is_required: true
+- runner_bin: "/bin/bash"
+  opts:
+    title: "Execute with / runner binary"
+    description: |
+      The executor to be used for running the script.
+      If it's available in the PATH you can just
+      specify `ruby` or `python`, generally
+      if you know the path of the executor you should
+      define that, like `/bin/bash`.
+
+      You can even specify an execution command
+      like `go run` instead of just a binary.
+    is_expand: false
+    is_required: true
+- is_debug: "no"
+  opts:
+    title: "Debug?"
+    description: |
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    value_options:
+        - "no"
+        - "yes"
+    is_expand: false
+    is_required: false
+- working_dir: ""
+  opts:
+    title: "Working directory"
+    description: |
+      This directory will be set as the current working
+      directory for the script.
+    is_expand: true
+    is_required: false
+- script_file_path: ""
+  opts:
+    title: "Script file path"
+    description: |
+      Save the specified script content to this path
+      before execution. The file will be removed after
+      the script finishes.
+
+      Generally you don't have to define this but
+      there might be cases where the file's name or path
+      actually matters.
+      For example `go run` only accepts `.go` files.
+
+      If you specify a relative path then it will be
+      relative to the *working directory* (which you
+      can optinally specify as well).
+    is_expand: true
+    is_required: false

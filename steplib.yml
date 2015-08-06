@@ -1,0 +1,7 @@
+---
+format_version: 0.9.9
+download_locations:
+  - type: zip
+    src: https://bitrise-steps-spec-downloads-test.s3.amazonaws.com/steps/
+  - type: git
+    src: source/git
