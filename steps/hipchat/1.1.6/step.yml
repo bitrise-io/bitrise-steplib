@@ -6,9 +6,10 @@ description: |
   **This Step requires a HipChat account.**
   [Click here](https://www.hipchat.com) to sign in or sign up on HipChat, for free.
 website: https://github.com/bitrise-io/steps-hipchat
-fork_url: https://github.com/bitrise-io/steps-hipchat
+source_code_url: https://github.com/bitrise-io/steps-hipchat
 source:
   git: https://github.com/bitrise-io/steps-hipchat.git
+  commit: 2ef77d838cc2136fc4b8c63ae85e5fa42993180d
 host_os_tags:
   - osx-10.10
 type_tags:
