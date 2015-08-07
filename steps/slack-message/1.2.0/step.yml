@@ -12,9 +12,10 @@ description: |
   *Don't forget to enable this Step to **Always run** if
   you want to get notified about failed builds as well!*
 website: https://github.com/bitrise-io/steps-slack-message
-fork_url: https://github.com/bitrise-io/steps-slack-message
+source_code_url: https://github.com/bitrise-io/steps-slack-message
 source:
   git: https://github.com/bitrise-io/steps-slack-message.git
+  commit: 73a01fff49633d1993df87fd80f21ae6526113ff
 host_os_tags:
   - osx-10.9
   - osx-10.10
