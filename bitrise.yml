@@ -1,0 +1,55 @@
+format_version: 0.9.8
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib
+app:
+  envs: []
+workflows:
+
+  generate:
+    title: Workflow for testing, PR check
+    envs: []
+    steps:
+    - script:
+        title: Generate
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            tmp_dir="$(pwd)/_tmp"
+            mkdir -p "${tmp_dir}"
+            spec_path="${tmp_dir}/spec.json"
+            stepman setup --local -c "$(pwd)" --copy-spec-json="${spec_path}"
+            envman add --key SPEC_JSON_PATH --value "${spec_path}"
+    - script:
+        title: tmp
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
+
+  deploy:
+    title: Workflow for deployment
+    before_run:
+      - generate
+    after_run: []
+    envs:
+      - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
+    steps:
+    - script:
+        title: Generate
+        dependencies:
+          - manager: brew
+            name: s3cmd
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            if [ ! -f "${SPEC_JSON_PATH}" ] ; then
+              echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
+              exit 1
+            fi
+            set -v
+            bash ./_scripts/deploy.sh
