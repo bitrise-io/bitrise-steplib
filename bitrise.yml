@@ -9,6 +9,14 @@ workflows:
     envs: []
     steps:
     - script:
+        title: Remove previous version of this local spec from stepman
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            stepman delete -c "$(pwd)"
+    - script:
         title: Generate
         inputs:
         - content: |-
