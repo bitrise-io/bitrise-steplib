@@ -81,4 +81,4 @@ workflows:
               exit 1
             fi
             set -v
-            bash ./_scripts/deploy.sh
+            bash ./_scripts/deploy/deploy.sh
