@@ -20,7 +20,7 @@ fi
 set -v
 
 # normalized repo_root_dir
-repo_root_dir="${THIS_SCRIPT_DIR}/.."
+repo_root_dir="${THIS_SCRIPT_DIR}/../.."
 cd "${repo_root_dir}"
 repo_root_dir="$(pwd)"
 echo "repo_root_dir: ${repo_root_dir}"
