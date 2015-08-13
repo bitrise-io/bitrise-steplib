@@ -23,6 +23,7 @@ workflows:
             #!/bin/bash
             set -e
             set -v
+            git fetch
             git diff --name-only HEAD origin/master
     - script:
         title: Generate
