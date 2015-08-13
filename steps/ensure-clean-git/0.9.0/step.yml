@@ -1,0 +1,19 @@
+title: Ensure clean git
+description: |-
+  Fails if there's any uncommitted change in the git repository.
+
+  Calls `git status` and fails if it reports any changed/uncommitted file.
+summary: Make sure there are no uncommitted changes in the git repository
+website: https://github.com/bitrise-io/steps-ensure-clean-git
+source_code_url: https://github.com/bitrise-io/steps-ensure-clean-git
+support_url: https://github.com/bitrise-io/steps-ensure-clean-git/issues
+source:
+  git: https://github.com/bitrise-io/steps-ensure-clean-git.git
+  commit: a3fa0a5aeebc22046bf4d1ce4080e86a7451de82
+host_os_tags:
+- osx-10.10
+type_tags:
+- git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
