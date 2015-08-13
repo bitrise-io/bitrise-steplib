@@ -9,13 +9,21 @@ workflows:
     envs: []
     steps:
     - script:
+        title: Set TMP_COLLECTION_ID
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            envman add --key TMP_COLLECTION_ID --value "$(pwd)"
+    - script:
         title: Remove previous version of this local spec from stepman
         inputs:
         - content: |-
             #!/bin/bash
             set -e
             set -v
-            stepman delete -c "$(pwd)"
+            stepman delete -c "${TMP_COLLECTION_ID}"
     - script:
         title: Generate
         inputs:
@@ -26,7 +34,7 @@ workflows:
             tmp_dir="$(pwd)/_tmp"
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
-            stepman setup --local -c "$(pwd)" --copy-spec-json="${spec_path}"
+            stepman setup --local -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
     - script:
         title: tmp
@@ -35,6 +43,19 @@ workflows:
             #!/bin/bash
             set -e
             echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
+    - script:
+        title: List of changed files
+        dependencies:
+        - manager: brew
+          name: go
+        inputs:
+        - content: |-
+            set -e
+            localtest_param=""
+            if [[ "${IS_LOCAL_TEST}" == "true" ]] ; then
+              localtest_param="--localtest"
+            fi
+            go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
   deploy:
     title: Workflow for deployment
