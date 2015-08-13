@@ -17,6 +17,14 @@ workflows:
             set -v
             stepman delete -c "$(pwd)"
     - script:
+        title: List of changed files
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            git diff --name-only HEAD origin/master
+    - script:
         title: Generate
         inputs:
         - content: |-
