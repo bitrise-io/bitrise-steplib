@@ -1,0 +1,94 @@
+title: Send HipChat message
+summary: Send a hipchat.com message to a room.
+description: |
+  Send a [HipChat](https://www.hipchat.com) message to a room.
+
+  **This Step requires a HipChat account.**
+  [Click here](https://www.hipchat.com) to sign in or sign up on HipChat, for free.
+website: https://github.com/bitrise-io/steps-hipchat
+source_code_url: https://github.com/bitrise-io/steps-hipchat
+source:
+  git: https://github.com/bitrise-io/steps-hipchat.git
+  commit: d9e6506249a279c07a67f3488dd0abca79a22f72
+host_os_tags:
+  - osx-10.10
+type_tags:
+  - IM
+  - notification
+is_requires_admin_user: false
+is_always_run: true
+inputs:
+  - HIPCHAT_TOKEN:
+    opts:
+      title: HipChat Auth Token
+      description: |
+        This Step uses HipChat API v1, you can register
+        a v1 API Token at [https://www.hipchat.com/admin/api](https://www.hipchat.com/admin/api).
+      is_expand: false
+      is_required: true
+  - HIPCHAT_ROOMID:
+    opts:
+      title: HipChat RoomID
+      description: |
+        You can get the *room id* of any HipChat room by selecting *Rooms > Summary > API ID*.
+      is_expand: false
+      is_required: true
+  - HIPCHAT_FROMNAME:
+    opts:
+      title: "From Name"
+      description: |
+        The one which should be presented as the sender of the message.
+
+        *max 15 characters*
+      is_expand: false
+      is_required: true
+  - HIPCHAT_ERROR_FROMNAME:
+    opts:
+      title: "From Name - if the build failed"
+      description: |
+        **This option will be used if the build failed.** If you
+        leave this option empty then the default one will be use.
+
+        *max 15 characters*
+      is_expand: false
+      is_required: false
+  - HIPCHAT_MESSAGE:
+    opts:
+      title: "The message you want to send"
+      is_expand: true
+      is_required: true
+  - HIPCHAT_ERROR_MESSAGE:
+    opts:
+      title: "The message you want to send - if the build failed"
+      description: |
+        **This option will be used if the build failed.** If you
+        leave this option empty then the default one will be used.
+      is_expand: true
+      is_required: false
+  - HIPCHAT_MESSAGE_COLOR: green
+    opts:
+      title: Message Color
+      value_options:
+        - yellow
+        - red
+        - green
+        - purple
+        - gray
+        - random
+      is_expand: false
+      is_required: false
+  - HIPCHAT_ERROR_MESSAGE_COLOR: red
+    opts:
+      title: Message Color - if the build failed
+      description: |-
+        **This option will be used if the build failed.** If you
+        leave this option empty then the default one will be used.
+      value_options:
+        - yellow
+        - red
+        - green
+        - purple
+        - gray
+        - random
+      is_expand: false
+      is_required: false
