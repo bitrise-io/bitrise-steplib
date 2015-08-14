@@ -88,6 +88,18 @@ func auditChangedStepYML(stepYmlPth string) error {
 		return fmt.Errorf("Audit failed for (%s), error: %s", stepYmlPth, err)
 	}
 
+	log.Println("==> Step's main folder content: ")
+	stepMainDirPth := "./steps/" + stepID
+	lsOut, err := runCommandAndReturnCombinedOutputs("ls", "-alh", stepMainDirPth)
+	log.Println()
+	log.Println(lsOut)
+	if err != nil {
+		log.Println("Failed to 'ls -alh' the Step's main folder: ", stepMainDirPth)
+		log.Println("Error: ", err)
+		return err
+	}
+	log.Println()
+
 	log.Println("==> Auditing step: ", stepID, " | version: ", stepVer)
 	//
 	tmpStepActPth, err := normalizedOSTempDirPath("" + stepID + "--" + stepVer)
