@@ -1,12 +1,15 @@
 format_version: 0.9.8
-default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 app:
   envs: []
 workflows:
 
-  generate:
+  _generate:
     title: Workflow for testing, PR check
-    envs: []
+    description: |-
+      Adds a clean copy of this StepLib collection to stepman,
+      calls a setup on it, moves the generated spec.json to
+      a specified path and makes the path available for other workflows.
     steps:
     - script:
         title: Set TMP_COLLECTION_ID
@@ -43,6 +46,15 @@ workflows:
             #!/bin/bash
             set -e
             echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
+
+  pr_audit:
+    title: Pull Request audit
+    description: |-
+      Performs an audit only on the changed step.yml files, and on the
+      related Steps.
+    before_run:
+    - _generate
+    steps:
     - script:
         title: List of changed files
         dependencies:
@@ -57,10 +69,27 @@ workflows:
             fi
             go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
+  full_audit:
+    title: Full Audit
+    description: |-
+      Performs a full audit on the collection.
+    before_run:
+    - _generate
+    steps:
+    - script:
+        title: Run full audit on the StepLib collection
+        inputs:
+        - content: |-
+            set -e
+            set -v
+            stepman audit --collection "${TMP_COLLECTION_ID}"
+
   deploy:
     title: Workflow for deployment
+    description: |-
+      Deploys the StepLib to Amazon S3
     before_run:
-      - generate
+      - full_audit
     after_run: []
     envs:
       - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
