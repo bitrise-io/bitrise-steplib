@@ -15,7 +15,7 @@ source_code_url: https://github.com/bitrise-io/steps-slack-message
 support_url: https://github.com/bitrise-io/steps-slack-message/issues
 source:
   git: https://github.com/bitrise-io/steps-slack-message.git
-  commit: 30c8262aff084b48c1a4fe0b953afb07a8268838
+  commit: 756f39f76f94d525aaea2fc2d0c5a23799f8ec97
 host_os_tags:
 - osx-10.10
 type_tags:
@@ -76,8 +76,7 @@ inputs:
       icon. You can use the Ghost icon for example
       if you specify `:ghost:` here as an input.
 
-      **If you specify an Icon URL as icon then this
-      Emoji input will be ignored!**
+      **If you specify an Icon URL then this Emoji input will be ignored!**
     is_expand: true
     is_required: false
     title: Emoji Icon
@@ -100,7 +99,7 @@ inputs:
       and it must be smaller than 64K in size.
       Slack custom emoji guideline: [https://slack.zendesk.com/hc/en-us/articles/202931348-Using-emoji-and-emoticons](https://slack.zendesk.com/hc/en-us/articles/202931348-Using-emoji-and-emoticons)
 
-      *If you this input the Emoji input will be ignored!*
+      *If you specify this input, the Emoji input will be ignored!*
     is_expand: true
     is_required: false
     title: Icon URL
