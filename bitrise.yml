@@ -26,9 +26,9 @@ workflows:
         - from_username: "${BITRISE_APP_TITLE} - OK"
         - from_username_on_error: "${BITRISE_APP_TITLE} - ERROR"
         - message: |-
+            Workflow: *${BITRISE_WORKFLOW_ID}*
             Branch: ${BITRISE_GIT_BRANCH}
             Build URL: ${BITRISE_BUILD_URL}
-            Workflow: ${BITRISE_WORKFLOW_ID}
 
   _generate:
     title: Workflow for testing, PR check
