@@ -7,11 +7,14 @@ source_code_url: https://github.com/bitrise-io/steps-timestamp
 support_url: https://github.com/bitrise-io/steps-timestamp/issues
 source:
   git: https://github.com/bitrise-io/steps-timestamp.git
-  commit: 14f9d19990185bd5fa698abc4951de47af3befc3
+  commit: 97f1ac0d48e1450cb71f0dd6dc28f76e88c49c35
 host_os_tags:
 - osx-10.10
 type_tags:
 - utility
+dependencies:
+- manager: brew
+  name: go
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
