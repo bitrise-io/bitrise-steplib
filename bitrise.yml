@@ -119,15 +119,14 @@ workflows:
     description: |-
       Deploys the StepLib to Amazon S3
     envs:
-      - BITRISE_WORKFLOW_ID: deploy
+      - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+      - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
+      - BITRISE_WORKFLOW_ID: "DEPLOY"
     before_run:
     - full_audit
     after_run:
     - _notifications
-    envs:
-      - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-      - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
     steps:
     - script:
         title: Generate
