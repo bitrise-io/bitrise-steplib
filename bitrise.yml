@@ -1,8 +1,34 @@
-format_version: 0.9.8
+format_version: 0.9.10
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
 app:
-  envs: []
+  envs:
+  # define these ENVs in your .bitrise.secrets.yml
+  - AWS_ACCESS_KEY_ID:
+  - AWS_SECRET_ACCESS_KEY:
+  - S3_UPLOAD_BUCKET:
+  - S3_UPLOAD_BUCKET_REGION:
+  - IS_LOCAL_TEST:
+  - BITRISE_GIT_BRANCH:
+  - BITRISE_BUILD_URL:
+  - BITRISE_APP_TITLE:
+  - SLACK_WEBHOOK_URL:
+  - SLACK_CHANNEL:
+
 workflows:
+
+  _notifications:
+    steps:
+    - slack:
+        inputs:
+        - webhook_url: "${SLACK_WEBHOOK_URL}"
+        - channel: "${SLACK_CHANNEL}"
+        - from_username: "${BITRISE_APP_TITLE} - OK"
+        - from_username_on_error: "${BITRISE_APP_TITLE} - ERROR"
+        - message: |-
+            Workflow: *${BITRISE_WORKFLOW_ID}*
+            Branch: ${BITRISE_GIT_BRANCH}
+            Build URL: ${BITRISE_BUILD_URL}
 
   _generate:
     title: Workflow for testing, PR check
@@ -52,8 +78,12 @@ workflows:
     description: |-
       Performs an audit only on the changed step.yml files, and on the
       related Steps.
+    envs:
+      - BITRISE_WORKFLOW_ID: pr_audit
     before_run:
     - _generate
+    after_run:
+    - _notifications
     steps:
     - script:
         title: List of changed files
@@ -88,9 +118,12 @@ workflows:
     title: Workflow for deployment
     description: |-
       Deploys the StepLib to Amazon S3
+    envs:
+      - BITRISE_WORKFLOW_ID: deploy
     before_run:
-      - full_audit
-    after_run: []
+    - full_audit
+    after_run:
+    - _notifications
     envs:
       - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
@@ -111,3 +144,9 @@ workflows:
             fi
             set -v
             bash ./_scripts/deploy/deploy.sh
+
+  quicktest:
+    description: |-
+      A workflow for testing quick bitrise.yml changes
+    after_run:
+    - _notifications
