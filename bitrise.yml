@@ -1,13 +1,50 @@
-format_version: 0.9.8
-default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib
+format_version: 0.9.10
+default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+
 app:
-  envs: []
+  envs:
+  # define these ENVs in your .bitrise.secrets.yml
+  - AWS_ACCESS_KEY_ID:
+  - AWS_SECRET_ACCESS_KEY:
+  - S3_UPLOAD_BUCKET:
+  - S3_UPLOAD_BUCKET_REGION:
+  - IS_LOCAL_TEST:
+  - BITRISE_GIT_BRANCH:
+  - BITRISE_BUILD_URL:
+  - BITRISE_APP_TITLE:
+  - SLACK_WEBHOOK_URL:
+  - SLACK_CHANNEL:
+
 workflows:
 
-  generate:
-    title: Workflow for testing, PR check
-    envs: []
+  _notifications:
     steps:
+    - slack:
+        inputs:
+        - webhook_url: "${SLACK_WEBHOOK_URL}"
+        - channel: "${SLACK_CHANNEL}"
+        - from_username: "${BITRISE_APP_TITLE} - OK"
+        - from_username_on_error: "${BITRISE_APP_TITLE} - ERROR"
+        - message: |-
+            Workflow: *${BITRISE_WORKFLOW_ID}*
+            Branch: ${BITRISE_GIT_BRANCH}
+            Build URL: ${BITRISE_BUILD_URL}
+
+  _generate:
+    title: Workflow for testing, PR check
+    description: |-
+      Adds a clean copy of this StepLib collection to stepman,
+      calls a setup on it, moves the generated spec.json to
+      a specified path and makes the path available for other workflows.
+    steps:
+    - script:
+        title: Set TMP_COLLECTION_ID
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            envman add --key TMP_COLLECTION_ID --value "$(pwd)"
     - script:
         title: Remove previous version of this local spec from stepman
         inputs:
@@ -15,7 +52,7 @@ workflows:
             #!/bin/bash
             set -e
             set -v
-            stepman delete -c "$(pwd)"
+            stepman delete -c "${TMP_COLLECTION_ID}"
     - script:
         title: Generate
         inputs:
@@ -26,7 +63,7 @@ workflows:
             tmp_dir="$(pwd)/_tmp"
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
-            stepman setup --local -c "$(pwd)" --copy-spec-json="${spec_path}"
+            stepman setup --local -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
     - script:
         title: tmp
@@ -36,15 +73,60 @@ workflows:
             set -e
             echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
 
+  pr_audit:
+    title: Pull Request audit
+    description: |-
+      Performs an audit only on the changed step.yml files, and on the
+      related Steps.
+    envs:
+      - BITRISE_WORKFLOW_ID: pr_audit
+    before_run:
+    - _generate
+    after_run:
+    - _notifications
+    steps:
+    - script:
+        title: List of changed files
+        dependencies:
+        - manager: brew
+          name: go
+        inputs:
+        - content: |-
+            set -e
+            localtest_param=""
+            if [[ "${IS_LOCAL_TEST}" == "true" ]] ; then
+              localtest_param="--localtest"
+            fi
+            go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
+
+  full_audit:
+    title: Full Audit
+    description: |-
+      Performs a full audit on the collection.
+    before_run:
+    - _generate
+    steps:
+    - script:
+        title: Run full audit on the StepLib collection
+        inputs:
+        - content: |-
+            set -e
+            set -v
+            stepman audit --collection "${TMP_COLLECTION_ID}"
+
   deploy:
     title: Workflow for deployment
-    before_run:
-      - generate
-    after_run: []
+    description: |-
+      Deploys the StepLib to Amazon S3
     envs:
       - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
       - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
+      - BITRISE_WORKFLOW_ID: "DEPLOY"
+    before_run:
+    - full_audit
+    after_run:
+    - _notifications
     steps:
     - script:
         title: Generate
@@ -60,4 +142,10 @@ workflows:
               exit 1
             fi
             set -v
-            bash ./_scripts/deploy.sh
+            bash ./_scripts/deploy/deploy.sh
+
+  quicktest:
+    description: |-
+      A workflow for testing quick bitrise.yml changes
+    after_run:
+    - _notifications
