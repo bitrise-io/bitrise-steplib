@@ -8,6 +8,7 @@ summary: Send a [HipChat](https://www.hipchat.com) message to a room.
 website: https://github.com/bitrise-io/steps-hipchat
 source_code_url: https://github.com/bitrise-io/steps-hipchat
 support_url: https://github.com/bitrise-io/steps-hipchat/issues
+published_at: 2015-08-16T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-hipchat.git
   commit: 2141c7ad966b092d0049f490723d5ebb7445b309

@@ -27,6 +27,7 @@ summary: |-
 website: https://github.com/bitrise-io/steps-script
 source_code_url: https://github.com/bitrise-io/steps-script
 support_url: https://github.com/bitrise-io/steps-script/issues
+published_at: 2015-08-18T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-script.git
   commit: 3b6857b016aa021cd5c86c78b54681679f996fc7

@@ -13,6 +13,7 @@ summary: Send a [Slack](https://slack.com/) message to a channel or group.
 website: https://github.com/bitrise-io/steps-slack-message
 source_code_url: https://github.com/bitrise-io/steps-slack-message
 support_url: https://github.com/bitrise-io/steps-slack-message/issues
+published_at: 2015-08-19T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-slack-message.git
   commit: 756f39f76f94d525aaea2fc2d0c5a23799f8ec97

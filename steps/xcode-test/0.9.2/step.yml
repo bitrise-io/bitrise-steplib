@@ -4,6 +4,7 @@ summary: Runs Xcode's `test` action.
 website: https://github.com/bitrise-io/steps-new-xcode-test
 source_code_url: https://github.com/bitrise-io/steps-new-xcode-test
 support_url: https://github.com/bitrise-io/steps-new-xcode-test/issues
+published_at: 2015-08-22T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-xcode-test.git
   commit: 0d9ddce7d8d606aa3f3f655fd1c3e12be47c7b70
