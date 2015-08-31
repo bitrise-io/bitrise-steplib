@@ -4,6 +4,7 @@ summary: Xcode Test
 website: https://github.com/bitrise-io/steps-new-xcode-test
 source_code_url: https://github.com/bitrise-io/steps-new-xcode-test
 support_url: https://github.com/bitrise-io/steps-new-xcode-test/issues
+published_at: 2015-08-23T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-xcode-test.git
   commit: ad299e72fefaeaf7ba0a9c13750dfbb7a7d950c6
