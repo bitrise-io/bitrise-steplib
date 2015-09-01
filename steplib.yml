@@ -1,5 +1,6 @@
 ---
-format_version: 0.9.9
+format_version: 1.0.0
+steplib_source: https://github.com/bitrise-io/bitrise-steplib.git
 download_locations:
   - type: zip
     src: https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/
