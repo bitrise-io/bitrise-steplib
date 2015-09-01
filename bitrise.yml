@@ -144,14 +144,17 @@ workflows:
         inputs:
         - content: |-
             require 'json'
-            
+
             spec_json_pth = ENV['SPEC_JSON_PATH']
-            puts " spec_json_pth: #{spec_json_pth}"
+            puts " -> spec_json_pth: #{spec_json_pth}"
             file = File.read(spec_json_pth)
             data_hash = JSON.parse(file)
 
-            data_hash['steplib_source'] = ENV['STEPLIB_SOURCE']
+            steplib_source_param = ENV['STEPLIB_SOURCE']
+            puts " -> steplib_source_param: #{steplib_source_param}"
+            data_hash['steplib_source'] = steplib_source_param
             File.write(spec_json_pth, JSON.pretty_generate(data_hash))
+            puts "DONE - OK"
         - runner_bin: ruby
     - script:
         title: Generate
