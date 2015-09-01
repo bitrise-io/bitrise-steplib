@@ -1,8 +1,9 @@
-format_version: 0.9.10
+format_version: 1.0.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
+  - STEPLIB_SOURCE: 'https://github.com/bitrise-io/bitrise-steplib.git'
   # define these ENVs in your .bitrise.secrets.yml
   - AWS_ACCESS_KEY_ID:
   - AWS_SECRET_ACCESS_KEY:
@@ -129,10 +130,7 @@ workflows:
     - _notifications
     steps:
     - script:
-        title: Generate
-        dependencies:
-          - manager: brew
-            name: s3cmd
+        title: Check spec.json - exist?
         inputs:
         - content: |-
             #!/bin/bash
@@ -141,6 +139,29 @@ workflows:
               echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
               exit 1
             fi
+    - script:
+        title: Fix steplib_source in spec.json
+        inputs:
+        - content: |-
+            require 'json'
+            
+            spec_json_pth = ENV['SPEC_JSON_PATH']
+            puts " spec_json_pth: #{spec_json_pth}"
+            file = File.read(spec_json_pth)
+            data_hash = JSON.parse(file)
+
+            data_hash['steplib_source'] = ENV['STEPLIB_SOURCE']
+            File.write(spec_json_pth, JSON.pretty_generate(data_hash))
+        - runner_bin: ruby
+    - script:
+        title: Generate
+        dependencies:
+          - manager: brew
+            name: s3cmd
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
             set -v
             bash ./_scripts/deploy/deploy.sh
 
