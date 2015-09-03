@@ -1,9 +1,9 @@
 title: Xcode Test
 description: Runs Xcode's `test` action.
 summary: Runs Xcode's `test` action.
-website: https://github.com/bitrise-io/steps-new-xcode-test
-source_code_url: https://github.com/bitrise-io/steps-new-xcode-test
-support_url: https://github.com/bitrise-io/steps-new-xcode-test/issues
+website: https://github.com/bitrise-io/steps-xcode-test
+source_code_url: https://github.com/bitrise-io/steps-xcode-test
+support_url: https://github.com/bitrise-io/steps-xcode-test/issues
 published_at: 2015-08-23T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-xcode-test.git
