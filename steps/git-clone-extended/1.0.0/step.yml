@@ -1,5 +1,5 @@
-title: Git Clone Repository
-description: |
+title: Git Clone Repository - Extended
+description: |-
   Clones a repository based on the provided inputs.
 
   **NOTE**: it will remove the specified (local) Destination Directory before cloning!
@@ -11,14 +11,16 @@ description: |
 
   Use either the *(raw) SSH* or the *Base64 encoded SSH* key input to specify
   the SSH key. If both specified the *(raw) SSH* key input will be used.
-summary: Clones a repository based on the provided inputs.
-website: https://github.com/bitrise-io/steps-git-clone
-source_code_url: https://github.com/bitrise-io/steps-git-clone
-support_url: https://github.com/bitrise-io/steps-git-clone/issues
-published_at: 2015-09-03T18:54:55.467846404+02:00
+summary: |-
+  Clones a repository based on the provided inputs. It's the advanced
+  version of the `git-clone` step.
+website: https://github.com/bitrise-io/steps-git-clone-extended
+source_code_url: https://github.com/bitrise-io/steps-git-clone-extended
+support_url: https://github.com/bitrise-io/steps-git-clone-extended/issues
+published_at: 2015-09-04T10:40:48.502932457+02:00
 source:
-  git: https://github.com/bitrise-io/steps-git-clone.git
-  commit: 5abbf324df84c8122ca9f0e050effc6ac057953c
+  git: https://github.com/bitrise-io/steps-git-clone-extended.git
+  commit: db98bb91d8fd68565a2bab7584920683114617ad
 host_os_tags:
 - osx-10.10
 type_tags:
