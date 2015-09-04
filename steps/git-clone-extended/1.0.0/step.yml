@@ -14,13 +14,13 @@ description: |-
 summary: |-
   Clones a repository based on the provided inputs. It's the advanced
   version of the `git-clone` step.
-website: https://github.com/bitrise-io/steps-git-clone
-source_code_url: https://github.com/bitrise-io/steps-git-clone
-support_url: https://github.com/bitrise-io/steps-git-clone/issues
-published_at: 2015-09-04T10:36:29.820410227+02:00
+website: https://github.com/bitrise-io/steps-git-clone-extended
+source_code_url: https://github.com/bitrise-io/steps-git-clone-extended
+support_url: https://github.com/bitrise-io/steps-git-clone-extended/issues
+published_at: 2015-09-04T10:40:48.502932457+02:00
 source:
   git: https://github.com/bitrise-io/steps-git-clone-extended.git
-  commit: 5703ca59ac97b55023b26af73afddaaa01efdff9
+  commit: db98bb91d8fd68565a2bab7584920683114617ad
 host_os_tags:
 - osx-10.10
 type_tags:
