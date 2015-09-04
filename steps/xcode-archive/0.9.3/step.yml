@@ -1,0 +1,57 @@
+title: Xcode Archive
+summary: Runs Xcode's `archive` action.
+website: https://github.com/bitrise-io/steps-new-xcode-archive
+source_code_url: https://github.com/bitrise-io/steps-new-xcode-archive
+support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues
+published_at: 2015-09-03T23:08:06.193350613+02:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-archive.git
+  commit: f890ab95b76f0e8a89cce08f798a1124c735119b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path.
+    is_expand: true
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: null
+- opts:
+    description: |
+      The Scheme to use.
+    is_expand: true
+    is_required: true
+    title: Scheme name
+  scheme: null
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: null
+- opts:
+    description: |
+      This directory will contain the generated Xcode archive (.xcarchive)
+      and the .ipa file.
+    is_expand: true
+    is_required: false
+    title: Output directory path
+  output_dir: ./build
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created .ipa file's path
