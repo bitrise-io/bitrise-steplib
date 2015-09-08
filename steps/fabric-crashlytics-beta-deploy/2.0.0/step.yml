@@ -1,0 +1,105 @@
+title: Fabric / Crashlytics deployer
+summary: Fabric / Crashlytics deployer
+description: |-
+  Deploys to Fabric / Crashlytics beta testing service.
+
+  ## How to setup your Xcode project for [Fabric](https://get.fabric.io/) / Crashlytics beta testing?
+
+  * Register a Fabric account at [https://get.fabric.io/](https://get.fabric.io/).
+  * Add Fabric & Crashlytics to your Xcode project as described when you first sign into your Fabric account
+  * After your first Fabric & Crashlytics app setup the app should be listed on [https://fabric.io](https://fabric.io)
+  * You should also test that everything works correctly with a manual version upload: just Create an Archive in Xcode and if the Fabric menu bar app is running it'll show an upload popup
+
+  Your app is now ready to be deployed with this Step!
+website: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+source_code_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+support_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy/issues
+published_at: 2015-09-08T13:23:04.587005867+02:00
+source:
+  git: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy.git
+  commit: 2cf25e46e89412a7c1527a9cb38dcfd42dd5f456
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: |-
+      You can get your API Key under **Organizations**
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to
+      and at the top you'll see a text: **API Key**.
+      Click it and the API key will appear.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: 'Fabric: API Key'
+- build_secret: ""
+  opts:
+    description: |-
+      You can get the Build Secret key on the same
+      page as the API Key.
+
+      Select the **Organizations** option
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to
+      and at the top you'll see a text: **Build Secret**.
+      Click it and the Build Secret will appear.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: 'Fabric: Build Secret'
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: IPA file path
+- email_list: ""
+  opts:
+    description: "Optional list of individual addresses (comma-separated)\uFEFF\n"
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: 'Notify: Emails'
+- group_aliases_list: ""
+  opts:
+    description: Optional list of group aliases from web dashboard (comma-separated)
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: 'Notify: Group Aliases'
+- notification: "Yes"
+  opts:
+    description: Should send email notification to testers about the new release?
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Notify testers?
+    value_options:
+    - "Yes"
+    - "No"
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Release Notes
+  release_notes: Automatic build with Bitrise
