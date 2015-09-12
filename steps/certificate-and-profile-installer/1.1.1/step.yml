@@ -1,0 +1,64 @@
+title: Certificate and profile installer
+summary: Certificate and profile installer
+description: Downloads and installs the certificate and the mobile provisioning profiles
+website: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+source_code_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+support_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer/issues
+published_at: 2015-09-12T13:09:48.258176257+02:00
+source:
+  git: https://github.com/bitrise-io/steps-certificate-and-profile-installer.git
+  commit: dc2daacc26007f8f2f8ae98eba0afd7548d2cc19
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- security
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- certificate_url: $BITRISE_CERTIFICATE_URL
+  opts:
+    description: |
+      URL of the certificate to download
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Certificate URL
+- certificate_passphrase: $BITRISE_CERTIFICATE_PASSPHRASE
+  opts:
+    description: |
+      Certificate passphrase
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Certificate passphrase
+- opts:
+    description: |
+      URL of the provisioning profile to download
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Provisioning profile URL
+  provisioning_profile_url: $BITRISE_PROVISION_URL
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keychain Path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keychain's password
