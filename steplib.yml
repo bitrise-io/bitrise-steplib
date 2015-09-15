@@ -1,6 +1,7 @@
 ---
 format_version: 1.0.0
 steplib_source: https://github.com/bitrise-io/bitrise-steplib.git
+assets_download_base_uri: https://bitrise-steplib-collection.s3.amazonaws.com/steps/script/assets
 download_locations:
   - type: zip
     src: https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/
