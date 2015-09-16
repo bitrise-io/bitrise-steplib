@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+<rect y="0" fill="#2EA9E0" width="256" height="256"/>
+<g>
+	<g>
+		<path fill="#FFFFFF" d="M147.6,89.8L107.4,96c-2.1,0.3-4-1.1-4.2-3.2l-3.7-30.2c-0.2-2,1.2-3.9,3.2-4.1l38.3-4.9
+			c1.9-0.2,3.7,1,4.1,3l5.6,28.9C151.1,87.5,149.7,89.5,147.6,89.8z"/>
+	</g>
+	<g>
+		
+			<path fill="#FFFFFF" stroke="#2EA9E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M121.8,50.4c3.1-15.3,14.5-12.5,14.5-12.5l10.7,2.2c2.5,3.8,5.6,1.1,5.6,1.1l4,0.8l-1.8,9l-4.2-0.9c-2.3-3.5-5.4-1.1-5.4-1.1
+			L134.4,47c0,0,0.7-3.4-0.7-3.6C125.6,41.7,121.8,50.4,121.8,50.4z"/>
+		
+			<path fill="#FFFFFF" stroke="#2EA9E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M137.4,47.6l-10.3,47.1c0,0,1.8,1.5,3.2,1.8c1.7,0.3,4.1-0.3,4.1-0.3l8.4-47.5L137.4,47.6z"/>
+	</g>
+	
+		<line fill="none" stroke="#2EA9E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="106.2" y1="65.1" x2="127.2" y2="62.1"/>
+	
+		<line fill="none" stroke="#2EA9E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="107.1" y1="70.9" x2="128.1" y2="68"/>
+	
+		<line fill="none" stroke="#2EA9E0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="107.9" y1="77" x2="120.2" y2="75.2"/>
+</g>
+<text transform="matrix(1 0 0 1 48.1781 196.1284)" fill="#FFFFFF" font-family="'GothamHTF-Thin'" font-size="126.4032px">x.y</text>
+</svg>
