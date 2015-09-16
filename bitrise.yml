@@ -44,6 +44,9 @@ workflows:
             curl -fL https://github.com/bitrise-io/stepman/releases/download/0.9.15/stepman-$(uname -s)-$(uname -m) > /usr/local/bin/stepman
             chmod +x /usr/local/bin/stepman
 
+            # Stepman version:
+            stepman --version
+
   _generate:
     title: Workflow for testing, PR check
     description: |-
