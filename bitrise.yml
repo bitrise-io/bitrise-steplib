@@ -50,6 +50,8 @@ workflows:
       Adds a clean copy of this StepLib collection to stepman,
       calls a setup on it, moves the generated spec.json to
       a specified path and makes the path available for other workflows.
+    before_run:
+    - _install_required_stepman_version
     steps:
     - script:
         title: Set TMP_COLLECTION_ID
@@ -138,7 +140,6 @@ workflows:
       - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
       - BITRISE_WORKFLOW_ID: "DEPLOY"
     before_run:
-    - _install_required_stepman_version
     - full_audit
     after_run:
     - _notifications
