@@ -31,6 +31,19 @@ workflows:
             Branch: ${BITRISE_GIT_BRANCH}
             Build URL: ${BITRISE_BUILD_URL}
 
+  _install_required_stepman_version:
+    steps:
+    - script:
+        title: Make sure the required Stepman version is installed
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            curl -fL https://github.com/bitrise-io/stepman/releases/download/0.9.15/stepman-$(uname -s)-$(uname -m) > /usr/local/bin/stepman
+            chmod +x /usr/local/bin/stepman
+
   _generate:
     title: Workflow for testing, PR check
     description: |-
@@ -125,6 +138,7 @@ workflows:
       - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
       - BITRISE_WORKFLOW_ID: "DEPLOY"
     before_run:
+    - _install_required_stepman_version
     - full_audit
     after_run:
     - _notifications
