@@ -16,6 +16,10 @@ app:
   - SLACK_WEBHOOK_URL:
   - SLACK_CHANNEL:
 
+trigger_map:
+- pattern: generate/spec.json
+  workflow: _generate
+
 workflows:
 
   _notifications:
@@ -31,7 +35,7 @@ workflows:
             Branch: ${BITRISE_GIT_BRANCH}
             Build URL: ${BITRISE_BUILD_URL}
 
-  _install_required_stepman_version:
+  install_required_tool_versions:
     steps:
     - script:
         title: Make sure the required Stepman version is installed
@@ -41,8 +45,9 @@ workflows:
             #!/bin/bash
             set -e
             set -v
-            curl -fL https://github.com/bitrise-io/stepman/releases/download/0.9.15/stepman-$(uname -s)-$(uname -m) > /usr/local/bin/stepman
-            chmod +x /usr/local/bin/stepman
+            curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.1.0/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise
+            chmod +x /usr/local/bin/bitrise
+            bitrise setup --minimal
 
             # Stepman version:
             stepman --version
@@ -53,8 +58,6 @@ workflows:
       Adds a clean copy of this StepLib collection to stepman,
       calls a setup on it, moves the generated spec.json to
       a specified path and makes the path available for other workflows.
-    before_run:
-    - _install_required_stepman_version
     steps:
     - script:
         title: Set TMP_COLLECTION_ID
@@ -143,6 +146,7 @@ workflows:
       - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
       - BITRISE_WORKFLOW_ID: "DEPLOY"
     before_run:
+    - install_required_tool_versions
     - full_audit
     after_run:
     - _notifications
