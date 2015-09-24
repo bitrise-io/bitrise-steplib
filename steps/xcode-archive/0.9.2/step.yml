@@ -3,6 +3,7 @@ summary: Runs Xcode's `archive` action.
 website: https://github.com/bitrise-io/steps-new-xcode-archive
 source_code_url: https://github.com/bitrise-io/steps-new-xcode-archive
 support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues
+published_at: 2015-08-21T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-xcode-archive.git
   commit: 775a2c5c50db099e302fe92f265719b20f980059

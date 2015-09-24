@@ -24,6 +24,7 @@ description: |
   script will run without any problem.
 website: https://github.com/bitrise-io/steps-script
 source_code_url: https://github.com/bitrise-io/steps-script
+published_at: 2015-08-17T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-script.git
   commit: 28c5ba4f81162fbd7f9484c9fb26711f5d27cb1c

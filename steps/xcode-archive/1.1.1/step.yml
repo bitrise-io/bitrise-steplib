@@ -1,0 +1,70 @@
+title: Xcode Archive
+summary: Runs Xcode's `archive` action.
+description: ""
+website: https://github.com/bitrise-io/steps-new-xcode-archive
+source_code_url: https://github.com/bitrise-io/steps-new-xcode-archive
+support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues
+published_at: 2015-09-11T16:51:07.347180116+02:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-archive.git
+  commit: 15c1f1cc7d04350a1dd0a2e13582cedc670fc298
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |
+      This directory will contain the generated Xcode archive (.xcarchive)
+      and the .ipa file.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created .ipa file's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created .dSYM.zip file's path

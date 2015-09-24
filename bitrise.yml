@@ -1,8 +1,9 @@
-format_version: 0.9.10
+format_version: 1.0.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
+  - STEPLIB_SOURCE: 'https://github.com/bitrise-io/bitrise-steplib.git'
   # define these ENVs in your .bitrise.secrets.yml
   - AWS_ACCESS_KEY_ID:
   - AWS_SECRET_ACCESS_KEY:
@@ -14,6 +15,10 @@ app:
   - BITRISE_APP_TITLE:
   - SLACK_WEBHOOK_URL:
   - SLACK_CHANNEL:
+
+trigger_map:
+- pattern: generate/spec.json
+  workflow: _generate
 
 workflows:
 
@@ -29,6 +34,23 @@ workflows:
             Workflow: *${BITRISE_WORKFLOW_ID}*
             Branch: ${BITRISE_GIT_BRANCH}
             Build URL: ${BITRISE_BUILD_URL}
+
+  install_required_tool_versions:
+    steps:
+    - script:
+        title: Make sure the required Stepman version is installed
+        run_if: .IsCI
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            set -v
+            curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.1.0/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise
+            chmod +x /usr/local/bin/bitrise
+            bitrise setup --minimal
+
+            # Stepman version:
+            stepman --version
 
   _generate:
     title: Workflow for testing, PR check
@@ -124,10 +146,38 @@ workflows:
       - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
       - BITRISE_WORKFLOW_ID: "DEPLOY"
     before_run:
+    - install_required_tool_versions
     - full_audit
     after_run:
     - _notifications
     steps:
+    - script:
+        title: Check spec.json - exist?
+        inputs:
+        - content: |-
+            #!/bin/bash
+            set -e
+            if [ ! -f "${SPEC_JSON_PATH}" ] ; then
+              echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
+              exit 1
+            fi
+    - script:
+        title: Fix steplib_source in spec.json
+        inputs:
+        - content: |-
+            require 'json'
+
+            spec_json_pth = ENV['SPEC_JSON_PATH']
+            puts " -> spec_json_pth: #{spec_json_pth}"
+            file = File.read(spec_json_pth)
+            data_hash = JSON.parse(file)
+
+            steplib_source_param = ENV['STEPLIB_SOURCE']
+            puts " -> steplib_source_param: #{steplib_source_param}"
+            data_hash['steplib_source'] = steplib_source_param
+            File.write(spec_json_pth, JSON.pretty_generate(data_hash))
+            puts "DONE - OK"
+        - runner_bin: ruby
     - script:
         title: Generate
         dependencies:
@@ -137,10 +187,6 @@ workflows:
         - content: |-
             #!/bin/bash
             set -e
-            if [ ! -f "${SPEC_JSON_PATH}" ] ; then
-              echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
-              exit 1
-            fi
             set -v
             bash ./_scripts/deploy/deploy.sh
 

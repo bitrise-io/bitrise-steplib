@@ -1,0 +1,67 @@
+title: Send Email with Mailgun
+summary: Send Email with Mailgun
+description: |-
+  Send email with Mailgun ( [https://mailgun.com](https://mailgun.com) ).
+
+  With the free Mailgun account you can send 10,000 emails/month, 300 emails/day.
+website: https://github.com/bitrise-io/steps-email-with-mailgun
+source_code_url: https://github.com/bitrise-io/steps-email-with-mailgun
+support_url: https://github.com/bitrise-io/steps-email-with-mailgun/issues
+published_at: 2015-09-08T20:55:10.881817411+02:00
+source:
+  git: https://github.com/bitrise-io/steps-email-with-mailgun.git
+  commit: 10dd6e4e94422688dacf50190d5bde736369fbe5
+host_os_tags:
+- osx-10.9
+- osx-10.10
+type_tags:
+- email
+- messaging
+- notification
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Mailgun API Key
+- domain: ""
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Mailgun Domain
+- opts:
+    description: |
+      Comma separated email address list.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Send To emails
+  send_to: ""
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Email Subject
+  subject: ""
+- message: Build finished on Bitrise.io
+  opts:
+    description: |
+      The message can be HTML.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Email Message

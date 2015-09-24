@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
+<g>
+	<rect x="0" y="0" fill="#414042" width="256" height="256"/>
+	<g>
+		<g>
+			<text transform="matrix(1 0 0 1 56.605 205.6924)" fill="#FFFFFF" font-family="'SourceCodePro-Regular'" font-size="58.2319px">&gt;</text>
+			
+				<text transform="matrix(1 0 0 1 58.1234 159.7449)" fill="#FFFFFF" font-family="'SourceCodePro-Regular'" font-size="58.2319px">&gt;&gt;&gt;&gt;</text>
+			
+				<text transform="matrix(1 0 0 1 94.5786 202.1025)" fill="#4CD964" font-family="'SourceCodePro-Semibold'" font-size="58.2319px">run</text>
+		</g>
+		<path fill="none" stroke="#FFFFFF" stroke-width="4.7407" stroke-miterlimit="10" d="M213.3,218.4H42.7V105.1
+			c0-3.5,2.8-6.3,6.3-6.3h158c3.5,0,6.3,2.8,6.3,6.3V218.4z"/>
+		<line fill="none" stroke="#FFFFFF" stroke-width="4.7407" stroke-miterlimit="10" x1="42.7" y1="112.4" x2="213.3" y2="112.4"/>
+	</g>
+	<g>
+		
+			<path fill="none" stroke="#FFFFFF" stroke-width="4.7407" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M147.9,45.8c-7.4,5.3-16.4,8.4-26.2,8.4s-18.8-3.1-26.2-8.4"/>
+		
+			<path fill="none" stroke="#FFFFFF" stroke-width="4.7407" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M157,58.3c-9.9,7.1-22.1,11.3-35.2,11.3c-13.1,0-25.3-4.2-35.2-11.3"/>
+		
+			<path fill="none" stroke="#FFFFFF" stroke-width="4.7407" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" d="
+			M139.8,34.5c-5.1,3.7-11.3,5.8-18,5.8c-6.7,0-13-2.2-18-5.8"/>
+	</g>
+</g>
+</svg>

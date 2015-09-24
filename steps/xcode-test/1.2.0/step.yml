@@ -1,0 +1,91 @@
+title: Xcode Test
+summary: Xcode Test
+description: Runs Xcode's `test` action.
+website: https://github.com/bitrise-io/steps-xcode-test
+source_code_url: https://github.com/bitrise-io/steps-xcode-test
+support_url: https://github.com/bitrise-io/steps-xcode-test/issues
+published_at: 2015-09-18T21:11:06.433547909+02:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-test.git
+  commit: 1b94c32fb0a2ff6dce89546e801e3462807e54ed
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+- manager: brew
+  name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Workfing directory (if specified).
+    is_expand: true
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_expand: true
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+    is_expand: true
+    is_required: false
+    title: Device
+  simulator_device: iPad
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+
+      A couple of format examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * 8.4
+      * latest
+    is_expand: true
+    is_required: false
+    title: OS version
+  simulator_os_version: latest
+- is_clean_build: "yes"
+  opts:
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"

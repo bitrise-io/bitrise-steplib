@@ -11,6 +11,7 @@ summary: Bitrise iOS App (.ipa) Deployer.
 website: https://github.com/bitrise-io/steps-bitrise-ios-deploy
 source_code_url: https://github.com/bitrise-io/steps-bitrise-ios-deploy
 support_url: https://github.com/bitrise-io/steps-bitrise-ios-deploy/issues
+published_at: 2015-08-14T14:35:38.611929345+02:00
 source:
   git: https://github.com/bitrise-io/steps-bitrise-ios-deploy.git
   commit: 76d121fe1db54f873e3fa01b042a7d58b7a5b73f

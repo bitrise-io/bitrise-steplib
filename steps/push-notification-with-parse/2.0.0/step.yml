@@ -1,0 +1,56 @@
+title: Send Push Notification with Parse
+summary: Send Push Notification with Parse
+description: |-
+  Send a push notification with [Parse](https://parse.com/).
+
+  To use their service you have to register first.
+  It is possible to register a trial account for free.
+
+  You can get the required keys and IDs from your parse app's page,
+  similar to this: [https://www.parse.com/apps/your-parse-apps-name/edit#app_keys](https://www.parse.com/apps/your-parse-apps-name/edit#app_keys)
+
+  You have to install your own Push Receiver app to receive the push notifications - you can find a
+  template app here: [https://github.com/bitrise-io/example-parse-notification-center-ios-app](https://github.com/bitrise-io/example-parse-notification-center-ios-app)
+website: https://github.com/bitrise-io/steps-push-notification-with-parse
+source_code_url: https://github.com/bitrise-io/steps-push-notification-with-parse
+support_url: https://github.com/bitrise-io/steps-push-notification-with-parse/issues
+published_at: 2015-09-08T21:24:49.75929616+02:00
+source:
+  git: https://github.com/bitrise-io/steps-push-notification-with-parse.git
+  commit: cfef29fe361ea2020ac2338196aac11c07e26685
+host_os_tags:
+- osx-10.9
+- osx-10.10
+type_tags:
+- push notification
+- notification
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- app_id: ""
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Parse App ID
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Parse REST API Key
+  rest_key: ""
+- message: Automatic build with Bitrise.
+  opts:
+    description: |
+      The text of the push message.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Message
