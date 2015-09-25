@@ -1,5 +1,8 @@
 title: Fabric / Crashlytics deployer
-summary: Fabric / Crashlytics deployer
+summary: |-
+  Use the awesome Crashlytics / Fabric beta distribution service during your
+  workflow. Add notes, send notification to the testers, groups or to any email
+  address and let the search for those nasty bugs begin!
 description: |-
   Deploys to Fabric / Crashlytics beta testing service.
 

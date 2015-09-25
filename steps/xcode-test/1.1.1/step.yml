@@ -1,5 +1,8 @@
 title: Xcode Test
-summary: Xcode Test
+summary: |-
+  Write the tests and run them on every build just to make sure those tiny
+  code goblins didn't put something in the code that shouldn't be there while
+  you were at the daily Scrum meeting.
 description: Runs Xcode's `test` action.
 website: https://github.com/bitrise-io/steps-xcode-test
 source_code_url: https://github.com/bitrise-io/steps-xcode-test

@@ -1,5 +1,5 @@
 title: FTP Upload
-summary: FTP Upload
+summary: You get what you see, upload a file or directory to the target directory
 description: Upload a single file or a folder (recursively) to an FTP server.
 website: https://github.com/bitrise-io/steps-ftp-upload
 source_code_url: https://github.com/bitrise-io/steps-ftp-upload

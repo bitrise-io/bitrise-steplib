@@ -9,7 +9,7 @@ description: |-
   the provided path (if another key at the path already exists).*
 
   It will start the ssh-agent if it can't connect to the agent.
-summary: Activate SSH key (RSA private key)
+summary: Setup the SSH Key to use with the current workflow
 website: https://github.com/bitrise-io/steps-activate-ssh-key
 source_code_url: https://github.com/bitrise-io/steps-activate-ssh-key
 support_url: https://github.com/bitrise-io/steps-activate-ssh-key/issues

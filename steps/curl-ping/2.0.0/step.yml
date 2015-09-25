@@ -2,7 +2,7 @@ title: Ping an URL with cURL
 description: |-
   Performs a [cURL](http://curl.haxx.se/) request on the given URL
   and reports the result (success / failed) of the response.
-summary: Ping an URL with cURL
+summary: Ping an URL using cURL. You can also add optional parameters.
 website: https://github.com/bitrise-io/steps-curl-ping
 source_code_url: https://github.com/bitrise-io/steps-curl-ping
 support_url: https://github.com/bitrise-io/steps-curl-ping/issues

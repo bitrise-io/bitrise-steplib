@@ -2,7 +2,11 @@ title: TestFairy Deploy
 description: |-
   To use this step you have to register
   an account on [TestFairy.com](http://testfairy.com/).
-summary: TestFairy Deploy
+summary: |-
+  Deploy your awesome App to TestFairy, set Tester Groups to be notified,
+  enable email notification for the build, enable in-app notification of new
+  version, set recording duration, set if video recording is enabled and add
+  your comments and let the TestFairy do it's magic.
 website: https://github.com/bitrise-io/steps-testfairy-deploy
 source_code_url: https://github.com/bitrise-io/steps-testfairy-deploy
 support_url: https://github.com/bitrise-io/steps-testfairy-deploy/issues

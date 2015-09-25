@@ -4,7 +4,11 @@ description: |
 
   **This Step requires a HipChat account.**
   [Click here](https://www.hipchat.com) to sign in or sign up on HipChat, for free.
-summary: Send a [HipChat](https://www.hipchat.com) message to a room.
+summary: |-
+  Why bother sending a “done” or "." message to the HipChat room to notify your
+  team members that the build / deploy finished with success when Bitrise can
+  do it for you? Simply add the HipChat Step to your Workflow. And also you can
+  change the color of the message to make the chat a bit more hip.
 website: https://github.com/bitrise-io/steps-hipchat
 source_code_url: https://github.com/bitrise-io/steps-hipchat
 support_url: https://github.com/bitrise-io/steps-hipchat/issues

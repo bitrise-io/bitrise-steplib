@@ -1,5 +1,5 @@
 title: Deploy to Amazon S3
-summary: Deploy to Amazon S3
+summary: Upload your iOS Application to Amazon S3
 description: |-
   Bitrise Step to Deploy an Xcode archive to Amazon S3.
   Required: an Xcode Archive Step should run before this Step!

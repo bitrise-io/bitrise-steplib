@@ -1,5 +1,7 @@
 title: HockeyApp Deploy
-summary: HockeyApp Deploy
+summary: |-
+  Deploy your awesome Application to HockeyApp, add notes even in markdown
+  format, notify testers, restrict download
 description: |-
   Deploy an iOS application to [HockeyApp](http://hockeyapp.net).
 

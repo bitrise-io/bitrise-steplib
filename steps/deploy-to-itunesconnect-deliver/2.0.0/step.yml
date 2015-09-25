@@ -1,5 +1,5 @@
 title: Deploy to iTunes Connect (with Deliver)
-summary: Deploy to iTunes Connect (with Deliver)
+summary: Upload the archive to iTunes Connect and you can also submit it to TestFlight Beta Testing
 description: |-
   Deploy to iTunes Connect, using the
   fantastic [Deliver](https://github.com/KrauseFx/deliver)

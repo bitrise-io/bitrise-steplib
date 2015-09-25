@@ -1,5 +1,7 @@
 title: Xcode Archive
-summary: Runs Xcode's `archive` action.
+summary: |-
+  Create an archive so you can share it, upload it, deploy it and catch them
+  all! Well, maybe not the last one.
 website: https://github.com/bitrise-io/steps-new-xcode-archive
 source_code_url: https://github.com/bitrise-io/steps-new-xcode-archive
 support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues

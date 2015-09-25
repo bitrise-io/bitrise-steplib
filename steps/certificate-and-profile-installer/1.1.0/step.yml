@@ -1,5 +1,9 @@
 title: Certificate and profile installer
-summary: Certificate and profile installer
+summary: |-
+  Need to use your Provisioning Profile and Certificate? Use this Step to
+  add them to the keychain and use it as you wish! No worries, as our security
+  policy goes, the VM is reverted after running the workflow so there's no
+  trace of these left on them.
 description: Downloads and installs the certificate and the mobile provisioning profiles
 website: https://github.com/bitrise-io/steps-certificate-and-profile-installer
 source_code_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer

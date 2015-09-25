@@ -1,7 +1,7 @@
 title: Git Clone Repository - Extended
 summary: |-
-  Clones a repository based on the provided inputs. It's the advanced
-  version of the `git-clone` step.
+  Clone a repository to the specified path on the VM using the specified
+  SSH key based authentication
 description: |-
   Clones a repository based on the provided inputs.
 

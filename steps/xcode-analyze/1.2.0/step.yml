@@ -1,5 +1,7 @@
 title: Xcode Analyze
-summary: Xcode Analyze
+summary: |-
+  Find flaws—potential bugs—in the source code of a project with the
+  static analyzer built into Xcode.
 description: Runs Xcode's `analyze` action.
 website: https://github.com/bitrise-io/steps-xcode-analyze
 source_code_url: https://github.com/bitrise-io/steps-xcode-analyze

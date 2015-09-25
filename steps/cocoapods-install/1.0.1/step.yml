@@ -1,6 +1,8 @@
 title: Run CocoaPods install
 description: Run CocoaPods install (`$ pod install`) in your App's directory.
-summary: Run CocoaPods install (`$ pod install`) in your App's directory.
+summary: |-
+  You don't need to keep the installed pods in your repo, simply add this step
+  and Bitrise will do the pod install for you on the VM!
 website: https://github.com/bitrise-io/steps-cocoapods-install
 source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
 support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues

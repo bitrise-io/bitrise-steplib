@@ -1,5 +1,7 @@
 title: Random Quote
-summary: Generates a random quote
+summary: |-
+  Got no idea how to spice up your every day build notifications? How about a
+  random quote to pass the time while your app is being installed on your device?
 description: |
   Prints a random quote and saves it into the $quote environment variable (adds it to the ~/.bash_profile)
   Uses the http://www.iheartquotes.com API
