@@ -68,7 +68,7 @@ inputs:
     is_expand: true
     is_required: false
     title: Device
-  simulator_device: iPad
+  simulator_device: iPhone 6
 - opts:
     description: |
       Set it as it is shown in
