@@ -5,9 +5,9 @@ summary: |-
 description: |
   Prints a random quote and saves it into the $quote environment variable (adds it to the ~/.bash_profile)
   Uses the http://www.iheartquotes.com API
-website: https://github.com/gkiki90/steps-random-quote
-source_code_url: https://github.com/gkiki90/steps-random-quote
-support_url: https://github.com/gkiki90/steps-random-quote/issues
+website: https://github.com/bitrise-io/steps-random-quote
+source_code_url: https://github.com/bitrise-io/steps-random-quote
+support_url: https://github.com/bitrise-io/steps-random-quote/issues
 published_at: 2015-09-08T14:56:23.493268529+02:00
 source:
   git: https://github.com/bitrise-io/steps-random-quote.git
