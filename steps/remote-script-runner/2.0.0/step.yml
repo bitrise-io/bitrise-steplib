@@ -1,5 +1,7 @@
 title: Remote Bash Script Runner
-summary: Remote Bash Script Runner
+summary: |-
+  Found a great GitHub Gist that you'd like to use during your workflow?
+  Just add the raw URL, Bitrise will download it and run it as a bash script!
 description: |-
   Downloads the content of the input url and runs it as a bash script.
   For example you can provide a GitHub Gist *raw* url.

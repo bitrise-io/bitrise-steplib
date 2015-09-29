@@ -1,5 +1,7 @@
 title: Send Push Notification with Parse
-summary: Send Push Notification with Parse
+summary: |-
+  When an email or an IM isn't enough you can send a push notification,
+  now even from your workflow!
 description: |-
   Send a push notification with [Parse](https://parse.com/).
 

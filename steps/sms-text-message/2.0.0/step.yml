@@ -1,5 +1,8 @@
 title: Twilio SMS Text Message Sender
-summary: Twilio SMS Text Message Sender
+summary: |-
+  You can stay up-to-date about the status of your builds even if you don't
+  have an internet connection all day. Send an SMS to your phone and you can
+  keep an eye on the status of your builds even with a good old Nokia 3310.
 description: |-
   SMS Text Message Sender using [https://www.twilio.com/](https://www.twilio.com/)
 

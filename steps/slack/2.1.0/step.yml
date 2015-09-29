@@ -9,7 +9,10 @@ description: |
 
   *Don't forget to enable this Step to **Always run** if
   you want to get notified about failed builds as well!*
-summary: Send a [Slack](https://slack.com/) message to a channel or group.
+summary: |-
+  Notify your team on Slack and spice up your message with a custom sender
+  image or choose one of the awesome Emojis. You can even set different sender
+  name, image and message for builds that failed or succeeded!
 website: https://github.com/bitrise-io/steps-slack-message
 source_code_url: https://github.com/bitrise-io/steps-slack-message
 support_url: https://github.com/bitrise-io/steps-slack-message/issues

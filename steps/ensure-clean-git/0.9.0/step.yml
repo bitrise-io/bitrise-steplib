@@ -3,7 +3,9 @@ description: |-
   Fails if there's any uncommitted change in the git repository.
 
   Calls `git status` and fails if it reports any changed/uncommitted file.
-summary: Make sure there are no uncommitted changes in the git repository
+summary: |-
+  Make sure your repo is clean as a whistle, no uncommitted changes,
+  nothing to hide.
 website: https://github.com/bitrise-io/steps-ensure-clean-git
 source_code_url: https://github.com/bitrise-io/steps-ensure-clean-git
 support_url: https://github.com/bitrise-io/steps-ensure-clean-git/issues

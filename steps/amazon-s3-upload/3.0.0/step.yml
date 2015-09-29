@@ -1,5 +1,5 @@
 title: Amazon S3 Bucket Sync
-summary: Amazon S3 Bucket Sync
+summary: Fill your Amazon S3 Bucket with contents from the VM
 description: |-
   Syncs the given local folder with an S3 bucket.
 

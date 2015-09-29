@@ -22,7 +22,7 @@ description: |-
   * Register an app on iTunes Connect, on the **My Apps** page. Click on the *plus sign* and select the **New iOS App** option. This requires an **admin** account.
   * Requires an **App Store iOS distibution Provisioning Profile**
   * Every build which you want to push to iTunes Connect have to have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*)
-summary: Deploy to iTunes Connect (with Shenzhen)
+summary: Upload the archive to iTunes Connect with a simple Step
 website: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen
 source_code_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen
 support_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen/issues

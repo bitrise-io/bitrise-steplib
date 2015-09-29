@@ -1,5 +1,5 @@
 title: "Script"
-summary: Run a script
+summary: The power is in your hands. Use it wisely!
 description: |
   Specify the script content and (optionally) the script runner
   binary and this step will execute it.

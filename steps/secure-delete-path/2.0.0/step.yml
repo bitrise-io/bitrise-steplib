@@ -1,5 +1,5 @@
 title: Secure Delete a given path
-summary: Secure Delete a given path
+summary: Delete a file or a folder. You can even use sudo to do so.
 description: |
   Calls 'rm -rfP the-path' to securely delete the given file or folder.
   From the OS X rm man documentation (https://developer.apple.com/library/mac/documentation/Darwin/Reference/Manpages/man1/rm.1.html):

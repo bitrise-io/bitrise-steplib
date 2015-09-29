@@ -1,5 +1,5 @@
 title: Ruby Script runner with optional Gemfile support
-summary: Ruby Script runner with optional Gemfile support
+summary: Install the gems you need, run the script you'd like.
 description: Run a Ruby script with optional Gemfile.
 website: https://github.com/bitrise-io/steps-ruby-script
 source_code_url: https://github.com/bitrise-io/steps-ruby-script

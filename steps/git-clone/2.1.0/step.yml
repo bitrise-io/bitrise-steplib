@@ -1,5 +1,5 @@
 title: Git Clone Repository
-summary: Clones a repository based on the provided inputs.
+summary: Clone a repository to the specified path on the VM
 description: |
   Clones a repository based on the provided inputs.
 

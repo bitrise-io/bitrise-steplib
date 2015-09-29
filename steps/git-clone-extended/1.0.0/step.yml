@@ -12,8 +12,8 @@ description: |-
   Use either the *(raw) SSH* or the *Base64 encoded SSH* key input to specify
   the SSH key. If both specified the *(raw) SSH* key input will be used.
 summary: |-
-  Clones a repository based on the provided inputs. It's the advanced
-  version of the `git-clone` step.
+  Clone a repository to the specified path on the VM using the specified
+  SSH key based authentication
 website: https://github.com/bitrise-io/steps-git-clone-extended
 source_code_url: https://github.com/bitrise-io/steps-git-clone-extended
 support_url: https://github.com/bitrise-io/steps-git-clone-extended/issues

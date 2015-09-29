@@ -1,5 +1,8 @@
 title: Select Xcode version
-summary: Select Xcode version
+summary: |-
+  Get ready for a new release of Xcode by testing your build with the beta or
+  make sure everything works fine with the stable version. With this step Xcode
+  updates can be handled a bit more smoothly.
 description: |-
   Selects / activates the specified Xcode version.
 

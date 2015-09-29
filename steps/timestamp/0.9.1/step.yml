@@ -1,7 +1,10 @@
 title: Generate timestamps
-description: |
+description: |-
   Generates current timestamp
-summary: Generates current timestamp
+summary: |-
+  Need some time? This step helps by giving you the current time
+  in two formats! ISO_DATETIME and even UNIX_TIMESTAMP! What more could a mere
+  mortal ask for?
 website: https://github.com/bitrise-io/steps-timestamp
 source_code_url: https://github.com/bitrise-io/steps-timestamp
 support_url: https://github.com/bitrise-io/steps-timestamp/issues
