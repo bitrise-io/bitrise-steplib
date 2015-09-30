@@ -1,0 +1,50 @@
+title: Carthage
+summary: Installs and updates Carthage to the latest available version and runs selected
+  Carthage command.
+description: |-
+  Installs and updates Carthage to the latest available version and runs selected Carthage command.
+  For more information about Carthage, visit the [Carthage GitHub page](https://github.com/Carthage/Carthage).
+website: https://github.com/vasarhelyia/steps-carthage
+source_code_url: https://github.com/vasarhelyia/steps-carthage
+support_url: https://github.com/vasarhelyia/steps-carthage/issues
+published_at: 2015-09-30T10:11:10.013990903-07:00
+source:
+  git: https://github.com/vasarhelyia/steps-carthage.git
+  commit: 832df9d4d8ee954b962f6e7f907951e5783fc413
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- carthage
+- system
+dependencies:
+- manager: brew
+  name: carthage
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- carthage_command: bootstrap
+  opts:
+    description: |-
+      Select a command to set up your dependencies with.
+      * `bootstrap`: initializes the project with checking out & building all dependencies. (default)
+      * `update`: updates all dependencies.
+      * `build`: builds all checked out items.
+    summary: Select a command to set up your dependencies with.
+    title: Carthage command to run
+    value_options:
+    - bootstrap
+    - update
+    - build
+- no_use_binaries: "false"
+  opts:
+    summary: |-
+      Use this flag to make sure Carthage checks out all dependencies (otherwise
+      it defaults to binary framework releases). False by default.
+    title: Set no use binaries flag
+    value_options:
+    - "true"
+    - "false"
