@@ -10,10 +10,10 @@ description: |
 website: https://www.appaloosa-store.com
 source_code_url: https://github.com/appaloosa-store/bitrise_appalossa
 support_url: https://github.com/appaloosa-store/bitrise_appalossa/issues
-published_at: 2015-10-26T09:39:40.33051998+01:00
+published_at: 2015-10-26T09:49:37.761092326+01:00
 source:
   git: https://github.com/appaloosa-store/bitrise_appalossa.git
-  commit: 45f54fc5225e635041975eb6884de2b508ea38cb
+  commit: 7a549a1dcfc8c6b9961d59c3fd4e76a911a5b389
 host_os_tags:
 - osx-10.9
 - osx-10.10
