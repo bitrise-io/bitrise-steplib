@@ -1,0 +1,58 @@
+title: Activate SSH key (RSA private key)
+summary: Setup the SSH Key to use with the current workflow
+description: |-
+  Saves the provided **RSA private SSH key** to file
+  and then loads it into the user's ssh-agent with `ssh-add`.
+
+  **The key should not have a passphrase** (should have an empty passphrase).
+
+  *Warning: the provided key will overwrite an existing key at
+  the provided path (if another key at the path already exists).*
+
+  It will start the ssh-agent if it can't connect to the agent.
+website: https://github.com/bitrise-io/steps-activate-ssh-key
+source_code_url: https://github.com/bitrise-io/steps-activate-ssh-key
+support_url: https://github.com/bitrise-io/steps-activate-ssh-key/issues
+published_at: 2015-10-29T12:00:32.481457224+01:00
+source:
+  git: https://github.com/bitrise-io/steps-activate-ssh-key.git
+  commit: 5c42e6fe8642d8416faac742b0e137053f9ac9f3
+host_os_tags:
+- osx-10.9
+project_type_tags:
+- ios
+type_tags:
+- ssh
+deps:
+  apt_get:
+  - name: expect
+  - name: git
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    title: SSH private key in RSA format
+  ssh_rsa_private_key: $SSH_RSA_PRIVATE_KEY
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    title: (Optional) path to save the private key.
+  ssh_key_save_path: $HOME/.ssh/bitrise_step_activate_ssh_key
+- is_remove_other_identities: "true"
+  opts:
+    description: |-
+      (Optional) Remove other, previously loaded keys and restart ssh-agent?
+
+      Options:
+
+      * "true"
+      * "false"
+    is_dont_change_value: true
+    is_expand: false
+    title: Remove other identities?
+    value_options:
+    - "true"
+    - "false"
