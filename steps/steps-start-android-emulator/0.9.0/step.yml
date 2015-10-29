@@ -1,0 +1,27 @@
+title: Start Android emulator
+summary: Start Android emulator and wait till it's booted fully
+description: Start Android emulator and wait till it's booted fully
+website: https://github.com/bitrise-io/steps-start-android-emulator
+source_code_url: https://github.com/bitrise-io/steps-start-android-emulator
+support_url: https://github.com/bitrise-io/steps-start-android-emulator/issues
+published_at: 2015-10-29T17:25:42.008578447Z
+source:
+  git: https://github.com/bitrise-io/steps-start-android-emulator.git
+  commit: cd02fa5143cb3fe90f2b91a98d88b30f6c98415a
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- emulator
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- emulator_name: null
+  opts:
+    description: |
+      Emulator to boot
+    is_expand: true
+    is_required: false
+    title: Emulator to boot
