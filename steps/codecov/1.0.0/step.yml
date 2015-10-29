@@ -3,9 +3,9 @@ summary: Upload your code coverage files to Codecov.io
 description: Reduce technical debt with visualized test performance, faster code reviews
   and workflow enhancements. You can now upload your code coverage files to Codecov
   every time you kick off a build!
-website: https://github.com/bitrise-io/codecov
-source_code_url: https://github.com/bitrise-io/codecov
-support_url: https://github.com/bitrise-io/codecov/issues
+website: https://github.com/bitrise-io/steps-codecov
+source_code_url: https://github.com/bitrise-io/steps-codecov
+support_url: https://github.com/bitrise-io/steps-codecov/issues
 published_at: 2015-10-28T16:54:02.524489434Z
 source:
   git: https://github.com/bitrise-io/steps-codecov.git
