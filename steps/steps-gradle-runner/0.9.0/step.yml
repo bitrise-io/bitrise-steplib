@@ -1,0 +1,39 @@
+title: Gradle Unit Test
+summary: Runs Unit Tests with `./gradlew`.
+description: Runs Unit Tests with `./gradlew`. You can specify the test tasks to run
+  and the task flags to run ony specific files.
+website: https://github.com/bitrise-io/steps-gradle-runner
+source_code_url: https://github.com/bitrise-io/steps-gradle-runner
+support_url: https://github.com/bitrise-io/steps-gradle-runner/issues
+published_at: 2015-10-29T17:12:53.790629855Z
+source:
+  git: https://github.com/bitrise-io/steps-gradle-runner.git
+  commit: 2f12b73ab17e6f75971f3e17e6c87794f10a3064
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- gradle
+deps:
+  check_only:
+  - name: gradle
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- gradle_task: null
+  opts:
+    description: |
+      Gradle task to run
+    is_expand: true
+    is_required: false
+    title: Gradle task to run
