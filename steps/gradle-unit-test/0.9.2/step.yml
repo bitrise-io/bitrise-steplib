@@ -1,0 +1,58 @@
+title: Gradle Unit Test
+summary: Runs Unit Tests with `./gradlew`.
+description: Runs Unit Tests with `./gradlew`. You can specify the test tasks to run
+  and the task flags to run ony specific files.
+website: https://github.com/bitrise-io/steps-gradle-unit-test
+source_code_url: https://github.com/bitrise-io/steps-gradle-unit-test
+support_url: https://github.com/bitrise-io/steps-gradle-unit-test/issues
+published_at: 2015-10-31T12:57:12.091135288Z
+source:
+  git: https://github.com/bitrise-io/steps-gradle-unit-test.git
+  commit: 3113ce9c2226c05da6c5f84ffe33c59b819c69a9
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- unit test
+- gradle
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- gradlew_file_path: ./gradlew
+  opts:
+    description: |
+      Path for the gradlew file
+    is_expand: true
+    is_required: true
+    title: Path for the gradlew file
+- opts:
+    description: |
+      The test task to execute by gradlew
+    is_expand: true
+    is_required: true
+    title: Test task
+  unit_test_task: test
+- opts:
+    description: |
+      Use this flag to execute tests for only a couple of files like: `--tests='*.MyTestClass'`
+    is_expand: true
+    is_required: false
+    title: Test flags
+  unit_test_flags: --continue
+outputs:
+- BITRISE_GRADLE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
