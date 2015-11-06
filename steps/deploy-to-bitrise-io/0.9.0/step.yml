@@ -1,0 +1,127 @@
+title: Deploy to bitrise.io
+summary: Generic artifacts deployer, attaches the artifacts to bitrise.io builds.
+description: Generic artifacts deployer, attaches the artifacts to bitrise.io builds.
+website: https://github.com/bitrise-io/steps-deploy-to-bitrise-io
+source_code_url: https://github.com/bitrise-io/steps-deploy-to-bitrise-io
+support_url: https://github.com/bitrise-io/steps-deploy-to-bitrise-io/issues
+published_at: 2015-11-06T17:36:25.15197309+01:00
+source:
+  git: https://github.com/bitrise-io/steps-deploy-to-bitrise-io.git
+  commit: 7a068700b2fb04bb3fa1f8c56deb878b50a58a53
+host_os_tags:
+- osx-10.10
+type_tags:
+- deploy
+- artifact
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    description: Unique build URL of this build on Bitrise.io
+    is_expand: true
+    is_required: true
+    summary: Unique build URL of this build on Bitrise.io
+    title: Bitrise Build URL
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    description: The build's API Token for the build on Bitrise.io
+    is_expand: true
+    is_required: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise Build API Token
+- is_compress: "false"
+  opts:
+    description: |-
+      If this option is allowed the artifacts
+      found in the *Deploy directory* folder will be compressed
+      into a single file.
+
+      If this option is turned off the artifacts
+      found in the *Deploy directory* folder will be deployed
+      separately.
+    is_expand: false
+    is_required: true
+    summary: |-
+      If this option is allowed the artifacts
+      found in the *Deploy directory* folder will be compressed
+      into a single (ZIP) file.
+    title: Compress the artifacts into one file?
+    value_options:
+    - "true"
+    - "false"
+- deploy_path: $BITRISE_DEPLOY_DIR
+  opts:
+    description: |
+      Specify the directory or file path which will be deployed.
+      If the specified path is a directory then every file
+      in the directory will be deployed - but only the
+      files in the specified directory, sub-directories
+      won't be uploaded. For uploading the directory's content
+      recursively you should use the *Compress* option
+      which will compress the whole directory, with
+      every sub-directory included.
+
+      If you specify a file path then only the specified
+      file will be deployed.
+    is_expand: true
+    is_required: true
+    title: Deploy directory or file path
+- notify_user_groups: everyone
+  opts:
+    description: |
+      Your App's user groups to notify, comma separated.
+      Possible group names:
+
+      * none
+      * testers
+      * developers
+      * admins
+      * owner
+      * everyone
+
+      An example to notify your developers and testers:
+
+      `testers, developers`
+
+      If you want to notify everyone in your team just specify `everyone`.
+
+      If you don't want to notify anyone set this to `none`.
+    is_expand: false
+    is_required: false
+    title: 'Notify: User Groups'
+- notify_email_list: null
+  opts:
+    description: |
+      Email addresses to notify, comma separated.
+
+      You can specify any email address, the recepients
+      don't have to be in your team.
+    is_expand: false
+    is_required: false
+    title: 'Notify: Emails'
+- is_enable_public_page: "true"
+  opts:
+    description: |
+      If this option is enabled a public install page
+      will be available with a long and random URL which can be shared
+      with others who are not registered on Bitrise.
+
+      **If you disable this option the Notify Emails option will
+      be ignored and the Notify Groups will receive the build's
+      URL instead of the public page's URL!**
+    is_expand: false
+    is_required: true
+    title: Enable public page for the App?
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- BITRISE_PUBLIC_INSTALL_PAGE_URL: null
+  opts:
+    description: |-
+      Public Install Page's URL, if the
+      *Enable public page for the App?* option was *enabled*.
+    title: Public Install Page URL
