@@ -1,0 +1,78 @@
+title: Certificate and profile installer
+summary: |-
+  Need to use your Provisioning Profile and Certificate? Use this Step to
+  add them to the keychain and use it as you wish! No worries, as our security
+  policy goes, the VM is reverted after running the workflow so there's no
+  trace of these left on them.
+description: Downloads and installs the certificate and the mobile provisioning profiles
+website: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+source_code_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+support_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer/issues
+published_at: 2015-11-06T19:18:07.468318355+01:00
+source:
+  git: https://github.com/bitrise-io/steps-certificate-and-profile-installer.git
+  commit: f61d71f413ddb2b6ee6d4c6f8ba6f847a477e881
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- security
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- certificate_url: $BITRISE_CERTIFICATE_URL
+  opts:
+    description: |
+      URL of the certificate to download
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Certificate URL
+- certificate_passphrase: $BITRISE_CERTIFICATE_PASSPHRASE
+  opts:
+    description: |
+      Certificate passphrase
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Certificate passphrase
+- opts:
+    description: |
+      URL of the provisioning profile to download
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Provisioning profile URL
+  provisioning_profile_url: $BITRISE_PROVISION_URL
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keychain Path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keychain's password
+outputs:
+- BITRISE_PROVISIONING_PROFILE_ID: null
+  opts:
+    description: |-
+      **Will only export the Profile ID if you specify
+      a single Provisioning Profile!**
+    title: Activated Provisioning Profile ID
+- BITRISE_CODE_SIGN_IDENTITY: null
+  opts:
+    title: Activated Code Signing Certificate ID
