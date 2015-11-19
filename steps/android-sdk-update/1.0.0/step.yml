@@ -5,10 +5,10 @@ description: 'Install the necessary sdk tools to compile your application  '
 website: https://github.com/guitcastro/steps-update-sdk
 source_code_url: https://github.com/guitcastro/steps-update-sdk
 support_url: https://github.com/guitcastro/steps-update-sdk/issues
-published_at: 2015-11-19T12:51:10.998730017-02:00
+published_at: 2015-11-19T13:04:03.446538481-02:00
 source:
   git: https://github.com/guitcastro/steps-update-sdk.git
-  commit: 07380312f55055b1cef6f50688eb73a2a64d7f95
+  commit: ad840499b873972e3e4c7082301dc44b8434e53e
 host_os_tags:
 - osx-10.10
 project_type_tags:
