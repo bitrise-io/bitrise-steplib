@@ -5,10 +5,10 @@ description: 'Install the necessary sdk tools to compile your application  '
 website: https://github.com/guitcastro/steps-update-sdk
 source_code_url: https://github.com/guitcastro/steps-update-sdk
 support_url: https://github.com/guitcastro/steps-update-sdk/issues
-published_at: 2015-11-19T13:04:03.446538481-02:00
+published_at: 2015-11-27T18:20:19.60565615-02:00
 source:
   git: https://github.com/guitcastro/steps-update-sdk.git
-  commit: ad840499b873972e3e4c7082301dc44b8434e53e
+  commit: 674962da62a9e89f3317ed258348f47e74f1f5d2
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -22,12 +22,12 @@ is_skippable: false
 run_if: ""
 inputs:
 - opts:
-    description: Mark this if you want to update the Android SDK Build-tools.
+    description: Enable this option to update the Android SDK Tools.
     is_dont_change_value: false
     is_expand: false
     is_required: false
     summary: ""
-    title: Update Android SDK Build-tools
+    title: Update Android SDK Tools
     value_options:
     - "on"
     - "off"
@@ -61,7 +61,7 @@ inputs:
     is_required: true
     summary: 'Example: 23,22,17'
     title: Android SDK Platform versions
-  platform: "23"
+  sdk_version: "23"
 - opts:
     description: |-
       List separated by comman of all system images that should be installed.
