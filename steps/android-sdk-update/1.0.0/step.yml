@@ -5,10 +5,10 @@ description: 'Install the necessary sdk tools to compile your application  '
 website: https://github.com/guitcastro/steps-update-sdk
 source_code_url: https://github.com/guitcastro/steps-update-sdk
 support_url: https://github.com/guitcastro/steps-update-sdk/issues
-published_at: 2015-11-27T18:20:49.52038874-02:00
+published_at: 2015-11-27T18:34:06.160718444-02:00
 source:
   git: https://github.com/guitcastro/steps-update-sdk.git
-  commit: 674962da62a9e89f3317ed258348f47e74f1f5d2
+  commit: edce6ca14cda2286ce2465248560cb4815255c0a
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -31,7 +31,7 @@ inputs:
     value_options:
     - "on"
     - "off"
-  tools: "on"
+  tools: ""
 - opts:
     description: Select which version of Android SDK Platform-tools should be installed.
     is_dont_change_value: false
@@ -44,7 +44,7 @@ inputs:
     - both
     - none
   platform_tools: stable
-- build_tools: 23.0.2
+- build_tools: ""
   opts:
     description: "List separated by comman all Build-tools versions that should be
       installed. \nleave empty with don't want to install."
@@ -61,7 +61,7 @@ inputs:
     is_required: true
     summary: 'Example: 23,22,17'
     title: Android SDK Platform versions
-  sdk_version: "23"
+  sdk_version: ""
 - opts:
     description: |-
       List separated by comman of all system images that should be installed.
@@ -70,6 +70,6 @@ inputs:
     is_dont_change_value: false
     is_expand: false
     is_required: false
-    summary: 'Example: sys-img-armeabi-v7a-android-tv-23, sys-img-armeabi-v7a-android-22'
+    summary: 'Example: sys-img-armeabi-v7a-android-tv-23,sys-img-armeabi-v7a-android-22'
     title: SystemImages
   system_images: ""
