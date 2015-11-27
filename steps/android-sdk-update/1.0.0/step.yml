@@ -5,7 +5,7 @@ description: 'Install the necessary sdk tools to compile your application  '
 website: https://github.com/guitcastro/steps-update-sdk
 source_code_url: https://github.com/guitcastro/steps-update-sdk
 support_url: https://github.com/guitcastro/steps-update-sdk/issues
-published_at: 2015-11-27T18:20:19.60565615-02:00
+published_at: 2015-11-27T18:20:49.52038874-02:00
 source:
   git: https://github.com/guitcastro/steps-update-sdk.git
   commit: 674962da62a9e89f3317ed258348f47e74f1f5d2
