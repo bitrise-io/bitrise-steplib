@@ -1,0 +1,44 @@
+title: Set Xcode Project Build Number
+summary: |-
+  Sets the value of Bundle version in the specified Info.plist file. A great
+  way to keep track of version when submitting bug reports.
+description: Set the value of Bundle version in the project's Info.plist file to the
+  specified version number.
+website: https://github.com/bitrise-io/set-xcode-build-number
+source_code_url: https://github.com/bitrise-io/set-xcode-build-number
+support_url: https://github.com/bitrise-io/set-xcode-build-number/issues
+published_at: 2015-10-11T10:35:26.080982811+02:00
+source:
+  git: https://github.com/bitrise-io/steps-set-xcode-build-number.git
+  commit: 809e1498d23cafce22b8680a67274149b8809051
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    description: |
+      Path to the given project's Info.plist file.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Info.plist file path
+  plist_path: null
+- build_version: $BITRISE_BUILD_NUMBER
+  opts:
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: Set the Build Number / Bundle Version to this value.
+    title: Build Number

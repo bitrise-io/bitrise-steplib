@@ -1,0 +1,93 @@
+title: Gradle Runner
+summary: Runs the specified gradle task.
+description: |-
+  Runs the specified gradle task and copies the generated APKs into
+  the Bitrise Deploy Directory (`$BITRISE_DEPLOY_DIR`).
+website: https://github.com/bitrise-io/steps-gradle-runner
+source_code_url: https://github.com/bitrise-io/steps-gradle-runner
+support_url: https://github.com/bitrise-io/steps-gradle-runner/issues
+published_at: 2015-11-24T11:47:30.337056993+01:00
+source:
+  git: https://github.com/bitrise-io/steps-gradle-runner.git
+  commit: 0b1ebf78721601b74990dbbd1268461a6dc63395
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- gradle
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- gradle_file: $GRADLE_BUILD_FILE_PATH
+  opts:
+    description: |
+      Path to the gradle file to use
+    is_expand: true
+    is_required: true
+    title: Path to the gradle file to use
+- gradle_task: assemble
+  opts:
+    description: |
+      Gradle task to run.
+
+      You can call `gradle tasks` or `gradle tasks --all` in your
+      Gradle project directory to get the list of available tasks.
+    is_expand: true
+    is_required: true
+    title: Gradle task to run
+- gradle_options: --stacktrace
+  opts:
+    description: |-
+      Options added to the end of the Gradle call.
+
+      You can use multiple options, separated by a space
+      character. Example: `--stacktrace --debug`
+    is_expand: true
+    is_required: false
+    title: Additional options for Gradle call
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    description: |
+      **Optional**
+
+      If specified the `gradle` commands will be
+      executed with this `gradlew` file, instead of with `gradle` directly;
+      for example: `./gradlew assemble` instead of `gradle assemble`.
+
+      **The path should be relative** to the repository root / `workdir`,
+      for example: `./gradlew`.
+    is_expand: true
+    is_required: false
+    title: gradlew file path
+- apk_file_include_filter: '*.apk'
+  opts:
+    description: |
+      The step will moves generated apk files that match with this filter
+      into the Bitrise Deploy Directory.
+
+      Example: `*release*.apk`
+    is_expand: true
+    is_required: false
+    title: APK file include filter
+- apk_file_exclude_filter: '*-unaligned.apk'
+  opts:
+    description: |
+      The step will **not** moves generated apk files that match with this filter
+      into the Bitrise Deploy Directory.
+
+      You can use this step to avoid moving unalinged or unsigned apk files.
+
+      Example: `*unaligned*.apk`
+    is_expand: true
+    is_required: false
+    title: APK file exclude filter

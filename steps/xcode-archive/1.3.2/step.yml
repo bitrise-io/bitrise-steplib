@@ -1,0 +1,110 @@
+title: Xcode Archive
+summary: |-
+  Create an archive so you can share it, upload it, deploy it and catch them
+  all! Well, maybe not the last one.
+description: ""
+website: https://github.com/bitrise-io/steps-new-xcode-archive
+source_code_url: https://github.com/bitrise-io/steps-new-xcode-archive
+support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues
+published_at: 2015-10-28T22:45:12.84503658+01:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-archive.git
+  commit: 7bde2ea91aba900d5f550f4816997a3182abd92d
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |
+      This directory will contain the generated Xcode archive (.xcarchive)
+      and the .ipa file.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- is_force_code_sign: "no"
+  opts:
+    description: |-
+      If set to "yes" then it'll use the `PROVISIONING_PROFILE` (set
+      to the value of the `$BITRISE_PROVISIONING_PROFILE_ID` environment)
+      and `CODE_SIGN_IDENTITY` (set to the value
+      of the `$BITRISE_CODE_SIGN_IDENTITY` environment)
+      Xcode Command Line parameters,
+      for force the use of specified Certificate and Provisioning Profile,
+      to the ones
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    title: Use force code signing attributes?
+    value_options:
+    - "yes"
+    - "no"
+- export_options_path: null
+  opts:
+    description: |-
+      Used if Xcode version > 6 .
+
+      Specifies a path to a plist file that configures archive exporting.
+      If empty, step generates these options based on provisioning profile,
+      with default values.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    title: Export options path
+- is_clean_build: "yes"
+  opts:
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before the archive?
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created .ipa file's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created .dSYM.zip file's path
