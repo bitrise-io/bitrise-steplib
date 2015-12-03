@@ -1,0 +1,77 @@
+title: Xcode Test
+summary: |-
+  Write the tests and run them on every build just to make sure those tiny
+  code goblins didn't put something in the code that shouldn't be there while
+  you were at the daily Scrum meeting.
+description: Runs Xcode's `test` action.
+website: https://github.com/vasarhelyia/steps-xcode-test-mac
+source_code_url: https://github.com/vasarhelyia/steps-xcode-test-mac
+support_url: https://github.com/vasarhelyia/steps-xcode-test-mac/issues
+published_at: 2015-12-03T18:43:28.122618407+01:00
+source:
+  git: https://github.com/vasarhelyia/steps-xcode-test-mac.git
+  commit: 40108f26163f51d3b08a03b604f43fe367226a0a
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- mac
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_expand: true
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_expand: true
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- is_clean_build: "yes"
+  opts:
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- generate_code_coverage_files: "no"
+  opts:
+    is_expand: true
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
