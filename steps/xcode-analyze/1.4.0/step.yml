@@ -1,0 +1,99 @@
+title: Xcode Analyze
+summary: |-
+  Find flaws (potential bugs) in the source code of a project with the
+  static analyzer built into Xcode.
+description: |-
+  Find flaws (potential bugs) in the source code of a project with the
+  static analyzer built into Xcode.
+
+  Runs Xcode's `analyze` action.
+website: https://github.com/bitrise-io/steps-xcode-analyze
+source_code_url: https://github.com/bitrise-io/steps-xcode-analyze
+support_url: https://github.com/bitrise-io/steps-xcode-analyze/issues
+published_at: 2015-12-04T14:18:01.177210708+01:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-analyze.git
+  commit: 19e5e6b66afc84f72a7693105dc8c2fc73cefc0b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Workfing directory (if specified).
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- is_clean_build: "yes"
+  opts:
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- is_force_code_sign: "no"
+  opts:
+    description: |-
+      If set to "yes" then it'll use the `PROVISIONING_PROFILE` (set
+      to the value of the `$BITRISE_PROVISIONING_PROFILE_ID` environment)
+      and `CODE_SIGN_IDENTITY` (set to the value
+      of the `$BITRISE_CODE_SIGN_IDENTITY` environment)
+      Xcode Command Line parameters,
+      for force the use of specified Certificate and Provisioning Profile,
+      to the ones
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    title: Use force code signing attributes?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
