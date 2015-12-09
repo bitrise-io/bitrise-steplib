@@ -4,7 +4,7 @@ description: Sign APK.
 website: https://github.com/bitrise-steplib/steps-sign-apk
 source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
 support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
-published_at: 2015-12-09T17:42:31.976570956+01:00
+published_at: 2015-12-09T17:55:36.31249557+01:00
 source:
   git: https://github.com/bitrise-steplib/steps-sign-apk.git
   commit: 7251b16474112d72cf4054289b90c5dfbdcc07fb
