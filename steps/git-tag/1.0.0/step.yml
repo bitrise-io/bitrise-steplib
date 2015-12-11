@@ -1,0 +1,40 @@
+title: Git tag
+summary: A simple step that create a tag to the current commit
+description: A simple step that create a tag to the current commit
+website: https://github.com/Itelios/bitrise-steps-git-tag
+source_code_url: https://github.com/Itelios/bitrise-steps-git-tag
+support_url: https://github.com/Itelios/bitrise-steps-git-tag/issues
+published_at: 2015-12-11T16:50:07.069088152+01:00
+source:
+  git: https://github.com/Itelios/bitrise-steps-git-tag.git
+  commit: 159632ca375ed7a90fd649f8daddf1f5262fb56f
+host_os_tags:
+- osx-10.10
+type_tags:
+- git
+- vcs
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    summary: You can set a custom tag or keep default value to tag with current build
+      number
+    title: Tag to set on current commit
+  tag: $BITRISE_BUILD_NUMBER
+- opts:
+    is_expand: true
+    is_required: false
+    title: The message associated to the tag in case you want an annoted tag
+  tag_message: null
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    is_required: true
+    title: Determine if your want to push the tag to your remote repository or not
+    value_options:
+    - "true"
+    - "false"
+  push: true
