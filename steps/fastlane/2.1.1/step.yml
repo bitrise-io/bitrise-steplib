@@ -1,0 +1,44 @@
+title: Fastlane
+summary: |-
+  You probably heard of the awesome fastlane. We are proud to welcome this
+  great tool in the integrations section. Add the step to your workflow and
+  enjoy your ride with us in the fastlane!
+website: https://github.com/bitrise-io/steps-fastlane
+source_code_url: https://github.com/bitrise-io/steps-fastlane
+support_url: https://github.com/bitrise-io/steps-fastlane/issues
+published_at: 2015-12-12T17:22:28.751748689+01:00
+source:
+  git: https://github.com/bitrise-io/steps-fastlane.git
+  commit: 74bfe38ce92c265a0c9eb0498e6d612557b1336e
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+- fastlane
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- lane: null
+  opts:
+    description: |
+      Fastlane lane to run
+      $ fastlane [lane]
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Fastlane lane
+- opts:
+    description: |
+      Work directory
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Work directory
+  work_dir: $BITRISE_SOURCE_DIR
