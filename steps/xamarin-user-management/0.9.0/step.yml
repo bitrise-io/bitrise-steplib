@@ -1,17 +1,15 @@
 title: Xamarin User Management
-summary: |-
-  This step helps you authenticate your user with Xamarin and to download your Xamarin license file.
-  You can also use this to logout the user from the machine.
+summary: This step helps you authenticate your user with Xamarin.
 description: |-
   This step helps you authenticate your user with Xamarin and to download your Xamarin license file.
   You can also use this to logout the user from the machine.
 website: https://github.com/bitrise-steplib/steps-xamarin-user-management
 source_code_url: https://github.com/bitrise-steplib/steps-xamarin-user-management
 support_url: https://github.com/bitrise-steplib/steps-xamarin-user-management/issues
-published_at: 2015-12-17T12:13:39.182341851+01:00
+published_at: 2015-12-17T12:17:08.741767044+01:00
 source:
   git: https://github.com/bitrise-steplib/steps-xamarin-user-management.git
-  commit: 7f5c87038b73ef228169849adac4904895dca265
+  commit: 8a270e52f37b3872ca9176bac10ab45dd9999513
 host_os_tags:
 - osx-10.10
 project_type_tags:
