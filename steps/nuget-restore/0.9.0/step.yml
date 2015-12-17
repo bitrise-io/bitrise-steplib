@@ -1,0 +1,26 @@
+title: Step nuget restore
+summary: Step nuget restore
+description: Step nuget restore
+website: https://github.com/bitrise-steplib/steps-nuget-restore
+source_code_url: https://github.com/bitrise-steplib/steps-nuget-restore
+support_url: https://github.com/bitrise-steplib/steps-nuget-restore/issues
+published_at: 2015-12-17T13:33:46.535004354+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-nuget-restore.git
+  commit: 69960520ad6c2ef70af7d3f795ac7b9b8c85b720
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path to Xamarin solution
+    is_expand: true
+    is_required: true
+    title: Path to Xamarin solution
+  xamarin_solution: $BITRISE_PROJECT_PATH
