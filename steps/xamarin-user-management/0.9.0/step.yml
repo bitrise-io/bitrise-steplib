@@ -1,0 +1,56 @@
+title: Xamarin User Management
+summary: This step helps you authenticate your user with Xamarin.
+description: |-
+  This step helps you authenticate your user with Xamarin and to download your Xamarin license file.
+  You can also use this to logout the user from the machine.
+website: https://github.com/bitrise-steplib/steps-xamarin-user-management
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-user-management
+support_url: https://github.com/bitrise-steplib/steps-xamarin-user-management/issues
+published_at: 2015-12-17T13:23:09.824564421+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-user-management.git
+  commit: d5384d52a9ad2ee53a5534f78a7f35b7f357c13b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: Xamarin action to run
+    value_options:
+    - login
+    - logout
+  xamarin_action: login
+- bitrise_repository: $BITRISE_APP_SLUG
+  opts:
+    description: |
+      Bitrise repository slug
+    is_expand: true
+    is_required: true
+    title: Bitrise repository slug
+- opts:
+    description: |
+      Set true if you want to download the Xamarin.iOS license file
+    is_expand: true
+    is_required: true
+    title: Xamarin.iOS License
+    value_options:
+    - true
+    - false
+  xamarin_ios_license: true
+- opts:
+    description: |
+      Set true if you want to download the Xamarin.Android license file
+    is_expand: true
+    is_required: true
+    title: Xamarin.Android License
+    value_options:
+    - true
+    - false
+  xamarin_android_license: true
