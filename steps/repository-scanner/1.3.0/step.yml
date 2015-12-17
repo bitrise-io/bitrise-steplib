@@ -1,0 +1,62 @@
+title: Repository scanner
+summary: Scans repository for iOS and Android projects
+description: |-
+  For iOS projects detects CocoaPods and scan Xcode project files
+  for valid Xcode command line configurations.
+
+  For Android projects checks for build.gradle files and lists all the gradle tasks
+
+  For Xamarin projects checks the solution files and lists the configuration options
+website: https://github.com/bitrise-io/steps-repository-scanner
+source_code_url: https://github.com/bitrise-io/steps-repository-scanner
+support_url: https://github.com/bitrise-io/steps-repository-scanner/issues
+published_at: 2015-12-17T18:50:30.579290121+01:00
+source:
+  git: https://github.com/bitrise-io/steps-repository-scanner.git
+  commit: 2fe982fdae2a103e925292b9fb95bac8560a74ad
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- ios
+- android
+- xamarin
+type_tags:
+- xcode
+- cocoapods
+- pod
+- gradle
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: Source Code Directory path.
+  source_root_path: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      If this parameter is provided then only the specified branch
+      will be scanned, all other branches will be ignored.
+    is_expand: true
+    title: Scan only a single branch
+  scan_only_branch: ""
+- opts:
+    description: |
+      If provided, the scan results will be sent to the given
+      URL, with a POST request.
+    is_dont_change_value: true
+    is_expand: true
+    is_required: false
+    title: POST url to send the scan results to
+  scan_result_submit_url: $BITRISE_SCAN_RESULT_POST_URL
+- opts:
+    description: |
+      If provided and `scan_result_submit_url` also provided,
+      this API Token will be used for sending the Scan Results.
+    is_dont_change_value: true
+    is_expand: true
+    is_required: false
+    title: API Token for scan result submission
+  scan_result_submit_api_token: $BITRISE_APP_API_TOKEN
