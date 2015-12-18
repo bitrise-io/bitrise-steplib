@@ -1,0 +1,99 @@
+title: Xamarin iOS Test
+summary: Xamarin iOS Test
+description: Xamarin iOS Test
+website: https://github.com/bitrise-steplib/steps-xamarin-ios-test
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-ios-test
+support_url: https://github.com/bitrise-steplib/steps-xamarin-ios-test/issues
+published_at: 2015-12-18T12:01:10.459343588+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-ios-test.git
+  commit: 6e12990113d5b430e4280ec15b3afce7295d2955
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path to Xamarin Project
+    is_expand: true
+    is_required: true
+    title: Path to Xamarin Project
+  xamarin_project: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      Path to Xamarin UITest Project
+    is_expand: true
+    is_required: true
+    title: Path to Xamarin UITest Project
+  xamarin_test_project: null
+- opts:
+    description: |
+      Xamarin project configuration
+    is_expand: true
+    is_required: true
+    title: Xamarin project configuration
+  xamarin_configuration: Debug
+- opts:
+    description: |
+      Xamarin platform
+    is_expand: true
+    is_required: true
+    title: Xamarin platform
+  xamarin_platform: iPhoneSimulator
+- is_clean_build: true
+  opts:
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    title: Do a clean before the archive?
+    value_options:
+    - true
+    - false
+- opts:
+    is_expand: true
+    is_required: true
+    title: Build tool
+    value_options:
+    - xbuild
+    - mdtool
+  xamarin_builder: xbuild
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+    is_expand: true
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6
+- opts:
+    description: |
+      A couple of format examples:
+      * iOS 8.4
+      * iOS 9.1
+    is_expand: true
+    is_required: false
+    title: OS version
+  simulator_os_version: null
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.
