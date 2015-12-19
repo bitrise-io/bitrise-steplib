@@ -1,0 +1,39 @@
+title: Flowdock Notification
+summary: This step posts a notification to your flow's inbox with the build status.
+description: |-
+  This is a step for posting a build status notifiction to Flowdock.
+
+  In order to use this step, you must create a shortcut application in your
+  Flowdock account's developer applications. From there create a source token
+  for the desired flow, and use that token here. More information can be found
+  at the [Flowdock API Reference](https://www.flowdock.com/api/developing-integrations)
+website: https://github.com/scottrhoyt/bitrise-flowdock-step
+source_code_url: https://github.com/scottrhoyt/bitrise-flowdock-step
+support_url: https://github.com/scottrhoyt/bitrise-flowdock-step/issues
+published_at: 2015-12-18T07:33:39.488954095-08:00
+source:
+  git: https://github.com/scottrhoyt/bitrise-flowdock-step.git
+  commit: 4b6c0e403e7cf0bdf4ad5a725c3ea5fd441bddb6
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- android
+type_tags:
+- messaging
+- notifiction
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: true
+run_if: ""
+inputs:
+- flowdock_source_token: null
+  opts:
+    description: |
+      In order to use this step, you must create a shortcut application in your
+      Flowdock account's developer applications. From there create a source token
+      for the desired flow, and use that token here. More information can be found
+      at the [Flowdock API Reference](https://www.flowdock.com/api/developing-integrations)
+    is_required: true
+    summary: This is the source token for the desired flow to post to.
+    title: Flowdock Source Token
