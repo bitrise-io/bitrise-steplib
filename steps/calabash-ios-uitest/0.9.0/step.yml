@@ -1,9 +1,9 @@
 title: Step Calabash iOS UITest
 summary: Step Calabash iOS UITest
 description: Step Calabash iOS UITest
-website: https://github.com/bitrise-io/steps-calabash-ios-uitest
-source_code_url: https://github.com/bitrise-io/steps-calabash-ios-uitest
-support_url: https://github.com/bitrise-io/steps-calabash-ios-uitest/issues
+website: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest/issues
 published_at: 2015-12-21T10:55:20.13729491+01:00
 source:
   git: https://github.com/bitrise-steplib/steps-calabash-ios-uitest.git
