@@ -1,15 +1,15 @@
-title: Xcode Archive
+title: Xcode Archive for Mac
 summary: |-
-  Create an archive so you can share it, upload it, deploy it and catch them
+  Create an archive for your OS X project so you can share it, upload it, deploy it and catch them
   all! Well, maybe not the last one.
 description: ""
 website: https://github.com/vasarhelyia/steps-new-xcode-archive-mac
 source_code_url: https://github.com/vasarhelyia/steps-new-xcode-archive-mac
 support_url: https://github.com/vasarhelyia/steps-new-xcode-archive-mac/issues
-published_at: 2015-12-24T18:00:34.296981691+01:00
+published_at: 2015-12-24T18:08:47.991330459+01:00
 source:
   git: https://github.com/vasarhelyia/steps-xcode-archive-mac.git
-  commit: 7b684b0427fa6343a4bc8fcfc37184381a6c4a60
+  commit: 6498e7c978e0b1528b87e88d55935a694cdb5436
 host_os_tags:
 - osx-10.10
 project_type_tags:
