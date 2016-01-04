@@ -6,10 +6,10 @@ description: ""
 website: https://github.com/vasarhelyia/steps-new-xcode-archive-mac
 source_code_url: https://github.com/vasarhelyia/steps-new-xcode-archive-mac
 support_url: https://github.com/vasarhelyia/steps-new-xcode-archive-mac/issues
-published_at: 2016-01-04T22:43:42.693795131+01:00
+published_at: 2016-01-04T22:53:59.823395992+01:00
 source:
   git: https://github.com/vasarhelyia/steps-xcode-archive-mac.git
-  commit: 14da92591dd3624704ef88b2de84b8c1b138f437
+  commit: 2d07f242929af670229e6020a688be21de5ea0da
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -87,7 +87,6 @@ inputs:
 - export_options_path: null
   opts:
     description: |-
-      Used for Xcode version 7 and above.
       Specifies a path to a plist file that configures archive exporting.
       If not specified, it will generate an export options plist with the method specified in `export_method`.
       Call xcodebuild -help for available export options.
@@ -98,6 +97,8 @@ inputs:
   opts:
     description: |-
       The method for exporting used in `exportOptions` plist.
+      `none` means no resigning during export.
+      Upload and install proper certificates when exporting with different identity than the one used for archive.
       See `xcodebuild -help` for more information.
     is_required: true
     title: Export method
