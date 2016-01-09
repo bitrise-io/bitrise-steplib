@@ -1,20 +1,20 @@
-format_version: 1.0.0
+format_version: 1.1.0
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
   - STEPLIB_SOURCE: 'https://github.com/bitrise-io/bitrise-steplib.git'
   # define these ENVs in your .bitrise.secrets.yml
-  - AWS_ACCESS_KEY_ID:
-  - AWS_SECRET_ACCESS_KEY:
-  - S3_UPLOAD_BUCKET:
-  - S3_UPLOAD_BUCKET_REGION:
-  - IS_LOCAL_TEST:
-  - BITRISE_GIT_BRANCH:
-  - BITRISE_BUILD_URL:
-  - BITRISE_APP_TITLE:
-  - SLACK_WEBHOOK_URL:
-  - SLACK_CHANNEL:
+  - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+  - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+  - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
+  - S3_UPLOAD_BUCKET_REGION: $S3_UPLOAD_BUCKET_REGION
+  - IS_LOCAL_TEST: $IS_LOCAL_TEST
+  - BITRISE_GIT_BRANCH: $BITRISE_GIT_BRANCH
+  - BITRISE_BUILD_URL: $BITRISE_BUILD_URL
+  - BITRISE_APP_TITLE: $BITRISE_APP_TITLE
+  - SLACK_WEBHOOK_URL: $SLACK_WEBHOOK_URL
+  - SLACK_CHANNEL: $SLACK_CHANNEL
 
 trigger_map:
 - pattern: generate/spec.json
@@ -100,6 +100,9 @@ workflows:
     description: |-
       Performs an audit only on the changed step.yml files, and on the
       related Steps.
+
+      Development Note: if `IS_LOCAL_TEST` is enabled it'll check the
+      changes in the local git staging/cache.
     envs:
       - BITRISE_WORKFLOW_ID: pr_audit
     before_run:
@@ -119,6 +122,7 @@ workflows:
             if [[ "${IS_LOCAL_TEST}" == "true" ]] ; then
               localtest_param="--localtest"
             fi
+            go get github.com/hashicorp/go-version
             go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
   full_audit:
