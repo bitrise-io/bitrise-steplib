@@ -8,7 +8,11 @@ import (
 	"log"
 	"os"
 	"os/exec"
+	"path"
+	"sort"
 	"strings"
+
+	"github.com/hashicorp/go-version"
 )
 
 var (
@@ -19,11 +23,11 @@ var (
 // -----------------------------------
 // --- UTIL FUNCTIONS
 
-func runCommandAndReturnCombinedOutputs(name string, args ...string) (string, error) {
+func runCommandAndReturnCombinedOutputs(isDebug bool, name string, args ...string) (string, error) {
 	cmd := exec.Command(name, args...)
 	outBytes, err := cmd.CombinedOutput()
 	outStr := string(outBytes)
-	if err != nil {
+	if isDebug && err != nil {
 		log.Printf(" [!] Failed to run command: %#v", cmd)
 	}
 	return strings.TrimSpace(outStr), err
@@ -81,6 +85,26 @@ func normalizedOSTempDirPath(tmpDirNamePrefix string) (retPth string, err error)
 	return
 }
 
+func collectVersionsFromDir(dirPth string) ([]*version.Version, error) {
+	dirInfos, err := ioutil.ReadDir(dirPth)
+	if err != nil {
+		return []*version.Version{}, fmt.Errorf("collectVersionsFromDir: Failed to list dir: %s", err)
+	}
+	versions := []*version.Version{}
+	for _, aDirInfo := range dirInfos {
+		aVerStr := aDirInfo.Name()
+		if aVerStr == "assets" {
+			continue
+		}
+		ver, err := version.NewVersion(aVerStr)
+		if err != nil {
+			return []*version.Version{}, fmt.Errorf("collectVersionsFromDir: Failed to create version from string: %s | error: %s", aVerStr, err)
+		}
+		versions = append(versions, ver)
+	}
+	return versions, nil
+}
+
 func auditChangedStepYML(stepYmlPth string) error {
 	log.Println("=> auditChangedStepYML: ", stepYmlPth)
 	stepID, stepVer, err := detectStepIDAndVersionFromPath(stepYmlPth)
@@ -90,7 +114,7 @@ func auditChangedStepYML(stepYmlPth string) error {
 
 	log.Println("==> Step's main folder content: ")
 	stepMainDirPth := "./steps/" + stepID
-	lsOut, err := runCommandAndReturnCombinedOutputs("ls", "-alh", stepMainDirPth)
+	lsOut, err := runCommandAndReturnCombinedOutputs(true, "ls", "-alh", stepMainDirPth)
 	log.Println()
 	log.Println(lsOut)
 	if err != nil {
@@ -98,13 +122,48 @@ func auditChangedStepYML(stepYmlPth string) error {
 		log.Println("Error: ", err)
 		return err
 	}
-	log.Println()
+	fmt.Println()
+
+	//
+	versions, err := collectVersionsFromDir(stepMainDirPth)
+	if err != nil {
+		log.Println(" [!] Failed to collect versions")
+		return err
+	}
+	if len(versions) > 1 {
+		sort.Sort(version.Collection(versions))
+		prevVersion := ""
+		for _, aVer := range versions {
+			if aVer.String() == stepVer {
+				// stop
+				break
+			}
+			prevVersion = aVer.String()
+		}
+		log.Println("==> Diff step: ", stepID, " | ", stepVer, "<->", prevVersion)
+		lsOut, _ := runCommandAndReturnCombinedOutputs(
+			false,
+			"diff",
+			path.Join(stepMainDirPth, prevVersion, "step.yml"),
+			path.Join(stepMainDirPth, stepVer, "step.yml"),
+		)
+		fmt.Println()
+		fmt.Println()
+		fmt.Println("========== DIFF ====================")
+		fmt.Println(lsOut)
+		fmt.Println("====================================")
+		fmt.Println()
+		fmt.Println()
+	} else {
+		log.Println("==> FIRST VERSION - can't diff against previous version")
+	}
 
 	log.Println("==> Auditing step: ", stepID, " | version: ", stepVer)
 	//
-	tmpStepActPth, err := normalizedOSTempDirPath("" + stepID + "--" + stepVer)
+	tmpStepActPth, err := normalizedOSTempDirPath(stepID + "--" + stepVer)
 	//
-	output, err := runCommandAndReturnCombinedOutputs("stepman", "activate",
+	output, err := runCommandAndReturnCombinedOutputs(true,
+		"stepman", "activate",
 		"--collection", collectionID,
 		"--id", stepID,
 		"--version", stepVer,
@@ -139,7 +198,7 @@ func main() {
 	log.Println("Auditing changed steps...")
 
 	log.Println("git fetch...")
-	if output, err := runCommandAndReturnCombinedOutputs("git", "fetch"); err != nil {
+	if output, err := runCommandAndReturnCombinedOutputs(true, "git", "fetch"); err != nil {
 		log.Println(" [!] Error - Output was: ", output)
 		log.Fatalln(" [!] Error: ", err)
 	}
@@ -149,9 +208,9 @@ func main() {
 	var diffErr error
 	//
 	if isLocalTestMode {
-		diffOutput, diffErr = runCommandAndReturnCombinedOutputs("git", "diff", "--name-only", "--cached", "upstream/master")
+		diffOutput, diffErr = runCommandAndReturnCombinedOutputs(true, "git", "diff", "--name-only", "--cached", "upstream/master")
 	} else {
-		diffOutput, diffErr = runCommandAndReturnCombinedOutputs("git", "diff", "--name-only", "HEAD", "origin/master")
+		diffOutput, diffErr = runCommandAndReturnCombinedOutputs(true, "git", "diff", "--name-only", "HEAD", "origin/master")
 	}
 
 	if diffErr != nil {
