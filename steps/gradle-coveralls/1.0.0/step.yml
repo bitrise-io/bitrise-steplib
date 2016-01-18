@@ -1,0 +1,37 @@
+title: Gradle Coveralls
+summary: Runs Coveralls with `./gradlew`.
+description: Sends code coverage to www.coveralls.io. Uses `./gradlew coveralls` task.
+  You have to configure [org.kt3k.gradle.plugin:coveralls-gradle-plugin](https://github.com/kt3k/coveralls-gradle-plugin)
+  in your project first.
+website: https://github.com/donvigo/steps-gradle-coveralls
+source_code_url: https://github.com/donvigo/steps-gradle-coveralls
+support_url: https://github.com/donvigo/steps-gradle-coveralls/issues
+published_at: 2016-01-17T21:09:55.984310417+02:00
+source:
+  git: https://github.com/donvigo/steps-gradle-coveralls.git
+  commit: 630046c6d818d35760ef2a1c73cecb3c777ce9c9
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- coveralls
+- gradle
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- gradlew_file_path: $GRADLEW_PATH
+  opts:
+    description: |
+      Path for the gradlew file
+    is_expand: true
+    is_required: true
+    title: Path for the gradlew file
+- coveralls_task: coveralls
+  opts:
+    description: |
+      The coveralls task to execute by gradlew
+    is_expand: true
+    is_required: true
+    title: Coveralls gradle task
