@@ -1,0 +1,57 @@
+title: Xamarin User Management
+summary: This step helps you authenticate your user with Xamarin and to download your
+  Xamarin liceses.
+description: This step helps you authenticate your user with Xamarin and to download
+  your Xamarin licenses.
+website: https://github.com/bitrise-steplib/steps-xamarin-user-management
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-user-management
+support_url: https://github.com/bitrise-steplib/steps-xamarin-user-management/issues
+published_at: 2016-02-03T18:11:32.518941147+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-user-management.git
+  commit: b9e1455157b462d7644c4c59939e8508781dc9b2
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- build_slug: $BITRISE_BUILD_SLUG
+  opts:
+    description: |
+      Bitrise build slug
+    is_expand: true
+    is_required: true
+    title: Bitrise build slug
+- opts:
+    description: |
+      Set to yes if you want to download the Xamarin.iOS license file
+    is_expand: true
+    is_required: true
+    title: Xamarin.iOS License
+    value_options:
+    - "yes"
+    - "no"
+  xamarin_ios_license: "yes"
+- opts:
+    description: |
+      Set to yes if you want to download the Xamarin.Android license file
+    is_expand: true
+    is_required: true
+    title: Xamarin.Android License
+    value_options:
+    - "yes"
+    - "no"
+  xamarin_android_license: "yes"
+- opts:
+    description: |
+      Set to yes if you want to download the Xamarin.Mac license file
+    is_expand: true
+    is_required: true
+    title: Xamarin.Mac License
+    value_options:
+    - "yes"
+    - "no"
+  xamarin_mac_license: "no"
