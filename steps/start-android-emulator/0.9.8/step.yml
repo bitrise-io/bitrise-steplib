@@ -1,0 +1,42 @@
+title: Start Android emulator
+summary: Start Android emulator and wait till it's booted fully.
+description: Start Android emulator and wait till it's booted fully.
+website: https://github.com/bitrise-steplib/steps-start-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-start-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-start-android-emulator/issues
+published_at: 2016-02-09T13:02:06.159610308+01:00
+source:
+  git: https://github.com/bitrise-io/steps-start-android-emulator.git
+  commit: a055675e33e4fc63da4ad8b1ca68999e0887b5e3
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- emulator
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- emulator_name: null
+  opts:
+    description: |
+      Emulator to boot
+    is_required: true
+    title: Emulator to boot
+- emulator_skin: null
+  opts:
+    description: |
+      Use this input to specify an emulator skin.
+      Example: - emulator_skin: 320x480
+    title: Emulator skin
+- android_home: $ANDROID_HOME
+  opts:
+    description: Android sdk path
+    is_required: true
+    title: Android sdk path
+outputs:
+- BITRISE_EMULATOR_SERIAL: null
+  opts:
+    description: Booted emulator serial
+    title: Emulator serial
