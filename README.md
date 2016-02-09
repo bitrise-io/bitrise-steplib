@@ -12,7 +12,7 @@ Install the [Bitrise CLI](https://www.bitrise.io/cli) to run `bitrise` on your m
 
 You can install it via Homebrew:
 
-`brew install bitrise`
+`brew update && brew install bitrise`
 
 Or check the latest release with instructions at: [https://github.com/bitrise-io/bitrise/releases](https://github.com/bitrise-io/bitrise/releases)
 
