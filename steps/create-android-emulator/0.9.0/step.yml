@@ -1,0 +1,46 @@
+title: Create Android emulator
+summary: Creates a new Android Virtual Device
+description: Creates a new Android Virtual Device.
+website: https://github.com/bitrise-steplib/steps-create-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-create-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-create-android-emulator/issues
+published_at: 2016-02-11T11:45:48.560557859+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-create-android-emulator.git
+  commit: fa86cca7a9810f52f20eac178018dae463612f90
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- emulator
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- name: null
+  opts:
+    description: |
+      Name of the new AVD.
+    is_required: true
+    title: Name of the new AVD
+- opts:
+    description: |
+      Target platform of the new AVD.
+
+      Example: android-19
+    is_required: true
+    title: Target platform of the new AVD
+  platform: null
+- abi: armeabi-v7a
+  opts:
+    description: |
+      The ABI to use for the AVD.
+    is_dont_change_value: true
+    is_required: true
+    title: The ABI to use for the AVD
+outputs:
+- BITRISE_EMULATOR_NAME: null
+  opts:
+    description: Name of the new AVD
+    title: Name of the new AVD
