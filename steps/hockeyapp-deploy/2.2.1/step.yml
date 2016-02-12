@@ -1,0 +1,230 @@
+title: HockeyApp iOS Deploy
+summary: Deploy your awesome iOS Application to HockeyApp.
+description: |-
+  Deploy an iOS application to [HockeyApp](http://hockeyapp.net),
+  add notes even in markdown format, notify testers, restrict download.
+
+  Register a HockeyApp account at [http://hockeyapp.net/](http://hockeyapp.net)
+  and create an app to utilize this step.
+  You also need to create a *HockeyApp Token* for your app.
+
+  If app_id is provided the ipa will be upload to the specified app on HockeyApp,
+  otherwise HockeyApp will decide based on the bundle id, if it's a new app, or update.
+website: https://github.com/bitrise-io/steps-hockeyapp-deploy
+source_code_url: https://github.com/bitrise-io/steps-hockeyapp-deploy
+support_url: https://github.com/bitrise-io/steps-hockeyapp-deploy/issues
+published_at: 2016-02-12T17:01:02.263987784+01:00
+source:
+  git: https://github.com/bitrise-io/steps-hockeyapp-deploy.git
+  commit: 0a1c58a021ec2f6d5cca0e3420cee5c39a595154
+host_os_tags:
+- osx-10.9
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- deploy
+- HockeyApp
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: IPA file path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: |-
+      Although the dSYM is marked as optional in the HockeyApp
+      API documentations it seems that HockeyApp can't parse
+      the required App information from the IPA in case no
+      dSYM is generated (if dSYM generation is turned off
+      in the Xcode project settings).
+
+      To turn on dSYM generation open you Xcode
+      project, select *Project Settings - Build Settings - Debug Information Format*
+      and make sure it's set to the *DWARF with dSYM File* option.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: dSYM file path
+- api_token: ""
+  opts:
+    description: |-
+      Note: different access types exist when obtaining a api_token on your account page.
+
+      ## Where to get the HockeyApp API Token?
+
+      Sign in to your [http://hockeyapp.net/](http://hockeyapp.net) account,
+      click on your username at the top right corner to get to the
+      *Manage Account* page. Select the *API Tokens* option on the left side
+      and if you don't have an appropriate API Token for your app or account
+      you can register one here.
+
+      You can see your registered API Tokens at the bottom of this page
+      at the *Active API Tokens* section. Copy and paste here the API Token
+      you want to use.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: API Token
+- app_id: ""
+  opts:
+    description: |-
+      **Important:**
+      *If no App ID is specified HockeyApp will attach the build
+      to an app on HockeyApp based on the bundle ID, or create a new app on HockeyApp
+      if it does not match any existing HockeyApp app's bundle ID.*
+
+      *If you set the App ID the build will be uploaded for the specified
+      HockeyApp app/project!*
+
+      ## Where to get the HockeyApp App ID?
+
+      If you didn't register your app on [http://hockeyapp.net/](http://hockeyapp.net)
+      you first have to do so to get an App ID.
+
+      Once the app is registered select it from the Apps list on the
+      Dashboard page and on the left side you'll find the **App ID**
+      of the app. Copy and paste it here.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: 'HockeyApp: App ID'
+- notes: Deploy with Bitrise HockeyApp Deploy Step.
+  opts:
+    description: Additional notes to the deploy.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Notes attached to the deploy
+- notes_type: "0"
+  opts:
+    description: |-
+      Possible values:
+
+      * 0: Textile
+      * 1: Markdown
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Notes type
+    value_options:
+    - "0"
+    - "1"
+- notify: "2"
+  opts:
+    description: |-
+      Sets who should be notified on deployment.
+      **Requires full-access tokens.**
+
+      Possible values:
+
+      * 0 - Don't notify testers
+      * 1 - Notify all testers that can install this app
+      * 2 - Notify all testers
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Notify Testers?
+    value_options:
+    - "0"
+    - "1"
+    - "2"
+- opts:
+    description: |
+      Download status.
+
+      **Requires full-access tokens.**
+
+      Possible values:
+
+      * 1 - do not allow users to download the version
+      * 2 - make the version available for download.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Allow Download?
+    value_options:
+    - "1"
+    - "2"
+  status: "2"
+- mandatory: "false"
+  opts:
+    description: |
+      Set if version is mandatory to install.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Mandatory?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: |
+      Restrict download to comma-separated list of tags.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: '(optional) Restrict download: Tags'
+  tags: ""
+- commit_sha: $BITRISE_GIT_COMMIT
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: (optional) Git commit sha for this build
+- build_server_url: $BITRISE_BUILD_URL
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: (optional) Build job URL (on your build server)
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: (optional) Source Code Repository URL
+  repository_url: ""
+outputs:
+- HOCKEYAPP_DEPLOY_STATUS: ""
+  opts:
+    description: ""
+    summary: ""
+    title: 'Deployment result: ''success'' or ''failed'''
+- HOCKEYAPP_DEPLOY_PUBLIC_URL: ""
+  opts:
+    description: ""
+    summary: ""
+    title: Public URL of the newly deployed version
+- HOCKEYAPP_DEPLOY_BUILD_URL: ""
+  opts:
+    description: ""
+    summary: ""
+    title: URL of the HockeyApp build
+- HOCKEYAPP_DEPLOY_CONFIG_URL: ""
+  opts:
+    description: ""
+    summary: ""
+    title: URL of the HockeyApp config view
