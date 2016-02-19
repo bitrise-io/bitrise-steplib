@@ -1,0 +1,50 @@
+title: Heroku Deploy
+summary: Deploy to Heroku
+description: Deploy to [Heroku](https://heroku.com).
+website: https://github.com/bitrise-steplib/steps-heroku-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-heroku-deploy
+support_url: https://github.com/bitrise-steplib/steps-heroku-deploy/issues
+published_at: 2016-02-19T17:46:40.016994822+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-heroku-deploy.git
+  commit: 71fbf427c176eea33c4ba1d54bb231a96391640a
+host_os_tags:
+- ubuntu-14.04
+- osx-10.11
+project_type_tags:
+- web
+type_tags:
+- deploy
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: heroku
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- heroku_api_token: $HEROKU_API_TOKEN
+  opts:
+    description: |
+      You can get your API Token by running `heroku auth:token` in
+      your Terminal/Command Line, if you have the [Heroku Toolbelt](https://toolbelt.heroku.com) installed,
+      or you can follow the [official guide on Heroku](https://devcenter.heroku.com/articles/platform-api-quickstart).
+
+      **Security**: instead of specifying the api token here, you should
+      set it in your Bitrise Secrets! If you don't change the default
+      value of this input, you can simply specify the value for the
+      key: `HEROKU_API_TOKEN`.
+    is_required: true
+    title: Heroku API Token
+- heroku_app_id: $HEROKU_APP_ID
+  opts:
+    description: |
+      Your webapp's Heroku App ID. This is the ID of the App you
+      can see on your [Heroku Dashboard](https://dashboard.heroku.com/apps).
+    is_required: true
+    title: Heroku App ID
