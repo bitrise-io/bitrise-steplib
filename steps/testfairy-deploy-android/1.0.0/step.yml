@@ -5,17 +5,22 @@ summary: |-
   version, set recording duration, set if video recording is enabled and add
   your comments and let the TestFairy do it's magic.
 description: |-
+  Deploy your awesome App to TestFairy, set Tester Groups to be notified,
+  enable email notification for the build, enable in-app notification of new
+  version, set recording duration, set if video recording is enabled and add
+  your comments and let the TestFairy do it's magic.
   To use this step you have to register
   an account on [TestFairy.com](http://testfairy.com/).
 website: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android
 source_code_url: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android
 support_url: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android/issues
-published_at: 2016-02-20T14:55:22.465044928-03:00
+published_at: 2016-02-22T07:34:58.706705979-03:00
 source:
   git: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android.git
-  commit: 5e57153e55ec29675911069bbba8d439d9b5afe4
+  commit: 789231b5d8c3b2c630bcbb6c52755d676acc1c78
 host_os_tags:
 - osx-10.10
+- ubuntu
 project_type_tags:
 - android
 type_tags:
