@@ -7,10 +7,10 @@ description: |-
 website: https://github.com/vasarhelyia/steps-carthage
 source_code_url: https://github.com/vasarhelyia/steps-carthage
 support_url: https://github.com/vasarhelyia/steps-carthage/issues
-published_at: 2016-03-01T14:31:43.223053897+01:00
+published_at: 2016-03-01T20:09:00.543133063+01:00
 source:
   git: https://github.com/vasarhelyia/steps-carthage.git
-  commit: 6569b922e3a85aca35aca614c4a87d74f2e57dba
+  commit: 703f0c9f27c1e1a8d5e0f3fd4a6ad114ebd5a899
 host_os_tags:
 - osx-10.10
 project_type_tags:
