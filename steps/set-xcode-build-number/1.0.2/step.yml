@@ -1,0 +1,59 @@
+title: Set Xcode Project Build Number
+summary: |-
+  Sets the value of Bundle version in the specified Info.plist file. A great
+  way to keep track of version when submitting bug reports.
+description: Set the value of Bundle version in the project's Info.plist file to the
+  specified version number.
+website: https://github.com/bitrise-io/set-xcode-build-number
+source_code_url: https://github.com/bitrise-io/set-xcode-build-number
+support_url: https://github.com/bitrise-io/set-xcode-build-number/issues
+published_at: 2016-03-03T13:33:41.223444754+01:00
+source:
+  git: https://github.com/bitrise-io/steps-set-xcode-build-number.git
+  commit: cf0508303cb2d9144dd0076fbc3728c421f0ce0f
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+run_if: .IsCI
+inputs:
+- opts:
+    description: |
+      Path to the given project's Info.plist file.
+    is_required: true
+    title: Info.plist file path
+  plist_path: null
+- build_version: $BITRISE_BUILD_NUMBER
+  opts:
+    description: |
+      Set the CFBundleVersion to this value.
+
+      You can find this in Xcode:
+
+      - Select the your project in Project navigator
+      - Under General tab, in Identity section
+      - Build field
+    is_required: true
+    title: Build Number
+- build_version_offset: null
+  opts:
+    description: |
+      This offset will be added to `build_version` input's value.
+    title: Build Number Offset
+- build_short_version_string: null
+  opts:
+    description: |
+      Set the CFBundleShortVersionString to this value.
+
+      You can find this in Xcode:
+
+      - Select the your project in Project navigator
+      - Under General tab, in Identity section
+      - Version field
+    title: Version Number
