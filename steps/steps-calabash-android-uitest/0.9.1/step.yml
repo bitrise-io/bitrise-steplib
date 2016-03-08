@@ -1,0 +1,35 @@
+title: Calabash Android UI test
+summary: Calabash Android UI test step
+description: Calabash Android UI test step
+website: https://github.com/bitrise-steplib/steps-calabash-android-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-android-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-android-uitest/issues
+published_at: 2016-03-08T16:59:10.026612227+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-calabash-android-uitest.git
+  commit: 6b49043dc6b6db9d9fc21d0cbe01df33b800c052
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- testing
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- apk_path: null
+  opts:
+    description: |
+      APK path
+    is_expand: true
+    is_required: true
+    title: APK path
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
