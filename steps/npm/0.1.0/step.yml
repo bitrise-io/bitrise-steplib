@@ -1,0 +1,31 @@
+title: Run npm command
+summary: Runs `npm` with the given command and args.
+description: Runs `npm` with the given command and args.
+website: https://github.com/bitrise-steplib/steps-npm
+source_code_url: https://github.com/bitrise-steplib/steps-npm
+support_url: https://github.com/bitrise-steplib/steps-npm/issues
+published_at: 2016-03-09T13:29:24.879012651+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-npm.git
+  commit: 25d36053a5b9ae0db836eba47cfb12f0c0fa8a04
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+type_tags:
+- npm
+deps:
+  brew:
+  - name: node
+inputs:
+- command: null
+  opts:
+    description: Specify the command to run with `npm`. For example `install`, or
+      `test`.
+    title: The `npm` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `npm` command. You can specify multiple arguments, separated
+      by a space character. For example `-dd -ll`
+    title: Arguments for running `npm` commands
