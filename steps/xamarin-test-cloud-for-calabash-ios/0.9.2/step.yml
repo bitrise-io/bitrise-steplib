@@ -1,0 +1,113 @@
+title: Submit Calabash iOS test to Xamarin Test Cloud
+summary: Submit Calabash iOS test to Xamarin Test Cloud step
+description: Submit Calabash iOS test to Xamarin Test Cloud step
+website: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-ios
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-ios
+support_url: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-ios/issues
+published_at: 2016-03-09T07:59:32.546358495+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-ios.git
+  commit: c9ccd5609565d02dcdc4bd7deefdb45a49f5fe59
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: IPA path
+    is_expand: true
+    is_required: true
+    title: IPA path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: dSYM path
+    is_expand: true
+    is_required: true
+    title: dSYM path
+- opts:
+    description: |
+      The e-mail address of the team member submitting the tests.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: User email
+    title: User email
+  xamarin_user: null
+- opts:
+    description: |
+      Api key.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: Api key
+    title: Api key
+  test_cloud_api_key: null
+- opts:
+    description: |
+      Device selection id from the Test Cloud upload dialog.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: Device selection id
+    title: Device selection id
+  test_cloud_devices: null
+- opts:
+    description: |
+      Don't wait for cloud test run to complete.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: Don't wait for cloud test run to complete
+    title: Don't wait for cloud test run to complete
+    value_options:
+    - "yes"
+    - "no"
+  test_cloud_is_async: "yes"
+- opts:
+    description: |
+      Test series.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: Test series
+    title: Test series
+  test_cloud_series: master
+- opts:
+    description: |
+      Other parameters to pass Xamarin Test Cloud.
+
+      Available parameters:
+      - -params, [--test-parameters=key:value] # Test parameters (e.g., -params username:nat@xamarin.com password:xamarin)
+      - -w, [--workspace=WORKSPACE] # Path to your Calabash workspace (containing your features folder)
+      - -c, [--config=CONFIG] # Cucumber configuration file (cucumber.yml)
+      - [--skip-config-check], [--no-skip-config-check] # Force running without Cucumber profile (cucumber.yml)
+      - -p, [--profile=PROFILE] # Profile to run (profile from cucumber.yml)
+      - [--priority], [--no-priority] # Run as priority test execution. Please note: This is only available for some tiers, and priority test executions cost double.
+      - [--locale=LOCALE] # System language
+
+      Example:
+      '--locale=en_US --skip-config-check'
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: Other parameters
+    title: Other parameters
+  other_parameters: null
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.
