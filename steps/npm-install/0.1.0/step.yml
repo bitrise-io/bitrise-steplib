@@ -1,0 +1,26 @@
+title: Install npm packages
+summary: Installs your npm packages. Runs `npm install`.
+description: Installs your npm packages. Runs `npm install`.
+website: https://github.com/vasarhelyia/steps-npm-install
+source_code_url: https://github.com/vasarhelyia/steps-npm-install
+support_url: https://github.com/vasarhelyia/steps-npm-install/issues
+published_at: 2016-03-09T09:55:28.180645747+01:00
+source:
+  git: https://github.com/vasarhelyia/steps-npm-install.git
+  commit: 7422e155845a1acac4406671c63efe525e27a384
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+type_tags:
+- npm
+deps:
+  brew:
+  - name: node
+inputs:
+- options: null
+  opts:
+    description: |-
+      Options are added to `npm install`. You can use multiple options, separated
+      by a space character, for example `-dd -ll`
+    title: Additional options when installing your Node packages with `npm install`
