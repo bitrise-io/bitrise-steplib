@@ -9,7 +9,7 @@ support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues
 published_at: 2016-02-23T13:50:04.095195255+01:00
 source:
   git: https://github.com/bitrise-io/steps-xcode-archive.git
-  commit: ac88f34b0629798387e5e0fb8ebff62e08274a82
+  commit: 73c2c37ac66d4d4baa8729a95764b4c1bbf54bf9
 host_os_tags:
 - osx-10.10
 project_type_tags:
