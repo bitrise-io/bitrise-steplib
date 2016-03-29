@@ -1,43 +1,23 @@
 title: "Create JIRA comment with build"
 summary: Will post a comment on the issue page with build details (download link, build number, etc)
-description: |-
-  This is a Step template.
-  Contains everything what's required for a valid Stepman managed step.
-
-  A Step's description (and generally any `description` property)
-  can be a [Markdown](https://en.wikipedia.org/wiki/Markdown) formatted text.
-
-  To create your own Step:
-
-  1. Create a new repository on GitHub
-  2. Copy the files from this folder into your repository
-  3. That's all, you can use it on your own machine
-  4. Once you're happy with it you can share it with others.
-website: https://github.com/...
-source_code_url: https://github.com/...
-support_url: https://github.com/.../issues
+description:
+website: https://github.com/dag-io/post-jira-comment-with-build-details-step
+source_code_url: https://github.com/dag-io/post-jira-comment-with-build-details-step.git
+support_url: https://github.com/dag-io/post-jira-comment-with-build-details-step/issues
 host_os_tags:
-  - osx-10.10
 project_type_tags:
-  - ios
 type_tags:
   - script
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
 dependencies:
-  #- manager: brew
-  #  name: git
 run_if: ""
 inputs:
   - git_branch:
     opts:
       title: "Git branch name"
       summary: ""
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
@@ -46,10 +26,6 @@ inputs:
     opts:
       title: "JIRA user"
       summary: "JIRA account username that will be the author of the comment"
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
@@ -58,10 +34,6 @@ inputs:
     opts:
       title: "JIRA user password"
       summary: "JIRA account password that will be the author of the comment"
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
@@ -70,10 +42,6 @@ inputs:
     opts:
       title: "Build message"
       summary: "The content of the build message that will be posted"
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
@@ -82,10 +50,6 @@ inputs:
     opts:
       title: "JIRA domain"
       summary: "JIRA website domain name"
-      description: |
-        Description of this input.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
@@ -95,10 +59,6 @@ outputs:
     opts:
       title: "JIRA issue key"
       summary: The key of the issue where the comment has been posted
-      description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
@@ -106,10 +66,6 @@ outputs:
     opts:
       title: "JIRA issue name"
       summary: The name of the issue where the comment has been posted
-      description: |
-        Description of this output.
-
-        Can be Markdown formatted text.
       is_expand: false
       is_required: true
       is_dont_change_value: true
