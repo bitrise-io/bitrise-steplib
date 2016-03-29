@@ -4,6 +4,7 @@ description:
 website: https://github.com/dag-io/post-jira-comment-with-build-details-step
 source_code_url: https://github.com/dag-io/post-jira-comment-with-build-details-step.git
 support_url: https://github.com/dag-io/post-jira-comment-with-build-details-step/issues
+published_at: 2016-03-29T12:26:00+02:00
 host_os_tags:
 project_type_tags:
 type_tags:
