@@ -1,0 +1,34 @@
+title: Android Manifest Package Name
+summary: Sets the specified package name in the AndroidManifest.xml
+description: "This step allows to change the initial package name specified in AndroidManifest.xml\nThis
+  is mainly required for the android app created with Xamarin. \nXamarin doesn't provide
+  an easy wayt to change package name depending on the configuration. So this step
+  may be used to do so."
+website: https://github.com/Memorado/bitrise-android-package-name-step
+source_code_url: https://github.com/Memorado/bitrise-android-package-name-step
+support_url: https://github.com/Memorado/bitrise-android-package-name-step/issues
+published_at: 2016-03-31T11:12:52.857027332+02:00
+source:
+  git: https://github.com/Memorado/bitrise-android-package-name-step.git
+  commit: 810ce06a3098a772d9091161c9ac8934729ccc45
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- build
+- utils
+run_if: .IsCI
+inputs:
+- manifest_file: $BITRISE_ANDROID_MANIFEST_PATH
+  opts:
+    description: |
+      Path to the given project's AndroidManifest.xml file.
+    is_required: true
+    summary: ""
+    title: AndroidManifest.xml file path
+- opts:
+    is_required: true
+    summary: Set the package attribute in the AndroidManifest.xml to a specified value
+    title: Package Name
+  package_name: null
