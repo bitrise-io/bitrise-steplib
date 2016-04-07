@@ -1,0 +1,42 @@
+title: Android Manifest Application Attributes
+summary: Sets the specified `<application>` attributes in the AndroidManifest.xml
+description: "This step allows to change the initial attributes of the application
+  tag specified in AndroidManifest.xml\nThis is mainly required for the android app
+  created with Xamarin. \nXamarin doesn't provide an easy wayt to change such attributes
+  as `android:label` or `android:icon` depending on the configuration. So this step
+  may be used to do so."
+website: https://github.com/Memorado/bitrise-android-application-attributes-step
+source_code_url: https://github.com/Memorado/bitrise-android-application-attributes-step
+support_url: https://github.com/Memorado/bitrise-android-application-attributes-step/issues
+published_at: 2016-04-05T17:19:32.12257686+02:00
+source:
+  git: https://github.com/Memorado/bitrise-android-application-attributes-step.git
+  commit: 5bec41b7466061efc8088e7c14beea78ab53c5df
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- build
+- utils
+run_if: .IsCI
+inputs:
+- manifest_file: $BITRISE_ANDROID_MANIFEST_PATH
+  opts:
+    description: |
+      Path to the given project's AndroidManifest.xml file.
+    is_required: true
+    summary: ""
+    title: AndroidManifest.xml file path
+- app_name: null
+  opts:
+    is_required: false
+    summary: Set the `android:label` attribute in the AndroidManifest.xml to a specified
+      value. the value may be specific string o string resource id. E.g. @string/app_name_staging
+    title: Application Name
+- app_icon: null
+  opts:
+    is_required: false
+    summary: Set the `android:icon` attribute in the AndroidManifest.xml to a specified
+      value. E.g. @drawable/ic_launcher_staging
+    title: Application Icon
