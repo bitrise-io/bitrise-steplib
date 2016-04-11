@@ -11,9 +11,9 @@ description: |-
   your comments and let the TestFairy do it's magic.
   To use this step you have to register
   an account on [TestFairy.com](http://testfairy.com/).
-website: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android
-source_code_url: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android
-support_url: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android/issues
+website: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
+source_code_url: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
+support_url: https://github.com/bitrise-steplib/steps-testfairy-deploy-android/issues
 published_at: 2016-02-22T07:34:58.706705979-03:00
 source:
   git: https://github.com/bitrise-steplib/steps-testfairy-deploy-android.git
