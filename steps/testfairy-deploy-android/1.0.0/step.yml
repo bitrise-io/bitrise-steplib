@@ -16,7 +16,7 @@ source_code_url: https://github.com/rudacs/bitrise-steps-testfairy-deploy-androi
 support_url: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android/issues
 published_at: 2016-02-22T07:34:58.706705979-03:00
 source:
-  git: https://github.com/rudacs/bitrise-steps-testfairy-deploy-android.git
+  git: https://github.com/bitrise-steplib/steps-testfairy-deploy-android.git
   commit: 789231b5d8c3b2c630bcbb6c52755d676acc1c78
 host_os_tags:
 - osx-10.10
