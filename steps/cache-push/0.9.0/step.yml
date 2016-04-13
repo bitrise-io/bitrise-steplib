@@ -1,0 +1,95 @@
+title: Bitrise.io Cache:Push [BETA]
+summary: WIP
+description: |-
+  WIP
+
+  It won't upload if the Cache did not change, nor in case of PullRequest build.
+website: https://github.com/bitrise-steplib/steps-cache-push
+source_code_url: https://github.com/bitrise-steplib/steps-cache-push.git
+support_url: https://github.com/bitrise-steplib/steps-cache-push/issues
+published_at: 2016-04-13T16:20:27.064787455+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-cache-push.git
+  commit: d92ce9091bc52951d5a193bd70c3e16d28564a09
+host_os_tags:
+- osx-10.10
+- ubuntu-14.04
+type_tags:
+- bitrise.io
+- cache
+deps:
+  apt_get:
+  - name: rsync
+  - name: tar
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: .IsCI | and (not .IsPR)
+inputs:
+- cache_paths: |
+    $BITRISE_CACHE_DIR
+    ./Pods -> ./Podfile.lock
+    $HOME/.gradle/wrapper
+    ./.gradle
+  opts:
+    description: |-
+      Cache these paths. Separate paths with a newline.
+
+      A path item can be either a file or a directory.
+    is_required: true
+    summary: Cache these paths. Separate paths with a newline.
+    title: Cache paths
+- ignore_check_on_paths: ""
+  opts:
+    description: |-
+      These paths will be ignored from change checking.
+      If something changed under the specified path(s) and nothing else changed
+      then the cache won't be updated.
+
+      **These paths are NOT ignored from the cache**, if a path is located
+      inside a specified Cache Path item it'll be included in the cache,
+      just won't be checked for changes.
+
+      Important: you can't ignore a path which results in an invalid cache item.
+      For example, if you specify the path `a/path/to/cache` to be cached, you
+      can't ignore `a/path/to`, as that would ignore every file from checking
+      for a change - no fingerprint could be generated for `a/path/to/cache`.
+      You're free to ignore paths inside a Cache Path however, e.g.
+      if path is `a/path/to/cache` you're free to ignore `a/path/to/cache/.ignore-me`,
+      unless that's the only file inside `a/path/to/cache`.
+
+      The point is: you should not specify an ignore rule which would completely
+      ignore a specified Cache Path item, as that would result in a path which
+      can't be checked for updates/changes/fingerprints.
+    summary: Ignore these Paths when checking for cache changes
+    title: Ignore Paths from change check
+- opts:
+    description: Working directory path - should be an absolute path.
+    summary: Working directory path
+    title: Working directory path
+  workdir: $BITRISE_SOURCE_DIR
+- is_debug_mode: "false"
+  opts:
+    description: If debug mode is enabled the step will print verbose logs
+    is_required: true
+    summary: If debug mode is enabled the step will print verbose logs
+    title: Debug mode?
+    value_options:
+    - "true"
+    - "false"
+- cache_api_url: $BITRISE_CACHE_API_URL
+  opts:
+    description: Cache Upload URL
+    is_dont_change_value: true
+    is_required: true
+    summary: Cache Upload URL
+    title: 'TMP: Cache Upload URL'
+- compare_cache_info_path: $BITRISE_CACHE_INFO_PATH
+  opts:
+    description: |-
+      Compare the fingerprints against this Cache Info, to see if cache
+      update/upload is required or not.
+    is_dont_change_value: true
+    is_required: true
+    summary: Compare the fingerprints against this Cache Info
+    title: Cache Info file path, for compare
