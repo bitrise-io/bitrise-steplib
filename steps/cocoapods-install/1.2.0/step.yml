@@ -1,0 +1,40 @@
+title: Run CocoaPods install
+summary: |-
+  You don't need to keep the installed pods in your repo, simply add this step
+  and Bitrise will do the pod install for you on the VM!
+description: Run CocoaPods install (`$ pod install`) in your App's directory.
+website: https://github.com/bitrise-io/steps-cocoapods-install
+source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
+support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues
+published_at: 2016-04-13T17:42:41.972675095+02:00
+source:
+  git: https://github.com/bitrise-io/steps-cocoapods-install.git
+  commit: 27ee14cae1562c1f62d71edb796f8f95140898da
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- xcode
+- cocoapods
+- pod
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: Source Code Directory path.
+  source_root_path: $BITRISE_SOURCE_DIR
+- is_update_cocoapods: "false"
+  opts:
+    description: |
+      Should update the system installed CocoaPods
+      to the latest version?
+    is_expand: false
+    is_required: true
+    title: Update CocoaPods version?
+    value_options:
+    - "true"
+    - "false"
