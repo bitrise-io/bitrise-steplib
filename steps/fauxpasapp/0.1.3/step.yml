@@ -1,0 +1,74 @@
+title: Fauxpasapp Step
+summary: Step for Fauxpasapp
+description: |-
+  This is a Step for [Faux Pas App](http://fauxpasapp.com).
+  This is not an officially supported plugin
+website: https://github.com/mackoj/fauxpasapp-bitrise
+source_code_url: https://github.com/mackoj/fauxpasapp-bitrise
+support_url: https://github.com/mackoj/fauxpasapp-bitrise/issues
+published_at: 2016-04-11T17:45:40.879825299+02:00
+source:
+  git: https://github.com/mackoj/fauxpasapp-bitrise.git
+  commit: b0915237035f3c2d6dead8571415ff8d01662e75
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- script
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- fauxpas_license_type: personal
+  opts:
+    is_required: true
+    summary: Set the type in the license between these personal,organization-seat,site
+      and enterprise
+    title: License type
+    value_options:
+    - personal
+    - organization-seat
+    - site
+    - enterprise
+- fauxpas_license_name: $FAUXPAS_LICENSE_NAME
+  opts:
+    is_required: true
+    summary: Set the name in the license
+    title: License name
+- fauxpas_license_key: $FAUXPAS_LICENSE_KEY
+  opts:
+    is_required: true
+    summary: Set the Key in the license
+    title: License Key
+- fauxpas_project_path: $BITRISE_PROJECT_PATH
+  opts:
+    is_required: true
+    title: Path of the xcodeproj
+- fauxpas_target: null
+  opts:
+    is_required: true
+    title: Xcode target to check
+- fauxpas_scheme: $BITRISE_SCHEME
+  opts:
+    is_required: true
+    title: If you use a workspace you need to define a shared scheme
+- fauxpas_build_config: null
+  opts:
+    is_required: true
+    title: Xcode build configuration to check
+- fauxpas_partial_custom_config: null
+  opts:
+    summary: Use whatever flag you want to launch faux pas in check mode
+    title: Faux Pas custom configuration
+- fauxpas_debug_mode: "false"
+  opts:
+    is_required: true
+    title: Faux Pas Debug
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- FAUXPAS_JSON_OUTPUT_FILE: null
+  opts:
+    title: Faux Pas JSON Output
