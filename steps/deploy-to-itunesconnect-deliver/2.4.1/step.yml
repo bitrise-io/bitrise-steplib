@@ -1,0 +1,154 @@
+title: Deploy to iTunes Connect (with Deliver)
+summary: Upload the archive to iTunes Connect and you can also submit it to TestFlight
+  Beta Testing
+description: |-
+  Deploy to iTunes Connect, using the
+  fantastic [Deliver](https://github.com/KrauseFx/deliver)
+  Ruby gem.
+
+  **If this is the very first build** of the app
+  you try to deploy to iTunes Connect then you might want to upload the first
+  build manually to make sure it fulfills the initial iTunes Connect submission
+  verification process.
+
+  **Be advised** that this
+  step uses a well maintained, open source tool which
+  uses *undocumented and unsupported APIs* (because the current
+  iTunes Connect platform does not have a documented and supported API)
+  to perform the deployment.
+  This means that when the API changes
+  **this step might fail until the tool is updated**.
+
+  ## Setup guide and notes
+
+  * Register an app on iTunes Connect, on the **My Apps** page. Click on the *plus sign* and select the **New iOS App** option. This requires an **admin** account.
+  * Requires an **App Store iOS distibution Provisioning Profile**
+  * Every build which you want to push to iTunes Connect have to have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*)
+website: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver
+source_code_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver
+support_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver/issues
+published_at: 2016-04-13T12:03:28.671533666+02:00
+source:
+  git: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver.git
+  commit: 1b65f350176e3d5c9dc11057b39b16c6ad139dca
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: Path of the IPA file, to be deployed to iTunes Connect
+    is_required: true
+    summary: ""
+    title: IPA path
+- itunescon_user: ""
+  opts:
+    description: |-
+      Login Apple ID (email) for the iTunes Connect site.
+
+      *Make sure that this email is verified,
+      your Apple ID cannot be used until you verify it
+      on Apple's website!*
+    is_required: true
+    summary: ""
+    title: 'iTunes Connect: User Apple ID (email)'
+- opts:
+    description: |-
+      Password for the specified User Apple ID.
+
+      **Note:** if your password
+      contains special characters
+      and you experience problems, please
+      consider changing your password
+      to something with only
+      alphanumeric characters.
+    is_required: true
+    summary: ""
+    title: 'iTunes Connect: Password'
+  password: ""
+- app_id: ""
+  opts:
+    description: |-
+      The App's *Apple ID* on iTunes Connect.
+
+      Open the **App's page on iTunes Connect**,
+      click on **More**, click on *About this app*,
+      copy the *Apple ID*'s value from here (numeric, like 846814360)
+    is_required: true
+    summary: ""
+    title: 'iTunes Connect: App Apple ID'
+- opts:
+    description: |
+      Wait for the submission to be processed and then
+      enable **TestFlight Beta Testing** for this specific version?
+
+      If this option is disabled then this step won't wait
+      for the new version to be processed on iTunes Connect
+      and won't enable it for *TestFlight Beta Testing* automatically.
+
+      *Enabling this option will wait for the submission to be
+      processed which might take a couple of minutes after the
+      new version is deployed to iTunes Connect*.
+
+      **NOTE:** if this option is enabled then this step will
+      fail if it can't enable TestFlight Beta Testing for the
+      version, even if the version was successfully uploaded
+      to iTunes Connect and only the TestFlight Beta Testing
+      submission failed.
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Submit for TestFlight Beta Testing?
+    value_options:
+    - "yes"
+    - "no"
+  submit_for_beta: "no"
+- opts:
+    description: |
+      Flag to skip uploading the appstore metadata.
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Skip Metadata?
+    value_options:
+    - "yes"
+    - "no"
+  skip_metadata: "yes"
+- opts:
+    description: |
+      Flag to skip uploading changes to appstore screenshots.
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Skip Screenshots?
+    value_options:
+    - "yes"
+    - "no"
+  skip_screenshots: "yes"
+- opts:
+    description: |-
+      The App's *Team Name* on iTunes Connect.
+
+      This field are required when using iTunes Connect account
+      linked to multiple publish team.
+    summary: ""
+    title: 'iTunes Connect: Team name'
+  team_name: ""
+- opts:
+    description: |-
+      Should the step use the latest version of `deliver` gem,
+      or the preinstalled one?
+    is_required: true
+    summary: ""
+    title: Update deliver gem
+    value_options:
+    - "yes"
+    - "no"
+  update_deliver: "yes"
