@@ -1,0 +1,56 @@
+title: Bitrise.io Cache:Pull [BETA]
+summary: Download Build Cache from Bitrise.io
+description: |-
+  Downloads the Build Cache from Bitrise.io, and moves the files back to
+  their original place.
+
+  You can find a setup and tips & tricks guide on the Bitrise DevCenter
+  at [http://devcenter.bitrise.io/docs/using-the-build-cache](http://devcenter.bitrise.io/docs/using-the-build-cache).
+website: https://github.com/bitrise-steplib/steps-cache-pull
+source_code_url: https://github.com/bitrise-steplib/steps-cache-pull.git
+support_url: https://github.com/bitrise-steplib/steps-cache-pull/issues
+published_at: 2016-04-20T11:35:10.976596542+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-cache-pull.git
+  commit: 60ed678708702719d6331f0abc7312b02af003fb
+host_os_tags:
+- osx-10.10
+- ubuntu-14.04
+type_tags:
+- bitrise.io
+- cache
+deps:
+  apt_get:
+  - name: rsync
+  - name: tar
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    description: Working directory path - should be an absolute path.
+    summary: Working directory path
+    title: Working directory path
+  workdir: $BITRISE_SOURCE_DIR
+- is_debug_mode: "false"
+  opts:
+    description: If debug mode is enabled the step will print verbose logs
+    is_required: true
+    summary: If debug mode is enabled the step will print verbose logs
+    title: Debug mode?
+    value_options:
+    - "true"
+    - "false"
+- cache_api_url: $BITRISE_CACHE_API_URL
+  opts:
+    description: Cache API URL
+    is_dont_change_value: true
+    is_required: true
+    summary: Cache API URL
+    title: Cache API URL
+outputs:
+- BITRISE_CACHE_INFO_PATH: null
+  opts:
+    description: Path to the uncompressed cache-info.json
+    title: Bitrise Cache-Info (JSON) file path
