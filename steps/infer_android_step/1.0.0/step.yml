@@ -5,7 +5,7 @@ description: |-
   This is not an officially supported plugin
 website: https://github.com/ataourirt/fbinfer-android-bitrise
 source_code_url: https://github.com/ataourirt/fbinfer-android-bitrise
-support_url: https://github.com/ataourirt/fbinfer-android-bitrise
+support_url: https://github.com/ataourirt/fbinfer-android-bitrise/issues
 published_at: 2016-04-19T17:32:46.040754099+02:00
 source:
   git: https://github.com/ataourirt/fbinfer-android-bitrise.git
