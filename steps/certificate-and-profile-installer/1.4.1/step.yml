@@ -1,0 +1,85 @@
+title: Certificate and profile installer
+summary: |-
+  Need to use your Provisioning Profile and Certificate? Use this Step to
+  add them to the keychain and use it as you wish! No worries, as our security
+  policy goes, the VM is reverted after running the workflow so there's no
+  trace of these left on them.
+description: Downloads and installs the certificate and the mobile provisioning profiles
+website: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+source_code_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+support_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer/issues
+published_at: 2016-04-21T19:53:55.517140135+02:00
+source:
+  git: https://github.com/bitrise-io/steps-certificate-and-profile-installer.git
+  commit: 78f3f0d3e9fb48331612da1a13e351e7d0d0ab35
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- security
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- certificate_url: $BITRISE_CERTIFICATE_URL
+  opts:
+    description: |
+      URL of the certificate to download.
+
+      You can specify a local path as well, using the `file://` scheme.
+      Example: `file://./Cert.p12`
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Certificate URL
+- certificate_passphrase: $BITRISE_CERTIFICATE_PASSPHRASE
+  opts:
+    description: |
+      Certificate passphrase
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Certificate passphrase
+- opts:
+    description: |
+      URL of the provisioning profile to download. Multiple URLs can be
+      specified, separated by a pipe (`|`) character.
+
+      You can specify a local path as well, using the `file://` scheme.
+      Example: `file://./BuildAnything.mobileprovision`
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Provisioning profile URL
+  provisioning_profile_url: $BITRISE_PROVISION_URL
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keychain Path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keychain's password
+outputs:
+- BITRISE_PROVISIONING_PROFILE_ID: null
+  opts:
+    description: |-
+      **Will only export the Profile ID if you specify
+      a single Provisioning Profile!**
+    title: Activated Provisioning Profile ID
+- BITRISE_CODE_SIGN_IDENTITY: null
+  opts:
+    title: Activated Code Signing Certificate ID
