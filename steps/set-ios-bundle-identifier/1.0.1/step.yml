@@ -1,0 +1,39 @@
+title: Set iOS Info.plist - Bundle Identifier
+summary: Sets the Bundle Identifier to the specified value, in the target Info.plist
+  file for the next build.
+description: Sets the Bundle Identifier to the specified value, in the target Info.plist
+  file for the next build.
+website: https://github.com/teference/steps-set-ios-bundle-identifier
+source_code_url: https://github.com/teference/steps-set-ios-bundle-identifier
+support_url: https://github.com/teference/steps-set-ios-bundle-identifier/issues
+published_at: 2016-04-30T13:18:15.748193166+05:30
+source:
+  git: https://github.com/teference/steps-set-ios-bundle-identifier.git
+  commit: bc8cf19b20fb4082e07844feac41562ae19c2eb3
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- utils
+- xcode
+- xamarin
+- ios
+- info.plist
+run_if: .IsCI
+inputs:
+- info_plist_file: null
+  opts:
+    description: |
+      Path to the given iOS project's Info.plist file.
+    is_required: true
+    summary: ""
+    title: Info.plist file path
+- bundle_identifier: null
+  opts:
+    description: |
+      Bundle Identifier e.g.: com.yourcompany.$(PRODUCT_NAME:rfc1034identifier) Read more: https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringYourApp/ConfiguringYourApp.html
+    is_required: true
+    summary: Set the :CFBundleIdentifier to a specified value. Should be string.
+    title: Bundle Identifier to set
