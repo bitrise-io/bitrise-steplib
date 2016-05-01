@@ -1,0 +1,46 @@
+title: Install page QR code
+summary: Create install page QR code
+description: Create install page QR code
+website: https://github.com/dag-io/create-install-page-qr-code-step
+source_code_url: https://github.com/dag-io/create-install-page-qr-code-step.git
+support_url: https://github.com/dag-io/create-install-page-qr-code-step/issues
+published_at: 2016-05-01T17:33:36.088194107+02:00
+source:
+  git: https://github.com/dag-io/create-install-page-qr-code-step.git
+  commit: 39e6f156cdf00e661b14f7e4f4ec427765b79805
+host_os_tags:
+- ubuntu-14.04
+- osx-10.11
+type_tags:
+- deploy
+deps:
+  brew:
+  - name: homebrew/php/php56
+  apt_get:
+  - name: php5
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: .IsCI | and (not .IsPR)
+inputs:
+- opts:
+    description: The full path to the application file (.app or .apk)
+    is_expand: true
+    is_required: true
+    summary: The full path to the application file (.app or .apk)
+    title: Public Install Page URL
+  public_install_page_url: $BITRISE_PUBLIC_INSTALL_PAGE_URL
+- opts:
+    description: 'The size of the QR Code image using the format : WIDTHxHEIGHT'
+    is_expand: true
+    is_required: false
+    summary: 'The size of the QR Code image using the format : WIDTHxHEIGHT'
+    title: Public Install Page QR Code Image size
+  qr_code_size: 150x150
+outputs:
+- BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL: null
+  opts:
+    description: |-
+      QR Code Image URL for the public install page, if the
+      *Enable public page for the App?* option was *enabled*.
+    title: Public Install Page QR Code Image URL
