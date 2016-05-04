@@ -1,0 +1,38 @@
+title: Web Translate It
+summary: Install web translate it and perform a pull operation.
+description: This step runs a `wti pull` after installing the web translate it gem.
+  You need an account on https://webtranslateit.com to be able to run this step.
+website: https://github.com/mAu888/steps-wti
+source_code_url: https://github.com/mAu888/steps-wti
+support_url: https://github.com/mAu888/steps-wti/issues
+published_at: 2016-05-04T16:15:43.644180786+02:00
+source:
+  git: https://github.com/mAu888/steps-wti.git
+  commit: f020a7295a9b8462a9511cf220311ce0a975618b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- translation
+- localization
+- xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: If no `.wti` file can be located in the $wti_working_directory (defaults
+      to current working directory), the step creates a `.wti` file based on the $wti_api_key
+      you provide. If neither a `.wti` file nor an $wti_api_key are given, the step
+      fails.
+    is_required: false
+    summary: Find the API key on webtranslateit.com in your project settings.
+    title: Web Translate It API Key
+  wti_api_key: null
+- opts:
+    is_required: false
+    summary: The directory containing the `.wti` file.
+    title: Working directory
+  wti_working_directory: null
