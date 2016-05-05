@@ -1,0 +1,43 @@
+title: Xcode Project Info
+summary: Extracts Xcode project info data to environment variables.
+description: |-
+  This step will simply read Xcode Project Info data from `Info.plist` file,
+  then export that data to environment variables prefixed with **XPI_**.
+
+  After this you can use these environment variables in other steps (ex. sending message on Slack).
+website: https://github.com/tadija/bitrise-step-xcode-project-info
+source_code_url: https://github.com/tadija/bitrise-step-xcode-project-info
+support_url: https://github.com/tadija/bitrise-step-xcode-project-info/issues
+published_at: 2016-05-05T13:18:52.770586331+02:00
+source:
+  git: https://github.com/tadija/bitrise-step-xcode-project-info.git
+  commit: 18e5437229039efa79266cee505147b667d98a93
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- xcode
+- versioning
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- info_plist_path: Info.plist
+  opts:
+    description: "Source directory is considered to be root directory created by the
+      Git Clone step.\nIf your `Info.plist` file is in **RootDir/ProjectName** directory
+      (for example), \nthen you should set this input to `ProjectName/Info.plist`."
+    is_required: true
+    summary: ""
+    title: Relative path from Source directory to Info.plist file
+outputs:
+- XPI_VERSION: null
+  opts:
+    title: Version (CFBundleShortVersionString from Info.plist)
+- XPI_BUILD: null
+  opts:
+    title: Build (CFBundleVersion from Info.plist)
