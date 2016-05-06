@@ -1,0 +1,51 @@
+title: Set NuGet private source
+summary: Sets specified NuGet private source to the NuGet source list for the next
+  build.
+description: Sets specified NuGet private source to the NuGet source list for the
+  next build.
+website: https://github.com/teference/steps-set-nuget-private-source
+source_code_url: https://github.com/teference/steps-set-nuget-private-source
+support_url: https://github.com/teference/steps-set-nuget-private-source/issues
+published_at: 2016-05-06T17:52:57.769773859+05:30
+source:
+  git: https://github.com/teference/steps-set-nuget-private-source.git
+  commit: 437b0f15f8eecdb6b1488062e44547f47fc21e0f
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- android
+type_tags:
+- build
+- nuget
+- xamarin
+- ios
+- android
+run_if: .IsCI
+inputs:
+- nuget_source_name: null
+  opts:
+    description: |
+      Name to use for specified NuGet private source in the NuGet source list.
+    is_required: true
+    summary: ""
+    title: NuGet private source name
+- nuget_source_path_or_url: null
+  opts:
+    description: |
+      Path or URL of the NuGet private package(s) source.
+    is_required: true
+    summary: ""
+    title: NuGet private source path / url
+- nuget_source_username: null
+  opts:
+    description: |
+      UserName to be used when connecting to an authenticated source.
+    summary: ""
+    title: NuGet private source username
+- nuget_source_password: null
+  opts:
+    description: |
+      Password to be used when connecting to an authenticated source.
+    summary: ""
+    title: NuGet private source password
