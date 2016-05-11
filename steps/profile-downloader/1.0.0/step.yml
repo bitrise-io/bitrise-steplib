@@ -1,0 +1,53 @@
+title: Profile downloader
+summary: Provisioning profile downloader for iOS projects
+description: Use this step to automatically download provisioning profiles for your
+  project. This step uses [sigh](https://github.com/fastlane/fastlane/tree/master/sigh)
+  from the fastlane toolchain.
+website: https://github.com/mAu888/steps-sigh
+source_code_url: https://github.com/mAu888/steps-sigh
+support_url: https://github.com/mAu888/steps-sigh/issues
+published_at: 2016-05-11T16:44:16.222754322+02:00
+source:
+  git: https://github.com/mAu888/steps-sigh.git
+  commit: bada07f5534e9a7915e0ed5e89eaa77ca6e2d568
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- provisioning
+- code signing
+- fastlane
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    title: Provisioning profile type
+    value_options:
+    - adhoc
+    - appstore
+    - development
+  profile_type: adhoc
+- bundle_identifier: null
+  opts:
+    is_required: true
+    title: Application bundle identifier
+- certificate_id: null
+  opts:
+    is_required: true
+    summary: The identifier of the certificate associated with the provisioning profile
+    title: Certificate ID
+- opts:
+    is_required: false
+    summary: Team ID, if you are in multiple development teams.
+    title: Team ID
+  team_id: null
+outputs:
+- opts:
+    is_dont_change_value: true
+    summary: The provisioning profiles that were found and downloaded. The variable
+      may be used in the `Certificate and profile installer` step.
+    title: Available provisioning profiles
+  provisioning_profile_paths: null
