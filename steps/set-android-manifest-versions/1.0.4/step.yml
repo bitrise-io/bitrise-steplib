@@ -6,7 +6,7 @@ description: Sets the Android Manifest Version Code and Name to the specified va
 website: https://github.com/jamesmontemagno/steps-set-android-manifest-versions
 source_code_url: https://github.com/jamesmontemagno/steps-set-android-manifest-versions
 support_url: https://github.com/jamesmontemagno/steps-set-android-manifest-versions/issues
-published_at: 2016-04-28T09:03:41.702343318-04:00
+published_at: 2016-05-17T14:17:21.34872863-05:00
 source:
   git: https://github.com/jamesmontemagno/steps-set-android-manifest-versions.git
   commit: 0b0fc2def3b16c61f28a28a11e806c8ea516d8ea
