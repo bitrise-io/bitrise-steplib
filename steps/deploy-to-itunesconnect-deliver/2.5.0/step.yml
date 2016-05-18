@@ -3,7 +3,7 @@ summary: Upload the archive to iTunes Connect and you can also submit it to Test
   Beta Testing
 description: |-
   Deploy to iTunes Connect, using the
-  fantastic [Deliver](https://github.com/KrauseFx/deliver)
+  fantastic [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver)
   Ruby gem.
 
   **If this is the very first build** of the app
