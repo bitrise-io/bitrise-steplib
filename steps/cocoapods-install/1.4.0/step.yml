@@ -6,10 +6,10 @@ description: Run CocoaPods install (`$ pod install`) in your App's directory.
 website: https://github.com/bitrise-io/steps-cocoapods-install
 source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
 support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues
-published_at: 2016-05-24T13:32:40.466378409+02:00
+published_at: 2016-05-24T14:14:21.498257094+02:00
 source:
   git: https://github.com/bitrise-io/steps-cocoapods-install.git
-  commit: 1d00dd547509f0c0fa3777de2c67a64436aea5e1
+  commit: 168af0c0cff69be6c702a052f9dfd1161a1ee098
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -59,5 +59,5 @@ inputs:
 
       - 0.39.0.beta.1
       - 1.0.0
-      - lates
+      - latest
     title: Install specified CocoaPods version
