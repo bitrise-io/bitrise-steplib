@@ -1,0 +1,99 @@
+title: Fabric / Crashlytics deployer
+summary: |-
+  Use the awesome Crashlytics / Fabric beta distribution service during your
+  workflow. Add notes, send notification to the testers, groups or to any email
+  address and let the search for those nasty bugs begin!
+description: |-
+  Deploys to Fabric / Crashlytics beta testing service.
+
+  ## How to setup your Xcode project for [Fabric](https://get.fabric.io/) / Crashlytics beta testing?
+
+  * Register a Fabric account at [https://get.fabric.io/](https://get.fabric.io/).
+  * Add Fabric & Crashlytics to your Xcode project as described when you first sign into your Fabric account
+  * After your first Fabric & Crashlytics app setup the app should be listed on [https://fabric.io](https://fabric.io)
+  * You should also test that everything works correctly with a manual version upload: just Create an Archive in Xcode and if the Fabric menu bar app is running it'll show an upload popup
+
+  Your app is now ready to be deployed with this Step!
+website: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+source_code_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+support_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy/issues
+published_at: 2016-05-30T14:28:46.645930146+02:00
+source:
+  git: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy.git
+  commit: d4e09748b66986b238c8aecd7a6f09e4458d79ee
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: |-
+      You can get your API Key under **Organizations**
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to
+      and at the top you'll see a text: **API Key**.
+      Click it and the API key will appear.
+    is_required: true
+    summary: ""
+    title: 'Fabric: API Key'
+- build_secret: ""
+  opts:
+    description: |-
+      You can get the Build Secret key on the same
+      page as the API Key.
+
+      Select the **Organizations** option
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to
+      and at the top you'll see a text: **Build Secret**.
+      Click it and the Build Secret will appear.
+    is_required: true
+    summary: ""
+    title: 'Fabric: Build Secret'
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: IPA file path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: |-
+      To turn on dSYM generation open your Xcode project,
+      select *Project Settings - Build Settings - Debug Information Format*
+      and make sure it's set to the *DWARF with dSYM File* option.
+      After dsym generated, zip it and provide the zipped path as input.
+    title: dSYM zip file path
+- email_list: ""
+  opts:
+    description: "Optional list of individual addresses (comma-separated)\uFEFF\n"
+    summary: ""
+    title: 'Notify: Emails'
+- group_aliases_list: ""
+  opts:
+    description: Optional list of group aliases from web dashboard (comma-separated)
+    summary: ""
+    title: 'Notify: Group Aliases'
+- notification: "Yes"
+  opts:
+    description: Should send email notification to testers about the new release?
+    is_required: true
+    summary: ""
+    title: Notify testers?
+    value_options:
+    - "Yes"
+    - "No"
+- opts:
+    description: ""
+    summary: ""
+    title: Release Notes
+  release_notes: Automatic build with Bitrise
