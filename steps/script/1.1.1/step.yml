@@ -1,0 +1,110 @@
+title: Script
+summary: The power is in your hands. Use it wisely!
+description: |-
+  Specify the script content and (optionally) the script runner,
+  to run any custom script in your [bitrise.io](https://www.bitrise.io/) workflow!
+
+  The **runner** can even be a command, as long as it's available in the `PATH`
+  and can execute the script, it will work.
+
+  For example to run a [Go](https://golang.org/) Hello World "script"
+  you can define the content:
+
+  ```
+  package main
+  import "fmt"
+  func main() {
+      fmt.Println("Hello World")
+  }
+  ```
+
+  Set the *Execute with* parameter to `go run` and specify
+  a *script file path* because `go run` can only accept (at the moment)
+  files with a `.go` extension (just specify `main.go` or `step.go` as the script path).
+
+  If the `go` binary can be found in the `$PATH` your Hello World
+  script will run without any problem.
+website: https://github.com/bitrise-io/steps-script
+source_code_url: https://github.com/bitrise-io/steps-script
+support_url: https://github.com/bitrise-io/steps-script/issues
+published_at: 2016-06-09T14:01:30.316345844+02:00
+source:
+  git: https://github.com/bitrise-io/steps-script.git
+  commit: e6e761292648d6a8f2c7092499d8aebca4620d3e
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- script
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- content: |-
+    #!/bin/bash
+    # fail if any commands fails
+    set -e
+    # debug log
+    set -x
+
+    # write your script here
+    echo "Hello World!"
+
+    # or run a script from your repository, like:
+    # bash ./path/to/script.sh
+    # not just bash, e.g.:
+    # ruby ./path/to/script.rb
+  opts:
+    description: |
+      Type your script here.
+
+      **Make sure that it returns a non zero exit code in case of an error!**
+      The step will only fail if your script returns with a non zero exit code!
+    is_expand: false
+    is_required: true
+    title: Script content
+- opts:
+    description: |
+      The executor to be used for running the script.
+      If it's available in the PATH you can just
+      specify `ruby` or `python`, generally
+      if you know the path of the executor you should
+      define that, like `/bin/bash`.
+
+      You can even specify an execution command
+      like `go run` instead of just a binary.
+    is_required: true
+    title: Execute with / runner binary
+  runner_bin: /bin/bash
+- is_debug: "no"
+  opts:
+    description: |
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    title: Debug?
+    value_options:
+    - "no"
+    - "yes"
+- opts:
+    description: |
+      This directory will be set as the current working
+      directory for the script.
+    title: Working directory
+  working_dir: ""
+- opts:
+    description: |
+      Save the specified script content to this path
+      before execution. The file will be removed after
+      the script finishes.
+
+      Generally you don't have to define this but
+      there might be cases where the file's name or path
+      actually matters.
+      For example `go run` only accepts `.go` files.
+
+      If you specify a relative path then it will be
+      relative to the *working directory* (which you
+      can optinally specify as well).
+    title: Script file path
+  script_file_path: ""
