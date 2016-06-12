@@ -1,0 +1,51 @@
+title: Ruby Script runner with optional Gemfile support
+summary: |
+  Install the gems you need, run the script you'd like.
+description: |
+  Run a Ruby script with optional Gemfile.
+website: https://github.com/bitrise-io/steps-ruby-script
+source_code_url: https://github.com/bitrise-io/steps-ruby-script
+support_url: https://github.com/bitrise-io/steps-ruby-script/issues
+published_at: 2016-06-12T19:53:32.688754363+02:00
+source:
+  git: https://github.com/bitrise-io/steps-ruby-script.git
+  commit: 1f3fa082042c2fd9ece19525dcecaa94c86b8305
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- script
+- ruby
+- runner
+- glue
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- gemfile_content: |
+    source 'https://rubygems.org'
+
+    # gem 'json', '~> 1.8', '>= 1.8.3'
+  opts:
+    description: Gemfile's content
+    is_expand: false
+    summary: Gemfile's content
+    title: Gemfile's content
+- opts:
+    description: The Ruby script to run
+    is_expand: false
+    is_required: true
+    summary: The Ruby script to run
+    title: The Ruby script
+  ruby_content: |
+    puts "Hello World!"
+- opts:
+    description: |
+      Specify a directory - this will be set as the
+      current working directory for the script
+    summary: |
+      Specify a directory - this will be set as the
+      current working directory for the script
+    title: Run in directory
+  script_run_dir: ""
