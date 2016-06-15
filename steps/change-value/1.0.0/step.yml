@@ -1,9 +1,9 @@
 title: Change value in file
 summary: Change value in file. (e.g. constants)
 description: Change value in file. (e.g. constants)
-website: https://github.com/BOOMik/steps-set-ios-version
-source_code_url: https://github.com/BOOMik/steps-set-ios-version
-support_url: https://github.com/BOOMik/steps-set-ios-version/issues
+website: https://github.com/BOOMik/step_change_value
+source_code_url: https://github.com/BOOMik/step_change_value
+support_url: https://github.com/BOOMik/step_change_value/issues
 published_at: 2016-06-15T01:57:43.433007129+03:00
 source:
   git: https://github.com/BOOMik/step_change_value.git
@@ -15,7 +15,6 @@ type_tags:
 - ios
 - android
 - code
-run_if: .IsCI
 inputs:
 - file: null
   opts:
