@@ -1,0 +1,55 @@
+title: Change value in file
+summary: Change value in file. (e.g. constants)
+description: Change value in file. (e.g. constants)
+website: https://github.com/BOOMik/step_change_value
+source_code_url: https://github.com/BOOMik/step_change_value
+support_url: https://github.com/BOOMik/step_change_value/issues
+published_at: 2016-06-15T21:38:10.028822047+03:00
+source:
+  git: https://github.com/BOOMik/step_change_value.git
+  commit: ccdfb68e12dc54683f6b4f7deef1fa9fa9702da6
+type_tags:
+- build
+- utils
+- xamarin
+- ios
+- android
+- code
+inputs:
+- file: null
+  opts:
+    description: |
+      The file that you want to change a value.
+    is_required: true
+    summary: ""
+    title: File path
+- old_value: null
+  opts:
+    description: |
+      current value in file
+    is_required: true
+    summary: For replace
+    title: Old value
+- new_value: null
+  opts:
+    description: |
+      new value
+    is_required: true
+    summary: To replace
+    title: New value
+- opts:
+    is_required: false
+    summary: For debug
+    title: Show old and new file content
+    value_options:
+    - "true"
+    - "false"
+  show_file: "false"
+- notfound_exit: "true"
+  opts:
+    is_required: false
+    summary: To mark a step as "Failed" if value for replacing isn't found.
+    title: Mark as "Failed" if value isn't found.
+    value_options:
+    - "true"
+    - "false"
