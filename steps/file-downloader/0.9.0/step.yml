@@ -1,0 +1,29 @@
+title: File Downloader
+summary: Downloands file
+description: Downloands file
+website: https://github.com/bitrise-steplib/steps-file-downloader
+source_code_url: https://github.com/bitrise-steplib/steps-file-downloader
+support_url: https://github.com/bitrise-steplib/steps-file-downloader/issues
+published_at: 2016-06-21T16:12:51.635139329+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-file-downloader.git
+  commit: 2a79576302bc56ba99adde840a0c2f5590b67c7c
+project_type_tags:
+- script
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Download source url
+    is_required: true
+    title: Download source url
+  source: null
+- destination: null
+  opts:
+    description: |
+      Download destination path
+    is_required: true
+    title: Download destination path
