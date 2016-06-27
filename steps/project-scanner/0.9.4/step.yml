@@ -14,7 +14,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-project-scanner
 source_code_url: https://github.com/bitrise-steplib/steps-project-scanner
 support_url: https://github.com/bitrise-steplib/steps-project-scanner/issues
-published_at: 2016-06-09T11:04:42.234404525+02:00
+published_at: 2016-06-27T15:40:16.969955421+02:00
 source:
   git: https://github.com/bitrise-steplib/steps-project-scanner.git
   commit: 6de0b8ed93b32d97b01bcb9e53f41da3504a2619
