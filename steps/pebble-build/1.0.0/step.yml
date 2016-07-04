@@ -67,9 +67,8 @@ inputs:
 
       PEBBLE DEVELOPER LICENSE
       https://developer.getpebble.com/legal/sdk-license
-    is_expand: true
+
+      You have to provide "yes" as input value to agree.
     title: Accept Pebble TERMS OF USE and PEBBLE DEVELOPER LICENSE?
-    value_options:
-    - "yes"
-    - "no"
-  sdk_accept_legalese: "no"
+    is_required: true
+  sdk_accept_legalese:
