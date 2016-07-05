@@ -5,10 +5,10 @@ description: |
 website: https://github.com/HBehrens/bitrise-step-pebble-build
 source_code_url: https://github.com/HBehrens/bitrise-step-pebble-build
 support_url: https://github.com/HBehrens/bitrise-step-pebble-build/issues
-published_at: 2016-07-01T17:33:30.501763379-07:00
+published_at: 2016-07-05T08:01:19.000000000-07:00
 source:
   git: https://github.com/HBehrens/bitrise-step-pebble-build.git
-  commit: dac55032dc4ac855645dd6c27b0910fcaa413119
+  commit: 1e66a4aa9d4f71eff7007aeb4e3fbfd4ad6e8e5f
 host_os_tags:
 - osx-10.10
 - osx-10.11
