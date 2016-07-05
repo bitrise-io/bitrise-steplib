@@ -8,7 +8,7 @@ support_url: https://github.com/HBehrens/bitrise-step-pebble-build/issues
 published_at: 2016-07-05T08:01:19.000000000-07:00
 source:
   git: https://github.com/HBehrens/bitrise-step-pebble-build.git
-  commit: 1e66a4aa9d4f71eff7007aeb4e3fbfd4ad6e8e5f
+  commit: b98053ef64f5af83da5bbf0846e998fb1083862b
 host_os_tags:
 - osx-10.10
 - osx-10.11
