@@ -1,12 +1,12 @@
 title: Xcode Test for Mac
 summary: Run Xcode Test on your Mac OS X app project.
 description: Runs Xcode's `test` action, configured for Mac OS X app projects.
-website: https://github.com/vasarhelyia/steps-xcode-test-mac
-source_code_url: https://github.com/vasarhelyia/steps-xcode-test-mac
-support_url: https://github.com/vasarhelyia/steps-xcode-test-mac/issues
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
 published_at: 2015-12-17T14:14:12.104469283+01:00
 source:
-  git: https://github.com/vasarhelyia/steps-xcode-test-mac.git
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
   commit: 80eb5cee1bf1b153537495374c29ec32fed8b2e0
 host_os_tags:
 - osx-10.10

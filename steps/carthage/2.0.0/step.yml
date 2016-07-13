@@ -4,12 +4,12 @@ summary: Installs and updates Carthage to the latest available version and runs 
 description: |-
   Installs and updates Carthage to the latest available version and runs selected Carthage command.
   For more information about Carthage, visit the [Carthage GitHub page](https://github.com/Carthage/Carthage).
-website: https://github.com/vasarhelyia/steps-carthage
-source_code_url: https://github.com/vasarhelyia/steps-carthage
-support_url: https://github.com/vasarhelyia/steps-carthage/issues
+website: https://github.com/bitrise-steplib/steps-carthage
+source_code_url: https://github.com/bitrise-steplib/steps-carthage
+support_url: https://github.com/bitrise-steplib/steps-carthage/issues
 published_at: 2016-02-16T13:24:47.516629701+01:00
 source:
-  git: https://github.com/vasarhelyia/steps-carthage.git
+  git: https://github.com/bitrise-steplib/steps-carthage.git
   commit: 11a34efd1d91bf3526c55e9774712810656a2617
 host_os_tags:
 - osx-10.10
