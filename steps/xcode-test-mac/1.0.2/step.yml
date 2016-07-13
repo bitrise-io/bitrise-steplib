@@ -4,12 +4,12 @@ summary: |-
   code goblins didn't put something in the code that shouldn't be there while
   you were at the daily Scrum meeting.
 description: Runs Xcode's `test` action.
-website: https://github.com/vasarhelyia/steps-xcode-test-mac
-source_code_url: https://github.com/vasarhelyia/steps-xcode-test-mac
-support_url: https://github.com/vasarhelyia/steps-xcode-test-mac/issues
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
 published_at: 2015-12-06T10:56:19.639868507+01:00
 source:
-  git: https://github.com/vasarhelyia/steps-xcode-test-mac.git
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
   commit: d85c0afe7bf14459967b76135c2e3f72ec463cd9
 host_os_tags:
 - osx-10.10
