@@ -99,6 +99,9 @@ func prepareTmpStepZIPArchiveFromGit(stepID, stepVersion string) (string, error)
 	log.Println("stepZipArchivePth: ", stepZipArchivePth)
 
 	// stepman activate into the tmp dir
+	if !strings.HasPrefix(collectionRootDirPath, "file://") {
+		collectionRootDirPath = "file://" + collectionRootDirPath
+	}
 	if err := runCommand("stepman", "activate", "--collection", collectionRootDirPath, "--id", stepID, "--version", stepVersion, "--path", stepVerTmpDir); err != nil {
 		return "", err
 	}
