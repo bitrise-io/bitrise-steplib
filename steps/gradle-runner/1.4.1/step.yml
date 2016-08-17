@@ -1,0 +1,122 @@
+title: Gradle Runner
+summary: Runs the specified gradle task.
+description: |-
+  Runs the specified gradle task and copies the generated APKs into
+  the Bitrise Deploy Directory (`$BITRISE_DEPLOY_DIR`).
+website: https://github.com/bitrise-io/steps-gradle-runner
+source_code_url: https://github.com/bitrise-io/steps-gradle-runner
+support_url: https://github.com/bitrise-io/steps-gradle-runner/issues
+published_at: 2016-08-17T19:24:15.676082448+02:00
+source:
+  git: https://github.com/bitrise-io/steps-gradle-runner.git
+  commit: d7dccea86625d6e87622d0b064e0697e000f95d2
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- gradle
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- gradle_file: $GRADLE_BUILD_FILE_PATH
+  opts:
+    description: |
+      Path to the gradle file to use
+    is_required: true
+    title: Path to the gradle file to use
+- gradle_task: assemble
+  opts:
+    description: |
+      Gradle task to run.
+
+      You can call `gradle tasks` or `gradle tasks --all` in your
+      Gradle project directory to get the list of available tasks.
+    is_required: true
+    title: Gradle task to run
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper is what makes sure
+      that the right Gradle version is installed and used for the build.
+
+      __You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one (if you would not have one already)__
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root, for example: `./gradlew`,
+      or if it's in a sub directory: `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- gradle_options: --stacktrace
+  opts:
+    description: |-
+      Options added to the end of the Gradle call.
+
+      You can use multiple options, separated by a space
+      character. Example: `--stacktrace --debug`
+    title: Additional options for Gradle call
+- apk_file_include_filter: '*.apk'
+  opts:
+    description: |
+      The step will move the generated apk files that match this filter
+      into the Bitrise Deploy Directory.
+
+      This filter is a standerd bash find commands -name pattern, see: http://linux.die.net/man/1/find
+
+      Example: `*release*.apk`
+    title: APK file include filter
+- apk_file_exclude_filter: '*-unaligned.apk'
+  opts:
+    description: |
+      The step will **not** move the generated apk files that match this filter
+      into the Bitrise Deploy Directory.
+
+      You can use this step to avoid moving unalinged or unsigned apk files.
+
+      This filter is a standerd bash find commands negated -name pattern, see: http://linux.die.net/man/1/find
+
+      Example: `*unaligned*.apk`
+    title: APK file exclude filter
+- mapping_file_include_filter: '*/mapping.txt'
+  opts:
+    description: |
+      The step will move the generated mapping files that match this filter
+      into the Bitrise Deploy Directory.
+
+      This filter is a standerd bash find commands -path pattern, see: http://linux.die.net/man/1/find
+
+      Example: `*/release/mapping.txt`
+    title: Mapping file include filter
+- mapping_file_exclude_filter: null
+  opts:
+    description: |
+      The step will **not** move the generated mapping files that match this filter
+      into the Bitrise Deploy Directory.
+
+      You can use this step to avoid moving beta mapping file.
+
+      This filter is a standerd bash find commands negated -path pattern, see: http://linux.die.net/man/1/find
+
+      Example: `*/beta/mapping.txt`
+    title: Mapping file exclude filter
+outputs:
+- BITRISE_APK_PATH: ""
+  opts:
+    description: |-
+      This output will include the path of the generated APK,
+      after filtering based on the filter inputs.
+
+      If the build generates more than one APK which fulfills the
+      filter inputs this output will contain the last one's path.
+    summary: Path of the generated (and moved) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_MAPPING_PATH: ""
+  opts:
+    description: |-
+      This output will include the path of the generated mapping.txt.
+
+      If more than one mapping.txt exist in project this output will contain the last one's path.
+    summary: Path of the generated (and moved) mapping.txt.
+    title: Path of the generated mapping.txt
