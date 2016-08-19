@@ -1,0 +1,56 @@
+title: Run CocoaPods install
+summary: |-
+  You don't need to keep the installed pods in your repo, simply add this step
+  and Bitrise will do the pod install for you on the VM!
+description: Run CocoaPods install (`$ pod install`) in your App's directory.
+website: https://github.com/bitrise-io/steps-cocoapods-install
+source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
+support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues
+published_at: 2016-08-19T15:38:10.89274923+02:00
+source:
+  git: https://github.com/bitrise-io/steps-cocoapods-install.git
+  commit: 84937421683c9073f2590e4dfcb0d8cb7bfa3b10
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- xcode
+- cocoapods
+- pod
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_required: true
+    title: Source Code Directory path.
+  source_root_path: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      (optional) `Podfile` path, relative to the `source_root_path`.
+
+      If not provided, the Step will search for root Podfile,
+      and run `pod install` with.
+    summary: (optional) Podfile path, relative to the source_root_path
+    title: Podfile path
+  podfile_path: ""
+- is_update_cocoapods: "false"
+  opts:
+    description: |
+      __Deprecated!__
+
+      CocoaPods version is determined based on the Gemfile.lock or the Podfile.lock in the Podfile's directory.
+    is_expand: false
+    is_required: true
+    title: Update CocoaPods to the latest version?
+    value_options:
+    - "true"
+    - "false"
+- install_cocoapods_version: ""
+  opts:
+    description: |
+      __Deprecated!__
+
+      CocoaPods version is determined based on the Gemfile.lock or the Podfile.lock in the Podfile's directory.
+    title: Install specified CocoaPods version
