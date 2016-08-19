@@ -1,0 +1,61 @@
+title: React Native bundle
+summary: Bundles your React Native app.
+description: Bundles your React Native app.
+website: https://github.com/bitrise-steplib/steps-react-native-bundle
+source_code_url: https://github.com/bitrise-steplib/steps-react-native-bundle
+support_url: https://github.com/bitrise-steplib/steps-react-native-bundle/issues
+published_at: 2016-08-19T18:18:11.643057143+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-react-native-bundle.git
+  commit: 5ef970c6d5943be2ba914d415f42c3c8d00ec5a0
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+type_tags:
+- react-native
+deps:
+  brew:
+  - name: node
+inputs:
+- opts:
+    description: Specify either `ios`, or `android` as platform for the bundler.
+    is_required: true
+    title: Bundle platform
+    value_options:
+    - ios
+    - android
+  platform: ios
+- dev: "false"
+  opts:
+    description: Set DEV flag.
+    title: DEV flag
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: Add another root(s) to be used in bundling in this project.
+    title: Root
+  root: null
+- assetRoots: null
+  opts:
+    description: Specify the root directories of app assets.
+    title: Asset root directories
+- entry_file: null
+  opts:
+    description: Specify the entry file.
+    title: Entry file
+- opts:
+    description: Specify the output file.
+    title: Output file
+  out: null
+- opts:
+    description: Specify the bundle file URL.
+    title: Bundle file URL
+  url: null
+- options: null
+  opts:
+    description: |-
+      Options are added to `react-native bundle`. You can use multiple options, separated
+      by a space character.
+    title: Additional options for running `react-native bundle`
