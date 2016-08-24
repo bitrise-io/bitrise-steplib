@@ -1,0 +1,74 @@
+title: Git Clone Repository
+summary: Clone a repository to the specified path on the VM
+description: |
+  Clones a repository based on the provided inputs.
+
+  If `pull_request_id` is provided then all other git checkout parameters will be ignored.
+  If a git commit is provided it will ignore the tag and branch parameters.
+  If no git commit but a tag is provided then it will ignore the branch parameter.
+  If no `branch` parameter is provided then it'll skip `git checkout`.
+website: https://github.com/bitrise-io/steps-git-clone
+source_code_url: https://github.com/bitrise-io/steps-git-clone
+support_url: https://github.com/bitrise-io/steps-git-clone/issues
+published_at: 2016-08-24T14:19:48.016423064+02:00
+source:
+  git: https://github.com/bitrise-io/steps-git-clone.git
+  commit: d3f9d978a92df2fc98acb6473f0ff6d615963fe6
+host_os_tags:
+- osx-10.10
+type_tags:
+- git
+- vcs
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    title: Git repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- clone_into_dir: $BITRISE_SOURCE_DIR
+  opts:
+    is_required: true
+    title: Clone destination (local) directory path
+- commit: $BITRISE_GIT_COMMIT
+  opts:
+    title: Git Commit to clone
+- opts:
+    title: Git Tag to clone
+  tag: $BITRISE_GIT_TAG
+- branch: $BITRISE_GIT_BRANCH
+  opts:
+    title: Git Branch to clone
+- opts:
+    title: Pull request ID on GitHub
+  pull_request_id: $BITRISE_PULL_REQUEST
+- clone_depth: null
+  opts:
+    description: |-
+      Limit fetching to the specified number of commits.
+      The value should be a decimal number, example: `10`.
+    title: Limit fetching to the specified number of commits
+outputs:
+- GIT_CLONE_COMMIT_HASH: null
+  opts:
+    title: Cloned git commit's commit hash
+- GIT_CLONE_COMMIT_MESSAGE_SUBJECT: null
+  opts:
+    title: Cloned git commit's message subject
+- GIT_CLONE_COMMIT_MESSAGE_BODY: null
+  opts:
+    title: Cloned git commit's message body
+- GIT_CLONE_COMMIT_AUTHOR_NAME: null
+  opts:
+    title: Cloned git commit's author name
+- GIT_CLONE_COMMIT_AUTHOR_EMAIL: null
+  opts:
+    title: Cloned git commit's author email address
+- GIT_CLONE_COMMIT_COMMITER_NAME: null
+  opts:
+    title: Cloned git commit's committer name
+- GIT_CLONE_COMMIT_COMMITER_EMAIL: null
+  opts:
+    title: Cloned git commit's committer email
