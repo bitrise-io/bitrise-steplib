@@ -1,0 +1,56 @@
+title: Start Android emulator
+summary: Start Android emulator and wait till it's booted fully.
+description: Start Android emulator and wait till it's booted fully.
+website: https://github.com/bitrise-steplib/steps-start-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-start-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-start-android-emulator/issues
+published_at: 2016-08-24T11:57:43.677164381+02:00
+source:
+  git: https://github.com/bitrise-io/steps-start-android-emulator.git
+  commit: d8cbd0d2d72c972371d9107523673640648333ba
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- emulator
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- emulator_name: $BITRISE_EMULATOR_NAME
+  opts:
+    description: |
+      Emulator AVD image name to boot.
+    is_required: true
+    title: Emulator to boot
+- opts:
+    description: |
+      Use this input to specify an emulator skin.
+      Value example: `768x1280`.
+    title: Emulator skin
+  skin: 768x1280
+- emulator_options: -no-boot-anim -no-audio -no-window
+  opts:
+    description: These flags will be added to the emulator command.
+    title: Specify emulator command's flags
+- android_home: $ANDROID_HOME
+  opts:
+    description: Android sdk path
+    is_required: true
+    title: Android sdk path
+- opts:
+    description: |-
+      This options is deprecated please use `emulator_options` instead.
+
+      Options added to the end of the emulator call.
+
+      Example:
+      `-dpi-device 165 -no-cache`
+    title: '[Deprecated!] Additional options for emulator call'
+  other_options: ""
+outputs:
+- BITRISE_EMULATOR_SERIAL: null
+  opts:
+    description: Booted emulator serial
+    title: Emulator serial
