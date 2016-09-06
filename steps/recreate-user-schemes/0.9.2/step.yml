@@ -1,0 +1,26 @@
+title: Recreate User Schemes
+summary: Recreate User Schemes
+description: "This step recreates default user schemes.\n\nIf no shared schemes exist
+  in the project/workspace, step will recreate default user schemes, \njust like Xcode
+  does. "
+website: https://github.com/bitrise-steplib/steps-recreate-user-schemes
+source_code_url: https://github.com/bitrise-steplib/steps-recreate-user-schemes
+support_url: https://github.com/bitrise-steplib/steps-recreate-user-schemes/issues
+published_at: 2016-09-06T17:27:28.112223278+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-recreate-user-schemes.git
+  commit: ca5ce8b3e38fe7d9a07bf829e033557cc64b950d
+project_type_tags:
+- ios
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      A `.xcodeproj/.xcworkspace` path.
+    is_required: true
+    summary: ""
+    title: Project or Workspace path
+  project_path: null
