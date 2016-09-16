@@ -8,7 +8,7 @@ description: |-
 website: https://github.com/scruffyfox/bitrise-amazon-s3-uploader
 source_code_url: https://github.com/scruffyfox/bitrise-amazon-s3-uploader
 support_url: https://github.com/scruffyfox/bitrise-amazon-s3-uploader/issues
-published_at: 2016-09-16T16:02:56.266141213+01:00
+published_at: 2016-09-16T16:19:30.362183824+01:00
 source:
   git: https://github.com/scruffyfox/bitrise-amazon-s3-uploader.git
   commit: 2f622cb773b8a4f5dc5a16eac25579818b6a86a4
