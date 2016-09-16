@@ -8,7 +8,7 @@ description: |-
 website: https://github.com/scruffyfox/steps-amazon-s3-uploader
 source_code_url: https://github.com/scruffyfox/steps-amazon-s3-uploader
 support_url: https://github.com/scruffyfox/steps-amazon-s3-uploader/issues
-published_at: 2016-09-16T14:54:39.39399456+01:00
+published_at: 2016-09-16T14:56:13.213374723+01:00
 source:
   git: https://github.com/scruffyfox/steps-amazon-s3-uploader.git
   commit: 4047a517e1af1f50e69a41873c4844cfe3bb5449
