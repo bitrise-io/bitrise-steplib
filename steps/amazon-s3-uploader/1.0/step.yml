@@ -5,13 +5,13 @@ description: |-
 
   This Step requires an Amazon S3 account.
   To register an Amazon S3 account, [click here](http://aws.amazon.com/s3/).
-website: https://github.com/scruffyfox/steps-amazon-s3-uploader
-source_code_url: https://github.com/scruffyfox/steps-amazon-s3-uploader
-support_url: https://github.com/scruffyfox/steps-amazon-s3-uploader/issues
-published_at: 2016-09-16T15:21:49.41149431+01:00
+website: https://github.com/scruffyfox/bitrise-amazon-s3-uploader
+source_code_url: https://github.com/scruffyfox/bitrise-amazon-s3-uploader
+support_url: https://github.com/scruffyfox/bitrise-amazon-s3-uploader/issues
+published_at: 2016-09-16T15:29:59.994124301+01:00
 source:
   git: https://github.com/scruffyfox/bitrise-amazon-s3-uploader.git
-  commit: e00585bd3c71b324e4c5da8a02525689b0667fc3
+  commit: 1538d8a978516687b098c52e2a7812ca9424cf68
 type_tags:
 - deploy
 - amazon
