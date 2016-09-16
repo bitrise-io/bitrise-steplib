@@ -1,0 +1,55 @@
+title: Project scanner
+summary: Scans repository for iOS, Android, Xamarin and Fastlane projects
+description: |-
+  For iOS projects detects CocoaPods and scan Xcode project files
+  for valid Xcode command line configurations.
+
+  For Android projects checks for build.gradle files and lists all the gradle tasks,
+  also checks for gradlew file.
+
+  For Xamarin projects checks the solution files and lists the configuration options,
+  also checks for NuGet and Xamarin Components packages.
+
+  For Fastlane detects Fastfile and lists the available lanes.
+website: https://github.com/bitrise-steplib/steps-project-scanner
+source_code_url: https://github.com/bitrise-steplib/steps-project-scanner
+support_url: https://github.com/bitrise-steplib/steps-project-scanner/issues
+published_at: 2016-09-16T17:32:59.932916065+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-project-scanner.git
+  commit: bdffac57a4a8700ae61d8d4e50f59ed91835bb9c
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- ios
+- android
+- xamarin
+type_tags:
+- script
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_required: true
+    title: Directory to scan.
+  scan_dir: $BITRISE_SOURCE_DIR
+- opts:
+    is_required: true
+    title: Directory to save scan results.
+  output_dir: $BITRISE_SOURCE_DIR/scan_result
+- opts:
+    description: |
+      If provided, the scan results will be sent to the given
+      URL, with a POST request.
+    is_dont_change_value: true
+    title: POST url to send the scan results to
+  scan_result_submit_url: $BITRISE_SCAN_RESULT_POST_URL
+- opts:
+    description: |
+      If provided and `scan_result_submit_url` also provided,
+      this API Token will be used for sending the Scan Results.
+    is_dont_change_value: true
+    title: API Token for scan result submission
+  scan_result_submit_api_token: $BITRISE_APP_API_TOKEN
