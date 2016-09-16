@@ -1,0 +1,109 @@
+title: Amazon S3 File uploader
+summary: Upload a file to Amazon S3
+description: |-
+  Bitrise Step to upload a file to Amazon S3.
+
+  This Step requires an Amazon S3 account.
+  To register an Amazon S3 account, [click here](http://aws.amazon.com/s3/).
+website: https://github.com/scruffyfox/bitrise-amazon-s3-uploader
+source_code_url: https://github.com/scruffyfox/bitrise-amazon-s3-uploader
+support_url: https://github.com/scruffyfox/bitrise-amazon-s3-uploader/issues
+published_at: 2016-09-16T16:24:30.382339161+01:00
+source:
+  git: https://github.com/scruffyfox/bitrise-amazon-s3-uploader.git
+  commit: 2f622cb773b8a4f5dc5a16eac25579818b6a86a4
+type_tags:
+- deploy
+- amazon
+- s3
+- upload
+- uploader
+deps:
+  brew:
+  - name: awscli
+    bin_name: aws
+  apt_get:
+  - name: awscli
+    bin_name: aws
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- file_path: ""
+  opts:
+    description: ""
+    is_required: true
+    summary: Path to the file to be uploaded
+    title: File path
+- app_slug: $BITRISE_APP_SLUG
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: BITRISE's App-Slug variable (passed automatically on Bitrise)
+- build_slug: $BITRISE_BUILD_SLUG
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: BITRISE's Build-Slug variable (passed automatically on Bitrise)
+- aws_access_key: ""
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Amazon AWS Access Key
+- aws_secret_key: ""
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Amazon AWS Secret Access Key
+- bucket_name: ""
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Amazon S3 Bucket Name
+- bucket_region: ""
+  opts:
+    description: |
+      Amazon S3 Bucket Region
+
+      If you use default s3 region (us-east-1), you can leave it empty,
+      otherwise you should provide this input.
+    summary: ""
+    title: Amazon S3 Bucket Region
+- opts:
+    description: |-
+      Optional, if no value specified then the default will be:
+
+          bitrise_$BITRISE_APP_SLUG/${BITRISE_BUILD_TRIGGER_TIMESTAMP}_build_${BITRISE_BUILD_SLUG}
+    summary: ""
+    title: Amazon S3 File Path In Bucket
+  path_in_bucket: bitrise_$BITRISE_APP_SLUG/${BITRISE_BUILD_TRIGGER_TIMESTAMP}_build_${BITRISE_BUILD_SLUG}
+- file_access_level: public_read
+  opts:
+    is_required: true
+    title: Amazon S3 file access level
+    value_options:
+    - private
+    - public_read
+outputs:
+- S3_UPLOAD_STEP_URL: ""
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: Url generated for the uploaded file
+    title: Amazon S3 Deploy URL
+- S3_UPLOAD_STEP_STATUS: ""
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Amazon S3 Deploy result ('success' or 'failed')
