@@ -8,10 +8,10 @@ description: |-
 website: https://github.com/scruffyfox/steps-amazon-s3-uploader
 source_code_url: https://github.com/scruffyfox/steps-amazon-s3-uploader
 support_url: https://github.com/scruffyfox/steps-amazon-s3-uploader/issues
-published_at: 2016-09-16T14:56:33.517260904+01:00
+published_at: 2016-09-16T15:21:49.41149431+01:00
 source:
-  git: https://github.com/scruffyfox/steps-amazon-s3-uploader.git
-  commit: 4047a517e1af1f50e69a41873c4844cfe3bb5449
+  git: https://github.com/scruffyfox/bitrise-amazon-s3-uploader.git
+  commit: e00585bd3c71b324e4c5da8a02525689b0667fc3
 type_tags:
 - deploy
 - amazon
