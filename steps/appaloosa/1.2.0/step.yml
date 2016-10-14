@@ -10,7 +10,7 @@ description: |
 website: https://www.appaloosa-store.com
 source_code_url: https://github.com/appaloosa-store/bitrise_appaloosa
 support_url: https://github.com/appaloosa-store/bitrise_appaloosa/issues
-published_at: 2016-10-13T14:27:48.012057922+02:00
+published_at: 2016-10-14T09:44:57.313721065+02:00
 source:
   git: https://github.com/appaloosa-store/bitrise_appaloosa.git
   commit: daa18c207fb0a6c00cd586fd071bc559c1a6946a
