@@ -1,0 +1,130 @@
+title: Xamarin Test Cloud for iOS
+summary: Xamarin Test Cloud for iOS
+description: Upload your iOS test suite to Xamarin Test Cloud and run it on thousands
+  of real devices.
+website: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-ios
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-ios
+support_url: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-ios/issues
+published_at: 2016-10-19T11:37:59.766816664+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-ios.git
+  commit: c74b8d52d9e9c3c36e0764b12d4c7d1b04ac9edc
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-test-cloud-for-ios
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_project: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      Xamarin project configuration
+    is_required: true
+    title: Xamarin project configuration
+  xamarin_configuration: Debug
+- opts:
+    description: |
+      Xamarin platform
+    is_required: true
+    title: Xamarin platform
+  xamarin_platform: iPhone
+- opts:
+    description: |
+      The e-mail address of the team member submitting the tests.
+    is_required: true
+    summary: User email
+    title: User email
+  xamarin_user: null
+- opts:
+    description: |
+      Api key.
+    is_required: true
+    summary: Api key
+    title: Api key
+  test_cloud_api_key: null
+- opts:
+    description: |
+      Device selection id from the Test Cloud upload dialog.
+    is_required: true
+    summary: Device selection id
+    title: Device selection id
+  test_cloud_devices: null
+- opts:
+    description: |
+      Don't wait for cloud test run to complete.
+
+      Adds '--async-json' flag to Xamarin Test Cloud upload command.
+    summary: Don't wait for cloud test run to complete
+    title: Don't wait for cloud test run to complete
+    value_options:
+    - "yes"
+    - "no"
+  test_cloud_is_async: "yes"
+- opts:
+    description: |
+      Test series.
+    summary: Test series
+    title: Test series
+  test_cloud_series: master
+- opts:
+    description: |
+      Run tests in parallel by method/fixture.
+    summary: Run tests in parallel by method/fixture
+    title: Run tests in parallel by method/fixture
+    value_options:
+    - none
+    - by_test_fixture
+    - by_test_chunk
+  test_cloud_parallelization: none
+- opts:
+    description: |
+      Other parameters to pass Xamarin Test Cloud.
+
+      Available parameters:
+      - --app-name APP-NAME
+      - --category NUNIT-CATEGORY
+      - --fixture NUNIT-FIXTURE
+      - --sign-info SIGN-INFO-SI-PATH
+
+      Example:
+      '--app-name <APP-NAME> --category <NUNIT-CATEGORY> --sign-info <SIGN-INFO-SI-PATH>
+      '--app-name <APP-NAME> --fixture <NUNIT-FIXTURE> --sign-info <SIGN-INFO-SI-PATH>
+    summary: Other parameters
+    title: Other parameters
+  other_parameters: null
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.
+- BITRISE_XAMARIN_TEST_TO_RUN_ID: null
+  opts:
+    description: |
+      Test to run ID.
+
+      This output is available only if 'test_cloud_is_async' is set to 'yes'.
+    title: Test to run ID.
