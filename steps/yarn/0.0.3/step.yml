@@ -4,7 +4,7 @@ description: Runs `yarn` with the given command and args.
 website: https://github.com/jonoirwinrsa/steps-yarn
 source_code_url: https://github.com/jonoirwinrsa/steps-yarn
 support_url: https://github.com/jonoirwinrsa/steps-yarn/issues
-published_at: 2016-10-20T15:24:59.660070003+02:00
+published_at: 2016-10-20T15:47:04.719977451+02:00
 source:
   git: https://github.com/jonoirwinrsa/steps-yarn.git
   commit: 107ab5c1ca7b60b2089e4bba2e7288c4b18999d5
