@@ -1,5 +1,5 @@
 format_version: 1.0.0
-default_step_lib_source: https://github.com/jonoirwinrsa/steps-yarn.git
+default_step_lib_source: https://github.com/SovTech/bitrise-steplib.git
 
 app:
   envs:
@@ -36,7 +36,7 @@ workflows:
       - MY_STEPLIB_REPO_FORK_GIT_URL: $MY_STEPLIB_REPO_FORK_GIT_URL
       - STEP_ID_IN_STEPLIB: yarn
       - STEP_GIT_VERION_TAG_TO_SHARE: $RELEASE_VERSION
-      - STEP_GIT_CLONE_URL: https://github.com/jonoirwinrsa/steps-yarn.git
+      - STEP_GIT_CLONE_URL: https://github.com/SovTech/bitrise-steplib.git
     description: |-
       If this is the first time you try to share a Step you should
       first call: $ bitrise share

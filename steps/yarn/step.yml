@@ -2,8 +2,8 @@ title: Run yarn command
 summary: Runs `yarn` with the given command and args.
 description: Runs `yarn` with the given command and args.
 website: https://github.com/jonoirwinrsa/steps-yarn
-source_code_url: https://github.com/jonoirwinrsa/steps-yarn
-support_url: https://github.com/jonoirwinrsa/steps-yarn/issues
+source_code_url: https://github.com/SovTech/bitrise-steplib.git
+support_url: https://github.com/SovTech/bitrise-steplib/issues
 host_os_tags:
 - osx-10.10
 project_type_tags:
