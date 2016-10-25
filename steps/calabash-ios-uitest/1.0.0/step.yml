@@ -1,0 +1,80 @@
+title: Calabash iOS UI test
+summary: Calabash iOS UI test step
+description: Calabash iOS UI test step
+website: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest/issues
+published_at: 2016-10-25T17:03:37.369897394+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-calabash-ios-uitest.git
+  commit: c562fb7161e2a7893961e5c442111f382fa90d15
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- testing
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-calabash-ios-uitest
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6
+- opts:
+    description: |
+      A couple of format examples:
+      * iOS 8.4
+      * iOS 9.3
+      * latest
+    is_required: true
+    title: OS version
+  simulator_os_version: latest
+- calabash_cucumber_version: null
+  opts:
+    description: |
+      calabash-cucumber gem version to use.
+
+      __If this input specifies the gem version, this version will be used, even `gem_file_path` provided.__
+
+      If `calabash_cucumber_version` not specified:
+
+      - gem version will be used specified by Gemfile at `gem_file_path`
+      - if Gemfile not exist with calabash-cucumber gem, latest version will be used
+    title: calabash-cucumber gem version
+- gem_file_path: $BITRISE_SOURCE_DIR/Gemfile
+  opts:
+    description: |
+      Path to the Gemfile which contains calabash-cucumber gem.
+
+      If Gemfile not exist or does not contain calabash-cucumber gem:
+
+      - if `calabash_cucumber_version` not specified, latest version will be used
+    title: Gemfile path
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
