@@ -1,0 +1,15 @@
+<svg width="415" height="415" xmlns="http://www.w3.org/2000/svg">
+ <!-- Created with Method Draw - http://github.com/duopixel/Method-Draw/ -->
+ <g>
+  <title>background</title>
+  <rect fill="#999999" id="canvas_background" height="417" width="417" y="-1" x="-1"/>
+  <g display="none" overflow="visible" y="0" x="0" height="100%" width="100%" id="canvasGrid">
+   <rect fill="url(#gridpattern)" stroke-width="0" y="0" x="0" height="100%" width="100%"/>
+  </g>
+ </g>
+ <g>
+  <title>Layer 1</title>
+  <path stroke="#000" opacity="0.75" id="svg_2" d="m207.49999,27.487486c-62.408096,0 -112.999999,50.591984 -112.999999,112.999999c0,62.409398 50.591902,113.000026 112.999999,113.000026c62.409443,0 113.000026,-50.590619 113.000026,-113.000026c0,-62.408015 -50.590583,-112.999999 -113.000026,-112.999999zm-9.664357,50.801088l18.815559,0l0,20.01373l-18.815559,0l0,-20.01373zm31.138788,121.460101l-20.695897,0c-8.040466,0 -11.469076,-3.421107 -11.469076,-11.632176l0,-53.373926c0,-2.565525 -1.367273,-3.763705 -3.76224,-3.763705l-6.842214,0l0,-18.480401l20.697353,0c8.046432,0 11.460162,3.591637 11.460162,11.630684l0,53.545903c0,2.402462 1.367282,3.763777 3.76224,3.763777l6.842295,0l0,18.309834l0.007377,0l0,0.000009z" fill-opacity="null" stroke-opacity="null" stroke-width="1.5" fill="#fff"/>
+  <text font-weight="bold" xml:space="preserve" text-anchor="start" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="92" id="svg_3" y="355.5" x="138.570313" stroke-opacity="null" stroke-width="0" stroke="#000" fill="#ffffff">IPA</text>
+ </g>
+</svg>
