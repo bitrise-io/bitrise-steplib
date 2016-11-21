@@ -1,0 +1,48 @@
+title: Cordova
+summary: This step allows you to build cordova-based Android and iOS projects.
+description: |-
+  The Cordova CLI is the main tool to use for the cross-platform workflow
+  described in the [Overview](https://cordova.apache.org/docs/en/latest/guide/overview/index.html).
+website: https://github.com/vgaidarji/steps-cordova-android
+source_code_url: https://github.com/nhammond101/steps-cordova-android
+support_url: https://github.com/nhammond101/steps-cordova-android/issues
+published_at: 2016-11-21T13:59:09.893794926Z
+source:
+  git: https://github.com/nhammond101/steps-cordova-android.git
+  commit: 52948c46a66af2294a91d8c380f4a476547b888e
+host_os_tags:
+- ubuntu
+- macosx
+project_type_tags:
+- android
+- ios
+type_tags:
+- cordova
+- build
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- cordova_command: build
+  opts:
+    description: Run `cordova --help` to check list of available commands.
+    is_required: true
+    title: Cordova command to run.
+- opts:
+    description: |
+      Choose which platform to build your dependencies for.
+    is_required: true
+    title: Platform to build.
+    value_options:
+    - android
+    - ios
+  platform_name: android
+- build_options: --verbose
+  opts:
+    description: |-
+      Options added to the end of the Cordova call.
+      You can use multiple options, separated by a space
+      character. For example: `--verbose`; `--debug`
+      `--release --buildConfig=..\myBuildConfig.json`
+    is_required: false
+    title: Additional options for `cordova` command
