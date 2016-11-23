@@ -1,0 +1,42 @@
+title: Run bower command
+summary: Runs `bower` with the given command and args.
+description: Runs `bower` with the given command and args.
+website: https://github.com/nhammond101/steps-bower
+source_code_url: https://github.com/nhammond101/steps-bower
+support_url: https://github.com/nhammond101/steps-bower/issues
+published_at: 2016-11-23T12:58:05.247749879Z
+source:
+  git: https://github.com/nhammond101/steps-bower.git
+  commit: b3cdda75d4541afacc08826a328c285d5e7225f1
+type_tags:
+- bower
+deps:
+  brew:
+  - name: npm
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: Specify the command to run with `bower`. For example `install`, or
+      `test`.
+    title: The `bower` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `bower` command. You can specify multiple arguments, separated
+      by a space character. For example `-dd -ll`
+    title: Arguments for running `bower` commands
+- is_debug: "no"
+  opts:
+    description: |
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    title: Debug?
+    value_options:
+    - "no"
+    - "yes"
