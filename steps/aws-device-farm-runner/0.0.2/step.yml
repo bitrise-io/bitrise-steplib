@@ -7,7 +7,7 @@ description: |-
 website: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner
 source_code_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner
 support_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/issues
-published_at: 2016-09-23T11:23:05.808962866-07:00
+published_at: 2016-12-09T14:51:12.536764755-08:00
 source:
   git: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner.git
   commit: 6289c7b0cf2038cdc06d185d0c55eae926d70b51
