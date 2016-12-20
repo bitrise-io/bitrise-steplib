@@ -1,0 +1,55 @@
+title: Carthage
+summary: Runs selected Carthage command.
+description: |-
+  Runs selected Carthage command.
+  For more information about Carthage, visit the [Carthage GitHub page](https://github.com/Carthage/Carthage).
+website: https://github.com/bitrise-steplib/steps-carthage
+source_code_url: https://github.com/bitrise-steplib/steps-carthage
+support_url: https://github.com/bitrise-steplib/steps-carthage/issues
+published_at: 2016-12-19T15:49:57.840253427+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-carthage.git
+  commit: 1f253bcf19c7277fcdf428ed14d77573a48c5429
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- carthage
+- system
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-carthage
+deps:
+  brew:
+  - name: go
+  - name: carthage
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- github_access_token: $GITHUB_ACCESS_TOKEN
+  opts:
+    description: "Use this input to avoid Github rate limit issues.\n\nSee the github's
+      guide: [Creating an access token for command-line use](https://help.github.com/articles/creating-an-access-token-for-command-line-use/),
+      \  \nhow to create Personal Access Token.\n\n__UNCHECK EVERY SCOPE BOX__ when
+      creating this token. There is no reason this token needs access to private information."
+    title: Github Personal Access Token
+- carthage_command: update
+  opts:
+    description: |-
+      Select a command to set up your dependencies with.
+
+      To see available commands run: `carthage help` on your local machine.
+    summary: Select a command to set up your dependencies with.
+    title: Carthage command to run
+- carthage_options: null
+  opts:
+    description: "Options added to the end of the Carthage call.\nYou can use multiple
+      options, separated by a space character.\n\nTo see available command's options,
+      call: `carthage help COMMAND` \n\nFormat example: `--platform ios`"
+    title: Additional options for `carthage` command
