@@ -3,12 +3,12 @@ summary: |-
   Create an archive for your OS X project so you can share it, upload it, deploy it and catch them
   all! Well, maybe not the last one.
 description: ""
-website: https://github.com/vasarhelyia/steps-new-xcode-archive-mac
-source_code_url: https://github.com/vasarhelyia/steps-new-xcode-archive-mac
-support_url: https://github.com/vasarhelyia/steps-new-xcode-archive-mac/issues
+website: https://github.com/bitrise-steplib/steps-new-xcode-archive-mac
+source_code_url: https://github.com/bitrise-steplib/steps-new-xcode-archive-mac
+support_url: https://github.com/bitrise-steplib/steps-new-xcode-archive-mac/issues
 published_at: 2016-01-04T22:53:59.823395992+01:00
 source:
-  git: https://github.com/vasarhelyia/steps-xcode-archive-mac.git
+  git: https://github.com/bitrise-steplib/steps-xcode-archive-mac.git
   commit: 2d07f242929af670229e6020a688be21de5ea0da
 host_os_tags:
 - osx-10.10

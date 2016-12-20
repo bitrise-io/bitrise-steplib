@@ -1,0 +1,93 @@
+title: Applivery.com Android Deploy
+summary: Deploy your awesome Android Application to Applivery.com
+description: |-
+  Deploy an Android application to [Applivery](http://www.applivery.com),
+  add notes and notify testers.
+
+  Register a Applivery account at [http://www.applivery..com/](http://www.applivery.com)
+  and create an App to utilize this step.
+
+  You also need to get your *Account API Key* for you account and the *App Id* for the app.
+website: https://github.com/applivery/steps-applivery-android-deploy
+source_code_url: https://github.com/applivery/steps-applivery-android-deploy
+support_url: https://github.com/applivery/steps-applivery-android-deploy/issues
+published_at: 2016-02-09T23:36:10.028033474+01:00
+source:
+  git: https://github.com/applivery/steps-applivery-android-deploy.git
+  commit: f76628cef4a36049026b74d0a96eabdc5d3f7e8e
+host_os_tags:
+- ubuntu
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- deploy
+- Applivery
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: APK file path
+- api_token: ""
+  opts:
+    description: |-
+      This is the API Key to access your account.
+
+      ## Where to get the Applivery Account API Key?
+
+      Sign in to your [Applivery.com](http://dashboard.applivery.com) account,
+      click on Developers menu option from the left side menu and copy it from the
+      Account API Key section.
+    is_required: true
+    summary: ""
+    title: Account API Key
+- app_id: ""
+  opts:
+    description: |-
+      This is the App Id that identifies your App in Applivery.com
+
+      ## Where to get the App Id?
+
+      Sign in to your [Applivery.com](http://dashboard.applivery.com) account,
+      click on Applications menu option from the left side menu, click on the desired App.
+      You'll find the App Id inside the (i) information block (written in red).
+    is_required: false
+    summary: ""
+    title: 'Applivery: App ID'
+- notes: Deployed with Bitrise Applivery.com Android Deploy Step.
+  opts:
+    description: Additional build/release notes
+    summary: ""
+    title: Notes attached to the deploy
+- notify: "true"
+  opts:
+    description: This flag allows you to automatically notify your testers vía email.
+    is_required: true
+    summary: ""
+    title: Notify Testers?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: Comma-separated list of tags
+    is_required: false
+    summary: ""
+    title: (Optional) Comma-separated list of tags
+  tags: ""
+- opts:
+    description: Human readable version name for this build.
+    summary: ""
+    title: (Optional) Human readable version name
+  version_name: ""
+outputs:
+- APPLIVERY_DEPLOY_STATUS: null
+  opts:
+    description: ""
+    summary: ""
+    title: 'Deployment result: ''success'' or ''failed'''

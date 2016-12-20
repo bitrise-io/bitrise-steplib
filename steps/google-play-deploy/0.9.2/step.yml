@@ -1,0 +1,79 @@
+title: Step google play deploy [beta]
+summary: Step google play deploy
+description: |-
+  To use this step:
+
+  1. You have to upload the first apk manually (using the web interface).
+    See: https://play.google.com/apps/publish -> All applications -> Add new application
+
+  2. You must link your Google Play Developer Console to an API project.
+    See: https://developers.google.com/android-publisher/getting_started (Linking your API Project section)
+
+  3. Setting Up API Access Clients:
+    See: https://developers.google.com/android-publisher/getting_started (Using a service account)
+    When you create your service account on the google developer console choose P12 as Key Type.
+
+  4. Grant Access to provide the service account the necessary rights.
+    See: https://play.google.com/apps/publish -> Settings -> User account & rights -> Invite new user and give the privileges.
+    Due to the way the Google Play Publisher API works, you have to grant at least the following permissions to that service account:
+     - Edit store listing, pricing & distribution
+     - Manage Production APKs
+     - Manage Alpha & Beta APKs
+     - Manage Alpha & Beta users
+website: https://github.com/bitrise-io/steps-google-play-deploy
+source_code_url: https://github.com/bitrise-io/steps-google-play-deploy
+support_url: https://github.com/bitrise-io/steps-google-play-deploy/issues
+published_at: 2016-05-02T17:04:18.980031139+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-google-play-deploy.git
+  commit: 88c64913a1877831694afbda989f13ff37d3fd33
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- deploy
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Service account email
+    is_required: true
+    summary: Service account email
+    title: Service account email
+  service_account_email: null
+- opts:
+    description: Package name
+    is_required: true
+    summary: Package name
+    title: Package name
+  package_name: null
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: APK file path
+    is_required: true
+    summary: APK file path
+    title: APK file path
+- key_file_path: null
+  opts:
+    description: |-
+      P12 service account key file path.
+
+      You can specify local path: `~/key_file.p12` or remote URL as well.
+    is_required: true
+    summary: Key file path
+    title: Key file path
+- opts:
+    description: Track
+    is_required: true
+    summary: Track
+    title: Track
+    value_options:
+    - alpha
+    - beta
+    - production
+    - rollout
+  track: alpha

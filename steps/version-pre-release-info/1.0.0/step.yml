@@ -1,0 +1,80 @@
+title: Version pre-release info
+summary: Generate version containing pre-release information (`v1.0.0-alpha.1`, `2.4.1.beta+2`,
+  `v2.0-rc.3`) based on git tags.
+description: |-
+  This step extends version provided as a parameter (`Version number`) with a pre-release identifier (`Pre-release identifier`, e.g. `alpha`, `beta`, `rc`)
+  and a pre-release number. The pre-release number is automatically incremented based on the existing git tags.
+  If there are no tags for the provided version, pre-release number is set to the initial value (`Pre-release initial value`).
+  Pre-release information is exported to the following environment variables:
+  - **APP_PRE_RELEASE_INFO** (e.g. `rc.3`)
+  - **APP_VERSION_WITH_PRE_RELEASE_INFO** (e.g. `v2.0-rc.3`)
+
+  You can use these environment variables in next steps (e.g. when creating a git tag).
+website: https://github.com/pmkowal/bitrise-step-version-pre-release-info
+source_code_url: https://github.com/pmkowal/bitrise-step-version-pre-release-info
+support_url: https://github.com/pmkowal/bitrise-step-version-pre-release-info/issues
+published_at: 2016-06-23T00:36:33.245617403+02:00
+source:
+  git: https://github.com/pmkowal/bitrise-step-version-pre-release-info.git
+  commit: 36159c82db7995ce0010887ed042f6de82e994a2
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- xcode
+- versioning
+- pre-release
+- git
+- tag
+- alpha
+- beta
+- rc
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      e.g.: `1.0.0`
+    is_required: true
+    title: Version number
+  version_number: $XPI_VERSION
+- opts:
+    description: |
+      e.g.: `alpha`, `beta`, `rc`
+    is_required: true
+    title: Pre-release identifier
+  pre_release_identifier: beta
+- opts:
+    description: |
+      If there are no tags, pre-release number is set to this value
+    is_required: true
+    title: Pre-release initial value
+  pre_release_initial_value: 1
+- opts:
+    description: |
+      e.g. [v]2.0-rc.3
+    is_required: false
+    title: Version prefix
+  pre_release_version_prefix: v
+- opts:
+    description: |
+      e.g. 2.0[-]rc.3
+    is_required: false
+    title: Pre-release identifier prefix
+  pre_release_identifier_prefix: '-'
+- opts:
+    description: |
+      e.g. 2.0-rc[.]3
+    is_required: false
+    title: Pre-release number prefix
+  pre_release_number_prefix: .
+outputs:
+- APP_VERSION_PRE_RELEASE_INFO: null
+  opts:
+    title: Pre-release info (e.g. `rc.3`)
+- APP_VERSION_WITH_PRE_RELEASE_INFO: null
+  opts:
+    title: Version number containing pre-release info (e.g. `v2.0-rc.3`)

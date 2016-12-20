@@ -1,0 +1,45 @@
+title: Cordova Android
+summary: This step allows you to build cordova-based Android projects.
+description: |-
+  The Cordova CLI is the main tool to use for the cross-platform workflow
+  described in the [Overview](https://cordova.apache.org/docs/en/latest/guide/overview/index.html).
+website: https://github.com/donvigo/steps-cordova-install
+source_code_url: https://github.com/donvigo/steps-cordova-install
+support_url: https://github.com/donvigo/steps-cordova-install/issues
+published_at: 2016-02-15T22:19:45.080250673+02:00
+source:
+  git: https://github.com/donvigo/steps-cordova-android.git
+  commit: 04a6e4c317927c7b50a0cf143c4619a5030fe2a4
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- cordova
+- build
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- cordova_command: build
+  opts:
+    description: Run `cordova --help` to check list of available commands.
+    is_required: true
+    title: Cordova command to run.
+- opts:
+    description: |
+      Choose which platform to build your dependencies for.
+    is_required: true
+    title: Platform to build.
+    value_options:
+    - android
+  platform: android
+- build_options: --verbose
+  opts:
+    description: |-
+      Options added to the end of the Cordova call.
+      You can use multiple options, separated by a space
+      character. For example: `--verbose`; `--debug`
+      `--release --buildConfig=..\myBuildConfig.json`
+    is_required: false
+    title: Additional options for `cordova` command

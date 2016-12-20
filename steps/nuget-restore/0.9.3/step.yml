@@ -1,0 +1,38 @@
+title: NuGet restore
+summary: NuGet restore step
+description: NuGet restore step
+website: https://github.com/bitrise-steplib/steps-nuget-restore
+source_code_url: https://github.com/bitrise-steplib/steps-nuget-restore
+support_url: https://github.com/bitrise-steplib/steps-nuget-restore/issues
+published_at: 2016-08-11T12:16:24.406903306+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-nuget-restore.git
+  commit: 2cce588ead7d01c37c72f99fff7f0e95a9b46bc7
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path to Xamarin solution
+    is_required: true
+    title: Path to Xamarin solution
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- nuget_version: null
+  opts:
+    description: |
+      The default NuGet restore step uses the NuGet version that ships with Xamarin.
+
+      Specify this input if you would like to use a custom NuGet version.
+      You can find all the available NuGet distribution here: https://dist.nuget.org/index.html.
+
+      Format examples:
+
+      - 2.8.6
+      - latest
+    title: NuGet version

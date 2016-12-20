@@ -1,0 +1,129 @@
+title: TestFairy Deploy Android
+summary: |-
+  Deploy your awesome App to TestFairy, set Tester Groups to be notified,
+  enable email notification for the build, enable in-app notification of new
+  version, set recording duration, set if video recording is enabled and add
+  your comments and let the TestFairy do it's magic.
+description: |-
+  Deploy your awesome App to TestFairy, set Tester Groups to be notified,
+  enable email notification for the build, enable in-app notification of new
+  version, set recording duration, set if video recording is enabled and add
+  your comments and let the TestFairy do it's magic.
+  To use this step you have to register
+  an account on [TestFairy.com](http://testfairy.com/).
+website: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
+source_code_url: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
+support_url: https://github.com/bitrise-steplib/steps-testfairy-deploy-android/issues
+published_at: 2016-02-22T07:34:58.706705979-03:00
+source:
+  git: https://github.com/bitrise-steplib/steps-testfairy-deploy-android.git
+  commit: 789231b5d8c3b2c630bcbb6c52755d676acc1c78
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- testfairy
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: |-
+      API key from TestFairy.
+      You can find your API key under the settings menu.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: TestFairy API key
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: Path for the APK to upload to TestFairy.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: APK path
+- opts:
+    description: |-
+      Tester Groups that will be notified when the app is ready.
+      Setup groups in your TestFairy account testers page.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Tester groups
+  tester_groups: ""
+- notify: "off"
+  opts:
+    description: Sets if should email testers about new version.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Email notification
+    value_options:
+    - "on"
+    - "off"
+- auto_update: "off"
+  opts:
+    description: |-
+      If auto update is on all users will be prompt to update
+      to this build next time they run the app.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Auto update
+    value_options:
+    - "on"
+    - "off"
+- max_test_duration: 10m
+  opts:
+    description: Maximum session recording length, eg 20m or 1h. Maximum 24h.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Recording duration
+- opts:
+    description: Sets if video recording is enabled for this build.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Video recording
+    value_options:
+    - "on"
+    - wifi
+    - "off"
+  video_recording: "off"
+- icon_watermark: "off"
+  opts:
+    description: Sets Icon Watermark.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Icon Watermark
+    value_options:
+    - "on"
+    - "off"
+- comment: ""
+  opts:
+    description: Comment text will be included in the email sent to testers.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: Comments
+outputs:
+- TESTFAIRY_PUBLIC_INSTALL_PAGE_URL_ANDROID: null
+  opts:
+    description: Public Install Page's URL
+    title: Public Install Page URL

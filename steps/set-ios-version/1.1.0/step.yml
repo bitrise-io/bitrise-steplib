@@ -1,0 +1,68 @@
+title: Set iOS Info.plist - Bundle Version and Bundle Short Version String
+summary: Sets the Bundle Version and Bundle Short Version String to the specified
+  value, in the target Info.plist file for the next build.
+description: Sets the Bundle Version and Bundle Short Version String to the specified
+  value, in the target Info.plist file for the next build.
+website: https://github.com/BOOMik/steps-set-ios-version
+source_code_url: https://github.com/BOOMik/steps-set-ios-version
+support_url: https://github.com/BOOMik/steps-set-ios-version/issues
+published_at: 2016-06-08T13:06:26.611278019+03:00
+source:
+  git: https://github.com/BOOMik/steps-set-ios-version.git
+  commit: cc6a7e4ca9fcf64cb8cfbfeb34b74647eb38053b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- utils
+- xcode
+- xamarin
+- ios
+- info.plist
+- versioning
+run_if: .IsCI
+inputs:
+- info_plist_file: null
+  opts:
+    description: |
+      Path to the given iOS project's Info.plist file.
+    is_required: true
+    summary: ""
+    title: Info.plist file path
+- bundle_version: null
+  opts:
+    description: |
+      CFBundleVersion e.g.: 1.0.0
+    is_required: true
+    summary: Set the :CFBundleVersion to a specified value. Should be string.
+    title: Bundle Version to set
+- bundle_version_short: null
+  opts:
+    description: |
+      CFBundleShortVersionString e.g.: 1.0
+    is_required: true
+    summary: Set the :CFBundleShortVersionString to a specified value. Should be string.
+    title: Bundle Short Version String to set
+- opts:
+    description: |
+      This offset will be added to `Short Version` input's value. If this set - Offset and Short Version must be integer!.
+    title: Bundle Short Version String Offset
+  version_short_offset: null
+- append_version: "no"
+  opts:
+    is_required: true
+    summary: It appends to the current CFBundleVersion. e.g. Current version in Info.plist
+      is '1.0.'. After step will be '1.0.YOU_ENTERED_VERSION NAME'
+    title: Append Version
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- APP_VERSION: null
+  opts:
+    title: Version (CFBundleVersion from Info.plist)
+- APP_BUILD: null
+  opts:
+    title: Build (CFBundleShortVersionString from Info.plist)

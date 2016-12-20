@@ -1,0 +1,89 @@
+title: Carthage
+summary: Installs and updates Carthage to the latest available version and runs selected
+  Carthage command.
+description: |-
+  Installs and updates Carthage to the latest available version and runs selected Carthage command.
+  For more information about Carthage, visit the [Carthage GitHub page](https://github.com/Carthage/Carthage).
+website: https://github.com/bitrise-steplib/steps-carthage
+source_code_url: https://github.com/bitrise-steplib/steps-carthage
+support_url: https://github.com/bitrise-steplib/steps-carthage/issues
+published_at: 2016-03-01T20:09:00.543133063+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-carthage.git
+  commit: 703f0c9f27c1e1a8d5e0f3fd4a6ad114ebd5a899
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- carthage
+- system
+deps:
+  brew:
+  - name: carthage
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- carthage_command: update
+  opts:
+    description: |-
+      Select a command to set up your dependencies with.
+      * `bootstrap`: initializes the project with checking out & building all dependencies. (default)
+      * `update`: updates all dependencies.
+      * `build`: builds all checked out items.
+    summary: Select a command to set up your dependencies with.
+    title: Carthage command to run
+    value_options:
+    - bootstrap
+    - update
+    - build
+- no_use_binaries: "false"
+  opts:
+    summary: |-
+      Use this flag to make sure Carthage checks out all dependencies (otherwise
+      it defaults to binary framework releases). False by default.
+    title: Set no use binaries flag
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    summary: Use this flag to have a verbose output of the carthage command. False
+      by default.
+    title: Set verbose output flag
+    value_options:
+    - "true"
+    - "false"
+  verbose_output: "false"
+- opts:
+    summary: Use this flag to use ssh when cloning the repos. False by default.
+    title: Set ssh flag
+    value_options:
+    - "true"
+    - "false"
+  ssh_output: "false"
+- opts:
+    description: |
+      This directory will be set as the current working
+      directory for the carthage command.
+    title: Working directory
+  working_dir: null
+- opts:
+    description: |
+      Choose which platform to build your dependencies for.
+    title: Platform
+    value_options:
+    - iOS
+    - Mac
+    - iOS,Mac
+    - tvOS
+    - all
+  platform: iOS
+- carthage_options: null
+  opts:
+    description: |-
+      Options added to the end of the Carthage call.
+      You can use multiple options, separated by a space
+      character.
+    title: Additional options for `carthage` command

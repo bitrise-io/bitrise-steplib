@@ -1,0 +1,40 @@
+title: Xcode Project Info
+summary: Extracts version and build number to environment variables.
+description: |-
+  This step will simply read version and build number from given `Info.plist` path,
+  then export those to **APP_VERSION** and **APP_BUILD** environment variables.
+
+  After this you can use these variables in other steps (ex. sending message on Slack).
+website: https://github.com/tadija/bitrise-step-xcode-project-info
+source_code_url: https://github.com/tadija/bitrise-step-xcode-project-info
+support_url: https://github.com/tadija/bitrise-step-xcode-project-info/issues
+published_at: 2016-04-21T17:49:32.149684094+02:00
+source:
+  git: https://github.com/tadija/bitrise-step-xcode-project-info.git
+  commit: cc682e9a0b4ec39b3868cbe059f0486efe681690
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- xcode
+- versioning
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- info_plist_path: Info.plist
+  opts:
+    is_required: true
+    summary: Path to project's Info.plist file.
+    title: Info.plist file path
+outputs:
+- APP_VERSION: null
+  opts:
+    title: Version (CFBundleShortVersionString from Info.plist)
+- APP_BUILD: null
+  opts:
+    title: Build (CFBundleVersion from Info.plist)

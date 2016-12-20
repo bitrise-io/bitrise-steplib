@@ -1,0 +1,54 @@
+title: Set iOS Info.plist - Bundle Identifier
+summary: Sets the Bundle Version and Bundle Short Version String to the specified
+  value, in the target Info.plist file for the next build.
+description: Sets the Bundle Version and Bundle Short Version String to the specified
+  value, in the target Info.plist file for the next build.
+website: https://github.com/BOOMik/steps-set-ios-version
+source_code_url: https://github.com/BOOMik/steps-set-ios-version
+support_url: https://github.com/BOOMik/steps-set-ios-version/issues
+published_at: 2016-06-07T20:41:18.504380527+03:00
+source:
+  git: https://github.com/BOOMik/steps-set-ios-version.git
+  commit: 48a80ba9d24caca021f7a7561f50c8a443665bec
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- utils
+- xcode
+- xamarin
+- ios
+- info.plist
+- versioning
+run_if: .IsCI
+inputs:
+- info_plist_file: null
+  opts:
+    description: |
+      Path to the given iOS project's Info.plist file.
+    is_required: true
+    summary: ""
+    title: Info.plist file path
+- bundle_version: null
+  opts:
+    description: |
+      CFBundleVersion e.g.: 1.0.0
+    is_required: true
+    summary: Set the :CFBundleVersion to a specified value. Should be string.
+    title: Bundle Version to set
+- bundle_version_short: null
+  opts:
+    description: |
+      CFBundleShortVersionString e.g.: 1.0
+    is_required: true
+    summary: Set the :CFBundleShortVersionString to a specified value. Should be string.
+    title: Bundle Short Version String to set
+outputs:
+- APP_VERSION: null
+  opts:
+    title: Version (CFBundleVersion from Info.plist)
+- APP_BUILD: null
+  opts:
+    title: Build (CFBundleShortVersionString from Info.plist)

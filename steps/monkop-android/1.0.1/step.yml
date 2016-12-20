@@ -1,0 +1,48 @@
+title: Monkop.com Android Testing Cloud.
+summary: Test your Android app using Monkop. Real performance analysis using real
+  devices.
+description: |-
+  Use this step to test your deployed APK on Monkop.
+
+  Monkop enable to run smoke tests on several real devices with no officer. Get detailed information about the native app’s performance.
+
+  If you don't have a Monkop account, register for free [here](https://console.monkop.com/register.xhtml) and get your API KEY!
+  The API_KEY value can be found on "Add-ons" section under "API Key" option.
+website: https://github.com/MonkopApps/bitrise-monkop-android
+source_code_url: https://github.com/MonkopApps/bitrise-monkop-android
+support_url: https://github.com/MonkopApps/bitrise-monkop-android/issues
+published_at: 2016-11-04T12:42:53.869512912-03:00
+source:
+  git: https://github.com/MonkopApps/bitrise-monkop-android.git
+  commit: 80329361ee1c42d07a9a49db50d7165b9fc92a3d
+host_os_tags:
+- ubuntu
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- Monkop
+deps:
+  apt_get:
+  - name: git
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: APK file path
+- api_key: $MONKOP_API_KEY
+  opts:
+    description: "This is the API key value associated to your account.\n\n## Where
+      can you get it?\n\n[Sign in](https://console.monkop.com/login.xhtml) to your
+      Monkop account,\nclick on [Add-ons](https://console.monkop.com/addOns.xhtml)
+      and select the \n\"API Key\" add-on. Your API key will appear once you enable
+      the add-on."
+    is_required: true
+    summary: ""
+    title: Account API key

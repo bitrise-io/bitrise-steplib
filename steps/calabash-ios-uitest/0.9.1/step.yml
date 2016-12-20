@@ -1,0 +1,52 @@
+title: Calabash iOS UI test
+summary: Calabash iOS UI test step
+description: Calabash iOS UI test step
+website: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest/issues
+published_at: 2016-03-09T15:46:53.800915637+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-calabash-ios-uitest.git
+  commit: 70365e88315188fd71c7436136eb74012eb302d1
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- testing
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+    is_expand: true
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6
+- opts:
+    description: |
+      A couple of format examples:
+      * iOS 8.4
+      * iOS 9.1
+    is_expand: true
+    is_required: false
+    title: OS version
+  simulator_os_version: null
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed

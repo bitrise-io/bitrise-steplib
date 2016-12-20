@@ -1,0 +1,42 @@
+title: NUnit runner
+summary: NUnit runner
+description: Executes a set of NUnit tests against your Xamarin solution file
+website: https://github.com/bitrise-steplib/steps-nunit-runner
+source_code_url: https://github.com/bitrise-steplib/steps-nunit-runner
+support_url: https://github.com/bitrise-steplib/steps-nunit-runner/issues
+published_at: 2016-09-07T12:59:16.946440062+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-nunit-runner.git
+  commit: 50be11b849c4a24e9a82ffb35b69d786bad5a2cc
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+- test
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      Xamarin project configuration
+    is_required: true
+    title: Xamarin project configuration
+  xamarin_configuration: $BITRISE_XAMARIN_CONFIGURATION
+- opts:
+    description: |
+      Xamarin platform
+    is_required: true
+    title: Xamarin platform
+  xamarin_platform: $BITRISE_XAMARIN_PLATFORM
+- nunit_options: null
+  opts:
+    description: |
+      Additional option flags when running nunit3-console
+    title: NUnit command options

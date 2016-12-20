@@ -1,0 +1,73 @@
+title: Sign APK
+summary: Sign APK
+description: Sign APK.
+website: https://github.com/bitrise-steplib/steps-sign-apk
+source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
+support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
+published_at: 2016-03-03T15:33:47.017761837+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-sign-apk.git
+  commit: f75613a81d5859ab930d6b4b917f67a29f5693bc
+host_os_tags:
+- osx-10.10
+- ubuntu
+type_tags:
+- android
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: null
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: apk path
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    description: |-
+      For remote keystores you can provide any download location (ex: https://URL/TO/keystore.jks).
+      For local keystores provide file path url. (ex: file://PATH/TO/keystore.jks).
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keystore url
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keystore password
+- keystore_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Keystore alias
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Private key password
+  private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+- jarsigner_options: null
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Additional options for jarsigner
+outputs:
+- BITRISE_SIGNED_APK_PATH: null
+  opts:
+    title: Bitrise signed apk path

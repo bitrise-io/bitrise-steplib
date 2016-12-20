@@ -1,0 +1,175 @@
+title: Xcode Archive for Mac
+summary: |-
+  Create an archive for your OS X project so you can share it, upload it, deploy it and catch them
+  all! Well, maybe not the last one.
+description: ""
+website: https://github.com/bitrise-steplib/steps-xcode-archive-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-archive-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-archive-mac/issues
+published_at: 2016-08-12T17:05:37.079620227+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-archive-mac.git
+  commit: d243e4e2cfc0efaa9d52cba36fc92eb997ad20c3
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- mac
+type_tags:
+- build
+- xcode
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path.
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |
+      (optional) The configuration to use. By default your Scheme
+      defines which configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+      **Make sure that the Configuration you specify actually exists
+      in your Xcode Project**. If it does not, if you have a typo
+      in the value of this input Xcode will simply use the Configuration
+      specified by the Scheme and will silently ignore this parameter!
+    summary: ""
+    title: Configuration name
+- opts:
+    description: |
+      This directory will contain the generated .app or .pkg file's and .dSYM.zip files.
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- is_force_code_sign: "no"
+  opts:
+    description: "__DEPRECATED!__ \n\nUse `force_code_sign_identity` and `force_provisioning_profile`
+      instead.\n\nIf set to \"yes\" then it'll use the `PROVISIONING_PROFILE` (set\nto
+      the value of the `$BITRISE_PROVISIONING_PROFILE_ID` environment)\nand `CODE_SIGN_IDENTITY`
+      (set to the value\nof the `$BITRISE_CODE_SIGN_IDENTITY` environment)\nXcode
+      Command Line parameters,\nfor force the use of specified Certificate and Provisioning
+      Profile,\nto the ones"
+    is_required: true
+    title: Use force code signing attributes?
+    value_options:
+    - "yes"
+    - "no"
+- force_code_sign_identity: null
+  opts:
+    description: |-
+      Force xcodebuild to use specified Code Sign Identity.
+
+      Specify code sign identity as full ID (e.g. `Mac Developer: Bitrise Bot (VV2J4SV8V4)`)
+      or specify code sign group ( `Mac Developer` or `Mac Distribution` ).
+
+      You also have to **specify the Identity in the format it's stored in Xcode project settings**,
+      and **not how it's presented in the Xcode.app GUI**!
+      **Capitalization also matters**, `Mac Distribution` works but `mac distribution` does not!
+    title: Force code signing with Identity
+- force_provisioning_profile: null
+  opts:
+    description: |-
+      Force xcodebuild to use specified Provisioning Profile.
+
+      Use Provisioning Profile's UUID, profile's name is not acceptable by xcodebuild.
+
+      How to get your UUID:
+
+      - In xcode select your project -> Build Settings -> Code Signing
+      - Select the desired Provisioning Profile, then scroll down in profile list and click on Other...
+      - The popup will show your profile's UUID.
+
+      Format example:
+
+      - c5be4123-1234-4f9d-9843-0d9be985a068
+    title: Force code signing with Provisioning Profile
+- export_options_path: null
+  opts:
+    description: |-
+      Specifies a path to a plist file that configures archive exporting.
+      If not specified, it will generate an export options plist with the method specified in `export_method`.
+      Call xcodebuild -help for available export options.
+    title: Export options path
+- export_method: development
+  opts:
+    description: |-
+      The method for exporting used in `exportOptions` plist.
+      `none` means no resigning during export.
+      Upload and install proper certificates when exporting with different identity than the one used for archive.
+      See `xcodebuild -help` for more information.
+    is_required: true
+    title: Export method
+    value_options:
+    - app-store
+    - development
+    - developer-id
+    - none
+- is_clean_build: "yes"
+  opts:
+    is_required: true
+    title: Do a clean Xcode build before the archive?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- is_export_xcarchive_zip: "no"
+  opts:
+    description: |
+      If this input is set to `yes`, the generated .xcarchive will be zipped and moved to `output_dir`.
+    is_required: true
+    title: Export the generated archive?
+    value_options:
+    - "yes"
+    - "no"
+- is_export_all_dsyms: "no"
+  opts:
+    description: |-
+      If this input is set to `yes` step will collect every dsym (.app dsym and framwork dsyms) in a directory, zip it and export the zipped directory path.
+      Otherwise only .app dsym will be zipped and the zip path exported.
+    is_required: true
+    title: Export all dsyms?
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_EXPORTED_FILE_PATH: null
+  opts:
+    title: The created .app or .pkg file's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created .dSYM.zip file's path
+- BITRISE_XCARCHIVE_PATH: null
+  opts:
+    title: The created .xcarchive.zip file's path

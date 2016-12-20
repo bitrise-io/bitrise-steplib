@@ -1,0 +1,74 @@
+title: Pebble build
+summary: Builds a Pebble project
+description: |
+  Builds a [Pebble project](https://developer.pebble.com) after installing SDK (if necessary).
+website: https://github.com/HBehrens/bitrise-step-pebble-build
+source_code_url: https://github.com/HBehrens/bitrise-step-pebble-build
+support_url: https://github.com/HBehrens/bitrise-step-pebble-build/issues
+published_at: 2016-07-05T08:01:19.000000000-07:00
+source:
+  git: https://github.com/HBehrens/bitrise-step-pebble-build.git
+  commit: b98053ef64f5af83da5bbf0846e998fb1083862b
+host_os_tags:
+- osx-10.10
+- osx-10.11
+- osx-10.12
+is_requires_admin_user: false
+is_always_run: false
+inputs:
+- opts:
+    description: |-
+      Specify the path to your Pebble project.
+      Use an empty value to skip building the project and only install the SDK.
+    title: Pebble project path
+  project_path: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Speed up Pebble SDK installation by skiping the emulator.
+      If you only build your projects, it's safe to do this.
+    title: Install SDK without Emulator?
+    value_options:
+    - "yes"
+    - "no"
+  sdk_without_emulator: "yes"
+- opts:
+    description: |-
+      Speed up Pebble SDK installation by skiping Freetype.
+      Only if you don't use any custom fonts, it's safe to set this to "yes".
+    title: Install SDK without FreeType?
+    value_options:
+    - "yes"
+    - "no"
+  sdk_without_freetype: "no"
+- opts:
+    description: |-
+      Speed up Pebble SDK installation by skiping Node.
+      Only if you don't use Pebble Packages, it's safe to set this to "yes".
+    title: Install SDK without Pebble Packages?
+    value_options:
+    - "yes"
+    - "no"
+  sdk_without_node: "no"
+- opts:
+    description: |-
+      If set to "yes" (recommended), Pebble collects metrics on your usage of their developer tools.
+      This helps them to help prioritise further development of their tooling.
+    title: Send analytics about SDK usage to Pebble?
+    value_options:
+    - "yes"
+    - "no"
+  sdk_enable_analytics: "yes"
+- opts:
+    description: |-
+      To use the Pebble SDK, you must agree to the following:
+
+      PEBBLE TERMS OF USE
+      https://developer.getpebble.com/legal/terms-of-use
+
+      PEBBLE DEVELOPER LICENSE
+      https://developer.getpebble.com/legal/sdk-license
+
+      You have to provide "yes" as input value to agree.
+    title: Accept Pebble TERMS OF USE and PEBBLE DEVELOPER LICENSE?
+    is_required: true
+  sdk_accept_legalese:

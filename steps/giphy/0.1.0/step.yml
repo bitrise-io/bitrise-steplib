@@ -1,0 +1,34 @@
+title: Gifs with Giphy
+summary: Spice up your Bitrise.io logs with a random Gif from Giphy (saved into $GIF_URL)
+description: |
+  Spice up your Bitrise.io logs with a random Gif from Giphy
+
+  This script will add a `GIF_URL` variable to your build than you can use in the next steps.
+  Wanna send a Gif with the Slack step? Simply add `$GIF_URL` somewhere in your Gif message ;)
+website: https://github.com/almouro/bitrise-giphy-step
+source_code_url: https://github.com/almouro/bitrise-giphy-step
+support_url: https://github.com/almouro/bitrise-giphy-step/issues
+published_at: 2016-10-17T20:09:38.225617462+02:00
+source:
+  git: https://github.com/Almouro/bitrise-giphy-step.git
+  commit: f03d7bcf9451b32a199c7f30cdd6736bad8774e2
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- gif_words: such wow,awesome,shipit,yes,panda,cat,hell yeah,applaud,lgtm,surprise,suprise
+    motherfucker,yeah bitches,high five,legendary,lil bub
+  opts:
+    description: |
+      The step randomly select a gif for one the words you entered.
+
+      You should enter a comma separated list of value.
+      The default is "such wow,awesome,shipit,yes,panda,cat,hell yeah,applaud,lgtm,surprise,suprise motherfucker,yeah bitches,high five,legendary,lil bub"
+    is_expand: false
+    is_required: true
+    title: Random Gif words

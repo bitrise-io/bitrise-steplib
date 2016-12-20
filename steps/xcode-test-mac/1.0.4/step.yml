@@ -1,0 +1,74 @@
+title: Xcode Test for Mac
+summary: Run Xcode Test on your Mac OS X app project.
+description: Runs Xcode's `test` action, configured for Mac OS X app projects.
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
+published_at: 2016-03-09T18:20:56.685421805+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
+  commit: 7fca7ad8604a345c756d292ecc8c56a7e4e183c3
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- mac
+type_tags:
+- build
+- xcode
+dependencies:
+- manager: _
+  name: xcode
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_expand: true
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_expand: true
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- is_clean_build: "yes"
+  opts:
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- generate_code_coverage_files: "no"
+  opts:
+    is_expand: true
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed

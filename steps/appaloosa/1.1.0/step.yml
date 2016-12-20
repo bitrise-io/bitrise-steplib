@@ -8,11 +8,11 @@ description: |
 
   This step requires an Appaloosa-Store account or an email address to create your account
 website: https://www.appaloosa-store.com
-source_code_url: https://github.com/appaloosa-store/bitrise_appalossa
-support_url: https://github.com/appaloosa-store/bitrise_appalossa/issues
+source_code_url: https://github.com/appaloosa-store/bitrise_appaloosa
+support_url: https://github.com/appaloosa-store/bitrise_appaloosa/issues
 published_at: 2015-12-07T18:46:02.426518391+01:00
 source:
-  git: https://github.com/appaloosa-store/bitrise_appalossa.git
+  git: https://github.com/appaloosa-store/bitrise_appaloosa.git
   commit: ab2f0a9f075027d3b25d44f1b66da1ac66fb25e3
 host_os_tags:
 - osx-10.9

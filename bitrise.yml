@@ -43,8 +43,8 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -v
+            set -ex
+
             # curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.2.4/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise
             # chmod +x /usr/local/bin/bitrise
             # bitrise setup --minimal
@@ -64,28 +64,28 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -v
-            envman add --key TMP_COLLECTION_ID --value "$(pwd)"
+            set -ex
+            
+            envman add --key TMP_COLLECTION_ID --value "file://$(pwd)"
     - script:
         title: Remove previous version of this local spec from stepman
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -v
+            set -ex
+            
             stepman delete -c "${TMP_COLLECTION_ID}"
     - script:
         title: Generate
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -v
+            set -ex
+
             tmp_dir="$(pwd)/_tmp"
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
-            stepman setup --local -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
+            stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
     - script:
         title: tmp
@@ -93,6 +93,7 @@ workflows:
         - content: |-
             #!/bin/bash
             set -e
+
             echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
 
   pr_audit:
@@ -136,8 +137,8 @@ workflows:
         title: Run full audit on the StepLib collection
         inputs:
         - content: |-
-            set -e
-            set -v
+            set -ex
+
             stepman audit --collection "${TMP_COLLECTION_ID}"
 
   deploy:
@@ -190,8 +191,8 @@ workflows:
         inputs:
         - content: |-
             #!/bin/bash
-            set -e
-            set -v
+            set -ex
+
             bash ./_scripts/deploy/deploy.sh
 
   quicktest:

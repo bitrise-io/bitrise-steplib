@@ -1,0 +1,60 @@
+title: Sign APK
+summary: Sign APK
+description: Sign APK.
+website: https://github.com/bitrise-steplib/steps-sign-apk
+source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
+support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
+published_at: 2016-04-19T11:44:51.596106058+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-sign-apk.git
+  commit: 4cdaedf83546ed4fabf0e741b2f5f428ae8c867e
+host_os_tags:
+- osx-10.10
+- ubuntu
+type_tags:
+- android
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: apk path
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    description: |-
+      For remote keystores you can provide any download location (ex: https://URL/TO/keystore.jks).
+      For local keystores provide file path url. (ex: file://PATH/TO/keystore.jks).
+    is_required: true
+    summary: ""
+    title: Keystore url
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Keystore password
+- keystore_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Keystore alias
+- opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Private key password
+  private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+- jarsigner_options: null
+  opts:
+    description: ""
+    summary: ""
+    title: Additional options for jarsigner
+outputs:
+- BITRISE_SIGNED_APK_PATH: null
+  opts:
+    title: Bitrise signed apk path

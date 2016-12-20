@@ -1,0 +1,161 @@
+title: Xcode Archive
+summary: |-
+  Create an archive so you can share it, upload it, deploy it and catch them
+  all! Well, maybe not the last one.
+description: ""
+website: https://github.com/bitrise-io/steps-new-xcode-archive
+source_code_url: https://github.com/bitrise-io/steps-new-xcode-archive
+support_url: https://github.com/bitrise-io/steps-new-xcode-archive/issues
+published_at: 2016-06-06T12:35:49.088635109+02:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-archive.git
+  commit: e5ee1d87f5dd50436b53aaaf7accf2512150eb26
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- xcode
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path.
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |
+      (optional) The configuration to use. By default your Scheme
+      defines which configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+
+      **Make sure that the Configuration you specify actually exists
+      in your Xcode Project**. If it does not, if you have a typo
+      in the value of this input Xcode will simply use the Configuration
+      specified by the Scheme and will silently ignore this parameter!
+    summary: ""
+    title: Configuration name
+- opts:
+    description: |
+      This directory will contain the generated .ipa and .dSYM.zip files.
+    is_required: true
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- force_provisioning_profile: null
+  opts:
+    description: |-
+      Force xcodebuild to use specified Provisioning Profile.
+
+      Use Provisioning Profile's UUID, profile's name is not acceptable by xcodebuild.
+
+      How to get your UUID:
+
+      - In xcode select your project -> Build Settings -> Code Signing
+      - Select the desired Provisioning Profile, then scroll down in profile list and click on Other...
+      - The popup will show your profile's UUID.
+
+      Format example:
+
+      - c5be4123-1234-4f9d-9843-0d9be985a068
+    title: Force code signing with Provisioning Profile
+- force_code_sign_identity: null
+  opts:
+    description: |-
+      Force xcodebuild to use specified Code Sign Identity.
+
+      Specify code sign identity as full ID (e.g. `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
+      or specify code sign group ( `iPhone Developer` or `iPhone Distribution` ).
+    title: Force code signing with Identity
+- export_options_path: null
+  opts:
+    description: |-
+      Used for Xcode version 7 and above.
+
+      Specifies a path to a plist file that configures archive exporting.
+      If empty, step generates these options based on provisioning profile,
+      with default values.
+
+      Auto generated export options available for export methods:
+
+      - app-store
+      - ad-hoc
+      - enterprise
+      - development
+
+      If step doesn't find export method based on provisioning profile, development will be use.
+
+      Call xcodebuild -help for available export options.
+    title: Export options path
+- is_clean_build: "no"
+  opts:
+    is_required: true
+    title: Do a clean Xcode build before the archive?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_expand: false
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    description: |-
+      Options added to the end of the xcodebuild call.
+
+      You can use multiple options, separated by a space
+      character. Example: `-xcconfig PATH -verbose`
+    title: Additional options for xcodebuild call
+  xcodebuild_options: ""
+- is_export_xcarchive_zip: "no"
+  opts:
+    description: |
+      If this input is set to `yes`, the generated .xcarchive will be zipped and moved to `output_dir`.
+    is_required: true
+    title: Export the generated archive?
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created .ipa file's path
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The generated .app directory
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created .dSYM.zip file's path
+- BITRISE_XCARCHIVE_PATH: null
+  opts:
+    title: The created .xcarchive.zip file's path

@@ -1,0 +1,39 @@
+title: fastlane
+summary: Runs your fastlane lane.
+website: https://github.com/bitrise-io/steps-fastlane
+source_code_url: https://github.com/bitrise-io/steps-fastlane
+support_url: https://github.com/bitrise-io/steps-fastlane/issues
+published_at: 2016-04-08T14:45:42.26374279+02:00
+source:
+  git: https://github.com/bitrise-io/steps-fastlane.git
+  commit: 30d7dc143c722f9a0847541bb24533a02e1307dc
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- android
+type_tags:
+- build
+- xcode
+- fastlane
+inputs:
+- lane: null
+  opts:
+    description: |
+      fastlane lane to run
+      $ fastlane [lane]
+    is_required: true
+    title: fastlane lane
+- opts:
+    description: |-
+      Use this option if the fastlane directory is not in your repository's root.
+
+      Working directory should be the parent directory of your Fastfile's directory.
+
+      Example:
+
+      * If Fastfile path: `./here/is/my/fastlane/Fastfile`
+      * Then Fastfile's directory: `./here/is/my/fastlane`
+      * So Working Directory should be: `./here/is/my`
+    title: Working directory
+  work_dir: $BITRISE_SOURCE_DIR

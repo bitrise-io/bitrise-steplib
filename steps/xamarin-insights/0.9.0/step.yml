@@ -1,0 +1,32 @@
+title: Xamarin.Insights
+summary: Upload your dSym to Xamarin.Insights
+description: Upload your dSym to Xamarin.Insights
+website: https://github.com/bitrise-steplib/steps-xamarin-insights
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-insights
+support_url: https://github.com/bitrise-steplib/steps-xamarin-insights/issues
+published_at: 2016-02-08T12:55:06.75242244+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-insights.git
+  commit: eced0a55ac0cb86def5b5bfb63efc05a2bf97655
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      API Key for Xamarin.Insights
+    is_expand: true
+    is_required: true
+    title: API Key for Xamarin.Insights
+  xamarin_insights_api_key: null
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: |
+      Path to your zipped dSYM file
+    is_expand: true
+    is_required: true
+    title: Path to your zipped dSYM file

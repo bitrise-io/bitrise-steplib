@@ -1,0 +1,62 @@
+title: NUnit runner
+summary: NUnit runner
+description: Executes a set of NUnit tests against your Xamarin solution file
+website: https://github.com/bitrise-steplib/steps-nunit-runner
+source_code_url: https://github.com/bitrise-steplib/steps-nunit-runner
+support_url: https://github.com/bitrise-steplib/steps-nunit-runner/issues
+published_at: 2016-10-26T12:32:13.608664257+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-nunit-runner.git
+  commit: 6ecd55a8dd1644233c7d73f09879bf184f8dae49
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-nunit-runner
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      Xamarin project configuration
+    is_required: true
+    title: Xamarin project configuration
+  xamarin_configuration: $BITRISE_XAMARIN_CONFIGURATION
+- opts:
+    description: |
+      Xamarin platform
+    is_required: true
+    title: Xamarin platform
+  xamarin_platform: $BITRISE_XAMARIN_PLATFORM
+- nunit_options: null
+  opts:
+    description: |
+      Additional option flags when running nunit3-console
+    title: NUnit command options
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.
