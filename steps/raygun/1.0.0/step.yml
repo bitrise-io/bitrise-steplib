@@ -1,0 +1,41 @@
+title: Raygun dSYM Upload
+summary: Upload your dSym to Raygun
+description: Upload your dSYM to Xamarin.Insights
+website: https://github.com/jamesmontemagno/bitrise-step-raygun-dsym-upload
+source_code_url: https://github.com/jamesmontemagno/bitrise-step-raygun-dsym-upload
+support_url: https://github.com/jamesmontemagno/bitrise-step-raygun-dsym-upload/issues
+published_at: 2016-12-20T10:13:01.863060192-08:00
+source:
+  git: https://github.com/jamesmontemagno/bitrise-step-raygun-dsym-upload.git
+  commit: 5a08676e33e9ff004b854503dd9a5326f5c94440
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+- ios
+- mac
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      This is a Base64 encode of your username:password, you can run the following command in the terminal - 'echo -n 'username:password | openssl base64' to get it
+    is_expand: true
+    is_required: true
+    title: API Key for Raygun. This is a Base64 encode of your username:password.
+  raygun_api_key: null
+- app_id: null
+  opts:
+    description: |
+      App ID from the Raygun portal
+    is_expand: true
+    is_required: true
+    title: Raygun App ID
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: |
+      Path to your dSYM file
+    is_expand: true
+    is_required: true
+    title: Path to your dSYM file
