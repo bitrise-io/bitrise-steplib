@@ -4,22 +4,21 @@ description: Sets various values in the target Info.plist file for the next buil
 website: https://github.com/mapletonhillmedia/steps-set-ios-info-plist
 source_code_url: https://github.com/mapletonhillmedia/steps-set-ios-info-plist
 support_url: https://github.com/mapletonhillmedia/steps-set-ios-info-plist/issues
-published_at: 2016-12-29T14:37:43.172584977-07:00
+published_at: 2016-12-30T08:16:40.991801204-07:00
 source:
   git: https://github.com/mapletonhillmedia/steps-set-ios-info-plist.git
-  commit: c727ccd56c882012d6d7013a469ab554ed82d971
+  commit: 2fa4129c72b5747981a3c633a41144c32d770297
 host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
+- macos
+- xamarin
 type_tags:
 - build
 - utils
 - xcode
-- xamarin
-- ios
 - info.plist
-run_if: .IsCI
 inputs:
 - info_plist_file: null
   opts:
