@@ -1,0 +1,53 @@
+title: Step GitHub Status
+summary: Update commit status for GitHub repositories
+description: Update commit status for GitHub repositories
+website: https://github.com/bitrise-steplib/steps-github-status
+source_code_url: https://github.com/bitrise-steplib/steps-github-status
+support_url: https://github.com/bitrise-steplib/steps-github-status/issues
+published_at: 2017-01-27T10:58:32.360251309+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-github-status.git
+  commit: b3b5af4c084b790491a5c7ff8a22035afc6d8a0b
+type_tags:
+- github
+- status
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- auth_token: ""
+  opts:
+    description: |-
+      Authorization token for GitHub applications
+
+      You can create one for yourself at the following url:
+      [https://github.com/settings/tokens](https://github.com/settings/tokens)
+
+      Add repo/repo:status scope to the generated token, to allow to update the repo status.
+    is_required: true
+    summary: ""
+    title: GitHub auth token
+- opts:
+    description: The URL for the repository we are working with
+    is_required: true
+    summary: ""
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- commit_hash: $BITRISE_GIT_COMMIT
+  opts:
+    description: The commit hash for the commit we are working with
+    is_required: true
+    summary: ""
+    title: Commit hash
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    description: Build URL with detailed information for the build
+    is_required: true
+    summary: ""
+    title: Build URL
+- api_base_url: https://api.github.com
+  opts:
+    description: API URL for GitHub or Github Enterprise
+    is_required: true
+    summary: ""
+    title: GitHub API base url
