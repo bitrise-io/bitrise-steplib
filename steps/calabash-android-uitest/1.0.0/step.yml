@@ -1,0 +1,64 @@
+title: Calabash Android UI test
+summary: Calabash Android UI test step
+description: Calabash Android UI test step
+website: https://github.com/bitrise-steplib/steps-calabash-android-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-android-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-android-uitest/issues
+published_at: 2016-10-26T14:24:38.950120692+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-calabash-android-uitest.git
+  commit: f2d52945390ddef84a0cbf6609bcd337c2cd6099
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- testing
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-calabash-android-uitest
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      APK path
+    is_expand: true
+    is_required: true
+    title: APK path
+- calabash_android_version: null
+  opts:
+    description: |
+      calabash-android gem version to use.
+
+      __If this input specifies the gem version, this version will be used, even `gem_file_path` provided.__
+
+      If `calabash_android_version` not specified:
+
+      - gem version will be used specified by Gemfile at `gem_file_path`
+      - if Gemfile not exist with calabash-android gem, latest version will be used
+    title: calabash-android gem version
+- gem_file_path: $BITRISE_SOURCE_DIR/Gemfile
+  opts:
+    description: |
+      Path to the Gemfile which contains calabash-android gem.
+
+      If Gemfile not exist or does not contain calabash-android gem:
+
+      - if `calabash_android_version` not specified, latest version will be used
+    title: Gemfile path
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed

@@ -1,0 +1,42 @@
+title: Run gulp command
+summary: Runs `gulp` with the given command and args.
+description: Runs `gulp` with the given command and args.
+website: https://github.com/nhammond101/steps-gulp
+source_code_url: https://github.com/nhammond101/steps-gulp
+support_url: https://github.com/nhammond101/steps-gulp/issues
+published_at: 2016-12-02T12:12:33.124897245Z
+source:
+  git: https://github.com/nhammond101/steps-gulp.git
+  commit: 3fc1b99594544775412df580ac034ea957756b2f
+type_tags:
+- gulp
+deps:
+  brew:
+  - name: npm
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: Specify the command to run with `gulp`. For example `install`, or
+      `test`.
+    title: The `gulp` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `gulp` command. You can specify multiple arguments, separated
+      by a space character. For example `-dd -ll`
+    title: Arguments for running `gulp` commands
+- is_debug: "no"
+  opts:
+    description: |
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    title: Debug?
+    value_options:
+    - "no"
+    - "yes"

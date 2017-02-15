@@ -1,0 +1,37 @@
+title: Run yarn command
+summary: Runs `yarn` with the given command and args.
+description: Runs `yarn` with the given command and args.
+website: https://github.com/jonoirwinrsa/steps-yarn
+source_code_url: https://github.com/jonoirwinrsa/steps-yarn
+support_url: https://github.com/jonoirwinrsa/steps-yarn/issues
+published_at: 2016-10-20T13:25:54.991730369+02:00
+source:
+  git: https://github.com/jonoirwinrsa/steps-yarn.git
+  commit: 9b65131340ace1399bee8b2916eb2d65b5714db7
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+type_tags:
+- yarn
+deps:
+  brew:
+  - name: node
+  - name: yarn
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: Specify the command to run with `yarn`. For example `add`.
+    title: The `yarn` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `yarn` command. You can specify multiple arguments, separated
+      by a space character. For example `-dd -ll`
+    title: Arguments for running `yarn` commands

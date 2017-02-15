@@ -1,0 +1,86 @@
+title: Xamarin iOS Test
+summary: Xamarin iOS Test
+description: Xamarin iOS Test
+website: https://github.com/bitrise-steplib/steps-xamarin-ios-test
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-ios-test
+support_url: https://github.com/bitrise-steplib/steps-xamarin-ios-test/issues
+published_at: 2017-02-06T14:25:54.035998106+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-ios-test.git
+  commit: 50ae38f79727c41388ef7afcc1baa98464195873
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-ios-test
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_project: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      Xamarin project configuration
+    is_required: true
+    title: Xamarin project configuration
+  xamarin_configuration: Debug
+- opts:
+    description: |
+      Xamarin platform
+    is_required: true
+    title: Xamarin platform
+  xamarin_platform: iPhoneSimulator
+- opts:
+    description: |
+      Comma-separated list of names of tests to run.
+      If not specified all tests will run.
+    title: Test name to run
+  test_to_run: null
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+      * iPhone 6
+      * iPhone 6s Plus
+      * iPad
+      * iPad Air
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6s Plus
+- opts:
+    description: |
+      A couple of format examples:
+      * iOS 8.4
+      * iOS 9.3
+      * latest
+    title: OS version
+  simulator_os_version: latest
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.

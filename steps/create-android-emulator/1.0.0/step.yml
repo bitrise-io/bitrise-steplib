@@ -1,0 +1,85 @@
+title: Create Android emulator
+summary: Creates a new Android Virtual Device
+description: Creates a new Android Virtual Device.
+website: https://github.com/bitrise-steplib/steps-create-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-create-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-create-android-emulator/issues
+published_at: 2016-11-29T11:00:45.657228431+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-create-android-emulator.git
+  commit: 350e006047d8138d1509c77f78aa35024781f0d7
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- emulator
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-create-android-emulator
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- name: null
+  opts:
+    description: |
+      Name of the new AVD.
+    is_required: true
+    title: Name of the new AVD
+- opts:
+    description: |
+      Target platform of the new AVD.
+    is_required: true
+    title: Target platform of the new AVD
+  platform: android-19
+- abi: armeabi-v7a
+  opts:
+    description: |
+      The ABI to use for the AVD.
+    is_dont_change_value: true
+    is_required: true
+    title: The ABI to use for the AVD
+- options: ""
+  opts:
+    description: |-
+      Options added to the end of the `android create avd` call:
+
+      `android create avd --force --name name --target platform --abi abi options`
+
+      You can use multiple options, separated by a space
+      character. Example: `--skin WVGA800`
+    title: Additional options for `android create avd` call
+- custom_hardware_profile_content: null
+  opts:
+    description: |-
+      The value of this input will be written into `${name}.avd/config.ini` file,
+      to let the created emulator use your custom hardware profile.
+
+      Format example:
+      ```
+      avd.ini.encoding=UTF-8
+      abi.type=armeabi-v7a
+      hw.cpu.arch=arm
+      hw.cpu.model=cortex-a8
+      hw.lcd.density=240
+      hw.ramSize=512
+      image.sysdir.1=system-images/android-21/default/armeabi-v7a/
+      skin.name=WVGA800
+      skin.path=platforms/android-21/skins/WVGA800
+      tag.display=Default
+      tag.id=default
+      vm.heapSize=48
+      ```
+    title: Custom Hardware Profile Content
+outputs:
+- BITRISE_EMULATOR_NAME: null
+  opts:
+    description: Name of the new AVD
+    title: Name of the new AVD

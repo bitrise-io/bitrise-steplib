@@ -1,0 +1,119 @@
+title: Submit Calabash Android test to Xamarin Test Cloud
+summary: Submit Calabash Android test to Xamarin Test Cloud step
+description: Submit Calabash Android test to Xamarin Test Cloud step
+website: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-android
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-android
+support_url: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-android/issues
+published_at: 2017-01-23T15:24:10.362522627+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-android.git
+  commit: 553d7813dfff09f43a13184f333a8b08ed51ddc4
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-test-cloud-for-calabash-android
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: "Path to the directory, which contains your calabash features directory.\n\nFor
+      emxaple:\nIf calabash features directory path is: `CreditCardValidator.Droid/features`,
+      \ \nthen work_dir should be: `CreditCardValidator.Droid`"
+    is_required: true
+    title: Directory of your calabash features
+  work_dir: null
+- gem_file_path: $work_dir/Gemfile
+  opts:
+    description: |
+      Path to the Gemfile which contains xamarin-test-cloud and or calabash-android gem.
+    title: Gemfile path
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |-
+      Path to the APK to test.
+
+      __The APK should have Internet permission.__
+
+      In case of Xamarin:
+
+      Use an APK, which not built using Shared mono runtime (_Shared mono runtime is enabled by default in DEBUG builds_).
+    is_required: true
+    title: APK path
+- opts:
+    description: |
+      The e-mail address of the team member submitting the tests.
+    is_required: true
+    summary: User email
+    title: User email
+  xamarin_user: null
+- opts:
+    description: |
+      Api key.
+    is_required: true
+    summary: Api key
+    title: Api key
+  test_cloud_api_key: null
+- opts:
+    description: |
+      Device selection id from the Test Cloud upload dialog.
+    is_required: true
+    summary: Device selection id
+    title: Device selection id
+  test_cloud_devices: null
+- opts:
+    description: |
+      Don't wait for cloud test run to complete.
+    summary: Don't wait for cloud test run to complete
+    title: Don't wait for cloud test run to complete
+    value_options:
+    - "yes"
+    - "no"
+  test_cloud_is_async: "yes"
+- opts:
+    description: |
+      Test series.
+    summary: Test series
+    title: Test series
+  test_cloud_series: master
+- opts:
+    description: |
+      Other parameters to pass Xamarin Test Cloud.
+
+      Available parameters:
+      - --app-name APP-NAME
+      - --category NUNIT-CATEGORY
+      - --fixture NUNIT-FIXTURE
+      - --sign-info SIGN-INFO-SI-PATH
+
+      Example:
+      '--app-name <APP-NAME> --category <NUNIT-CATEGORY> --sign-info <SIGN-INFO-SI-PATH>
+      '--app-name <APP-NAME> --fixture <NUNIT-FIXTURE> --sign-info <SIGN-INFO-SI-PATH>
+    summary: Other parameters
+    title: Other parameters
+  other_parameters: null
+- android_home: $ANDROID_HOME
+  opts:
+    description: |
+      Path to the Android Home Directory.
+    is_expand: true
+    is_required: true
+    title: Android Home Directory
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
