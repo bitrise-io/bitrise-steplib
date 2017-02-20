@@ -7,7 +7,7 @@ support_url: https://github.com/bitrise-io/steps-ftp-upload/issues
 published_at: 2017-02-20T16:38:49.285204454+01:00
 source:
   git: https://github.com/bitrise-io/steps-ftp-upload.git
-  commit: a6086376a68b57eb5662e2e8d44cced714d964ca
+  commit: a88c2e90c6b17f2f8118a41e572e14e5b700f4d7
 host_os_tags:
 - osx-10.9
 type_tags:
