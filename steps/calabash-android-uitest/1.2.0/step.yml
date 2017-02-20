@@ -1,0 +1,89 @@
+title: Calabash Android UI test
+summary: Calabash Android UI test step
+description: Calabash Android UI test step
+website: https://github.com/bitrise-steplib/steps-calabash-android-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-android-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-android-uitest/issues
+published_at: 2017-02-20T16:10:28.208396213+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-calabash-android-uitest.git
+  commit: 14c3f17b46b0160ef7123d5a9c1da61512b17637
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- testing
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-calabash-android-uitest
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: "Path to the directory, which contains your calabash features directory.\n\nFor
+      emxaple:\nIf calabash features directory path is: `CreditCardValidator.Droid/features`,
+      \ \nthen work_dir should be: `CreditCardValidator.Droid`"
+    is_required: true
+    title: Directory of your calabash features
+  work_dir: null
+- gem_file_path: $work_dir/Gemfile
+  opts:
+    description: |
+      Path to the Gemfile which contains calabash-android gem.
+
+      If Gemfile not exist or does not contain calabash-android gem:
+
+      - if `calabash_android_version` not specified, latest version will be used
+    title: Gemfile path
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      Path to the APK to test.
+
+      __The APK should have Internet permission.__
+
+      In case of Xamarin:
+
+      Use an APK, which not built using Shared mono runtime (_Shared mono runtime is enabled by default in DEBUG builds_).
+    is_expand: true
+    is_required: true
+    title: APK path
+- additional_options: --format html --out $BITRISE_DEPLOY_DIR/calabash-android_report.html
+  opts:
+    description: |
+      Options added to the end of the `calabash-android run` call.
+    title: Additional options for `calabash-android run` call
+- android_home: $ANDROID_HOME
+  opts:
+    description: |
+      Path to the Android Home Directory.
+    is_expand: true
+    is_required: true
+    title: Android Home Directory
+- calabash_android_version: null
+  opts:
+    description: |
+      calabash-android gem version to use.
+
+      __If this input specifies the gem version, this version will be used, even `gem_file_path` provided.__
+
+      If `calabash_android_version` not specified:
+
+      - gem version will be used specified by Gemfile at `gem_file_path`
+      - if Gemfile not exist with calabash-android gem, latest version will be used
+    title: calabash-android gem version
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
