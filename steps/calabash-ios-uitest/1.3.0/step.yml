@@ -1,0 +1,105 @@
+title: Calabash iOS UI test
+summary: Calabash iOS UI test step
+description: Calabash iOS UI test step
+website: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+source_code_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest
+support_url: https://github.com/bitrise-steplib/steps-calabash-ios-uitest/issues
+published_at: 2017-02-20T16:59:24.195495186+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-calabash-ios-uitest.git
+  commit: 5e2f25353acb8a58178f6ac21970341a57515164
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- testing
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-calabash-ios-uitest
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: "Path to the directory, which contains your calabash features directory.\n\nFor
+      emxaple:\nIf calabash features directory path is: `CreditCardValidator.iOS/features`,
+      \ \nthen work_dir should be: `CreditCardValidator.iOS`"
+    is_required: true
+    title: Directory of your calabash features
+  work_dir: null
+- gem_file_path: $work_dir/Gemfile
+  opts:
+    description: |
+      Path to the Gemfile which contains calabash-cucumber gem.
+
+      If Gemfile not exist or does not contain calabash-cucumber gem:
+
+      - if `calabash_cucumber_version` input not specified, latest version will be used
+    title: Gemfile path
+- app_path: $BITRISE_APP_PATH
+  opts:
+    description: |-
+      Path to the iOS .app file, which supports selected simulator `Device` architecture.
+
+      __In case of Xamarin .app file:__
+
+      You can ensure `Supported architectures` in your project's `Project Options/Code Generation and Runtime/Supported architectures`.
+
+      If `i386` architecture is selected, simulator device should be a 32-bit device.
+      If `x86_64` architecture is selected, simulator device should be a 64-bit device.
+      If `i386 + x86_64` architecture is selected, simulator can be both 32-bit and 64-bit device.
+    title: Path to the iOS .app file to test
+- opts:
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6
+- opts:
+    description: |
+      A couple of format examples:
+      * iOS 8.4
+      * iOS 9.3
+      * latest
+    is_required: true
+    title: OS version
+  simulator_os_version: latest
+- additional_options: --format html --out $BITRISE_DEPLOY_DIR/calabash-android_report.html
+  opts:
+    description: |
+      Options added to the end of the `cucumber` call.
+    title: Additional options for `cucumber` call
+- calabash_cucumber_version: null
+  opts:
+    description: |
+      calabash-cucumber gem version to use.
+
+      __If this input specifies the gem version, this version will be used, even `gem_file_path` provided.__
+
+      If `calabash_cucumber_version` not specified:
+
+      - gem version will be used specified by Gemfile at `gem_file_path`
+      - if Gemfile not exist with calabash-cucumber gem, latest version will be used
+    title: calabash-cucumber gem version
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
