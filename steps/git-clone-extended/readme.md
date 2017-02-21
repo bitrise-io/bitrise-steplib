@@ -1,0 +1,1 @@
+###This step is deprecated, use [activate-ssh-key](https://github.com/bitrise-io/bitrise-steplib/tree/master/steps/activate-ssh-key) + [git-clone](https://github.com/bitrise-io/bitrise-steplib/tree/master/steps/git-clone) instead.
