@@ -96,6 +96,10 @@ func collectVersionsFromDir(dirPth string) ([]*version.Version, error) {
 		if aVerStr == "assets" {
 			continue
 		}
+		if aVerStr == "step-info.yml" {
+			continue
+		}
+
 		ver, err := version.NewVersion(aVerStr)
 		if err != nil {
 			return []*version.Version{}, fmt.Errorf("collectVersionsFromDir: Failed to create version from string: %s | error: %s", aVerStr, err)
