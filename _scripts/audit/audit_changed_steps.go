@@ -1,17 +1,21 @@
 package main
 
 import (
-	"errors"
 	"flag"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
-	"os/exec"
 	"path"
+	"path/filepath"
 	"sort"
 	"strings"
 
+	yaml "gopkg.in/yaml.v2"
+
+	"github.com/bitrise-io/go-utils/command"
+	"github.com/bitrise-io/go-utils/fileutil"
+	"github.com/bitrise-io/go-utils/log"
+	"github.com/bitrise-io/go-utils/pathutil"
 	"github.com/hashicorp/go-version"
 )
 
@@ -24,48 +28,28 @@ var (
 // --- UTIL FUNCTIONS
 
 func runCommandAndReturnCombinedOutputs(isDebug bool, name string, args ...string) (string, error) {
-	cmd := exec.Command(name, args...)
-	outBytes, err := cmd.CombinedOutput()
-	outStr := string(outBytes)
+	cmd := command.New(name, args...)
+	outStr, err := cmd.RunAndReturnTrimmedCombinedOutput()
 	if isDebug && err != nil {
-		log.Printf(" [!] Failed to run command: %#v", cmd)
+		log.Errorf("Failed to run command: %#v", cmd)
 	}
 	return strings.TrimSpace(outStr), err
-}
-
-func genericIsPathExists(pth string) (os.FileInfo, bool, error) {
-	if pth == "" {
-		return nil, false, errors.New("No path provided")
-	}
-	fileInf, err := os.Stat(pth)
-	if err == nil {
-		return nil, true, nil
-	}
-	if os.IsNotExist(err) {
-		return fileInf, false, nil
-	}
-	return fileInf, false, err
-}
-
-func isPathExists(pth string) (bool, error) {
-	_, isExists, err := genericIsPathExists(pth)
-	return isExists, err
 }
 
 func detectStepIDAndVersionFromPath(pth string) (stepID, stepVersion string, err error) {
 	pathComps := strings.Split(pth, "/")
 	if len(pathComps) < 4 {
-		err = fmt.Errorf("Path should contain at least 4 components: steps, step-id, step-version, step.yml: %s", pth)
+		err = fmt.Errorf("path should contain at least 4 components: steps, step-id, step-version, step.yml: %s", pth)
 		return
 	}
 	// we only care about the last 4 component of the path
 	pathComps = pathComps[len(pathComps)-4:]
 	if pathComps[0] != "steps" {
-		err = fmt.Errorf("Invalid step.yml path, 'steps' should be included right before the step-id: %s", pth)
+		err = fmt.Errorf("invalid step.yml path, 'steps' should be included right before the step-id: %s", pth)
 		return
 	}
 	if pathComps[3] != "step.yml" {
-		err = fmt.Errorf("Invalid step.yml path, should end with 'step.yml': %s", pth)
+		err = fmt.Errorf("invalid step.yml path, should end with 'step.yml': %s", pth)
 		return
 	}
 	stepID = pathComps[1]
@@ -73,22 +57,10 @@ func detectStepIDAndVersionFromPath(pth string) (stepID, stepVersion string, err
 	return
 }
 
-// normalizedOSTempDirPath ...
-// Returns a temp dir path. If tmpDirNamePrefix is provided it'll be used
-//  as the tmp dir's name prefix.
-// Normalized: it's guaranteed that the path won't end with '/'.
-func normalizedOSTempDirPath(tmpDirNamePrefix string) (retPth string, err error) {
-	retPth, err = ioutil.TempDir("", tmpDirNamePrefix)
-	if strings.HasSuffix(retPth, "/") {
-		retPth = retPth[:len(retPth)-1]
-	}
-	return
-}
-
 func collectVersionsFromDir(dirPth string) ([]*version.Version, error) {
 	dirInfos, err := ioutil.ReadDir(dirPth)
 	if err != nil {
-		return []*version.Version{}, fmt.Errorf("collectVersionsFromDir: Failed to list dir: %s", err)
+		return []*version.Version{}, fmt.Errorf("failed to list dir: %s", err)
 	}
 	versions := []*version.Version{}
 	for _, aDirInfo := range dirInfos {
@@ -102,37 +74,55 @@ func collectVersionsFromDir(dirPth string) ([]*version.Version, error) {
 
 		ver, err := version.NewVersion(aVerStr)
 		if err != nil {
-			return []*version.Version{}, fmt.Errorf("collectVersionsFromDir: Failed to create version from string: %s | error: %s", aVerStr, err)
+			return []*version.Version{}, fmt.Errorf("failed to create version from string: %s | error: %s", aVerStr, err)
 		}
 		versions = append(versions, ver)
 	}
 	return versions, nil
 }
 
+func auditChangedStepInfoYML(stepInfoYmlPth string) error {
+	type StepGroupInfoModel struct {
+		RemovalDate    string            `json:"removal_date,omitempty" yaml:"removal_date,omitempty"`
+		DeprecateNotes string            `json:"deprecate_notes,omitempty" yaml:"deprecate_notes,omitempty"`
+		AssetURLs      map[string]string `json:"asset_urls,omitempty" yaml:"asset_urls,omitempty"`
+	}
+
+	bytes, err := fileutil.ReadBytesFromFile(stepInfoYmlPth)
+	if err != nil {
+		return fmt.Errorf("failed to read global step info (%s), error: %s", stepInfoYmlPth, err)
+	}
+
+	var stepGroupInfo StepGroupInfoModel
+	if err := yaml.Unmarshal(bytes, &stepGroupInfo); err != nil {
+		return fmt.Errorf("failed to parse global step info (%s), error: %s", stepInfoYmlPth, err)
+	}
+
+	return nil
+}
+
 func auditChangedStepYML(stepYmlPth string) error {
-	log.Println("=> auditChangedStepYML: ", stepYmlPth)
+	log.Infof("Audit changed step.yml: ", stepYmlPth)
+
 	stepID, stepVer, err := detectStepIDAndVersionFromPath(stepYmlPth)
 	if err != nil {
 		return fmt.Errorf("Audit failed for (%s), error: %s", stepYmlPth, err)
 	}
 
-	log.Println("==> Step's main folder content: ")
+	log.Printf("Step's main folder content:")
+
 	stepMainDirPth := "./steps/" + stepID
 	lsOut, err := runCommandAndReturnCombinedOutputs(true, "ls", "-alh", stepMainDirPth)
-	log.Println()
-	log.Println(lsOut)
 	if err != nil {
-		log.Println("Failed to 'ls -alh' the Step's main folder: ", stepMainDirPth)
-		log.Println("Error: ", err)
-		return err
+		return fmt.Errorf("failed to list the step's main folder (%s) content, output: %s, error: %s", stepMainDirPth, lsOut, err)
 	}
+
 	fmt.Println()
 
 	//
 	versions, err := collectVersionsFromDir(stepMainDirPth)
 	if err != nil {
-		log.Println(" [!] Failed to collect versions")
-		return err
+		return fmt.Errorf("failed to collect versions, error: %s", err)
 	}
 	if len(versions) > 1 {
 		sort.Sort(version.Collection(versions))
@@ -144,27 +134,33 @@ func auditChangedStepYML(stepYmlPth string) error {
 			}
 			prevVersion = aVer.String()
 		}
-		log.Println("==> Diff step: ", stepID, " | ", stepVer, "<->", prevVersion)
-		lsOut, _ := runCommandAndReturnCombinedOutputs(
+
+		log.Warnf("Diff step: %s | %s <-> %s", stepID, stepVer, prevVersion)
+
+		diffOut, _ := runCommandAndReturnCombinedOutputs(
 			false,
 			"diff",
 			path.Join(stepMainDirPth, prevVersion, "step.yml"),
 			path.Join(stepMainDirPth, stepVer, "step.yml"),
 		)
+
 		fmt.Println()
 		fmt.Println()
 		fmt.Println("========== DIFF ====================")
-		fmt.Println(lsOut)
+		fmt.Println(diffOut)
 		fmt.Println("====================================")
 		fmt.Println()
 		fmt.Println()
 	} else {
-		log.Println("==> FIRST VERSION - can't diff against previous version")
+		log.Warnf("FIRST VERSION - can't diff against previous version")
 	}
 
-	log.Println("==> Auditing step: ", stepID, " | version: ", stepVer)
+	log.Infof("Auditing step: %s | version: %s", stepID, stepVer)
 	//
-	tmpStepActPth, err := normalizedOSTempDirPath(stepID + "--" + stepVer)
+	tmpStepActPth, err := pathutil.NormalizedOSTempDirPath(stepID + "--" + stepVer)
+	if err != nil {
+		return fmt.Errorf("failed to create tmp dir, error: %s", err)
+	}
 	//
 	output, err := runCommandAndReturnCombinedOutputs(true,
 		"stepman", "activate",
@@ -174,13 +170,18 @@ func auditChangedStepYML(stepYmlPth string) error {
 		"--path", tmpStepActPth,
 	)
 	if err != nil {
-		log.Println(" [!] Failed to run stepman activate, output was:")
-		log.Println(output)
-		return err
+		return fmt.Errorf("failed to run stepman activate, output: %s, error: %s", output, err)
 	}
-	log.Println("stepman activate output: ", output)
-	log.Println("==> SUCCESSFUL audit")
+
+	log.Printf("stepman activate output: %s", output)
+	log.Donef("SUCCESSFUL audit")
+
 	return nil
+}
+
+func fatalf(format string, v ...interface{}) {
+	log.Errorf(format, v...)
+	os.Exit(1)
 }
 
 // -----------------------------------
@@ -192,22 +193,25 @@ func init() {
 }
 
 func main() {
+	fmt.Println()
+
 	// --- INPUTS
 	flag.Parse()
 	if collectionID == "" {
-		log.Fatalln("Collection ID not provided!")
+		fatalf("Collection ID not provided!")
 	}
 
 	// --- MAIN
-	log.Println("Auditing changed steps...")
+	log.Infof("Auditing changed steps...")
 
-	log.Println("git fetch...")
+	log.Printf("git fetch...")
+
 	if output, err := runCommandAndReturnCombinedOutputs(true, "git", "fetch"); err != nil {
-		log.Println(" [!] Error - Output was: ", output)
-		log.Fatalln(" [!] Error: ", err)
+		fatalf("git fecth failed, output: %s, error: %s", output, err)
 	}
 
-	log.Println("git diff...")
+	log.Printf("git diff...")
+
 	diffOutput := ""
 	var diffErr error
 	//
@@ -218,26 +222,43 @@ func main() {
 	}
 
 	if diffErr != nil {
-		log.Println(" [!] Error - Output was: ", diffOutput)
-		log.Fatalln(" [!] Error: ", diffErr)
+		fatalf("git diff failed, output: %s, error: %s", diffOutput, diffErr)
 	}
+
 	changedFilePaths := strings.Split(diffOutput, "\n")
-	log.Println("Changed files: ", changedFilePaths)
+
+	log.Printf("Changed files:")
+	for _, pth := range changedFilePaths {
+		log.Printf("- %s", pth)
+	}
+
 	for _, aPth := range changedFilePaths {
 		if strings.HasSuffix(aPth, "step.yml") {
-			if isExist, err := isPathExists(aPth); err != nil {
-				log.Fatalln(" [!] Failed to check path: ", aPth, " | err: ", err)
+			if isExist, err := pathutil.IsPathExists(aPth); err != nil {
+				fatalf("Failed to check if path (%s) exists, error: %s", aPth, err)
 			} else if !isExist {
-				log.Fatalln(" [!] Step.yml was removed: ", aPth)
-			} else {
-				if err := auditChangedStepYML(aPth); err != nil {
-					log.Fatalf("Failed to audit step (%s), err: %s", aPth, err)
-				}
+				fatalf("step.yml was removed: %s", aPth)
 			}
+
+			if err := auditChangedStepYML(aPth); err != nil {
+				fatalf("Failed to audit step (%s), err: %s", aPth, err)
+			}
+		} else if strings.HasSuffix(aPth, "step-info.yml") {
+			if isExist, err := pathutil.IsPathExists(aPth); err != nil {
+				fatalf("Failed to check if path (%s) exists, error: %s", aPth, err)
+			} else if !isExist {
+				fatalf("step-info.yml was removed: %s", aPth)
+			}
+
+			if err := auditChangedStepInfoYML(aPth); err != nil {
+				fatalf("Failed to audit global step info (%s), err: %s", aPth, err)
+			}
+		} else if dir := filepath.Dir(aPth); strings.HasSuffix(dir, "assets") {
+			log.Warnf("asset, skipping audit: %s", aPth)
 		} else {
-			log.Println("Not a step.yml, skipping audit: ", aPth)
+			log.Warnf("Unkown file, skipping audit: %s", aPth)
 		}
 	}
 
-	log.Println("DONE")
+	log.Donef("DONE")
 }

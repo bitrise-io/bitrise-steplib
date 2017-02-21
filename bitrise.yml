@@ -123,7 +123,13 @@ workflows:
             if [[ "${IS_LOCAL_TEST}" == "true" ]] ; then
               localtest_param="--localtest"
             fi
+
             go get github.com/hashicorp/go-version
+            go get github.com/bitrise-io/go-utils/command
+            go get github.com/bitrise-io/go-utils/fileutil
+            go get github.com/bitrise-io/go-utils/pathutil
+            go get github.com/bitrise-io/go-utils/log
+
             go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
   full_audit:
