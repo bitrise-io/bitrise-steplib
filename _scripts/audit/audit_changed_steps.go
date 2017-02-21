@@ -125,7 +125,7 @@ func auditChangedStepYML(stepYmlPth string) error {
 		return fmt.Errorf("failed to list the step's main folder (%s) content, output: %s, error: %s", stepMainDirPth, lsOut, err)
 	}
 
-	log.Printft(lsOut)
+	log.Printf(lsOut)
 
 	versions, err := collectVersionsFromDir(stepMainDirPth)
 	if err != nil {
