@@ -1,1 +1,1 @@
-###This step is deprecated, use repository-scanner instead.
+###This step is deprecated, use [../repository-scanner](repository-scanner) instead.
