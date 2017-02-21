@@ -82,6 +82,9 @@ func collectVersionsFromDir(dirPth string) ([]*version.Version, error) {
 }
 
 func auditChangedStepInfoYML(stepInfoYmlPth string) error {
+	fmt.Println()
+	log.Infof("Audit changed step-info.yml: %s", stepInfoYmlPth)
+
 	type StepGroupInfoModel struct {
 		RemovalDate    string            `json:"removal_date,omitempty" yaml:"removal_date,omitempty"`
 		DeprecateNotes string            `json:"deprecate_notes,omitempty" yaml:"deprecate_notes,omitempty"`
@@ -98,17 +101,22 @@ func auditChangedStepInfoYML(stepInfoYmlPth string) error {
 		return fmt.Errorf("failed to parse global step info (%s), error: %s", stepInfoYmlPth, err)
 	}
 
+	fmt.Println()
+	log.Donef("SUCCESSFUL audit")
+
 	return nil
 }
 
 func auditChangedStepYML(stepYmlPth string) error {
-	log.Infof("Audit changed step.yml: ", stepYmlPth)
+	fmt.Println()
+	log.Infof("Audit changed step.yml: %s", stepYmlPth)
 
 	stepID, stepVer, err := detectStepIDAndVersionFromPath(stepYmlPth)
 	if err != nil {
 		return fmt.Errorf("Audit failed for (%s), error: %s", stepYmlPth, err)
 	}
 
+	fmt.Println()
 	log.Printf("Step's main folder content:")
 
 	stepMainDirPth := "./steps/" + stepID
@@ -117,9 +125,8 @@ func auditChangedStepYML(stepYmlPth string) error {
 		return fmt.Errorf("failed to list the step's main folder (%s) content, output: %s, error: %s", stepMainDirPth, lsOut, err)
 	}
 
-	fmt.Println()
+	log.Printft(lsOut)
 
-	//
 	versions, err := collectVersionsFromDir(stepMainDirPth)
 	if err != nil {
 		return fmt.Errorf("failed to collect versions, error: %s", err)
@@ -135,6 +142,7 @@ func auditChangedStepYML(stepYmlPth string) error {
 			prevVersion = aVer.String()
 		}
 
+		fmt.Println()
 		log.Warnf("Diff step: %s | %s <-> %s", stepID, stepVer, prevVersion)
 
 		diffOut, _ := runCommandAndReturnCombinedOutputs(
@@ -145,23 +153,21 @@ func auditChangedStepYML(stepYmlPth string) error {
 		)
 
 		fmt.Println()
-		fmt.Println()
 		fmt.Println("========== DIFF ====================")
 		fmt.Println(diffOut)
 		fmt.Println("====================================")
-		fmt.Println()
-		fmt.Println()
 	} else {
 		log.Warnf("FIRST VERSION - can't diff against previous version")
 	}
 
+	fmt.Println()
 	log.Infof("Auditing step: %s | version: %s", stepID, stepVer)
-	//
+
 	tmpStepActPth, err := pathutil.NormalizedOSTempDirPath(stepID + "--" + stepVer)
 	if err != nil {
 		return fmt.Errorf("failed to create tmp dir, error: %s", err)
 	}
-	//
+
 	output, err := runCommandAndReturnCombinedOutputs(true,
 		"stepman", "activate",
 		"--collection", collectionID,
@@ -173,7 +179,11 @@ func auditChangedStepYML(stepYmlPth string) error {
 		return fmt.Errorf("failed to run stepman activate, output: %s, error: %s", output, err)
 	}
 
-	log.Printf("stepman activate output: %s", output)
+	fmt.Println()
+	log.Printf("stepman activate output:")
+	log.Printf(output)
+
+	fmt.Println()
 	log.Donef("SUCCESSFUL audit")
 
 	return nil
@@ -203,6 +213,7 @@ func main() {
 
 	// --- MAIN
 	log.Infof("Auditing changed steps...")
+	fmt.Println()
 
 	log.Printf("git fetch...")
 
@@ -227,6 +238,7 @@ func main() {
 
 	changedFilePaths := strings.Split(diffOutput, "\n")
 
+	fmt.Println()
 	log.Printf("Changed files:")
 	for _, pth := range changedFilePaths {
 		log.Printf("- %s", pth)
@@ -260,5 +272,6 @@ func main() {
 		}
 	}
 
+	fmt.Println()
 	log.Donef("DONE")
 }
