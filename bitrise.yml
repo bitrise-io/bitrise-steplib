@@ -129,6 +129,7 @@ workflows:
             go get github.com/bitrise-io/go-utils/fileutil
             go get github.com/bitrise-io/go-utils/pathutil
             go get github.com/bitrise-io/go-utils/log
+            go get gopkg.in/yaml.v2
 
             go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
