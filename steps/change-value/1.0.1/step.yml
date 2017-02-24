@@ -1,12 +1,12 @@
 title: Change value in file
 summary: Change value in file. (e.g. constants)
 description: Change value in file. (e.g. constants)
-website: https://github.com/BOOMik/step_change_value
-source_code_url: https://github.com/BOOMik/step_change_value
-support_url: https://github.com/BOOMik/step_change_value/issues
+website: https://github.com/bitrise-community/steps-change-value
+source_code_url: https://github.com/bitrise-community/steps-change-value
+support_url: https://github.com/bitrise-community/steps-change-value/issues
 published_at: 2016-06-15T21:38:10.028822047+03:00
 source:
-  git: https://github.com/BOOMik/step_change_value.git
+  git: https://github.com/bitrise-community/steps-change-value.git
   commit: ccdfb68e12dc54683f6b4f7deef1fa9fa9702da6
 type_tags:
 - build
