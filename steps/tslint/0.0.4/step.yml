@@ -1,0 +1,44 @@
+title: Run tslint command
+summary: Runs `tslint` with the given args.
+description: Runs `tslint` with the given args.
+website: https://github.com/ibratoev/steps-tslint
+source_code_url: https://github.com/ibratoev/steps-tslint
+support_url: https://github.com/ibratoev/steps-tslint/issues
+published_at: 2017-03-29T18:28:08.540610584+03:00
+source:
+  git: https://github.com/ibratoev/steps-tslint.git
+  commit: 8f24c81dfb3d65b4129f1d44591eca7af13d44c0
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      The path to the `tslint` executable.
+    title: '`tslint` executable path'
+  path: tslint
+- opts:
+    description: |
+      The version of `tslint` to install if not available.
+    title: Version
+  version: latest
+- opts:
+    description: |
+      The TypeScript version to install if not available.
+    title: TypeScript version
+  typescript_version: latest
+- args: '"**/*.ts" -e "**/node_modules/**"'
+  opts:
+    description: Arguments are added to the `tslint` command.
+    title: Arguments for running `tslint`
