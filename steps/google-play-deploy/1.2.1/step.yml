@@ -1,0 +1,158 @@
+title: Step google play deploy [beta]
+summary: Step google play deploy
+description: |-
+  To use this step:
+
+  1. You have to upload the first apk manually (using the web interface).
+    See: https://play.google.com/apps/publish -> All applications -> Add new application
+
+  2. You must link your Google Play Developer Console to an API project.
+    See: https://developers.google.com/android-publisher/getting_started (Linking your API Project section)
+
+  3. Setting Up API Access Clients, using a service account:
+    See: https://developers.google.com/android-publisher/getting_started (Using a service account)
+    When you create your service account on the google developer console choose json as Key Type.
+
+  4. Grant Access to provide the service account the necessary rights.
+    See: https://play.google.com/apps/publish -> Settings -> User account & rights -> Invite new user and give the privileges.
+    Due to the way the Google Play Publisher API works, you have to grant at least the following permissions to that service account:
+     - Edit store listing, pricing & distribution
+     - Manage Production APKs
+     - Manage Alpha & Beta APKs
+     - Manage Alpha & Beta users
+
+  5. OPTIONAL - Add translations for your Store Listing.
+    To allow the step to assign your whats news to the uploaded apk version.
+    See: https://support.google.com/googleplay/android-developer/answer/3125566?hl=en (Add translations for your Store Listing)
+website: https://github.com/bitrise-io/steps-google-play-deploy
+source_code_url: https://github.com/bitrise-io/steps-google-play-deploy
+support_url: https://github.com/bitrise-io/steps-google-play-deploy/issues
+published_at: 2017-03-22T13:49:47.715522499+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-google-play-deploy.git
+  commit: 3ede230a48d6f8e9f559715b506c137ac5ce64be
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-google-play-deploy
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Path to the Service Account's JSON key file.
+
+      For remote JSON key file you can provide any download location (ex: `https://URL/TO/key.json`).
+      For local JSON key file provide file path url. (ex: `file://PATH/TO/key.json`).
+    summary: Service Account JSON key file path
+    title: Service Account JSON key file path
+  service_account_json_key_path: null
+- opts:
+    description: Package name of the APK to deploy.
+    is_required: true
+    summary: Package name
+    title: Package name
+  package_name: null
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |-
+      Path to the APK to deploy.
+
+      You can provide multiple APK paths separated by `|` character.
+
+      Format emxamples:
+
+      - `/path/to/my/app.apk`
+      - `/path/to/my/app1.apk|/path/to/my/app2.apk|/path/to/my/app3.apk`
+    is_required: true
+    summary: APK file path
+    title: APK file path
+- opts:
+    description: Track to assign the APK(s).
+    is_required: true
+    summary: Track
+    title: Track
+    value_options:
+    - alpha
+    - beta
+    - rollout
+    - production
+  track: alpha
+- opts:
+    description: |-
+      __Only available if `track` is `rollout`.__
+
+      Portion of the users who should get the staged rollout version of the APK.
+    is_required: true
+    summary: User Fraction
+    title: User Fraction
+    value_options:
+    - "0.05"
+    - "0.1"
+    - "0.2"
+    - "0.5"
+  user_fraction: "0.5"
+- opts:
+    description: |-
+      Use this input to specify localised whatsnew files directory.
+
+      This directory should contain whatsnew files postfixed with the local.
+
+      whatsnew file name pattern: `whatsnew-LOCAL`
+
+      Example:
+      ```
+      + - [PATH/TO/WHATSNEWS]
+          |
+          + - whatsnew-en-US
+          |
+          + - whatsnew-de-DE
+      ```
+    title: Direcotry of localised whatsnew files
+  whatsnews_dir: null
+- opts:
+    description: "Should deactivate apks, with lower version code, on lower level
+      tracks?\n\nE.g.: \nIf you have an __active apk on alpha__ track with version
+      code: `42`.\nAnd you try to __upload a new version (`43`), to the beta track__,
+      you will see error, like this:\n\n`Version 42 of this app can not be downloaded
+      by any devices as they will all receive APKs with higher version codes`\n\nTo
+      avoid this issue set this input to: `\"true\"` and the step will deactivate
+      every apk with lower version code, on lower level tracks."
+    title: Untrack blocking versions?
+  untrack_blocking_versions: "true"
+- opts:
+    description: "__DEPRECATED!__\nUse JSON key instead of P12 key and `service_account_json_key_path`
+      input.\n\nThe `Service account ID` of the Service Account you want to use to
+      authorize the deploy. "
+    summary: '[DEPRECATED!] Service account ID'
+    title: '[DEPRECATED!] Service account ID'
+  service_account_email: null
+- key_file_path: null
+  opts:
+    description: |-
+      __DEPRECATED!__
+      Use JSON key instead of P12 key and `service_account_json_key_path` input.
+
+      Path to the Service Account's p12 key file .
+
+      For remote P12 key file you can provide any download location (ex: `https://URL/TO/key.p12`).
+      For local P12 key file provide file path url. (ex: `file://PATH/TO/key.p12`).
+    summary: '[DEPRECATED!] Service Account p12 key file path'
+    title: '[DEPRECATED!] Service Account p12 key file path'
