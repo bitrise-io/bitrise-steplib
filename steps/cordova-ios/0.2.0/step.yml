@@ -1,0 +1,59 @@
+title: Cordova iOS
+summary: This step allows you to build cordova-based iOS projects.
+description: |-
+  The Cordova CLI is the main tool to use for the cross-platform workflow
+  described in the [Overview](https://cordova.apache.org/docs/en/latest/guide/overview/index.html).
+website: https://github.com/waracle/steps-cordova-ios
+source_code_url: https://github.com/waracle/steps-cordova-ios
+support_url: https://github.com/waracle/steps-cordova-ios/issues
+published_at: 2017-03-22T14:32:20.559909976Z
+source:
+  git: https://github.com/Waracle/steps-cordova-ios.git
+  commit: 85ebaa7e3859f1800d79d9df7d77a2ad1c21a1ae
+host_os_tags:
+- macosx
+type_tags:
+- cordova
+deps:
+  brew:
+  - name: npm
+inputs:
+- cordova_dir: $CORDOVA_APP_PATH
+  opts:
+    description: Change the base directory to run Cordova from.
+    is_required: false
+    title: The directory of the Cordova application.
+- cordova_command: build
+  opts:
+    description: Run `cordova --help` to check list of available commands.
+    is_required: true
+    title: Cordova command to run.
+    value_options:
+    - build
+    - platform add
+- opts:
+    description: Choose which platform to to run the command for.
+    is_required: true
+    title: Platform to build.
+    value_options:
+    - android
+    - ios
+  platform_name: ios
+- build_options: --verbose
+  opts:
+    description: |-
+      Options added to the end of the Cordova call.
+      You can use multiple options, separated by a space
+      character. For example: `--verbose`; `--debug`
+      `--release --buildConfig=..\myBuildConfig.json`
+    is_required: false
+    title: Additional options for `cordova` command
+- is_debug: "no"
+  opts:
+    description: |
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    title: Debug?
+    value_options:
+    - "no"
+    - "yes"
