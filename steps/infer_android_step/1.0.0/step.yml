@@ -1,0 +1,44 @@
+title: Infer Android Step
+summary: Step for Bitrise
+description: |-
+  This is a Step for [FbInfer App](http://fbinfer.com).
+  This is not an officially supported plugin
+website: https://github.com/ataourirt/fbinfer-android-bitrise
+source_code_url: https://github.com/ataourirt/fbinfer-android-bitrise
+support_url: https://github.com/ataourirt/fbinfer-android-bitrise/issues
+published_at: 2016-04-19T17:32:46.040754099+02:00
+source:
+  git: https://github.com/ataourirt/fbinfer-android-bitrise.git
+  commit: 9ca5d7ce4fe0c3b5d9fd0293c0eb0be820c8361b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- script
+deps:
+  brew:
+  - name: infer
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: "true"
+inputs:
+- infer_debug_mode: "false"
+  opts:
+    description: |
+      If you want to see what command are send to the system.
+    is_required: true
+    summary: ""
+    title: Debug Mode
+    value_options:
+    - "true"
+    - "false"
+- infer_source_dir: $BITRISE_SOURCE_DIR
+  opts:
+    is_required: true
+    title: Path of the source directory
+- infer_gradle_task: assemble
+  opts:
+    is_required: true
+    title: Gradle task to run
