@@ -1,0 +1,70 @@
+title: Install missing Android tools
+summary: Install missing Android tools
+description: |-
+  This step analyze your root settings.gradle file, to collect the active build.gradle files.
+
+  Based on the build.gradle files it will:
+
+  - install required `compileSdkVersion`s if missing
+  - install required `buildToolsVersion`s if missing
+  - update `Support Library` if used
+  - update `Google Play Services` if used
+website: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+source_code_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+support_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools/issues
+published_at: 2017-03-28T11:29:25.060040631+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-install-missing-android-tools.git
+  commit: bb7fa922c99741ca63f821741ebacfc8a1bc2887
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-install-missing-android-tools
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: 'Path to the root build.gradle file. '
+    is_required: true
+    summary: ""
+    title: Path to the root build.gradle file
+  root_build_gradle_file: $GRADLE_BUILD_FILE_PATH
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper is what makes sure
+      that the right Gradle version is installed and used for the build.
+      __You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one (if you would not have one already)__
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root, for example: `./gradlew`,
+      or if it's in a sub directory: `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- opts:
+    description: |-
+      If project uses `Support Library` and/or `Google Play Services` they will be updated by default.
+
+      Set this input to `"false"` if you wan to skip `Support Library` and/or `Google Play Services` updates.
+    is_required: true
+    summary: ""
+    title: Should the step update `Support Library` and `Google Play Services`
+    value_options:
+    - "true"
+    - "false"
+  update_support_library_and_play_services: "true"
