@@ -18,11 +18,7 @@ host_os_tags:
 project_type_tags:
 - ios
 type_tags:
-- script
-- build
-- utils
 - xcode
-- xamarin
 - ios
 - xcodeproj
 is_requires_admin_user: false
