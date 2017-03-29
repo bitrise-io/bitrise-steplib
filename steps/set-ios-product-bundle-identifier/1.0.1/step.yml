@@ -1,4 +1,4 @@
-title: REPLACE PRODUCT_BUNDLE_IDENTIFIER
+title: Replaces Xcode's project PRODUCT_BUNDLE_IDENTIFIER
 summary: Replaces Xcode's project PRODUCT_BUNDLE_IDENTIFIER setting.
 description: |-
   Replaces Xcode's project `PRODUCT_BUNDLE_IDENTIFIER` setting by passing in a new value.
@@ -18,6 +18,9 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
+- react-native
+- cordova
+- ionic
 type_tags:
 - utility
 is_requires_admin_user: false
