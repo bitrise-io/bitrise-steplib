@@ -1,0 +1,39 @@
+title: Replaces Xcode's project PRODUCT_BUNDLE_IDENTIFIER
+summary: Replaces Xcode's project PRODUCT_BUNDLE_IDENTIFIER setting.
+description: |-
+  Replaces Xcode's project `PRODUCT_BUNDLE_IDENTIFIER` setting by passing in a new value.
+  This is the recommended way to substitute the bundle identifier
+  instead of modifiying the `CFBundleIdentifier` setting in the `Info.plist` file.
+
+  From [Xcode 7 Release Notes](https://developer.apple.com/library/content/documentation/Xcode/Conceptual/RN-Xcode-Archive/Chapters/xc7_release_notes.html):
+  > The new build setting Product Bundle Identifier (PRODUCT_BUNDLE_IDENTIFIER) is the recommended place to set the Bundle Identifier for a target. The target’s Info.plist should be configured to use this build setting by referencing it as $(PRODUCT_BUNDLE_IDENTIFIER) in the value for the CFBundleIdentifier key.
+website: https://github.com/emenegro/bitrise-step-product-bundle-identifier
+source_code_url: https://github.com/emenegro/bitrise-step-product-bundle-identifier
+support_url: https://github.com/emenegro/bitrise-step-product-bundle-identifier/issues
+published_at: 2017-03-29T13:00:55.894351683+02:00
+source:
+  git: https://github.com/emenegro/bitrise-step-product-bundle-identifier.git
+  commit: 35c0a260082f20423b232dd6ca7e42f1fde1f184
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- react-native
+- cordova
+- ionic
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_required: true
+    summary: Path to the iOS project `.xcodeproj` file.
+    title: Xcode project path
+  project_path: null
+- new_bundle_identifier: null
+  opts:
+    is_required: true
+    summary: The new bundle identifier to be set.
+    title: New bundle identifier
