@@ -1,4 +1,4 @@
-title: Replaces Xcode's project «PRODUCT_BUNDLE_IDENTIFIER
+title: Replaces Xcode's project PRODUCT_BUNDLE_IDENTIFIER
 summary: Replaces Xcode's project PRODUCT_BUNDLE_IDENTIFIER setting.
 description: |-
   Replaces Xcode's project `PRODUCT_BUNDLE_IDENTIFIER` setting by passing in a new value.
