@@ -1,0 +1,55 @@
+title: Generate Gradle Wrapper
+summary: Generates Gradle Wraper if not exists
+description: |-
+  Generates Gradle Wraper if not exists.
+
+  The gradlew file will be generated into the same directory where your root build.gradle file exists.
+website: https://github.com/bitrise-steplib/steps-generate-gradle-wrapper
+source_code_url: https://github.com/bitrise-steplib/steps-generate-gradle-wrapper
+support_url: https://github.com/bitrise-steplib/steps-generate-gradle-wrapper/issues
+published_at: 2017-04-12T16:18:20.216890848+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-generate-gradle-wrapper.git
+  commit: 85815edc33fa2765ad3963c8a74f08df4a75d536
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-generate-gradle-wrapper
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: Root directory of the project.
+    is_required: true
+    summary: ""
+    title: Project root directory
+  project_root_dir: $BITRISE_SOURCE_DIR
+- gradle_version: 2.14.1
+  opts:
+    is_required: true
+    summary: Gradle version to use to generate the wrapper.
+    title: Gradle version to use to generate the wrapper.
+- android_home: $ANDROID_HOME
+  opts:
+    description: Android sdk path
+    is_required: true
+    title: Android sdk path
+outputs:
+- GRADLEW_PATH: null
+  opts:
+    summary: The generated Gradle Wrapper file path.
+    title: Gradle Wrapper file path
