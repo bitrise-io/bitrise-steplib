@@ -4,7 +4,7 @@ You can find the collection of all [Bitrise integrations](https://www.bitrise.io
 
 ## Contribution
 
-If you find something missing from the steps, you can drop us an issue, or [create your own step](http://devcenter.bitrise.io/docs/step-dev). See our example for creating & sharing a new step under [/step-template](https://github.com/bitrise-steplib/step-template).
+If you find something missing from the steps, you can drop us an issue, or [create your own step](http://devcenter.bitrise.io/bitrise-cli/create-your-own-step). See our example for creating & sharing a new step under [/step-template](https://github.com/bitrise-steplib/step-template).
 
 ### Install Bitrise CLI
 
