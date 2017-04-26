@@ -18,7 +18,7 @@ project_type_tags:
 - ionic
 - react-native
 type_tags:
-- utility
+- "code sign"
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-sign-apk
