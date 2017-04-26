@@ -11,12 +11,8 @@ source:
   commit: c212a5cd7f27f9ce12220a78cdda569a6879df48
 host_os_tags:
 - osx-10.10
-project_type_tags:
-- ios
 type_tags:
-- translation
-- localization
-- xcode
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

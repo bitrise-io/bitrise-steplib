@@ -14,13 +14,12 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
-type_tags:
-- build
-- utils
-- xcode
 - xamarin
-- ios
-- info.plist
+- cordova
+- ionic
+- react-native
+type_tags:
+- utility
 run_if: .IsCI
 inputs:
 - info_plist_file: null

@@ -12,12 +12,7 @@ source:
   commit: 75dd3fc5d9523a9843d5d677c4aca737ec0eb81b
 host_os_tags:
 - ubuntu
-project_type_tags:
-- android
 type_tags:
-- build
-- android
-- code_coverage
 - test
 is_requires_admin_user: false
 is_always_run: false

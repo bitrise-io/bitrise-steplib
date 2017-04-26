@@ -35,7 +35,6 @@ host_os_tags:
 - osx
 - ubuntu
 type_tags:
-- script
 - utility
 is_requires_admin_user: false
 is_always_run: false

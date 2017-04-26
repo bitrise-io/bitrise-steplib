@@ -12,8 +12,12 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- testing
+- test
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-calabash-ios-uitest

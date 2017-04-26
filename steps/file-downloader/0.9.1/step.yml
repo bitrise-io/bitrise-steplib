@@ -9,7 +9,7 @@ source:
   git: https://github.com/bitrise-steplib/steps-file-downloader.git
   commit: 8877374cc8d17a599e359ff7bddf465da14e9ba8
 type_tags:
-- script
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

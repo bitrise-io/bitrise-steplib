@@ -17,9 +17,6 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
-- react-native
-- cordova
-- ionic
 type_tags:
 - test
 toolkit:

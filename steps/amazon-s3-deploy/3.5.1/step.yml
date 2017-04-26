@@ -16,11 +16,8 @@ source:
 host_os_tags:
 - osx-10.9
 - osx-10.10
-project_type_tags:
-- ios
 type_tags:
 - deploy
-- amazon
 deps:
   brew:
   - name: awscli

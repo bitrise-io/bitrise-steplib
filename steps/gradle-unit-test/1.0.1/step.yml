@@ -15,8 +15,7 @@ host_os_tags:
 project_type_tags:
 - android
 type_tags:
-- unit test
-- gradle
+- test
 toolkit:
   go:
     package_name: github.com/bitrise-io/steps-gradle-unit-test

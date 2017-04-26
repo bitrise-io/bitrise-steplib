@@ -14,11 +14,11 @@ project_type_tags:
 - ios
 - macos
 - xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- build
-- utils
-- xcode
-- info.plist
+- utility
 inputs:
 - info_plist_file: null
   opts:

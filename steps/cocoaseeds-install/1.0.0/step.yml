@@ -15,9 +15,7 @@ host_os_tags:
 project_type_tags:
 - ios
 type_tags:
-- xcode
-- cocoaseeds
-- seed
+- dependency
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

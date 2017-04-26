@@ -38,6 +38,8 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - xamarin
+type_tags:
+- test
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-xamarin-android-test

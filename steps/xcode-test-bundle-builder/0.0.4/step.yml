@@ -15,7 +15,6 @@ project_type_tags:
 - ios
 type_tags:
 - build
-- xcode
 deps:
   check_only:
   - name: xcode

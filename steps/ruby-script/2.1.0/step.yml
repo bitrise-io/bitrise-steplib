@@ -14,10 +14,7 @@ host_os_tags:
 - osx
 - ubuntu
 type_tags:
-- script
-- ruby
-- runner
-- glue
+- utility
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false

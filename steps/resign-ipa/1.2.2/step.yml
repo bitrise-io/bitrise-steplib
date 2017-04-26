@@ -18,8 +18,11 @@ host_os_tags:
 project_type_tags:
 - ios
 - xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- archive
+- "code sign"
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

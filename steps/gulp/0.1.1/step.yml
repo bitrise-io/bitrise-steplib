@@ -9,7 +9,7 @@ source:
   git: https://github.com/nhammond101/steps-gulp.git
   commit: 3fc1b99594544775412df580ac034ea957756b2f
 type_tags:
-- gulp
+- utility
 deps:
   brew:
   - name: npm

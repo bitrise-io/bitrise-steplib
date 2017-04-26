@@ -16,9 +16,7 @@ host_os_tags:
 - osx-10.9
 - osx-10.10
 type_tags:
-- script
-- bash
-- runner
+- utility
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
