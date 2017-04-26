@@ -16,6 +16,8 @@ source:
   commit: 94c58915edb11972def5c266396613b7fb35a686
 host_os_tags:
 - osx-10.10
+type_tags:
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

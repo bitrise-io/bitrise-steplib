@@ -12,6 +12,8 @@ published_at: 2015-09-08T15:57:26.567815454+02:00
 source:
   git: https://github.com/bitrise-io/steps-secure-delete-path.git
   commit: 543cca2b481fa921d0dcf59fcce587ead1cf3009
+type_tags:
+- utility
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false

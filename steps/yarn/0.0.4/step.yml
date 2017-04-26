@@ -10,13 +10,8 @@ source:
   commit: ec2279ecaf33360420509e7dd438cfe70300ea02
 host_os_tags:
 - osx-10.11
-project_type_tags:
-- ios
-- android
 type_tags:
-- react-native
-- npm
-- yarn
+- dependency
 deps:
   brew:
   - name: node

@@ -17,10 +17,11 @@ host_os_tags:
 project_type_tags:
 - android
 - xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- build
-- utils
-- versioning
+- "artifact info"
 is_always_run: false
 is_skippable: false
 inputs:

@@ -14,10 +14,6 @@ source:
   commit: 2f622cb773b8a4f5dc5a16eac25579818b6a86a4
 type_tags:
 - deploy
-- amazon
-- s3
-- upload
-- uploader
 deps:
   brew:
   - name: awscli

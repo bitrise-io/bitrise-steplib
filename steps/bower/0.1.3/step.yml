@@ -8,8 +8,10 @@ published_at: 2016-12-02T10:46:39.400538674Z
 source:
   git: https://github.com/nhammond101/steps-bower.git
   commit: f01eca0dffbc693d959bb6758cfb07c72de72077
+project_type_tags:
+- web
 type_tags:
-- bower
+- installer
 deps:
   brew:
   - name: npm

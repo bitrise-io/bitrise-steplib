@@ -16,10 +16,12 @@ host_os_tags:
 project_type_tags:
 - ios
 - macos
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- versioning
-- build
-- xcode
+- utility
 deps:
   check_only:
   - name: xcode

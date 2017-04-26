@@ -23,9 +23,12 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - android
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
 - deploy
-- HockeyApp
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-hockeyapp-android-deploy

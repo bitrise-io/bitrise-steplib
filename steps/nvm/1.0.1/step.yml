@@ -16,8 +16,7 @@ host_os_tags:
 - osx
 - ubuntu
 type_tags:
-- npm
-- node
+- utility
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false

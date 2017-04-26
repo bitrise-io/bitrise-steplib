@@ -17,7 +17,7 @@ project_type_tags:
 - ios
 - xamarin
 type_tags:
-- script
+- build
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-export-xcarchive
