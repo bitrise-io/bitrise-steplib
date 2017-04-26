@@ -23,10 +23,6 @@ host_os_tags:
 - osx-10.9
 - osx-10.10
 type_tags:
-- IM
-- messaging
-- sms
-- text message
 - notification
 is_requires_admin_user: false
 is_always_run: true

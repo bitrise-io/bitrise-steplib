@@ -20,8 +20,12 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - android
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- Monkop
+- test
 deps:
   apt_get:
   - name: git

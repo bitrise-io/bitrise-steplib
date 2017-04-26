@@ -14,8 +14,9 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
+- macos
 type_tags:
-- script
+- test
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false

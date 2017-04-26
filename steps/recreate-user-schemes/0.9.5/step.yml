@@ -13,6 +13,8 @@ source:
 project_type_tags:
 - ios
 - macos
+type_tags:
+- utility
 deps: {}
 is_requires_admin_user: false
 is_always_run: false

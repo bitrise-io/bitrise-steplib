@@ -12,6 +12,8 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - xamarin
+type_tags:
+- dependency
 toolkit:
   go:
     package_name: github.com/bitrise-io/steps-nuget-restore

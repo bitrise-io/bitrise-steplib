@@ -11,6 +11,13 @@ source:
 host_os_tags:
 - ubuntu-14.04
 - osx-10.11
+project_type_tags:
+- ios
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
 - deploy
 deps:

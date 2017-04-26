@@ -10,10 +10,8 @@ source:
   commit: ba76c47b82475207c6db3e21354ecdfc3115ff5b
 host_os_tags:
 - osx-10.10
-project_type_tags:
-- xamarin
-- ios
-- mac
+type_tags:
+- deploy
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

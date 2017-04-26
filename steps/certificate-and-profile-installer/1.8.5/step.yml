@@ -17,8 +17,12 @@ host_os_tags:
 project_type_tags:
 - ios
 - macos
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- security
+- "code sign"
 toolkit:
   go:
     package_name: github.com/bitrise-io/steps-certificate-and-profile-installer

@@ -17,8 +17,7 @@ source:
 host_os_tags:
 - osx-10.10
 type_tags:
-- git
-- vcs
+- utility
 toolkit:
   go:
     package_name: github.com/bitrise-io/steps-git-clone

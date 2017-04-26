@@ -14,6 +14,8 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - xamarin
+type_tags:
+- "access control"
 is_requires_admin_user: false
 is_always_run: true
 is_skippable: false
