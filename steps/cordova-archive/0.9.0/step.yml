@@ -1,0 +1,104 @@
+title: Cordova archive
+summary: Archives your Cordova project
+description: |-
+  Archives your Cordova project.
+
+  For first the step prepare your Cordova project by calling:
+
+  - `cordova "platform" "rm" "<platform>"`
+  - `cordova "platform" "add" "<platform>"`
+
+  then it archives the project by calling:
+
+  - `cordova "build" "--debug|--release" "--device|--emulator" "<platform>" "--buildConfig=$BITRISE_CORDOVA_BUILD_CONFIGURATION"`
+website: https://github.com/bitrise-community/steps-cordova-archive
+source_code_url: https://github.com/bitrise-community/steps-cordova-archive
+support_url: https://github.com/bitrise-community/steps-cordova-archive/issues
+published_at: 2017-04-27T16:43:54.212250194+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-cordova-archive.git
+  commit: 1dc4368a29133df02e4826ca2d4e70c6c3446238
+project_type_tags:
+- cordova
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-cordova-archive
+deps:
+  brew:
+  - name: go
+  - name: gradle
+inputs:
+- opts:
+    description: Root directory of your Cordova project, where your Cordova config.xml
+      exists.
+    is_required: true
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Specify this input to apply cordova-cli commands to desired platforms only.
+
+      `cordova build [OTHER_PARAMS] <platform>`
+    is_required: true
+    title: Platform to use in cordova-cli commands
+    value_options:
+    - ios,android
+    - ios
+    - android
+  platform: ios,android
+- configuration: release
+  opts:
+    description: |-
+      Specify build command configuration.
+
+      `cordova build [OTHER_PARAMS] [--release | --debug]`
+    is_required: true
+    title: Build command configuration
+    value_options:
+    - release
+    - debug
+- opts:
+    description: |-
+      Specify build command target.
+
+      `cordova build [OTHER_PARAMS] [--device | --emulator]`
+    is_required: true
+    title: Build command target
+    value_options:
+    - device
+    - emulator
+  target: device
+- build_config: $BITRISE_CORDOVA_BUILD_CONFIGURATION
+  opts:
+    description: Path to the build configuration file (build.json), which describes
+      code signing properties.
+    title: Build configuration path, to describe code signing properties
+- options: null
+  opts:
+    description: |-
+      Use this input to specify custom options, to append to the end of the cordova-cli build command.
+
+      Example:
+      - `--browserify`
+
+      `cordova build [OTHER_PARAMS] [options]`
+    title: Options to append to the cordova-cli build command
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created ios .ipa file's path
+- BITRISE_APP_PATH: null
+  opts:
+    title: The created ios .app file's path
+- BITRISE_DSYM_DIR_PATH: null
+  opts:
+    title: The created ios .dSYM dir's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created ios .dSYM.zip file's path
+- BITRISE_APK_PATH: ""
+  opts:
+    title: The created android .apk file's path
