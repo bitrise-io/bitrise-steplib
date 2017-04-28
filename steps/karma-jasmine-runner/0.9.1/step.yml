@@ -1,0 +1,37 @@
+title: Karma Jasmine Test Runner
+summary: Karma Jasmine Test Runner
+description: Karma Jasmine Test Runner
+website: https://github.com/bitrise-community/steps-karma-jasmine-runner
+source_code_url: https://github.com/bitrise-community/steps-karma-jasmine-runner
+support_url: https://github.com/bitrise-community/steps-karma-jasmine-runner/issues
+published_at: 2017-04-28T15:30:49.260119785+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-karma-jasmine-runner.git
+  commit: 15e8e7bd55624d70041334c05766e220446c060c
+project_type_tags:
+- cordova
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-karma-jasmine-runner
+deps:
+  brew:
+  - name: go
+inputs:
+- opts:
+    is_required: true
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- browsers: Safari
+  opts:
+    description: |-
+      Use this input to specify which browser to use by karma start command.
+      Comma separated list of browsers (eg. `Safari,Chrome,Firefox`).
+    is_required: true
+    title: List of browsers to start
+- options: null
+  opts:
+    description: Use this input to specify custom options, to append to the end of
+      the karma start command.
+    title: Options to append to the karma start command
