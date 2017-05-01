@@ -12,7 +12,7 @@ source:
   git: https://github.com/stefandevo/bitrise-buildnumberadjust-step.git
   commit: 4188b654c2ff941f2297cbecc9bf35cb148fd76b
 type_tags:
-- script
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
