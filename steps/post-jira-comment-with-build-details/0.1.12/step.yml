@@ -6,14 +6,15 @@ description: Will post a comment on the issue page with build details (download 
 website: https://github.com/dag-io/post-jira-comment-with-build-details-step
 source_code_url: https://github.com/dag-io/post-jira-comment-with-build-details-step.git
 support_url: https://github.com/dag-io/post-jira-comment-with-build-details-step/issues
-published_at: 2017-05-01T15:37:01.533745086+02:00
+published_at: 2017-05-01T16:02:39.191194951+02:00
 source:
   git: https://github.com/dag-io/post-jira-comment-with-build-details-step.git
-  commit: 394822b656824386fc5337d04e2f13fbcfe0e49d
+  commit: d612f2a214459b6a24d7012124e9c19073e8b31b
 host_os_tags:
 - ubuntu-14.04
 - osx-10.11
 type_tags:
+- utility
 - jira
 - issue-tracker
 deps:
