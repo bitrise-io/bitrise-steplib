@@ -1,4 +1,4 @@
-title: .NET Core
+title: Install .NET Core
 summary: Installs the .NET Core SDK
 description: Installs the .NET Core SDK
 website: https://github.com/stefandevo/bitrise-dotnetcore-step
