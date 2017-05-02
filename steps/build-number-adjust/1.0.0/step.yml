@@ -1,0 +1,45 @@
+title: Adjust BuildNumber
+summary: Adjust the $BITRISE_BUILD_NUMBER
+description: |-
+  In some cases you want to use the $BITRISE_BUILD_NUMBER for setting version info, but for some reason
+  you want to add, substract or just change the variable (for example when migrating from another build system
+  and you already have a certain build number to start with)
+website: https://github.com/stefandevo/bitrise-buildnumberadjust-step
+source_code_url: https://github.com/stefandevo/bitrise-buildnumberadjust-step
+support_url: https://github.com/stefandevo/bitrise-buildnumberadjust-step/issues
+published_at: 2017-05-02T18:37:35.12670068+02:00
+source:
+  git: https://github.com/stefandevo/bitrise-buildnumberadjust-step.git
+  commit: 93b784999facfcea50c464aada4dde0e3905eeb1
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- change: null
+  opts:
+    description: |
+      Just change the $BITRISE_BUILD_NUMBER value
+    is_expand: true
+    is_required: false
+    title: Change Build Number
+- increase: null
+  opts:
+    description: |
+      Add a certain number to the current $BITRISE_BUILD_NUMBER value
+    is_expand: true
+    is_required: false
+    title: Increase Value
+- decrease: null
+  opts:
+    description: |
+      Substract a certain number of to the current $BITRISE_BUILD_NUMBER value
+    is_expand: true
+    is_required: false
+    title: Decrease Value
+outputs:
+- BITRISE_BUILD_NUMBER: null
+  opts:
+    description: ""
+    title: Adjusted BITRISE_BUILD_NUMBER value
