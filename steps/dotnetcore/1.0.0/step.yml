@@ -1,0 +1,36 @@
+title: Install .NET Core
+summary: Installs the .NET Core SDK
+description: Installs the .NET Core SDK
+website: https://github.com/stefandevo/bitrise-dotnetcore-step
+source_code_url: https://github.com/stefandevo/bitrise-dotnetcore-step
+support_url: https://github.com/stefandevo/bitrise-dotnetcore-step/issues
+published_at: 2017-04-30T21:00:13.660280264+02:00
+source:
+  git: https://github.com/stefandevo/bitrise-dotnetcore-step.git
+  commit: cf27f88a0974c68fe97fef66758c5341b2432926
+host_os_tags:
+- osx-10.10
+project_type_tags: []
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- channel: null
+  opts:
+    description: |
+      Specifies the source channel for the installation. Currently "production" does not exists.
+      Leave empty to get latest "stable" (if this exists :-))
+      Possible known values are rel-1.0.0, rel-1.0.1, master (=daily version)
+    is_expand: true
+    is_required: false
+    title: Channel
+- opts:
+    description: "Specifies the version of CLI to install. You must specify the version
+      as a 3-part version (for example, 1.0.0-13232). \nIf it isn't present, it will
+      use the latest version.\n"
+    is_expand: true
+    is_required: false
+    title: Version
+  version: null
