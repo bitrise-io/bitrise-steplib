@@ -1,0 +1,167 @@
+title: Send a Slack message
+summary: Send a [Slack](https://slack.com/) message to a channel or group.
+description: |
+  Send a [Slack](https://slack.com/) message to a channel or group.
+
+  You have to register an **Incoming WebHook integration** at:
+  https://**YOURTEAMNAME**.slack.com/services
+
+  On the WebHook integration's page copy the **Webhook URL**.
+
+  *Don't forget to enable this Step to **Always run** if
+  you want to get notified about failed builds as well!*
+website: https://github.com/bitrise-io/steps-slack-message
+source_code_url: https://github.com/bitrise-io/steps-slack-message
+support_url: https://github.com/bitrise-io/steps-slack-message/issues
+published_at: 2017-05-09T17:40:56.840754429+02:00
+source:
+  git: https://github.com/bitrise-io/steps-slack-message.git
+  commit: c68cef2dbf5068b7f83e9ea676dd714a4d06d2ad
+host_os_tags:
+- osx-10.10
+- ubuntu-14.04
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-slack-message
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: Slack Webhook URL
+  webhook_url: null
+- channel: null
+  opts:
+    description: |
+      * channel example: #general
+      * username example: @everyone
+    is_expand: true
+    is_required: false
+    title: Target Slack channel, group or username
+- from_username: Bitrise CI - OK
+  opts:
+    description: |
+      The one which should be presented as the sender of the message
+    is_expand: true
+    is_required: false
+    title: The 'from' name
+- from_username_on_error: Bitrise CI - ERROR
+  opts:
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    is_expand: true
+    is_required: false
+    title: The 'from' name - if the build failed
+- message: Type your message here
+  opts:
+    is_expand: true
+    is_required: true
+    title: The message you want to send
+- message_on_error: null
+  opts:
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    is_expand: true
+    is_required: false
+    title: The message you want to send - if the build failed
+- color: good
+  opts:
+    description: |
+      Color of the message. You can use hex color codes,
+      or the predefined Slack color words like `good`, `warning` or `danger`.
+
+      You can find more info about the color and other text formatting
+      in [Slack's documentation](https://api.slack.com/docs/message-attachments).
+    is_expand: true
+    is_required: true
+    title: Message color
+- color_on_error: danger
+  opts:
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    is_expand: true
+    is_required: false
+    title: Message color
+- image_url: null
+  opts:
+    description: |
+      Optionally render an image from a URL.
+      You can include GIFs.
+    is_expand: true
+    is_required: false
+    title: Image URL
+- image_url_on_error: null
+  opts:
+    description: |
+      **This option will be used if the build failed.**
+      Optionally render an image from a URL.
+      You can include GIFs.
+    is_expand: true
+    is_required: false
+    title: Image URL
+- emoji: ':white_check_mark:'
+  opts:
+    description: |
+      Optionally you can specify a Slack emoji as the sender
+      icon. You can use the Ghost icon for example
+      if you specify `:ghost:` here as an input.
+
+      **If you specify an Icon URL then this Emoji input will be ignored!**
+    is_expand: true
+    is_required: false
+    title: Emoji Icon
+- emoji_on_error: ':no_entry_sign:'
+  opts:
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    is_expand: true
+    is_required: false
+    title: Emoji Icon - if build failed
+- icon_url: null
+  opts:
+    description: |
+      Optionally you can specify a custom icon image URL
+      which will be presented as the sender icon.
+
+      Slack recommends an image a square image,
+      which can't be larger than 128px in width nor in height,
+      and it must be smaller than 64K in size.
+      Slack custom emoji guideline: [https://slack.zendesk.com/hc/en-us/articles/202931348-Using-emoji-and-emoticons](https://slack.zendesk.com/hc/en-us/articles/202931348-Using-emoji-and-emoticons)
+
+      *If you specify this input, the Emoji input will be ignored!*
+    is_expand: true
+    is_required: false
+    title: Icon URL
+- icon_url_on_error: null
+  opts:
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    is_expand: true
+    is_required: false
+    title: Icon URL - if build failed
+- is_debug_mode: "no"
+  opts:
+    description: |
+      Step prints additional debug information if this option
+      is enabled
+    is_expand: true
+    is_required: false
+    title: Debug mode?
+    value_options:
+    - "yes"
+    - "no"
