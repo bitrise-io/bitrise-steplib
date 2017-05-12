@@ -11,8 +11,14 @@ source:
 host_os_tags:
 - osx-10.10
 - ubuntu
-type_tags:
+project_type_tags:
 - android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- "code sign"
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-sign-apk

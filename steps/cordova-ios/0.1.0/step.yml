@@ -15,7 +15,7 @@ host_os_tags:
 project_type_tags:
 - ios
 type_tags:
-- cordova
+- build
 deps:
   brew:
   - name: npm
