@@ -15,8 +15,6 @@ host_os_tags:
 - osx-10.11
 type_tags:
 - utility
-- jira
-- issue-tracker
 deps:
   apt_get:
   - name: php7.0
