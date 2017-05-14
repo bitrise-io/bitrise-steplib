@@ -1,0 +1,99 @@
+title: Ionic Build
+summary: Build ionic project for your platform. Examples on GitHub.
+description: |-
+  With this step you can build ionic apps easily.
+  Select your environment things and start building.
+
+  On our [GitHub page](https://github.com/bussmann-it/steps-ionic/blob/master/README.md) you can see complete Bitrise examples for iOS and Android.
+  We describe the whole process for the Ionic conference app. From creating certificate or keystore to build the app successfully.
+
+  If you have questions feel free to ask us in english and german language.
+  We will help you as soon as possible ;-)
+website: https://github.com/bussmann-it/steps-ionic
+source_code_url: https://github.com/bussmann-it/steps-ionic.git
+support_url: https://github.com/bussmann-it/steps-ionic/issues
+published_at: 2017-05-14T02:06:53.343409014+02:00
+source:
+  git: https://github.com/bussmann-it/steps-ionic.git
+  commit: d587cee45caaf377f5fb29c0c1590475f2f1a056
+host_os_tags:
+- osx-10.9
+- osx-10.10
+- osx-10.11
+- osx-10.12
+project_type_tags:
+- ios
+- android
+- wp8
+- browser
+type_tags:
+- ionic
+deps:
+  brew:
+  - name: git
+  - name: npm
+  apt_get:
+  - name: git
+  - name: npm
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- build_for_platform: browser
+  opts:
+    description: The platform you want to use. i.e. Android, iOS, Windows Phone, Browser
+    summary: ""
+    title: Platform
+    value_options:
+    - android
+    - ios
+    - wp8
+    - browser
+- cordova_version: "7"
+  opts:
+    description: The version of cordova you want to use.
+    title: Cordova version
+    value_options:
+    - "7"
+    - "6"
+- ionic_version: "3"
+  opts:
+    description: The version of ionic you want to use.
+    title: Ionic version
+    value_options:
+    - "3"
+    - "2"
+- ios_provisioning_style: Manual
+  opts:
+    description: If you build for iOS then you can select the provisioning style here.
+      But maybe it's not working!
+    title: '[iOS] Provisioning style (maybe not working!)'
+    value_options:
+    - Manual
+    - Automatic
+- build_parameters: --release --prod
+  opts:
+    description: If you want to debug the build you can use --debug or for production
+      build --release with --prod.
+    is_expand: true
+    is_required: false
+    skip_if_empty: false
+    title: Build parameters for ionic
+outputs:
+- BITRISE_PROJECT_PATH: null
+  opts:
+    summary: If the bitrise project path is not specified yet then it will be defined
+      after this step. (if found)
+    title: '[iOS] Bitrise project path'
+- BITRISE_APK_PATH: null
+  opts:
+    summary: If there is a apk then this variable contains the apk path.
+    title: '[Android] APK Path of build'
+- BITRISE_APK_PATH_ARMV7: null
+  opts:
+    summary: If there is a x86 apk then this variable is set after this step.
+    title: '[Android] APK Path of armv7 build'
+- BITRISE_APK_PATH_X86: null
+  opts:
+    summary: If there is a x86 apk then this variable is set after this step.
+    title: '[Android] APK Path of x86 build'
