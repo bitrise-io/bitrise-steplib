@@ -1,0 +1,92 @@
+title: Create Android emulator
+summary: Creates a new Android Virtual Device
+description: Creates a new Android Virtual Device.
+website: https://github.com/bitrise-steplib/steps-create-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-create-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-create-android-emulator/issues
+published_at: 2017-05-16T10:36:37.33995105+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-create-android-emulator.git
+  commit: e87911ec2f44a761268db85b382ddd5948ab2423
+host_os_tags:
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-create-android-emulator
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- name: null
+  opts:
+    description: |
+      Name of the new AVD.
+    is_required: true
+    title: Name of the new AVD
+- opts:
+    description: |
+      Target platform of the new AVD.
+    is_required: true
+    title: Target platform of the new AVD
+  platform: android-19
+- abi: armeabi-v7a
+  opts:
+    description: |
+      The ABI to use for the AVD.
+    is_dont_change_value: true
+    is_required: true
+    title: The ABI to use for the AVD
+- opts:
+    description: |
+      The sys-img tag to use for the AVD.
+    is_required: true
+    title: The sys-img tag to use for the AVD
+    value_options:
+    - default
+    - google_apis
+    - android-tv
+    - android-wear
+  tag: default
+- options: ""
+  opts:
+    description: "Options added to the end of the `android create avd` or `avdmanager
+      create avd` call:\n\n`android create avd --force --name name --target platform
+      --abi abi options`\n\nor \n\n`avdmanager create avd --force --package PACKAGE
+      --name name --abi abi options`\n\nYou can use multiple options, separated by
+      a space\ncharacter. Example: `--skin WVGA800`"
+    title: Additional options for `android create avd` call
+- custom_hardware_profile_content: null
+  opts:
+    description: |-
+      The value of this input will be written into `${name}.avd/config.ini` file,
+      to let the created emulator use your custom hardware profile.
+
+      Format example:
+      ```
+      avd.ini.encoding=UTF-8
+      abi.type=armeabi-v7a
+      hw.cpu.arch=arm
+      hw.cpu.model=cortex-a8
+      hw.lcd.density=240
+      hw.ramSize=512
+      image.sysdir.1=system-images/android-21/default/armeabi-v7a/
+      skin.name=WVGA800
+      skin.path=platforms/android-21/skins/WVGA800
+      tag.display=Default
+      tag.id=default
+      vm.heapSize=48
+      ```
+    title: Custom Hardware Profile Content
+outputs:
+- BITRISE_EMULATOR_NAME: null
+  opts:
+    description: Name of the new AVD
+    title: Name of the new AVD
