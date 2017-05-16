@@ -1,0 +1,79 @@
+title: Start Android emulator
+summary: Start Android emulator and wait till it's booted fully.
+description: Start Android emulator and - optionally - wait till it's booted fully.
+website: https://github.com/bitrise-steplib/steps-start-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-start-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-start-android-emulator/issues
+published_at: 2017-05-16T12:27:17.435719403+02:00
+source:
+  git: https://github.com/bitrise-io/steps-start-android-emulator.git
+  commit: 7cd9fe0ce1e8b0a4446f49234855d7fbf3aadde8
+host_os_tags:
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-start-android-emulator
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- emulator_name: $BITRISE_EMULATOR_NAME
+  opts:
+    description: |
+      Emulator AVD image name to boot.
+    is_required: true
+    title: Emulator to boot
+- opts:
+    description: |
+      Use this input to specify an emulator skin.
+      Value example: `768x1280`.
+    title: Emulator skin
+  skin: 768x1280
+- emulator_options: -no-boot-anim -no-window
+  opts:
+    description: These flags will be added to the emulator command.
+    title: Specify emulator command's flags
+- android_home: $ANDROID_HOME
+  opts:
+    description: Android sdk path
+    is_required: true
+    title: Android sdk path
+- opts:
+    description: If this option is false, the step will not wait for the emulator
+      to finish boot
+    is_required: true
+    title: Wait for emulator boot
+    value_options:
+    - "true"
+    - "false"
+  wait_for_boot: "true"
+- boot_timeout: "1600"
+  opts:
+    description: |
+      Maximum time to wait for emulator to boot.
+    is_required: true
+    summary: Maximum time to wait for emulator to boot
+    title: Waiting timeout (secs)
+- opts:
+    description: |-
+      This options is deprecated please use `emulator_options` instead.
+
+      Options added to the end of the emulator call.
+
+      Example:
+      `-dpi-device 165 -no-cache`
+    title: '[Deprecated!] Additional options for emulator call'
+  other_options: ""
+outputs:
+- BITRISE_EMULATOR_SERIAL: null
+  opts:
+    description: Booted emulator serial
+    title: Emulator serial
