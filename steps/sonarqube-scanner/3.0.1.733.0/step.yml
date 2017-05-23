@@ -1,0 +1,42 @@
+title: SonarQube Scanner
+summary: Runs SonarQube Scanner CLI
+description: "This step provides only a **scanner** (client) which needs SonarQube
+  **server** to work.\nIf you haven't access to server check out tutorial \n[how to
+  get started in two minutes](https://docs.sonarqube.org/display/SONAR/Get+Started+in+Two+Minutes).\nLocal
+  server can be spawned in previous script step. \nSee [test of this step](https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner/blob/master/bitrise.yml)
+  \nfor sample implementation.\n\nAdd `sonar-project.properties` file in the workspace
+  root directory or type properties below.\nSee [SonarQube Scanner documentation](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner)
+  \nfor more details.\n\nIt's an error to both have that file and specify properties
+  here at the same time."
+website: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner
+support_url: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner/issues
+published_at: 2017-04-27T01:33:13.090756297Z
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner.git
+  commit: be9996df22ed9f0e535287a4bd1cbfa72afe8350
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      See [analysis parameters](https://docs.sonarqube.org/display/SONAR/Analysis+Parameters) documentation
+      for list of possible options.
+
+      Example:
+      ```
+        sonar.sources=.
+        sonar.login=TOKEN_HERE
+        sonar.projectKey=$BITRISE_APP_TITLE
+        sonar.host.url=https://sonar.example.test
+        sonar.analysis.mode=preview
+        #comments are also allowed
+      ```
+    is_expand: true
+    is_required: false
+    title: Scanner parameters in Java properties format
+  scanner_properties: null
