@@ -1,0 +1,58 @@
+title: Hockey CI Multi Deploy
+summary: Step for deploying one or more builds to hockey
+description: "Deploys any build artifacts and uploads to Hockey. \nAccepts a json
+  structure with hockey id, app id and a file path to the build.\nRead more on the
+  github page."
+website: https://github.com/nodes-android/ci-bitrise-deploy-step
+source_code_url: https://github.com/nodes-android/ci-bitrise-deploy-step
+support_url: https://github.com/nodes-android/ci-bitrise-deploy-step/issues
+published_at: 2017-06-07T17:54:32.999157409+02:00
+source:
+  git: https://github.com/nodes-android/ci-bitrise-deploy-step.git
+  commit: 8451bf58a361b11f5d4254c9a0d7aec74ea20d0a
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+- ios
+type_tags:
+- script
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: ruby
+  apt_get:
+  - name: git
+  - name: wget
+  - name: ruby
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: "true"
+inputs:
+- PROJECT_SLACK_CHANNEL: '#bitrise'
+  opts:
+    title: Default channel for outputting succeeded build info, links etc
+- ERROR_SLACK_CHANNEL: '#bitrise'
+  opts:
+    title: Default channel for outputting step errors
+- HOCKEYBUILDSJSON: ""
+  opts:
+    description: |-
+      The build information format is:
+      ```
+      [
+        {
+          "build": "app-first.apk",
+          "hockeyId": "11111111111111111111111111111",
+          "appId": "dk.nodes.citestflavors.firstskin","mappingFile": "null"
+        },
+        {
+          "build": "app-second.apk",
+          "hockeyId": "11111111111111111111111111111",
+          "appId": "dk.nodes.citestflavors.secondskin","mappingFile": "null"
+        }
+      ]
+      ```
+    title: JSON String containing build info
