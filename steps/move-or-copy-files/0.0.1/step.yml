@@ -1,0 +1,56 @@
+title: Move or Copy Files
+summary: |
+  Moves or copies files
+description: |
+  -
+website: https://github.com/...
+source_code_url: https://github.com/...
+support_url: https://github.com/.../issues
+published_at: 2017-06-20T10:20:33.1127341+02:00
+source:
+  git: https://github.com/Dave005/bitrise-step-move-or-copy-files.git
+  commit: 1618f8204b687a0914de1d5f1f849ee60f1bfc43
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- input_file: null
+  opts:
+    description: |
+      Path to the file to copy or move
+    is_required: true
+    summary: ""
+    title: Source File
+- opts:
+    description: |
+      Path to the target file
+    is_required: true
+    summary: ""
+    title: Target File
+  output_file: null
+- move_action: false
+  opts:
+    description: |
+      If this is true, the source file will be moved instead of copied, can also be used to rename files
+    is_required: false
+    summary: ""
+    title: Enable Move
+    value_options:
+    - "true"
+    - "false"
