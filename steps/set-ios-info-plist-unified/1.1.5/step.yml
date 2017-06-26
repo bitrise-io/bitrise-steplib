@@ -4,7 +4,7 @@ description: Sets various values in the target Info.plist file for the next buil
 website: https://github.com/mapletonhillmedia/steps-set-ios-info-plist
 source_code_url: https://github.com/mapletonhillmedia/steps-set-ios-info-plist
 support_url: https://github.com/mapletonhillmedia/steps-set-ios-info-plist/issues
-published_at: 2017-06-23T12:10:49.783121498-06:00
+published_at: 2017-06-26T08:25:20.105925896-06:00
 source:
   git: https://github.com/mapletonhillmedia/steps-set-ios-info-plist.git
   commit: 9e065abf3579df91f4d32e29047981cd232b2a6d
