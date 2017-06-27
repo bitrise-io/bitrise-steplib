@@ -1,0 +1,113 @@
+title: Xamarin android Test
+summary: Xamarin android Test
+description: |-
+  Xamarin android Test
+
+  Use solution configuration-platform combination for automatig tests, which maps to an android project configuration-platform combination, which:
+
+  * DO NOT 'Use Shared Mono runtime' see: PROJECT_TO_TEST/Options/Build/Android Build/General/Packaging and Deployment
+  * Use 'Enable developer instarumentation (debugging and profiling)' see: PROJECT_TO_TEST/Options/Build/Android Build/General/Debugging Options
+
+  Initialize you android app in your UITest project as follows:
+
+  ```
+  AndroidAppConfigurator androidConfigurator = ConfigureApp.Android;
+
+  string apkPath = Environment.GetEnvironmentVariable("ANDROID_APK_PATH");
+  if (!string.IsNullOrEmpty(apkPath))
+  {
+    androidConfigurator.ApkFile(apkPath);
+  }
+
+  string emulatorSerial = Environment.GetEnvironmentVariable("BITRISE_EMULATOR_SERIAL");
+  if (!string.IsNullOrEmpty(emulatorSerial))
+  {
+    androidConfigurator.DeviceSerial(emulatorSerial);
+  }
+
+  return androidConfigurator.StartApp();
+  ```
+
+  Add Internet permission to you Android app.
+website: https://github.com/bitrise-steplib/steps-xamarin-android-test
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-android-test
+support_url: https://github.com/bitrise-steplib/steps-xamarin-android-test/issues
+published_at: 2017-06-27T14:59:26.949544895+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-android-test.git
+  commit: 54f583899f3e06a4111e6bac36e5fad299bfa190
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-android-test
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- emulator_serial: $BITRISE_EMULATOR_SERIAL
+  opts:
+    category: Testing
+    description: |
+      Emulator to boot
+    is_required: true
+    title: Emulator serial to boot
+- opts:
+    category: Testing
+    description: |
+      Comma-separated list of names of tests to run.
+      If not specified all tests will run.
+
+      Format example: `Multiplatform.UItest.Tests(Android)`
+    title: Test name to run
+  test_to_run: null
+- opts:
+    category: Config
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_project: $BITRISE_PROJECT_PATH
+- opts:
+    category: Config
+    description: |
+      Xamarin solution configuration
+    is_required: true
+    title: Xamarin solution configuration
+  xamarin_configuration: Release
+- opts:
+    category: Config
+    description: |
+      Xamarin solution platform
+    is_required: true
+    title: Xamarin solution platform
+  xamarin_platform: Any CPU
+- build_tool: xbuild
+  opts:
+    category: Debug
+    description: Which tool to use for building?
+    is_required: true
+    title: Which tool to use for building?
+    value_options:
+    - xbuild
+    - msbuild
+    - mdtool
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.
