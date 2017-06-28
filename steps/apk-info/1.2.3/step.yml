@@ -5,15 +5,14 @@ description: Provides all possible Android APK information as package name, vers
 website: https://github.com/thefuntasty/bitrise-step-apk-info
 source_code_url: https://github.com/thefuntasty/bitrise-step-apk-info
 support_url: https://github.com/thefuntasty/bitrise-step-apk-info/issues
-published_at: 2017-06-28T11:16:37.763788407+02:00
+published_at: 2017-06-28T12:49:26.124825631+02:00
 source:
   git: https://github.com/thefuntasty/bitrise-step-apk-info.git
-  commit: b8763ea4d0517c0ec16ceca37cb62373c8ad833e
+  commit: 8aa691f70c60416b3c3d30002797a3775875a351
 project_type_tags:
 - android
 type_tags:
-- android
-- apk
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
