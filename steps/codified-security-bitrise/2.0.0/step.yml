@@ -1,0 +1,47 @@
+title: Codified Security
+summary: This step uploads your app to Codified Security for automated mobile app
+  security testing
+description: |-
+  This step uploads your app to Codified Security for automated mobile app security testing.
+
+  https://codifiedsecurity.com
+website: https://bitbucket.org/codifiedldn/codified-security-bitrise
+published_at: 2017-06-29T15:45:26.487157365+02:00
+source:
+  git: https://bitbucket.org/codifiedldn/codified-security-bitrise.git
+  commit: 9e4a89d93d5fe903a9b73b929706552a2e216b0f
+project_type_tags:
+- ios
+- android
+- xamarin
+type_tags:
+- test
+is_requires_admin_user: false
+is_always_run: false
+inputs:
+- codified_security_api_key: $CODIFIED_SECURITY_API_KEY
+  opts:
+    description: You can get your key from https://dashboard.codifiedsecurity.com/settings.
+      You'll find it under Integrations tab as Api Key.
+    is_required: true
+    title: Codified Security API Key
+- app_path: $BITRISE_APK_PATH
+  opts:
+    is_required: false
+    title: Path to your IPA or APK file
+- is_xamarin_ios: "false"
+  opts:
+    description: |-
+      You'll need to specify the path to your iOS project directory. Also make sure to build your Xamarin project in Debug mode! Instructions for this are in the User Guide.
+      Options:
+      * "true"
+      * "false"
+    is_required: false
+    title: Select true if you want to upload a Xamarin.iOS app
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_required: false
+    title: Path to your iOS project folder
+  xamarin_ios_project_folder: ""
