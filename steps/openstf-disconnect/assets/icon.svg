@@ -5,7 +5,7 @@
 <style type="text/css">
 	.st0{fill:#662D91;}
 	.st1{fill:#FFFFFF;}
-	.st2{fill:none;stroke:#CC2166;stroke-width:13;stroke-miterlimit:10;}
+	.st2{fill:#CC2166;}
 </style>
 <rect x="-25.3" y="-19.2" class="st0" width="1035.1" height="1053.1"/>
 <g>
@@ -56,5 +56,5 @@
 		<path class="st1" d="M742,802h79.2v20.8h-56.3V845h49.6v20.8h-49.6V906H742V802z"/>
 	</g>
 </g>
-<line class="st2" x1="814.7" y1="730.8" x2="185.3" y2="101.3"/>
+<rect x="466" y="-60" transform="matrix(0.7072 -0.7071 0.7071 0.7072 -125.8297 466.281)" class="st2" width="68" height="890.2"/>
 </svg>
