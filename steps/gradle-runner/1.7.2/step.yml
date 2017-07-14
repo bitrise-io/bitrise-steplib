@@ -1,0 +1,166 @@
+title: Gradle Runner
+summary: Runs the specified gradle task.
+description: |-
+  Runs the specified gradle task and copies the generated APKs into
+  the Bitrise Deploy Directory (`$BITRISE_DEPLOY_DIR`).
+website: https://github.com/bitrise-io/steps-gradle-runner
+source_code_url: https://github.com/bitrise-io/steps-gradle-runner
+support_url: https://github.com/bitrise-io/steps-gradle-runner/issues
+published_at: 2017-07-14T11:13:17.545766565+02:00
+source:
+  git: https://github.com/bitrise-io/steps-gradle-runner.git
+  commit: f98e8fc37c023d3d169197b681e2db5cf5cf27a9
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-gradle-runner
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- gradle_file: $GRADLE_BUILD_FILE_PATH
+  opts:
+    category: Config
+    description: |
+      Optional path to the gradle build file to use
+    title: Optional path to the gradle build file to use
+- gradle_task: assemble
+  opts:
+    category: Config
+    description: |
+      Gradle task to run.
+
+      You can call `gradle tasks` or `gradle tasks --all` in your
+      Gradle project directory to get the list of available tasks.
+    is_required: true
+    title: Gradle task to run
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    category: Config
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper is what makes sure
+      that the right Gradle version is installed and used for the build.
+
+      __You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one (if you would not have one already)__
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root, for example: `./gradlew`,
+      or if it's in a sub directory: `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- apk_file_include_filter: '*.apk'
+  opts:
+    category: Export Config
+    description: |
+      The step will copy the generated apk files that match this filter into the Bitrise Deploy Directory.
+
+      This filter is a standard find commands -path pattern, see: http://linux.die.net/man/1/find
+
+      If you specify an empty filter, the step will set this filter to: `*.apk`.
+
+      Example:
+
+      - `*release*.apk` - Copy every apk which filename contains `release`, like (`./app/build/outputs/apk/app-release-unsigned.apk`).
+    title: APK file include filter
+- apk_file_exclude_filter: '*-unaligned.apk'
+  opts:
+    category: Export Config
+    description: |
+      The step will **not** copy the generated apk files that match this filter into the Bitrise Deploy Directory.
+      You can use this filter to avoid moving unalinged or unsigned apk files.
+
+      This filter is a standard find commands negated -path flag, see: http://linux.die.net/man/1/find
+
+      If you specify an empty filter, every apk file (selected by `apk_file_include_filter`) will be copied.
+
+      Example:
+
+      - `*unaligned*.apk` - Avoid to copy apk if filename contains `unaligned`.
+    title: APK file exclude filter
+- mapping_file_include_filter: '*/mapping.txt'
+  opts:
+    category: Export Config
+    description: |
+      The step will copy the generated mapping files that match this filter into the Bitrise Deploy Directory.
+
+      This filter is a standard find commands -path pattern, see: http://linux.die.net/man/1/find
+
+      If you specify an empty filter, no mapping files will be copied.
+
+      Example: `*mapping.txt` - Copy every mapping.txt file.
+    title: Mapping file include filter
+- mapping_file_exclude_filter: null
+  opts:
+    category: Export Config
+    description: |
+      The step will **not** copy the generated mapping files that match this filter into the Bitrise Deploy Directory.
+      You can use this step to avoid moving beta mapping file.
+
+      This filter is a standard find commands negated -path flag, see: http://linux.die.net/man/1/find
+
+      If you specify an empty filter, every mapping files (selected by `mapping_file_include_filter`) will be copied.
+
+      Example: `*/beta/mapping.txt` - Avoid to copy mapping.txt file in a `beta` directoy.
+    title: Mapping file exclude filter
+- cache_level: all
+  opts:
+    category: Debug
+    description: |-
+      `all` - will cache build-cache and dependencies
+      `only deps` - will cache dependencies only
+      `none` - won't cache any of the above
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only deps
+    - none
+- gradle_options: --stacktrace --no-daemon
+  opts:
+    category: Debug
+    description: |-
+      Options added to the end of the Gradle call.
+
+      You can use multiple options, separated by a space
+      character. Example: `--stacktrace --debug`
+    title: Additional options for Gradle call
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK,
+      after filtering based on the filter inputs.
+
+      If the build generates more than one APK which fulfills the
+      filter inputs this output will contain the last one's path.
+    summary: Path of the generated (and copied) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated APKs,
+      after filtering based on the filter inputs.
+
+      The paths are separated with `|` character, eg: `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+    summary: List of the generated (and copied) APK paths - after filtering.
+    title: List of the generated APK paths
+- BITRISE_MAPPING_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated mapping.txt.
+
+      If more than one mapping.txt exist in project this output will contain the last one's path.
+    summary: Path of the generated (and copied) mapping.txt.
+    title: Path of the generated mapping.txt
