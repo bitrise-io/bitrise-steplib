@@ -1,0 +1,73 @@
+title: Android SDK Update
+summary: |-
+  Need to install or update a packge from Android SDK Manager?
+  Use this Step to install and update them as you wish!
+description: Install the necessary sdk tools to compile your application
+website: https://github.com/guitcastro/steps-update-sdk
+source_code_url: https://github.com/guitcastro/steps-update-sdk
+support_url: https://github.com/guitcastro/steps-update-sdk/issues
+published_at: 2017-07-18T16:40:00.250198428-03:00
+source:
+  git: https://github.com/guitcastro/steps-update-sdk.git
+  commit: fb76af2d0e6137bc09b7c432ce22d119d1f9e754
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- installer
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Enable this option to update the Android SDK Tools.
+    summary: ""
+    title: Update Android SDK Tools
+    value_options:
+    - "on"
+    - "off"
+  tools: "off"
+- opts:
+    description: Select which version of Android SDK Platform-tools should be installed.
+    is_required: true
+    title: Android SDK Platform-tools version
+    value_options:
+    - stable
+    - preview
+    - both
+    - none
+  platform_tools: none
+- build_tools: ""
+  opts:
+    description: |-
+      Comma separated list of all Build-tools versions that should be installed.
+
+      Example: `23.0.2,22.0.1`
+
+      *Leave it empty if you don't want to install any Build tool.*
+    summary: 'Example: 23.0.2,22.0.1'
+    title: Android SDK Build-tools versions
+- opts:
+    description: "Comma separated list of all platform versions that should be installed.\n\nExample:
+      `23,22,17`\n\n*Leave it empty if you don't want to install any SDK version.*
+      \     "
+    summary: 'Example: 23,22,17'
+    title: Android SDK Platform versions
+  sdk_version: ""
+- opts:
+    description: |-
+      Comma separated list of all system images that should be installed.
+      Use `android list --all -e` to get the names of all available SystemImages.
+
+      Example: `sys-img-armeabi-v7a-android-tv-23,sys-img-armeabi-v7a-android-22`
+
+      *Leave it empty if you don't want to install any System Image.*
+    summary: 'Example: extras;google;googlee_play_services,extras;google;m2repository,extras;android;m2repository,add-ons;addon-google_apis-google-15,system-images;android-20;android-wear;x86,system-images;android-20;android-tv;armeabi-v7a'
+    title: System Images and others
+  system_images: ""
