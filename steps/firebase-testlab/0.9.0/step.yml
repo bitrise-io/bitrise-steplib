@@ -1,0 +1,163 @@
+title: Firebase TestLab Android PRIVATE-BETA
+summary: Run your Android tests using Firebase TestLab
+description: Run your Android tests using Firebase TestLab, so your tests will run
+  faster and you'll receive more detailed test results.
+website: https://github.com/bitrise-steplib/steps-firebase-testlab
+source_code_url: https://github.com/bitrise-steplib/steps-firebase-testlab
+support_url: https://github.com/bitrise-steplib/steps-firebase-testlab/issues
+published_at: 2017-08-17T16:35:04.215674889+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-firebase-testlab.git
+  commit: f7eefab9c2c5c94bf5a7118097719ea0bae575e1
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-firebase-testlab
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: null
+  opts:
+    description: |
+      The path to the unaligned debug APK.
+    is_required: true
+    summary: The path to the debug, unaligned APK.
+    title: APK path
+- opts:
+    description: |
+      One device configuration per line and the parameters are separated with "," in the order of: deviceID, version, language, orientation
+      For example:
+      athene,23,en,portrait
+      athene,23,en,landscape
+    is_required: true
+    summary: |
+      One device configuration per line and the parameters are separated with "," in the order of: "deviceID, version, language, orientation". For example: athene,23,en,portrait
+    title: Test devices
+  test_devices: athene,23,en,portrait
+- opts:
+    description: |
+      The type of your test you want to run on the device.
+    is_required: true
+    summary: The type of your test
+    title: Test type
+    value_options:
+    - instrumentation
+    - robo
+    - gameloop
+  test_type: instrumentation
+- app_package_id: null
+  opts:
+    description: |
+      The package ID of your app
+    summary: The package ID of your apk
+    title: App package ID
+- opts:
+    category: Instrumentation Test
+    description: |
+      The path to the unaligned test debug APK.
+    summary: The path to the unaligned test debug APK.
+    title: Test APK path
+  test_apk_path: null
+- inst_test_package_id: null
+  opts:
+    category: Instrumentation Test
+    description: |
+      The package ID of your test apk
+    summary: The package ID of your test apk
+    title: Test package ID
+- inst_test_runner_class: null
+  opts:
+    category: Instrumentation Test
+    description: |
+      The test runner that will run your test cases
+    summary: The test runner that will run your test cases
+    title: Test runner class
+- inst_test_targets: null
+  opts:
+    category: Instrumentation Test
+    description: |
+      Test targets
+    summary: Test targets
+    title: |
+      Test targets, seperated with the "," character.
+- opts:
+    category: Robo Test
+    title: Initial activity
+  robo_initial_activity: null
+- opts:
+    category: Robo Test
+    title: Max depth
+  robo_max_depth: null
+- opts:
+    category: Robo Test
+    title: Max steps
+  robo_max_steps: null
+- opts:
+    category: Robo Test
+    description: |
+      Test targets
+    summary: |
+      One directive per line, the parameters are separated with "," character. For example: "ResourceName,InputText,ActionType"
+    title: Robo directives
+  robo_directives: null
+- loop_scenarios: null
+  opts:
+    category: Game Loop Test
+    title: Loop scenarios
+- loop_scenario_labels: null
+  opts:
+    category: Game Loop Test
+    title: Loop scenario labels
+- opts:
+    category: Debug
+    title: Maximum time allowed for the tests to run
+  test_timeout: 900
+- directories_to_pull: null
+  opts:
+    category: Debug
+    title: Directories to pull, one path per line
+- environment_variables: null
+  opts:
+    category: Debug
+    title: |
+      Environment Variables, one per line and separated by "="
+- download_test_results: false
+  opts:
+    category: Debug
+    is_required: true
+    title: Download test result files
+    value_options:
+    - false
+    - true
+- api_base_url: $ADDON_FIREBASE_API_URL
+  opts:
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- api_token: $ADDON_FIREBASE_API_TOKEN
+  opts:
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_required: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+outputs:
+- FIREBASE_TEST_RESULTS_PATH: null
+  opts:
+    description: The directory containing test assets
+    title: The directory containing test assets
