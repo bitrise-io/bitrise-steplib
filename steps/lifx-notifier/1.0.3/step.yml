@@ -1,0 +1,95 @@
+title: LIFX Notifier
+summary: Sends signals to your LIFX bulb during builds.
+description: |-
+  Add this step to your workflow when color change is required.
+
+  This step can be used at the start (notify build start) and at the end (notify success/failure) of your workflow.
+  If there's no need to notify about workflow start than adding step to the end of the workflow will be enough.
+
+  If all colors fields will be empty, default colors will be used:
+  "build start" - yellow, "build success" - green, "build failure" - red.
+website: https://github.com/vgaidarji/steps-lifx-notifier
+source_code_url: https://github.com/vgaidarji/steps-lifx-notifier
+support_url: https://github.com/vgaidarji/steps-lifx-notifier/issues
+published_at: 2017-08-17T16:04:25.018497066+03:00
+source:
+  git: https://github.com/vgaidarji/steps-lifx-notifier.git
+  commit: f815e5dc14a75acdd3266e9c43baf3dbb96f0d38
+host_os_tags:
+- osx-10.8
+- osx-10.10
+- ubuntu
+type_tags:
+- utility
+- notification
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+run_if: ""
+inputs:
+- auth_token: null
+  opts:
+    description: |
+      This step uses official LIFX API,
+      which requires OAuth2 Access token (https://api.developer.lifx.com/docs/authentication).
+    is_required: true
+    title: Authentication token
+- bulb_label: null
+  opts:
+    description: |
+      This is the name of the LIFX bulb, eg. "Bedroom", "Office".
+    is_required: true
+    title: LIFX bulb label
+- color_build_success: green
+  opts:
+    description: |
+      It can be used after any step in the workflow to notify about current state.
+      e.g.: use "yellow" color to indicate that workflow started
+    title: Build success color (LIFX default)
+    value_options:
+    - blue
+    - cyan
+    - green
+    - orange
+    - pink
+    - purple
+    - red
+    - yellow
+    - white
+- color_build_success_custom: null
+  opts:
+    description: |
+      If custom color provided, it will be used instead of LIFX default.
+      Format RRGGBB, e.g: 00ff00 (green).
+    title: Build success color (custom)
+- color_build_failure: red
+  opts:
+    description: |
+      This color will be used to notify about failure,
+      if no custom color provided.
+    title: Build failure color (LIFX default)
+    value_options:
+    - blue
+    - cyan
+    - green
+    - orange
+    - pink
+    - purple
+    - red
+    - yellow
+    - white
+- color_build_failure_custom: null
+  opts:
+    description: |
+      If custom color provided, it will be used instead of LIFX default.
+      Format RRGGBB, e.g: ff0000 (red).
+    title: Build failure color (custom)
+- effect: none
+  opts:
+    description: |
+      Instead of setting a solid color, do you want to e.g. pulse the light?
+    title: Effect
+    value_options:
+    - none
+    - pulse
+    - breathe
