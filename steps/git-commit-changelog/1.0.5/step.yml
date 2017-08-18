@@ -1,0 +1,29 @@
+title: Git Commit Changelog
+summary: Generates a changelog for deployment between two tags
+description: Generates a changelog for deployment between two tags
+website: https://github.com/nodes-android/ci-bitrise-changelog-step
+source_code_url: https://github.com/nodes-android/ci-bitrise-changelog-step
+support_url: https://github.com/nodes-android/ci-bitrise-changelog-step/issues
+published_at: 2017-08-18T10:29:46.627644616+02:00
+source:
+  git: https://github.com/nodes-android/ci-bitrise-changelog-step.git
+  commit: bc3fbd78684d397ecd1ba8684ec021110882e983
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: "true"
+outputs:
+- COMMIT_CHANGELOG: ""
+  opts:
+    description: ""
+    summary: ""
+    title: Environment variable containing the generated commit changelog
