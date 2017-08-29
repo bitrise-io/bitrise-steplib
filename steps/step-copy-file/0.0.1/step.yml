@@ -1,0 +1,32 @@
+title: copy-file
+summary: |
+  Step to copy a file from one folder to another. You can use this for copying configuration files fromm archived location to a specific directory in the workspace.
+description: |
+  Step to copy a file from one folder to another. You can use this for copying configuration files from archived location to a specific directory in the workspace.
+website: https://github.com/satyasrikantmantha/bitrise-step-copy-file
+source_code_url: https://github.com/satyasrikantmantha/bitrise-step-copy-file
+support_url: https://github.com/satyasrikantmantha/bitrise-step-copy-file/issues
+published_at: 2017-08-29T00:31:45.079479601+05:30
+source:
+  git: https://github.com/satyasrikantmantha/bitrise-step-copy-file.git
+  commit: 11221535b026ba0fc31bb341e8146bd3c2dfabb1
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: false
+    is_required: true
+    title: Source file path
+  source_file_path: Specify source file path
+- destination_file_path: Specify destination file path
+  opts:
+    is_expand: false
+    is_required: true
+    title: Destination file path
