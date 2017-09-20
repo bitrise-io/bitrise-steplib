@@ -1,0 +1,42 @@
+title: Git Last Commit Date
+summary: |
+  Reads the date of the last git commit
+description: |
+  Reads the date of the last git commit, then export that data to
+  environemnt variables LAST_COMMIT_DATE and LAST_COMMIT_DATE_NUMBERS.
+
+  After this you can use these environment variables in other steps.
+website: https://github.com/tomcurran/bitrise-step-git-last-commit-date
+source_code_url: https://github.com/tomcurran/bitrise-step-git-last-commit-date
+support_url: https://github.com/tomcurran/bitrise-step-git-last-commit-date/issues
+published_at: 2017-09-18T22:40:35.77834787+01:00
+source:
+  git: https://github.com/tomcurran/bitrise-step-git-last-commit-date.git
+  commit: f665b491fcbc4c345d307d06530a283d044d2cdc
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+outputs:
+- LAST_COMMIT_DATE: null
+  opts:
+    summary: The date for the last git commit in ISO 8601 format.
+    title: Last commit date
+- LAST_COMMIT_DATE_NUMBERS: null
+  opts:
+    description: |
+      The date numbers are intended to fit in the 32-bit signed two's complement integer range.
+    summary: The date for the last git commit in format YYMMDDHHmm.
+    title: Last commit date numbers
