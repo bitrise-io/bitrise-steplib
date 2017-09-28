@@ -45,3 +45,4 @@ inputs:
     is_required: false
     summary: ""
     title: Linting configuration file
+
