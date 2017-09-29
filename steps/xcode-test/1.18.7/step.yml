@@ -158,8 +158,7 @@ inputs:
         -project\-workspace PROJECT.xcodeproj\WORKSPACE.xcworkspace
         -scheme SCHEME
         build test
-        -destination platform=PLATFORM Simulator,name=NAME,OS=VERSION
-        -derivedDataPath DERIVED_DATA_PATH`
+        -destination platform=PLATFORM Simulator,name=NAME,OS=VERSION`
 
       In case of `generate_code_coverage_files: "yes"`
       `xcodebuild` gets two additional flags:
