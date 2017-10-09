@@ -25,7 +25,10 @@ project_type_tags:
 - android
 type_tags:
 - deploy
-- HockeyApp
+- xamarin
+- cordova
+- ionic
+- react-native
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-hockeyapp-android-deploy
