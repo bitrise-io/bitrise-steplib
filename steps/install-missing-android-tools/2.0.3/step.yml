@@ -1,0 +1,56 @@
+title: Install missing Android SDK components
+summary: Install missing Android SDK components
+description: "This step makes sure that required Android SDK components (platforms
+  and build-tools) are installed.\n\nThe step runs the `gradlew dependencies` command.\n\nIf
+  the Plugin version is 2.2.0 or later, the plugin will download and install the missing
+  components during the Gradle command.   \nOtherwise the command will fail, the step
+  parses the command's output to determine which SDK components are missing and installs
+  them."
+website: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+source_code_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+support_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools/issues
+published_at: 2017-10-11T14:49:43.584014034+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-install-missing-android-tools.git
+  commit: c59062639b1579f935f7ede8a75bf87c34a6dc44
+project_type_tags:
+- android
+- cordova
+- ionic
+- react-native
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-install-missing-android-tools
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    category: Config
+    description: Path to the root build.gradle file.
+    is_required: true
+    summary: ""
+    title: Path to the root build.gradle file
+  root_build_gradle_file: $GRADLE_BUILD_FILE_PATH
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    category: Config
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper is what makes sure
+      that the right Gradle version is installed and used for the build.
+      __You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one (if you would not have one already)__
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root, for example: `./gradlew`,
+      or if it's in a sub directory: `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
