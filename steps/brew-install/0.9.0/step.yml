@@ -1,0 +1,56 @@
+title: Brew install
+summary: |
+  Install or upgrade formula with brew
+description: |
+  Install or upgrade formula with brew
+website: https://github.com/bitrise-steplib/steps-brew-install
+source_code_url: https://github.com/bitrise-steplib/steps-brew-install
+support_url: https://github.com/bitrise-steplib/steps-brew-install/issues
+published_at: 2017-10-27T17:22:48.641520695+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-brew-install.git
+  commit: 2f3c953e7178a92e3d05ed67d91a01c181f0675a
+host_os_tags:
+- osx-10.10
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-brew-install
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Name of the formula to install/upgrade
+    is_expand: true
+    is_required: true
+    summary: Name of the formula to install/upgrade
+    title: Name of the formula to install/upgrade
+    value_options: []
+  packages: null
+- options: null
+  opts:
+    description: |
+      Flags to pass to the bew install/reinstall command.
+
+      `brew install/reinstall [options] [packages]`
+    is_expand: true
+    is_required: false
+    summary: Options for Brew install/upgrade
+    title: Options for Brew install/upgrade
+    value_options: []
+- opts:
+    description: |
+      If set the step will upgrade the defined packages by calling `brew reinstall [options] [packages]` command.
+
+      Otherwise the step calls `brew install [options] [packages]`
+    is_expand: true
+    is_required: false
+    summary: Upgrade formula if previously installed
+    title: Upgrade formula if previously installed
+    value_options:
+    - "yes"
+    - "no"
+  upgrade: "yes"
