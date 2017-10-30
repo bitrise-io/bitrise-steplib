@@ -1,0 +1,56 @@
+title: apt-get install
+summary: |
+  Install or upgrade packages with apt-get
+description: |
+  Install or upgrade packages with apt-get
+website: https://github.com/bitrise-steplib/steps-apt-get-install
+source_code_url: https://github.com/bitrise-steplib/steps-apt-get-install
+support_url: https://github.com/bitrise-steplib/steps-apt-get-install/issues
+published_at: 2017-10-30T13:48:44.706918231+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-apt-get-install.git
+  commit: 0561642b4ec224e02697e55636bc52631cd45c45
+host_os_tags:
+- ubuntu
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-apt-get-install
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Name of the packages to install/upgrade
+    is_expand: true
+    is_required: true
+    summary: Name of the packages to install/upgrade
+    title: Name of the packages to install/upgrade
+    value_options: []
+  packages: null
+- options: null
+  opts:
+    description: |
+      Flags to pass to the apt-get install/upgrade command.
+
+      `apt-get install/upgrade -y [options] [packages]`
+    is_expand: true
+    is_required: false
+    summary: Options for apt-get install/upgrade
+    title: Options for apt-get install/upgrade
+    value_options: []
+- opts:
+    description: |
+      If set the step will upgrade the defined packages by calling `apt-get upgrade -y [options] [packages]` command.
+
+      Otherwise the step calls `apt-get install -y [options] [packages]`
+    is_expand: true
+    is_required: false
+    summary: Upgrade packages if previously installed
+    title: Upgrade packages if previously installed
+    value_options:
+    - "yes"
+    - "no"
+  upgrade: "yes"
