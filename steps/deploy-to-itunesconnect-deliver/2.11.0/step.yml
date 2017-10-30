@@ -1,0 +1,214 @@
+title: Deploy to iTunes Connect / TestFlight (with Deliver)
+summary: Upload the archive to iTunes Connect / TestFlight and you can also submit
+  it for review.
+description: |-
+  Deploy to iTunes Connect / TestFlight, using the
+  fantastic [Deliver](https://github.com/fastlane/fastlane/tree/master/deliver)
+  Ruby gem.
+
+  **If this is the very first build** of the app
+  you try to deploy to iTunes Connect / TestFlight then you might want to upload the first
+  build manually to make sure it fulfills the initial iTunes Connect / TestFlight submission
+  verification process.
+
+  **Be advised** that this
+  step uses a well maintained, open source tool which
+  uses *undocumented and unsupported APIs* (because the current
+  iTunes Connect / TestFlight platform does not have a documented and supported API)
+  to perform the deployment.
+  This means that when the API changes
+  **this step might fail until the tool is updated**.
+
+  ## Setup guide and notes
+
+  * Register an app on iTunes Connect / TestFlight, on the **My Apps** page. Click on the *plus sign* and select the **New App** option. This requires an **admin** account.
+  * Requires an **App Store iOS distibution Provisioning Profile**
+  * Every build which you want to push to iTunes Connect / TestFlight have to have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*)
+website: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver
+source_code_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver
+support_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver/issues
+published_at: 2017-10-30T15:16:37.148057048+01:00
+source:
+  git: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver.git
+  commit: e05273741a50de922cee77267965fad232fa6d04
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-deploy-to-itunesconnect-deliver
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: Path of the IPA file, to be deployed to iTunes Connect
+    summary: ""
+    title: IPA path
+- opts:
+    description: Path of the PKG file, to be deployed to iTunes Connect
+    summary: ""
+    title: PKG path
+  pkg_path: $BITRISE_PKG_PATH
+- itunescon_user: ""
+  opts:
+    description: |-
+      Login Apple ID (email) for the iTunes Connect site.
+
+      *Make sure that this email is verified,
+      your Apple ID cannot be used until you verify it
+      on Apple's website!*
+    is_required: true
+    summary: ""
+    title: 'iTunes Connect: User Apple ID (email)'
+- opts:
+    description: |-
+      Password for the specified User Apple ID.
+
+      **Note:** if your password
+      contains special characters
+      and you experience problems, please
+      consider changing your password
+      to something with only
+      alphanumeric characters.
+    is_required: true
+    summary: ""
+    title: 'iTunes Connect: Password'
+  password: ""
+- app_id: ""
+  opts:
+    description: |-
+      The App's *Apple ID* on iTunes Connect.
+
+      This input or `bundle_id` is required
+
+      Open the **App's page on iTunes Connect**,
+      click on **App Information**, scroll down to the *General Information* section,
+      copy the *Apple ID*'s value from here (numeric, like 846814360)
+    summary: ""
+    title: 'iTunes Connect: App Apple ID'
+- bundle_id: ""
+  opts:
+    description: |-
+      The App's *Bundle ID* on iTunes Connect.
+
+      This input or app_id is required
+    summary: ""
+    title: 'iTunes Connect: App Bundle ID'
+- opts:
+    description: |
+      Wait for the submission to be processed and then
+      submit the app for review for this specific version?
+
+      If this option is disabled then this step won't wait
+      for the new version to be processed on iTunes Connect
+      and won't submit it for review automatically.
+
+      *Enabling this option will wait for the submission to be
+      processed which might take a couple of minutes after the
+      new version is deployed to iTunes Connect*.
+
+      **NOTE:** if this option is enabled then this step will
+      fail even if the version was successfully uploaded
+      to iTunes Connect and only the review submission failed.
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Submit for Review?
+    value_options:
+    - "yes"
+    - "no"
+  submit_for_review: "no"
+- opts:
+    description: |
+      Flag to skip uploading the appstore metadata.
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Skip Metadata?
+    value_options:
+    - "yes"
+    - "no"
+  skip_metadata: "yes"
+- opts:
+    description: |
+      Flag to skip uploading changes to appstore screenshots.
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Skip Screenshots?
+    value_options:
+    - "yes"
+    - "no"
+  skip_screenshots: "yes"
+- opts:
+    description: |-
+      The App's *Team ID* on iTunes Connect.
+
+      This field is required when using iTunes Connect account
+      linked to multiple publish team.
+
+      Use this input or `team_name` to specify the team.
+    summary: ""
+    title: 'iTunes Connect: Team ID'
+  team_id: ""
+- opts:
+    description: |-
+      The App's *Team Name* on iTunes Connect.
+
+      This field is required when using iTunes Connect account
+      linked to multiple publish team.
+
+      Use this input or `team_id` to specify the team.
+    summary: ""
+    title: 'iTunes Connect: Team name'
+  team_name: ""
+- opts:
+    description: The platform will be delivered to iTunes Connect.
+    is_required: true
+    summary: ""
+    title: Platform
+    value_options:
+    - ios
+    - osx
+    - appletvos
+  platform: ios
+- options: null
+  opts:
+    description: |-
+      Options added to the end of the `deliver` call.
+
+      If you want to add more options, list that separated by space character.
+      Example: `--skip_metadata --skip_screenshots`
+    summary: ""
+    title: ' Additional options for `deliver` call'
+- gemfile_path: ./Gemfile
+  opts:
+    description: |
+      Path to the Gemfile which contains `fastlane` gem.
+
+      If Gemfile not exist or does not contain fastlane gem:
+
+      - if `fastlane_version` input not specified, latest version will be used
+    title: Gemfile path
+- fastlane_version: latest
+  opts:
+    description: This option lets you specify a specific version of the `fastlane`
+      gem to be installed.
+    summary: Install a specific version of the `fastlane` gem.
+    title: Fastlane version
