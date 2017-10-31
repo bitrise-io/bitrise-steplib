@@ -1,0 +1,47 @@
+title: Telegram Notifier
+summary: |
+  Notify Telegram groups about build status
+description: |
+  This plugin let's you notify about build status on your Telegram groups
+website: https://github.com/munirwanis/bitrise-step-telegram-notifier
+source_code_url: https://github.com/munirwanis/bitrise-step-telegram-notifier
+support_url: https://github.com/munirwanis/bitrise-step-telegram-notifier/issues
+published_at: 2017-10-31T13:25:11.222148-02:00
+source:
+  git: https://github.com/munirwanis/bitrise-step-telegram-notifier.git
+  commit: 7b954855740fb70abcfdd9ba355b5f9242a42897
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- TELEGRAM_BOT_TOKEN: $TELEGRAM_BOT_TOKEN
+  opts:
+    description: |
+      Your bot token
+      You can also set it as a Secret with the name `TELEGRAM_BOT_TOKEN`
+    is_required: true
+    title: Telegram Bot Token
+- TELEGRAM_CHAT_ID: $TELEGRAM_CHAT_ID
+  opts:
+    description: |
+      The chat you want to send the message
+      You can also set it as a Secret with the name `TELEGRAM_CHAT_ID`
+    is_required: true
+    title: Chat ID
