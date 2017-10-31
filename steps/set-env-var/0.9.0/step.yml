@@ -1,0 +1,46 @@
+title: Set environment variable
+summary: |
+  Set environment variable
+description: |
+  With this step you can copy a value into as many environment variables as you like.
+website: https://github.com/bitrise-steplib/steps-set-env-var
+source_code_url: https://github.com/bitrise-steplib/steps-set-env-var
+support_url: https://github.com/bitrise-steplib/steps-set-env-var/issues
+published_at: 2017-10-31T17:05:44.602748128+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-set-env-var.git
+  commit: c62571ae181ac00498f69753005fb03dc8e62a9c
+host_os_tags:
+- osx-10.10
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-set-env-var
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      The value will be copied into the destination environment variables.
+    is_expand: true
+    is_required: false
+    summary: Value for copy into Environment variables
+    title: Value for copy into Envirhnment variables
+    value_options: []
+  value: null
+- destination_keys: null
+  opts:
+    description: |
+      Space separated list of the keys of the destination environment variables.
+      The value will be copied into these environment variables.
+
+      `envman add --key [destination_key] --value [value]`
+    is_expand: true
+    is_required: true
+    summary: Destination Environment variables
+    title: Destination Environment variables
+    value_options: []
