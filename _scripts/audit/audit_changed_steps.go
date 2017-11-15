@@ -102,7 +102,7 @@ func auditChangedStepInfoYML(stepInfoYmlPth string) error {
 	}
 
 	fmt.Println()
-	log.Donef("SUCCESSFUL audit")
+	log.Successf("SUCCESSFUL audit")
 
 	return nil
 }
@@ -184,7 +184,7 @@ func auditChangedStepYML(stepYmlPth string) error {
 	log.Printf(output)
 
 	fmt.Println()
-	log.Donef("SUCCESSFUL audit")
+	log.Successf("SUCCESSFUL audit")
 
 	return nil
 }
