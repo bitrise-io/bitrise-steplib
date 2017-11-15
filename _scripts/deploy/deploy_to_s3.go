@@ -165,10 +165,7 @@ func uploadStepsDir() error {
 		upStepsDirPth += "/"
 	}
 	log.Println("Uploading from: ", upStepsDirPth, " | to: ", s3UploadFullPath)
-	if err := runCommand("s3cmd", "-c", s3cmdConfigFilePath, "--acl-public", "--recursive", "sync", upStepsDirPth, s3UploadFullPath); err != nil {
-		return err
-	}
-	return nil
+	return runCommand("s3cmd", "-c", s3cmdConfigFilePath, "--acl-public", "--recursive", "sync", upStepsDirPth, s3UploadFullPath)
 }
 
 func uploadStepArchiveZIPs() error {
