@@ -1,0 +1,70 @@
+title: Swiftlint
+summary: |
+  Runs Swiftlint on the project
+description: |
+  Runs Swiftlint on the project to provide clean code
+  For more information about Swiftlint please visit: https://github.com/realm/SwiftLint/
+website: https://github.com/kimdv/bitrise-step-swiftlint
+source_code_url: https://github.com/kimdv/bitrise-step-swiftlint
+support_url: https://github.com/kimdv/bitrise-step-swiftlint/issues
+published_at: 2017-11-18T22:54:29.053729+01:00
+source:
+  git: https://github.com/kimdv/bitrise-step-swiftlint.git
+  commit: 48315ba5abea226bfb3ada4787128eece0c9eeb4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: swiftlint
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- linting_path: null
+  opts:
+    category: Config
+    description: ""
+    is_required: true
+    summary: ""
+    title: Select the path where Swiftlint should lint
+- lint_config_file: $BITRISE_SOURCE_DIR/.swiftlint.yml
+  opts:
+    category: Config
+    description: If you use a custom linting configuration for Bitrise, you can specify
+      the path here.
+    is_required: false
+    summary: ""
+    title: Linting configuration file
+- opts:
+    category: Config
+    description: Sets the reporter style when printing violations or errors.
+    summary: ""
+    title: Select method for export
+    value_options:
+    - xcode
+    - json
+    - csv
+    - checkstyle
+    - junit
+    - emoji
+  reporter: xcode
+- opts:
+    category: Config
+    description: Use strict mode when linting (i.e. warnings become errors)
+    is_required: false
+    summary: ""
+    title: Use strict mode
+    value_options:
+    - "yes"
+    - "no"
+  strict: "no"
