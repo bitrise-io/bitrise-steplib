@@ -58,7 +58,7 @@ inputs:
     - junit
     - emoji
   reporter: xcode
-- opts:
+- opts: "no"
     category: Config
     description: Use strict mode when linting (i.e. warnings become errors)
     is_required: false
