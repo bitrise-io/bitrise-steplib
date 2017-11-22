@@ -1,0 +1,117 @@
+title: Xcode Analyze
+summary: |-
+  Find flaws (potential bugs) in the source code of a project with the
+  static analyzer built into Xcode.
+description: |-
+  Find flaws (potential bugs) in the source code of a project with the
+  static analyzer built into Xcode.
+
+  Runs Xcode's `analyze` action.
+website: https://github.com/bitrise-io/steps-xcode-analyze
+source_code_url: https://github.com/bitrise-io/steps-xcode-analyze
+support_url: https://github.com/bitrise-io/steps-xcode-analyze/issues
+published_at: 2017-11-22T15:14:19.382722705+01:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-analyze.git
+  commit: ab74c69599eadb1c639fb1abced011d6ed160225
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- react-native
+- cordova
+- ionic
+type_tags:
+- test
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    is_expand: true
+    is_required: false
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Workfing directory (if specified).
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- is_clean_build: "no"
+  opts:
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- force_code_sign_identity: null
+  opts:
+    description: |-
+      Force xcodebuild to use specified Code Sign Identity.
+
+      Specify code sign identity as full ID (e.g. `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
+      or specify code sign group ( `iPhone Developer` or `iPhone Distribution` ).
+    title: Force code signing with Identity
+- force_provisioning_profile: null
+  opts:
+    description: |-
+      Force xcodebuild to use specified Provisioning Profile.
+
+      Use Provisioning Profile's UUID, profile's name is not acceptable by xcodebuild.
+
+      How to get your UUID:
+
+      - In xcode select your project -> Build Settings -> Code Signing
+      - Select the desired Provisioning Profile, then scroll down in profile list and click on Other...
+      - The popup will show your profile's UUID.
+
+      Format example:
+
+      - c5be4123-1234-4f9d-9843-0d9be985a068
+    title: Force code signing with Provisioning Profile
+- disable_codesign: "yes"
+  opts:
+    description: In order to skip the code signing set this option to `yes`.
+    title: Disable Code Signing
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
