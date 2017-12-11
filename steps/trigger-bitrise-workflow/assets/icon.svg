@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="1000" viewBox="0 0 1000 1000">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: #49c1a3;
+      }
+
+      .cls-2, .cls-4 {
+        fill: #fff;
+      }
+
+      .cls-3 {
+        fill: none;
+        stroke-width: 36px;
+      }
+
+      .cls-3, .cls-4 {
+        stroke: #fff;
+        stroke-miterlimit: 10;
+      }
+
+      .cls-4 {
+        stroke-width: 35px;
+      }
+    </style>
+  </defs>
+  <title>bitrise_trigger</title>
+  <g id="Layer_2" data-name="Layer 2">
+    <rect class="cls-1" x="-22" y="-26" width="1048" height="1044"/>
+  </g>
+  <g id="Layer_3" data-name="Layer 3">
+    <g>
+      <circle class="cls-2" cx="289.56827" cy="289.7249" r="20.43173"/>
+      <circle class="cls-2" cx="220.47189" cy="289.7249" r="20.43173"/>
+      <circle class="cls-2" cx="145.43173" cy="289.7249" r="20.43173"/>
+      <g>
+        <circle class="cls-3" cx="781.14052" cy="719.07843" r="65.82353"/>
+        <circle class="cls-3" cx="438.61438" cy="528.92157" r="65.82353"/>
+        <circle class="cls-4" cx="438.61438" cy="280.92157" r="65.82353"/>
+        <path class="cls-3" d="M716.536,716.64052H228.95425S129,714.20261,129,616.68627c0-50.69362,31.37051-74.14326,57.83938-84.90651a125.49032,125.49032,0,0,1,46.4553-9.02256L374,521.8268"/>
+        <path class="cls-3" d="M504.43791,520.92157l216.159.56209c33.47958,0,66.55415-6.336,94.97677-24.02887C845.89323,478.58113,870,448.3814,870,398.15033c0-46.39314-19.59011-72.74645-47.00534-91.32767C793.5096,286.83857,758.49916,276.598,722.87989,276.598H505"/>
+      </g>
+    </g>
+  </g>
+</svg>
