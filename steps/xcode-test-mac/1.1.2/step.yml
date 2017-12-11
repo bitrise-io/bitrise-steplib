@@ -1,0 +1,83 @@
+title: Xcode Test for Mac
+summary: Run Xcode Test on your Mac OS X app project.
+description: Runs Xcode's `test` action, configured for Mac OS X app projects.
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
+published_at: 2017-12-11T11:42:56.813502436+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
+  commit: 7db724cc60f52a279c81e0482a41159f95f2b48c
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- test
+dependencies:
+- manager: _
+  name: xcode
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-test-mac
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- is_clean_build: "yes"
+  opts:
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- generate_code_coverage_files: "no"
+  opts:
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    description: |
+      This input is __deprecated__, please __use change-workdir step__ instead.
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    title: '[Deprecated] Working directory'
+  workdir: $BITRISE_SOURCE_DIR
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
