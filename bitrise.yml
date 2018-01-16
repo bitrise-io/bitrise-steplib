@@ -191,6 +191,7 @@ workflows:
             file = File.read(spec_json_pth)
             data_hash = JSON.parse(file)
 
+            puts " -> original steplib source: #{data_hash['steplib_source']}"
             steplib_source_param = ENV['STEPLIB_SOURCE']
             puts " -> steplib_source_param: #{steplib_source_param}"
             data_hash['steplib_source'] = steplib_source_param
