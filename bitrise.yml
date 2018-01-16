@@ -86,8 +86,9 @@ workflows:
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
             stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
+            find /root/stepman -name slim-spec.json -exec cp {} ${tmp_dir} \;
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
-            envman add --key SLIM_JSON_PATH --value "${spec_path/spec.json/slim.json}"
+            envman add --key SLIM_JSON_PATH --value "${spec_path/spec.json/slim-spec.json}"
     - script:
         title: tmp
         inputs:
@@ -169,10 +170,13 @@ workflows:
         title: Check spec.json - exist?
         inputs:
         - content: |-
-            #!/bin/bash
-            set -e
-            if [ ! -f "${SPEC_JSON_PATH}" ] ; then
+            #!/usr/bin/env bash
+            if [[ ! -f "${SPEC_JSON_PATH}" ]] ; then
               echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
+              exit 1
+            fi
+            if [[ ! -f "${SLIM_JSON_PATH}" ]] ; then
+              echo " [!] slim-spec.json does not exist at path: ${SLIM_JSON_PATH}"
               exit 1
             fi
     - script:
@@ -212,7 +216,7 @@ workflows:
         - aws_secret_key: $AWS_SECRET_ACCESS_KEY
         - bucket_name: $S3_UPLOAD_BUCKET
         - bucket_region: $S3_UPLOAD_BUCKET_REGION
-        - path_in_bucket: "/slim.json"
+        - path_in_bucket: "/slim-spec.json"
         - file_access_level: public_read
 
   quicktest:
