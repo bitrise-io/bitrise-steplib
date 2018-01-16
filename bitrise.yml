@@ -208,16 +208,23 @@ workflows:
 
             bash ./_scripts/deploy/deploy.sh
 
-    - amazon-s3-uploader:
+    - script:
         title: Upload slim.json
+        dependencies:
+          - manager: brew
+            name: awscli
+        envs:
+        - SLIM_JSON_PATH: $SLIM_JSON_PATH
+        - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+        - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+        - S3_UPLOAD_BUCKET_REGION: $S3_UPLOAD_BUCKET_REGION
+        - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
         inputs:
-        - file_path: $SLIM_JSON_PATH
-        - aws_access_key: $AWS_ACCESS_KEY_ID
-        - aws_secret_key: $AWS_SECRET_ACCESS_KEY
-        - bucket_name: $S3_UPLOAD_BUCKET
-        - bucket_region: $S3_UPLOAD_BUCKET_REGION
-        - path_in_bucket: ""
-        - file_access_level: public_read
+        - content: | -
+            #!/usr/bin/env bash
+            set -ex
+
+            aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json" --acl public-read
 
   quicktest:
     description: |-
