@@ -87,6 +87,7 @@ workflows:
             spec_path="${tmp_dir}/spec.json"
             stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
+            envman add --key SLIM_JSON_PATH --value "${spec_path/spec.json/slim.json}"
     - script:
         title: tmp
         inputs:
@@ -95,6 +96,7 @@ workflows:
             set -e
 
             echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
+            echo "SLIM_JSON_PATH: ${SLIM_JSON_PATH}"
 
   pr_audit:
     title: Pull Request audit
@@ -201,6 +203,17 @@ workflows:
             set -ex
 
             bash ./_scripts/deploy/deploy.sh
+
+    - amazon-s3-uploader:
+        title: Upload slim.json
+        inputs:
+        - file_path: $SLIM_JSON_PATH
+        - aws_access_key: $AWS_ACCESS_KEY_ID
+        - aws_secret_key: $AWS_SECRET_ACCESS_KEY
+        - bucket_name: $S3_UPLOAD_BUCKET
+        - bucket_region: $S3_UPLOAD_BUCKET_REGION
+        - path_in_bucket: "/slim.json"
+        - file_access_level: public_read
 
   quicktest:
     description: |-
