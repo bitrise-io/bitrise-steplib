@@ -216,7 +216,7 @@ workflows:
         - aws_secret_key: $AWS_SECRET_ACCESS_KEY
         - bucket_name: $S3_UPLOAD_BUCKET
         - bucket_region: $S3_UPLOAD_BUCKET_REGION
-        - path_in_bucket: "/slim-spec.json"
+        - path_in_bucket: ""
         - file_access_level: public_read
 
   quicktest:
