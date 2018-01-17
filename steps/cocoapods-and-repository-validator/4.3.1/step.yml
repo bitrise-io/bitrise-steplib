@@ -15,10 +15,9 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
+- react-native
 type_tags:
-- xcode
-- cocoapods
-- pod
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

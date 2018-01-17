@@ -19,7 +19,6 @@ source:
 host_os_tags:
 - osx-10.10
 type_tags:
-- IM
 - notification
 toolkit:
   go:

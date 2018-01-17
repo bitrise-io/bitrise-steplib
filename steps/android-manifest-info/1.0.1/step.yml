@@ -21,7 +21,7 @@ project_type_tags:
 - ionic
 - react-native
 type_tags:
-- "artifact info"
+- artifact-info
 is_always_run: false
 is_skippable: false
 inputs:
