@@ -13,7 +13,7 @@ host_os_tags:
 project_type_tags:
 - android
 type_tags:
-- script
+- utility
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-avd-manager

@@ -22,7 +22,7 @@ project_type_tags:
 - ionic
 - react-native
 type_tags:
-- "code sign"
+- code-sign
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

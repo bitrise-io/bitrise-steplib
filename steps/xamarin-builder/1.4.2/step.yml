@@ -12,8 +12,9 @@ source:
 host_os_tags:
 - osx-10.10
 project_type_tags:
-- build
 - xamarin
+type_tags:
+- build
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
