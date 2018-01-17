@@ -5,15 +5,18 @@ description: Provides all possible iOS IPA information as package name, version 
 website: https://github.com/thefuntasty/bitrise-step-ipa-info
 source_code_url: https://github.com/thefuntasty/bitrise-step-ipa-info
 support_url: https://github.com/thefuntasty/bitrise-step-ipa-info/issues
-published_at: 2018-01-16T12:23:33.637018+01:00
+published_at: 2018-01-17T12:27:12.106338+01:00
 source:
   git: https://github.com/thefuntasty/bitrise-step-ipa-info.git
-  commit: e05685a047cc67135e43e95fa8bf613ad8d654f2
+  commit: 9131a67b7d0e17bb84f2c537dd2bea1a2afac02e
 project_type_tags:
 - ios
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- ios
-- ipa
+- artifact-info
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
