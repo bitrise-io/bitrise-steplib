@@ -1,0 +1,68 @@
+title: Gradle Info
+summary: |
+  Set the value of versionCode and versionName in the project's build.gradle to the specified version
+  Extracts Android gradle attributes to eviroment variables
+description: |
+  Set the value of versionCode and versionName in the project's build.gradle to the specified version
+  Extracts Android gradle attributes to eviroment variables
+website: https://github.com/manuelgon47/bitrise-step-gradle-info
+source_code_url: https://github.com/manuelgon47/bitrise-step-gradle-info
+support_url: https://github.com/manuelgon47/bitrise-step-gradle-info/issues
+published_at: 2018-01-17T08:17:37.827531826+01:00
+source:
+  git: https://github.com/manuelgon47/bitrise-step-gradle-info.git
+  commit: fffe489815fc1533b7b4e36fa2c86423b10371c0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- artifact-info
+toolkit:
+  bash:
+    entry_file: step.sh
+deps: {}
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- gradle_file_path: null
+  opts:
+    description: |
+      Path to the given project's gradle file.
+    is_required: true
+    summary: ""
+    title: Gradle File Path
+- opts:
+    description: |
+      Set the version code to this value.
+      Leave this input empty to don't modify version code.
+    is_required: false
+    summary: Set the version code to this value.
+    title: Version Code
+  version_code: $BITRISE_BUILD_NUMBER
+- opts:
+    description: |
+      This offset will be added to verson code input's value.
+    is_required: false
+    summary: ""
+    title: Version Code Offset
+  version_code_offset: null
+- opts:
+    description: |
+      Set the version name to this value.
+      Leave this input empty to don't modify version name.
+    is_required: false
+    summary: Set the version name to this value.
+    title: Version Name
+  version_name: null
+outputs:
+- GRADLE_FILE_PATH: null
+  opts:
+    title: Gradle file path
+- GRADLE_VERSION_CODE: null
+  opts:
+    title: Gradle version code
+- GRADLE_VERSION_NAME: null
+  opts:
+    title: Gradle version name
