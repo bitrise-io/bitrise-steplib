@@ -86,7 +86,9 @@ workflows:
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
             stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
+            find "${HOME}/.stepman" -name slim-spec.json -exec cp {} ${tmp_dir} \;
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
+            envman add --key SLIM_JSON_PATH --value "${spec_path/spec.json/slim-spec.json}"
     - script:
         title: tmp
         inputs:
@@ -95,6 +97,7 @@ workflows:
             set -e
 
             echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
+            echo "SLIM_JSON_PATH: ${SLIM_JSON_PATH}"
 
   pr_audit:
     title: Pull Request audit
@@ -155,6 +158,7 @@ workflows:
     envs:
       - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
       - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+      - S3_UPLOAD_BUCKET_REGION: $S3_UPLOAD_BUCKET_REGION
       - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
       - BITRISE_WORKFLOW_ID: "DEPLOY"
     before_run:
@@ -167,10 +171,13 @@ workflows:
         title: Check spec.json - exist?
         inputs:
         - content: |-
-            #!/bin/bash
-            set -e
-            if [ ! -f "${SPEC_JSON_PATH}" ] ; then
+            #!/usr/bin/env bash
+            if [[ ! -f "${SPEC_JSON_PATH}" ]] ; then
               echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
+              exit 1
+            fi
+            if [[ ! -f "${SLIM_JSON_PATH}" ]] ; then
+              echo " [!] slim-spec.json does not exist at path: ${SLIM_JSON_PATH}"
               exit 1
             fi
     - script:
@@ -184,6 +191,7 @@ workflows:
             file = File.read(spec_json_pth)
             data_hash = JSON.parse(file)
 
+            puts " -> original steplib source: #{data_hash['steplib_source']}"
             steplib_source_param = ENV['STEPLIB_SOURCE']
             puts " -> steplib_source_param: #{steplib_source_param}"
             data_hash['steplib_source'] = steplib_source_param
@@ -201,6 +209,18 @@ workflows:
             set -ex
 
             bash ./_scripts/deploy/deploy.sh
+
+    - script:
+        title: Upload slim.json
+        dependencies:
+          - manager: brew
+            name: awscli
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -ex
+
+            aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json" --acl public-read
 
   quicktest:
     description: |-
