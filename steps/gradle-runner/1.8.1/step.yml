@@ -6,7 +6,7 @@ description: |-
 website: https://github.com/bitrise-io/steps-gradle-runner
 source_code_url: https://github.com/bitrise-io/steps-gradle-runner
 support_url: https://github.com/bitrise-io/steps-gradle-runner/issues
-published_at: 2018-01-25T18:06:11.860796602+01:00
+published_at: 2018-01-26T11:14:24.471020913+01:00
 source:
   git: https://github.com/bitrise-io/steps-gradle-runner.git
   commit: 2b5fbd035cc4fdceb644e855d536a1e7cd906e83
