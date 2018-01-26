@@ -6,7 +6,7 @@ description: |
 website: https://github.com/manuelgon47/bitrise-step-fabric---crashlytics-deployer
 source_code_url: https://github.com/manuelgon47/bitrise-step-fabric---crashlytics-deployer
 support_url: https://github.com/manuelgon47/bitrise-step-fabric---crashlytics-deployer/issues
-published_at: 2018-01-26T16:17:32.02551118+01:00
+published_at: 2018-01-26T16:59:24.018060643+01:00
 source:
   git: https://github.com/manuelgon47/bitrise-step-fabric-crashlytics-deployer.git
   commit: 3edbb91eb21a37c2b3d8533de0fe95c5c175639c
