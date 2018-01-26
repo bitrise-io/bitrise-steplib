@@ -1,0 +1,84 @@
+title: Fabric / Crashlytics deployer
+summary: |
+  Deploy to Fabric/Crashlytics beta testing service your apk.
+description: |
+  Deploy to Fabric/Crashlytics beta testing service your apk.
+website: https://github.com/manuelgon47/bitrise-step-fabric---crashlytics-deployer
+source_code_url: https://github.com/manuelgon47/bitrise-step-fabric---crashlytics-deployer
+support_url: https://github.com/manuelgon47/bitrise-step-fabric---crashlytics-deployer/issues
+published_at: 2018-01-26T16:17:32.02551118+01:00
+source:
+  git: https://github.com/manuelgon47/bitrise-step-fabric-crashlytics-deployer.git
+  commit: 3edbb91eb21a37c2b3d8533de0fe95c5c175639c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- fabric_api_key: null
+  opts:
+    description: |
+      Set the fabric api key
+    is_required: true
+    summary: Set the fabric api key
+    title: 'Fabric: API Key'
+- fabric_build_secret: null
+  opts:
+    description: |
+      Set the fabric build secret
+    is_required: true
+    summary: Set the fabric build secret
+    title: 'Fabric: Build Secret'
+- fabric_apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      Path to the apk you want to publish on Beta
+    is_required: true
+    summary: Path to the apk you want to publish on Beta
+    title: Apk Path
+- fabric_android_res: $BITRISE_SOURCE_DIR/app/src/main
+  opts:
+    description: |
+      Path to you android project /res folder
+    is_required: true
+    summary: Path to you android project /res folder
+    title: Android Res Path
+- fabric_android_manifest: $BITRISE_SOURCE_DIR/app/src/main/AndroidManifest.xml
+  opts:
+    description: |
+      Path to you android project Manifest file
+    is_required: true
+    summary: Path to you android project Manifest file
+    title: Android Manifest Path
+- fabric_beta_distribution_notification: "Yes"
+  opts:
+    description: |
+      Send email to testers?
+    is_required: true
+    summary: Send email to testers?
+    title: Notify testers
+    value_options:
+    - "Yes"
+    - "No"
+- fabric_beta_distribution_list: null
+  opts:
+    description: Optional list of group aliases from web dashboard (comma-separated)
+    summary: ""
+    title: Tester Group Aliases
