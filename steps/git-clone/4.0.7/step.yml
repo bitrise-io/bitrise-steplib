@@ -1,0 +1,157 @@
+title: Git Clone Repository
+summary: Clone a repository to the specified path on the VM
+description: |
+  Clones a repository based on the provided inputs.
+
+  If `pull_request_id` is provided then all other git checkout parameters will be ignored.
+  If a git commit is provided it will ignore the tag and branch parameters.
+  If no git commit but a tag is provided then it will ignore the branch parameter.
+  If no `branch` parameter is provided then it'll skip `git checkout`.
+website: https://github.com/bitrise-io/steps-git-clone
+source_code_url: https://github.com/bitrise-io/steps-git-clone
+support_url: https://github.com/bitrise-io/steps-git-clone/issues
+published_at: 2018-01-31T18:51:58.293530157+01:00
+source:
+  git: https://github.com/bitrise-io/steps-git-clone.git
+  commit: 5e0cda37543743e9f6fbd9322acb765c1102c2d4
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-git-clone
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_dont_change_value: true
+    is_required: true
+    title: Git repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- clone_into_dir: $BITRISE_SOURCE_DIR
+  opts:
+    is_required: true
+    title: Clone destination (local) directory path
+- commit: $BITRISE_GIT_COMMIT
+  opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Git Commit to clone
+- opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Git Tag to clone
+  tag: $BITRISE_GIT_TAG
+- branch: $BITRISE_GIT_BRANCH
+  opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Git Branch to clone
+- branch_dest: $BITRISEIO_GIT_BRANCH_DEST
+  opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Destination git Branch. Used for pull requests
+- opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Pull request ID on GitHub
+  pull_request_id: $PULL_REQUEST_ID
+- opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Pull request git URL
+  pull_request_repository_url: $BITRISEIO_PULL_REQUEST_REPOSITORY_URL
+- opts:
+    category: Clone Config
+    is_dont_change_value: true
+    title: Merged pull request branch
+  pull_request_merge_branch: $BITRISEIO_PULL_REQUEST_MERGE_BRANCH
+- opts:
+    category: Debug
+    summary: Reset repository contents with git reset --hard HEAD and git clean -f
+      after repository updated
+    title: Reset repository
+    value_options:
+    - "No"
+    - "Yes"
+  reset_repository: "No"
+- clone_depth: null
+  opts:
+    category: Debug
+    description: |-
+      Limit fetching to the specified number of commits.
+      The value should be a decimal number, example: `10`.
+    title: Limit fetching to the specified number of commits
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: Unique build URL of this build on Bitrise.io
+    is_dont_change_value: true
+    summary: Unique build URL of this build on Bitrise.io
+    title: Bitrise Build URL
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: The build's API Token for the build on Bitrise.io
+    is_dont_change_value: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise Build API Token
+- opts:
+    category: Debug
+    description: Update the registered submodules?
+    summary: Update the registered submodules?
+    title: Update the registered submodules?
+    value_options:
+    - "yes"
+    - "no"
+  update_submodules: "yes"
+- manual_merge: "yes"
+  opts:
+    category: Clone Config
+    description: |-
+      Prefer to do a manual `git merge` by default.
+      When the PR is from a private repository, set this to `"no"`.
+    summary: Prefer to do a manual `git merge` by default.
+    title: Manual merge
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- GIT_CLONE_COMMIT_HASH: null
+  opts:
+    title: Cloned git commit's commit hash
+- GIT_CLONE_COMMIT_MESSAGE_SUBJECT: null
+  opts:
+    title: Cloned git commit's message subject
+- GIT_CLONE_COMMIT_MESSAGE_BODY: null
+  opts:
+    title: Cloned git commit's message body
+- GIT_CLONE_COMMIT_COUNT: null
+  opts:
+    description: |-
+      Count will only work properly if no `--depth` option is set.
+
+      If `--depth` is set then the history truncated to the specified number of commits. Count will **not** fail but will be the clone depth.
+    title: Cloned git commit counts
+- GIT_CLONE_COMMIT_AUTHOR_NAME: null
+  opts:
+    title: Cloned git commit's author name
+- GIT_CLONE_COMMIT_AUTHOR_EMAIL: null
+  opts:
+    title: Cloned git commit's author email address
+- GIT_CLONE_COMMIT_COMMITER_NAME: null
+  opts:
+    title: Cloned git commit's committer name
+- GIT_CLONE_COMMIT_COMMITER_EMAIL: null
+  opts:
+    title: Cloned git commit's committer email
