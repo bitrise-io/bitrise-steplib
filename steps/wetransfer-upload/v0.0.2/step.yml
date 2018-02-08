@@ -1,0 +1,52 @@
+title: wetransfer-upload
+summary: |
+  Upload files to wetransfer and share a short url to download
+description: |
+  This step send files to wetransfer. Wetransfer give you a short url to download files. Limit 2GO.
+website: https://github.com/kawaiseb/bitrise-step-wetransfer-upload
+source_code_url: https://github.com/kawaiseb/bitrise-step-wetransfer-upload
+support_url: https://github.com/kawaiseb/bitrise-step-wetransfer-upload/issues
+published_at: 2018-02-02T18:21:59.53994154+01:00
+source:
+  git: https://github.com/kawaiseb/bitrise-step-wetransfer-upload.git
+  commit: 8d4a75db30e31408f00577bc867f62cdfadaff3f
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
