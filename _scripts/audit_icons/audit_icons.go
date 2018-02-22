@@ -7,10 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	yaml "gopkg.in/yaml.v2"
-
 	"github.com/bitrise-io/go-utils/command"
-	"github.com/bitrise-io/go-utils/fileutil"
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-utils/pathutil"
 )
@@ -30,32 +27,6 @@ func runCommandAndReturnCombinedOutputs(isDebug bool, name string, args ...strin
 		log.Errorf("Failed to run command: %#v", cmd)
 	}
 	return strings.TrimSpace(outStr), err
-}
-
-func auditChangedStepInfoYML(stepInfoYmlPth string) error {
-	fmt.Println()
-	log.Infof("Audit changed step-info.yml: %s", stepInfoYmlPth)
-
-	type StepGroupInfoModel struct {
-		RemovalDate    string            `json:"removal_date,omitempty" yaml:"removal_date,omitempty"`
-		DeprecateNotes string            `json:"deprecate_notes,omitempty" yaml:"deprecate_notes,omitempty"`
-		AssetURLs      map[string]string `json:"asset_urls,omitempty" yaml:"asset_urls,omitempty"`
-	}
-
-	bytes, err := fileutil.ReadBytesFromFile(stepInfoYmlPth)
-	if err != nil {
-		return fmt.Errorf("failed to read global step info (%s), error: %s", stepInfoYmlPth, err)
-	}
-
-	var stepGroupInfo StepGroupInfoModel
-	if err := yaml.Unmarshal(bytes, &stepGroupInfo); err != nil {
-		return fmt.Errorf("failed to parse global step info (%s), error: %s", stepInfoYmlPth, err)
-	}
-
-	fmt.Println()
-	log.Donef("SUCCESSFUL audit")
-
-	return nil
 }
 
 func fatalf(format string, v ...interface{}) {
