@@ -135,8 +135,6 @@ workflows:
             go get gopkg.in/yaml.v2
 
             go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
-
-    steps:
     - script:
         title: Check icon for the changes steps
         dependencies:
@@ -152,7 +150,7 @@ workflows:
             go get github.com/bitrise-io/go-utils/pathutil
             go get github.com/bitrise-io/go-utils/log
             go get gopkg.in/yaml.v2
-            
+
             go run ./_scripts/audit_icons/audit_icons.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
   full_audit:
