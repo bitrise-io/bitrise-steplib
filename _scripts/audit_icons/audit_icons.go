@@ -107,6 +107,7 @@ func main() {
 
 	activeExtensions := []string{"png", "svg"}
 	changedFilePaths := strings.Split(diffOutput, "\n")
+	hasMissingIcon := false
 
 	fmt.Println()
 	log.Printf("Checking icons:")
@@ -131,12 +132,16 @@ func main() {
 			if hasIcon {
 				log.Donef("> Icon found!")
 				fmt.Println()
-				log.Donef("DONE")
 			} else {
 				log.Errorf("> No icon found")
 				fmt.Println()
-				log.Errorf("ERROR")
+				hasMissingIcon = true
 			}
 		}
+	}
+	if hasMissingIcon {
+		log.Errorf("ERROR")
+	} else {
+		log.Donef("DONE")
 	}
 }
