@@ -136,6 +136,18 @@ workflows:
 
             go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
 
+    steps:
+    - script:
+        title: Check icon for the changes steps
+        dependencies:
+        - manager: brew
+          name: go
+        inputs:
+        - content: |-
+            set -e
+            
+            go run ./_scripts/audit_icons/audit_icons.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
+
   full_audit:
     title: Full Audit
     description: |-
