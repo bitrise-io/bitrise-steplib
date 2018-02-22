@@ -1,0 +1,73 @@
+title: Gradle Unit Test
+summary: Runs Unit Tests with `gradlew`.
+description: |-
+  Runs Unit Tests with `gradlew`.
+  You can specify the test tasks to run and the task flags to run ony specific files.
+website: https://github.com/bitrise-io/steps-gradle-unit-test
+source_code_url: https://github.com/bitrise-io/steps-gradle-unit-test
+support_url: https://github.com/bitrise-io/steps-gradle-unit-test/issues
+published_at: 2018-02-22T09:10:23.382738041+01:00
+source:
+  git: https://github.com/bitrise-io/steps-gradle-unit-test.git
+  commit: 26b9bffd8f229774ee23de6ffe1ccae2ebcf5f74
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-gradle-unit-test
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- gradle_file: $GRADLE_BUILD_FILE_PATH
+  opts:
+    description: |
+      Optional path to the gradle build file to use
+    title: Optional path to the gradle build file to use
+- opts:
+    description: |
+      The test task to execute by gradlew
+    is_required: true
+    title: Test task
+  unit_test_task: test
+- gradlew_file_path: $GRADLEW_PATH
+  opts:
+    description: |
+      Path for the gradlew file
+    is_required: true
+    title: Path for the gradlew file
+- opts:
+    description: |
+      Use this flag to execute tests for only a couple of files like: `--tests='*.MyTestClass'`
+    title: Test flags
+  unit_test_flags: --continue
+- cache_level: only deps
+  opts:
+    category: Debug
+    description: |-
+      `all` - will cache build-cache and dependencies
+      `only deps` - will cache dependencies only
+      `none` - won't cache any of the above
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only deps
+    - none
+outputs:
+- BITRISE_GRADLE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
