@@ -10,7 +10,7 @@ description: "This step uploads dSYM to AppCenter using official CLI.\nThe step 
 website: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload
 source_code_url: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload
 support_url: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload/issues
-published_at: 2018-02-21T18:13:48.843209+02:00
+published_at: 2018-02-23T13:15:57.923773+02:00
 source:
   git: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload.git
   commit: 42bb29ba2f557877bf8bea996452a60c2162d47c
