@@ -1,0 +1,58 @@
+title: wetransfer
+summary: |
+  Upload files to wetransfer and share a short url to download
+description: |
+  This step send files to wetransfer. Wetransfer give you a short url to download files. Limit 2GO.
+website: https://github.com/kawaiseb/bitrise-step-wetransfer
+source_code_url: https://github.com/kawaiseb/bitrise-step-wetransfer
+support_url: https://github.com/kawaiseb/bitrise-step-wetransfer/issues
+published_at: 2018-02-22T16:29:48.082619+01:00
+source:
+  git: https://github.com/kawaiseb/bitrise-step-wetransfer.git
+  commit: 29f5f867ebd4622efb1682904fb656f313263e39
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    title: Email of the sender
+  wtu_mailsender: null
+- opts:
+    is_required: true
+    title: One or more email separated by coma for receiver
+  wtu_mailreceiver: null
+- opts:
+    is_required: true
+    title: The path where are stored one or more files to upload
+  wtu_filepath: null
+- opts:
+    is_required: true
+    title: A little body for the mail
+  wtu_message: null
+- opts:
+    is_required: true
+    title: The language of the wetransfer receiver
+    value_options:
+    - fr
+    - en
+  wtu_language: fr
+- opts:
+    description: |
+      Step prints additional debug information if this option
+      is enabled
+    is_required: true
+    title: Debug mode ?
+    value_options:
+    - "yes"
+    - "no"
+  wtu_debug_mode: "no"
