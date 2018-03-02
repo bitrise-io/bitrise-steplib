@@ -1,0 +1,63 @@
+title: GitLab status
+summary: |
+  Update commit status for GitLab repositories
+description: |
+  Update commit status for GitLab repositories
+website: https://github.com/bitrise-steplib/steps-gitlab-status
+source_code_url: https://github.com/bitrise-steplib/steps-gitlab-status
+support_url: https://github.com/bitrise-steplib/steps-gitlab-status/issues
+published_at: 2018-03-02T13:44:47.522955524+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-gitlab-status.git
+  commit: df4e5e11239d5c21f353959befeb923e191ca3bb
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-gitlab-status
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- api_base_url: ""
+  opts:
+    description: |-
+      API URL for GitLab or GitLab Enterprise
+
+      Example: "https://gitlab.example.com/api/v4"
+    is_required: true
+    summary: ""
+    title: GitLab API base url
+- opts:
+    description: |-
+      Authorization token for GitLab applications
+
+      Generating a personal access token:
+      1. Log in to your GitLab instance
+      2. Go to User Settings > Access Tokens
+      3. Pick a _name_ and set a _scope_ for the token
+      4. Click on **Create personal access token** and save your new token
+    is_required: true
+    summary: ""
+    title: GitLab private token
+  private_token: ""
+- opts:
+    description: The URL for the repository we are working with
+    is_required: true
+    summary: ""
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- commit_hash: $BITRISE_GIT_COMMIT
+  opts:
+    description: The commit hash for the commit we are working with
+    is_required: true
+    summary: ""
+    title: Commit hash
+- opts:
+    description: |-
+      If set, this step will set a specific status instead of reporting the current build status.
+
+      Can be one of pending, running, success, failed or canceled.
+    summary: ""
+    title: Set Specific Status
+  preset_status: ""
