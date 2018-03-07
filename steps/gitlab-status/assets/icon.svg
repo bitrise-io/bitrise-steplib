@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 49 (51002) - http://www.bohemiancoding.com/sketch -->
+    <title>gitlab-status-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard">
+            <g id="gitlab-status-stepicon" transform="translate(128.002124, 128.000000) rotate(-180.000000) translate(-128.002124, -128.000000) translate(0.002124, -0.000000)">
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="-2.84217094e-14" width="256" height="256"></rect>
+                <g id="g44" transform="translate(51.165110, 57.240245)" fill="#FC6D26" fill-rule="nonzero">
+                    <path d="M152.695711,60.3506922 L144.142682,86.6449925 L127.191803,138.758642 C126.319906,141.439701 122.522376,141.439701 121.650065,138.758642 L104.698773,86.6449925 L48.4103336,86.6449925 L31.4586268,138.758642 C30.5867302,141.439701 26.7892003,141.439701 25.9168898,138.758642 L8.96601072,86.6449925 L0.413395705,60.3506922 C-0.367049039,57.9523721 0.487881416,55.3250504 2.53003137,53.8427379 L76.5543461,0.119461302 L150.579075,53.8427379 C152.621225,55.3250504 153.475741,57.9523721 152.695711,60.3506922" id="path46"></path>
+                </g>
+                <g id="g48" transform="translate(99.477122, 57.359707)" fill="#E24329" fill-rule="nonzero">
+                    <polygon id="path50" points="28.2424993 0 28.2424993 0 56.3869256 86.5255313 0.0980728478 86.5255313"></polygon>
+                </g>
+                <g id="g56" transform="translate(59.854861, 57.359872)" fill="#FC6D26" fill-rule="nonzero">
+                    <polygon id="path58" points="67.8647601 0 39.7203336 86.525118 0.276424755 86.525118"></polygon>
+                </g>
+                <g id="g64" transform="translate(51.027477, 57.079324)" fill="#FCA326" fill-rule="nonzero">
+                    <path d="M9.1038093,86.80579 L0.550780462,60.5114893 C-0.22925047,58.1131696 0.625266176,55.4858475 2.66782993,54.0039487 L76.6921447,0.280672054 L9.1038093,86.80579 Z" id="path66"></path>
+                </g>
+                <g id="g72" transform="translate(60.131286, 143.885031)" fill="#E24329" fill-rule="nonzero">
+                    <path d="M0,0 L39.4439091,0 L22.4926161,52.1136493 C21.6203056,54.7951215 17.8227757,54.7951215 16.9508791,52.1136493 L0,0 Z" id="path74"></path>
+                </g>
+                <g id="g76" transform="translate(127.719622, 57.359872)" fill="#FC6D26" fill-rule="nonzero">
+                    <polygon id="path78" points="0 0 28.1444264 86.525118 67.5883356 86.525118"></polygon>
+                </g>
+                <g id="g80" transform="translate(127.443156, 57.079324)" fill="#FCA326" fill-rule="nonzero">
+                    <path d="M67.8647601,86.80579 L76.417789,60.5114893 C77.1978198,58.1131696 76.3433033,55.4858475 74.3007396,54.0039487 L0.276424755,0.280672054 L67.8647601,86.80579 Z" id="path82"></path>
+                </g>
+                <g id="g84" transform="translate(155.582203, 143.885031)" fill="#E24329" fill-rule="nonzero">
+                    <path d="M39.7257134,0 L0.281804279,0 L17.2330972,52.1136493 C18.1054077,54.7951215 21.9029376,54.7951215 22.7748342,52.1136493 L39.7257134,0 Z" id="path86"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
