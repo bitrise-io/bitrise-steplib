@@ -1,0 +1,79 @@
+title: Cake Script
+summary: Cake (C# Make) is a cross platform build automation system
+description: "Cake (C# Make) is a cross platform build automation system with a C#
+  DSL to do things like compiling code, \ncopy files/folders, running unit tests,
+  compress files and build NuGet packages. \nMore info: https://cakebuild.net/"
+website: https://github.com/cake-build/bitrise-cake-step
+source_code_url: https://github.com/cake-build/bitrise-cake-step
+support_url: https://github.com/cake-build/bitrise-cake-step/issues
+published_at: 2018-03-08T20:41:33.325992+01:00
+source:
+  git: https://github.com/cake-build/bitrise-cake-step.git
+  commit: 29425670048f3e15c7a7de001ab6cd8926f16602
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- build
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Name of the script to execute. Default is build.cake
+    is_expand: true
+    is_required: true
+    title: Script
+  script: build.cake
+- opts:
+    description: |
+      Target name to execute. Default is Default
+    is_expand: true
+    is_required: true
+    title: Target
+  target: Default
+- configuration: Release
+  opts:
+    description: |
+      Configuration to build. Default is Release.
+    is_expand: true
+    is_required: true
+    title: Configuration
+- opts:
+    description: |
+      Specifies the amount of information to be displayed (quiet, minimal, normal, verbose, diagnostic).
+    is_expand: true
+    is_required: true
+    title: Verbosity
+    value_options:
+    - quiet
+    - minimal
+    - normal
+    - verbose
+    - diagnostic
+  verbosity: normal
+- nuget_source_name: null
+  opts:
+    description: |
+      Name to use for specified NuGet private source in the NuGet source list.
+    summary: ""
+    title: NuGet private source name
+- nuget_source_path_or_url: null
+  opts:
+    description: |
+      Path or URL of the NuGet private package(s) source.
+    summary: ""
+    title: NuGet private source path / url
+- nuget_source_username: null
+  opts:
+    description: |
+      UserName to be used when connecting to an authenticated source.
+    summary: ""
+    title: NuGet private source username
+- nuget_source_password: null
+  opts:
+    description: Password to be used when connecting to an authenticated source.
+    summary: ""
+    title: NuGet private source password
