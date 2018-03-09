@@ -35,7 +35,7 @@ inputs:
     description: |
       * Go to Microsoft Teams
       * Click on the three dots next to channel name then **Add Connector**
-      * Select **Incoming Webhook* and in the text input type **Bitrise**
+      * Select **Incoming Webhook** and in the text input type **Bitrise**
       * Save and copy the link to the input for this step
     is_expand: true
     is_required: true
