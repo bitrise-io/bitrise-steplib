@@ -8,7 +8,7 @@ source_code_url: https://github.com/stefandevo/bitrise-cake-step
 support_url: https://github.com/stefandevo/bitrise-cake-step/issues
 published_at: 2017-04-25T12:54:20.55383053+02:00
 source:
-  git: https://github.com/stefandevo/bitrise-cake-step.git
+  git: http://github.com/stefandevo/bitrise-cake-step.git
   commit: 6cd05453ce279b129513e426351e2edb00663baa
 host_os_tags:
 - osx-10.10
