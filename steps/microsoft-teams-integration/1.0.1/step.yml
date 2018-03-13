@@ -6,10 +6,10 @@ description: |
 website: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
 source_code_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
 support_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration/issues
-published_at: 2018-03-13T17:24:06.693598264Z
+published_at: 2018-03-13T17:31:52.444068504Z
 source:
   git: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration.git
-  commit: d4075626d3895e9079885e53a0ac0ac3c271197c
+  commit: f8a9b23ca83879619ed1618a727e6d8864f4b47a
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -30,7 +30,7 @@ is_always_run: false
 is_skippable: true
 run_if: ""
 inputs:
-- INCOMING_WEBHOOK_URL: null
+- INCOMING_WEBHOOK_URL,required: null
   opts:
     description: |
       * Go to Microsoft Teams
