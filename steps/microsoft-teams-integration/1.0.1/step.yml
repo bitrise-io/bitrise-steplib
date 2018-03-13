@@ -6,7 +6,7 @@ description: |
 website: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
 source_code_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
 support_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration/issues
-published_at: 2018-03-09T10:23:07.310583032Z
+published_at: 2018-03-13T17:24:06.693598264Z
 source:
   git: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration.git
   commit: d4075626d3895e9079885e53a0ac0ac3c271197c
@@ -35,7 +35,7 @@ inputs:
     description: |
       * Go to Microsoft Teams
       * Click on the three dots next to channel name then **Add Connector**
-      * Select **Incoming Webhook** and in the text input type **Bitrise**
+      * Select **Incoming Webhook* and in the text input type **Bitrise**
       * Save and copy the link to the input for this step
     is_expand: true
     is_required: true
