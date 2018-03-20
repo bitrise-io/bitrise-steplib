@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300px" height="300px" viewBox="0 0 300 300" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="background: #CB2E63;">
+    <title>Artboard</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" fill="#FFFFFF" fill-rule="nonzero">
+            <g id="icon" transform="translate(64.000000, 54.000000)">
+                <path d="M0,49.2975734 L76.6051661,0 L96.3948339,10.2292465 L96.3948339,63.7171137 L152.827306,24.8952746 L173,34.8780332 L173,158.121967 L152.827306,168.227969 L96.3948339,129.282886 L96.3948339,182.770754 L76.6051661,193 L1.42108547e-14,143.702427 L1.42108547e-14,123.243934 L41.4944649,96.5 L1.42108547e-14,69.7560664 L0,49.2975734 Z M30.00369,59.8965517 L70.8597786,86.1475096 L70.8597786,33.6455939 L30.00369,59.8965517 Z M92.8199262,96.8697318 L134.697417,125.708812 L134.697417,68.1538953 L92.8199262,96.7464879 L92.8199262,96.8697318 Z M70.8597786,107.591954 L30.00369,133.842912 L70.8597786,160.09387 L70.8597786,107.591954 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>
