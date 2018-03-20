@@ -6,7 +6,7 @@ description: |
 website: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
 source_code_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
 support_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native/issues
-published_at: !!timestamp 2018-03-18T17:37:48.647970232+08:00
+published_at: !!timestamp 2018-03-21T03:24:18.183703631+08:00
 source:
   git: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native.git
   commit: bdbfa011fc1469fd2cb583f3cc732cfc01e013b8
@@ -51,13 +51,13 @@ inputs:
       New API Token > Enter a description for the token > Select Full Access > Add New API Token
     is_required: true
     title: AppCenter API Token
-- env: $ENVIRONMENT
+- env: 'prod'
   opts:
     description: |
       Choices for environments [here](https://github.com/Microsoft/appcenter-cli/blob/61bd72c1dcabeb876ee14fcaa316fd6b367b49a6/src/commands/codepush/lib/environment.ts#L18)
     is_required: true
     title: Environment
-- options: $OPTIONS
+- options:
   opts:
     description: |
       Any extra options that you would like to concat to the release-react command
