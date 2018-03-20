@@ -1,3 +1,0 @@
-removal_date: "2017.10.01"
-deprecate_notes: |
-  Please use export-xcarchive step instead.
