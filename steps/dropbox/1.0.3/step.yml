@@ -1,0 +1,68 @@
+title: Send file to dropbox
+summary: |
+  Upload one or more files to [dropbox](https://www.dropbox.com)
+description: |
+  This step is used to send files to dropbox.
+
+  * This step is able to upload only one file
+  * If a remote file exist with the same name, the file is not deleted
+  * If you specify a directory, the directory is created
+website: https://github.com/kawaiseb/bitrise-step-dropbox
+source_code_url: https://github.com/kawaiseb/bitrise-step-dropbox
+support_url: https://github.com/kawaiseb/bitrise-step-dropbox/issues
+published_at: 2018-03-20T17:44:28.703977+01:00
+source:
+  git: https://github.com/kawaiseb/bitrise-step-dropbox.git
+  commit: bf984c305021e43b3bbecbe8b96ae2ba19ef2be4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- dropbox_secret: null
+  opts:
+    description: |
+      You have to generate a secret access token in [the developer website](https://www.dropbox.com/developers).
+      Create an application and go in the setting's application.
+    is_required: true
+    title: The secret access token (OAuth2)
+- dropbox_local_path: null
+  opts:
+    description: |
+      The name of the local file you wish to upload on dropbox.
+
+      * Only one file !
+      * If a remote file exist with the same name, the file is not deleted
+
+
+      **example :** "/tmp/myapp.ipa" or "/tmp/myapp.apk"
+    is_required: true
+    title: Local File
+- dropbox_remote_path: null
+  opts:
+    description: |
+      The directory to upload file in dropbox
+
+      * If you specify a directory that does not exist this one is created
+
+      **example :** "/delivery/ios" or "/delivery/android"
+    is_required: true
+    title: Dropbox remote target
+- dropbox_debug_mode: "no"
+  opts:
+    description: |
+      Step prints additional debug information if this option
+      is enabled
+    is_required: true
+    title: Debug mode ?
+    value_options:
+    - "yes"
+    - "no"
