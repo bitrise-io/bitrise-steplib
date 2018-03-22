@@ -1,0 +1,44 @@
+title: Parse Composer test results
+summary: |
+  Parses Composer junit test results and stores them in environment variables.
+  `$COMPOSER_ALL_TEST_COUNT` and `$COMPOSER_PASSED_TEST_COUNT` respectively.
+description: |
+  Parses [Composer](https://github.com/gojuno/composer) junit test results and stores them in environment variables:
+    `$COMPOSER_ALL_TEST_COUNT` and `$COMPOSER_PASSED_TEST_COUNT` respectively.
+website: https://github.com/DroidsOnRoids/bitrise-step-parse-composer-results
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-parse-composer-results
+support_url: https://github.com/DroidsOnRoids/bitrise-step-parse-composer-results/issues
+published_at: !!timestamp 2018-03-22T02:08:36.824194894+01:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-parse-composer-results.git
+  commit: f3df131f59f55664f879cac467b827b4a60aaa37
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/DroidsOnRoids/bitrise-step-parse-composer-results
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: false
+    summary: |
+      Directory to search for composer test result files, recursively. By default the entire workspace: `$BITRISE_SOURCE_DIR`.
+    title: Directory to search for composer test result files
+  results_dir: $BITRISE_SOURCE_DIR
+outputs:
+- COMPOSER_ALL_TEST_COUNT: null
+  opts:
+    summary: All test count. Passed, failed, skipped and errored. Sum across all found
+      files.
+    title: All test count
+- COMPOSER_PASSED_TEST_COUNT: null
+  opts:
+    summary: Passed test count (excluding skipped ones). Sum across all found files.
+    title: Passed test count (excluding skipped)
