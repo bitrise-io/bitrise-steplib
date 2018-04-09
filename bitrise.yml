@@ -77,6 +77,9 @@ workflows:
             stepman delete -c "${TMP_COLLECTION_ID}"
     - script:
         title: Generate
+        dependencies:
+          - manager: brew
+            name: jq
         inputs:
         - content: |-
             #!/bin/bash
@@ -86,7 +89,7 @@ workflows:
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
             stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
-            find "${HOME}/.stepman" -name slim-spec.json -exec cp {} ${tmp_dir} \;
+            find "${HOME}/.stepman" -name slim-spec.json -exec jq -c . {} > "${tmp_dir}/slim-spec" \;
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
             envman add --key SLIM_JSON_PATH --value "${spec_path/spec.json/slim-spec.json}"
     - script:
@@ -237,7 +240,7 @@ workflows:
             #!/usr/bin/env bash
             set -ex
 
-            aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json" --acl public-read
+            aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json" --acl public-read --content-encoding gzip
 
   quicktest:
     description: |-
