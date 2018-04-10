@@ -9,7 +9,7 @@ support_url: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version
 published_at: !!timestamp 2018-04-04T16:50:55.395108202+03:00
 source:
   git: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number.git
-  commit: 69ab704371355dc5daa4ca1ee7a8c2bf03c43fd5
+  commit: 5c7c44df263ab5201f14dfcb7be2eeb95417bce0
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -22,12 +22,8 @@ toolkit:
     package_name: github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
 deps:
   brew:
-  - name: git
-  - name: wget
   - name: imagemagick
   apt_get:
-  - name: git
-  - name: wget
   - name: imagemagick
 is_requires_admin_user: false
 is_always_run: false
