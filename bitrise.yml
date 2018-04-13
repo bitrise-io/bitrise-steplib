@@ -89,7 +89,7 @@ workflows:
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
             stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
-            slim_spec_path="$(find "${HOME}/.stepman" -name slim-spec.json | head -n1)
+            slim_spec_path="$(find "${HOME}/.stepman" -name slim-spec.json | head -n1)"
             # write out minimized slim-spec.json
             jq --compact-output '.' ${slim_spec_path} > "${tmp_dir}/slim-spec.json"
             envman add --key SPEC_JSON_PATH --value "${spec_path}"
