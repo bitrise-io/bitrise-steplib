@@ -241,7 +241,7 @@ workflows:
             set -ex
 
             aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json" --acl public-read
-            aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.gz.json" --acl public-read --content-encoding gzip
+            aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json.gz" --acl public-read --content-encoding gzip
 
   quicktest:
     description: |-
