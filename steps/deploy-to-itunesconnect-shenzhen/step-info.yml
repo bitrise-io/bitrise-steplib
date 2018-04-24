@@ -1,3 +1,0 @@
-removal_date: "2018-09-20"
-deprecate_notes: |
-  This step is deprecated, use deploy-to-itunesconnect-deliver step instead.
