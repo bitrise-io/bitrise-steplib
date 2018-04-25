@@ -1,0 +1,41 @@
+title: Create install page QR code
+summary: Generates an URL for a QR code which points to the install page.
+description: Generates an URL for a QR code which points to the install page.
+website: https://github.com/bitrise-steplib/steps-create-install-page-qr-code
+source_code_url: https://github.com/bitrise-steplib/steps-create-install-page-qr-code
+support_url: https://github.com/bitrise-steplib/steps-create-install-page-qr-code/issues
+published_at: !!timestamp 2018-04-25T13:55:37.174654536+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-create-install-page-qr-code.git
+  commit: 13e7f97a99d75eea4689e51b2c242b8554ccac6b
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-create-install-page-qr-code
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- opts:
+    description: The full path to the application file (.app or .apk)
+    is_required: true
+    summary: The full path to the application file (.app or .apk)
+    title: Public Install Page URL
+  public_install_page_url: null
+- opts:
+    description: 'The size of the QR Code image using the format : WIDTHxHEIGHT'
+    is_required: false
+    summary: 'The size of the QR Code image using the format : WIDTHxHEIGHT'
+    title: Public Install Page QR Code Image size
+  qr_code_size: 150x150
+outputs:
+- BITRISE_PUBLIC_INSTALL_PAGE_QR_CODE_IMAGE_URL: null
+  opts:
+    description: |-
+      QR Code Image URL for the public install page, if the
+      *Enable public page for the App?* option was *enabled*.
+    title: Public Install Page QR Code Image URL
