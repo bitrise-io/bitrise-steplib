@@ -1,0 +1,114 @@
+title: Certificate and profile installer
+summary: |-
+  Need to use your Provisioning Profiles and Certificates? Use this Step to
+  add them to the keychain and use it as you wish! No worries, as our security
+  policy goes, the VM is reverted after running the workflow so there's no
+  trace of these left on them.
+description: Downloads and installs the certificate and the mobile provisioning profiles
+website: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+source_code_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer
+support_url: https://github.com/bitrise-io/steps-certificate-and-profile-installer/issues
+published_at: !!timestamp 2018-05-07T13:14:05.692541576+02:00
+source:
+  git: https://github.com/bitrise-io/steps-certificate-and-profile-installer.git
+  commit: d482bca5fd93d5163509e092e999c50ac87638fb
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-certificate-and-profile-installer
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- certificate_url: $BITRISE_CERTIFICATE_URL
+  opts:
+    description: |
+      URL of the certificate to download. Multiple URLs can be
+      specified, separated by a pipe (`|`) character.
+
+      You can specify a local path as well, using the `file://` scheme.
+      Example: `file://./Cert.p12`
+    title: Certificate URL
+- certificate_passphrase: $BITRISE_CERTIFICATE_PASSPHRASE
+  opts:
+    description: |
+      Certificate passphrase. Multiple passphrases can be
+      specified, separated by a pipe (`|`) character.
+
+      Specified Certificate passphrase count should match the count of the certificate urls.
+
+      Format example:
+
+      - 1 certificate provided with passphrase: `PASS`
+      - 1 certificate provided without passphrase: ``
+      - 3 certificates provided, none of them has passphrase: `||`
+      - 3 certificates provided, only the 2. one has passphrase: `|PASS|`
+    title: Certificate passphrase
+- opts:
+    description: |
+      URL of the provisioning profile to download. Multiple URLs can be
+      specified, separated by a pipe (`|`) character.
+
+      You can specify a local path as well, using the `file://` scheme.
+      Example: `file://./BuildAnything.mobileprovision`
+    title: Provisioning profile URL
+  provisioning_profile_url: $BITRISE_PROVISION_URL
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    is_required: true
+    title: Keychain Path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    is_required: true
+    title: Keychain's password
+- install_defaults: "yes"
+  opts:
+    category: Default Codesign Files
+    description: Installs default (Bitrise) Wildcard Provisioning Profile and Codesign
+      Certificate for testing.
+    summary: Installs default (Bitrise) Wildcard Codesign Files.
+    title: Installs default Codesign Files
+    value_options:
+    - "no"
+    - "yes"
+- default_certificate_url: $BITRISE_DEFAULT_CERTIFICATE_URL
+  opts:
+    category: Default Codesign Files
+    description: |
+      URL of the default certificate.
+
+      You can specify a local path as well, using the `file://` scheme.
+      Example: `file://./Cert.p12`
+    title: Default Certificate URL
+- default_certificate_passphrase: $BITRISE_DEFAULT_CERTIFICATE_PASSPHRASE
+  opts:
+    category: Default Codesign Files
+    description: |
+      Certificate passphrase of the default certificate.
+    title: Default Certificate passphrase
+- default_provisioning_profile_url: $BITRISE_DEFAULT_PROVISION_URL
+  opts:
+    category: Default Codesign Files
+    description: |
+      URL of the default provisioning profile to download.
+
+      You can specify a local path as well, using the `file://` scheme.
+      Example: `file://./BuildAnything.mobileprovision`
+    title: Default Provisioning profile URL
