@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>authenticate-host-with-netrc-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#0DD3C5" offset="0%"></stop>
+            <stop stop-color="#0D83CD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="132.409355%" y1="-11.0977103%" x2="-18.5997596%" y2="109.263393%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-24.4959615%" y1="123.982136%" x2="96.7950856%" y2="6.14922306%" id="linearGradient-3">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Authenticate-host-with-netrc">
+            <g id="authenticate-host-with-netrc-stepicon">
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" fill-rule="nonzero" x="0" y="0" width="256" height="256"></rect>
+                <path d="M69,37 L159.738281,37 L193,71.9585974 L193,211 C193,214.313708 190.313708,217 187,217 L69,217 C65.6862915,217 63,214.313708 63,211 L63,43 C63,39.6862915 65.6862915,37 69,37 Z" id="Rectangle-6" fill="url(#linearGradient-2)"></path>
+                <path d="M158.731207,37.3828125 L192.784706,72.2668851 L164.731207,72.2668851 C161.417498,72.2668851 158.731207,69.5805936 158.731207,66.2668851 L158.731207,37.3828125 Z" id="Rectangle-6-Copy-2" fill="url(#linearGradient-3)"></path>
+                <text id="NETRC" style="mix-blend-mode: multiply;" font-family="TTNorms-Black, TT Norms" font-size="27" font-weight="700" letter-spacing="0.530357242" fill="#760FC3">
+                    <tspan x="78" y="199">NETRC</tspan>
+                </text>
+                <g id="Group" transform="translate(90.000000, 53.000000)">
+                    <path d="M20,88 L56,88 L56,58 L20,58 L20,88 Z M12,38 L64,38 C70.627417,38 76,43.372583 76,50 L76,96 C76,102.627417 70.627417,108 64,108 L12,108 C5.372583,108 8.11624501e-16,102.627417 0,96 L0,50 C-8.11624501e-16,43.372583 5.372583,38 12,38 Z" id="Rectangle-11" fill="#760FC3" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
+                    <path d="M58,44.0505529 L58,30 C58,18.954305 49.045695,10 38,10 C26.954305,10 18,18.954305 18,30 L18,44.0505529 L58,44.0505529 Z" id="Oval" stroke="#760FC3" stroke-width="20" style="mix-blend-mode: multiply;"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
