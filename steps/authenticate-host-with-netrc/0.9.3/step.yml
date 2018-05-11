@@ -1,0 +1,47 @@
+title: Authenticate host with netrc
+summary: Adds your authentication config to the .netrc file
+description: |-
+  Adds your authentication config to the .netrc file.
+
+  If you already has a .netrc file, the step will create a backup of the original, and appends the configs to the current one.
+website: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc
+source_code_url: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc
+support_url: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc/issues
+published_at: !!timestamp 2018-05-04T17:03:16.138150869+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc.git
+  commit: b112b2419e5000d94e33849a9855761a4c5a96d8
+type_tags:
+- access-control
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-authenticate-host-with-netrc
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- host: null
+  opts:
+    description: |-
+      The host where username and password will be used.
+      For example: github.com
+    is_required: true
+    summary: ""
+    title: Host
+- opts:
+    is_required: true
+    summary: The username used for the host to authenticate.
+    title: Username
+  username: null
+- opts:
+    description: The password (or Auth Token / Access Token) used for the host to
+      authenticate.
+    is_required: true
+    title: Password / Auth Token / Access Token
+  password: null
