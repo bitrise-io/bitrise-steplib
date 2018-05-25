@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>ionic-prepare-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="70.2343762%" y1="40.8911133%" x2="74.0234375%" y2="131.567383%" id="linearGradient-1">
+            <stop stop-color="#478AFF" offset="0%"></stop>
+            <stop stop-color="#5B5EF4" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="6.41576452%" x2="50%" y2="100%" id="linearGradient-2">
+            <stop stop-color="#FF716E" offset="0%"></stop>
+            <stop stop-color="#FCC04A" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="3.83399566%" x2="50%" y2="100%" id="linearGradient-3">
+            <stop stop-color="#FE8481" offset="0%"></stop>
+            <stop stop-color="#FCC04A" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Ionic-Prepare">
+            <g id="ionic-prepare-stepicon">
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="256" height="256"></rect>
+                <path d="M128.999837,91 C149.952833,91 167,108.047167 167,129.000489 C167,149.953158 149.952833,167 128.999837,167 C108.046842,167 91,149.953158 91,129.000489 C91,108.047167 108.046842,91 128.999837,91 Z M199,76 C199,85.3896204 191.386991,93 181.99984,93 C172.611091,93 165,85.3896204 165,76 C165,66.6103796 172.611091,59 181.99984,59 C191.386991,59 199,66.6103796 199,76 Z M200.806562,94.8559375 C205.579375,105.3225 208,116.474062 208,128 C208,172.1125 172.111875,208 128,208 C83.8878125,208 48,172.1125 48,128 C48,83.888125 83.8878125,48 128,48 C140.902187,48 153.243437,50.9984375 164.680312,56.9115625 L166.17,57.6815625 L164.859375,58.72875 C161.641562,61.3003125 159.089375,64.6453125 157.480625,68.401875 L157.034375,69.4434375 L156.011562,68.95625 C147.209062,64.7628125 137.784687,62.6365625 128,62.6365625 C91.958125,62.6365625 62.63625,91.9584375 62.63625,128 C62.63625,164.041562 91.958125,193.363437 128,193.363437 C164.041562,193.363437 193.363437,164.041562 193.363437,128 C193.363437,119.3325 191.678125,110.895312 188.35375,102.924062 L187.9175,101.87875 L188.979687,101.484687 C192.808437,100.06375 196.27375,97.6790625 199,94.5875 L200.11,93.3290625 L200.806562,94.8559375 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+                <g id="Group-7" transform="translate(48.000000, 48.000000)"></g>
+                <path d="M167,200 C185.777681,200 201,184.777681 201,166 C201,147.222319 185.777681,132 167,132 C148.222319,132 133,147.222319 133,166 C133,184.777681 148.222319,200 167,200 Z M167,220 C137.176624,220 113,195.823376 113,166 C113,136.176624 137.176624,112 167,112 C196.823376,112 221,136.176624 221,166 C221,195.823376 196.823376,220 167,220 Z" id="Oval-6" fill="url(#linearGradient-2)" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
+                <polygon id="Line-2-Copy" fill="url(#linearGradient-3)" fill-rule="nonzero" style="mix-blend-mode: multiply;" points="186.538487 161.115724 186.538487 171.115724 147.6 171.115724 147.6 161.115724"></polygon>
+                <path d="M87,123 C105.777681,123 121,107.777681 121,89 C121,70.2223185 105.777681,55 87,55 C68.2223185,55 53,70.2223185 53,89 C53,107.777681 68.2223185,123 87,123 Z M87,143 C57.1766235,143 33,118.823376 33,89 C33,59.1766235 57.1766235,35 87,35 C116.823376,35 141,59.1766235 141,89 C141,118.823376 116.823376,143 87,143 Z" id="Oval-6" fill="url(#linearGradient-2)" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
+                <path d="M92,84.1157237 L106.538487,84.1157237 L106.538487,94.1157237 L92,94.1157237 L92,107.517925 L82,107.517925 L82,94.1157237 L67.6,94.1157237 L67.6,84.1157237 L82,84.1157237 L82,70.5833333 L92,70.5833333 L92,84.1157237 Z" id="Combined-Shape" fill="url(#linearGradient-3)" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
+            </g>
+        </g>
+    </g>
+</svg>
