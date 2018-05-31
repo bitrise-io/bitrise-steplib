@@ -1,0 +1,93 @@
+title: Xcode Test for Mac
+summary: Runs Xcode Test on your macOS app project.
+description: Runs Xcode's `test` action, configured for macOS app projects.
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
+published_at: 2018-04-10T11:25:10.333955027+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
+  commit: d368cf481ce86b5a8b5711c8ad981c13a41fdcd9
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- test
+dependencies:
+- manager: _
+  name: xcode
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-test-mac
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- destination: null
+  opts:
+    description: |
+      The Destination to use.
+
+      Read more in [Xcodebuild Destination Cheatsheet](http://www.mokacoding.com/blog/xcodebuild-destination-options/).
+
+      Example value: `platform=OS X,arch=x86_64`
+    is_required: false
+    title: Destination name
+- is_clean_build: "yes"
+  opts:
+    is_required: true
+    title: Should a clean Xcode build run before testing?
+    value_options:
+    - "yes"
+    - "no"
+- generate_code_coverage_files: "no"
+  opts:
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    description: |
+      This input is __deprecated__, please __use change-workdir step__ instead.
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    title: '[Deprecated] Working directory'
+  workdir: $BITRISE_SOURCE_DIR
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed

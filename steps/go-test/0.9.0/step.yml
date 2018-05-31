@@ -1,0 +1,31 @@
+title: Go test
+summary: Runs go test
+description: |-
+  Runs go test on the given packages one-by-one:
+
+  `go test -v <package>`
+website: https://github.com/bitrise-steplib/steps-go-test
+source_code_url: https://github.com/bitrise-steplib/steps-go-test
+support_url: https://github.com/bitrise-steplib/steps-go-test/issues
+published_at: 2018-04-11T15:27:25.616467447+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-go-test.git
+  commit: a0d3bf08f31dffcb3652aa50ab746f1b12756a07
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-go-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      Newline (`\n`) separated list of go packages, to run the go test command against.
+
+      Example: `github.com/my/step\ngithub.com/bitrise/step/tool`
+    summary: go test target packages
+    title: go test target packages
+  packages: $BITRISE_GO_PACKAGES

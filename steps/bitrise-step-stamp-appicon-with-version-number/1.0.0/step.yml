@@ -1,0 +1,59 @@
+title: Stamp AppIcon with version number
+summary: |
+  This script will use ImageMagick to stamp the version number to all icons.
+description: |
+  Stamps version "version(build number)" to the bottom of the icon.
+website: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
+source_code_url: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
+support_url: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number/issues
+published_at: !!timestamp 2018-04-04T16:50:55.395108202+03:00
+source:
+  git: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number.git
+  commit: 5c7c44df263ab5201f14dfcb7be2eeb95417bce0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
+deps:
+  brew:
+  - name: imagemagick
+  apt_get:
+  - name: imagemagick
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: "true"
+inputs:
+- opts:
+    description: |
+      Relative path to icons for example `Project/General.xcassets/AppIcon.appiconset`
+    is_expand: true
+    is_required: true
+    summary: Relative path to icons
+    title: Path to icons of the project
+    value_options: []
+  stamp_path_to_icons: null
+- opts:
+    description: |
+      Version number or string for example 0.1 or Dev
+    is_expand: true
+    is_required: true
+    summary: Version number or string
+    title: Version number or string
+    value_options: []
+  stamp_version: null
+- opts:
+    description: |
+      Build number to stamp on the icon. Defaults to BITRISE_BUILD_NUMBER
+    is_expand: true
+    is_required: true
+    summary: Build number to stamp on the icon
+    title: Build number to stamp on the icon
+    value_options: []
+  stamp_build_number: $BITRISE_BUILD_NUMBER
