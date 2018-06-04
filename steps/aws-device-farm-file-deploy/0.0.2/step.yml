@@ -15,10 +15,15 @@ host_os_tags:
 - linux
 - osx-10.9
 - osx-10.10
+project_type_tags:
+- ios
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
 - test
-- amazon
-- device-farm
 deps:
   brew:
   - name: awscli

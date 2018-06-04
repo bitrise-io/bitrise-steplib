@@ -1,0 +1,114 @@
+title: App Center upload and schedule tests
+summary: Uploads and schedules tests on Microsoft App Center
+description: |-
+  Uploads and schedules tests on Microsoft App Center.
+
+  Appium, Espresso, Calabash Xamarin.UITest and XCUITest tests can be uploaded.
+
+  Setup Instructions:
+
+  1. Prepare your test for upload: [https://docs.microsoft.com/en-us/appcenter/test-cloud/preparing-for-upload/](https://docs.microsoft.com/en-us/appcenter/test-cloud/preparing-for-upload/)
+  1. Create an App Center project: [https://appcenter.ms/apps](https://appcenter.ms/apps)
+  1. Navigate to Test runs tab and start a New test run:
+    - Select devices
+    - Configure test run
+    - On Submit tab you will find every required input for the step
+    - Click on Done
+website: https://github.com/bitrise-steplib/steps-appcenter-test
+source_code_url: https://github.com/bitrise-steplib/steps-appcenter-test
+support_url: https://github.com/bitrise-steplib/steps-appcenter-test/issues
+published_at: 2018-04-26T14:00:51.279392903+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-appcenter-test.git
+  commit: 913608ceb0cb9f507b831c6ffb05c35d7096f291
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appcenter-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: '[Install the appcenter-cli](https://github.com/Microsoft/appcenter-cli#installation)
+      and run `appcenter tokens create` to generate a new API token.'
+    is_expand: true
+    is_required: true
+    summary: API token
+    title: API token
+  token: null
+- app: null
+  opts:
+    description: Specify app in the <ownerName>/<appName> format
+    is_expand: true
+    is_required: true
+    summary: Specify app in the <ownerName>/<appName> format
+    title: Target App on App Center
+- framework: null
+  opts:
+    description: |-
+      The used testing framework name.
+
+      Available options:
+
+      - `appium` - for Appium tests
+      - `espresso` - for Espresso tests
+      - `calabash` - for Calabash tests
+      - `uitest` - for Xamarin.UITests
+      - `xcuitest` - for XCUITest
+    is_expand: true
+    is_required: true
+    summary: The used testing framework name
+    title: Test framework
+- devices: null
+  opts:
+    description: Device selection slug
+    is_expand: true
+    is_required: true
+    summary: Device selection slug
+    title: Device selection slug
+- opts:
+    description: Name of the test series.
+    is_expand: true
+    is_required: true
+    summary: Name of the test series
+    title: Name of the test series
+  series: null
+- locale: en_US
+  opts:
+    description: The system locale for the test run.
+    is_expand: true
+    is_required: true
+    summary: The system locale for the test run
+    title: The system locale for the test run
+- app_path: null
+  opts:
+    description: |-
+      Path to an application file.
+      Can be an .ipa or .apk file.
+    is_expand: true
+    is_required: true
+    summary: Path to an application file
+    title: Path to an application file
+- dsym_dir: null
+  opts:
+    description: Path to the directory with iOS symbol files.
+    is_expand: true
+    summary: Path to the directory with iOS symbol files
+    title: Path to the directory with iOS symbol files
+- opts:
+    description: |-
+      Path to the test directory.
+
+      - For Appium tests: path to the directory with the Appium tests (usually <project>/target/upload)
+      - For Espresso tests: path to the Espresso output directory (usually <project>/build/outputs/apk)
+      - For Calabash tests: path to the Calabash workspace directory (usually <project>/features)
+      - For Xamarin.UITest tests: path to the directory with the built test assemblies (usually <project>/bin/<configuration>)
+      - For XCUITest tests: path to the build output directory (usually <project>/Build/Products/Debug-iphoneos)
+    is_expand: true
+    is_required: true
+    summary: Path to the test directory
+    title: Path to the test directory
+  test_dir: null

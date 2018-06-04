@@ -16,11 +16,7 @@ source:
   commit: e6a13ae1069bfd5eb703b5d97ada234bdc93a694
 host_os_tags:
 - osx-10.10
-project_type_tags:
-- ios
-- android
 type_tags:
-- messaging
 - notification
 is_requires_admin_user: true
 is_always_run: true

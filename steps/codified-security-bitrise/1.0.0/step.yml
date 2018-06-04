@@ -1,0 +1,35 @@
+title: Codified Security
+summary: This step uploads your app to Codified Security for automated mobile app
+  security testing
+description: |-
+  This step uploads your app to Codified Security for automated mobile app security testing.
+
+  https://codifiedsecurity.com
+website: https://bitbucket.org/codifiedldn/codified-security-bitrise
+published_at: 2017-04-24T11:19:06.686290651+02:00
+source:
+  git: https://bitbucket.org/codifiedldn/codified-security-bitrise.git
+  commit: d941c0e648ec869b99ea746fb423482903a8a069
+project_type_tags:
+- ios
+- android
+- xamarin
+type_tags:
+- test
+is_requires_admin_user: false
+is_always_run: false
+inputs:
+- codified_security_api_key: $CODIFIED_SECURITY_API_KEY
+  opts:
+    description: You can obtain your key from https://dashboard.codifiedsecurity.com/settings.
+      You'll find it under Integrations tab as Api Key.
+    is_required: true
+    title: Codified Security API Key
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    is_required: false
+    title: IPA path
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    is_required: false
+    title: APK path

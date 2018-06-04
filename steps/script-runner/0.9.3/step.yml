@@ -1,0 +1,58 @@
+title: Script Runner
+summary: |
+  Run scripts from file
+description: |
+  Run scripts from file
+website: https://github.com/bitrise-steplib/steps-script-runner
+source_code_url: https://github.com/bitrise-steplib/steps-script-runner
+support_url: https://github.com/bitrise-steplib/steps-script-runner/issues
+published_at: 2017-09-29T16:31:56.22439+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-script-runner.git
+  commit: 0e0fc3483b271c45d4e321ddc2a68e9e92593399
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-script-runner
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- file_path: null
+  opts:
+    description: The script you want to run.
+    is_expand: true
+    is_required: true
+    title: Script location
+- opts:
+    description: "The executor to be used for running the script.\nYou can use any
+      binary which is in the PATH (bash/ruby/etc.), \nmultipart commands (e. g. go
+      run), absolute paths (e. g. /bin/sh) \nor binaries from env (e. g. /usr/bin/env
+      python). You can \nspecify flags as well (e. g. /bin/bash -l)."
+    is_required: true
+    title: Execute with / runner binary
+  runner: bash
+- opts:
+    category: Debug
+    description: |-
+      This directory will be set as the current working
+      directory for the script.
+      Any relative path in the Script (file_path) will be
+      relative to this directory.
+    title: Working directory
+  working_dir: $BITRISE_SOURCE_DIR
+- is_debug: "no"
+  opts:
+    category: Debug
+    description: |-
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    title: Debug print?
+    value_options:
+    - "no"
+    - "yes"

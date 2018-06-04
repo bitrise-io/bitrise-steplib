@@ -1,0 +1,59 @@
+title: SonarQube Scanner
+summary: Runs SonarQube Scanner CLI
+description: "This step provides only a **scanner** (client) which needs SonarQube
+  **server** to work.\nIf you haven't access to server check out this tutorial: \n[how
+  to get started in two minutes](https://docs.sonarqube.org/display/SONAR/Get+Started+in+Two+Minutes).\nLocal
+  server can be spawned in previous script step. \nSee [test of this step](https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner/blob/master/bitrise.yml)
+  \nfor sample step implementation.\n\nAnalysis result can be saved to file (specified
+  via `sonar.report.export.path` property) or send directly by server e.g.\nto [GitHub
+  PullRequest comment](https://docs.sonarqube.org/display/PLUG/GitHub+Plugin).\n\nScanner
+  properties can be provided via `sonar-project.properties` file in the workspace
+  root directory or typed in input below.\nSee [SonarQube Scanner documentation](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner)
+  \nfor more details.\n\nIt's an error to both have that file and specify properties
+  here at the same time."
+website: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner
+support_url: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner/issues
+published_at: 2017-04-28T00:42:28.882075063Z
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-sonarqube-scanner.git
+  commit: 7cc72d937e9465a7c62b023228d73925ae896d97
+type_tags:
+- utility
+deps:
+  brew:
+  - name: unzip
+  - name: wget
+  apt_get:
+  - name: unzip
+  - name: wget
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Scanner CLI version to be used. Step will fail if invalid or non-existent
+      is specified.
+    is_required: true
+    title: Scanner CLI version
+  scanner_version: 3.0.1.733
+- opts:
+    description: |-
+      See [analysis parameters](https://docs.sonarqube.org/display/SONAR/Analysis+Parameters) documentation
+      for list of possible options.
+
+      Example:
+      ```
+        sonar.sources=.
+        sonar.login=TOKEN_HERE
+        #environment variables are evaluated
+        sonar.projectKey=$BITRISE_APP_TITLE
+        sonar.host.url=https://sonar.example.test
+        sonar.analysis.mode=preview
+        sonar.report.export.path=sonar-report.json
+      ```
+    is_expand: true
+    is_required: false
+    title: Scanner parameters in Java properties format
+  scanner_properties: null

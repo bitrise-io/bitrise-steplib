@@ -1,0 +1,64 @@
+title: Set iOS Info.plist - Bundle Version and Bundle Short Version String
+summary: Sets the Bundle Version and Bundle Short Version String to the specified
+  value, in the target Info.plist file for the next build.
+description: Sets the Bundle Version and Bundle Short Version String to the specified
+  value, in the target Info.plist file for the next build.
+website: https://github.com/BOOMik/steps-set-ios-version
+source_code_url: https://github.com/BOOMik/steps-set-ios-version
+support_url: https://github.com/BOOMik/steps-set-ios-version/issues
+published_at: 2017-11-28T00:12:19.548767526+03:00
+source:
+  git: https://github.com/BOOMik/steps-set-ios-version.git
+  commit: 75a1b1cf5f8f91987e14379eefa46fcd0dc9c986
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- utility
+run_if: .IsCI
+inputs:
+- info_plist_file: null
+  opts:
+    description: |
+      Path to the given iOS project's Info.plist file.
+    is_required: true
+    summary: ""
+    title: Info.plist file path
+- bundle_version: null
+  opts:
+    description: |
+      CFBundleVersion e.g.: 42
+    is_required: false
+    summary: Set the :CFBundleVersion to a specified value. Should be string or empty.
+      If the field is empty, the current version will be used.
+    title: Bundle Version to set
+- bundle_version_short: null
+  opts:
+    description: |
+      CFBundleShortVersionString e.g.: 1.0.0
+    is_required: false
+    summary: Set the :CFBundleShortVersionString to a specified value. Should be string
+      or empty. If the field is empty, the current short version will be used.
+    title: Bundle Short Version String to set
+- opts:
+    description: |
+      This offset will be added to `Version` input's value. If this set - Offset and Version must be integer!.
+    title: Bundle Version Offset
+  version_short_offset: null
+- append_version: "false"
+  opts:
+    is_required: true
+    summary: It appends to the current CFBundleShortVersionString. e.g. Current version
+      in Info.plist is '1.0.'. After step will be '1.0.YOU_ENTERED_VERSION NAME'
+    title: Append Version
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- APP_VERSION: null
+  opts:
+    title: Version (CFBundleShortVersionString from Info.plist)
+- APP_BUILD: null
+  opts:
+    title: Build (CFBundleVersion from Info.plist)

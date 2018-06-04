@@ -11,9 +11,12 @@ source:
   commit: c3dabeb442c18410520baad4301ade8e81666a96
 project_type_tags:
 - ios
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- ios
-- ipa
+- "artifact info"
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

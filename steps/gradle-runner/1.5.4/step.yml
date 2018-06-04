@@ -15,7 +15,7 @@ host_os_tags:
 project_type_tags:
 - android
 type_tags:
-- gradle
+- build
 toolkit:
   go:
     package_name: github.com/bitrise-io/steps-gradle-runner

@@ -1,3 +1,0 @@
-removal_date: "2016-06-01"
-deprecate_notes: |
-  Use deploy-to-bitrise-io step instead of this.

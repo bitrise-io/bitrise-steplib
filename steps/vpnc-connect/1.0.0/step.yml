@@ -1,0 +1,40 @@
+title: Cisco VPN connect
+summary: Connects with Cisco VPN provided by VPN3000 Concentrator, Juniper/Netscreen,
+  IOS and PIX using vpnc
+description: |-
+  VPN client settings and credentials can be provided in several ways:
+  - existing config file `/etc/vpnc.conf`
+  - commandline options input in this step
+  - config file content input in this step
+  More info about available configuration options and settings resolution order can be found on
+  [vpnc homepage](https://www.unix-ag.uni-kl.de/~massar/vpnc/) and [manual](https://linux.die.net/man/8/vpnc).
+website: https://github.com/DroidsOnRoids/bitrise-step-vpnc-connect
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-vpnc-connect
+support_url: https://github.com/DroidsOnRoids/bitrise-step-vpnc-connect/issues
+published_at: 2017-06-28T09:23:25.879160231Z
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-vpnc-connect.git
+  commit: 96e95a537e0621ca3a0cc7dbb974d40b71c78b45
+type_tags:
+- utility
+deps:
+  apt_get:
+  - name: vpnc
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- commandline_options: null
+  opts:
+    description: |
+      Options specified here will take precedence over config files.
+    summary: vpnc commandline options
+    title: Commandline options
+- config_file_content: null
+  opts:
+    description: |
+      If not empty, value will be saved to `/etc/vpnc/default.conf` overwriting existing file.
+    is_expand: false
+    summary: Default config file content
+    title: Config file content

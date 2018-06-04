@@ -1,3 +1,0 @@
-removal_date: "2017-08-01"
-deprecate_notes: |
-  This step is deprecated, use xamarin-archive step instead. More info at - http://blog.bitrise.io/2016/10/18/the-new-xamarin-archive-step.html 

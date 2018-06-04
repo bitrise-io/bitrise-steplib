@@ -1,0 +1,28 @@
+title: Xamarin User Management
+summary: This step helps you authenticate your user with Xamarin.
+description: This step helps you authenticate your user with Xamarin.
+website: https://github.com/bitrise-steplib/steps-xamarin-user-management
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-user-management
+support_url: https://github.com/bitrise-steplib/steps-xamarin-user-management/issues
+published_at: 2017-06-08T16:17:09.718726573+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-user-management.git
+  commit: a5f64623053614f4ddb92ba825b8cfdffe3813b1
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- access-control
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+run_if: .IsCI
+inputs:
+- build_slug: $BITRISE_BUILD_SLUG
+  opts:
+    description: |
+      Bitrise build slug
+    is_expand: true
+    is_required: true
+    title: Bitrise build slug

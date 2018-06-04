@@ -1,0 +1,70 @@
+title: Manipulate cordova config.xml
+summary: |
+  Manipulate cordova config.xml
+description: |
+  Manipulate cordova config.xml
+website: https://github.com/platanus/bitrise-step-cordova-config
+source_code_url: https://github.com/platanus/bitrise-step-cordova-config
+support_url: https://github.com/platanus/bitrise-step-cordova-config/issues
+published_at: 2017-12-07T10:42:17.822211-05:00
+source:
+  git: https://github.com/platanus/bitrise-step-cordova-config.git
+  commit: c70527e8d200c3ee2b66a44c5da80c3977a0e941
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- cordova
+- ionic
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- name: $CORDOVA_NAME
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Modify the element `<name></name>` in the config.xml file
+    title: Cordova application name
+- id: $CORDOVA_ID
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Modify the attribute `id` the config.xml file
+    title: Cordova ID
+- android_version_code: $CORDOVA_ANDROID_VERSION_CODE
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Modify the attribute `android-versionCode` in the config.xml file
+    title: Android version code
+- android_package_name: $CORDOVA_ANDROID_PACKAGE_NAME
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Modify the attribute `android-packageName` in the config.xml file
+    title: Android package name
+- ios_bundle_version: $CORDOVA_IOS_BUNDLE_VERSION
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Modify the attribute `ios-CFBundleVersion` in the config.xml file
+    title: iOS bundle version
+- ios_bundle_identifier: $CORDOVA_IOS_BUNDLE_IDENTIFIER
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Modify the attribute `ios-CFBundleIdentifier` in the config.xml file
+    title: iOS bundle identifier
+- config_path: $CORDOVA_CONFIG_PATH
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Define the location of the config.xml files. Defaults to `./config.xml`
+    title: Cordova config.xml file location

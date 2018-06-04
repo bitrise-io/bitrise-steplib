@@ -19,10 +19,12 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
 - deploy
-- Applivery
-- iOS
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

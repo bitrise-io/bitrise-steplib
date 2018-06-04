@@ -16,8 +16,7 @@ project_type_tags:
 - ios
 - macos
 type_tags:
-- carthage
-- system
+- dependency
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-carthage

@@ -1,0 +1,130 @@
+title: Xamarin iOS Test
+summary: Xamarin iOS Test
+description: |-
+  Xamarin iOS Test
+
+  Use solution configuration-platform combination for automatig tests, which maps to an ios project configuration-platform combination, which:
+
+  * Starts the Xamarin Test Cloud Agent in your AppDelegate
+  * Builds for Simulator platform
+
+  Initialize you ios app in your UITest project as follows:
+
+  ```
+  iOSAppConfigurator iosConfigurator = ConfigureApp.iOS;
+
+  string appBundlePath = Environment.GetEnvironmentVariable("APP_BUNDLE_PATH");
+  if (!string.IsNullOrEmpty(appBundlePath))
+  {
+    iosConfigurator.AppBundle(appBundlePath);
+  }
+
+  string simulatorUDID = Environment.GetEnvironmentVariable("IOS_SIMULATOR_UDID");
+  if (!string.IsNullOrEmpty(simulatorUDID))
+  {
+    iosConfigurator.DeviceIdentifier(simulatorUDID);
+  }
+
+  return iosConfigurator.StartApp();
+  ```
+website: https://github.com/bitrise-steplib/steps-xamarin-ios-test
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-ios-test
+support_url: https://github.com/bitrise-steplib/steps-xamarin-ios-test/issues
+published_at: 2017-08-09T14:25:05.085320758+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-ios-test.git
+  commit: 7439a7b08129e6b0751a08797c4ed1ef6ddd1bab
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-ios-test
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    category: Testing
+    description: |
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+      * iPhone 6
+      * iPhone 6s Plus
+      * iPad
+      * iPad Air
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6s Plus
+- opts:
+    category: Testing
+    description: |
+      A couple of format examples:
+      * iOS 8.4
+      * iOS 9.3
+      * latest
+    is_required: true
+    title: OS version
+  simulator_os_version: latest
+- opts:
+    category: Testing
+    description: |
+      Comma-separated list of names of tests to run.
+      If not specified all tests will run.
+
+      Format example: `Multiplatform.UItest.Tests(iOS)`
+    title: Test name to run
+  test_to_run: null
+- opts:
+    category: Config
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_project: $BITRISE_PROJECT_PATH
+- opts:
+    category: Config
+    description: |
+      Xamarin solution configuration
+    is_required: true
+    title: Xamarin solution configuration
+  xamarin_configuration: Debug
+- opts:
+    category: Config
+    description: |
+      Xamarin solution platform
+    is_required: true
+    title: Xamarin solution platform
+  xamarin_platform: iPhoneSimulator
+- build_tool: msbuild
+  opts:
+    category: Debug
+    description: Which tool to use for building?
+    is_required: true
+    title: Which tool to use for building?
+    value_options:
+    - msbuild
+    - xbuild
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.

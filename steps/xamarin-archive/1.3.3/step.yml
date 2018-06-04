@@ -1,0 +1,125 @@
+title: Xamarin Archive
+summary: Xamarin Archive
+description: Create an archive for your Xamarin application.
+website: https://github.com/bitrise-steplib/steps-xamarin-archive
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-archive
+support_url: https://github.com/bitrise-steplib/steps-xamarin-archive/issues
+published_at: 2017-04-18T11:58:11.977024803+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-archive.git
+  commit: c052837c9a272e8afe83db7ef87933d42bc7405e
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-archive
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The Xamarin Solution file `.sln` path.
+    is_required: true
+    title: Path to the Xamarin Solution file
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- opts:
+    description: Xamarin solution configuration.
+    is_required: true
+    title: Xamarin solution configuration
+  xamarin_configuration: $BITRISE_XAMARIN_CONFIGURATION
+- opts:
+    description: Xamarin solution platform.
+    is_required: true
+    title: Xamarin solution platform
+  xamarin_platform: $BITRISE_XAMARIN_PLATFORM
+- opts:
+    description: |-
+      Comma separated list of project types to build.
+
+      __Empty list means: build all project types.__
+
+      Available platforms:
+
+      - android
+      - ios
+      - macos
+      - tvos
+    title: Specify project types to build
+  project_type_whitelist: android,ios,macos,tvos
+- ios_build_command_custom_options: null
+  opts:
+    description: These options will be append to the end of the iOS build command.
+    title: (Experimental) Options to append to the iOS build command
+- android_build_command_custom_options: null
+  opts:
+    description: These options will be append to the end of the Android build command.
+    title: (Experimental) Options to append to the Android build command
+- opts:
+    description: These options will be append to the end of the tvOS build command.
+    title: (Experimental) Options to append to the tvOS build command
+  tvos_build_command_custom_options: null
+- macos_build_command_custom_options: null
+  opts:
+    description: These options will be append to the end of the macOS build command.
+    title: (Experimental) Options to append to the macOS build command
+- force_mdtool: "no"
+  opts:
+    description: |-
+      Force use mdtool for building iOS, tvOS and macOS projects?
+
+      By default step will build __iOS__, __tvOS__ and __macOS__ projects with `xbuild` build tool.
+      If you want to switch to use `mdtool`, set this input to `yes`.
+
+      _Android projects will build with `xbuild`._
+    is_required: true
+    title: (Experimental) Force use mdtool for builds?
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_APK_PATH: ""
+  opts:
+    title: The created android .apk file's path
+- BITRISE_XCARCHIVE_PATH: ""
+  opts:
+    title: The created iOS .xcarchive file's path
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created iOS .ipa file's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created iOS .dSYM.zip file's path
+- BITRISE_APP_PATH: null
+  opts:
+    title: The create iOS .app file's path
+- BITRISE_TVOS_XCARCHIVE_PATH: ""
+  opts:
+    title: The created tvOS .xcarchive file's path
+- BITRISE_TVOS_IPA_PATH: null
+  opts:
+    title: The created tvOS .ipa file's path
+- BITRISE_TVOS_DSYM_PATH: null
+  opts:
+    title: The created tvOS .dSYM file's path
+- BITRISE_TVOS_APP_PATH: null
+  opts:
+    title: The create tvOS .app file's path
+- BITRISE_MACOS_XCARCHIVE_PATH: ""
+  opts:
+    title: The created macOS .xcarchive file's path
+- BITRISE_MACOS_APP_PATH: null
+  opts:
+    title: The created macOS .app file's path
+- BITRISE_MACOS_PKG_PATH: null
+  opts:
+    title: The created macOS .pkg file's path

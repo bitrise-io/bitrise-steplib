@@ -16,7 +16,6 @@ project_type_tags:
 - macos
 type_tags:
 - build
-- xcode
 toolkit:
   go:
     package_name: github.com/bitrise-steplib/steps-xcode-archive-mac

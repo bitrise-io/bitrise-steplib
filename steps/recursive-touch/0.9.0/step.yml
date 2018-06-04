@@ -1,0 +1,51 @@
+title: Recursive touch for Cache
+summary: Touches all the files in a directory
+description: |-
+  Touches all the files in a directory so you can keep your project's file statuses between builds.
+  Put this step before any `xcodebuild` related step that uses `build`, `test` or `build-for-testing` commands, so `DerivedData` cache can work properly.
+website: https://github.com/bitrise-steplib/steps-recursive-touch
+source_code_url: https://github.com/bitrise-steplib/steps-recursive-touch
+support_url: https://github.com/bitrise-steplib/steps-recursive-touch/issues
+published_at: 2017-09-15T13:51:17.308572911+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-recursive-touch.git
+  commit: b0640bb209410393a9c24816f811db313d930f94
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-recursive-touch
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- directory_path: $BITRISE_SOURCE_DIR
+  opts:
+    description: |
+      The path pointing to a directory where the files will be touched.
+    is_expand: true
+    is_required: true
+    summary: The path pointing to a directory.
+    title: Path
+- opts:
+    description: |
+      The time in RFC3339 format that will be set on the files.
+
+      For example: `2017-09-08T14:50:17+02:00`
+    is_expand: true
+    is_required: false
+    summary: |
+      The time in RFC3339 format that will be set on the files.
+
+      For example: `2017-09-08T14:50:17+02:00`
+    title: Touch Time
+  touch_time: 2017-09-01T15:00:00+00:00

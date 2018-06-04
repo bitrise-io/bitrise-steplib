@@ -18,7 +18,6 @@ project_type_tags:
 - ios
 type_tags:
 - build
-- xcode
 toolkit:
   go:
     package_name: github.com/bitrise-io/steps-xcode-archive

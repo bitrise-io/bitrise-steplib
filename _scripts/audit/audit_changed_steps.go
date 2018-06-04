@@ -249,7 +249,8 @@ func main() {
 			if isExist, err := pathutil.IsPathExists(aPth); err != nil {
 				fatalf("Failed to check if path (%s) exists, error: %s", aPth, err)
 			} else if !isExist {
-				fatalf("step.yml was removed: %s", aPth)
+				log.Warnf("step.yml was removed: %s", aPth)
+				continue
 			}
 
 			if err := auditChangedStepYML(aPth); err != nil {
@@ -259,7 +260,8 @@ func main() {
 			if isExist, err := pathutil.IsPathExists(aPth); err != nil {
 				fatalf("Failed to check if path (%s) exists, error: %s", aPth, err)
 			} else if !isExist {
-				fatalf("step-info.yml was removed: %s", aPth)
+				log.Warnf("step-info.yml was removed: %s", aPth)
+				continue
 			}
 
 			if err := auditChangedStepInfoYML(aPth); err != nil {

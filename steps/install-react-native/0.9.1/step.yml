@@ -12,10 +12,8 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - react-native
-- ios
-- android
 type_tags:
-- react-native
+- installer
 deps:
   brew:
   - name: node

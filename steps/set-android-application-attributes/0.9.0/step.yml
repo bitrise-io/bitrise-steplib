@@ -16,9 +16,12 @@ host_os_tags:
 - osx-10.10
 project_type_tags:
 - android
+- xamarin
+- cordova
+- ionic
+- react-native
 type_tags:
-- build
-- utils
+- utility
 run_if: .IsCI
 inputs:
 - manifest_file: $BITRISE_ANDROID_MANIFEST_PATH

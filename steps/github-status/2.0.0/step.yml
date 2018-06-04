@@ -1,0 +1,75 @@
+title: GitHub Status
+summary: Update commit status for GitHub repositories
+description: Update commit status for GitHub repositories
+website: https://github.com/bitrise-steplib/steps-github-status
+source_code_url: https://github.com/bitrise-steplib/steps-github-status
+support_url: https://github.com/bitrise-steplib/steps-github-status/issues
+published_at: 2018-03-09T11:46:54.245300945+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-github-status.git
+  commit: e817f780d85df6fdf6cd35cbd05c78174ca56812
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- auth_token: ""
+  opts:
+    description: |-
+      Authorization token for GitHub applications
+
+      You can create one for yourself at the following url:
+      [https://github.com/settings/tokens](https://github.com/settings/tokens)
+
+      Add repo/repo:status scope to the generated token, to allow to update the repo status.
+    is_required: true
+    summary: ""
+    title: GitHub auth token
+- opts:
+    description: The URL for the repository we are working with
+    is_required: true
+    summary: ""
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- commit_hash: $BITRISE_GIT_COMMIT
+  opts:
+    description: The commit hash for the commit we are working with
+    is_required: true
+    summary: ""
+    title: Commit hash
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    description: |-
+      The target URL to associate with this status.
+      This URL will be linked from the GitHub UI to allow users to easily see the source of the status.
+    is_required: true
+    summary: ""
+    title: Build URL
+- api_base_url: https://api.github.com
+  opts:
+    description: API URL for GitHub or Github Enterprise
+    summary: ""
+    title: GitHub API base url
+- opts:
+    description: |-
+      A string label to differentiate this status from the status of other systems.
+      Default: `default`
+    summary: The Identifier to be used for this status
+    title: Status Identifier
+  status_identifier: continuous-integration/bitrise
+- opts:
+    description: |-
+      The state of the status.
+
+      If you select `auto` the step will send `success` status if the current build status is success (no step failed previously)
+      or `failure` status if the build previously failed.
+    summary: ""
+    title: Set Specific Status
+    value_options:
+    - auto
+    - pending
+    - success
+    - error
+    - failure
+  set_specific_status: auto

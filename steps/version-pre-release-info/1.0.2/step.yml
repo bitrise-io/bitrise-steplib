@@ -19,17 +19,8 @@ source:
   commit: 1970cb90c321f19f808dfdac82be953bc22a8eea
 host_os_tags:
 - osx-10.10
-project_type_tags:
-- ios
 type_tags:
-- xcode
-- versioning
-- pre-release
-- git
-- tag
-- alpha
-- beta
-- rc
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false

@@ -1,0 +1,58 @@
+title: AppCenter dSYM upload
+summary: |
+  Upload dSYM to Microsoft AppCenter
+description: "This step uploads dSYM to AppCenter using official CLI.\nThe step is
+  relevant only for iOS projects (including Xamarin.iOS).\n\nBy default $BITRISE_DSYM_PATH
+  env used to lookup for dSYM file.\nIf an archive step used as part of the workflow
+  then a default value can be used \nfor `dsym_path` variable\n\nIt is important to
+  [obtain API Token from AppCenter](https://appcenter.ms/settings/apitokens)\nto use
+  this step.\n"
+website: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload
+source_code_url: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload
+support_url: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload/issues
+published_at: 2018-02-23T13:15:57.923773+02:00
+source:
+  git: https://github.com/alexshikov/bitrise-step-appcenter-dsym-upload.git
+  commit: 42bb29ba2f557877bf8bea996452a60c2162d47c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: node
+  apt_get:
+  - name: node
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: |
+      A path to dSYM file to upload.
+    is_required: true
+    title: dSYM path
+- app_id: $BITRISE_APPCENTER_APP_ID
+  opts:
+    description: |
+      AppCenter Application Identifier is a combination of your Organization/Owner Name
+      and an Application Name.
+
+      For example: "MyOrganization/MyApplication"
+    is_required: true
+    summary: AppCenter application identifier (Owner + App Name).
+    title: Application Identifier
+- api_token: $BITRISE_APPCENTER_API_TOKEN
+  opts:
+    description: |
+      [Obtain API Token from AppCenter](https://appcenter.ms/settings/apitokens)
+    is_required: true
+    title: AppCenter API Token

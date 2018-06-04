@@ -1,0 +1,80 @@
+title: Sign APK
+summary: Sign APK
+description: Sign APK.
+website: https://github.com/bitrise-steplib/steps-sign-apk
+source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
+support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
+published_at: 2017-05-12T13:44:38.38476517+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-sign-apk.git
+  commit: 7f2f0b9d15918191509d2d1a1a75c862c96c2454
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- "code sign"
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-sign-apk
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: apk path
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    description: |-
+      For remote keystores you can provide any download location (ex: https://URL/TO/keystore.jks).
+      For local keystores provide file path url. (ex: file://PATH/TO/keystore.jks).
+    is_required: true
+    summary: ""
+    title: Keystore url
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Keystore password
+- keystore_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Keystore alias
+- opts:
+    description: |
+      If key password equals to keystore password, you can leave it empty.
+      Otherwise specify the private key password.
+    summary: ""
+    title: Private key password
+  private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+- jarsigner_options: ""
+  opts:
+    description: |
+      __deprecated!__ jarsigner options are detected from the keystore
+    summary: ""
+    title: Additional options for jarsigner
+outputs:
+- BITRISE_SIGNED_APK_PATH: null
+  opts:
+    title: Bitrise signed apk path
+- BITRISE_APK_PATH: null
+  opts:
+    title: Bitrise signed apk path

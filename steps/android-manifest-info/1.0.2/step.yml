@@ -1,0 +1,50 @@
+title: Android Manifest Info
+summary: Extracts Android manifest attributes to environment variables.
+description: |-
+  Read Android manifest attriubtes from `AndroidManifest.xml` file,
+  then export that data to environment variables prefixed with **AMI_**.
+
+  After this you can use these environment variables in other steps.
+website: https://github.com/tomcurran/bitrise-step-android-manifest-info
+source_code_url: https://github.com/tomcurran/bitrise-step-android-manifest-info
+support_url: https://github.com/tomcurran/bitrise-step-android-manifest-info/issues
+published_at: 2018-01-18T23:28:30.018621Z
+source:
+  git: https://github.com/tomcurran/bitrise-step-android-manifest-info.git
+  commit: d85f7a37476f419390dec2459f1c80f99078a4bd
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- artifact-info
+is_always_run: false
+is_skippable: false
+inputs:
+- manifest_file: $BITRISE_ANDROID_MANIFEST_PATH
+  opts:
+    description: |
+      Path to the given project's AndroidManifest.xml file.
+    is_required: true
+    summary: ""
+    title: AndroidManifest.xml file path
+outputs:
+- AMI_VERSION_CODE: null
+  opts:
+    title: Version Code (versionCode from AndroidManifest.xml)
+- AMI_VERSION_NAME: null
+  opts:
+    title: Version Name (versionName from AndroidManifest.xml)
+- AMI_PACKAGE_NAME: null
+  opts:
+    title: Package Name (package from AndroidManifest.xml)
+- AMI_MIN_SDK_VERSION: null
+  opts:
+    title: Minimum SDK Version (minSdkVersion from AndroidManifest.xml)
+- AMI_TARGET_SDK_VERSION: null
+  opts:
+    title: Target SDK Version (targetSdkVersion from AndroidManifest.xml)

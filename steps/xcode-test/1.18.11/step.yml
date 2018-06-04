@@ -1,0 +1,254 @@
+title: Xcode Test for iOS
+summary: Runs Xcode's `test` action, on an iOS project.
+description: |-
+  Runs Xcode's `test` action, on an iOS project.
+
+  Write the tests and run them on every build just to make sure those tiny
+  code goblins didn't put something in the code that shouldn't be there while
+  you were at the daily Scrum meeting.
+website: https://github.com/bitrise-io/steps-xcode-test
+source_code_url: https://github.com/bitrise-io/steps-xcode-test
+support_url: https://github.com/bitrise-io/steps-xcode-test/issues
+published_at: 2018-02-05T11:12:56.197405934+01:00
+source:
+  git: https://github.com/bitrise-io/steps-xcode-test.git
+  commit: fc3e3afff10919d1618dcd9b0684d99cf0d89c52
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-xcode-test
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    category: Testing
+    description: |-
+      Set it as it is shown in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+      * Apple TV 1080p (don't forget to set the platform to `tvOS Simulator` to use this option!)
+    is_required: true
+    title: Device
+  simulator_device: iPhone 6s Plus
+- opts:
+    category: Testing
+    description: |-
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+
+      A couple of format examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * 8.4
+      * latest
+    is_required: true
+    title: OS version
+  simulator_os_version: latest
+- opts:
+    category: Testing
+    description: |-
+      Set it as it is shown in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iOS Simulator
+      * tvOS Simulator
+    is_required: true
+    title: Platform
+    value_options:
+    - iOS Simulator
+    - tvOS Simulator
+  simulator_platform: iOS Simulator
+- export_uitest_artifacts: "false"
+  opts:
+    category: Testing
+    description: |-
+      If enabled, the attachments of the UITest will be exported into the BITRISE_DEPLOY_DIR, as a compressed ZIP file.
+      Attachments include screenshots taken during the UI test, and other artifacts.
+    title: Export UITest Artifacts
+    value_options:
+    - "true"
+    - "false"
+- generate_code_coverage_files: "no"
+  opts:
+    category: Testing
+    description: |-
+      In case of `generate_code_coverage_files: "yes"`
+      `xcodebuild` gets two additional flags:
+
+      * GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+      * GCC_GENERATE_TEST_COVERAGE_FILES=YES
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Config
+    description: |-
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    category: Config
+    description: |-
+      The Scheme to use.
+
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    category: Debug
+    description: |-
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- is_clean_build: "no"
+  opts:
+    category: Debug
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    category: Debug
+    description: |-
+      Options added to the end of the `xcodebuild build test` call.
+
+      If you leave empty this input, xcodebuild will be called as:
+
+      `xcodebuild
+        -project\-workspace PROJECT.xcodeproj\WORKSPACE.xcworkspace
+        -scheme SCHEME
+        build test
+        -destination platform=PLATFORM Simulator,name=NAME,OS=VERSION`
+
+      In case of `generate_code_coverage_files: "yes"`
+      `xcodebuild` gets two additional flags:
+
+      * GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+      * GCC_GENERATE_TEST_COVERAGE_FILES=YES
+
+      If you want to add more options, list that separated by space character.
+      Example: `-xcconfig PATH -verbose`
+    title: Additional options for `xcodebuild build test` call
+  xcodebuild_test_options: ""
+- opts:
+    category: Debug
+    description: |-
+      If `single_build: false` step runs `xcodebuild OPTIONS build OPTIONS` before the test,
+      to generate the project derived datas. After that comes `xcodebuild OPTIONS build test OPTIONS`,
+      which command's log is presented in the step's log.
+
+      If `single_build: true`, then step calls only `xcodebuild OPTIONS build test OPTIONS`.
+    title: Run xcodebuild test only
+    value_options:
+    - "true"
+    - "false"
+  single_build: "true"
+- opts:
+    category: Debug
+    description: |-
+      Previous Xcode versions and configurations may throw the error `iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current state is 1.`
+      when the compilation before performing the tests takes too long.
+
+      This is fixed by running `xcodebuild OPTIONS build test OPTIONS` instead of `xcodebuild OPTIONS test OPTIONS`.
+      Calling an explicit build before the test results in the code being compiled twice, thus creating an overhead.
+
+      Unless you are sure that your configuration is not prone to this error, it is recommended to leave this option turned on.
+    is_required: true
+    title: (Experimental) Explicitly perform a build before testing?
+    value_options:
+    - "yes"
+    - "no"
+  should_build_before_test: "yes"
+- opts:
+    category: Debug
+    description: 'If `should_retry_test_on_fail: yes` step will retry the test if
+      first attempt failed.'
+    is_required: true
+    title: (Experimental) Rerun test, when it fails?
+    value_options:
+    - "yes"
+    - "no"
+  should_retry_test_on_fail: "no"
+- opts:
+    category: Debug
+    description: |-
+      Options added to the end of the `xcpretty` test call.
+
+      If you leave empty this input, xcpretty will be called as:
+
+      `set -o pipefail && XCODEBUILD_TEST_COMMAND | xcpretty`
+
+      In case of leaving this input on default value:
+
+      `set -o pipefail && XCODEBUILD_TEST_COMMAND | xcpretty --color --report html --color --report html --output "${BITRISE_DEPLOY_DIR}/xcode-test-results-${BITRISE_SCHEME}.html"
+
+      If you want to add more options, list that separated by space character.
+    title: Additional options for `xcpretty` test call
+  xcpretty_test_options: --color --report html --output "${BITRISE_DEPLOY_DIR}/xcode-test-results-${BITRISE_SCHEME}.html"
+- opts:
+    category: Debug
+    description: Wait to simulator boot or start test immediately?
+    title: (Experimental) Wait to simulator boot?
+    value_options:
+    - "yes"
+    - "no"
+  wait_for_simulator_boot: "yes"
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XCODE_RAW_TEST_RESULT_TEXT_PATH: null
+  opts:
+    description: |-
+      This is the path of the raw test results log file.
+
+      If the compilation fails this log will contain the compilation output,
+      if the tests can be started it'll only include the test output.
+    title: The full, raw test output file path
+- BITRISE_XCODE_TEST_ATTACHMENTS_PATH: null
+  opts:
+    description: This is the path of the test attachments zip.
+    title: The full, test attachments zip path

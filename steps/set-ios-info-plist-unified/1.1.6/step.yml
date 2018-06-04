@@ -1,0 +1,86 @@
+title: Set iOS Info.plist Values (unified)
+summary: Sets various values in the target Info.plist file for the next build.
+description: Sets various values in the target Info.plist file for the next build.
+website: https://github.com/mapletonhillmedia/steps-set-ios-info-plist
+source_code_url: https://github.com/mapletonhillmedia/steps-set-ios-info-plist
+support_url: https://github.com/mapletonhillmedia/steps-set-ios-info-plist/issues
+published_at: 2017-06-26T08:27:44.112413206-06:00
+source:
+  git: https://github.com/mapletonhillmedia/steps-set-ios-info-plist.git
+  commit: e1a2b38ee3f2bb09f9ca4f07886cb991586bd930
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- utility
+inputs:
+- info_plist_file: null
+  opts:
+    description: |
+      Path to the given iOS project's Info.plist file.
+    is_required: true
+    summary: ""
+    title: Info.plist file path
+- bundle_identifier: null
+  opts:
+    description: |
+      Bundle Identifier e.g.: com.yourcompany.$(PRODUCT_NAME:rfc1034identifier) Read more: https://developer.apple.com/library/ios/documentation/IDEs/Conceptual/AppDistributionGuide/ConfiguringYourApp/ConfiguringYourApp.html
+    is_required: false
+    summary: Set the :CFBundleIdentifier to a specified value. Should be string.
+    title: Bundle Identifier to set
+- bundle_version: null
+  opts:
+    description: |
+      CFBundleVersion e.g.: 1.0.0
+    is_required: false
+    summary: Set the :CFBundleVersion to a specified value. Should be string.
+    title: Bundle Version to set
+- bundle_version_short: null
+  opts:
+    description: |
+      CFBundleShortVersionString e.g.: 1.0
+    is_required: false
+    summary: Set the :CFBundleShortVersionString to a specified value. Should be string.
+    title: Bundle Short Version to set
+- bundle_name: null
+  opts:
+    description: |
+      Bundle CFBundleName e.g.: My App    Read more: https://developer.apple.com/library/prerelease/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/TP40009249-109585
+    is_required: false
+    summary: Set the :CFBundleName to a specified value. Should be string (16 characters
+      max).
+    title: Bundle Short Name to set
+- bundle_display_name: null
+  opts:
+    description: |
+      Bundle CFBundleDisplayName e.g.: My App    Read more: https://developer.apple.com/library/prerelease/content/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html#//apple_ref/doc/uid/20001431-110725
+    is_required: false
+    summary: Set the :CFBundleDisplayName to a specified value. Should be string.
+    title: Bundle Display Name to set (visible to users and used by Siri)
+- app_icon_asset_catalog: null
+  opts:
+    description: |
+      Asset Catalog path e.g.: Resources/Images.xcassets/AppIcons-FreeEdition.appiconset    Read more: https://developer.apple.com/library/prerelease/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/AssetTypes.html#//apple_ref/doc/uid/TP40015170-CH30-SW1
+    is_required: false
+    summary: Set the :XSAppIconAssets to a specified value. Should be string.
+    title: Path to App Icon Asset Catalog
+- app_launch_images_asset_catalog: null
+  opts:
+    description: |
+      Asset Catalog path e.g.: Resources/Images.xcassets/AppIcons-FreeEdition.appiconset    Read more: https://developer.apple.com/library/prerelease/content/documentation/Xcode/Reference/xcode_ref-Asset_Catalog_Format/AssetTypes.html#//apple_ref/doc/uid/TP40015170-CH30-SW1
+    is_required: false
+    summary: Set the :XSLaunchImageAssets to a specified value. Should be string.
+    title: Path to App Launch Images Asset Catalog
+- app_launch_screen: null
+  opts:
+    description: |
+      UILaunchStoryboardName e.g.: MyLaunchScreen    Read more: https://developer.apple.com/library/content/documentation/General/Reference/InfoPlistKeyReference/Articles/iPhoneOSKeys.html
+    is_required: false
+    summary: Set the :UILaunchStoryboardName to a specified value. Should be string.
+    title: 'Name of Launch screen Storyboard '

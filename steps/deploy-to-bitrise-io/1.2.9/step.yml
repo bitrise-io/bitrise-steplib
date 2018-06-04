@@ -16,7 +16,6 @@ host_os_tags:
 - osx-10.10
 type_tags:
 - deploy
-- artifact
 is_requires_admin_user: false
 is_always_run: true
 is_skippable: false

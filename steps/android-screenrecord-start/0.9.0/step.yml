@@ -1,0 +1,51 @@
+title: Android Screenrecord Start
+summary: Start recording an Android device's screen.
+description: Start recording an Android device's screen.
+website: https://github.com/bitrise-steplib/steps-android-screenrecord-start
+source_code_url: https://github.com/bitrise-steplib/steps-android-screenrecord-start
+support_url: https://github.com/bitrise-steplib/steps-android-screenrecord-start/issues
+published_at: 2017-12-20T11:18:41.171970361+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-android-screenrecord-start.git
+  commit: 3e83238c5c6fb5d27a955e2f3b3d24c5120dd428
+host_os_tags:
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-android-screenrecord-start
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: true
+inputs:
+- opts:
+    description: Make sure this input's value is unique. This ID will be included
+      in the recorded file's name to be able to separate records, and also `Stop Screenrecord
+      Android` step will need this ID to know which record need to be stopped.
+    is_expand: true
+    is_required: true
+    summary: Make sure this input's value is unique. This ID will be included in the
+      recorded file's name to be able to separate records, and also `Stop Screenrecord
+      Android` step will need this ID to know which record need to be stopped.
+    title: Record ID
+  record_id: record0
+- emulator_serial: $BITRISE_EMULATOR_SERIAL
+  opts:
+    description: The commands will be sent to the emulator that has the given serial.
+    is_expand: true
+    is_required: true
+    summary: The commands will be sent to the emulator that has the given serial.
+    title: Emulator serial
+outputs:
+- BITRISE_RECORD_ID: null
+  opts:
+    description: The started record's ID
+    summary: The started record's ID
+    title: Record ID

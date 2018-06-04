@@ -1,0 +1,73 @@
+title: FTP Upload
+summary: You get what you see, upload a file or directory to the target directory
+description: Upload a single file or a folder (recursively) to an FTP server.
+website: https://github.com/bitrise-io/steps-ftp-upload
+source_code_url: https://github.com/bitrise-io/steps-ftp-upload
+support_url: https://github.com/bitrise-io/steps-ftp-upload/issues
+published_at: 2017-10-10T14:47:37.357163415+02:00
+source:
+  git: https://github.com/bitrise-io/steps-ftp-upload.git
+  commit: 0a17164d734cbcf5cb1157b7badffa23febe955d
+host_os_tags:
+- osx-10.9
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-ftp-upload
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- hostname: ""
+  opts:
+    description: 'Host of the target FTP (example: ftp.someserver.com:21)'
+    is_required: true
+    summary: ""
+    title: 'Host (example: ftp.someserver.com:21)'
+- opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Username
+  username: ""
+- opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Password
+  password: ""
+- opts:
+    description: |
+      The source (local) file or directory for the FTP upload.
+      Format examples: "$HOME/temp" or "$HOME/temp/")
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Source path
+  upload_source_path: ""
+- opts:
+    description: |
+      The target (remote) path for the FTP upload.
+      Target is handled as directory if ends with "/", file otherwise.
+    is_required: true
+    summary: ""
+    title: Target / remote path
+  upload_target_path: ""
+- debug_mode: "false"
+  opts:
+    description: |
+      The step will print more logs if this option is set to true.
+    is_required: true
+    summary: ""
+    title: Debug mode
+    value_options:
+    - "true"
+    - "false"
