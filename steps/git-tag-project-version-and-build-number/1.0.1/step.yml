@@ -1,6 +1,5 @@
 title: Git tag project version and build number
-summary: |
-  Git tag project version and build number
+summary: Git tag project version and build number
 description: |
   This step will create Git tag with project version and build number
 website: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number
