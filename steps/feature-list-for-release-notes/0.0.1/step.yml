@@ -1,0 +1,44 @@
+title: Feature list for release notes
+summary: |
+  Creates a list of features gathered from git commits using given pattern.
+description: |
+  Feature descriptions are derived from commit messages. Using given pattern, one can create a list of the featurees based on previous commits. Also a alternative use would be to create links to appropriate features in the backlog system.
+website: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes
+source_code_url: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes
+support_url: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes/issues
+published_at: 2018-06-20T11:09:15.34508427+02:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise_set_jira_features.git
+  commit: 581f9442ed3e7fbd69786621b7fbe274187b1660
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- artifact-info
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- jira_default_url: null
+  opts:
+    is_expand: true
+    is_required: true
+    title: Jira Base URL
+- jira_project_prefix: null
+  opts:
+    is_expand: true
+    is_required: true
+    title: Jira project prefix
+outputs:
+- GIT_RELEASE_NOTES: null
+  opts:
+    title: List of features as jira links
