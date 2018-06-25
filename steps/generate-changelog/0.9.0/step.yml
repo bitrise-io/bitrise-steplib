@@ -10,7 +10,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-generate-changelog
 source_code_url: https://github.com/bitrise-steplib/steps-generate-changelog
 support_url: https://github.com/bitrise-steplib/steps-generate-changelog/issues
-published_at: 2018-06-21T17:06:19.735766002+02:00
+published_at: 2018-06-25T14:42:36.415468796+02:00
 source:
   git: https://github.com/bitrise-steplib/steps-generate-changelog.git
   commit: 0659829b7f00d69b400b8017927b3fe4a1a364d2
