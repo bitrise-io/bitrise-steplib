@@ -1,0 +1,81 @@
+title: Github Release
+summary: Create Github Release
+description: Create Github Release
+website: https://github.com/bitrise-steplib/steps-github-release
+source_code_url: https://github.com/bitrise-steplib/steps-github-release
+support_url: https://github.com/bitrise-steplib/steps-github-release/issues
+published_at: 2018-06-25T15:00:39.206370842+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-github-release.git
+  commit: 9bf0f818403aeca67d38bdca1057b55123876656
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-github-release
+inputs:
+- api_token: null
+  opts:
+    description: |-
+      Github Personal API token used to access the GitHub API.
+
+      Create your own token: https://github.com/settings/tokens
+
+      The following scopes needs to be enabled for the token:
+
+      - repo/public_repo
+    is_required: true
+    summary: Github Personal API token used to access the GitHub API.
+    title: Personal API token
+- opts:
+    description: Your Github user name
+    is_required: true
+    summary: Your Github user name
+    title: Username
+  username: null
+- opts:
+    description: |-
+      URL of the Github repository to release.
+
+      Available formats:
+
+      - https://hostname/owner/repository.git
+      - git@hostname:owner/repository.git
+      - ssh://git@hostname:port/owner/repository.git
+    is_required: true
+    summary: Github repository URL
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- opts:
+    is_required: true
+    summary: The name of the tag.
+    title: Tag
+  tag: $BITRISE_GIT_TAG
+- commit: $BITRISE_GIT_COMMIT
+  opts:
+    description: "Specifies the commitish value that determines where the Git tag
+      is created from. \nCan be any branch or commit SHA. \nUnused if the Git tag
+      already exists. \nDefault: the repository's default branch (usually master)."
+    is_required: true
+    summary: The commit of the tag
+    title: Commit
+- name: null
+  opts:
+    is_required: true
+    summary: The name of the release.
+    title: Release name
+- body: null
+  opts:
+    is_required: true
+    summary: The body of the release.
+    title: Release body
+- draft: true
+  opts:
+    description: '`true` to create a draft (unpublished) release, `false` to create
+      a published one.'
+    is_required: true
+    summary: If `no` selected the release will be published.
+    title: Draft
+    value_options:
+    - true
+    - false
