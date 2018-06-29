@@ -3,13 +3,13 @@ summary: |
   Creates a list of features gathered from git commits using given pattern.
 description: |
   Feature descriptions are derived from commit messages. Using given pattern, one can create a list of the featurees based on previous commits. Also a alternative use would be to create links to appropriate features in the backlog system.
-website: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes
-source_code_url: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes
-support_url: https://github.com/maqoo/bitrise-step-feature-list-for-release-notes/issues
-published_at: 2018-06-20T11:09:15.34508427+02:00
+website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
+source_code_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features
+support_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features/issues
+published_at: 2018-06-29T16:09:39.852991517+02:00
 source:
   git: https://github.com/DroidsOnRoids/bitrise_set_jira_features.git
-  commit: 581f9442ed3e7fbd69786621b7fbe274187b1660
+  commit: 78443eda11052bde03559d5fff546a85c49cdc7c
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -39,6 +39,9 @@ inputs:
     is_required: true
     title: Jira project prefix
 outputs:
-- GIT_RELEASE_NOTES: null
+- FEATURES_FROM_COMMITS: null
   opts:
     title: List of features as jira links
+- EPICS_FROM_TAGS: null
+  opts:
+    title: List of epics with title and jira links
