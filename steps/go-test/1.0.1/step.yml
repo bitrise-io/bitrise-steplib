@@ -1,0 +1,43 @@
+title: Go test
+summary: Runs Go test
+description: |-
+  Runs Go test on the given packages one-by-one:
+
+  `go test -v <package>`
+website: https://github.com/bitrise-steplib/steps-go-test
+source_code_url: https://github.com/bitrise-steplib/steps-go-test
+support_url: https://github.com/bitrise-steplib/steps-go-test/issues
+published_at: 2018-07-05T16:53:35.015023834+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-go-test.git
+  commit: 4e539a6abb00f8a23f7f3b158d4838aeb85c29e3
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-go-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      Newline separated list of Go packages, to run the Go test command against.
+
+      __Example:__
+
+      ```
+      github.com/my/step
+      github.com/bitrise/step/tool
+      ```
+    summary: List of Go packages to test.
+    title: Go test target packages
+  packages: $BITRISE_GO_PACKAGES
+outputs:
+- GO_CODE_COVERAGE_REPORT_PATH: null
+  opts:
+    description: Path to the code coverage report file, which contains each package's
+      code coverage report.
+    summary: Path to the code coverage report file.
+    title: Code coverage report file path
