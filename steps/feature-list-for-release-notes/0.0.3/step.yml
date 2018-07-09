@@ -14,7 +14,7 @@ description: |
 website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
 source_code_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features
 support_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features/issues
-published_at: 2018-07-09T13:27:06.040925436+02:00
+published_at: 2018-07-09T13:30:16.034204875+02:00
 source:
   git: https://github.com/DroidsOnRoids/bitrise_set_jira_features.git
   commit: aba9398f668da5444567e4bd964e5da1c33ba3a6
