@@ -1,0 +1,13 @@
+title: Dummy
+summary: Dummy
+description: Dummy
+website: https://github.com/trapacska/steps-dummy
+source_code_url: https://github.com/trapacska/steps-dummy
+support_url: https://github.com/trapacska/steps-dummy/issues
+published_at: 2018-07-12T12:01:43.7410789Z
+source:
+  git: https://github.com/bitrise-samples/steps-dummy.git
+  commit: 17333d3a11705af06dacacd2ae8dd199b35a3f70
+toolkit:
+  go:
+    package_name: github.com/trapacska/steps-dummy
