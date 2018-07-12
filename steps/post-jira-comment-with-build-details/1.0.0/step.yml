@@ -41,9 +41,9 @@ inputs:
     title: Jira issue keys
 - base_url: null
   opts:
-    description: URL of the presonal Jira software.
+    description: URL of the personal Jira software.
     is_required: true
-    summary: URL of the presonal Jira software.
+    summary: URL of the personal Jira software.
     title: Jira base URL.
 - build_message: |
     *$BITRISE_APP_TITLE* build *$BITRISE_BUILD_NUMBER* is now available: [Download|$BITRISE_PUBLIC_INSTALL_PAGE_URL]
