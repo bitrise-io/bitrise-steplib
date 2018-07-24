@@ -1,0 +1,65 @@
+title: AppCenter CodePush Release React Native
+summary: |
+  Release a React Native update to AppCenter CodePush
+description: |
+  Utilise appcenter-cli command appcenter codepush release-react to release an update
+website: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
+source_code_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
+support_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native/issues
+published_at: 2018-07-24T12:10:48.971190291+08:00
+source:
+  git: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native.git
+  commit: c6cb21acbdefcc8f230d459bcdb940d17fa58135
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- react-native
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: node
+  apt_get:
+  - name: node
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path where the React Native project is located.
+    is_required: true
+    title: React Native Project Root
+  react_native_project_root: $REACT_NATIVE_PROJECT_ROOT
+- app_id: $APPCENTER_APP_ID
+  opts:
+    description: |
+      AppCenter Application Identifier is a combination of your Organization/Owner Name and an Application Name.
+      For example: "Upstack-Studio/bitrise-android"
+    is_required: true
+    summary: AppCenter application identifier (Organization/Owner Name + App Name).
+    title: AppCenter App ID
+- api_token: $APPCENTER_API_TOKEN
+  opts:
+    description: |
+      AppCenter API Token can be obtained from [here]](https://appcenter.ms/settings/apitokens).
+      New API Token > Enter a description for the token > Select Full Access > Add New API Token
+    is_required: true
+    title: AppCenter API Token
+- deployment: Staging
+  opts:
+    description: |
+      This specifies which deployment you want to release the update to. This defaults to Staging, but when you're ready to deploy to Production, or one of your own custom deployments, just explicitly set this argument. See [here](https://docs.microsoft.com/en-us/appcenter/distribution/codepush/cli#deployment-name-parameter) for details.
+    is_required: true
+    title: Deployment
+- options: null
+  opts:
+    description: |
+      Any extra options that you would like to concat to the release-react command. Eg. "-m --disable-duplicate-release-error"
+    is_required: false
+    title: Extra Options
