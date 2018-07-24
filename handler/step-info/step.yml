@@ -1,0 +1,18 @@
+title: Step Info
+summary: Step Info
+description: Step Info
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-steplib/handler/step-info
+
+is_skippable: true
+
+outputs:
+- STEP_INFO_ID:
+- STEP_INFO_VERSION:
+- STEP_INFO_COMPOSITE:
