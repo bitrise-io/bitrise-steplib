@@ -1,6 +1,6 @@
 title: Android Lint
-summary: Runs lint gradle task on your project.
-description: Runs lint gradle task on your project.
+summary: This step runs lint gradle task on your project.
+description: This step runs lint gradle task on your project.
 website: https://github.com/bitrise-steplib/bitrise-step-android-lint
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-lint
 support_url: https://github.com/bitrise-steplib/bitrise-step-android-lint/issues
@@ -24,11 +24,11 @@ is_always_run: false
 is_skippable: false
 inputs:
 - opts:
-    description: 'The root directory of your android project, e.g.: where your root
-      build gradle file exist (also gradlew, settings.gradle, etc...)'
+    description: 'The root directory of your android project, for example, where your root
+      build gradle file exists (also gradlew, settings.gradle, etc...)'
     is_required: true
-    summary: 'The root directory of your android project, e.g.: where your root build
-      gradle file exist (also gradlew, settings.gradle, etc...)'
+    summary: 'The root directory of your android project, for example, where your root build
+      gradle file exists (also gradlew, settings.gradle, etc...)'
     title: Project Location
   project_location: $BITRISE_SOURCE_DIR
 - module: ""
