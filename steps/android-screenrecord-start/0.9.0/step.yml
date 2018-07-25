@@ -1,6 +1,6 @@
 title: Android Screenrecord Start
-summary: Start recording an Android device's screen.
-description: Start recording an Android device's screen.
+summary: Start recording the screen of an Android device.
+description: Start recording the screen of an Android device.
 website: https://github.com/bitrise-steplib/steps-android-screenrecord-start
 source_code_url: https://github.com/bitrise-steplib/steps-android-screenrecord-start
 support_url: https://github.com/bitrise-steplib/steps-android-screenrecord-start/issues
@@ -26,14 +26,14 @@ is_always_run: false
 is_skippable: true
 inputs:
 - opts:
-    description: Make sure this input's value is unique. This ID will be included
-      in the recorded file's name to be able to separate records, and also `Stop Screenrecord
-      Android` step will need this ID to know which record need to be stopped.
+    description: Make sure this input value is unique. This ID will be included
+      in the name of the recorded file to be able to separate records. `Stop Screenrecord
+      Android` step will need this ID as well to know which record has to be stopped.
     is_expand: true
     is_required: true
-    summary: Make sure this input's value is unique. This ID will be included in the
-      recorded file's name to be able to separate records, and also `Stop Screenrecord
-      Android` step will need this ID to know which record need to be stopped.
+    summary: Make sure this input value is unique. This ID will be included
+      in the name of the recorded file to be able to separate records. `Stop Screenrecord
+      Android` step will need this ID as well to know which record has to be stopped.
     title: Record ID
   record_id: record0
 - emulator_serial: $BITRISE_EMULATOR_SERIAL
