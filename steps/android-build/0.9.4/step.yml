@@ -24,11 +24,11 @@ is_always_run: false
 is_skippable: false
 inputs:
 - opts:
-    description: 'The root directory of your android project, e.g.: where your root
-      build gradle file exist (also gradlew, settings.gradle, etc...)'
+    description: 'The root directory of your android project, for example, where your root
+      build gradle file exists (also gradlew, settings.gradle, etc...)'
     is_required: true
-    summary: 'The root directory of your android project, e.g.: where your root build
-      gradle file exist (also gradlew, settings.gradle, etc...)'
+    summary: 'The root directory of your android project, for example, where your root build
+      gradle file exists (also gradlew, settings.gradle, etc...)'
     title: Project Location
   project_location: $BITRISE_SOURCE_DIR
 - module: ""
@@ -78,24 +78,24 @@ outputs:
 - BITRISE_APK_PATH: null
   opts:
     description: |-
-      This output will include the path of the generated APK,
+      This output will include the path of the generated APK
       after filtering based on the filter inputs.
       If the build generates more than one APK which fulfills the
-      filter inputs this output will contain the last one's path.
+      filter inputs, this output will contain the last one's path.
     summary: Path of the generated (and copied) APK - after filtering.
     title: Path of the generated APK
 - BITRISE_APK_PATH_LIST: null
   opts:
     description: |-
-      This output will include the paths of the generated APKs,
+      This output will include the paths of the generated APKs
       after filtering based on the filter inputs.
-      The paths are separated with `|` character, eg: `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+      The paths are separated with `|` character, for example, `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
     summary: List of the generated (and copied) APK paths - after filtering.
     title: List of the generated APK paths
 - BITRISE_MAPPING_PATH: null
   opts:
     description: |-
       This output will include the path of the generated mapping.txt.
-      If more than one mapping.txt exist in project this output will contain the last one's path.
+      If more than one mapping.txt exist in the project, this output will contain the last one's path.
     summary: Path of the generated (and copied) mapping.txt.
     title: Path of the generated mapping.txt
