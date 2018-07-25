@@ -1,10 +1,8 @@
 title: Deploy to Amazon S3
 summary: Upload your iOS Application to Amazon S3
 description: |-
-  Bitrise Step to Deploy an Xcode archive to Amazon S3.
-  Required: an Xcode Archive Step should run before this Step!
-
-  This Step requires an Amazon S3 account.
+  This step deploys an Xcode archive to Amazon S3.
+  Requirements: An Xcode Archive Step must run before this step and you must have an Amazon S3 account. 
   To register an Amazon S3 account, [click here](http://aws.amazon.com/s3/).
 website: https://github.com/bitrise-io/steps-amazon-s3-deploy
 source_code_url: https://github.com/bitrise-io/steps-amazon-s3-deploy
@@ -78,7 +76,7 @@ inputs:
     title: Amazon S3 Bucket Region
 - opts:
     description: |-
-      Optional, if no value specified then the default will be:
+      Optional, if there is no specified value, then the default will be:
 
           bitrise_$BITRISE_APP_SLUG/${BITRISE_BUILD_TRIGGER_TIMESTAMP}_build_${BITRISE_BUILD_SLUG}
     summary: ""
@@ -127,7 +125,7 @@ outputs:
 - S3_DEPLOY_STEP_EMAIL_READY_URL: ""
   opts:
     description: |-
-      In a link-ready format, example:
+      In a link-ready format, for example:
 
           itms-services://?action=download-manifest&url=...
     is_dont_change_value: true
