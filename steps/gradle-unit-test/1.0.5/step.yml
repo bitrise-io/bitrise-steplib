@@ -2,7 +2,7 @@ title: Gradle Unit Test
 summary: Runs Unit Tests with `gradlew`.
 description: |-
   Runs Unit Tests with `gradlew`.
-  You can specify the test tasks to run and the task flags to run specific files.
+  You can specify the test tasks to run and set task flags to run specific files.
 website: https://github.com/bitrise-io/steps-gradle-unit-test
 source_code_url: https://github.com/bitrise-io/steps-gradle-unit-test
 support_url: https://github.com/bitrise-io/steps-gradle-unit-test/issues
