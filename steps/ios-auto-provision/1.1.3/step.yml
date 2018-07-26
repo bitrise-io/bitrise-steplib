@@ -3,19 +3,19 @@ summary: Automatically manages your iOS Provisioning Profiles for your Xcode pro
 description: |-
   ### Automatically manages your iOS Provisioning Profiles for your Xcode project.
 
-  __Setup guide__: [https://blog.bitrise.io/ios-auto-provision-step](https://blog.bitrise.io/ios-auto-provision-step)
+  __Setup guide__: [Managing iOS code signing files - automatic provisioning](https://devcenter.bitrise.io/code-signing/ios-code-signing/ios-auto-provisioning/)
 
-  In case of __Xcode managed codesigning__ projects:
+  In the case of __Xcode managed codesigning__ projects:
 
-  - downloads the __Xcode managed Provisioning Profiles__ and installs for the build
+  - downloads the __Xcode managed Provisioning Profiles__ and installs them for the build
   - installs the provided __Codesigning Certificates__ into the Keychain
 
-  In case of __Manual codesigning__ projects:
+  In the case of __Manual codesigning__ projects:
 
   - ensures that the __Application Identifier__ exists on the Apple Developer Portal
   - ensures that the __project's Capabilities__ are set correctly in the Application Identifier
-  - ensures that the __Provisioning Profiles__ exists on the Apple Developer Portal and are installed for the build
-  - ensure that all the available __Test Devices__ exists on the Apple Developer Portal and are included in the Provisioning Profiles
+  - ensures that the __Provisioning Profiles__ exist on the Apple Developer Portal and are installed for the build
+  - ensure that all the available __Test Devices__ exist on the Apple Developer Portal and are included in the Provisioning Profiles
   - installs the provided __Codesigning Certificates__ into the Keychain
 website: https://github.com/bitrise-steplib/steps-ios-auto-provision
 source_code_url: https://github.com/bitrise-steplib/steps-ios-auto-provision
@@ -48,10 +48,10 @@ inputs:
     - enterprise
 - opts:
     description: "The Developer Portal team to manage the project's codesigning files.\n\n__If
-      your Developer Portal Account belongs to multiple development team, this input
+      your Developer Portal Account belongs to multiple development teams, this input
       is required!__   \nOtherwise specify this input if you want to manage the Provisioning
-      Profiles with different team, then the one set in your project.\n\nIf you leave
-      it empty the project defined team will be used.\n\n__Example:__ `1MZX23ABCD4`"
+      Profiles with a different team than the one set in your project.\n\nIf you leave
+      it empty, the team defined by the project will be used.\n\n__Example:__ `1MZX23ABCD4`"
     title: The Developer Portal team id
   team_id: null
 - opts:
@@ -72,12 +72,12 @@ inputs:
     title: Configuration name
 - generate_profiles: "no"
   opts:
-    description: "In case of __Xcode managed codesigning__ projects, by default the
+    description: "In the case of __Xcode managed codesigning__ projects, by default the
       step downloads and installs the Xcode managed Provisioning Profiles.\n\nIf this
       input is set to: `yes`, the step will try to manage the Provisioning Profiles
-      by itself (__like in case of Manual codesigning projects__),  \nthe step will
-      fall back to use the Xcode managed Provisioning Profiles in case of an issue.\n\n__This
-      input has no effect in case of Manual codesigning projects.__"
+      by itself (__like in the case of Manual codesigning projects__),  \nthe step will
+      fall back to use the Xcode managed Provisioning Profiles if there is an issue.\n\n__This
+      input has no effect in the case of Manual codesigning projects.__"
     title: Should the step try to generate Provisioning Profiles even if Xcode managed
       signing is enabled in the Xcode project?
     value_options:
@@ -98,8 +98,8 @@ inputs:
     description: "URLs of the certificates to download.\n\nMultiple URLs can be specified,
       separated by a pipe (`|`) character,  \nyou can specify a local path as well,
       using the `file://` scheme.\n\n__Provide a development certificate__ url, to
-      ensure development code sign files for the project and __also provide a distribution
-      certificate__ url, to ensure distribution code sign files for your project.\n\n__Example:__
+      ensure development code signing files for the project and __also provide a distribution
+      certificate__ url, to ensure distribution code signing files for your project.\n\n__Example:__
       `file://./development/certificate/path|https://distribution/certificate/url`\n"
     is_required: true
     title: Certificate URL
