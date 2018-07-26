@@ -1,12 +1,12 @@
 title: LIFX Notifier
 summary: Sends signals to your LIFX bulb during builds.
 description: |-
-  Add this step to your workflow when color change is required.
+  Add this step to your workflow when you wish to change the colors of the signals to your LIFX bulb. 
 
-  This step can be used at the start (notify build start) and at the end (notify success/failure) of your workflow.
-  If there's no need to notify about workflow start than adding step to the end of the workflow will be enough.
+  This step can be used at the start (notifying that a build started) and at the end (notifying about success/failure) of your workflow.
+  If there's no need to send a notification about a workflow starting then it's enough to add the step to the end of the workflow.
 
-  If all colors fields will be empty, default colors will be used:
+  If all color fields are left empty, default colors will be used:
   "build start" - yellow, "build success" - green, "build failure" - red.
 website: https://github.com/vgaidarji/steps-lifx-notifier
 source_code_url: https://github.com/vgaidarji/steps-lifx-notifier
@@ -66,7 +66,7 @@ inputs:
   opts:
     description: |
       This color will be used to notify about failure,
-      if no custom color provided.
+      if no custom color is provided.
     title: Build failure color (LIFX default)
     value_options:
     - blue
@@ -87,7 +87,7 @@ inputs:
 - effect: none
   opts:
     description: |
-      Instead of setting a solid color, do you want to e.g. pulse the light?
+      Instead of setting a solid color, do you want to, for example, pulse the light?
     title: Effect
     value_options:
     - none
