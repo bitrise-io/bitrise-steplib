@@ -1,7 +1,7 @@
 title: NUnit runner
 summary: NUnit runner
-description: "Runs your NUnit 2.x and NUnit 3.0 or higer tests with NUnit Console
-  Runner (nunit3-console.exe),  \nagainst your xamarin projects."
+description: "Runs your NUnit 2.x and NUnit 3.0 or higher tests with NUnit Console
+  Runner (nunit3-console.exe),  \nagainst your Xamarin projects."
 website: https://github.com/bitrise-steplib/steps-nunit-runner
 source_code_url: https://github.com/bitrise-steplib/steps-nunit-runner
 support_url: https://github.com/bitrise-steplib/steps-nunit-runner/issues
