@@ -1,7 +1,7 @@
 title: Parse Composer test results
 summary: |
   Parses Composer junit test results and stores them in environment variables.
-  `$COMPOSER_ALL_TEST_COUNT` and `$COMPOSER_PASSED_TEST_COUNT` respectively.
+  `$COMPOSER_ALL_TEST_COUNT` and `$COMPOSER_PASSED_TEST_COUNT`, respectively.
 description: |
   Parses [Composer](https://github.com/gojuno/composer) junit test results and stores them in environment variables:
     `$COMPOSER_ALL_TEST_COUNT` and `$COMPOSER_PASSED_TEST_COUNT` respectively.
