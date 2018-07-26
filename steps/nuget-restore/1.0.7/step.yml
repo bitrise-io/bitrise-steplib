@@ -1,6 +1,6 @@
 title: NuGet restore
 summary: NuGet restore step
-description: NuGet restore step
+description: Restore your NuGet packages by simply adding this step to your workflow, after the `Git Clone` step.
 website: https://github.com/bitrise-steplib/steps-nuget-restore
 source_code_url: https://github.com/bitrise-steplib/steps-nuget-restore
 support_url: https://github.com/bitrise-steplib/steps-nuget-restore/issues
