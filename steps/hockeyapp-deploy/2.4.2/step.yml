@@ -1,7 +1,7 @@
 title: HockeyApp iOS Deploy
 summary: Deploy your awesome iOS Application to HockeyApp.
 description: |-
-  Deploy an Android application to [HockeyApp](http://hockeyapp.net),
+  Deploy an iOS application to [HockeyApp](http://hockeyapp.net),
   add notes even in markdown format, notify testers, restrict download.
 
   Register a HockeyApp account at [http://hockeyapp.net/](http://hockeyapp.net)
