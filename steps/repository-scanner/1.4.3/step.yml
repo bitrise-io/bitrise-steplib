@@ -1,12 +1,12 @@
 title: Repository scanner
-summary: Scans repository for iOS and Android projects
+summary: Scans the repository for iOS and Android projects
 description: |-
-  For iOS projects detects CocoaPods and scan Xcode project files
+  For iOS projects, the step detects CocoaPods and scans Xcode project files
   for valid Xcode command line configurations.
 
-  For Android projects checks for build.gradle files and lists all the gradle tasks
+  For Android projects, the step checks for build.gradle files and lists all the gradle tasks.
 
-  For Xamarin projects checks the solution files and lists the configuration options
+  For Xamarin projects, the step checks the solution files and lists the configuration options.
 website: https://github.com/bitrise-io/steps-repository-scanner
 source_code_url: https://github.com/bitrise-io/steps-repository-scanner
 support_url: https://github.com/bitrise-io/steps-repository-scanner/issues
@@ -40,7 +40,7 @@ inputs:
   scan_result_submit_url: $BITRISE_SCAN_RESULT_POST_URL
 - opts:
     description: |
-      If provided and `scan_result_submit_url` also provided,
+      If provided and `scan_result_submit_url` is also provided,
       this API Token will be used for sending the Scan Results.
     is_dont_change_value: true
     title: API Token for scan result submission
