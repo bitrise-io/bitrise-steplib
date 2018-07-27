@@ -2,8 +2,9 @@ title: Swiftlint
 summary: |
   Runs Swiftlint on the project
 description: |
-  Runs Swiftlint on the project to provide clean code
-  For more information about Swiftlint please visit: https://github.com/realm/SwiftLint/
+  Runs Swiftlint on the project to provide clean code.
+  
+  For more information about Swiftlint, please visit: https://github.com/realm/SwiftLint/
 website: https://github.com/kimdv/bitrise-step-swiftlint
 source_code_url: https://github.com/kimdv/bitrise-step-swiftlint
 support_url: https://github.com/kimdv/bitrise-step-swiftlint/issues
