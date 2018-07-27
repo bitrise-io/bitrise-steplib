@@ -1,6 +1,8 @@
 title: Sign APK
-summary: Sign APK
-description: Sign APK.
+summary: Creates a signed APK file for your Android app.
+description: 
+  With this step, you can digitally sign your app's APK file in your workflow. 
+  All you have to do is upload your keystore file in the Code signing tab of the Workflow Editor.
 website: https://github.com/bitrise-steplib/steps-sign-apk
 source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
 support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
@@ -35,9 +37,9 @@ inputs:
 - apk_path: $BITRISE_APK_PATH
   opts:
     description: |-
-      Path(s) to the APK to sign.
+      Path(s) to the APK file to sign.
 
-      You can provide multiple APK paths separated by `|` character.
+      You can provide multiple APK file paths separated by `|` character.
 
       Format examples:
 
@@ -49,8 +51,8 @@ inputs:
 - keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
   opts:
     description: |-
-      For remote keystores you can provide any download location (ex: https://URL/TO/keystore.jks).
-      For local keystores provide file path url. (ex: file://PATH/TO/keystore.jks).
+      For remote keystores you can provide any download location (example: https://URL/TO/keystore.jks).
+      For local keystores provide file path url. (example: file://PATH/TO/keystore.jks).
     is_required: true
     summary: ""
     title: Keystore url
@@ -68,7 +70,7 @@ inputs:
     title: Keystore alias
 - opts:
     description: |
-      If key password equals to keystore password, you can leave it empty.
+      If the key password is equal to the keystore password, you can leave it empty.
       Otherwise specify the private key password.
     summary: ""
     title: Private key password
