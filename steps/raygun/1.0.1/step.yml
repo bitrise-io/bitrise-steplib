@@ -1,5 +1,5 @@
 title: Raygun dSYM Upload
-summary: Upload your dSym to Raygun
+summary: Upload your dSYM to Raygun
 description: Upload your dSYM to Raygun
 website: https://github.com/jamesmontemagno/bitrise-step-raygun-dsym-upload
 source_code_url: https://github.com/jamesmontemagno/bitrise-step-raygun-dsym-upload
@@ -18,7 +18,7 @@ is_skippable: false
 inputs:
 - opts:
     description: |
-      This is a Base64 encode of your username:password, you can run the following command in the terminal - 'echo -n 'username:password | openssl base64' to get it
+      This is a Base64 encode of your username:password. Run the following command in the terminal to get it: 'echo -n 'username:password | openssl base64'.
     is_expand: true
     is_required: true
     title: API Key for Raygun. This is a Base64 encode of your username:password.
