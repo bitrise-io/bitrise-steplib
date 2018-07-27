@@ -1,7 +1,7 @@
 title: APK info
 summary: APK Android info provider
-description: Provides all possible Android APK information as package name, version
-  name or version code.
+description: This step provides all possible Android APK information such as package name, version
+  name and version code.
 website: https://github.com/thefuntasty/bitrise-step-apk-info
 source_code_url: https://github.com/thefuntasty/bitrise-step-apk-info
 support_url: https://github.com/thefuntasty/bitrise-step-apk-info/issues
@@ -30,11 +30,11 @@ inputs:
 outputs:
 - ANDROID_APP_PACKAGE_NAME: null
   opts:
-    description: Android application package name, ex. com.package.my
+    description: Android application package name, for example, com.package.my
     title: Android application package name
 - ANDROID_APK_FILE_SIZE: null
   opts:
-    description: Android APK file size, in bytes
+    description: Android APK file size in bytes
     title: Android APK file size
 - ANDROID_APP_NAME: null
   opts:
@@ -42,11 +42,11 @@ outputs:
     title: Android application name
 - ANDROID_APP_VERSION_NAME: null
   opts:
-    description: Android application version name from APK, ex. 1.0.0
+    description: Android application version name from APK, for example, 1.0.0
     title: Android application version name
 - ANDROID_APP_VERSION_CODE: null
   opts:
-    description: Android application version code from APK, ex. 10
+    description: Android application version code from APK, for example, 10
     title: Android application version code
 - ANDROID_ICON_PATH: null
   opts:
