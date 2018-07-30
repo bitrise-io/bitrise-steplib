@@ -1,14 +1,14 @@
 title: Xamarin android Test
-summary: Xamarin android Test
+summary: Xamarin Android Test
 description: |-
-  Xamarin android Test
+  Xamarin Android Test
 
-  Use solution configuration-platform combination for automatig tests, which maps to an android project configuration-platform combination, which:
+  Use a solution configuration-platform combination for automating tests, that maps to an Android project configuration-platform combination that:
 
-  * DO NOT 'Use Shared Mono runtime' see: PROJECT_TO_TEST/Options/Build/Android Build/General/Packaging and Deployment
-  * Use 'Enable developer instarumentation (debugging and profiling)' see: PROJECT_TO_TEST/Options/Build/Android Build/General/Debugging Options
+  * DOES NOT 'Use Shared Mono runtime' See: PROJECT_TO_TEST/Options/Build/Android Build/General/Packaging and Deployment
+  * Uses 'Enable developer instrumentation (debugging and profiling)'. See: PROJECT_TO_TEST/Options/Build/Android Build/General/Debugging Options
 
-  Initialize you android app in your UITest project as follows:
+  Initialize your Android app in your UITest project as follows:
 
   ```
   AndroidAppConfigurator androidConfigurator = ConfigureApp.Android;
