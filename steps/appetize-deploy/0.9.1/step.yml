@@ -1,9 +1,9 @@
 title: Appetize.io deploy
-summary: Deploy the app to Appetize.io
-description: "Deploy your app to Appetize.io and run it in your browser.\nFor app
-  demos, training, customer support, development, testing, and more.\n\n**NOTE:**
-  For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app bundle
-  or the `.app` bundle. For Android, provide the `.apk` containing your app. "
+summary: Deploy your app to Appetize.io
+description: "Deploy your app to [Appetize.io](https://appetize.io/) and run it in your browser. For app
+  demos, training, customer support, development, testing, and more. **NOTE:**
+  For iOS, provide a `.zip` or a `.tar.gz` file containing your compressed .app bundle
+  or the `.app` bundle. For Android, provide the `.apk` containing your app."
 website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
 source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
 support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
@@ -45,11 +45,11 @@ inputs:
     title: Appetize.io token
 - opts:
     description: The public key in case you want to deploy this to build to an existing
-      app
+      app.
     is_expand: true
     is_required: false
     summary: The public key in case you want to deploy this to build to an existing
-      app
+      app.
     title: Public key
   public_key: null
 - opts:
