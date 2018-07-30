@@ -1,9 +1,9 @@
 title: Authenticate with GitHub OAuth
-summary: Adds your GitHub OAuth config to the .netrc file
+summary: This step Adds your GitHub OAuth config to the .netrc file.
 description: |-
   Adds your GitHub OAuth config to the .netrc file.
 
-  If you already has a .netrc file, the step will create a backup of the original, and appends the configs to the current one.
+  If you already have a .netrc file, the step will create a backup of the original, and appends the configs to the current one.
 website: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth
 source_code_url: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth
 support_url: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth/issues
@@ -35,12 +35,12 @@ inputs:
   opts:
     description: |-
       To get your GitHub Personal Access Token, follow the instructions below:
-      1) Login to yout GitHub account
-      2) In the upper-right corner of any page, click your profile photo, then click **Settings**.
-      3) In the left sidebar, click **Personal access tokens**.
-      4) Click **Generate new token**.
-      5) Give your token a descriptive name.
-      6) Select the scopes, or permissions, you'd like to grant this token.
-      7) Click Generate token.
+      1. Log into your GitHub account.
+      2. In the upper-right corner of any page, click your profile photo, then click **Settings**.
+      3. In the left sidebar, click **Personal access tokens**.
+      4. Click **Generate new token**.
+      5. Give your token a descriptive name.
+      6. Select the scopes or permissions, you'd like to grant to this token.
+      7. Click **Generate token**.
     is_required: true
     title: Personal Access Token
