@@ -1,7 +1,7 @@
 title: Xcode Archive & Export for iOS
-summary: Run Xcode Archive command and then Export an IPA from the archive.
+summary: Run the Xcode Archive command and then Export an IPA from the archive.
 description: |-
-  Run Xcode Archive command and then Export an IPA from the archive
+  Run the Xcode Archive command and then Export an IPA from the archive
   for iOS, tvOS or watchOS.
 
   You can share it, upload it, deploy it and catch them
@@ -52,8 +52,8 @@ inputs:
       but you can overwrite it with this option.
 
       **Make sure that the Configuration you specify actually exists
-      in your Xcode Project**. If it does not, if you have a typo
-      in the value of this input Xcode will simply use the Configuration
+      in your Xcode Project**. If it does not (for example, if you have a typo
+      in the value of this input), Xcode will simply use the Configuration
       specified by the Scheme and will silently ignore this parameter!
     summary: ""
     title: Configuration name
@@ -64,8 +64,8 @@ inputs:
 
       Describes how Xcode should export the archive.
 
-      If you select `auto-detect` step will figure out proper export method
-      based on provisioning profile embedded into generated xcodearchive.
+      If you select `auto-detect`, the step will figure out proper export method
+      based on the provisioning profile embedded into generated xcodearchive.
     summary: ""
     title: Select method for export
     value_options:
@@ -123,13 +123,13 @@ inputs:
       Force xcodebuild to use specified Code Signing Identity (CODE_SIGN_IDENTITY).
 
       Specify Code Signing Identity as full ID (e.g. `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
-      or specify code sign group ( `iPhone Developer` or `iPhone Distribution` ).
+      or specify code signing group ( `iPhone Developer` or `iPhone Distribution` ).
 
       You also have to **specify the Identity in the format it's stored in Xcode project settings**,
       and **not how it's presented in the Xcode.app GUI**!
       This means that instead of `iOS` (`iOS Distribution/Development`) you have to use
       `iPhone` (`iPhone Distribution` or `iPhone Development`).
-      **Capitalization also matters**, `iPhone Distribution` works but `iphone distribution` does not!
+      **The input is case sensitive**: `iPhone Distribution` works but `iphone distribution` does not!
     title: Force code signing with Code Signing Identity
 - force_provisioning_profile_specifier: null
   opts:
@@ -155,7 +155,7 @@ inputs:
     description: |-
       Force xcodebuild to use specified Provisioning Profile (PROVISIONING_PROFILE).
 
-      Use Provisioning Profile's UUID, profile's name is not acceptable by xcodebuild.
+      Use Provisioning Profile's UUID. The profile's name is not accepted by xcodebuild.
 
       How to get your UUID:
 
@@ -174,7 +174,7 @@ inputs:
       Used for Xcode version 7 and above.
 
       Specifies a custom export options plist content that configures archive exporting.
-      If empty, step generates these options based on provisioning profile,
+      If empty, the step generates these options based on the provisioning profile(s),
       with default values.
 
       Auto generated export options available for export methods:
@@ -184,7 +184,7 @@ inputs:
       - enterprise
       - development
 
-      If step doesn't find export method based on provisioning profile, development will be use.
+      If the step doesn't find an export method based on the provisioning profile(s), the development method will be used.
 
       Call `xcodebuild -help` for available export options.
     title: Custom export options plist content
@@ -207,7 +207,7 @@ inputs:
     category: Debug
     description: |-
       Working directory of the step.
-      You can leave it empty to don't change it.
+      You can leave it empty to leave the working directory unchanged.
     summary: ""
     title: Working directory
   workdir: $BITRISE_SOURCE_DIR
