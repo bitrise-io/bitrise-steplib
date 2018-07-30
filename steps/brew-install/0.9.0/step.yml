@@ -33,19 +33,19 @@ inputs:
 - options: null
   opts:
     description: |
-      Flags to pass to the bew install/reinstall command.
+      Flags to pass to the brew install/reinstall command.
 
       `brew install/reinstall [options] [packages]`
     is_expand: true
     is_required: false
     summary: Options for Brew install/upgrade
-    title: Options for Brew install/upgrade
+    title:https://github.com/bitrise-io/bitrise-steplib/pulls Options for Brew install/upgrade
     value_options: []
 - opts:
     description: |
-      If set the step will upgrade the defined packages by calling `brew reinstall [options] [packages]` command.
+      If set to `y`, the step will upgrade the defined packages by calling `brew reinstall [options] [packages]` command.
 
-      Otherwise the step calls `brew install [options] [packages]`
+      Otherwise the step calls `brew install [options] [packages]`.
     is_expand: true
     is_required: false
     summary: Upgrade formula if previously installed
