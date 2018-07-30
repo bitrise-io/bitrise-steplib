@@ -35,7 +35,7 @@ inputs:
 - opts:
     description: |
       Working directory of the step.
-      You can leave it empty to don't change it.
+      You can leave it empty to leave the working directory unchanged.
     is_required: false
     title: Working directory
   workdir: $BITRISE_SOURCE_DIR
