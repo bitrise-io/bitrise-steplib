@@ -1,14 +1,11 @@
 title: TestFairy Deploy Android
 summary: |-
-  Deploy your awesome App to TestFairy, set Tester Groups to be notified,
-  enable email notification for the build, enable in-app notification of new
-  version, set recording duration, set if video recording is enabled and add
-  your comments and let the TestFairy do it's magic.
+  Deploy your awesome App to TestFairy.
 description: |-
   Deploy your awesome App to TestFairy, set Tester Groups to be notified,
   enable email notification for the build, enable in-app notification of new
   version, set recording duration, set if video recording is enabled and add
-  your comments and let the TestFairy do it's magic.
+  your comments and let the TestFairy do its magic.
   To use this step you have to register
   an account on [TestFairy.com](http://testfairy.com/).
 website: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
