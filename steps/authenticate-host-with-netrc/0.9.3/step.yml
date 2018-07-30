@@ -3,7 +3,7 @@ summary: Adds your authentication config to the .netrc file
 description: |-
   Adds your authentication config to the .netrc file.
 
-  If you already has a .netrc file, the step will create a backup of the original, and appends the configs to the current one.
+  If you already have a .netrc file, the step will create a backup of the original, and appends the configs to the current one.
 website: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc
 source_code_url: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc
 support_url: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc/issues
@@ -40,8 +40,8 @@ inputs:
     title: Username
   username: null
 - opts:
-    description: The password (or Auth Token / Access Token) used for the host to
+    description: The password (or Auth Token/Access Token) used for the host to
       authenticate.
     is_required: true
-    title: Password / Auth Token / Access Token
+    title: Password/Auth Token/Access Token
   password: null
