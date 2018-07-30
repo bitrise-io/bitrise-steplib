@@ -1,7 +1,7 @@
 title: Amazon Device Farm File Deploy
 summary: Amazon Device Farm File Deploy
 description: |-
-  Uploads file (i.e. test package, app data, etc.) to device farm. Intended to be used with the [aws-device-farm-runner](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner) step.
+  Uploads file (for example, test package, app data, etc.) to device farm. Intended to be used with the [aws-device-farm-runner](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner) step.
   This step requires an Amazon Device Farm registration. [Please read the aws-device-farm-runner wiki for setup instructions](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/wiki).
 website: https://github.com/peartherapeutics/bitrise-aws-device-farm-file-deploy
 source_code_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-file-deploy
@@ -46,8 +46,7 @@ inputs:
 - aws_region: $AWS_REGION
   opts:
     description: |
-      If you want to specify a different AWS region. Leave
-      empty to use the default config/env setting.
+      Specify a different AWS region or use the default config/env setting.
     summary: ""
     title: AWS Region
 - device_farm_project: ""
@@ -58,14 +57,14 @@ inputs:
     summary: ""
     title: Device Farm Project ARN
 - opts:
-    description: Path of file to upload. If this is a test package, [aws-device-farm-runner](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner)
+    description: Path of file which you want to upload. If this is a test package, [aws-device-farm-runner](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner)
       can be configured to use the latest package with this name.
     is_required: true
     summary: ""
     title: Upload File Path
   upload_file_path: ""
 - opts:
-    description: ex. `APPIUM_PYTHON_TEST_PACKAGE`. See [Upload.type documentation](http://docs.aws.amazon.com/devicefarm/latest/APIReference/API_Upload.html#devicefarm-Type-Upload-type).
+    description: For example, `APPIUM_PYTHON_TEST_PACKAGE`. For more information, see [Upload.type documentation](http://docs.aws.amazon.com/devicefarm/latest/APIReference/API_Upload.html#devicefarm-Type-Upload-type).
     is_required: true
     summary: ""
     title: Upload Type
