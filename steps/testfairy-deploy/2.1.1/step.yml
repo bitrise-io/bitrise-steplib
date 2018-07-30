@@ -1,13 +1,18 @@
 title: TestFairy Deploy
 summary: Deploy your App to TestFairy.
 description: |-
-  Deploy your App to TestFairy, set Tester Groups to be notified,
-  enable email notification for the build, enable in-app notification of new
-  version, set recording duration, set if video recording is enabled and add
-  your comments.
-
-
-  **NOTE** To use this step you have to register
+  Deploy your awesome App to Testfairy easily, making use of multiple configuration options.
+  
+  * Set tester groups to be notified
+  * Enable email notification for the build
+  * Enable in-app notification of new versions
+  * Set recording duration
+  * Enable or disable video recording
+  * Add your comments
+  
+  Once you're done setting up, you can simply let TestFairy do its magic!
+  
+  To use this step you have to register
   an account on [TestFairy.com](http://testfairy.com/).
 website: https://github.com/bitrise-io/steps-testfairy-deploy
 source_code_url: https://github.com/bitrise-io/steps-testfairy-deploy
