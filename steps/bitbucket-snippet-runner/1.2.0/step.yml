@@ -35,7 +35,7 @@ inputs:
 - opts:
     category: Config
     description: |
-      The snippet to run can be private or public, hosted on cloud or server based Bitbucket accounts
+      The snippet to run can be private or public, hosted on cloud or server based Bitbucket accounts.
     is_expand: true
     is_required: true
     summary: |
@@ -72,7 +72,7 @@ inputs:
     category: Config
     description: |
       Allows passing of arguments to be passed
-      into the downloaded script
+      into the downloaded script.
     is_required: false
     title: Script Arguments
   script_args: null
@@ -80,7 +80,7 @@ inputs:
   opts:
     category: Debug
     description: |
-      If debug=yes the step will print debug infos about
+      If debug=yes, the step will print debug infos about
       the working dir, tmp file path, exit code, etc.
     title: Debug print?
     value_options:
