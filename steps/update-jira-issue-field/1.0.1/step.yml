@@ -2,7 +2,7 @@ title: Update JIRA issues field
 summary: |
   Updates a JIRA [issues](https://confluence.atlassian.com/jira064/what-is-an-issue-720416138.html) field like `Fix version` or `Links`. Existing value is overwritten.
 description: |
-  Updates a JIRA [issues](https://confluence.atlassian.com/jira064/what-is-an-issue-720416138.html) fields like `Fix version` or `Links`.
+  Updates a JIRA [issues](https://confluence.atlassian.com/jira064/what-is-an-issue-720416138.html) field like `Fix version` or `Links`.
 
   User specified in `jira_username` input must have `Edit Issue` permission granted.
   See [Managing project permissions](https://confluence.atlassian.com/adminjiracloud/managing-project-permissions-776636362.html) for more information.
