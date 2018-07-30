@@ -1,8 +1,8 @@
 title: apt-get install
 summary: |
-  Install or upgrade packages with apt-get
+  Install or upgrade packages with apt-get.
 description: |
-  Install or upgrade packages with apt-get
+  Install or upgrade packages with apt-get.
 website: https://github.com/bitrise-steplib/steps-apt-get-install
 source_code_url: https://github.com/bitrise-steplib/steps-apt-get-install
 support_url: https://github.com/bitrise-steplib/steps-apt-get-install/issues
@@ -33,7 +33,7 @@ inputs:
 - options: null
   opts:
     description: |
-      Flags to pass to the apt-get install/upgrade command.
+      Flags to pass to the `apt-get install/upgrade` command.
 
       `apt-get install/upgrade -y [options] [packages]`
     is_expand: true
@@ -43,9 +43,9 @@ inputs:
     value_options: []
 - opts:
     description: |
-      If set the step will upgrade the defined packages by calling `apt-get upgrade -y [options] [packages]` command.
+      If set to `y`, the step will upgrade the defined packages by calling `apt-get upgrade -y [options] [packages]` command.
 
-      Otherwise the step calls `apt-get install -y [options] [packages]`
+      Otherwise the step calls `apt-get install -y [options] [packages]`.
     is_expand: true
     is_required: false
     summary: Upgrade packages if previously installed
