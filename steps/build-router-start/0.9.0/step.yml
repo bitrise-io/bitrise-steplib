@@ -21,13 +21,12 @@ is_skippable: false
 inputs:
 - access_token: null
   opts:
-    description: "Your access token that has access to the app in you want to run
-      workflows.\n\nTo acquire a Personal Access Token for your user, sign in with
-      that user on [bitrise.io](https://bitrise.io),  \ngo to your Account Settings
+    description: "Your access token"\n\nTo acquire a `Personal Access Token` for your user, sign in with
+      that user on [bitrise.io](https://bitrise.io),  \ngo to your `Account Settings`
       page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
       on the left side.\n"
     is_required: true
-    summary: Your access token that has access to the app in you want to run workflows.
+    summary: Your access token
     title: Bitrise Access Token
 - opts:
     description: The workflow(s) to start. One workflow per line.
@@ -36,9 +35,9 @@ inputs:
     title: Workflows
   workflows: null
 - opts:
-    description: Shall the step wait for the builds to be finished?
+    description: Should the step wait for the builds to be finished?
     is_required: false
-    summary: Shall the step wait for the builds to be finished?
+    summary: Should the step wait for the builds to be finished?
     title: Wait for builds
     value_options:
     - "false"
