@@ -4,7 +4,7 @@ description: |-
   Downloads the Build Cache from Bitrise.io, and moves the files back to
   their original place.
 
-  You can find a setup and tips & tricks guide on the Bitrise DevCenter
+  For more information on setting it up and for tips & tricks, head over to our Bitrise DevCenter
   at [http://devcenter.bitrise.io/caching/about-caching/](http://devcenter.bitrise.io/caching/about-caching/).
 website: https://github.com/bitrise-steplib/steps-cache-pull
 source_code_url: https://github.com/bitrise-steplib/steps-cache-pull.git
@@ -37,9 +37,9 @@ inputs:
   workdir: $BITRISE_SOURCE_DIR
 - is_debug_mode: "false"
   opts:
-    description: If debug mode is enabled the step will print verbose logs
+    description: If debug mode is enabled, the step will print verbose logs.
     is_required: true
-    summary: If debug mode is enabled the step will print verbose logs
+    summary: If debug mode is enabled, the step will print verbose logs.
     title: Debug mode?
     value_options:
     - "true"
