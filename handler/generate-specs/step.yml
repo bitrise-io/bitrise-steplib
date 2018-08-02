@@ -10,8 +10,6 @@ toolkit:
   go:
     package_name: github.com/bitrise-io/bitrise-steplib/handler/generate-specs
 
-is_skippable: true
-
 inputs:
 - collection_uri: file://./
 
