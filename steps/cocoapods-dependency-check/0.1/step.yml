@@ -12,10 +12,9 @@ support_url: https://github.com/johnjcsmith/bitrise-step-cocoapods-dependency-ch
 published_at: 2018-08-02T16:47:02.19911406+09:30
 source:
   git: https://github.com/johnjcsmith/bitrise-step-cocoapods-dependency-checker.git
-  commit: f6a389a794df11e6923f335c4d219650e7060d41
+  commit: d69530728a7d46647046003f0fa654d5e177909a
 host_os_tags:
 - osx-10.10
-- ubuntu-16.04
 project_type_tags:
 - ios
 type_tags:
@@ -28,9 +27,6 @@ deps:
   - name: git
   - name: wget
   - name: dependency-check
-  apt_get:
-  - name: git
-  - name: wget
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
