@@ -1,7 +1,7 @@
 title: Cake Script
-summary: Cake (C# Make) is a cross platform build automation system
-description: "Cake (C# Make) is a cross platform build automation system with a C#
-  DSL to do things like compiling code, \ncopy files/folders, running unit tests,
+summary: Cake (C# Make) is a cross-platform build automation system
+description: "Cake (C# Make) is a cross-platform build automation system with a C#
+  DSL to compile code, \ncopy files and folders, run unit tests,
   compress files and build NuGet packages. \nMore info: https://cakebuild.net/"
 website: https://github.com/cake-build/bitrise-cake-step
 source_code_url: https://github.com/cake-build/bitrise-cake-step
@@ -22,14 +22,14 @@ is_skippable: false
 inputs:
 - opts:
     description: |
-      Name of the script to execute. Default is build.cake
+      Name of the script to execute. Default is `build.cake`.
     is_expand: true
     is_required: true
     title: Script
   script: build.cake
 - opts:
     description: |
-      Target name to execute. Default is Default
+      Target name to execute. Default is `Default`.
     is_expand: true
     is_required: true
     title: Target
@@ -37,7 +37,7 @@ inputs:
 - configuration: Release
   opts:
     description: |
-      Configuration to build. Default is Release.
+      Configuration to build. Default is `Release`.
     is_expand: true
     is_required: true
     title: Configuration
@@ -57,7 +57,7 @@ inputs:
 - custom_args: null
   opts:
     description: |
-      Custom arguments to add to the build script
+      Custom arguments to add to the build script.
     is_expand: false
     is_required: false
     title: Custom arguments
