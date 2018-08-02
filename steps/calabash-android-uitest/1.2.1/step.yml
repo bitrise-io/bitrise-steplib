@@ -33,8 +33,8 @@ is_skippable: false
 inputs:
 - opts:
     description: "Path to the directory, which contains your calabash features directory.\n\nFor
-      emxaple:\nIf calabash features directory path is: `CreditCardValidator.Droid/features`,
-      \ \nthen work_dir should be: `CreditCardValidator.Droid`"
+      example,\nif calabash features directory path is `CreditCardValidator.Droid/features`,
+      \ \nthen work_dir should be `CreditCardValidator.Droid`."
     is_required: true
     title: Directory of your calabash features
   work_dir: null
@@ -43,9 +43,9 @@ inputs:
     description: |
       Path to the Gemfile which contains calabash-android gem.
 
-      If Gemfile not exist or does not contain calabash-android gem:
+      If Gemfile doesn't exist or doesn't contain calabash-android gem:
 
-      - if `calabash_android_version` not specified, latest version will be used
+      - if `calabash_android_version` is not specified, then the latest version will be used.
     title: Gemfile path
 - apk_path: $BITRISE_APK_PATH
   opts:
@@ -54,9 +54,9 @@ inputs:
 
       __The APK should have Internet permission.__
 
-      In case of Xamarin:
+      In the case of Xamarin:
 
-      Use an APK, which not built using Shared mono runtime (_Shared mono runtime is enabled by default in DEBUG builds_).
+      Use an APK, which isn't built using Shared mono runtime (Shared mono runtime is enabled by default in DEBUG builds).
     is_expand: true
     is_required: true
     title: APK path
@@ -77,12 +77,12 @@ inputs:
     description: |
       calabash-android gem version to use.
 
-      __If this input specifies the gem version, this version will be used, even `gem_file_path` provided.__
+      __If this input specifies the gem version, this version will be used, even if `gem_file_path` is provided.__
 
-      If `calabash_android_version` not specified:
+      If `calabash_android_version` isn't specified:
 
-      - gem version will be used specified by Gemfile at `gem_file_path`
-      - if Gemfile not exist with calabash-android gem, latest version will be used
+      - gem version will be used specified by Gemfile at `gem_file_path`.
+      - if Gemfile doesn't exist with calabash-android gem, then the latest version will be used.
     title: calabash-android gem version
 outputs:
 - BITRISE_XAMARIN_TEST_RESULT: null
