@@ -1,0 +1,64 @@
+title: github-release-downloader
+summary: |
+  Download any assets from GitHub releases
+description: |
+  Download any assets from GitHub releases
+website: https://github.com/wakwak3125/bitrise-step-github-release-downloader
+source_code_url: https://github.com/wakwak3125/bitrise-step-github-release-downloader
+support_url: https://github.com/wakwak3125/bitrise-step-github-release-downloader/issues
+published_at: 2018-08-01T21:24:37.409281258+09:00
+source:
+  git: https://github.com/wakwak3125/bitrise-step-github-release-downloader.git
+  commit: 334d0dcc351aeb07880abe4a9555aa0640810442
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/wakwak3125/bitrise-step-github-release-downloader
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_always_run: false
+is_skippable: false
+inputs:
+- github_access_token: null
+  opts:
+    description: |-
+      Github Personal API token used to access the GitHub API.
+
+      Create your own token: https://github.com/settings/tokens
+
+      The following scopes needs to be enabled for the token:
+
+        - repo/publick_repo
+    is_expand: true
+    is_required: true
+    summary: Your access token to access the repository
+    title: GitHub Access Token
+- opts:
+    description: |-
+      Tag for download.
+      Set **latest** to always download latest assets.
+    is_expand: true
+    is_required: true
+    title: Tag for download
+  tag: latest
+- opts:
+    description: "Download file names.(You can separete with comma. \n\ne.g)file1,file2,file3"
+    is_expand: true
+    is_required: true
+    title: Download file names
+  source: null
+- opts:
+    description: Repository Url that you want to access
+    is_expand: true
+    is_required: true
+    title: Repository Url that you want to access
+  repository_url: null
