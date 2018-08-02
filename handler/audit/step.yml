@@ -12,7 +12,7 @@ toolkit:
 
 is_skippable: true
 
-inputs:
-- step:
+inputs: 
+- step: $STEP_INFO_COMPOSITE
   opts:
     description: "step_id@step_version or leave empty to audit all the steps"

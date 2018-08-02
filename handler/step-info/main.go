@@ -55,6 +55,7 @@ func main() {
 
 	log.Infof("Find step change:")
 	version, id := "", ""
+	found := 0
 	for _, file := range strings.Split(output, "\n") {
 		if strings.HasSuffix(file, "step.yml") && strings.HasPrefix(file, "steps") {
 			parent := filepath.Dir(file)
@@ -62,13 +63,16 @@ func main() {
 			parent = filepath.Dir(parent)
 			id = filepath.Base(parent)
 			log.Printf("%s - %s@%s", file, id, version)
-			log.Donef("- Done")
-			break
+			found++
 		}
+	}
+	if found > 1 {
+		failf("Multiple step.yml change, skip finding step-info")
 	}
 	if version == "" && id == "" {
 		failf("No step change found.")
 	}
+	log.Donef("- Done")
 	fmt.Println()
 
 	log.Infof("Exporting envs:")
