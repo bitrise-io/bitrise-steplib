@@ -23,7 +23,7 @@ trigger_map:
 workflows:
   test_handlers:
     steps:
-    - path::./handler/step-info:
+    - path::./handler/generate-specs:
   _notifications:
     steps:
     - slack:

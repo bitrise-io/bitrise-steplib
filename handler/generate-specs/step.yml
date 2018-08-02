@@ -1,0 +1,20 @@
+title: Generate Specs
+summary: Generate Specs
+description: Generate Specs
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-steplib/handler/generate-specs
+
+is_skippable: true
+
+inputs:
+- collection_uri: file://./
+
+outputs:
+- SLIM_SPEC_JSON:
+- SPEC_JSON: 
