@@ -30,7 +30,7 @@ inputs:
 - build_gradle_path: $BITRISE_SOURCE_DIR/app/build.gradle
   opts:
     is_required: true
-    summary: Path to the build.gradle file shows the versionCode and versionName settings.
+    summary: Path to the `build.gradle` file shows the versionCode and versionName settings.
     title: Path to the build.gradle file
 - new_version_name: null
   opts:
@@ -39,20 +39,19 @@ inputs:
 
       For example: 1.0.0
 
-      Leave this input empty to do not modify versionName.
+      Leave this input empty so that the versionName remains unchanged.
     summary: |-
       New versionName to set.
 
       For example: 1.0.0
 
-      Leave this input empty to do not modify versionName.
+      Leave this input empty so that the versionName remains unchanged.
     title: New versionName
 - new_version_code: $BITRISE_BUILD_NUMBER
   opts:
-    description: "New versionCode to set.\n\nFor example: 1\n\nLeave this input empty
-      to do not modify versionCode. "
+    description: "New versionCode to set.\n\nFor example: 1\n\nLeave this input empty so that versionCode remains unchanged."
     summary: "New versionCode to set.\n\nFor example: 1\n\nLeave this input empty
-      to do not modify versionCode. "
+      so that versionCode remains unchanged."
     title: New versionCode
 - opts:
     description: |-
@@ -67,7 +66,7 @@ inputs:
 
       For example: 1
 
-      Leave empty if you want the exact value you set in
+      Leave it empty if you want the exact value you set in
       `New versionCode` input otherwise it will be added to it.
     title: versionCode Offset
   version_code_offset: null
