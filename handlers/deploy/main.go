@@ -26,7 +26,7 @@ type Config struct {
 	AwsSecretKey               string `env:"AWS_SECRET_ACCESS_KEY,required"`
 	S3Bucket                   string `env:"S3_UPLOAD_BUCKET,required"`
 	StepsDirPath               string `env:"steps_dir,required"`
-	CollectionURI              string `env:"collection_urirequired"`
+	CollectionURI              string `env:"collection_uri,required"`
 	CollectionSpecJSONPath     string `env:"spec_json_path,required"`
 	CollectionSlimSpecJSONPath string `env:"slim_spec_json_path,required"`
 }

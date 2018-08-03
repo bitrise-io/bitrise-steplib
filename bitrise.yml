@@ -15,6 +15,15 @@ workflows:
     steps:
     - path::./handlers/audit:
 
+  deploy:
+    title: Deploy
+    description: Deploys the StepLib to Amazon S3
+    before_run:
+    - full_audit
+    steps:
+    - path::./handlers/generate-specs:
+    - path::./handlers/deploy:
+
   pr_audit:
     title: Pull Request audit
     description: Performs an audit only on the changed step.yml files, and on the related Steps.
@@ -22,13 +31,3 @@ workflows:
     - path::./handlers/step-info:
     - path::./handlers/generate-specs:
     - path::./handlers/audit:
-
-  deploy:
-    title: Deploy
-    description: Deploys the StepLib to Amazon S3
-    before_run:
-    - full_audit
-    steps:
-    - path::./handlers/step-info:
-    - path::./handlers/generate-specs:
-    - path::./handlers/deploy:
