@@ -1,6 +1,6 @@
-title: Audit
-summary: Audit
-description: Audit
+title: Deploy
+summary: Deploy
+description: Deploy
 
 website: https://github.com/bitrise-io/bitrise-steplib
 source_code_url: https://github.com/bitrise-io/bitrise-steplib
@@ -8,7 +8,7 @@ support_url: https://github.com/bitrise-io/bitrise-steplib/issues
 
 toolkit:
   go:
-    package_name: github.com/bitrise-io/bitrise-steplib/handler/audit
+    package_name: github.com/bitrise-io/bitrise-steplib/handlers/deploy
 
 is_skippable: true
 

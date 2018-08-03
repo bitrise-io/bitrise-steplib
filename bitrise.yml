@@ -3,8 +3,6 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
-  - STEPLIB_SOURCE: 'https://github.com/bitrise-io/bitrise-steplib.git'
-  # define these ENVs in your .bitrise.secrets.yml
   - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
   - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
@@ -13,32 +11,27 @@ app:
 workflows:
   full_audit:
     title: Full Audit
-    description: |-
-      Performs a full audit on the collection.
+    description: Performs a full audit on the collection.
     steps:
-    - path::./handler/audit:
+    - path::./handlers/audit:
 
   pr_audit:
     title: Pull Request audit
-    description: |-
-      Performs an audit only on the changed step.yml files, and on the
-      related Steps.
+    description: Performs an audit only on the changed step.yml files, and on the related Steps.
     steps:
-    - path::./handler/step-info:
-    - path::./handler/generate-specs:
-    - path::./handler/audit:
+    - path::./handlers/step-info:
+    - path::./handlers/generate-specs:
+    - path::./handlers/audit:
 
   deploy:
-    title: Workflow for deployment
-    description: |-
-      Deploys the StepLib to Amazon S3
+    title: Deploy
+    description: Deploys the StepLib to Amazon S3
     before_run:
     - full_audit
     steps:
-    - path::./handler/step-info:
-    - path::./handler/generate-specs:
-    - path::./handler/audit:
-    - path::./handler/deploy:
+    - path::./handlers/step-info:
+    - path::./handlers/generate-specs:
+    - path::./handlers/deploy:
 
   # deploy:
   #   title: Workflow for deployment

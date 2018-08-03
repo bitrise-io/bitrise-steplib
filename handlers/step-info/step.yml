@@ -8,7 +8,7 @@ support_url: https://github.com/bitrise-io/bitrise-steplib/issues
 
 toolkit:
   go:
-    package_name: github.com/bitrise-io/bitrise-steplib/handler/step-info
+    package_name: github.com/bitrise-io/bitrise-steplib/handlers/step-info
 
 is_skippable: true
 
