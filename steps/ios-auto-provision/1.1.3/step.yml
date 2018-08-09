@@ -72,12 +72,14 @@ inputs:
     title: Configuration name
 - generate_profiles: "no"
   opts:
-    description: "In the case of __Xcode managed codesigning__ projects, by default the
-      step downloads and installs the Xcode managed Provisioning Profiles.\n\nIf this
-      input is set to: `yes`, the step will try to manage the Provisioning Profiles
-      by itself (__like in the case of Manual codesigning projects__),  \nthe step will
-      fall back to use the Xcode managed Provisioning Profiles if there is an issue.\n\n__This
-      input has no effect in the case of Manual codesigning projects.__"
+    description: "This input determines how the step manages Provisioning Profiles 
+      if the __Automatically manage signing__" option is enabled in your Xcode.
+      
+      If this input is set to `no`, the step downloads and installs the Xcode managed Provisioning Profile from your Apple Developer account. 
+      
+      If this input is set to `yes`, the step will try to generate a new manual Provisioning Profile. If there is a problem and the 
+      step fails to generate a profile, it will attempt to download and install the Xcode managed Provisioning Profile 
+      from your Apple Developer account."
     title: Should the step try to generate Provisioning Profiles even if Xcode managed
       signing is enabled in the Xcode project?
     value_options:
