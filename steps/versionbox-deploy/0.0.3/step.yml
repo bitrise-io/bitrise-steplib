@@ -1,0 +1,94 @@
+title: VersionBox Application Deployment
+summary: |
+  Deploy your builded application as a new version to VersionBox.io store!
+description: "VersionBox is an inHouse application store for enterprises. (https://versionbox.io)\nYou
+  can manage, distribute and analyze your iOS or Android app from VersionBox web panel.\n\nUse
+  this step to integrate your VersionBox deployment with Bitrise.\nIt will automatically
+  deploy your generated IPA or APK file to VersionBox on build. \n\nAll you need is
+  an APP KEY and an API TOKEN from VersionBox!\n"
+website: https://github.com/loopdigital/bitrise-step-versionbox-deploy
+source_code_url: https://github.com/loopdigital/bitrise-step-versionbox-deploy
+support_url: https://github.com/loopdigital/bitrise-step-versionbox-deploy/issues
+published_at: 2018-08-10T15:21:54.609158093+03:00
+source:
+  git: https://github.com/loopdigital/bitrise-step-versionbox-deploy.git
+  commit: 783048d252aeba231fca1a491c35735ccd9e5682
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: VersionBox Application Key
+  vb_app_key: null
+- opts:
+    is_expand: true
+    is_required: true
+    title: VersionBox User API Token
+  vb_api_token: null
+- opts:
+    description: Absolute path of the IPA or APK file generated on build.
+    is_expand: true
+    is_required: true
+    title: File Path
+  vb_file_path: null
+- opts:
+    category: Additional
+    description: Mark the version as live after deployment.
+    is_expand: true
+    is_required: false
+    title: Mark as Live
+    value_options:
+    - "yes"
+    - "no"
+  vb_mark_live: "no"
+- opts:
+    category: Additional
+    description: Publish the version when deployment complete.
+    is_expand: true
+    is_required: false
+    title: Publish the Version
+    value_options:
+    - "no"
+    - "yes"
+  vb_auto_publish: "no"
+- opts:
+    category: Description
+    description: Version description text to display on VersionBox.
+    is_expand: true
+    is_required: false
+    title: Version Description
+  vb_version_description: null
+- opts:
+    category: Description
+    description: Your version description will be automatically generated from commits
+      between last two git tags. (Generated description will overwrite the Version
+      Description field above.)
+    is_expand: true
+    is_required: false
+    title: Copy Description From Tag Commits
+    value_options:
+    - "yes"
+    - "no"
+  vb_description_from_commit: "no"
+- opts:
+    category: Description
+    description: Absolute path of the currently cloned repository on VM. (Only necessary
+      if Description From Commits is desired.)
+    is_expand: true
+    is_required: false
+    title: Cloned Repository Path
+  vb_cloned_repository_path: $BITRISE_SOURCE_DIR
