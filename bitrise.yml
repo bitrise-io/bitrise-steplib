@@ -60,15 +60,6 @@ workflows:
       a specified path and makes the path available for other workflows.
     steps:
     - script:
-        title: install stepman
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-            
-            curl -fL https://github.com/bitrise-io/stepman/releases/download/0.10.1/stepman-$(uname -s)-$(uname -m) > /usr/local/bin/stepman
-            chmod +x /usr/local/bin/stepman
-    - script:
         title: Set TMP_COLLECTION_ID
         inputs:
         - content: |-
@@ -83,7 +74,7 @@ workflows:
             #!/bin/bash
             set -ex
             
-            /usr/local/bin/stepman delete -c "${TMP_COLLECTION_ID}"
+            stepman delete -c "${TMP_COLLECTION_ID}"
     - script:
         title: Generate
         dependencies:
@@ -97,7 +88,7 @@ workflows:
             tmp_dir="$(pwd)/_tmp"
             mkdir -p "${tmp_dir}"
             spec_path="${tmp_dir}/spec.json"
-            /usr/local/bin/stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
+            stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
             slim_spec_path="$(find "${HOME}/.stepman" -name slim-spec.json | head -n1)"
             # write out minimized slim-spec.json
             jq --compact-output '.' ${slim_spec_path} > "${tmp_dir}/slim-spec.json"
@@ -180,7 +171,7 @@ workflows:
         - content: |-
             set -ex
 
-            /usr/local/bin/stepman audit --collection "${TMP_COLLECTION_ID}"
+            stepman audit --collection "${TMP_COLLECTION_ID}"
 
   deploy:
     title: Workflow for deployment
