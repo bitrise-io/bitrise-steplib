@@ -101,7 +101,7 @@ func uploadStepsDir(s3Bucket, stepsDirPath string) error {
 		upStepsDirPth += "/"
 	}
 	fmt.Println("Uploading from: ", upStepsDirPth, " | to: ", s3UploadFullPath)
-	if err := command.New("aws", "s3", "cp", upStepsDirPth, s3UploadFullPath, "--acl", "public-read", "--recursive").
+	if err := command.New("aws", "s3", "sync", upStepsDirPth, s3UploadFullPath, "--acl", "public-read").
 		Run(); err != nil {
 		return err
 	}
