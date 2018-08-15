@@ -1,0 +1,118 @@
+title: Fastlane Match
+summary: |
+  Download and install certificates and provisioning profiles managed with fastlane match
+description: |
+  Download and install certificates and provisioning profiles, using the
+  fastlane [Match](https://github.com/fastlane/fastlane/tree/master/match)
+  Ruby gem.
+
+  ## Setup guide and notes
+
+  Follow these steps to create your certificates and provisioning profiles using fastlane match. https://codesigning.guide/
+website: https://github.com/platanus/bitrise-step-fastlane-match
+source_code_url: https://github.com/platanus/bitrise-step-fastlane-match
+support_url: https://github.com/platanus/bitrise-step-fastlane-match/issues
+published_at: 2018-08-10T12:03:19.742266745-04:00
+source:
+  git: https://github.com/platanus/bitrise-step-fastlane-match.git
+  commit: 95a063ae7dd70077ca726128d5905e8037191402
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/platanus/bitrise-step-fastlane-match
+deps:
+  brew:
+  - name: git
+  - name: go
+  apt_get:
+  - name: git
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- git_url: ""
+  opts:
+    description: |-
+      The private git repository url where you have your
+      encrypted certificates and profiles
+    is_required: true
+    summary: ""
+    title: Match git url
+- git_branch: ""
+  opts:
+    description: |-
+      The name of the git branch containing the encrypted
+      certificates and profiles. Uses master by default.
+    summary: ""
+    title: Match git branch
+- app_id: ""
+  opts:
+    description: |-
+      The App's *ID* on Apple Developer Account.
+
+      This is sometimes refered as Bundle ID
+    is_required: true
+    summary: ""
+    title: App ID
+- decrypt_password: ""
+  opts:
+    description: Password for decrypting the repository content
+    is_required: true
+    summary: ""
+    title: Match decrypt password
+- opts:
+    description: The type of certificate and provisioning profile you want to install.
+    is_required: true
+    summary: ""
+    title: Platform
+    value_options:
+    - adhoc
+    - appstore
+    - development
+    - enterprise
+  type: development
+- opts:
+    description: The ID of your Developer Portal team if you're in multiple teams.
+    summary: ""
+    title: Team ID
+  team_id: ""
+- gemfile_path: ./Gemfile
+  opts:
+    category: Debug
+    description: |
+      Path to the Gemfile which contains `fastlane` gem.
+
+      If Gemfile not exist or does not contain fastlane gem:
+
+      - if `fastlane_version` input not specified, latest version will be used
+    title: Gemfile path
+- fastlane_version: latest
+  opts:
+    category: Debug
+    description: This option lets you specify a specific version of the `fastlane`
+      gem to be installed.
+    summary: Install a specific version of the `fastlane` gem.
+    title: Fastlane version
+- options: null
+  opts:
+    category: Debug
+    description: |-
+      Options added to the end of the `match` call.
+
+      If you want to add more options, list them separated by a space character.
+
+      Example: `--team_name`
+    title: Additional options for `match` call
