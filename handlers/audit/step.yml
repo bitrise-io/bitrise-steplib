@@ -1,6 +1,6 @@
 title: Audit
-summary: Audit
-description: Audit
+summary: This handler will audit and check icon for the exact step if step input given, if not given then it will run audit and icon check on all of the steps in our steplib.
+description: This handler will audit and check icon for the exact step if step input given, if not given then it will run audit and icon check on all of the steps in our steplib.
 
 website: https://github.com/bitrise-io/bitrise-steplib
 source_code_url: https://github.com/bitrise-io/bitrise-steplib

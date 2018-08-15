@@ -1,6 +1,6 @@
 title: Step Info
-summary: Step Info
-description: Step Info
+summary: This handler collects changed files, if there was a step change then it exports the stepid@version composite.
+description: This handler collects changed files, if there was a step change then it exports the stepid@version composite.
 
 website: https://github.com/bitrise-io/bitrise-steplib
 source_code_url: https://github.com/bitrise-io/bitrise-steplib

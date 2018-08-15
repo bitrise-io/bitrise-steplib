@@ -1,6 +1,6 @@
 title: Deploy
-summary: Deploy
-description: Deploy
+summary: This handler will upload all of the step assets to S3, also slim-spec, spec, and spec.gz JSONs.
+description: This handler will upload all of the step assets to S3, also slim-spec, spec, and spec.gz JSONs.
 
 website: https://github.com/bitrise-io/bitrise-steplib
 source_code_url: https://github.com/bitrise-io/bitrise-steplib

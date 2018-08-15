@@ -1,6 +1,6 @@
 title: Generate Specs
-summary: Generate Specs
-description: Generate Specs
+summary: This handler generates the spec, slim-spec, and slim-spec.gz JSONs.
+description: This handler generates the spec, slim-spec, and slim-spec.gz JSONs.
 
 website: https://github.com/bitrise-io/bitrise-steplib
 source_code_url: https://github.com/bitrise-io/bitrise-steplib
