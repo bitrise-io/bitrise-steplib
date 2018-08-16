@@ -10,7 +10,6 @@ import (
 
 	"github.com/bitrise-io/go-utils/command"
 	"github.com/bitrise-io/go-utils/log"
-	"github.com/bitrise-io/go-utils/pathutil"
 )
 
 const (
@@ -22,6 +21,7 @@ const (
 type Config struct {
 	IsCI          bool   `env:"CI"`
 	CollectionURI string `env:"collection_uri,required"`
+	DeployDir     string `env:"BITRISE_DEPLOY_DIR,required"`
 }
 
 func failf(format string, v ...interface{}) {
@@ -37,11 +37,6 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	tmpPath, err := pathutil.NormalizedOSTempDirPath("collections")
-	if err != nil {
-		failf("Failed to get temp path, error: %s", err)
-	}
-
 	fmt.Println()
 
 	log.Infof("Clean collection:")
@@ -53,12 +48,12 @@ func main() {
 	fmt.Println()
 
 	log.Infof("Generating specs:")
-	if err := command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(tmpPath, "spec.json"), "--export-type", "full").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+	if err := command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(c.DeployDir, "spec.json"), "--export-type", "full").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
 	log.Printf("- spec.json")
 
-	if err := command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(tmpPath, "slim-spec.json"), "--export-type", "latest").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+	if err := command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(c.DeployDir, "slim-spec.json"), "--export-type", "latest").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
 	log.Printf("- slim-spec.json")
@@ -67,12 +62,12 @@ func main() {
 	fmt.Println()
 
 	log.Infof("Exporting envs:")
-	if err := tools.ExportEnvironmentWithEnvman(envSpecKey, filepath.Join(tmpPath, "spec.json")); err != nil {
+	if err := tools.ExportEnvironmentWithEnvman(envSpecKey, filepath.Join(c.DeployDir, "spec.json")); err != nil {
 		failf("Failed to export environment variable: %s", envSpecKey)
 	}
-	log.Printf("  Env    [ $%s = %s ]", envSpecKey, filepath.Join(tmpPath, "spec.json"))
-	if err := tools.ExportEnvironmentWithEnvman(envSlimSpecKey, filepath.Join(tmpPath, "slim-spec.json")); err != nil {
+	log.Printf("  Env    [ $%s = %s ]", envSpecKey, filepath.Join(c.DeployDir, "spec.json"))
+	if err := tools.ExportEnvironmentWithEnvman(envSlimSpecKey, filepath.Join(c.DeployDir, "slim-spec.json")); err != nil {
 		failf("Failed to export environment variable: %s", envSlimSpecKey)
 	}
-	log.Printf("  Env    [ $%s = %s ]", envSlimSpecKey, filepath.Join(tmpPath, "slim-spec.json"))
+	log.Printf("  Env    [ $%s = %s ]", envSlimSpecKey, filepath.Join(c.DeployDir, "slim-spec.json"))
 }

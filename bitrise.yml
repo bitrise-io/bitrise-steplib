@@ -23,6 +23,7 @@ workflows:
     steps:
     - path::./handlers/generate-specs:
     - path::./handlers/deploy:
+    - deploy-to-bitrise-io:
 
   pr_audit:
     title: Pull Request audit
