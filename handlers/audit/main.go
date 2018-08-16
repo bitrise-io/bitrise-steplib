@@ -111,11 +111,16 @@ func auditChangedStepYML(stepID, stepVer string) error {
 		fmt.Println()
 		log.Warnf("Diff step: %s | %s >> %s", stepID, prevVersion, stepVer)
 
-		diffOut, _ := command.New(
+		cmd := command.New(
 			"diff",
 			path.Join(stepMainDirPth, prevVersion, "step.yml"),
 			path.Join(stepMainDirPth, stepVer, "step.yml"),
-		).RunAndReturnTrimmedCombinedOutput()
+		)
+		fmt.Println()
+		log.Donef("$ %s", cmd.PrintableCommandArgs())
+		fmt.Println()
+
+		diffOut, _ := cmd.RunAndReturnTrimmedCombinedOutput()
 
 		fmt.Println()
 		fmt.Println("========== DIFF ====================")
@@ -133,13 +138,18 @@ func auditChangedStepYML(stepID, stepVer string) error {
 		return fmt.Errorf("failed to create tmp dir, error: %s", err)
 	}
 
-	output, err := command.New(
+	cmd := command.New(
 		"stepman", "activate",
 		"--collection", "file://./",
 		"--id", stepID,
 		"--version", stepVer,
 		"--path", tmpStepActPth,
-	).RunAndReturnTrimmedCombinedOutput()
+	)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	output, err := cmd.RunAndReturnTrimmedCombinedOutput()
 	if err != nil {
 		return fmt.Errorf("failed to run stepman activate, output: %s, error: %s", output, err)
 	}
@@ -176,10 +186,22 @@ func main() {
 	}
 
 	log.Infof("Clean collection:")
-	if err := command.New("stepman", "delete", "-c", "file://./").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+
+	cmd := command.New("stepman", "delete", "-c", "file://./")
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
-	if err := command.New("stepman", "setup", "-c", "file://./").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+
+	cmd = command.New("stepman", "setup", "-c", "file://./")
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
 	log.Donef("- Done")
@@ -199,7 +221,12 @@ func main() {
 		}
 		log.Infof("Auditing steps:")
 
-		if err := command.New("stepman", "audit", "-c", "file://./").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+		cmd = command.New("stepman", "audit", "-c", "file://./")
+		fmt.Println()
+		log.Donef("$ %s", cmd.PrintableCommandArgs())
+		fmt.Println()
+
+		if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 			failf("Failed to run stepman delete, error: %s", err)
 		}
 	} else {

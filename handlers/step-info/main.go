@@ -44,7 +44,12 @@ func main() {
 		cmdArgs = append(cmdArgs, "HEAD", "origin/master")
 	}
 
-	output, err := command.New("git", cmdArgs...).RunAndReturnTrimmedCombinedOutput()
+	cmd := command.New("git", cmdArgs...)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	output, err := cmd.RunAndReturnTrimmedCombinedOutput()
 	if err != nil {
 		failf("Diff failed, output: %s, error: %s", output, err)
 	}
