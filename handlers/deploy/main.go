@@ -213,8 +213,40 @@ func main() {
 		failf("Error: ", err)
 	}
 	fmt.Println()
+	fmt.Println("==> Uploading spec.json.gz")
+
+	cmd := command.New("gzip", "-v", c.CollectionSpecJSONPath)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+		failf("Error: ", err)
+	}
+
+	specJSONgzPath := c.CollectionSpecJSONPath + ".gz"
+	if err := uploadFileToS3(c.S3Bucket, specJSONgzPath, "/spec.json.gz", "--content-encoding", "gzip"); err != nil {
+		failf("Error: ", err)
+	}
+	fmt.Println()
 	fmt.Println("==> Uploading slim-spec.json")
-	if err := uploadFileToS3(c.S3Bucket, c.CollectionSlimSpecJSONPath, "/slim-spec.json", "--content-encoding", "gzip"); err != nil {
+	if err := uploadFileToS3(c.S3Bucket, c.CollectionSlimSpecJSONPath, "/slim-spec.json"); err != nil {
+		failf("Error: ", err)
+	}
+	fmt.Println()
+	fmt.Println("==> Uploading slim-spec.json.gz")
+
+	cmd = command.New("gzip", "-v", c.CollectionSlimSpecJSONPath)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+		failf("Error: ", err)
+	}
+
+	slimSpecJSONgzPath := c.CollectionSlimSpecJSONPath + ".gz"
+	if err := uploadFileToS3(c.S3Bucket, slimSpecJSONgzPath, "/slim-spec.json.gz", "--content-encoding", "gzip"); err != nil {
 		failf("Error: ", err)
 	}
 
