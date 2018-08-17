@@ -49,8 +49,12 @@ func prepareTmpStepZIPArchiveFromGit(collectionURI, stepID, stepVersion string) 
 	fmt.Println("stepVerTmpDir: ", stepVerTmpDir)
 	fmt.Println("stepZipArchivePth: ", stepZipArchivePth)
 
-	if err := command.New("stepman", "activate", "--collection", collectionURI, "--id", stepID, "--version", stepVersion, "--path", stepVerTmpDir).
-		SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+	cmd := command.New("stepman", "activate", "--collection", collectionURI, "--id", stepID, "--version", stepVersion, "--path", stepVerTmpDir)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		return "", err
 	}
 
@@ -63,7 +67,13 @@ func prepareTmpStepZIPArchiveFromGit(collectionURI, stepID, stepVersion string) 
 	}
 
 	// zip it up!
-	if err := command.New("zip", "-r", stepZipArchivePth, ".").SetDir(stepVerTmpDir).
+
+	cmd = command.New("zip", "-r", stepZipArchivePth, ".")
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetDir(stepVerTmpDir).
 		SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		return "", err
 	}
@@ -79,9 +89,13 @@ func uploadFileToS3(s3Bucket, filePth, pathInBucket string, otherOpts ...string)
 	upldPth += pathInBucket
 
 	fmt.Println("Uploading file: ", filePth, " | to: ", upldPth)
-	//aws s3 cp "${SLIM_JSON_PATH}" "s3://${S3_UPLOAD_BUCKET}/slim-spec.json" --acl public-read
-	if output, err := command.New("aws", append([]string{"s3", "cp", filePth, upldPth, "--acl", "public-read"}, otherOpts...)...).
-		RunAndReturnTrimmedCombinedOutput(); err != nil {
+
+	cmd := command.New("aws", append([]string{"s3", "cp", filePth, upldPth, "--acl", "public-read"}, otherOpts...)...)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if output, err := cmd.RunAndReturnTrimmedCombinedOutput(); err != nil {
 		fmt.Println()
 		fmt.Println()
 		fmt.Println("==========> [!] FAILED to upload file")
@@ -101,8 +115,13 @@ func uploadStepsDir(s3Bucket, stepsDirPath string) error {
 		upStepsDirPth += "/"
 	}
 	fmt.Println("Uploading from: ", upStepsDirPth, " | to: ", s3UploadFullPath)
-	if err := command.New("aws", "s3", "sync", upStepsDirPth, s3UploadFullPath, "--acl", "public-read").
-		Run(); err != nil {
+
+	cmd := command.New("aws", "s3", "sync", upStepsDirPth, s3UploadFullPath, "--acl", "public-read")
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.Run(); err != nil {
 		return err
 	}
 	return nil

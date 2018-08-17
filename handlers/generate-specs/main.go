@@ -40,7 +40,13 @@ func main() {
 	fmt.Println()
 
 	log.Infof("Clean collection:")
-	if err := command.New("stepman", "delete", "-c", c.CollectionURI).SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+
+	cmd := command.New("stepman", "delete", "-c", c.CollectionURI)
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
 	log.Donef("- Done")
@@ -48,12 +54,23 @@ func main() {
 	fmt.Println()
 
 	log.Infof("Generating specs:")
-	if err := command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(c.DeployDir, "spec.json"), "--export-type", "full").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+
+	cmd = command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(c.DeployDir, "spec.json"), "--export-type", "full")
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
 	log.Printf("- spec.json")
 
-	if err := command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(c.DeployDir, "slim-spec.json"), "--export-type", "latest").SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
+	cmd = command.New("stepman", "export-spec", "--steplib", c.CollectionURI, "--output", filepath.Join(c.DeployDir, "slim-spec.json"), "--export-type", "latest")
+	fmt.Println()
+	log.Donef("$ %s", cmd.PrintableCommandArgs())
+	fmt.Println()
+
+	if err := cmd.SetStdout(os.Stdout).SetStderr(os.Stderr).Run(); err != nil {
 		failf("Failed to run stepman delete, error: %s", err)
 	}
 	log.Printf("- slim-spec.json")
