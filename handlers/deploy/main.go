@@ -214,12 +214,7 @@ func main() {
 	}
 	fmt.Println()
 	fmt.Println("==> Uploading slim-spec.json")
-	if err := uploadFileToS3(c.S3Bucket, c.CollectionSlimSpecJSONPath, "/slim-spec.json"); err != nil {
-		failf("Error: ", err)
-	}
-	fmt.Println()
-	fmt.Println("==> Uploading slim-spec.json.gz")
-	if err := uploadFileToS3(c.S3Bucket, c.CollectionSlimSpecJSONPath, "/slim-spec.json.gz", "--content-encoding", "gzip"); err != nil {
+	if err := uploadFileToS3(c.S3Bucket, c.CollectionSlimSpecJSONPath, "/slim-spec.json", "--content-encoding", "gzip"); err != nil {
 		failf("Error: ", err)
 	}
 
