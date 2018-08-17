@@ -2,7 +2,7 @@ title: DeployGate - upload a single application file
 summary: |
   Upload your application file to DeployGate
 description: |
-  This is a step to upload your application file to DeployGate. see upload api documents #ref https://docs.deploygate.com/reference#upload
+  This is a step to upload your application file to DeployGate. For more details, please see references of DeployGate Upload API #ref https://docs.deploygate.com/reference#upload
 website: https://github.com/DeployGate/upload-app-bitrise-step
 source_code_url: https://github.com/DeployGate/upload-app-bitrise-step
 support_url: https://github.com/DeployGate/upload-app-bitrise-step/issues
@@ -34,13 +34,13 @@ inputs:
   opts:
     description: The authorization token to be used when uploading app
     is_required: true
-    summary: user's api key or group's api key
+    summary: User's API Key or Organization's API Key
     title: 'DeployGate: API Key'
 - opts:
     description: |
       The owner name of this application
     is_required: true
-    summary: User name or Group name
+    summary: User name or Organization name
     title: 'DeployGate: Owner Name'
   owner_name: ""
 - app_path: $BITRISE_APK_PATH
@@ -53,13 +53,17 @@ inputs:
     - $BITRISE_APK_PATH
     - $BITRISE_IPA_PATH
 - opts:
-    description: "For newly uploaded apps only, specify the app's privacy settings
-      to either private or public. \nBy default, Personal Free Plans are set to public,
-      and all other plans are set to private. \nThis setting does not apply for updates,
+    description: "For newly uploaded apps only, specify the app's name and icon privacy settings
+      to either private or public. \n
+      This is just only for visibility on your apps list in profile page, not for allowing download or install by anonymous. \n
+      Download or install apps is allowd only your app's member or invitee who knows your generated public link.\n 
+      \nBy default, Personal Free Plans are set to public,
+      and all other plans are set to private. \n
+      This setting does not apply for updates,
       and any changes made will be ignored.\n"
     is_required: true
-    summary: the visibility of this app
-    title: 'DeployGate: app visibility'
+    summary: The viisibility of this app in your profile page
+    title: 'DeployGate: App Visibility'
     value_options:
     - public
     - private
@@ -69,15 +73,15 @@ inputs:
     description: A short message to explain this version
     is_required: false
     summary: A short message to explain this version
-    title: 'DeployGate: a short message'
+    title: 'DeployGate: Short Message'
 - distribution_key: ""
   opts:
     description: |
       By specifying the distribution page's hash, that distribution page will be updated simultaneously.
-      The "xxxx" portion of the distributed page's URL like /distributions/xxxx
+      The "xxxx" portion of the distributed page's URL like https://deploygate.com/distributions/xxxx
     is_required: false
     summary: The distribution key to be updated
-    title: 'DeployGate: a distribution key'
+    title: 'DeployGate: Distribution Key'
 - distribution_name: ""
   opts:
     description: "Specify the name of the updated distribution page. \nIf none exists,
@@ -85,19 +89,19 @@ inputs:
       pages for each Git branch name.\n"
     is_required: false
     summary: The distribution name to be created or be updated
-    title: 'DeployGate: a distribution name'
+    title: 'DeployGate: Distribution Name'
 - opts:
     description: Message displayed during distribution page app updates
     is_required: false
     summary: Message displayed during distribution page app updates
-    title: 'DeployGate: a release note'
+    title: 'DeployGate: Release Note'
   release_note: ""
 - disable_notify: "false"
   opts:
     description: (iOS only) A setting of true disables Push notification emails.
     is_required: false
     summary: (iOS only) A setting of true disables Push notification emails.
-    title: 'DeployGate: disable notify'
+    title: 'DeployGate: Disable Notify'
     value_options:
     - "true"
     - "false"
