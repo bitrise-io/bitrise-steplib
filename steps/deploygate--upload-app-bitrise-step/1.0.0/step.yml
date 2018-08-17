@@ -2,7 +2,7 @@ title: DeployGate Upload
 summary: |
   Distribute your in-development iOS/Android apps to your developers or testers
 description: |
-  This is a step to upload your iOS/Android application to DeployGate. DeployGate enable to share in-development apps with others instantly. For more details, please see references of DeployGate Upload API #ref https://docs.deploygate.com/reference#upload
+  This is a step to upload your iOS/Android application to DeployGate. DeployGate enable to share in-development apps with others instantly. For more details, please read references in [DeployGate.com](https://deploygate.com/?locale=en)
 website: https://github.com/DeployGate/upload-app-bitrise-step
 source_code_url: https://github.com/DeployGate/upload-app-bitrise-step
 support_url: https://github.com/DeployGate/upload-app-bitrise-step/issues
