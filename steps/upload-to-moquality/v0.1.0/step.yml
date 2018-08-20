@@ -1,0 +1,70 @@
+title: Upload to MoQuality
+summary: |
+  Uploads an APK file to MoQuality
+description: |
+  This step logs into your MoQuality account and uploads an APK file to MoQuality. Upon upload, a new version of your app is created with the given APK file.
+website: https://github.com/moquality/bitrise-step-upload-to-moquality
+source_code_url: https://github.com/moquality/bitrise-step-upload-to-moquality
+support_url: https://github.com/moquality/bitrise-step-upload-to-moquality/issues
+published_at: 2018-08-20T10:45:56.686234965-04:00
+source:
+  git: https://github.com/moquality/bitrise-step-upload-to-moquality.git
+  commit: beb3c0152d61c30bb5c756a99815b1ff51637652
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: moquality/brew/mq
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- API_KEY: null
+  opts:
+    description: |
+      This key is necessary to log in to MoQuality and upload the app.
+
+      It can be found on `Personal Profile` tab on the account page of the [MoQuality website](https://app.moquality.com/account/).
+    is_expand: true
+    is_required: true
+    summary: A MoQuality user or team's API key
+    title: API key
+    value_options: []
+- APK_PATH: $BITRISE_APK_APTH
+  opts:
+    description: |
+      This path is necessary to determine the location of the app to be uploaded to MoQuality.
+
+      This path is often generated as an output value of a build step.
+    is_expand: true
+    is_required: false
+    summary: The path to an app's APK file.
+    title: Path to APK file
+    value_options:
+    - $BITRISE_APK_PATH
+- APP_ID: null
+  opts:
+    description: |
+      The MoQuality app Id is necessary to determine which app you are uploading.
+
+      You can find the app Id by [installing the MQ CLI](http://docs.moquality.com/integration-ci-cd/mq-cli/), running `mq login`, and then running `mq apps` to view your list of apps with their respective app Ids.
+    is_expand: true
+    is_required: true
+    summary: The identifier for a MoQuality app
+    title: MoQuality app Id
+    value_options: []
