@@ -90,7 +90,7 @@ func auditChangedSteps(collectionURI, stepID, stepVer string) error {
 			return err
 		}
 
-		cmd = command.New("stepman", "activate", "--collection", collectionURI, "--id", stepID, "--version", prevVersion, "--path", currentTmpDir)
+		cmd = command.New("stepman", "activate", "--collection", collectionURI, "--id", stepID, "--version", stepVer, "--path", currentTmpDir)
 		fmt.Println()
 		log.Donef("$ %s", cmd.PrintableCommandArgs())
 		fmt.Println()
