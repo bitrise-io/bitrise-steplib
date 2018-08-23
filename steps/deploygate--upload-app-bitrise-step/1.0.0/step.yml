@@ -6,10 +6,10 @@ description: |
 website: https://github.com/DeployGate/upload-app-bitrise-step
 source_code_url: https://github.com/DeployGate/upload-app-bitrise-step
 support_url: https://github.com/DeployGate/upload-app-bitrise-step/issues
-published_at: 2018-08-17T17:19:54.145155459+09:00
+published_at: 2018-08-23T16:11:24.697097562+09:00
 source:
   git: https://github.com/DeployGate/upload-app-bitrise-step.git
-  commit: ab3ece6646dfbcbaa3bb92a50d7abbe1bcb54d05
+  commit: fc26112e595aa5c062028d2abf982437a67124fc
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -43,24 +43,21 @@ inputs:
     summary: User name or Organization name
     title: 'DeployGate: Owner Name'
   owner_name: ""
-- app_path: $BITRISE_APK_PATH
+- app_path: ""
   opts:
-    description: App's binary file (IPA/APK) to be uploaded
+    description: |
+      App's binary file (IPA/APK) to be uploaded.
+      $BITRISE_APK_PATH, $BITRISE_IPA_PATH, and so on.
     is_required: true
     summary: App's binary file (IPA/APK) to be uploaded
     title: App file path
-    value_options:
-    - $BITRISE_APK_PATH
-    - $BITRISE_IPA_PATH
 - opts:
-    description: "For newly uploaded apps only, specify the app's name and icon privacy settings
-      to either private or public. \n
-      This is just only for visibility on your apps list in profile page, not for allowing download or install by anonymous. \n
-      Download or install apps is allowd only your app's member or invitee who knows your generated public link.\n 
-      \nBy default, Personal Free Plans are set to public,
-      and all other plans are set to private. \n
-      This setting does not apply for updates,
-      and any changes made will be ignored.\n"
+    description: |
+      For newly uploaded apps only, specify the app's name and icon privacy settings to either private or public.
+      This is just only for visibility on your apps list in profile page, not for allowing download or install by anonymous.
+      Download or install apps is allowd only your app's member or invitee who knows your generated public link.
+      By default, Personal Free Plans are set to public, and all other plans are set to private.
+      This setting does not apply for updates, and any changes made will be ignored.
     is_required: true
     summary: The viisibility of this app in your profile page
     title: 'DeployGate: App Visibility'
