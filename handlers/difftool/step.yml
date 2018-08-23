@@ -1,0 +1,20 @@
+title: DiffTool
+summary: Print side-by-side changes between the two versions
+description: Print side-by-side changes between the two versions
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-steplib/handlers/difftool
+
+deps:
+  brew:
+  - name: colordiff
+
+inputs: 
+- collection_uri: file://./
+  opts:
+    is_required: true
