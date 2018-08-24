@@ -13,6 +13,7 @@ workflows:
     title: Full Audit
     description: Performs a full audit on the collection.
     steps:
+    - path::./handlers/validate:
     - path::./handlers/audit:
 
   deploy:
@@ -21,6 +22,7 @@ workflows:
     before_run:
     - full_audit
     steps:
+    - path::./handlers/validate:
     - path::./handlers/generate-specs:
     - path::./handlers/deploy:
     - deploy-to-bitrise-io:
@@ -29,6 +31,7 @@ workflows:
     title: Pull Request audit
     description: Performs an audit only on the changed step.yml files, and on the related Steps.
     steps:
+    - path::./handlers/validate:
     - path::./handlers/step-info:
     - path::./handlers/generate-specs:
     - path::./handlers/audit:
