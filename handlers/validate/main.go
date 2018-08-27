@@ -4,15 +4,20 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/bitrise-io/bitrise-steplib/handlers/validate/tasks/valueoptions"
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/valueoptions"
 	"github.com/bitrise-io/go-utils/log"
 )
 
-// Task runner interface
-type Task interface {
-	Work() error
+// Validator runner interface
+type Validator interface {
+	Validate() error
 	IsSkippable() bool
 	String() string
+}
+
+// Config ...
+type Config struct {
+	Step string `env:"step"`
 }
 
 func failf(format string, v ...interface{}) {
@@ -21,15 +26,15 @@ func failf(format string, v ...interface{}) {
 }
 
 func main() {
-	log.Infof("Running validation tasks:")
-	tasks := []Task{
-		valueoptions.Task{},
+	log.Infof("Running validations:")
+	validators := []Validator{
+		&valueoptions.Validator{},
 	}
 
-	for i, task := range tasks {
-		log.Printf("- (%d/%d) Running: %s", i+1, len(tasks), task)
-		if err := task.Work(); err != nil {
-			if !task.IsSkippable() {
+	for i, validator := range validators {
+		log.Printf("- (%d/%d) Running: %s", i+1, len(validators), validator)
+		if err := validator.Validate(); err != nil {
+			if !validator.IsSkippable() {
 				log.Errorf(" > Failed, error:")
 				log.Printf("%s", err)
 				os.Exit(1)
