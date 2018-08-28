@@ -1,19 +1,19 @@
 title: Send Email with Mailgun
-summary: Send an email using your Mailgun account.
+summary: Send emails using your Mailgun account.
 description: |-
-  Send email with Mailgun ( [https://mailgun.com](https://mailgun.com) ).
+  Send emails with [Mailgun](https://mailgun.com).
 
-  How to get step inputs from mailgun?
+  How to get step inputs from Mailgun?
 
-  - [Sign up](https://mailgun.com/signup) or [Log in](https://mailgun.com/cp) to mailgun.
-  - Go to [Domains](https://mailgun.com/app/domains) and select a domain which one you want to use or create a new one.
+  - [Sign up](https://mailgun.com/signup) or [Log in](https://mailgun.com/cp) to Mailgun.
+  - Go to [Domains](https://mailgun.com/app/domains) and select a domain you want to use or create a new domain.
   - On the selected domain's page you can grab the:
-    - `MAILGUN_DOMAIN`'s environment value (sandobox...mailgun.org)
+    - `MAILGUN_DOMAIN`'s environment value (sandbox...mailgun.org)
     - `MAILGUN_API_KEY`'s environment value (key-...)
 
-  With the free Mailgun account you can send 10,000 emails/month, 300 emails/day.
+  With the free Mailgun account, you can send 10,000 emails/month, 300 emails/day.
 
-  If you don't get the email check your spam folder and your mailgun log on `Logs` tab after you logged in.
+  If you don't get the email, check your spam folder and your Mailgun log on `Logs` tab after you logged in.
 website: https://github.com/bitrise-io/steps-email-with-mailgun
 source_code_url: https://github.com/bitrise-io/steps-email-with-mailgun
 support_url: https://github.com/bitrise-io/steps-email-with-mailgun/issues
@@ -99,7 +99,7 @@ inputs:
 - attachments: null
   opts:
     description: |
-      You can post multiple attachments separated with comma.
-      example: image1.jpg,image2.jpg,image3.jpg
+      You can post multiple attachments separated with commas.
+      For example: image1.jpg,image2.jpg,image3.jpg
     summary: ""
     title: File attachments
