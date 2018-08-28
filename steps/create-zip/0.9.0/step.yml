@@ -3,8 +3,7 @@ title: |
 summary: |
   Creates a ZIP from the given file/dir to the given destination.
 description: "Creates a ZIP from the given file/dir to the given destination. \nIt
-  stores symlinks as symlinks ( it will not copy the file which the symlink is pointing
-  ).\n"
+  stores symlinks as symlinks (it will not copy the file which the symlink is pointing to).\n"
 website: https://github.com/bitrise-steplib/steps-create-zip
 source_code_url: https://github.com/bitrise-steplib/steps-create-zip
 support_url: https://github.com/bitrise-steplib/steps-create-zip
