@@ -42,9 +42,9 @@ inputs:
 - export_method: auto-detect
   opts:
     description: "`auto-detect` option is **DEPRECATED** - use direct export methods!\n\nDescribes
-      how Xcode should export the archive.   \n\nIf you select `auto-detect` step
-      will figure out proper export method  \nbased on provisioning profile embedded
-      into the generated xcode archive."
+      how Xcode should export the archive.   \n\nIf you select `auto-detect`, the step
+      will figure out the proper export method  \nbased on the provisioning profile embedded
+      into the generated Xcode archive."
     is_required: true
     summary: ""
     title: Select method for export
@@ -94,12 +94,12 @@ inputs:
       - enterprise
       - development
 
-      If step doesn't find export method based on provisioning profile, development will be use.
+      If the step doesn't find an export method based on the provisioning profile, development will be used.
 
       Call `xcodebuild -help` for available export options.
     title: Custom export options plist content
 - opts:
-    description: If this input is set to `yes`, step will use legacy ipa export method.
+    description: If this input is set to `yes`, the step will use legacy ipa export method.
     is_required: true
     title: Use legacy ipa export method?
     value_options:
@@ -111,7 +111,7 @@ inputs:
     description: |-
       This input will be used if `use_legacy_export` is set to `"yes"`.
 
-      If this input is empty the step will use the embedded provisining profile.
+      If this input is empty, the step will use the embedded provisining profile.
     title: Specify Provisioning Profile name to use by export
 - opts:
     category: Debug
