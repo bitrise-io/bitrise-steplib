@@ -33,23 +33,23 @@ inputs:
     - debug
 - development_team: null
   opts:
-    description: The development team (Team ID) to use for code signing, __example:__
+    description: The development team (Team ID) to use for code signing, __for example,__
       `1MZX23ABCD4`
-    summary: The development team (Team ID) to use for code signing, __example:__
+    summary: The development team (Team ID) to use for code signing, __for example,__
       `1MZX23ABCD4`
     title: Development Team
 - code_sign_identity: null
   opts:
     description: "Code Signing Identity to use for signing.\n\nSpecify Code Signing
-      Identity as full ID ( __example:__ `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
-      \ \nor specify code sign group ( __example:__ `iPhone Developer` or `iPhone
+      Identity as full ID ( __for example,__ `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
+      \ \nor specify code sign group ( __for example,__ `iPhone Developer` or `iPhone
       Distribution` )."
     summary: Code Signing Identity to use for signing
     title: Code Signing Identity
 - automatic_provisioning: "no"
   opts:
     description: "Enable to allow Xcode to automatically manage provisioning profiles.\n\nIf
-      this input is set to: `yes` the `Provisioning Profile` input will be omitted,
+      this input is set to `yes`, the `Provisioning Profile` input will be omitted,
       \ \notherwise `Provisioning Profile` is required for iOS code signing."
     summary: Enable to allow Xcode to automatically manage provisioning profiles
     title: Enable to allow Xcode to automatically manage provisioning profiles
@@ -58,8 +58,8 @@ inputs:
     - "yes"
 - opts:
     description: "Provisioning Profile to be used for signing.\n\nUse Provisioning
-      Profile's UUID ( __example:__ `c5be4123-1234-4f9d-9843-0d9be985a068` )  \nor
-      specify Profile's name ( __example:__ `Bitrise development - (com.bitrise.cordovasample)`
+      Profile's UUID ( __for example,__ `c5be4123-1234-4f9d-9843-0d9be985a068` )  \nor
+      specify Profile's name ( __for example,__ `Bitrise development - (com.bitrise.cordovasample)`
       )."
     summary: Provisioning Profile to be used for signing
     title: Provisioning Profile
@@ -78,8 +78,8 @@ inputs:
 - keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
   opts:
     description: "Path to a binary file which can hold a set of keys.\n\nFor __remote
-      keystores__ you can provide any download location, example: `https://URL/TO/keystore.jks`.
-      \ \nFor __local keystores__ provide file path, example: `file://PATH/TO/keystore.jks`."
+      keystores__ you can provide any download location, for example, `https://URL/TO/keystore.jks`.
+      \ \nFor __local keystores__ provide file path, for example, `file://PATH/TO/keystore.jks`."
     summary: Path to a binary file which can hold a set of keys
     title: Keystore
 - keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
