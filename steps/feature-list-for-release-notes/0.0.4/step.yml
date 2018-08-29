@@ -64,12 +64,12 @@ outputs:
     description: |
       If the backlog_default_url is specified, each element is prefixed with the given URL.
 
-      for example https://example.com/PROJ-1
+      for example "https://example.com/PROJ-1"
     title: List of features derived from commits
 - EPICS_FROM_TAGS: null
   opts:
     description: |-
       If the backlog_default_url is specified, each element is prefixed with the given URL.
 
-      e.g. https://example.com/PROJ-1
+      for example "https://example.com/PROJ-1"
     title: List of epics with titles derived from tags
