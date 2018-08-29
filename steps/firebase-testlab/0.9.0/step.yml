@@ -1,7 +1,7 @@
 title: Firebase TestLab Android PRIVATE-BETA
 summary: Run your Android tests using Firebase TestLab
-description: Run your Android tests using Firebase TestLab, so your tests will run
-  faster and you'll receive more detailed test results.
+description: Run your Android tests using Firebase TestLab. As a result, your tests will run
+  faster and you will receive more detailed test results.
 website: https://github.com/bitrise-steplib/steps-firebase-testlab
 source_code_url: https://github.com/bitrise-steplib/steps-firebase-testlab
 support_url: https://github.com/bitrise-steplib/steps-firebase-testlab/issues
@@ -36,13 +36,13 @@ inputs:
     title: APK path
 - opts:
     description: |
-      One device configuration per line and the parameters are separated with "," in the order of: deviceID, version, language, orientation
+      One device configuration per line and the parameters are separated with "," in this order: deviceID, version, language, orientation
       For example:
       athene,23,en,portrait
       athene,23,en,landscape
     is_required: true
     summary: |
-      One device configuration per line and the parameters are separated with "," in the order of: "deviceID, version, language, orientation". For example: athene,23,en,portrait
+      One device configuration per line and the parameters are separated with "," in this order: "deviceID, version, language, orientation". For example: athene,23,en,portrait
     title: Test devices
   test_devices: athene,23,en,portrait
 - opts:
