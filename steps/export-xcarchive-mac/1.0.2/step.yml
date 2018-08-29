@@ -83,7 +83,7 @@ inputs:
       - enterprise
       - development
 
-      If step doesn't find export method based on provisioning profile, development will be use.
+      If the step doesn't find export method based on provisioning profile, development will be used.
 
       Call `xcodebuild -help` for available export options.
     title: Custom export options plist content
@@ -97,7 +97,7 @@ inputs:
   use_legacy_export: "no"
 - legacy_export_provisioning_profile_name: null
   opts:
-    description: If this input is empty xcodebuild will grab one of the matching installed
+    description: If this input is empty, xcodebuild will grab one of the matching installed
       provisining profile.
     title: Specify Provisioning Profile name to use by export
 - legacy_export_output_format: app
