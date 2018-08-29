@@ -3,7 +3,7 @@ summary: Dynamically generate a text file
 description: |-
   This step lets you generate a dynamic text file which can use any environment
   variables. The path of the file will be made available as
-  `$GENERATED_TEXT_FILE_PATH`. This script can e.g. be used to generate the Play
+  `$GENERATED_TEXT_FILE_PATH`. This script can be used, for example, to generate the Play
   Store's "What's New" file based on the Git commit message.
 website: https://github.com/nicolas-fricke/bitrise-step-generate-text-file
 source_code_url: https://github.com/nicolas-fricke/bitrise-step-generate-text-file
@@ -29,7 +29,7 @@ inputs:
   opts:
     is_expand: true
     is_required: true
-    summary: Add content for the text file here. You can also use all ENV variables.
+    summary: Add content for the text file here. You can also use all env vars.
     title: Content of the text file
 outputs:
 - GENERATED_TEXT_FILE_PATH: null
