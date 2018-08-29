@@ -1,7 +1,7 @@
 title: Flowdock Notification
 summary: This step posts a notification to your flow's inbox with the build status.
 description: |-
-  This is a step for posting a build status notifiction to Flowdock.
+  This is a step for posting a build status notification to Flowdock.
 
   In order to use this step, you must create a shortcut application in your
   Flowdock account's developer applications. From there create a source token
