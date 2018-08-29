@@ -1,16 +1,16 @@
 title: Features and epics list for release notes
 summary: |
-  Creates a list of features and gathered from git commits and tags using given pattern.
+  Creates a list of features gathered from git commits and tags using given pattern.
 description: |
-  Feature descriptions are derived from commit messages. List of the features is based on previous commits messages.
+  Feature descriptions are derived from commit messages. The list of features is based on previous commit messages.
 
-  The regex pattern to look for features is "<project_prefix>[0-9]{1,5}"
+  To look for features, use this regex pattern: "<project_prefix>[0-9]{1,5}"
 
   Epics are derived from tags.
 
-  The regex pattern to look for epics is "<project_prefix>[0-9]{1,5}_"
+  To look for epics, use this regex pattern: "<project_prefix>[0-9]{1,5}_"
 
-  An alternative use, would be to create links to appropriate features and epics in the backlog system using the <default_backlog_url> variable.
+  Alternatively, you can create links to the appropriate features and epics in the backlog system using the <default_backlog_url> variable.
 website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
 source_code_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features
 support_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features/issues
@@ -41,7 +41,7 @@ inputs:
     description: |
       Base URL for prefixing the features and epics.
 
-      e.g. "https://example.com/"
+      for example "https://example.com/"
 
       Can be empty.
     is_expand: true
@@ -51,7 +51,7 @@ inputs:
     description: |
       Project prefix to search for features and epics.
 
-      e.g. "PROJ-"
+      for example "PROJ-"
 
       Can be empty.
     is_expand: true
@@ -62,14 +62,14 @@ outputs:
 - FEATURES_FROM_COMMITS: null
   opts:
     description: |
-      If the backlog_default_url is specified, each element is prefixed with the given URL
+      If the backlog_default_url is specified, each element is prefixed with the given URL.
 
-      e.g. https://example.com/PROJ-1
+      for example https://example.com/PROJ-1
     title: List of features derived from commits
 - EPICS_FROM_TAGS: null
   opts:
     description: |-
-      If the backlog_default_url is specified, each element is prefixed with the given URL
+      If the backlog_default_url is specified, each element is prefixed with the given URL.
 
       e.g. https://example.com/PROJ-1
     title: List of epics with titles derived from tags
