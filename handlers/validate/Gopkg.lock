@@ -8,6 +8,7 @@
     "colorstring",
     "log",
     "parseutil",
+    "pathutil",
     "pointers"
   ]
   revision = "d1de0dbcb811588e61362aff67bb700b93c13c17"
@@ -33,6 +34,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "5871a1cac0427e818ed05524d73b34c9660f2791cdd075e9a44a64cef6cd3bcc"
+  inputs-digest = "debb664a1f7ca7a729ecaf9a044f68fb801568d2b09f78af90bb8385f282bab3"
   solver-name = "gps-cdcl"
   solver-version = 1

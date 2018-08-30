@@ -8,6 +8,7 @@ import (
 	"reflect"
 	"strings"
 
+	"github.com/bitrise-io/go-utils/pathutil"
 	"github.com/bitrise-tools/go-steputils/stepconf"
 	version "github.com/hashicorp/go-version"
 	yaml "gopkg.in/yaml.v2"
@@ -51,14 +52,19 @@ func (v *Validator) Validate() error {
 			return nil
 		}
 
+		// find out step id and version from path
+		vers := filepath.Base(filepath.Dir(path))
+		stepDir := filepath.Dir(filepath.Dir(path))
+		stepID := filepath.Base(stepDir)
+
+		if exists, err := pathutil.IsPathExists(filepath.Join(stepDir, "step-info.yml")); err == nil && exists {
+			return nil
+		}
+
 		files, err := ioutil.ReadDir(filepath.Dir(filepath.Dir(path)))
 		if err != nil {
 			return err
 		}
-
-		// find out step id and version from path
-		vers := filepath.Base(filepath.Dir(path))
-		stepID := filepath.Base(filepath.Dir(filepath.Dir(path)))
 
 		latestVersion, err := version.NewVersion("0.0.0")
 		if err != nil {
