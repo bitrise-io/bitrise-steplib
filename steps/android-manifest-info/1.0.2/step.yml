@@ -1,7 +1,7 @@
 title: Android Manifest Info
 summary: Extracts Android manifest attributes to environment variables.
 description: |-
-  Read Android manifest attriubtes from `AndroidManifest.xml` file,
+  Read Android manifest attributes from `AndroidManifest.xml` file,
   then export that data to environment variables prefixed with **AMI_**.
 
   After this you can use these environment variables in other steps.
