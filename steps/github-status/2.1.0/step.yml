@@ -19,10 +19,10 @@ inputs:
     description: |-
       Authorization token for GitHub applications
 
-      You can create one for yourself at the following url:
-      [https://github.com/settings/tokens](https://github.com/settings/tokens)
+      You can create one for yourself [here](https://github.com/settings/tokens).
+   
 
-      Add repo/repo:status scope to the generated token, to allow to update the repo status.
+      Add repo/repo:status scope to the generated token to allow to update the repo status.
     is_required: true
     summary: ""
     title: GitHub auth token
@@ -62,7 +62,7 @@ inputs:
     description: |-
       The state of the status.
 
-      If you select `auto` the step will send `success` status if the current build status is success (no step failed previously)
+      If you select `auto`, the step will send `success` status if the current build status is successful (no step failed previously)
       or `failure` status if the build previously failed.
     summary: ""
     title: Set Specific Status

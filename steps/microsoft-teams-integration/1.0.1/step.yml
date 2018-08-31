@@ -1,8 +1,8 @@
 title: Microsoft Teams Integration
-summary: Allows you to recieve build status updates on Microsoft Team using Incoming
+summary: Allows you to receive build status updates on Microsoft Team using Incoming
   Webhooks
 description: |
-  Uses Incoming Webhooks feature in Microsft Teams to send updates on your builds
+  Uses the Incoming Webhooks feature in Microsoft Teams to send updates on your builds.
 website: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
 source_code_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
 support_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration/issues

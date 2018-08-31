@@ -55,7 +55,7 @@ inputs:
       Used for Xcode version 7 and above.
 
       Specifies a custom export options plist content that configures archive exporting.
-      If empty, step generates these options based on provisioning profile,
+      If empty, the step generates these options based on provisioning profile,
       with default values.
 
       Auto generated export options available for export methods:
@@ -65,7 +65,7 @@ inputs:
       - enterprise
       - development
 
-      If step doesn't find export method based on provisioning profile, development will be use.
+      If the step doesn't find an export method based on the provisioning profile(s), the development method will be used.
 
       Call `xcodebuild -help` for available export options.
     title: Custom export options plist content
@@ -89,12 +89,12 @@ inputs:
   opts:
     category: xcodebuild configs
     description: |
-      (optional) The configuration to use. By default your Scheme
+      (optional) The configuration to use. By default, your Scheme
       defines which configuration (Debug, Release, ...) should be used,
       but you can overwrite it with this option.
       **Make sure that the Configuration you specify actually exists
-      in your Xcode Project**. If it does not, if you have a typo
-      in the value of this input Xcode will simply use the Configuration
+      in your Xcode Project**. If it does not (for example, if you have a typo
+      in the value of this input) Xcode will simply use the Configuration
       specified by the Scheme and will silently ignore this parameter!
     summary: ""
     title: Configuration name
@@ -120,7 +120,7 @@ inputs:
     description: |-
       Used for Xcode version 8 and above.
 
-      Force xcodebuild to use specified Developer Portal team during archive.
+      Force xcodebuild to use the specified Developer Portal team during archive.
 
       Format example:
 
@@ -130,14 +130,14 @@ inputs:
   opts:
     category: force archive codesign settings
     description: |-
-      Force xcodebuild to use specified Code Sign Identity.
+      Force xcodebuild to use the specified Code Signing Identity.
 
-      Specify code sign identity as full ID (e.g. `Mac Developer: Bitrise Bot (VV2J4SV8V4)`)
-      or specify code sign group ( `Mac Developer` or `Mac Distribution` ).
+      Specify code signing identity as full ID (e.g. `Mac Developer: Bitrise Bot (VV2J4SV8V4)`)
+      or specify code signing group ( `Mac Developer` or `Mac Distribution` ).
 
-      You also have to **specify the Identity in the format it's stored in Xcode project settings**,
+      You also have to **specify the Identity in the format it's stored in the Xcode project settings**,
       and **not how it's presented in the Xcode.app GUI**!
-      **Capitalization also matters**, `Mac Distribution` works but `mac distribution` does not!
+      **The input is case sensitive**: `Mac Distribution` works but `mac distribution` does not!
     title: Force code signing with Identity
 - force_provisioning_profile_specifier: null
   opts:
@@ -145,7 +145,7 @@ inputs:
     description: |-
       Used for Xcode version 8 and above.
 
-      Force xcodebuild to use specified Provisioning Profile.
+      Force xcodebuild to use the specified Provisioning Profile.
 
       How to get your Provisioning Profile Specifier:
 

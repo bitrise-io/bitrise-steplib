@@ -1,6 +1,6 @@
 title: Flutter
 summary: |
-  Executes one or more Flutter commands. E.g. build, test or install.
+  Executes one or more Flutter commands, for example, `build`, `test` or `install`.
 website: https://github.com/DroidsOnRoids/bitrise-step-flutter
 source_code_url: https://github.com/DroidsOnRoids/bitrise-step-flutter
 support_url: https://github.com/DroidsOnRoids/bitrise-step-flutter/issues
@@ -35,7 +35,7 @@ inputs:
 - opts:
     is_expand: true
     is_required: true
-    summary: Flutter version including channel. Without `v` prefix. E.g. `0.2.8-alpha`
+    summary: Flutter version including channel. Without `v` prefix. For example, `0.2.8-alpha`
       or `0.3.0-dev`.
     title: Flutter version
   version: 0.4.4-beta
@@ -51,5 +51,5 @@ inputs:
     is_expand: true
     is_required: true
     summary: |
-      `|` separated Flutter commands to be executed in order. E.g. `build`, `test` or `install`.
+      `|` separated Flutter commands to be executed in order. For example, `build`, `test` or `install`.
     title: Flutter commands to be executed

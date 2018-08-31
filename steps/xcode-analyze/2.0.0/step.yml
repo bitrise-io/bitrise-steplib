@@ -39,7 +39,7 @@ inputs:
 - opts:
     description: |
       Working directory of the step.
-      You can leave it empty to don't change it.
+      You can leave it empty to leave the working directory unchanged.
     is_expand: true
     is_required: false
     summary: ""
@@ -78,21 +78,21 @@ inputs:
 - force_code_sign_identity: null
   opts:
     description: |-
-      Force xcodebuild to use specified Code Sign Identity.
+      Force xcodebuild to use specified Code Signing Identity.
 
-      Specify code sign identity as full ID (e.g. `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
-      or specify code sign group ( `iPhone Developer` or `iPhone Distribution` ).
+      Specify code signing identity as full ID (e.g. `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
+      or specify code signing group ( `iPhone Developer` or `iPhone Distribution` ).
     title: Force code signing with Identity
 - force_provisioning_profile: null
   opts:
     description: |-
       Force xcodebuild to use specified Provisioning Profile.
 
-      Use Provisioning Profile's UUID, profile's name is not acceptable by xcodebuild.
+      Use Provisioning Profile's UUID. The profile's name is NOT accepted by xcodebuild.
 
       How to get your UUID:
 
-      - In xcode select your project -> Build Settings -> Code Signing
+      - In Xcode select your project -> Build Settings -> Code Signing
       - Select the desired Provisioning Profile, then scroll down in profile list and click on Other...
       - The popup will show your profile's UUID.
 

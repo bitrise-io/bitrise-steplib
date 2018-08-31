@@ -1,6 +1,6 @@
 title: Web Translate It
-summary: Install web translate it and perform a pull operation.
-description: This step runs a `wti pull` after installing the web translate it gem.
+summary: Install WebTranslateIt and perform a pull operation.
+description: This step runs a `wti pull` after installing the WebTranslateIt gem.
   You need an account on https://webtranslateit.com to be able to run this step.
 website: https://github.com/mAu888/steps-wti
 source_code_url: https://github.com/mAu888/steps-wti

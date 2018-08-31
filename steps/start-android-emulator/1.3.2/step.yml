@@ -47,8 +47,8 @@ inputs:
     is_required: true
     title: Android sdk path
 - opts:
-    description: If this option is false, the step will not wait for the emulator
-      to finish boot
+    description: If this option is set to false, the step will not wait for the emulator
+      to finish booting.
     is_required: true
     title: Wait for emulator boot
     value_options:
@@ -58,13 +58,13 @@ inputs:
 - boot_timeout: "1600"
   opts:
     description: |
-      Maximum time to wait for emulator to boot.
+      Maximum time to wait for the emulator to boot.
     is_required: true
-    summary: Maximum time to wait for emulator to boot
+    summary: Maximum time to wait for the emulator to boot
     title: Waiting timeout (secs)
 - opts:
     description: |-
-      This options is deprecated please use `emulator_options` instead.
+      This is deprecated. Please use `emulator_options` instead.
 
       Options added to the end of the emulator call.
 

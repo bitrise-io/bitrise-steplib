@@ -71,22 +71,22 @@ inputs:
 - ios_build_command_custom_options: null
   opts:
     category: Debug
-    description: These options will be append to the end of the iOS build command.
+    description: These options will be appended to the end of the iOS build command.
     title: Options to append to the iOS build command
 - android_build_command_custom_options: null
   opts:
     category: Debug
-    description: These options will be append to the end of the Android build command.
+    description: These options will be appended to the end of the Android build command.
     title: Options to append to the Android build command
 - opts:
     category: Debug
-    description: These options will be append to the end of the tvOS build command.
+    description: These options will be appended to the end of the tvOS build command.
     title: Options to append to the tvOS build command
   tvos_build_command_custom_options: null
 - macos_build_command_custom_options: null
   opts:
     category: Debug
-    description: These options will be append to the end of the macOS build command.
+    description: These options will be appended to the end of the macOS build command.
     title: Options to append to the macOS build command
 outputs:
 - BITRISE_APK_PATH: ""

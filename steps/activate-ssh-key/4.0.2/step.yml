@@ -1,15 +1,15 @@
 title: Activate SSH key (RSA private key)
 summary: Setup the SSH Key to use with the current workflow
 description: |-
-  Saves the provided **RSA private SSH key** to file
+  This step saves the provided **RSA private SSH key** to a file
   and then loads it into the user's ssh-agent with `ssh-add`.
 
-  **The key should not have a passphrase** (should have an empty passphrase).
+  **The SSH key should not have a passphrase but an empty passphrase**.
 
   *Warning: the provided key will overwrite an existing key at
-  the provided path (if another key at the path already exists).*
+  the specified path (if another key at the path already exists).*
 
-  It will start the ssh-agent if it can't connect to the agent.
+  The step will start the ssh-agent if it can't connect to the agent.
 website: https://github.com/bitrise-io/steps-activate-ssh-key
 source_code_url: https://github.com/bitrise-io/steps-activate-ssh-key
 support_url: https://github.com/bitrise-io/steps-activate-ssh-key/issues
@@ -45,7 +45,7 @@ inputs:
 - is_remove_other_identities: "true"
   opts:
     description: |-
-      (Optional) Remove other, previously loaded keys and restart ssh-agent?
+      (Optional) Remove other or previously loaded keys and restart the ssh-agent?
 
       Options:
 
@@ -71,8 +71,8 @@ outputs:
 - SSH_AUTH_SOCK: null
   opts:
     description: |-
-      If the `is_should_start_new_agent` option is enabled the no accessible
-      ssh-agent if found this Step will start a new ssh-agent.
+      If the `is_should_start_new_agent` option is enabled, and no accessible
+      ssh-agent is found, the step will start a new ssh-agent.
 
       This output environment variable will contain the path of the
       SSH Auth Socket, which can be used to access the started ssh-agent.

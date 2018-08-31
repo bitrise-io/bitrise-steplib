@@ -1,12 +1,12 @@
 title: Generate Changelog
 summary: Generates changelog based on git commits
 description: |-
-  Genereates changelog based on git commits.
+  Generates changelog based on git commits.
 
   The step collects commits since the latest tag.
 
-  In case of first tag, the commits are from the first commit till the new version.
-  In other cases the first commit is the first commit after the previous tag.
+  In the case of the first tag, the commits are from the first commit, till there is a new version.
+  In other cases, the first commit is the first commit after the previous tag.
 website: https://github.com/bitrise-steplib/steps-generate-changelog
 source_code_url: https://github.com/bitrise-steplib/steps-generate-changelog
 support_url: https://github.com/bitrise-steplib/steps-generate-changelog/issues

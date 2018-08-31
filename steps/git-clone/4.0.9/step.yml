@@ -3,10 +3,10 @@ summary: Clone a repository to the specified path on the VM
 description: |
   Clones a repository based on the provided inputs.
 
-  If `pull_request_id` is provided then all other git checkout parameters will be ignored.
-  If a git commit is provided it will ignore the tag and branch parameters.
-  If no git commit but a tag is provided then it will ignore the branch parameter.
-  If no `branch` parameter is provided then it'll skip `git checkout`.
+  If a `pull_request_id` is provided, then all other git checkout parameters will be ignored.
+  If a git commit is provided, it will ignore the tag and the branch parameters.
+  If a tag is provided instead of a git commit, then it will ignore the branch parameter.
+  If no `branch` parameter is provided, then it'll skip the `git checkout`.
 website: https://github.com/bitrise-io/steps-git-clone
 source_code_url: https://github.com/bitrise-io/steps-git-clone
 support_url: https://github.com/bitrise-io/steps-git-clone/issues
@@ -60,7 +60,7 @@ inputs:
   opts:
     category: Clone Config
     is_dont_change_value: true
-    title: Destination git Branch. Used for pull requests
+    title: Destination git Branch, used for pull requests
 - opts:
     category: Clone Config
     is_dont_change_value: true
@@ -90,7 +90,7 @@ inputs:
     category: Debug
     description: |-
       Limit fetching to the specified number of commits.
-      The value should be a decimal number, example: `10`.
+      The value should be a decimal number, for example `10`.
     title: Limit fetching to the specified number of commits
 - build_url: $BITRISE_BUILD_URL
   opts:
@@ -141,7 +141,7 @@ outputs:
     description: |-
       Count will only work properly if no `--depth` option is set.
 
-      If `--depth` is set then the history truncated to the specified number of commits. Count will **not** fail but will be the clone depth.
+      If `--depth` is set, then the history truncated to the specified number of commits. Count will **not** fail but will be the clone depth.
     title: Cloned git commit counts
 - GIT_CLONE_COMMIT_AUTHOR_NAME: null
   opts:

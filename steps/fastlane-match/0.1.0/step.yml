@@ -47,7 +47,7 @@ inputs:
   opts:
     description: |-
       The private git repository url where you have your
-      encrypted certificates and profiles
+      encrypted certificates and profiles.
     is_required: true
     summary: ""
     title: Match git url
@@ -63,7 +63,7 @@ inputs:
     description: |-
       The App's *ID* on Apple Developer Account.
 
-      This is sometimes refered as Bundle ID
+      This is sometimes referred to as Bundle ID.
     is_required: true
     summary: ""
     title: App ID
@@ -89,7 +89,7 @@ inputs:
     description: |
       Path to the Gemfile which contains `fastlane` gem.
 
-      If Gemfile not exist or does not contain fastlane gem:
+      If Gemfile does not exist or does not contain fastlane gem:
 
       - if `fastlane_version` input not specified, latest version will be used
     title: Gemfile path

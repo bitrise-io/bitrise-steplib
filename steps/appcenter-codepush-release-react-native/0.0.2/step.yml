@@ -2,7 +2,7 @@ title: AppCenter CodePush Release React Native
 summary: |
   Release a React Native update to AppCenter CodePush
 description: |
-  Utilise appcenter-cli command appcenter codepush release-react to release an update
+  Use the appcenter-cli command, `appcenter codepush release-react`, to release an update.
 website: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
 source_code_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
 support_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native/issues
@@ -47,19 +47,19 @@ inputs:
 - api_token: $APPCENTER_API_TOKEN
   opts:
     description: |
-      AppCenter API Token can be obtained from [here]](https://appcenter.ms/settings/apitokens).
-      New API Token > Enter a description for the token > Select Full Access > Add New API Token
+      You can get the AppCenter API Token from [here](https://appcenter.ms/settings/apitokens).
+      Select New API Token. Enter a description for the token and select `Full Access`. Click `Add New API Token`.
     is_required: true
     title: AppCenter API Token
 - deployment: Staging
   opts:
     description: |
-      This specifies which deployment you want to release the update to. This defaults to Staging, but when you're ready to deploy to Production, or one of your own custom deployments, just explicitly set this argument. See [here](https://docs.microsoft.com/en-us/appcenter/distribution/codepush/cli#deployment-name-parameter) for details.
+      This specifies which deployment you want to release the update to. This defaults to Staging, but when you're ready to deploy to Production, or to one of your own custom deployments, just explicitly set this argument. For more details, head over [here](https://docs.microsoft.com/en-us/appcenter/distribution/codepush/cli#deployment-name-parameter).
     is_required: true
     title: Deployment
 - options: null
   opts:
     description: |
-      Any extra options that you would like to concat to the release-react command. Eg. "-m --disable-duplicate-release-error"
+      Any extra options that you would like to add to the release-react command. Eg. "-m --disable-duplicate-release-error"
     is_required: false
     title: Extra Options

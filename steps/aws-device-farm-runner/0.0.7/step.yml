@@ -1,7 +1,7 @@
 title: Amazon Device Farm Runner
 summary: Amazon Device Farm Runner
-description: Deploys app to device farm and starts a test run. [Please see the wiki
-  for setup instructions](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/wiki).
+description: Deploys app to device farm and starts a test run. Please see the wiki
+  for [setup instructions](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/wiki).
 website: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner
 source_code_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner
 support_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/issues
@@ -55,7 +55,7 @@ inputs:
 - billing_method: METERED
   opts:
     description: This step specifies the billing method for your test run. Use `METERED`
-      for free tier and pay-as-you-go billing, and `UNMETERED` to use [pre-paid device
+      for free tier and for pay-as-you-go billing, and `UNMETERED` for [pre-paid device
       slots](https://docs.aws.amazon.com/devicefarm/latest/developerguide/how-to-purchase-device-slots.html).
     is_required: false
     summary: ""
@@ -141,7 +141,7 @@ inputs:
 - filter: ""
   opts:
     description: This step adds the opportunity to filter your tests. For example
-      com.android.abc.test1. [See the ScheduleRunTest.filter documentation](https://docs.aws.amazon.com/devicefarm/latest/APIReference/API_ScheduleRunTest.html#devicefarm-Type-ScheduleRunTest-filter).
+      com.android.abc.test1. See the [ScheduleRunTest.filter documentation](https://docs.aws.amazon.com/devicefarm/latest/APIReference/API_ScheduleRunTest.html#devicefarm-Type-ScheduleRunTest-filter).
     is_required: false
     summary: ""
     title: Test Filter
@@ -188,16 +188,15 @@ inputs:
 - aws_region: $AWS_REGION
   opts:
     description: |
-      If you want to specify a different AWS region. Leave
-      empty to use the default config/env setting.
+      Specify a different AWS region or use the default config/env setting.
     summary: ""
     title: AWS Region
 - opts:
     description: |-
       If set to true, the script waits for the test run to complete on
       Device farm before returning success/failure. This will slow down your
-      Bitrise runs, however allows you to make decisions in subsequent steps
-      based on success/failure of the tests.
+      Bitrise runs, but allows you to make decisions in subsequent steps
+      based on the success/failure of the tests.
     title: Whether or not to wait for the test results from device farm
     value_options:
     - "true"
@@ -206,9 +205,9 @@ inputs:
 - opts:
     description: |-
       Depending on your tests, you may or may not wish to fail the step if
-      Device farm returns a WARNED result. Only takes effect if
+      Device farm returns a `WARNED` result. Only takes effect if
       `run_wait_for_results` is also enabled.
-    title: Fail if the device farm results return result of WARNED
+    title: Fail if the device farm results return result of `WARNED`
     value_options:
     - "true"
     - "false"

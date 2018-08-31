@@ -1,28 +1,28 @@
-title: Deploy to iTunes Connect / TestFlight (with Shenzhen)
-summary: Deploy to iTunes Connect / TestFlight (with Shenzhen)
+title: Deploy to iTunes Connect/TestFlight (with Shenzhen)
+summary: Deploy to iTunes Connect/TestFlight (with Shenzhen)
 description: |-
-  Deploy to iTunes Connect / TestFlight, using the
+  Deploy to iTunes Connect/TestFlight, using the
   fantastic [Shenzhen](https://github.com/nomad/shenzhen)
   Ruby gem.
 
   **If this is the very first build** of the app
-  you try to deploy to iTunes Connect / TestFlight then you might want to upload the first
-  build manually to make sure it fulfills the initial iTunes Connect / TestFlight submission
+  you try to deploy to iTunes Connect/TestFlight, then you might want to upload the first
+  build manually to make sure it fulfills the initial iTunes Connect/TestFlight submission
   verification process.
 
-  **Be advised** that this
+  **Note* that this
   step uses a well maintained, open source tool which
   uses *undocumented and unsupported APIs* (because the current
-  iTunes Connect / TestFlight platform does not have a documented and supported API)
+  iTunes Connect/TestFlight platform does not have a documented and supported API)
   to perform the deployment.
   This means that when the API changes
   **this step might fail until the tool is updated**.
 
   ## Setup guide and notes
 
-  * Register an app on iTunes Connect / TestFlight, on the **My Apps** page. Click on the *plus sign* and select the **New iOS App** option. This requires an **admin** account.
-  * Requires an **App Store iOS distibution Provisioning Profile**
-  * Every build which you want to push to iTunes Connect / TestFlight have to have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*)
+  * Register an app on the **My Apps** page of iTunes Connect/TestFlight. Click on the *plus sign* and select the **New iOS App** option. This requires an **admin** account.
+  * Requires an **App Store iOS distibution Provisioning Profile**.
+  * Every build which you want to push to iTunes Connect/TestFlight must have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*)
 website: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen
 source_code_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen
 support_url: https://github.com/bitrise-io/steps-deploy-to-itunesconnect-shenzhen/issues
@@ -48,7 +48,7 @@ run_if: ""
 inputs:
 - ipa_path: $BITRISE_IPA_PATH
   opts:
-    description: Path of the IPA file, to be deployed to iTunes Connect
+    description: Path of the IPA file to be deployed to iTunes Connect
     is_expand: true
     is_required: true
     summary: ""
@@ -86,8 +86,8 @@ inputs:
       The App's *Apple ID* on iTunes Connect.
 
       Open the **App's page on iTunes Connect**,
-      click on **More**, click on *About this app*,
-      copy the *Apple ID*'s value from here (numeric, like 846814360)
+      click **More**, click *About this app*, and
+      copy the *Apple ID*'s value from here (numeric value, for example 846814360)
     is_expand: true
     is_required: true
     summary: ""

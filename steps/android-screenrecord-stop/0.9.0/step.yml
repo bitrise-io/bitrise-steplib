@@ -1,8 +1,8 @@
 title: Android Screenrecord Stop
-summary: Stop an Android device's screen recording and pulls the recorded video under
-  BITRISE_DEPLOY_DIR
-description: Stop an Android device's screen recording and pulls the recorded video
-  under BITRISE_DEPLOY_DIR
+summary: This step stops the screen recording of an Android device and pulls the recorded video into
+  `BITRISE_DEPLOY_DIR`.
+description: This step stops the screen recording of an Android device and pulls the recorded video into
+  `BITRISE_DEPLOY_DIR`.
 website: https://github.com/bitrise-steplib/steps-android-screenrecord-stop
 source_code_url: https://github.com/bitrise-steplib/steps-android-screenrecord-stop
 support_url: https://github.com/bitrise-steplib/steps-android-screenrecord-stop/issues
@@ -40,12 +40,12 @@ inputs:
   record_id: $BITRISE_RECORD_ID
 - opts:
     description: Remove sequentially duplicate frames with FFmpeg by dropping frames
-      that do not differ greatly from the previous frame in order to reduce frame
+      that do not differ greatly from the previous frame to reduce frame
       rate, video length and file size.
     is_expand: true
     is_required: true
     summary: Remove sequentially duplicate frames with FFmpeg by dropping frames that
-      do not differ greatly from the previous frame in order to reduce frame rate,
+      do not differ greatly from the previous frame to reduce frame rate,
       video length and file size.
     title: Remove Duplicate Frames
     value_options:

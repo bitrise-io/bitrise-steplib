@@ -21,7 +21,7 @@ inputs:
 
       Create your own token: https://github.com/settings/tokens
 
-      The following scopes needs to be enabled for the token:
+      The following scope needs to be enabled for the token:
 
       - repo/public_repo
     is_required: true
@@ -71,10 +71,10 @@ inputs:
     title: Release body
 - draft: true
   opts:
-    description: '`yes` to create a draft (unpublished) release, `no` to create a
+    description: Select '`yes` to create a draft (unpublished) release and `no` to create a
       published one.'
     is_required: true
-    summary: If `no` selected the release will be published.
+    summary: If `no` is selected, the release will be published.
     title: Draft
     value_options:
     - "yes"
@@ -82,7 +82,7 @@ inputs:
 - files_to_upload: null
   opts:
     description: |-
-      One file path per line to upload to the release assets section. Optionally you can use a `|` separator at the end of the path
+      One file path per line to upload to the release assets section. Optionally, you can use a `|` separator at the end of the path
       to set the uploaded file's name.
 
       Example to use the file's __original name__:

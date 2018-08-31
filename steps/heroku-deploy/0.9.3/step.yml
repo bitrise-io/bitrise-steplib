@@ -40,7 +40,7 @@ inputs:
       your Terminal/Command Line, if you have the [Heroku Toolbelt](https://toolbelt.heroku.com) installed,
       or you can follow the [official guide on Heroku](https://devcenter.heroku.com/articles/platform-api-quickstart).
 
-      **Security**: instead of specifying the api token here, you should
+      **Security**: instead of specifying the API token here, you should
       set it in your Bitrise Secrets! If you don't change the default
       value of this input, you can simply specify the value for the
       key: `HEROKU_API_TOKEN`.

@@ -2,7 +2,7 @@ title: Telegram Notifier
 summary: |
   Notify Telegram groups about build status
 description: |
-  This plugin let's you notify about build status on your Telegram groups
+  This step lets you notify your Telegram groups about Bitrise build statuses.
 website: https://github.com/munirwanis/bitrise-step-telegram-notifier
 source_code_url: https://github.com/munirwanis/bitrise-step-telegram-notifier
 support_url: https://github.com/munirwanis/bitrise-step-telegram-notifier/issues

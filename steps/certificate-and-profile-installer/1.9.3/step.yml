@@ -44,7 +44,7 @@ inputs:
       specified, separated by a pipe (`|`) character.
 
       You can specify a local path as well, using the `file://` scheme.
-      Example: `file://./Cert.p12`
+      For example `file://./Cert.p12`
     title: Certificate URL
 - certificate_passphrase: $BITRISE_CERTIFICATE_PASSPHRASE
   opts:
@@ -52,7 +52,7 @@ inputs:
       Certificate passphrase. Multiple passphrases can be
       specified, separated by a pipe (`|`) character.
 
-      Specified Certificate passphrase count should match the count of the certificate urls.
+      Specified Certificate passphrase count should match the count of the certificate URLs.
 
       Format example:
 
@@ -67,7 +67,7 @@ inputs:
       specified, separated by a pipe (`|`) character.
 
       You can specify a local path as well, using the `file://` scheme.
-      Example: `file://./BuildAnything.mobileprovision`
+      For example `file://./BuildAnything.mobileprovision`
     title: Provisioning profile URL
   provisioning_profile_url: $BITRISE_PROVISION_URL
 - keychain_path: $HOME/Library/Keychains/login.keychain
@@ -95,7 +95,7 @@ inputs:
       URL of the default certificate.
 
       You can specify a local path as well, using the `file://` scheme.
-      Example: `file://./Cert.p12`
+      For example `file://./Cert.p12`
     title: Default Certificate URL
 - default_certificate_passphrase: $BITRISE_DEFAULT_CERTIFICATE_PASSPHRASE
   opts:
@@ -110,5 +110,5 @@ inputs:
       URL of the default provisioning profile to download.
 
       You can specify a local path as well, using the `file://` scheme.
-      Example: `file://./BuildAnything.mobileprovision`
+      For example `file://./BuildAnything.mobileprovision`
     title: Default Provisioning profile URL

@@ -1,7 +1,7 @@
 title: Generate Gradle Wrapper
-summary: Generates Gradle Wraper if not exists
+summary: Generates Gradle Wrapper if it doesn't already exist
 description: |-
-  Generates Gradle Wraper if not exists.
+  Generates Gradle Wrapper if it doesn't already exist.
 
   The gradlew file will be generated into the same directory where your root build.gradle file exists.
 website: https://github.com/bitrise-steplib/steps-generate-gradle-wrapper

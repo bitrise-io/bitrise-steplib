@@ -8,8 +8,8 @@ description: |-
   and create an app to utilize this step.
   You also need to create a *HockeyApp Token* for your app.
 
-  If app_id is provided the apk will be upload to the specified app on HockeyApp,
-  otherwise HockeyApp will decide based on the package ID, if it's a new app, or update.
+  If an `app_id` is provided, the APK file will be uploaded to the specified app on HockeyApp. 
+  Otherwise HockeyApp will decide whether it's a new app or an update to an existing app based on the package ID.
 website: https://github.com/bitrise-io/steps-hockeyapp-android-deploy
 source_code_url: https://github.com/bitrise-io/steps-hockeyapp-android-deploy
 support_url: https://github.com/bitrise-io/steps-hockeyapp-android-deploy/issues
@@ -66,7 +66,7 @@ inputs:
 - api_token: ""
   opts:
     description: |-
-      Note: different access types exist when obtaining a api_token on your account page.
+      Note: different access types exist when obtaining an api_token on your account page.
 
       ## Where to get the HockeyApp API Token?
 

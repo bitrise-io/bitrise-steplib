@@ -1,8 +1,8 @@
 title: Android SDK Update
 summary: |-
-  Need to install or update a packge from Android SDK Manager?
-  Use this Step to install and update them as you wish!
-description: Install the necessary sdk tools to compile your application
+  Need to install or update a package from Android SDK Manager?
+  Use this step to install and update them as you wish!
+description: Install the necessary sdk tools to compile your application.
 website: https://github.com/guitcastro/steps-update-sdk
 source_code_url: https://github.com/guitcastro/steps-update-sdk
 support_url: https://github.com/guitcastro/steps-update-sdk/issues

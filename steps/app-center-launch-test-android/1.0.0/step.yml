@@ -39,7 +39,7 @@ inputs:
 - app_path: $BITRISE_APK_PATH
   opts:
     description: |
-      App file path, for example to an APK file for Android.
+      App file path, for example, to an APK file for Android.
     is_expand: true
     is_required: true
     summary: ""
@@ -58,5 +58,5 @@ inputs:
       Create API token using cli "appcenter tokens create".
     is_expand: true
     is_required: true
-    summary: App Ceneter APK token with access to app specified in app_center_app
+    summary: App Center APK token with access to app specified in app_center_app
     title: App Center API token

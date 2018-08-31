@@ -1,14 +1,14 @@
 title: Publish to Appaloosa Store
 summary: This step allows you to publish your application to your private app store
-  on Appaloosa Store
+  on Appaloosa Store.
 description: |
-  Bitrise Step to Deploy an iOS .ipa or Android .apk to Appaloosa-Store.
+  This Bitrise Step deploys an iOS .ipa or an Android .apk to Appaloosa-Store.
 
   Required:
-    For iOS: an Xcode Archive Step should run before this Step!
-    For Android: an apk should exist
+    For iOS: an Xcode Archive Step must run before this Step.
+    For Android: an apk must exist.
 
-  This step requires an Appaloosa-Store account or an email address to create your account
+  This step requires an Appaloosa-Store account or an email address to create your account.
 website: https://www.appaloosa-store.com
 source_code_url: https://github.com/appaloosa-store/bitrise_appaloosa
 support_url: https://github.com/appaloosa-store/bitrise_appaloosa/issues
@@ -35,7 +35,7 @@ run_if: ""
 inputs:
 - bitrise_ipa_path: $BITRISE_IPA_PATH
   opts:
-    description: This is the path to your binary on Bitrise
+    description: This is the path to your binary on Bitrise.
     is_dont_change_value: false
     is_expand: true
     is_required: true
@@ -49,30 +49,30 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: If you don't have an account we'll automatically create one for you.
-      At the end of the step you'll receive an email with your credentials to access
+    summary: If you don't have an account, we'll automatically create one for you.
+      At the end of the step, you'll receive an email with your credentials to access
       your store, and install your application. For all future runs of this step,
-      remove your email address and setup this step as a registered user.
+      remove your email address and set up this step as a registered user.
     title: User Email Address
   user_email: null
 - appaloosa_api_key: null
   opts:
-    description: '***Only if you are already registered on Appaloosa***'
+    description: '***Only if you are already registered on Appaloosa.***'
     is_dont_change_value: false
     is_expand: true
     is_required: false
     summary: This is your unique Appaloosa API Key that can be found in your user's
-      profile on Appaloosa
+      profile on Appaloosa.
     title: User API Key
 - opts:
     description: |-
-      ***Only if you are already registered on Appaloosa***
+      ***Only if you are already registered on Appaloosa.***
 
-      This is the store id of the store you want your application uploaded to.
+      This is the store ID of the store where you want your application to upload to.
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: You can find this value in your store settings
+    summary: You can find this value in your store settings.
     title: Store ID
   store_id: null
 - opts:
@@ -80,7 +80,7 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: Enter the url of your first screenshot
+    summary: Enter the url of your first screenshot.
     title: SCREENSHOT 1
   screenshot1: null
 - opts:
@@ -88,7 +88,7 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: Enter the url of your second screenshot
+    summary: Enter the url of your second screenshot.
     title: SCREENSHOT 2
   screenshot2: null
 - opts:
@@ -96,7 +96,7 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: Enter the url of your third screenshot
+    summary: Enter the url of your third screenshot.
     title: SCREENSHOT 3
   screenshot3: null
 - opts:
@@ -104,7 +104,7 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: Enter the url of your fourth screenshot
+    summary: Enter the url of your fourth screenshot.
     title: SCREENSHOT 4
   screenshot4: null
 - opts:
@@ -112,7 +112,7 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: Enter the url of your fifth screenshot
+    summary: Enter the url of your fifth screenshot.
     title: SCREENSHOT 5
   screenshot5: null
 - description: null
@@ -121,8 +121,8 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: This is the description for your application. You can have a different
-      description for each version for your application.
+    summary: This is the description of your application. You can have a different
+      description for each version of your application.
     title: Description
 - changelog: null
   opts:
@@ -130,15 +130,15 @@ inputs:
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: This is the changelog for your application. You can have a different
-      changelog for each version for your application.
+    summary: This is the changelog of your application. You can have a different
+      changelog for each version of your application.
     title: Changelog
 - group_ids: null
   opts:
     description: |-
       ***Only for registered users. ***
 
-      Groups ids of the groups you want your application published to. If you do not specify at least one group id, you will have to change the visibility directly on Appaloosa website.
+      Groups IDs of the groups you want your application to be published to. If you do not specify at least one group id, you will have to change the visibility directly on Appaloosa website.
     is_dont_change_value: false
     is_expand: true
     is_required: false

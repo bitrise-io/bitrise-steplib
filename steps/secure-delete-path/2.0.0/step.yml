@@ -2,8 +2,8 @@ title: Secure Delete a given path
 summary: Delete a file or a folder. You can even use sudo to do so.
 description: |
   Calls 'rm -rfP the-path' to securely delete the given file or folder.
-  From the OS X rm man documentation (https://developer.apple.com/library/mac/documentation/Darwin/Reference/Manpages/man1/rm.1.html):
-  Option -P: Overwrite regular files before deleting them.  Files are overwritten three times, first
+  
+  The option -P overwrites regular files before deleting them.  Files are overwritten three times, first
   with the byte pattern 0xff, then 0x00, and then 0xff again, before they are deleted.
 website: https://github.com/bitrise-io/steps-secure-delete-path
 source_code_url: https://github.com/bitrise-io/steps-secure-delete-path

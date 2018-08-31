@@ -2,17 +2,17 @@ title: Open STF Connect
 summary: |
   Connects with devices from Open Smartphone Test Farm
 description: |
-  To use this step, you need an access to running [Open STF](https://openstf.io/) instance with at least 1 device connected.
-  [Access token](https://github.com/openstf/stf/blob/master/doc/API.md#authentication) and ADB keys has to be set up using STF web UI.
-  Typical workflow:
+  To use this step, you need access to running [Open STF](https://openstf.io/) instance with at least one device connected.
+  [Access token](https://github.com/openstf/stf/blob/master/doc/API.md#authentication) and ADB keys have to be set up using STF web UI.
+  A typical workflow looks like this:
 
-  1. App compilation e.g. using Gradle Runner step.
+  1. App compilation. For example, using the Gradle Runner step.
 
-  2. Open STF Connect (this step).
+  2. Running the Open STF Connect step.
 
-  3. Android instrumention and/or UI tests e.g. using Gradle Unit Test step.
+  3. Android instrumentation and/or UI tests. For example, using the Gradle Unit Test step.
 
-  4. Open STF Disconnect step with `is_always_run: true` (to stop using remote devices).
+  4. Running the Open STF Disconnect step with `is_always_run: true` (to stop using remote devices).
 website: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect
 source_code_url: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect
 support_url: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect/issues

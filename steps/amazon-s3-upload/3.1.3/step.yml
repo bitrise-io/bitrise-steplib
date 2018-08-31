@@ -1,15 +1,15 @@
 title: Amazon S3 Bucket Sync
 summary: Amazon S3 Bucket Sync
 description: |-
-  Syncs the given local folder with an S3 bucket.
+  Amazon S3 Bucket Sync step syncs the given local folder with an S3 bucket.
 
-  This Step requires an Amazon S3 registration.
+  This step requires an Amazon S3 registration.
   To register an Amazon S3 account, [click here](http://aws.amazon.com/s3/).
 
   # Warning!
 
-  It will perform a one-direction sync, removing every file and folder from
-  the bucket which is not present in the local, input folder!
+  This step will perform a one-direction sync, removing every file and folder from
+  the bucket which is not present in the local input folder!
 website: https://github.com/bitrise-io/steps-amazon-s3-upload
 source_code_url: https://github.com/bitrise-io/steps-amazon-s3-upload
 support_url: https://github.com/bitrise-io/steps-amazon-s3-upload/issues
@@ -53,8 +53,8 @@ inputs:
 - opts:
     description: |
       If you want to sync only the content of
-      the folder but don't want to create the folder then you
-      should append a slash at the end of the path. Example: ./folder/
+      the folder but don't want to create the folder, then you
+      should append a slash at the end of the path. For example: ./folder/
     is_required: true
     summary: ""
     title: Local path to upload
@@ -72,12 +72,12 @@ inputs:
     description: ""
     is_required: true
     summary: |-
-      If set to "true" it'll only set ACL for changed objects, which is
+      If it is set to "true", it'll only set ACL for changed objects, which is
       way faster to do than to check and set every objects' ACL.
 
       Generally, you can keep this option on "yes" to get a speed boost,
       and you should only change it to "false" if you changed the
-      ACL option (in order to force set every object's ACL to the specified one).
+      ACL option (to set every object's ACL to the specified one).
     title: Set ACL only on changed objects?
     value_options:
     - "true"
@@ -86,7 +86,7 @@ inputs:
 - aws_region: ""
   opts:
     description: |
-      If you want to specify a different AWS region of the bucket. Leave
+      Here you can specify a different AWS region of the bucket. You can leave it
       empty to use the default config/env setting.
     summary: ""
     title: AWS Region

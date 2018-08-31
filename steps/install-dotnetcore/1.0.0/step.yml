@@ -20,8 +20,8 @@ inputs:
 - channel: null
   opts:
     description: |
-      Specifies the source channel for the installation. Currently "production" does not exists.
-      Leave empty to get latest "stable" (if this exists :-))
+      Specifies the source channel for the installation. Currently "production" does not exist.
+      Leave empty to get the latest "stable" version (if such a thing exists :-))
       Possible known values are rel-1.0.0, rel-1.0.1, master (=daily version)
     is_expand: true
     is_required: false

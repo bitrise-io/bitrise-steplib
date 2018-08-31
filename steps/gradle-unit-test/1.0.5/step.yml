@@ -2,7 +2,7 @@ title: Gradle Unit Test
 summary: Runs Unit Tests with `gradlew`.
 description: |-
   Runs Unit Tests with `gradlew`.
-  You can specify the test tasks to run and the task flags to run ony specific files.
+  You can specify the test tasks to run and set task flags to run specific files.
 website: https://github.com/bitrise-io/steps-gradle-unit-test
 source_code_url: https://github.com/bitrise-io/steps-gradle-unit-test
 support_url: https://github.com/bitrise-io/steps-gradle-unit-test/issues
@@ -36,19 +36,19 @@ inputs:
     title: Optional path to the gradle build file to use
 - opts:
     description: |
-      The test task to execute by gradlew
+      The test task to be executed by gradlew
     is_required: true
     title: Test task
   unit_test_task: test
 - gradlew_file_path: $GRADLEW_PATH
   opts:
     description: |
-      Path for the gradlew file
+      Path to the gradlew file
     is_required: true
-    title: Path for the gradlew file
+    title: Path to the gradlew file
 - opts:
     description: |
-      Use this flag to execute tests for only a couple of files like: `--tests='*.MyTestClass'`
+      Use this flag to execute tests for specified files. For example, `--tests='*.MyTestClass'`
     title: Test flags
   unit_test_flags: --continue
 - cache_level: only deps

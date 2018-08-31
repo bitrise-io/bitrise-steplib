@@ -3,12 +3,12 @@ summary: Xamarin iOS Test
 description: |-
   Xamarin iOS Test
 
-  Use solution configuration-platform combination for automatig tests, which maps to an ios project configuration-platform combination, which:
+  Use a solution configuration-platform combination for automating tests that maps to an iOS project configuration-platform combination that:
 
   * Starts the Xamarin Test Cloud Agent in your AppDelegate
   * Builds for Simulator platform
 
-  Initialize you ios app in your UITest project as follows:
+  Initialize you iOS app in your UITest project as follows:
 
   ```
   iOSAppConfigurator iosConfigurator = ConfigureApp.iOS;

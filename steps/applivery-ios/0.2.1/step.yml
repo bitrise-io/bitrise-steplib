@@ -4,10 +4,10 @@ description: |-
   Deploy an iOS application to [Applivery](http://www.applivery.com),
   add notes and notify testers.
 
-  Register a Applivery account at [http://www.applivery..com/](http://www.applivery.com)
+  Register an Applivery account at [http://www.applivery.com/](http://www.applivery.com)
   and create an App to utilize this step.
 
-  You also need to get your *Account API Key* for you account and the *App Id* for the app.
+  You also need to get your *Account API Key* for you account and the *App ID* for the app.
 website: https://github.com/applivery/steps-applivery-ios-deploy
 source_code_url: https://github.com/applivery/steps-applivery-ios-deploy
 support_url: https://github.com/applivery/steps-applivery-ios-deploy/issues
@@ -44,7 +44,7 @@ inputs:
       ## Where to get the Applivery Account API Key?
 
       Sign in to your [Applivery.com](http://dashboard.applivery.com) account,
-      click on Developers menu option from the left side menu and copy it from the
+      click Developers on the left side menu and copy the key from the
       Account API Key section.
     is_required: true
     summary: ""
@@ -52,13 +52,13 @@ inputs:
 - app_id: $APPLIVERY_APP_ID
   opts:
     description: |-
-      This is the App Id that identifies your App in Applivery.com
+      This is the App ID that identifies your App in Applivery.com
 
-      ## Where to get the App Id?
+      ## Where to get the App ID?
 
       Sign in to your [Applivery.com](http://dashboard.applivery.com) account,
-      click on Applications menu option from the left side menu, click on the desired App.
-      You'll find the App Id inside the (i) information block (written in red).
+      click Applications on the left side menu, and select the desired App.
+      You'll find the App ID inside the (i) information block (written in red).
     is_required: false
     summary: ""
     title: 'Applivery: App ID'
@@ -69,7 +69,7 @@ inputs:
     title: Release notes
 - notify: "true"
   opts:
-    description: This flag allows you to automatically notify your testers vía email.
+    description: This flag allows you to automatically notify your testers via email.
     is_required: true
     summary: ""
     title: Notify Testers?
@@ -79,7 +79,7 @@ inputs:
 - autoremove: "true"
   opts:
     description: Automatically remove the oldest build before uploading a new one
-      to prevent reaching your account limits.
+      to avoid reaching your account limits.
     is_required: false
     summary: ""
     title: (Optional) Automatically remove the oldest build?

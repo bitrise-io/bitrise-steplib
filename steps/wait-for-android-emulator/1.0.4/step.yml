@@ -1,9 +1,9 @@
 title: Wait for Android emulator
 summary: Wait for the emulator to finish boot
 description: |-
-  If your workflow contains `start-android-emulator` step,
-  and you've set `wait_for_boot` param to false, use this step to check
-  if android emulator is booted or wait for finishing boot.
+  If your workflow contains the `start-android-emulator` step,
+  and you've set the `wait_for_boot` parameter to `false`, use this step to check
+  if the android emulator is booted or wait for it to finish booting.
 website: https://github.com/bitrise-steplib/steps-wait-for-android-emulator
 source_code_url: https://github.com/bitrise-steplib/steps-wait-for-android-emulator
 support_url: https://github.com/bitrise-steplib/steps-wait-for-android-emulator/issues

@@ -2,9 +2,9 @@ title: Open STF Disconnect
 summary: |
   Disconnects from devices from Open Smartphone Test Farm previously connected using Open STF Connect step
 description: |
-  This step has to be inserted after Android instrumention and/or UI tests.
-  It is recommended to set this step to be run always, even if previous step(s) failed to ensure that devices will be released.
-  Otherwise they will be occupied until usage timeout exceeds. This setting is enabled by default.
+  This step has to be inserted into the workflow after Android instrumentation and/or UI tests.
+  It is recommended to set this step to be run always, even if the previous step(s) failed, to ensure that the devices will be released.
+  Otherwise they will be occupied until the maximum time of use is exceeded. This setting is enabled by default.
 website: https://github.com/DroidsOnRoids/bitrise-step-openstf-disconnect
 source_code_url: https://github.com/DroidsOnRoids/bitrise-step-openstf-disconnect
 support_url: https://github.com/DroidsOnRoids/bitrise-step-openstf-disconnect/issues

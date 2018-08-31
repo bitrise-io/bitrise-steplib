@@ -1,15 +1,15 @@
-title: Send twitter message
+title: Send Twitter message
 summary: Update a [Twitter](https://twitter.com/) account status.
 description: |
-  This step is used to update a twitter account status.
+  This step is used to update a Twitter account status.
 
-  For that you need to create a twitter application here : [https://apps.twitter.com](https://apps.twitter.com)
+  For that you need to create a Twitter application here : [https://apps.twitter.com](https://apps.twitter.com)
 
   **Use the same credentials as the account you want to update !**
 
-  And get the four important information in your app : **Consumer Key (API Key)** / **Consumer Secret (API Secret)** / **Access Token** / **Access Token Secret**
+  And make sure you have all the important information in your app : **Consumer Key (API Key)** / **Consumer Secret (API Secret)** / **Access Token** / **Access Token Secret**
 
-  Find all the error code list [here](https://developer.twitter.com/en/docs/basics/response-codes)
+  Find the full error code list [here](https://developer.twitter.com/en/docs/basics/response-codes)
 website: https://github.com/kawaiseb/bitrise-step-twitter-message
 source_code_url: https://github.com/kawaiseb/bitrise-step-twitter-message
 support_url: https://github.com/kawaiseb/bitrise-step-twitter-message/issues

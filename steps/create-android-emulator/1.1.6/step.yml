@@ -73,12 +73,12 @@ inputs:
       create avd` call:\n\n`android create avd --force --name name --target platform
       --abi abi options`\n\nor \n\n`avdmanager create avd --force --package PACKAGE
       --name name --abi abi options`\n\nYou can use multiple options, separated by
-      a space\ncharacter. Example: `--skin WVGA800`"
+      a space\ncharacter. For example: `--skin WVGA800`"
     title: Additional options for `android create avd` call
 - custom_hardware_profile_content: null
   opts:
     description: |-
-      The value of this input will be written into `${name}.avd/config.ini` file,
+      The value of this input will be written into `${name}.avd/config.ini` file
       to let the created emulator use your custom hardware profile.
 
       Format example:

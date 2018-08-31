@@ -4,7 +4,7 @@ description: |-
   This step will simply read Xcode Project Info data from `Info.plist` file,
   then export that data to environment variables prefixed with **XPI_**.
 
-  After this you can use these environment variables in other steps (ex. sending message on Slack).
+  After this you can use these environment variables in other steps (for example, sending a message on Slack).
 website: https://github.com/tadija/bitrise-step-xcode-project-info
 source_code_url: https://github.com/tadija/bitrise-step-xcode-project-info
 support_url: https://github.com/tadija/bitrise-step-xcode-project-info/issues
@@ -31,9 +31,9 @@ is_skippable: false
 inputs:
 - info_plist_path: Info.plist
   opts:
-    description: "Source directory is considered to be root directory created by the
+    description: Source directory is considered to be root directory created by the
       Git Clone step.\nIf your `Info.plist` file is in **RootDir/ProjectName** directory
-      (for example), \nthen you should set this input to `ProjectName/Info.plist`."
+      (for example), \nthen you should set this input to `ProjectName/Info.plist`.
     is_required: true
     summary: ""
     title: Relative path from Source directory to Info.plist file

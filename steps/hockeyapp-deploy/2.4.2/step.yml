@@ -8,8 +8,8 @@ description: |-
   and create an app to utilize this step.
   You also need to create a *HockeyApp Token* for your app.
 
-  If app_id is provided the ipa will be upload to the specified app on HockeyApp,
-  otherwise HockeyApp will decide based on the bundle id, if it's a new app, or update.
+  If an `app_id` is provided, the IPA file will be uploaded to the specified app on HockeyApp. 
+  Otherwise HockeyApp will decide whether it's a new app or an update to an existing app based on the bundle ID.
 website: https://github.com/bitrise-io/steps-hockeyapp-deploy
 source_code_url: https://github.com/bitrise-io/steps-hockeyapp-deploy
 support_url: https://github.com/bitrise-io/steps-hockeyapp-deploy/issues

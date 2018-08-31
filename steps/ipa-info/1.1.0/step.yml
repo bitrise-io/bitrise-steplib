@@ -1,6 +1,6 @@
 title: IPA info
 summary: IPA iOS info provider
-description: Provides all possible iOS IPA information as package name, version name
+description: Provides all possible iOS IPA information, such as package name, version name
   or version code.
 website: https://github.com/thefuntasty/bitrise-step-ipa-info
 source_code_url: https://github.com/thefuntasty/bitrise-step-ipa-info
@@ -24,13 +24,13 @@ inputs:
 - ipa_path: $BITRISE_IPA_PATH
   opts:
     description: |
-      File path to IPA file to get info from.
+      File path to the IPA file to get info from.
     is_required: true
     title: IPA file path
 outputs:
 - IOS_IPA_PACKAGE_NAME: null
   opts:
-    description: iOS application package name, ex. com.package.my
+    description: iOS application package name. For example, com.package.my
     title: iOS application package name
 - IOS_IPA_FILE_SIZE: null
   opts:

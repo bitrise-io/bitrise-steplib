@@ -1,19 +1,19 @@
 title: App Center upload and schedule tests
-summary: Uploads and schedules tests on Microsoft App Center
+summary: This step uploads and schedules tests on Microsoft App Center
 description: |-
-  Uploads and schedules tests on Microsoft App Center.
+  This step uploads and schedules tests on Microsoft App Center.
 
   Appium, Espresso, Calabash Xamarin.UITest and XCUITest tests can be uploaded.
 
-  Setup Instructions:
+  Setup instructions:
 
   1. Prepare your test for upload: [https://docs.microsoft.com/en-us/appcenter/test-cloud/preparing-for-upload/](https://docs.microsoft.com/en-us/appcenter/test-cloud/preparing-for-upload/)
   1. Create an App Center project: [https://appcenter.ms/apps](https://appcenter.ms/apps)
-  1. Navigate to Test runs tab and start a New test run:
+  1. Go to Test runs tab and start a New test run:
     - Select devices
     - Configure test run
-    - On Submit tab you will find every required input for the step
-    - Click on Done
+    - On the Submit tab, you will find every required input for the step
+    - Click Done
 website: https://github.com/bitrise-steplib/steps-appcenter-test
 source_code_url: https://github.com/bitrise-steplib/steps-appcenter-test
 support_url: https://github.com/bitrise-steplib/steps-appcenter-test/issues
@@ -87,7 +87,7 @@ inputs:
   opts:
     description: |-
       Path to an application file.
-      Can be an .ipa or .apk file.
+      Can be an .ipa or an .apk file.
     is_expand: true
     is_required: true
     summary: Path to an application file
