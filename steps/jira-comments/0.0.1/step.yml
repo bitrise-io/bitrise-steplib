@@ -11,10 +11,10 @@ description: |
 website: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment
 source_code_url: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment
 support_url: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment/issues
-published_at: 2018-08-16T14:55:09.487844745+02:00
+published_at: 2018-09-04T13:02:24.540780402+02:00
 source:
   git: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment.git
-  commit: 752b8e126c5773629cb31625b16805de99d459d1
+  commit: 339ada3adc9a2ea263856e8131ede51bc5a33cdc
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
