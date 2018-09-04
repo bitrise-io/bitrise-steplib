@@ -1,0 +1,62 @@
+title: Change Android versionCode and versionName
+summary: Change Android versionCode and versionName in build.gradle file.
+description: Change your Android project's versionCode and versionName in build.gradle
+  file.
+website: https://github.com/bitrise-community/steps-change-android-versioncode-and-versionname
+source_code_url: https://github.com/bitrise-community/steps-change-android-versioncode-and-versionname
+support_url: https://github.com/bitrise-community/steps-change-android-versioncode-and-versionname
+published_at: 2018-01-24T14:39:59.791566+01:00
+source:
+  git: https://github.com/bitrise-community/steps-change-android-versioncode-and-versionname.git
+  commit: ab1e3600b7962b1dfbece8607acc1d8ffcfa93ff
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+- cordova
+- ionic
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-change-android-versioncode-and-versionname
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_gradle_path: null
+  opts:
+    is_required: true
+    summary: Path to the build.gradle file shows the versionCode and versionName settings.
+    title: Path to the build.gradle file
+- new_version_name: null
+  opts:
+    description: |-
+      New versionName to set.
+      Leave this input empty to do not modify versionName.
+    summary: New versionName to set.
+    title: New versionName
+- new_version_code: null
+  opts:
+    description: |-
+      New versionCode to set.
+      Leave this input empty to do not modify versionCode.
+    summary: New versionCode to set.
+    title: New versionCode
+- opts:
+    description: |-
+      Offset value for versionCode.
+      Leave this input empty to do not modify versionCode.
+    summary: Offset value for versionCode.
+    title: versionCode Offset
+  version_code_offset: null
+outputs:
+- ANDROID_VERSION_NAME: null
+  opts:
+    title: Final Android versionName in build.gradle file
+- ANDROID_VERSION_CODE: null
+  opts:
+    title: Final Android versionCode in build.gradle file

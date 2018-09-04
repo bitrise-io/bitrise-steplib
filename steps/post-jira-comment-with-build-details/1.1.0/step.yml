@@ -1,0 +1,65 @@
+title: Post Jira Comment
+summary: Post comment to an issue at Jira.
+description: "Post comment to an issue at Jira with the build params. \n- Public download
+  page\n- Build number\n- Author\n- Git branch\n- Commit hash\n- Commit message"
+website: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details
+source_code_url: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details.git
+support_url: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details/issues
+published_at: 2018-08-31T08:00:15.338429844Z
+source:
+  git: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details.git
+  commit: 3008edf193f08478ee8da562fefa53bbe7c4b370
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-post-jira-comment-with-build-details
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- opts:
+    description: User name on Jira (user's email).
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: User name on Jira (user's email).
+    title: Jira user name
+  user_name: null
+- api_token: null
+  opts:
+    description: Api token generated on Jira.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Api token generated on Jira.
+    title: Jira api token
+- issue_keys: null
+  opts:
+    description: Jira issue keys separatad with `|`
+    is_required: true
+    summary: Jira issue keys separatad with `|`
+    title: Jira issue keys
+- base_url: null
+  opts:
+    description: URL of the presonal Jira software.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: URL of the presonal Jira software.
+    title: Jira base URL.
+- build_message: |
+    *$BITRISE_APP_TITLE* build *$BITRISE_BUILD_NUMBER* is now available: [Download|$BITRISE_PUBLIC_INSTALL_PAGE_URL]
+    ||Build number|$BITRISE_BUILD_NUMBER|
+    ||Author|$GIT_CLONE_COMMIT_AUTHOR_NAME|
+    ||Branch|$BITRISE_GIT_BRANCH|
+    ||Commit hash|$GIT_CLONE_COMMIT_HASH|
+    ||Commit message|$GIT_CLONE_COMMIT_MESSAGE_SUBJECT|
+
+    [Show build details|$BITRISE_BUILD_URL]
+  opts:
+    description: The content of the build message that will be posted. You can use
+      markdown. Details [here|https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all]
+    is_required: true
+    summary: The content of the build message that will be posted
+    title: Build message

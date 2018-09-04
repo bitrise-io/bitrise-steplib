@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>generic-file-storage-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#0DD3C5" offset="0%"></stop>
+            <stop stop-color="#0D83CD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="132.409355%" y1="-11.0977103%" x2="-18.5997596%" y2="109.263393%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Generic-File-Storage">
+            <g id="generic-file-storage-stepicon">
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" fill-rule="nonzero" x="0" y="0" width="256" height="256"></rect>
+                <path d="M56,48.8613281 L114.378348,48.8613281 C116.605634,48.8613281 118.649644,50.0951109 119.687351,52.0658892 L128.496242,68.795439 C129.533949,70.7662172 131.57796,72 133.805246,72 L200,72 C203.313708,72 206,74.6862915 206,78 L206,178.060547 C206,181.374255 203.313708,184.060547 200,184.060547 L56,184.060547 C52.6862915,184.060547 50,181.374255 50,178.060547 L50,54.8613281 C50,51.5476196 52.6862915,48.8613281 56,48.8613281 Z" id="Rectangle-12" fill="url(#linearGradient-2)"></path>
+                <polygon id="icon-/-login" fill="#760FC3" style="mix-blend-mode: multiply;" points="173.602083 92.3979169 173.602083 211.602083 153.602083 211.602083 153.602083 92.3979169"></polygon>
+                <polygon id="icon-/-login-copy" fill="#760FC3" style="mix-blend-mode: multiply;" points="153 62 173 62 173 82 153 82"></polygon>
+                <polygon id="icon-/-login-copy-2" fill="#760FC3" style="mix-blend-mode: multiply;" points="153 32 173 32 173 52 153 52"></polygon>
+                <polygon id="Rectangle-2" fill="#760FC3" style="mix-blend-mode: multiply;" points="163.130374 203.235415 199.97211 166.393679 214.687053 181.108622 163.108622 232.687053 111.606321 181.184752 126.343015 166.448057"></polygon>
+            </g>
+        </g>
+    </g>
+</svg>

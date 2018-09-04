@@ -1,0 +1,163 @@
+title: Google Play Deploy
+summary: Google Play Deploy
+description: |-
+  To use this step:
+
+  1. You have to upload the first apk manually (using the web interface).
+    See: https://play.google.com/apps/publish -> All applications -> Add new application
+
+  2. You must link your Google Play Developer Console to an API project.
+    See: https://developers.google.com/android-publisher/getting_started. Check the __Linking your API Project section__.
+
+  3. Setting Up API Access Clients, using a service account:
+    See: https://developers.google.com/android-publisher/getting_started. Check the __Using a service account__ section.
+    When you create your service account on the google developer console, choose json as `Key Type`.
+
+  4. Grant Access to provide the service account the necessary rights.
+    See: https://play.google.com/apps/publish -> Settings -> User account & rights -> Invite new user and give the privileges.
+    Due to the way the Google Play Publisher API works, you have to grant at least the following permissions to that service account:
+     - Edit store listing, pricing & distribution
+     - Manage Production APKs
+     - Manage Alpha & Beta APKs
+     - Manage Alpha & Beta users
+
+  5. OPTIONAL - Add translations for your Store Listing.
+    To allow the step to assign your 'whatsnew' files to the uploaded apk version.
+    See: https://support.google.com/googleplay/android-developer/answer/3125566?hl=en (Add translations for your Store Listing)
+website: https://github.com/bitrise-io/steps-google-play-deploy
+source_code_url: https://github.com/bitrise-io/steps-google-play-deploy
+support_url: https://github.com/bitrise-io/steps-google-play-deploy/issues
+published_at: 2018-08-01T10:35:12.462903053Z
+source:
+  git: https://github.com/bitrise-steplib/steps-google-play-deploy.git
+  commit: 9f3352d2893841f1368df0c15ea799ab2e0f48fd
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-google-play-deploy
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Path to the Service Account's JSON key file.
+
+      For remote JSON key file you can provide any download location (ex: `https://URL/TO/key.json`).
+      For local JSON key file provide file path url. (ex: `file://PATH/TO/key.json`).
+    is_required: true
+    title: Service Account JSON key file path
+  service_account_json_key_path: null
+- opts:
+    description: Package name of the APK or App bundle to deploy.
+    is_required: true
+    title: Package name
+  package_name: null
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |-
+      Path to the APK or App Bundle to deploy.
+
+      You can provide multiple APK paths separated by `|` character.
+
+      Format examples:
+
+      - `/path/to/my/app.apk`
+      - `/path/to/my/app1.apk|/path/to/my/app2.apk|/path/to/my/app3.apk`
+      - `/path/to/my/bundle.aab`
+    is_required: true
+    title: APK or App Bundle file path
+- expansionfile_path: ""
+  opts:
+    description: |-
+      Path to the expansion file.
+
+      Leave empty or provide exactly the same number of paths as in apk_path, separated by `|` character and start each path with the expansion file's type
+      separated by a `:`. (main, patch)
+
+      Format examples:
+
+      - `main:/path/to/my/app.obb`
+      - `patch:/path/to/my/app1.obb|main:/path/to/my/app2.obb|main:/path/to/my/app3.obb`
+    title: Expansion file Path
+- opts:
+    description: "The track in which you want to assign the uploaded APK(s). \n\nCan
+      be one of the built-in tracks: internal, alpha, beta, rollout, production.\n\nOr
+      you can set your custom track name as well. \n\nFor example: `pre-release`,
+      or any of your closed track you added in Google Play Developer Console."
+    is_required: true
+    summary: The track in which you want to assign the uploaded APK(s).
+    title: Track
+  track: alpha
+- opts:
+    description: |-
+      __Only available if `track` is `rollout`.__
+
+      Portion of the users who should get the staged rollout version of the APK.
+    is_required: true
+    title: User Fraction
+    value_options:
+    - "0.05"
+    - "0.1"
+    - "0.2"
+    - "0.5"
+  user_fraction: "0.5"
+- opts:
+    description: |-
+      Use this input to specify localized 'whatsnew' files directory.
+
+      This directory should contain 'whatsnew' files postfixed with the locale.
+
+      whatsnew file name pattern: `whatsnew-LOCALE`
+
+      Example:
+
+      ```
+      + - [PATH/TO/WHATSNEWS]
+          |
+          + - whatsnew-en-US
+          |
+          + - whatsnew-de-DE
+      ```
+
+      Format examples:
+
+      - "./"         # whatsnew files are in the repo root directory
+      - "./whatsnew" # whatsnew files are in the whatsnew directory
+    title: Directory of localized whatsnew files
+  whatsnews_dir: null
+- mapping_file: $BITRISE_MAPPING_PATH
+  opts:
+    description: The `mapping.txt` file provides a translation between the original
+      and obfuscated class, method, and field names.
+    title: Location of your mapping.txt file
+- opts:
+    description: "Should deactivate apks, with lower version code, on lower level
+      tracks?\n\nE.g.: \nIf you have an __active apk on alpha__ track with version
+      code: `42`.\nAnd you try to __upload a new version (`43`), to the beta track__,
+      you will see an error:\n\n`Version 42 of this app can not be downloaded by any
+      devices as they will all receive APKs with higher version codes`\n\nTo avoid
+      this issue set this input to: `\"true\"` and the step will deactivate every
+      apk with lower version code, on lower level tracks."
+    is_required: true
+    title: Untrack blocking versions?
+    value_options:
+    - "true"
+    - "false"
+  untrack_blocking_versions: "true"

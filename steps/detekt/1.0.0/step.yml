@@ -1,0 +1,36 @@
+title: detekt
+summary: |
+  Runs detekt static code analysis for Kotlin
+description: |
+  Runs detekt, a static code analysis tool for the Kotlin programming language.
+website: https://github.com/misaelmt/bitrise-step-detekt
+source_code_url: https://github.com/misaelmt/bitrise-step-detekt
+support_url: https://github.com/misaelmt/bitrise-step-detekt/issues
+published_at: 2018-03-07T17:47:02.984966415-05:00
+source:
+  git: https://github.com/misaelmt/bitrise-step-detekt.git
+  commit: 17608029bb094e5226e830a4ab40deaf8b1973aa
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- test
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Input path to analyze, can either be a directory or a single Kotlin
+      file
+    is_required: true
+    summary: Path to analyze (path/to/project)
+    title: Path to analyze
+  path_to_analyze: .

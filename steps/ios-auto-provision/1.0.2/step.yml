@@ -1,0 +1,134 @@
+title: iOS Auto Provision
+summary: Automatically manages your iOS Provisioning Profiles for your Xcode project
+description: |-
+  Automatically manages your iOS Provisioning Profiles for your Xcode project:
+
+  - it ensures that the Application Identifier exists on the Apple Developer Portal
+  - it ensures that the project's Capabilities are set correctly in the Application Identifier
+  - it ensures that the Provisioning Profiles exists on the Apple Developer Portal
+  - it ensure that all the available Test Devices exists on the Apple Developer Portal and are included in the Provisioning Profile as well
+  - it installs all the Codesigning Certificates into the Keychain
+
+  Setup guide: https://blog.bitrise.io/ios-auto-provision-step
+website: https://github.com/bitrise-steplib/steps-ios-auto-provision
+source_code_url: https://github.com/bitrise-steplib/steps-ios-auto-provision
+support_url: https://github.com/bitrise-steplib/steps-ios-auto-provision/issues
+published_at: 2018-04-23T17:48:22.032881087+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-ios-auto-provision.git
+  commit: 8d5f7369dade91be647dcb4444765f0928366ac8
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- code-sign
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- distribution_type: development
+  opts:
+    description: Describes how Xcode should sign your project.
+    is_required: true
+    title: Distribution type
+    value_options:
+    - development
+    - app-store
+    - ad-hoc
+    - enterprise
+- opts:
+    description: |-
+      The Developer Portal team to manage the project's code signing files.
+
+      __If your Developer Portal Account belongs to multiple development team, this input is required!__ Otherwise specify this input if you want to manage the Profiles with different team, then one set in your project.
+
+      If you leave it empty the project defined team will be used.
+
+      Example: `1MZX23ABCD4`
+    title: The Developer Portal team id
+  team_id: null
+- opts:
+    description: A `.xcodeproj` or `.xcworkspace` path.
+    is_required: true
+    title: Xcode Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: The Scheme to use.
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |-
+      (optional) The configuration to use. By default your Scheme
+      defines which configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+      **Make sure that the Configuration you specify actually exists
+      in your Xcode Project**. If it does not, if you have a typo
+      in the value of this input Xcode will simply use the Configuration
+      specified by the Scheme and will silently ignore this parameter!
+    title: Configuration name
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- certificate_urls: $BITRISE_CERTIFICATE_URL
+  opts:
+    category: Debug
+    description: "URLs of the certificates to download.\n\nMultiple URLs can be specified,
+      separated by a pipe (`|`) character.\n\nYou can specify a local path as well,
+      using the `file://` scheme.\n\nProvide a development certificate url, to ensure
+      development code sign files for the project and also provide a distribution
+      certificate url, to ensure distribution code sign files for your project.\n\nExample:
+      \n\n`file://./development/certificate/path|https://distribution/certificate/url`\n"
+    is_required: true
+    title: Certificate URL
+- opts:
+    category: Debug
+    description: |
+      Certificate passphrases.
+
+      Multiple passphrases can be specified, separated by a pipe (`|`) character.
+
+      Specified certificate passphrase count should match the count of the certificate urls.
+
+      example: development certificate with empty passphrase, distribution certificate with non-empty passphrase
+
+      ```
+      passphrases: "|distribution-passphrase"
+      ```
+    is_required: true
+    title: Certificate passphrase
+  passphrases: $BITRISE_CERTIFICATE_PASSPHRASE
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    category: Config
+    description: The Keychain path
+    is_required: true
+    title: Keychain path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    category: Config
+    description: The Keychain's password
+    is_required: true
+    title: Keychain's password
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: Bitrise build url
+    is_required: true
+    title: Bitrise build url
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: Bitrise build api token
+    is_required: true
+    title: Bitrise build api token

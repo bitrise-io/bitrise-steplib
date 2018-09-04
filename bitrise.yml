@@ -3,207 +3,35 @@ default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 
 app:
   envs:
-  - STEPLIB_SOURCE: 'https://github.com/bitrise-io/bitrise-steplib.git'
-  # define these ENVs in your .bitrise.secrets.yml
   - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
   - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
   - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
   - S3_UPLOAD_BUCKET_REGION: $S3_UPLOAD_BUCKET_REGION
-  - IS_LOCAL_TEST: $IS_LOCAL_TEST
-  - BITRISE_GIT_BRANCH: $BITRISE_GIT_BRANCH
-  - BITRISE_BUILD_URL: $BITRISE_BUILD_URL
-  - BITRISE_APP_TITLE: $BITRISE_APP_TITLE
-  - SLACK_WEBHOOK_URL: $SLACK_WEBHOOK_URL
-  - SLACK_CHANNEL: $SLACK_CHANNEL
-
-trigger_map:
-- pattern: generate/spec.json
-  workflow: _generate
 
 workflows:
-
-  _notifications:
+  full_audit:
+    title: Full Audit
+    description: Performs a full audit on the collection.
     steps:
-    - slack:
-        inputs:
-        - webhook_url: "${SLACK_WEBHOOK_URL}"
-        - channel: "${SLACK_CHANNEL}"
-        - from_username: "${BITRISE_APP_TITLE} - OK"
-        - from_username_on_error: "${BITRISE_APP_TITLE} - ERROR"
-        - message: |-
-            Workflow: *${BITRISE_WORKFLOW_ID}*
-            Branch: ${BITRISE_GIT_BRANCH}
-            Build URL: ${BITRISE_BUILD_URL}
+    - path::./handlers/validate:
+    - path::./handlers/audit:
 
-  install_required_tool_versions:
+  deploy:
+    title: Deploy
+    description: Deploys the StepLib to Amazon S3
+    before_run:
+    - full_audit
     steps:
-    - script:
-        title: Make sure the required Stepman version is installed
-        run_if: .IsCI
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-
-            # curl -fL https://github.com/bitrise-io/bitrise/releases/download/1.2.4/bitrise-$(uname -s)-$(uname -m) > /usr/local/bin/bitrise
-            # chmod +x /usr/local/bin/bitrise
-            # bitrise setup --minimal
-            #
-            # # Stepman version:
-            # stepman --version
-
-  _generate:
-    title: Workflow for testing, PR check
-    description: |-
-      Adds a clean copy of this StepLib collection to stepman,
-      calls a setup on it, moves the generated spec.json to
-      a specified path and makes the path available for other workflows.
-    steps:
-    - script:
-        title: Set TMP_COLLECTION_ID
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-            
-            envman add --key TMP_COLLECTION_ID --value "file://$(pwd)"
-    - script:
-        title: Remove previous version of this local spec from stepman
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-            
-            stepman delete -c "${TMP_COLLECTION_ID}"
-    - script:
-        title: Generate
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-
-            tmp_dir="$(pwd)/_tmp"
-            mkdir -p "${tmp_dir}"
-            spec_path="${tmp_dir}/spec.json"
-            stepman setup -c "${TMP_COLLECTION_ID}" --copy-spec-json="${spec_path}"
-            envman add --key SPEC_JSON_PATH --value "${spec_path}"
-    - script:
-        title: tmp
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -e
-
-            echo "SPEC_JSON_PATH: ${SPEC_JSON_PATH}"
+    - path::./handlers/validate:
+    - path::./handlers/generate-specs:
+    - path::./handlers/deploy:
+    - deploy-to-bitrise-io:
 
   pr_audit:
     title: Pull Request audit
-    description: |-
-      Performs an audit only on the changed step.yml files, and on the
-      related Steps.
-
-      Development Note: if `IS_LOCAL_TEST` is enabled it'll check the
-      changes in the local git staging/cache.
-    envs:
-      - BITRISE_WORKFLOW_ID: pr_audit
-    before_run:
-    - _generate
-    after_run:
-    - _notifications
+    description: Performs an audit only on the changed step.yml files, and on the related Steps.
     steps:
-    - script:
-        title: List of changed files
-        dependencies:
-        - manager: brew
-          name: go
-        inputs:
-        - content: |-
-            set -e
-            localtest_param=""
-            if [[ "${IS_LOCAL_TEST}" == "true" ]] ; then
-              localtest_param="--localtest"
-            fi
-
-            go get github.com/hashicorp/go-version
-            go get github.com/bitrise-io/go-utils/command
-            go get github.com/bitrise-io/go-utils/fileutil
-            go get github.com/bitrise-io/go-utils/pathutil
-            go get github.com/bitrise-io/go-utils/log
-            go get gopkg.in/yaml.v2
-
-            go run ./_scripts/audit/audit_changed_steps.go --collectionid "${TMP_COLLECTION_ID}" ${localtest_param}
-
-  full_audit:
-    title: Full Audit
-    description: |-
-      Performs a full audit on the collection.
-    before_run:
-    - _generate
-    steps:
-    - script:
-        title: Run full audit on the StepLib collection
-        inputs:
-        - content: |-
-            set -ex
-
-            stepman audit --collection "${TMP_COLLECTION_ID}"
-
-  deploy:
-    title: Workflow for deployment
-    description: |-
-      Deploys the StepLib to Amazon S3
-    envs:
-      - AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
-      - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
-      - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
-      - BITRISE_WORKFLOW_ID: "DEPLOY"
-    before_run:
-    - install_required_tool_versions
-    - full_audit
-    after_run:
-    - _notifications
-    steps:
-    - script:
-        title: Check spec.json - exist?
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -e
-            if [ ! -f "${SPEC_JSON_PATH}" ] ; then
-              echo " [!] spec.json does not exist at path: ${SPEC_JSON_PATH}"
-              exit 1
-            fi
-    - script:
-        title: Fix steplib_source in spec.json
-        inputs:
-        - content: |-
-            require 'json'
-
-            spec_json_pth = ENV['SPEC_JSON_PATH']
-            puts " -> spec_json_pth: #{spec_json_pth}"
-            file = File.read(spec_json_pth)
-            data_hash = JSON.parse(file)
-
-            steplib_source_param = ENV['STEPLIB_SOURCE']
-            puts " -> steplib_source_param: #{steplib_source_param}"
-            data_hash['steplib_source'] = steplib_source_param
-            File.write(spec_json_pth, JSON.pretty_generate(data_hash))
-            puts "DONE - OK"
-        - runner_bin: ruby
-    - script:
-        title: Generate
-        dependencies:
-          - manager: brew
-            name: s3cmd
-        inputs:
-        - content: |-
-            #!/bin/bash
-            set -ex
-
-            bash ./_scripts/deploy/deploy.sh
-
-  quicktest:
-    description: |-
-      A workflow for testing quick bitrise.yml changes
-    after_run:
-    - _notifications
+    - path::./handlers/step-info:
+    - path::./handlers/validate:
+    - path::./handlers/generate-specs:
+    - path::./handlers/audit:

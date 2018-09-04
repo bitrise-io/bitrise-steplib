@@ -1,0 +1,85 @@
+title: Update JIRA issues field
+summary: |
+  Updates a JIRA [issues](https://confluence.atlassian.com/jira064/what-is-an-issue-720416138.html) field like `Fix version` or `Links`. Existing value is overwritten.
+description: |
+  Updates a JIRA [issues](https://confluence.atlassian.com/jira064/what-is-an-issue-720416138.html) fields like `Fix version` or `Links`.
+
+  User specified in `jira_username` input must have `Edit Issue` permission granted.
+  See [Managing project permissions](https://confluence.atlassian.com/adminjiracloud/managing-project-permissions-776636362.html) for more information.
+
+  Any field available on the issue edit screen can be updated. Multiple issues can be specified, all of them are updated in the same way.
+
+  Field value may be removed by specifying new empty value.
+
+  Either basic (password/token) or cookie-based authentication can be used. Thus either `jira_username` with `jira_password` or `jira_cookie` inputs must be specified.
+website: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field
+support_url: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field/issues
+published_at: 2018-03-04T04:19:29.284686289+01:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field.git
+  commit: 0b2d11a9033661c196b7ed295ab023d23457fb7b
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- jira_username: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: JIRA user (or bot) login. Ignored if `jira_cookie` is specified.
+    title: JIRA username
+- jira_password: null
+  opts:
+    description: |
+      See [API tokens documentation](https://confluence.atlassian.com/cloud/api-tokens-938839638.html)
+      for more information about API tokens.
+    is_expand: true
+    is_required: false
+    summary: JIRA user (or bot) password or token. Ignored if `jira_cookie` is specified.
+    title: JIRA user password
+- jira_cookie: null
+  opts:
+    description: |
+      See [Cookie-based auth for REST APIs](https://developer.atlassian.com/cloud/jira/platform/jira-rest-api-cookie-based-authentication/)
+      for more information about cookie-based auth.
+    is_expand: true
+    is_required: false
+    summary: JIRA user (or bot) authentication cookie.
+    title: JIRA authentication cookie
+- jira_instance_url: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: JIRA instance URL e.g. `https://example.atlassian.net`.
+    title: JIRA instance URL
+- issue_id_or_key_list: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Issues numeric ids e.g. `100000` or keys e.g. `FOO-123`, separated by
+      `|`. At least one element has to be specified. White spaces are trimmed.
+    title: List of issue ids or keys
+- field_key: null
+  opts:
+    description: |
+      Available field keys are available in metadata for editing an issue. See [Get edit issue meta](https://docs.atlassian.com/jira/REST/cloud/#api/2/issue-getEditIssueMeta)
+      documentation for more information.
+    is_expand: true
+    is_required: true
+    summary: Field in terms of API e.g. `reporter` or `customfield_11300`.
+    title: Field key
+- field_value: null
+  opts:
+    description: |
+      Existing field value if any will be overwritten by this value. May be empty.
+    is_expand: true
+    is_required: false
+    summary: New value to be written into the field. May be empty.
+    title: Field value

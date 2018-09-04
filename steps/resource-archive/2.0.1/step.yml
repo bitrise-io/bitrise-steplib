@@ -1,0 +1,34 @@
+title: ZIP resource archive downloader
+summary: ZIP resource archive downloader
+description: Downloads and extracts a .ZIP archive to a specified path.
+website: https://github.com/bitrise-io/steps-resource-archive
+source_code_url: https://github.com/bitrise-io/steps-resource-archive
+support_url: https://github.com/bitrise-io/steps-resource-archive/issues
+published_at: 2018-02-08T12:17:28.096431524+01:00
+source:
+  git: https://github.com/bitrise-io/steps-resource-archive.git
+  commit: 899410298363620b2ec8cb823ab56e6af4a4f119
+host_os_tags:
+- osx-10.9
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- archive_url: ""
+  opts:
+    description: Path of the resource .ZIP file.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Resource path
+- extract_to_path: ""
+  opts:
+    description: Resource extract path.
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: Extract path

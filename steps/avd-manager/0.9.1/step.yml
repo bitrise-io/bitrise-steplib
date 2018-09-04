@@ -1,0 +1,247 @@
+title: AVD Manager
+summary: Create and run Android Virtual Device
+description: Create and run Android Virtual Device
+website: https://github.com/bitrise-steplib/steps-avd-manager
+source_code_url: https://github.com/bitrise-steplib/steps-avd-manager
+support_url: https://github.com/bitrise-steplib/steps-avd-manager/issues
+published_at: 2017-12-01T15:45:31.799247621+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-avd-manager.git
+  commit: 2cb213006948bccae20100cb4e14e82c6965de7c
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- script
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-avd-manager
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Set the device profile to create the new AVD. This profile contains
+      all the parameters of the devices. To see the complete list of available profiles
+      please use the `avdmanager list device` command.
+    is_expand: true
+    is_required: true
+    summary: Set the device profile to create the new AVD. This profile contains all
+      the parameters of the devices. To see the complete list of available profiles
+      please use the `avdmanager list device` command.
+    title: Device Profile
+    value_options:
+    - tv_1080p
+    - tv_720p
+    - wear_round
+    - wear_round_chin_320_290
+    - wear_square
+    - Galaxy Nexus
+    - Nexus 10
+    - Nexus 4
+    - Nexus 5
+    - Nexus 5X
+    - Nexus 6
+    - Nexus 6P
+    - Nexus 7 2013
+    - Nexus 7
+    - Nexus 9
+    - Nexus One
+    - Nexus S
+    - pixel
+    - pixel_c
+    - pixel_xl
+    - 2.7in QVGA
+    - 2.7in QVGA slider
+    - 3.2in HVGA slider (ADP1)
+    - 3.2in QVGA (ADP2)
+    - 3.3in WQVGA
+    - 3.4in WQVGA
+    - 3.7 FWVGA slider
+    - 3.7in WVGA (Nexus One)
+    - 4in WVGA (Nexus S)
+    - 4.65in 720p (Galaxy Nexus)
+    - 4.7in WXGA
+    - 5.1in WVGA
+    - 5.4in FWVGA
+    - 7in WSVGA (Tablet)
+    - 10.1in WXGA (Tablet)
+  profile: Nexus 5X
+- opts:
+    description: The device will run with the specified version of android.
+    is_expand: true
+    is_required: true
+    summary: The device will run with the specified version of android.
+    title: Android API Level
+  version: 26
+- opts:
+    description: Select OS tag to have the required toolset on the device.
+    is_expand: true
+    is_required: true
+    summary: Select OS tag to have the required toolset on the device.
+    title: OS Tag
+    value_options:
+    - google_apis
+    - google_apis_playstore
+    - android-wear
+    - android-tv
+    - default
+  tag: google_apis
+- opts:
+    category: Customize
+    description: If set to `true` then the step will print emulator logs
+    is_expand: true
+    is_required: true
+    summary: If set to `true` then the step will print emulator logs
+    title: Verbose Mode
+    value_options:
+    - "true"
+    - "false"
+  verbose_mode: false
+- opts:
+    category: Customize
+    description: Set the device to the selected orientation.
+    is_expand: true
+    is_required: true
+    summary: Set the device to the selected orientation.
+    title: Orientation
+    value_options:
+    - portrait
+    - landscape
+  orientation: portrait
+- opts:
+    category: Customize
+    description: Set the device's display resolution. This field will override the
+      device profile's default resolution, if you need the device profile's default
+      resolution leave this field empty.
+    is_expand: true
+    is_required: false
+    summary: Set the device's display resolution. This field will override the device
+      profile's default resolution, if you need the device profile's default resolution
+      leave this field empty.
+    title: Resolution
+  resolution: 240x426
+- density: 120
+  opts:
+    category: Customize
+    description: Set the device's display density. This field will override the device
+      profile's default density, if you need the device profile's default density
+      leave this field empty.
+    is_expand: true
+    is_required: false
+    summary: Set the device's display density. This field will override the device
+      profile's default density, if you need the device profile's default density
+      leave this field empty.
+    title: Density
+- emulator_id: emulator
+  opts:
+    category: Customize
+    description: Set the device's ID. (This will be the name under $HOME/.android/avd/)
+    is_expand: true
+    is_required: true
+    summary: Set the device's ID. (This will be the name under $HOME/.android/avd/)
+    title: ID
+- custom_hw_config: |-
+    disk.dataPartition.size=1024M
+    hw.camera.back=emulated
+    hw.camera.front=emulated
+    hw.keyboard=yes
+    hw.gpu.enabled=true
+    hw.gpu.mode=swiftshader
+    hw.ramSize=1536
+    runtime.network.latency=none
+    runtime.network.speed=full
+    showDeviceFrame=no
+    skin.dynamic=yes
+    skin.path=_no_skin
+    skin.path.backup=_no_skin
+    vm.heapSize=384
+  opts:
+    category: Customize
+    description: |-
+      Will append, replace or remove your config entries to the default device hardware config.
+
+      Usage: one config per line in the format `key=value`
+
+      For example: `hw.gpu.enabled=false`
+
+      Append:
+
+      If the given `key` is not in the config already, it will be added.
+
+      Remove:
+
+      Set your key without value, for example: `key=`. It will be removed from the default device config.
+
+      Replace:
+
+      If the given `key` is already in the config, the `value` will be replaced.
+    is_expand: true
+    is_required: false
+    summary: |-
+      Will append, replace or remove your config entries to the default device hardware config.
+
+      Usage: one config per line in the format `key=value`
+
+      For example: `hw.gpu.enabled=false`
+
+      Append:
+
+      If the given `key` is not in the config already, it will be added.
+
+      Remove:
+
+      Set your key without value, for example: `key=`. It will be removed from the default device config.
+
+      Replace:
+
+      If the given `key` is already in the config, the `value` will be replaced.
+    title: Custom hardware config
+- opts:
+    category: Customize
+    description: Overwrite AVD images if already exists.
+    is_expand: true
+    is_required: true
+    summary: Overwrite AVD images if already exists.
+    title: Overwrite
+    value_options:
+    - "true"
+    - "false"
+  overwrite: true
+- custom_command_flags: -no-window -no-audio -debug-init
+  opts:
+    category: Customize
+    description: Flags used when running the command to start the emulator.
+    is_expand: true
+    is_required: false
+    summary: Flags used when running the command to start the emulator.
+    title: Start AVD command flags
+- emulator_abi: x86
+  opts:
+    category: Customize
+    description: Select which ABI to use running the emulator. Availability depends
+      on API level. Please use `sdkmanager --list` command to see the available ABIs.
+    is_expand: true
+    is_required: true
+    summary: Select which ABI to use running the emulator. Availability depends on
+      API level. Please use `sdkmanager --list` command to see the available ABIs.
+    title: Emulator ABI
+    value_options:
+    - x86
+    - armeabi-v7a
+    - arm64-v8a
+    - x86_64
+    - mips
+outputs:
+- BITRISE_EMULATOR_SERIAL: null
+  opts:
+    description: Booted emulator serial
+    title: Emulator serial

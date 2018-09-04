@@ -1,0 +1,62 @@
+title: IPA info
+summary: IPA iOS info provider
+description: Provides all possible iOS IPA information as package name, version name
+  or version code.
+website: https://github.com/thefuntasty/bitrise-step-ipa-info
+source_code_url: https://github.com/thefuntasty/bitrise-step-ipa-info
+support_url: https://github.com/thefuntasty/bitrise-step-ipa-info/issues
+published_at: 2018-01-17T12:27:12.106338+01:00
+source:
+  git: https://github.com/thefuntasty/bitrise-step-ipa-info.git
+  commit: 9131a67b7d0e17bb84f2c537dd2bea1a2afac02e
+project_type_tags:
+- ios
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- artifact-info
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: |
+      File path to IPA file to get info from.
+    is_required: true
+    title: IPA file path
+outputs:
+- IOS_IPA_PACKAGE_NAME: null
+  opts:
+    description: iOS application package name, ex. com.package.my
+    title: iOS application package name
+- IOS_IPA_FILE_SIZE: null
+  opts:
+    description: iOS IPA file size, in bytes
+    title: iOS IPA file size
+- IOS_APP_NAME: null
+  opts:
+    description: iOS application name from IPA
+    title: iOS application name
+- IOS_APP_DISPLAY_NAME: null
+  opts:
+    description: iOS application display name from IPA's Info.plist
+    title: iOS application display name
+- IOS_APP_VERSION_NAME: null
+  opts:
+    description: iOS application version name from IPA, ex. 1.0.0
+    title: iOS application version name
+- IOS_APP_VERSION_CODE: null
+  opts:
+    description: iOS application version code from IPA, ex. 10
+    title: iOS application version code
+- IOS_ICON_PATH: null
+  opts:
+    description: File path to iOS application icon
+    title: File path to icon
+- IOS_APP_PROFILE_NAME: null
+  opts:
+    description: iOS application profile name
+    title: iOS application profile name

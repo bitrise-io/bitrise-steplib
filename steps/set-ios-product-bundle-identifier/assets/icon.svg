@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <title>set-ios-info-plist-bundle-version-and-bundle-short-version-string-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#54C3FA" offset="0%"></stop>
+            <stop stop-color="#1586F5" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="256" height="256"></rect>
+        <linearGradient x1="132.409355%" y1="-11.0977103%" x2="-18.5997596%" y2="109.263393%" id="linearGradient-4">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="50%" y1="0%" x2="70.7817359%" y2="100%" id="linearGradient-5">
+            <stop stop-color="#135EA7" stop-opacity="0.855383832" offset="0%"></stop>
+            <stop stop-color="#1E568F" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="-24.4959615%" y1="123.982136%" x2="96.7950856%" y2="6.14922306%" id="linearGradient-6">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Set-iOS-Info.plist---Bundle-Version-and-Bundle-Short-Version-String">
+            <g id="set-ios-info-plist-bundle-version-and-bundle-short-version-string-stepicon">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="Rectangle" fill="url(#linearGradient-1)" xlink:href="#path-2"></use>
+                <path d="M69,37 L159.738281,37 L193,71.9585974 L193,211 C193,214.313708 190.313708,217 187,217 L69,217 C65.6862915,217 63,214.313708 63,211 L63,43 C63,39.6862915 65.6862915,37 69,37 Z" id="Rectangle-6" fill="url(#linearGradient-4)" mask="url(#mask-3)"></path>
+                <path d="M146.785714,125.464286 L161.25,125.464286 L159.107143,136.178571 L144.642857,136.178571 L140.892857,156 L128.571429,156 L132.321429,136.178571 L116.785714,136.178571 L113.035714,156 L100.714286,156 L104.464286,136.178571 L90,136.178571 L92.1428571,125.464286 L106.607143,125.464286 L109.285714,111.535714 L94.8214286,111.535714 L96.9642857,100.821429 L111.428571,100.821429 L115.178571,81 L127.5,81 L123.75,100.821429 L139.285714,100.821429 L143.035714,81 L155.357143,81 L151.607143,100.821429 L166.071429,100.821429 L163.928571,111.535714 L149.464286,111.535714 L146.785714,125.464286 Z M134.464286,125.464286 L137.142857,111.535714 L121.607143,111.535714 L118.928571,125.464286 L134.464286,125.464286 Z" id="#" fill="url(#linearGradient-5)" style="mix-blend-mode: multiply;" mask="url(#mask-3)"></path>
+                <path d="M87.025,180.1 L95.935,180.1 C100.39,180.1 103.225,183.07 103.225,186.985 C103.225,190.9 100.39,193.87 95.935,193.87 L93.1,193.87 L93.1,199 L87.025,199 L87.025,180.1 Z M95.53,185.5 L93.1,185.5 L93.1,188.47 L95.53,188.47 C96.475,188.47 97.15,187.795 97.15,186.985 C97.15,186.175 96.475,185.5 95.53,185.5 Z M120.7,199 L106.66,199 L106.66,180.1 L112.735,180.1 L112.735,193.465 L120.7,193.465 L120.7,199 Z M123.865,199 L123.865,180.1 L129.94,180.1 L129.94,199 L123.865,199 Z M141.88,193.06 C141.88,191.17 133.645,191.98 133.645,185.581 C133.645,182.53 136.48,179.56 141.205,179.56 C146.065,179.56 148.225,182.26 148.225,182.26 L144.715,185.905 C144.715,185.905 143.635,184.555 142.015,184.555 C140.935,184.555 140.395,185.095 140.395,185.77 C140.395,187.66 148.63,186.715 148.63,193.195 C148.63,196.516 145.795,199.54 140.8,199.54 C135.67,199.54 132.835,196.3 132.835,196.3 L136.345,192.79 C136.345,192.79 137.965,194.545 139.99,194.545 C141.205,194.545 141.88,193.87 141.88,193.06 Z M150.58,180.1 L166.645,180.1 L166.645,185.635 L161.65,185.635 L161.65,199 L155.575,199 L155.575,185.635 L150.58,185.635 L150.58,180.1 Z" id="plist" fill="url(#linearGradient-5)" style="mix-blend-mode: multiply;" mask="url(#mask-3)"></path>
+                <path d="M158.731207,37.3828125 L192.784706,72.2668851 L164.731207,72.2668851 C161.417498,72.2668851 158.731207,69.5805936 158.731207,66.2668851 L158.731207,37.3828125 Z" id="Rectangle-6-Copy-2" fill="url(#linearGradient-6)" mask="url(#mask-3)"></path>
+            </g>
+        </g>
+    </g>
+</svg>

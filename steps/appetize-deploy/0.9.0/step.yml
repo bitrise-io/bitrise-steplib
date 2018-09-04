@@ -1,0 +1,72 @@
+title: Appetize.io deploy
+summary: Deploy the app to Appetize.io
+description: "Deploy your app to Appetize.io and run it in your browser.\nFor app
+  demos, training, customer support, development, testing, and more.\n\n**NOTE:**
+  For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app bundle
+  or the `.app` bundle. For Android, provide the `.apk` containing your app. "
+website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
+published_at: 2018-06-08T10:13:42.715871756+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-appetize-io-deploy.git
+  commit: df109f715e013131cb47199949b5efdeb9bfa0d8
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appetize-io-deploy
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: go
+inputs:
+- app_path: null
+  opts:
+    description: "The full path to the application file (.app, .zip, .tar.gz, or .apk)\n\n**NOTE:**
+      For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app
+      bundle or the `.app` bundle. For Android, provide the `.apk` containing your
+      app. "
+    is_expand: true
+    is_required: true
+    summary: The full path to the application file (.app, .zip, .tar.gz, or .apk)
+    title: Application path
+- appetize_token: null
+  opts:
+    description: |-
+      The token provided by Appetize.io
+
+      **NOTE:** You can reaquest an api token for Appetioze.io here:
+      [Appetize.io/request-api-token](https://appetize.io/docs#request-api-token)
+    is_expand: true
+    is_required: true
+    summary: The token provided by Appetize.io
+    title: Appetize.io token
+- opts:
+    description: The public key in case you want to deploy this to build to an existing
+      app
+    is_expand: true
+    is_required: false
+    summary: The public key in case you want to deploy this to build to an existing
+      app
+    title: Public key
+  public_key: null
+- opts:
+    description: Enable verbose log option for better debug
+    is_expand: true
+    is_required: true
+    summary: Enable verbose log option for better debug
+    title: Enable verbose logging
+    value_options:
+    - true
+    - false
+  verbose: false
+outputs:
+- APPETIZE_APP_URL: null
+  opts:
+    description: The public URL to use the app
+    is_expand: false
+    is_required: true
+    summary: The public URL to use the app
+    title: Public URL for the app

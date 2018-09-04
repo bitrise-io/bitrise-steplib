@@ -20,7 +20,7 @@ source:
 host_os_tags:
 - osx-10.9
 type_tags:
-- "access control"
+- access-control
 deps:
   apt_get:
   - name: expect

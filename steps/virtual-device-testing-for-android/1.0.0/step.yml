@@ -1,0 +1,290 @@
+title: '[BETA] Virtual Device Testing for Android'
+summary: Run Android UI tests on virtual devices
+description: |-
+  Run Android UI tests on virtual devices. Available test types are instrumentation, robo, gameloop.
+  The minimal setup of this step would be to select test type. If you selected instrumentation, don't forget to set __Test APK path__
+  under the __Instrumentation Test__ group as well.
+website: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android
+source_code_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android
+support_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android/issues
+published_at: 2017-12-21T13:36:39.523074691+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android.git
+  commit: 57195b997579e76e46ff2eefbc5fe7bcad403498
+host_os_tags:
+- ubuntu
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-virtual-device-testing-for-android
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      The path to the APK you want the tests run with. By default `gradle-runner` step exports `BITRISE_APK_PATH` env, so you won't need to change this input.
+    is_required: true
+    summary: |
+      The path to the APK you want the tests run with. By default `gradle-runner` step exports `BITRISE_APK_PATH` env, so you won't need to change this input.
+    title: APK path
+- opts:
+    description: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+
+      For example:
+
+      `NexusLowRes,24,en,portrait`
+
+      `NexusLowRes,24,en,landscape`
+
+      Available devices and its versions:
+      ```
+      ┌─────────────┬──────────┬────────────────────┬─────────────┬────────────────┬
+      │   MODEL_ID  │   MAKE   │     MODEL_NAME     │  RESOLUTION │ OS_VERSION_IDS │
+      ├─────────────┼──────────┼────────────────────┼─────────────┼────────────────┼
+      │ Nexus4      │ LG       │ Nexus 4            │ 1280 x 768  │ 19,21,22       │
+      │ Nexus10     │ Samsung  │ Nexus 10           │ 2560 x 1600 │ 19,21,22       │
+      │ Nexus5      │ LG       │ Nexus 5            │ 1920 x 1080 │ 19,21,22,23    │
+      │ Nexus5X     │ LG       │ Nexus 5X           │ 1920 x 1080 │ 23,24,25,26    │
+      │ Nexus6      │ Motorola │ Nexus 6            │ 2560 x 1440 │ 21,22,23,24,25 │
+      │ Nexus6P     │ Google   │ Nexus 6P           │ 2560 x 1440 │ 23,24,25,26    │
+      │ Nexus7      │ ASUS     │ Nexus 7 (2012)     │ 1280 x 800  │ 19,21,22       │
+      │ Nexus9      │ HTC      │ Nexus 9            │ 2048 x 1536 │ 21,22,23,24,25 │
+      │ NexusLowRes │ Generic  │ Low-res MDPI phone │  640 x 360  │ 23,24,25,26    │
+      └─────────────┴──────────┴────────────────────┴─────────────┴────────────────┴
+      ```
+    is_required: true
+    summary: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+
+      For example:
+
+      `NexusLowRes,24,en,portrait`
+
+      `NexusLowRes,24,en,landscape`
+
+      Available devices and its versions:
+      ```
+      ┌─────────────┬──────────┬────────────────────┬─────────────┬────────────────┬
+      │   MODEL_ID  │   MAKE   │     MODEL_NAME     │  RESOLUTION │ OS_VERSION_IDS │
+      ├─────────────┼──────────┼────────────────────┼─────────────┼────────────────┼
+      │ Nexus4      │ LG       │ Nexus 4            │ 1280 x 768  │ 19,21,22       │
+      │ Nexus10     │ Samsung  │ Nexus 10           │ 2560 x 1600 │ 19,21,22       │
+      │ Nexus5      │ LG       │ Nexus 5            │ 1920 x 1080 │ 19,21,22,23    │
+      │ Nexus5X     │ LG       │ Nexus 5X           │ 1920 x 1080 │ 23,24,25,26    │
+      │ Nexus6      │ Motorola │ Nexus 6            │ 2560 x 1440 │ 21,22,23,24,25 │
+      │ Nexus6P     │ Google   │ Nexus 6P           │ 2560 x 1440 │ 23,24,25,26    │
+      │ Nexus7      │ ASUS     │ Nexus 7 (2012)     │ 1280 x 800  │ 19,21,22       │
+      │ Nexus9      │ HTC      │ Nexus 9            │ 2048 x 1536 │ 21,22,23,24,25 │
+      │ NexusLowRes │ Generic  │ Low-res MDPI phone │  640 x 360  │ 23,24,25,26    │
+      └─────────────┴──────────┴────────────────────┴─────────────┴────────────────┴
+      ```
+    title: Test devices
+  test_devices: NexusLowRes,24,en,portrait
+- opts:
+    description: |
+      The type of your test you want to run on the devices. Find more properties below in the selected test type's group.
+    is_required: true
+    summary: |
+      The type of your test you want to run on the devices. Find more properties below in the selected test type's group.
+    title: Test type
+    value_options:
+    - instrumentation
+    - robo
+    - gameloop
+  test_type: robo
+- app_package_id: null
+  opts:
+    description: |
+      The Java package of the application under test (leave empty to get it extracted from the APK manifest).
+    summary: |
+      The Java package of the application under test (leave empty to get it extracted from the APK manifest).
+    title: App package ID
+- opts:
+    category: Instrumentation Test
+    description: The path to the APK that contains instrumentation tests
+    summary: The path to the APK that contains instrumentation tests
+    title: Test APK path
+  test_apk_path: $BITRISE_TEST_APK_PATH
+- inst_test_package_id: null
+  opts:
+    category: Instrumentation Test
+    description: The Java package name of the instrumentation test (leave empty to
+      get it extracted from the APK manifest).
+    summary: The Java package name of the instrumentation test (leave empty to get
+      it extracted from the APK manifest).
+    title: Test package ID
+- inst_test_runner_class: null
+  opts:
+    category: Instrumentation Test
+    description: The fully-qualified Java class name of the instrumentation test runner
+      (leave empty to use the last name extracted from the APK manifest).
+    summary: The fully-qualified Java class name of the instrumentation test runner
+      (leave empty to use the last name extracted from the APK manifest).
+    title: Test runner class
+- inst_test_targets: null
+  opts:
+    category: Instrumentation Test
+    description: |
+      Test targets
+    summary: Test targets
+    title: |
+      Test targets, seperated with the "," character.
+- inst_use_orchestrator: "false"
+  opts:
+    category: Instrumentation Test
+    description: |
+      The option of whether running each test within its own invocation of instrumentation with Android Test Orchestrator or not.
+    is_required: true
+    summary: |
+      The option of whether running each test within its own invocation of instrumentation with Android Test Orchestrator or not.
+    title: Use Orchestrator
+    value_options:
+    - "false"
+    - "true"
+- opts:
+    category: Robo Test
+    description: The initial activity used to start the app during a robo test. (leave
+      empty to get it extracted from the APK manifest)
+    summary: The initial activity used to start the app during a robo test. (leave
+      empty to get it extracted from the APK manifest)
+    title: Initial activity
+  robo_initial_activity: null
+- opts:
+    category: Robo Test
+    description: |
+      The maximum depth of the traversal stack a robo test can explore. Needs to be at least 2 to make Robo explore the app beyond the first activity(leave empty to use the default value: `50`)
+    summary: |
+      The maximum depth of the traversal stack a robo test can explore. Needs to be at least 2 to make Robo explore the app beyond the first activity(leave empty to use the default value: `50`)
+    title: Max depth
+  robo_max_depth: null
+- opts:
+    category: Robo Test
+    description: |
+      The maximum number of steps/actions a robo test can execute(leave empty to use the default value: `no limit`).
+    summary: |
+      The maximum number of steps/actions a robo test can execute(leave empty to use the default value: `no limit`).
+    title: Max steps
+  robo_max_steps: null
+- opts:
+    category: Robo Test
+    description: |
+      To complete text fields in your app, use robo-directives and provide a comma-separated list of key-value pairs, where the key is the Android resource name of the target UI element, and the value is the text string. EditText fields are supported but not text fields in WebView UI elements.
+
+      For example, you could use the following parameter for custom login:
+
+      ```
+      username_resource,username,text
+      password_resource,password,text
+      loginbtn_resource,,click
+      ```
+
+      One directive per line, the parameters are separated with `,` character. For example: `ResourceName,InputText,ActionType`
+    summary: |
+      To complete text fields in your app, use robo-directives and provide a comma-separated list of key-value pairs, where the key is the Android resource name of the target UI element, and the value is the text string. EditText fields are supported but not text fields in WebView UI elements.
+
+      For example, you could use the following parameter for custom login:
+
+      ```
+      username_resource,username,text
+      password_resource,password,text
+      loginbtn_resource,,click
+      ```
+
+      One directive per line, the parameters are separated with `,` character. For example: `ResourceName,InputText,ActionType`
+    title: Robo directives
+  robo_directives: null
+- loop_scenarios: null
+  opts:
+    category: Game Loop Test
+    title: Loop scenarios
+- loop_scenario_labels: null
+  opts:
+    category: Game Loop Test
+    title: Loop scenario labels
+- opts:
+    category: Debug
+    description: |
+      The max time this test execution can run before it is cancelled. It does not include any time necessary to prepare and clean up the target device. The maximum possible testing time is 3600 seconds.
+    summary: |
+      The max time this test execution can run before it is cancelled. It does not include any time necessary to prepare and clean up the target device. The maximum possible testing time is 3600 seconds.
+    title: Test timeout
+  test_timeout: 900
+- directories_to_pull: null
+  opts:
+    category: Debug
+    description: "A list of paths that will be downloaded from the device's storage
+      after the test is complete. \n\nFor example\n\n```\n/sdcard/tempDir1\n/data/tempDir2\n```\n"
+    summary: "A list of paths that will be downloaded from the device's storage after
+      the test is complete. \n\nFor example\n\n```\n/sdcard/tempDir1\n/data/tempDir2\n```\n"
+    title: Directories to pull
+- environment_variables: null
+  opts:
+    category: Debug
+    description: |
+      One variable per line, key and value seperated by `=`
+
+      For example:
+
+      ```
+      coverage=true
+      coverageFile=/sdcard/tempDir/coverage.ec
+      ```
+    summary: |
+      One variable per line, key and value seperated by `=`
+
+      For example:
+
+      ```
+      coverage=true
+      coverageFile=/sdcard/tempDir/coverage.ec
+      ```
+    title: Environment Variables
+- download_test_results: "false"
+  opts:
+    category: Debug
+    description: |
+      Test result files like video or test cases results won't be downloaded. Use this input if you have set `directories_to_pull` input and you have files generated in the test.
+    is_required: true
+    summary: |
+      Test result files like video or test cases results won't be downloaded. Use this input if you have set `directories_to_pull` input and you have files generated in the test.
+    title: Download files
+    value_options:
+    - "false"
+    - "true"
+- api_base_url: $ADDON_VDTESTING_API_URL
+  opts:
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- api_token: $ADDON_VDTESTING_API_TOKEN
+  opts:
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_required: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+outputs:
+- VDTESTING_DOWNLOADED_FILES_DIR: null
+  opts:
+    description: The directory containing the downloaded files if you have set `directories_to_pull`
+      and `download_test_results` inputs above.
+    summary: The directory containing the downloaded files if you have set `directories_to_pull`
+      and `download_test_results` inputs above.
+    title: Downloaded files directory

@@ -1,0 +1,76 @@
+title: Set Android Manifest Values
+summary: |
+  Sets some important values in AndroidManifest.xml
+description: |
+  Sets the package, label, android:versionCode, and android:versionName attributes in AndroidManifest.xml.
+
+  Examples:
+  - package: "com.myorganization.myapp"
+  - label: "MyApp" (displayed with the app icon)
+  - android:versionCode: "1"
+  - android:versionName: "1.0"
+website: https://github.com/jsauve/set-android-manifest-values
+source_code_url: https://github.com/jsauve/set-android-manifest-values
+support_url: https://github.com/jsauve/set-android-manifest-values/issues
+published_at: 2018-02-01T15:58:33.181858568-06:00
+source:
+  git: https://github.com/jsauve/set-android-manifest-values.git
+  commit: 9bcbfb97748c673a18bd145b3da410dfbbf2e305
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: xmlstarlet
+  apt_get:
+  - name: xmlstarlet
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- android_manifest_path: ""
+  opts:
+    description: |
+      "The path to the AndroidManifest.xml, including the filename. Example: MyAndroidApp/Properties/AndroidManifest.xml"
+    is_expand: true
+    is_required: true
+    summary: The path to the AndroidManifest.xml, including the filename
+    title: Android Manifest Path
+- opts:
+    description: |
+      "The package value. Example: com.organization.appname"
+    is_expand: true
+    is_required: false
+    summary: 'The app package identifier. Example: com.organization.appname'
+    title: App Package Identifier
+  package_identifier: ""
+- app_label: ""
+  opts:
+    description: |
+      "This is the label that accompanies the app icon."
+    is_expand: true
+    is_required: false
+    summary: The app label shown with the app icon
+    title: App Label
+- opts:
+    description: |
+      "The app version code. Example: 1"
+    is_expand: true
+    is_required: false
+    summary: 'The app version code. Example: 1'
+    title: App Version Code
+  version_code: ""
+- opts:
+    description: |
+      "The app version name. Example: 1.0"
+    is_expand: true
+    is_required: false
+    summary: 'The app version name. Example: 1.0'
+    title: App Version Name
+  version_name: ""

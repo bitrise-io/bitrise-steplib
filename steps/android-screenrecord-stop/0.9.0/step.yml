@@ -1,0 +1,61 @@
+title: Android Screenrecord Stop
+summary: Stop an Android device's screen recording and pulls the recorded video under
+  BITRISE_DEPLOY_DIR
+description: Stop an Android device's screen recording and pulls the recorded video
+  under BITRISE_DEPLOY_DIR
+website: https://github.com/bitrise-steplib/steps-android-screenrecord-stop
+source_code_url: https://github.com/bitrise-steplib/steps-android-screenrecord-stop
+support_url: https://github.com/bitrise-steplib/steps-android-screenrecord-stop/issues
+published_at: 2017-12-20T11:51:07.464074046+01:00
+source:
+  git: https://github.com/bitrise-steplib/steps-android-screenrecord-stop.git
+  commit: d5180e9ddd1bae5bb5cc61ae59ceb83d9e4ecd16
+host_os_tags:
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-android-screenrecord-stop
+deps:
+  brew:
+  - name: go
+  - name: ffmpeg
+  apt_get:
+  - name: ffmpeg
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: true
+inputs:
+- opts:
+    description: The record running with this ID will be stopped and the finished
+      video will be downloaded from the device.
+    is_expand: true
+    is_required: true
+    summary: The record running with this ID will be stopped and the finished video
+      will be downloaded from the device.
+    title: Record ID
+  record_id: $BITRISE_RECORD_ID
+- opts:
+    description: Remove sequentially duplicate frames with FFmpeg by dropping frames
+      that do not differ greatly from the previous frame in order to reduce frame
+      rate, video length and file size.
+    is_expand: true
+    is_required: true
+    summary: Remove sequentially duplicate frames with FFmpeg by dropping frames that
+      do not differ greatly from the previous frame in order to reduce frame rate,
+      video length and file size.
+    title: Remove Duplicate Frames
+    value_options:
+    - "true"
+    - "false"
+  remove_frames: "false"
+- emulator_serial: $BITRISE_EMULATOR_SERIAL
+  opts:
+    description: The commands will be sent to the emulator that has the given serial.
+    is_expand: true
+    is_required: true
+    summary: The commands will be sent to the emulator that has the given serial.
+    title: Emulator serial

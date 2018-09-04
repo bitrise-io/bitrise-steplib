@@ -1,0 +1,88 @@
+title: Bitbucket Snippet Runner
+summary: "Found a great Bitbucket Snippet that you'd like to use during your workflow?
+  \ \nJust add the raw URL, Bitrise will download it and run it as a bash script!\n"
+description: "Downloads the content of the input url and runs it as a bash script.
+  \ \nFor example you can provide a Bitbucket Snippet url.\n"
+website: https://github.com/waracle/bitrise-step-bitbucket-snippet-runner
+source_code_url: https://github.com/waracle/bitrise-step-bitbucket-snippet-runner
+support_url: https://github.com/waracle/bitrise-step-bitbucket-snippet-runner/issues
+published_at: 2018-01-26T14:07:48.711174Z
+source:
+  git: https://github.com/waracle/bitrise-step-bitbucket-snippet-runner.git
+  commit: ddeebb540610bbfb0e3c8f55a781102eb2194145
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: jq
+  apt_get:
+  - name: git
+  - name: wget
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    category: Config
+    description: |
+      The snippet to run can be private or public, hosted on cloud or server based Bitbucket accounts
+    is_expand: true
+    is_required: true
+    summary: |
+      The Bitbucket url of the snippet to run
+
+      https://bitbucket.org/snippets/<username|team>/<encoded_id>
+
+      Example: https://bitbucket.org/snippets/waracle/xLMA9q
+    title: Snippet URL
+    value_options: []
+  script_url: null
+- opts:
+    category: Config
+    is_required: false
+    summary: The Bitbucket username to access the snippet with.
+    title: Username
+  username: $BITBUCKET_USERNAME
+- opts:
+    category: Config
+    is_required: false
+    summary: The password (or *app* password if 2FA is enabled) for the user to authenticate
+      against.
+    title: Password
+  password: $BITBUCKET_PASSWORD
+- opts:
+    category: Config
+    description: "This directory will be set as the current working\ndirectory for
+      the script.\nAny relative path in the Script (content) will be\nrelative to
+      this directory. \n"
+    is_required: false
+    title: Working directory
+  working_dir: $BITRISE_SOURCE_DIR
+- opts:
+    category: Config
+    description: |
+      Allows passing of arguments to be passed
+      into the downloaded script
+    is_required: false
+    title: Script Arguments
+  script_args: null
+- is_debug: "no"
+  opts:
+    category: Debug
+    description: |
+      If debug=yes the step will print debug infos about
+      the working dir, tmp file path, exit code, etc.
+    title: Debug print?
+    value_options:
+    - "no"
+    - "yes"
