@@ -1,15 +1,39 @@
-package valueoptions
+package typetags
 
 import (
 	"fmt"
-	"reflect"
 	"strings"
 
-	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
-	"github.com/bitrise-tools/go-steputils/stepconf"
+	"github.com/bitrise-io/go-utils/sliceutil"
 
-	yaml "gopkg.in/yaml.v2"
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
+	stepmanModels "github.com/bitrise-io/stepman/models"
+	"github.com/bitrise-tools/go-steputils/stepconf"
 )
+
+var typeTags = []string{
+	"access-control",
+	"artifact-info",
+	"installer",
+	"deploy",
+	"utility",
+	"dependency",
+	"code-sign",
+	"build",
+	"test",
+	"notification",
+}
+var projectTypeTags = []string{
+	"ios",
+	"macos",
+	"android",
+	"xamarin",
+	"react-native",
+	"cordova",
+	"ionic",
+	"fastlane",
+	"web",
+}
 
 // Config ...
 type Config struct {
@@ -40,12 +64,12 @@ func (v *Validator) Validate(sl steplib.StepLib) error {
 		if version.ID == "" {
 			return fmt.Errorf("Failed to find step by ID: %s and version: %s", stepID, vers)
 		}
-		return validateStepYML(version.Raw)
+		return validateStepYML(version.StepModel)
 	}
 
 	var errors []string
 	for _, step := range sl.Steps {
-		if err := validateStepYML(step.Latest.Raw); err != nil {
+		if err := validateStepYML(step.Latest.StepModel); err != nil {
 			errors = append(errors, fmt.Sprintf(" - %s@%s:\n%s", step.ID, step.Latest.ID, err.Error()))
 		}
 	}
@@ -58,32 +82,18 @@ func (v *Validator) Validate(sl steplib.StepLib) error {
 }
 
 // - %s@%s has invalid value_options
-func validateStepYML(data []byte) error {
+func validateStepYML(stepModel stepmanModels.StepModel) error {
 	var errors []string
 
-	var step struct {
-		Inputs []struct {
-			Opts struct {
-				Title        string        `yaml:"title,omitempty"`
-				ValueOptions []interface{} `yaml:"value_options,omitempty"`
-			} `yaml:"opts,omitempty"`
-		} `yaml:"inputs,omitempty"`
-	}
-	if err := yaml.Unmarshal(data, &step); err != nil {
-		return err
+	for _, typeTag := range stepModel.TypeTags {
+		if !sliceutil.IsStringInSlice(typeTag, typeTags) {
+			errors = append(errors, fmt.Sprintf("   - invalid type_tag: %s", typeTag))
+		}
 	}
 
-	for _, input := range step.Inputs {
-		for _, v := range input.Opts.ValueOptions {
-			switch v.(type) {
-			case string:
-				// all ok
-				break
-			default:
-				// error only if the latest version affected
-				errors = append(errors, fmt.Sprintf("   - type(%s) in value_options with value: %v at input: %s", reflect.TypeOf(v), v, input.Opts.Title))
-				break
-			}
+	for _, projectTypeTag := range stepModel.ProjectTypeTags {
+		if !sliceutil.IsStringInSlice(projectTypeTag, projectTypeTags) {
+			errors = append(errors, fmt.Sprintf("   - invalid project_type_tag: %s", projectTypeTag))
 		}
 	}
 
@@ -96,5 +106,5 @@ func validateStepYML(data []byte) error {
 
 // String will return a short summary of the validator task
 func (v *Validator) String() string {
-	return "Ensure all value_option is string type"
+	return "Ensure all type_tags and project_type_tags are supported"
 }

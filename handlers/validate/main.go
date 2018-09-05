@@ -4,13 +4,16 @@ import (
 	"fmt"
 	"os"
 
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/collection"
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/typetags"
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/valueoptions"
 	"github.com/bitrise-io/go-utils/log"
 )
 
 // Validator runner interface
 type Validator interface {
-	Validate() error
+	Validate(steplib.StepLib) error
 	IsSkippable() bool
 	String() string
 }
@@ -26,14 +29,23 @@ func failf(format string, v ...interface{}) {
 }
 
 func main() {
+	log.Infof("Parsing StepLib:")
+	sl, err := steplib.NewStepLib("./")
+	if err != nil {
+		failf("Failed to parse StepLib, error: %s", err)
+	}
+	fmt.Println()
+
 	log.Infof("Running validations:")
 	validators := []Validator{
+		&collection.Validator{},
 		&valueoptions.Validator{},
+		&typetags.Validator{},
 	}
 
 	for i, validator := range validators {
 		log.Printf("- (%d/%d) Running: %s", i+1, len(validators), validator)
-		if err := validator.Validate(); err != nil {
+		if err := validator.Validate(sl); err != nil {
 			if !validator.IsSkippable() {
 				log.Errorf(" > Failed, error:")
 				log.Printf("%s", err)

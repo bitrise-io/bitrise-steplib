@@ -3,15 +3,31 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/bitrise-io/envman"
+  packages = ["models"]
+  revision = "9c2802d426f96ffb5ef463dadff07b2fedbf5e53"
+
+[[projects]]
+  branch = "master"
   name = "github.com/bitrise-io/go-utils"
   packages = [
     "colorstring",
+    "command",
+    "errorutil",
+    "fileutil",
     "log",
     "parseutil",
     "pathutil",
-    "pointers"
+    "pointers",
+    "sliceutil"
   ]
   revision = "d1de0dbcb811588e61362aff67bb700b93c13c17"
+
+[[projects]]
+  name = "github.com/bitrise-io/stepman"
+  packages = ["models"]
+  revision = "eb9c1be644696dd0e7b56c574b8585466f151e09"
+  version = "0.10.2"
 
 [[projects]]
   branch = "master"
@@ -34,6 +50,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "debb664a1f7ca7a729ecaf9a044f68fb801568d2b09f78af90bb8385f282bab3"
+  inputs-digest = "919ecd190c29137d6b5959694db23777aff46abdef3acacd3b20c83c14068aad"
   solver-name = "gps-cdcl"
   solver-version = 1
