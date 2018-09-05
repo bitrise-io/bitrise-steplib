@@ -34,6 +34,7 @@ func main() {
 	if err != nil {
 		failf("Failed to parse StepLib, error: %s", err)
 	}
+	log.Donef("> Done")
 	fmt.Println()
 
 	log.Infof("Running validations:")
