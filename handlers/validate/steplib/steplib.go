@@ -104,13 +104,3 @@ func findLatestVersion(versions []Version) (Version, error) {
 	}
 	return versionFound, nil
 }
-
-func findPreviousVersion(versions []Version, latest Version) (Version, error) {
-	var cleanVersions []Version
-	for _, v := range versions {
-		if v.ID != latest.ID {
-			cleanVersions = append(cleanVersions, v)
-		}
-	}
-	return findLatestVersion(cleanVersions)
-}

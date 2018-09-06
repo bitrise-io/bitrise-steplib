@@ -57,7 +57,6 @@ func (v *Validator) Validate(sl steplib.StepLib) error {
 	return nil
 }
 
-// - %s@%s has invalid value_options
 func validateStepYML(data []byte) error {
 	var errors []string
 
