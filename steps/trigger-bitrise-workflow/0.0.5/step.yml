@@ -1,0 +1,143 @@
+title: Trigger Bitrise workflow
+summary: |
+  Triggers a workflow on bitrise.io with specified parameters.
+description: |
+  The main purpose of this step is to trigger another workflow process of the same app, with the same build parameters, to achieve
+  multiple workflows that all start on the same trigger. Optionally, we would like to do this in parallel and with different necessity of checks.
+
+  For example: unit tests require a PR status check but mutation tests do not.
+  However you can also provide modified build parameters, different Bitrise app and/or choose the same workflow.
+
+  All the parameters except the workflow ID have default values equal to those in a current build. The workflow ID needs to be specified explicitly
+  to avoid accidental infinite recursive triggers of the same build.
+  You can use `$BITRISE_TRIGGERED_WORKFLOW_ID` environment variable to get current workflow ID.
+
+  See [devcenter](http://devcenter.bitrise.io/api/build-trigger/#build-params) for more information about build parameters.
+  Specifying [environment variables](http://devcenter.bitrise.io/api/build-trigger/#specify-environment-variables) is not supported by this step.
+website: https://github.com/DroidsOnRoids/bitrise-step-trigger-bitrise-workflow
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-trigger-bitrise-workflow
+support_url: https://github.com/DroidsOnRoids/bitrise-step-trigger-bitrise-workflow/issues
+published_at: 2018-09-06T03:30:57.438119402+02:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-trigger-bitrise-workflow.git
+  commit: ef069eac3abc70e90147f15c90b7106d90f1703e
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/DroidsOnRoids/bitrise-step-trigger-bitrise-workflow
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_slug: $BITRISE_APP_SLUG
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Bitrise App Slug. You can view your App's Slug on the `Code` tab of the
+      app.
+    title: Bitrise App Slug
+- api_token: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Build trigger API Token. You can view and regenerate your App's API Token
+      on the `Code` tab of the app.
+    title: Build trigger API Token
+- branch: $BITRISE_GIT_BRANCH
+  opts:
+    is_expand: true
+    is_required: false
+    summary: The (Source) Branch to build. In the case of a standard git commit, this
+      is the branch of the commit. In case of a Pull Request build this is the source
+      branch, the one the PR was started from.
+    title: (Source) Branch to build
+- opts:
+    is_expand: true
+    is_required: false
+    title: git Tag to build
+  tag: $BITRISE_GIT_TAG
+- commit_hash: $BITRISE_GIT_COMMIT
+  opts:
+    is_expand: true
+    is_required: false
+    title: git commit hash to build
+- commit_message: $BITRISE_GIT_MESSAGE
+  opts:
+    is_expand: true
+    is_required: false
+    title: git commit message (or build's message)
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Force the use of the specified workflow ID. If empty, then the workflow
+      will be selected, based on the project's [Trigger Map](http://devcenter.bitrise.io/webhooks/trigger-map/)
+      config.
+    title: Workflow ID
+  workflow_id: null
+- branch_dest: $BITRISEIO_GIT_BRANCH_DEST
+  opts:
+    is_expand: true
+    is_required: false
+    summary: |
+      Used only in the case of Pull Request builds: this is the destination/target branch of the Pull Request, and the one the PR will be merged into.
+    title: Pull request destination branch
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Pull Request ID on the source code hosting system (e.g. the PR number
+      on GitHub).
+    title: Pull Request ID
+  pull_request_id: $PULL_REQUEST_ID
+- opts:
+    is_expand: true
+    is_required: false
+    summary: The repository URL from where the Pull Request is sent. E.g. if it's
+      created from a fork this should be the fork's URL.
+    title: Pull Request repository URL
+  pull_request_repository_url: $BITRISEIO_PULL_REQUEST_REPOSITORY_URL
+- opts:
+    is_expand: true
+    is_required: false
+    summary: |
+      The pre-merge branch: if the source code hosting system supports & provides the pre-merged state of the PR on a special "merge branch" (ref). Probably only GitHub supports this.
+    title: Pull Request pre-merge branch
+  pull_request_merge_branch: $BITRISEIO_PULL_REQUEST_MERGE_BRANCH
+- opts:
+    is_expand: true
+    is_required: false
+    summary: The Pull Request's "head branch" (refs/), if the source code hosting
+      system supports & provides this. This special git ref should point to the source
+      of the Pull Request. Supported by GitHub and GitLab.
+    title: Pull Request head branch
+  pull_request_head_branch: $BITRISEIO_PULL_REQUEST_HEAD_BRANCH
+- exported_environment_variable_names: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: |
+      `|` separated names of environment variables to export from current environment to triggered workflow, without leading `$`.
+    title: Names of environment variables to export
+outputs:
+- TRIGGERED_BUILD_SLUG: null
+  opts:
+    description: Triggered build slug
+    summary: ""
+    title: Triggered build slug
+- TRIGGERED_BUILD_NUMBER: null
+  opts:
+    description: Triggered build number
+    summary: ""
+    title: Triggered build number
+- TRIGGERED_BUILD_URL: null
+  opts:
+    description: Triggered build URL
+    summary: ""
+    title: Triggered build URL
+- TRIGGERED_WORKFLOW_ID: null
+  opts:
+    description: Triggered workflow ID
+    summary: ""
+    title: Triggered workflow ID
