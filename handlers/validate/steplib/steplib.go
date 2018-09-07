@@ -47,14 +47,12 @@ func NewStepLib(rootPath string) (StepLib, error) {
 		step := Step{
 			ID: stepDirInfo.Name(),
 		}
-		var previousVersion *Version
 		for _, versionDirInfo := range versionDirs {
 			if !versionDirInfo.IsDir() || versionDirInfo.Name() == "assets" {
 				continue
 			}
 			version := Version{
 				ID:          versionDirInfo.Name(),
-				Previous:    previousVersion,
 				StepYMLPath: filepath.Join(stepDir, versionDirInfo.Name(), "step.yml"),
 			}
 			b, err := fileutil.ReadBytesFromFile(version.StepYMLPath)
@@ -68,7 +66,6 @@ func NewStepLib(rootPath string) (StepLib, error) {
 			}
 
 			step.Versions = append(step.Versions, version)
-			previousVersion = &version
 		}
 
 		latestVersion, err := findLatestVersion(step.Versions)

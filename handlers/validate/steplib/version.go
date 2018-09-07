@@ -6,7 +6,6 @@ import (
 
 type Version struct {
 	ID          string
-	Previous    *Version
 	StepYMLPath string
 	Raw         []byte
 	StepModel   stepmanModels.StepModel
