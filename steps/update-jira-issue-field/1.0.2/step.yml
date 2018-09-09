@@ -15,10 +15,10 @@ description: |
 website: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field
 source_code_url: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field
 support_url: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field/issues
-published_at: 2018-09-06T03:25:32.433762642+02:00
+published_at: 2018-09-09T02:07:45.692811481+02:00
 source:
   git: https://github.com/DroidsOnRoids/bitrise-step-update-jira-issue-field.git
-  commit: caa4ff3f11c2f164a83b996e199ed3af009a7ead
+  commit: 95aa07f335f60b4fd22a94eb938b5e2d814ab870
 type_tags:
 - utility
 toolkit:
@@ -33,6 +33,7 @@ inputs:
   opts:
     is_expand: true
     is_required: false
+    is_sensitive: true
     summary: JIRA user (or bot) login. Ignored if `jira_cookie` is specified.
     title: JIRA username
 - jira_password: null
