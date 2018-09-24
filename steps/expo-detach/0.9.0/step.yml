@@ -1,0 +1,64 @@
+title: '[Beta] Expo Detach'
+summary: Creates Xcode and Android Studio projects for your app. Use this if you need
+  to add custom native functionality.
+description: |-
+  Using the The Expo Development CLI to create Xcode and Android Studio projects for your app.
+  **EXPO DEVELOPMENT CLI** https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli
+website: https://github.com/bitrise-steplib/steps-expo-detach
+source_code_url: https://github.com/bitrise-steplib/steps-expo-detach
+support_url: https://github.com/bitrise-steplib/steps-expo-detach/issues
+published_at: 2018-09-24T09:44:24.280753691Z
+source:
+  git: https://github.com/bitrise-steplib/steps-expo-detach.git
+  commit: a8d1eb1f7b0e327c72b45b4410628a0dd4b8a109
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-expo-detach
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+inputs:
+- opts:
+    description: The path of your project directory
+    is_required: true
+    summary: Project path
+    title: Project path
+  project_path: $BITRISE_SOURCE_DIR
+- expo_cli_verson: latest
+  opts:
+    description: |-
+      Specify the Expo CLI verion to install.
+      The Expo CLI detach your project and creates Xcode and Android Studio projects for your app.
+
+
+      [https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli](https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli)
+
+
+      A couple of examples:
+
+
+      * "2.0.0"
+      * latest
+    is_required: "true"
+    summary: Specify the Expo CLI verion to install.
+    title: Expo CLI version
+- opts:
+    description: |-
+      Your account's username for `https://expo.io/` .
+
+
+      **NOTE** You need to use your username and not your e-mail adress.
+    summary: Username for Expo
+    title: Username for Expo
+  user_name: ""
+- opts:
+    description: Your password for `https://expo.io/` .
+    is_sensitive: true
+    summary: Password for your Expo account
+    title: Password for your Expo account
+  password: ""
