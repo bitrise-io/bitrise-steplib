@@ -6,10 +6,10 @@ description: |
 website: https://github.com/DeployGate/upload-app-bitrise-step
 source_code_url: https://github.com/DeployGate/upload-app-bitrise-step
 support_url: https://github.com/DeployGate/upload-app-bitrise-step/issues
-published_at: 2018-09-26T17:29:05.7800137+09:00
+published_at: 2018-09-27T15:34:25.938975453+09:00
 source:
   git: https://github.com/DeployGate/upload-app-bitrise-step.git
-  commit: b08f5f49e83842ba33425d5e6237a5bdc1b52c07
+  commit: 35e778d9cf915dd42e30ad6ca3b8cf97336b71e6
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -20,10 +20,8 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
-  - name: git
   - name: curl
   apt_get:
-  - name: git
   - name: curl
 is_requires_admin_user: true
 is_always_run: false
@@ -34,6 +32,7 @@ inputs:
   opts:
     description: The authorization token to be used when uploading app
     is_required: true
+    is_sensitive: true
     summary: User's API Key or Organization's API Key
     title: 'DeployGate: API Key'
 - opts:
