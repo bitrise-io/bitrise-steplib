@@ -1,0 +1,72 @@
+title: AppScan Security Analysis
+summary: Performs security analysis using the IBM AppScan Cloud.
+description: |
+  Performs security analysis using the IBM AppScan Cloud.
+website: https://github.com/ipiranga-atq/bitrise_appscan_step
+source_code_url: https://github.com/ipiranga-atq/bitrise_appscan_step
+support_url: https://github.com/ipiranga-atq/bitrise_appscan_step
+published_at: 2018-09-26T15:58:54.306065087-03:00
+source:
+  git: https://github.com/ipiranga-atq/bitrise_appscan_step.git
+  commit: 96515265be0c324bcd00d1ad96a83b2a6fe2677d
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/ipiranga-atq/bitrise_appscan_step
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- app_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      Type of application's installer (APK or IPA)
+    is_expand: true
+    is_required: true
+    title: 'Choose file type: APK/IPA'
+    value_options:
+    - $BITRISE_APK_PATH
+    - $BITRISE_IPA_PATH
+- app_name: null
+  opts:
+    description: |
+      (If no application is found with the given name, the step will fail)
+    is_expand: true
+    is_required: true
+    title: Application's Name on AppScan
+- opts:
+    is_expand: true
+    is_required: true
+    title: Username for AppScan
+  user_name: null
+- opts:
+    is_expand: true
+    is_required: true
+    title: Password for AppScan
+  user_password: null
+- app_user: null
+  opts:
+    description: |
+      Username to log in the application
+    is_expand: true
+    is_required: false
+    title: Application's Username
+- app_password: null
+  opts:
+    description: |
+      Password to log in the application
+    is_expand: true
+    is_required: false
+    title: Application's Password
+- opts:
+    description: |
+      The Presence Id to access the private network of the application.
+    is_expand: true
+    is_required: false
+    title: Presence Id
+  presence_id: null
