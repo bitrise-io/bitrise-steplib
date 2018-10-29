@@ -1,0 +1,60 @@
+title: Comment on GitHub Pull Request
+summary: |
+  Comment on [GitHub](https://github.com) Pull Request or Issue
+description: |
+  You can send a any comment on [GitHub](https://github.com) Pull Request or Issue.
+
+  To setup a **GitHub personal access token** visit: https://github.com/settings/tokens
+website: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request
+source_code_url: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request
+support_url: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request/issues
+published_at: 2018-10-29T15:54:43.074321937+09:00
+source:
+  git: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request.git
+  commit: b35e1ddf95b4ef2b254312db4438b31dc3719aee
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/kvvzr/bitrise-step-comment-on-github-pull-request
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      To setup a **GitHub personal access token** visit: https://github.com/settings/tokens
+      Add repo/repo:status scope to the generated token, to allow to comment on GitHub Pull Request or Issue.
+    is_required: true
+    is_sensitive: true
+    title: GitHub personal access token
+  personal_access_token: null
+- body: null
+  opts:
+    description: |
+      Text of the message to send.
+    is_required: true
+    title: Body
+- opts:
+    description: |
+      The URL for target GitHub Repository.
+    is_required: true
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- issue_number: $BITRISE_PULL_REQUEST
+  opts:
+    description: |
+      Number of GitHub Pull request or Issue.
+    is_required: true
+    title: GitHub PullRequest or Issue number
