@@ -1,0 +1,40 @@
+title: Run yarn command
+summary: Runs `yarn` with the given command and args.
+description: Runs `yarn` with the given command and args.
+website: https://github.com/bitrise-community/steps-yarn
+source_code_url: https://github.com/bitrise-community/steps-yarn
+support_url: https://github.com/bitrise-community/steps-yarn/issues
+published_at: 2018-10-31T16:02:24.695158334Z
+source:
+  git: https://github.com/bitrise-community/steps-yarn.git
+  commit: 95f60fb059627f24ef5b4714bc9fbcd27be99ac1
+host_os_tags:
+- osx-10.11
+type_tags:
+- dependency
+deps:
+  brew:
+  - name: node
+  - name: yarn
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: |
+      Specify the command to run with `yarn`. For example `add`.
+      Leave it blank to install dependencies.
+    is_required: false
+    title: The `yarn` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `yarn` command. You can specify multiple arguments, separated
+      by a space character. For example `global`
+    title: Arguments for running `yarn` commands
