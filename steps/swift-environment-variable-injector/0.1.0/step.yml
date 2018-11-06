@@ -37,7 +37,7 @@ inputs:
     is_required: true
     title: Swift Variable Injector Version
   variable_injector_version: 0.2.0
-- files: null
+- files: "~/Sample/File.swift"
   opts:
     description: |
       All the file paths separated by a white space.
@@ -56,7 +56,7 @@ inputs:
     is_required: false
     summary: The variable names that will be ignored by the variable injector.
     title: Environment Variable Names to ignore
-  vars_to_ignore: null
+  vars_to_ignore: 
 - opts:
     description: |
       All injectictions variables and values logged. Also the output files content.
