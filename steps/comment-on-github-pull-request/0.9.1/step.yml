@@ -2,16 +2,16 @@ title: Comment on GitHub Pull Request
 summary: |
   Comment on [GitHub](https://github.com) Pull Request or Issue
 description: |
-  You can send a any comment on [GitHub](https://github.com) Pull Request or Issue.
+  You can send a comment on [GitHub](https://github.com) Pull Request or Issue.
 
   To setup a **GitHub personal access token** visit: https://github.com/settings/tokens
 website: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request
 source_code_url: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request
 support_url: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request/issues
-published_at: 2018-11-05T12:14:40.961726867+09:00
+published_at: 2018-11-07T11:59:16.01073495+09:00
 source:
   git: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request.git
-  commit: e266acb4355d87ac35989dac88cd72967ab5e280
+  commit: 2e76dfe6fded792627688529aca2f2f4bdff7184
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -20,15 +20,8 @@ type_tags:
 toolkit:
   go:
     package_name: github.com/kvvzr/bitrise-step-comment-on-github-pull-request
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
 is_requires_admin_user: true
-is_always_run: false
+is_always_run: true
 is_skippable: false
 run_if: ""
 inputs:
