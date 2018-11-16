@@ -6,10 +6,10 @@ description: |
 website: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path
 source_code_url: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path
 support_url: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path/issues
-published_at: 2018-11-16T10:19:16.468536521+10:30
+published_at: 2018-11-16T13:04:35.735930269+10:30
 source:
   git: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path.git
-  commit: d975d583a6a03345047c98a3feba6606b41fddeb
+  commit: 7533b3a183c751d7e81f4433f932defb287de21d
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -20,11 +20,9 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
-  - name: git
-  - name: wget
+  - name: zip
   apt_get:
-  - name: git
-  - name: wget
+  - name: zip
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
