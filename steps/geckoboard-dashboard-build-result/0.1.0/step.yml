@@ -2,7 +2,7 @@ title: Geckoboard dashboard build result
 summary: |
   Build result on Geckoboard dashboard
 description: |
-  Update Geckoboard dashboard with build the latest build result
+  Update a text widget on your Geckoboard dashboard with the latest build result
 website: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result
 source_code_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result
 support_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result/issues
@@ -33,7 +33,7 @@ inputs:
 - geckoboard_api_key: null
   opts:
     description: |
-      You can get the Geckoboard API key from your account page - https://app.geckoboard.com/account/details
+      You can get the Geckoboard API key from your [account page](https://app.geckoboard.com/account/details)
     is_expand: true
     is_required: true
     is_sensitive: true
@@ -50,7 +50,7 @@ inputs:
     title: Geckoboard Widget key
     value_options: []
   widget_key: null
-- build_number: 8
+- build_number: $BITRISE_BUILD_NUMBER
   opts:
     description: |
       Bitrise build number
@@ -60,7 +60,7 @@ inputs:
     summary: Bitrise build number
     title: Bitrise build number
     value_options: []
-- build_status: 0
+- build_status: $BITRISE_BUILD_STATUS
   opts:
     description: |
       Bitrise status
