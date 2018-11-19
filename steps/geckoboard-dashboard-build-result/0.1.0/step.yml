@@ -6,10 +6,10 @@ description: |
 website: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result
 source_code_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result
 support_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result/issues
-published_at: 2018-11-18T18:40:30.232446196+01:00
+published_at: 2018-11-19T10:24:13.211371062+01:00
 source:
   git: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result.git
-  commit: b35e8d9b49b67972b5170e61f3b0932aafdec6e9
+  commit: beba05273766c565ebfe7754f93dcd6372012b0c
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -20,11 +20,9 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
-  - name: git
-  - name: wget
+  - name: curl
   apt_get:
-  - name: git
-  - name: wget
+  - name: curl
 is_requires_admin_user: true
 is_always_run: true
 is_skippable: false
