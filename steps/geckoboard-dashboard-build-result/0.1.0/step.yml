@@ -9,7 +9,7 @@ support_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-bui
 published_at: 2018-11-18T18:40:30.232446196+01:00
 source:
   git: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result.git
-  commit: 5fb3d4f608cfa3cbc64ea394b955d4d609e63b61
+  commit: b35e8d9b49b67972b5170e61f3b0932aafdec6e9
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
