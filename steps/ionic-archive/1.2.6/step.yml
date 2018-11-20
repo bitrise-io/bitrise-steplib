@@ -14,7 +14,7 @@ description: |-
 website: https://github.com/bitrise-community/steps-ionic-archive
 source_code_url: https://github.com/bitrise-community/steps-ionic-archive
 support_url: https://github.com/bitrise-community/steps-ionic-archive/issues
-published_at: 2018-10-24T12:25:14.300009485Z
+published_at: 2018-11-20T12:04:16.399140502Z
 source:
   git: https://github.com/bitrise-community/steps-ionic-archive.git
   commit: f619ec94c5121d332e645cfa1920c7fff78e0fe1
