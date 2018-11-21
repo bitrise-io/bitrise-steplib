@@ -1,0 +1,70 @@
+title: Geckoboard dashboard build result
+summary: |
+  Build result on Geckoboard dashboard
+description: |
+  Update a text widget on your Geckoboard dashboard with the latest build result
+website: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result
+source_code_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result
+support_url: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result/issues
+published_at: 2018-11-19T10:24:13.211371062+01:00
+source:
+  git: https://github.com/CsabaSzabo/bitrise-step-geckoboard-dashboard-build-result.git
+  commit: beba05273766c565ebfe7754f93dcd6372012b0c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- geckoboard_api_key: null
+  opts:
+    description: |
+      You can get the Geckoboard API key from your [account page](https://app.geckoboard.com/account/details)
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Geckoboard API key
+    title: Geckoboard API key
+    value_options: []
+- opts:
+    description: |
+      You can get the Geckoboard Custom Widget key from the widget's details page
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Geckoboard Widget key
+    title: Geckoboard Widget key
+    value_options: []
+  widget_key: null
+- build_number: $BITRISE_BUILD_NUMBER
+  opts:
+    description: |
+      Bitrise build number
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Bitrise build number
+    title: Bitrise build number
+    value_options: []
+- build_status: $BITRISE_BUILD_STATUS
+  opts:
+    description: |
+      Bitrise status
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Bitrise status
+    title: Bitrise status
+    value_options: []
