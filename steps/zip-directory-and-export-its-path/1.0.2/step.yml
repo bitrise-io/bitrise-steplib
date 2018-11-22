@@ -1,0 +1,55 @@
+title: Zip Directory and Export its Path
+summary: |
+  This step will zip a directory and then export the path as an environment variable
+description: |
+  This step will zip a directory and then export the path as an environment variable
+website: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path
+source_code_url: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path
+support_url: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path/issues
+published_at: 2018-11-22T09:02:52.779130017+10:30
+source:
+  git: https://github.com/danielmcconville/bitrise-step-zip-directory-and-export-its-path.git
+  commit: 9b25fcdcaec3b54c9afbc9da92075cec3397826a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: zip
+  apt_get:
+  - name: zip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- directory_to_zip: $BITRISE_DIRECTORY_TO_ZIP
+  opts:
+    description: |
+      Define the path to the directory you want zipped here.
+    is_expand: true
+    is_required: true
+    summary: Path to the directory to zip.
+    title: Path to the directory to zip.
+- include_directory: true
+  opts:
+    description: "Set to true to include the parent directory in the zip file, false
+      if you \njust want the files in the directory.\n"
+    is_expand: false
+    is_required: true
+    summary: If set to true, the zip file will include the parent directory.
+    title: Include the directory in the zip
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- ZIP_FILE: null
+  opts:
+    description: |
+      This environment variable provdes the path to the zip file.
+    title: Path to the zip file
