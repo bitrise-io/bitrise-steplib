@@ -1,0 +1,45 @@
+title: Run npm command
+summary: Runs `npm` with the given command and args.
+description: Runs `npm` with the given command and args.
+website: https://github.com/bitrise-steplib/steps-npm
+source_code_url: https://github.com/bitrise-steplib/steps-npm
+support_url: https://github.com/bitrise-steplib/steps-npm/issues
+published_at: 2018-11-23T13:22:56.168129075Z
+source:
+  git: https://github.com/bitrise-steplib/steps-npm.git
+  commit: 2ec530ccc782688bf4ba48fbfae3860344430ac1
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-npm
+deps:
+  apt_get:
+  - name: nodejs
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: |-
+      Specify the command with arguments to run with `npm`.
+
+      This input value will be append to the end of the `npm` command call.
+
+      For example:
+
+      - `install` -> `npm install`
+      - `install -g cordova` -> `npm install -g cordova`
+    is_required: true
+    title: The `npm` command with arguments to run
+- npm_version: null
+  opts:
+    description: Set this value to the version of npm that is required to run the
+      command. Must be a valid semver string.
+    title: Version of npm to use
