@@ -10,14 +10,14 @@ description: |
   After building the VPN server, you need to register the contents of CA certificate, client certificate, client private key, base64 encoded as Bitrise Secret.
   You can easily retrieve the contents of Base64 with the following command.
 
-  `# base64 <certificate or private key file path>`
+  `$ base64 <certificate or private key file path>`
 website: https://github.com/justice3120/bitrise-step-open-vpn
 source_code_url: https://github.com/justice3120/bitrise-step-open-vpn
 support_url: https://github.com/justice3120/bitrise-step-open-vpn/issues
-published_at: 2018-11-28T11:17:06.306395508+09:00
+published_at: 2018-11-30T19:03:21.395072665+09:00
 source:
   git: https://github.com/justice3120/bitrise-step-open-vpn.git
-  commit: 15b462f30846de5ee21be962f591c8c3c32528cf
+  commit: bf313dbc5b14f3adeb9a5f68ac3ca2f1ca3f633c
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -67,19 +67,19 @@ inputs:
     is_expand: true
     is_required: true
     is_sensitive: true
-    summary: Base64 encorded CA Certificate
-    title: Base64 encorded CA Certificate
+    summary: Base64 encoded CA Certificate
+    title: Base64 encoded CA Certificate
 - client_crt: $VPN_CLIENT_CRT_BASE64
   opts:
     is_expand: true
     is_required: true
     is_sensitive: true
-    summary: Base64 encorded Client Certificate
-    title: Base64 encorded Client Certificate
+    summary: Base64 encoded Client Certificate
+    title: Base64 encoded Client Certificate
 - client_key: $VPN_CLIENT_KEY_BASE64
   opts:
     is_expand: true
     is_required: true
     is_sensitive: true
-    summary: Base64 encorded Client Private Key
-    title: Base64 encorded Client Private Key
+    summary: Base64 encoded Client Private Key
+    title: Base64 encoded Client Private Key
