@@ -1,0 +1,65 @@
+title: App Center Apk Upload
+summary: |
+  Uploads an Android APK to App Center
+description: |
+  Uploads an Android APK to App Center and deploys to a given distribution group
+website: https://github.com/Ian-M-Cowley/bitrise-step-appcenterapkupload
+source_code_url: https://github.com/Ian-M-Cowley/bitrise-step-appcenterapkupload
+support_url: https://github.com/Ian-M-Cowley/bitrise-step-appcenterapkupload/issues
+published_at: 2018-12-11T14:35:31.09915726-06:00
+source:
+  git: https://github.com/Ian-M-Cowley/bitrise-step-appcenterapkupload.git
+  commit: f115f9cc1dd230558bca1db23e4ba7a462768c95
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: npm
+  apt_get:
+  - name: npm
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      App file path, for example to an APK file for Android.
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: App path
+- app_center_app: $APP_CENTER_APP
+  opts:
+    description: |
+      Get all available apps using cli "appcenter apps list".
+    is_expand: true
+    is_required: true
+    summary: username/app_name or org/app_name
+    title: App Center app
+- app_center_distribution_group: $APP_CENTER_DISTRIBUTION_GROUP
+  opts:
+    description: |
+      Get all available groups using cli "appcenter distribute groups list"
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: App Center Distribution Group
+- app_center_token: $APP_CENTER_TOKEN
+  opts:
+    description: |
+      Create API token using cli "appcenter tokens create".
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: App Center APK token with access to app specified in App Center app
+    title: App Center API token
