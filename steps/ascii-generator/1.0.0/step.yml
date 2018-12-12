@@ -1,0 +1,52 @@
+title: ASCII art generator
+summary: |
+  Add a random Bitrise ASCII art to your build log
+description: |
+  Add a random Bitrise ASCII art to your build log
+website: https://github.com/slapec93/bitrise-step-ascii-art-generator
+source_code_url: https://github.com/slapec93/bitrise-step-ascii-art-generator
+support_url: https://github.com/slapec93/bitrise-step-ascii-art-generator/issues
+published_at: 2018-12-12T10:28:07.521638199+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-ascii-art-generator.git
+  commit: 2a5fd25b98fcff9e9d8e7c735c8a46da232b459b
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/slapec93/steps-ascii-art-generator
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- BITRISE_ASCII_ART: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: The Bitrise ASCII art fetched from the generator add-on
+    title: Generated random Bitrise ASCII art
