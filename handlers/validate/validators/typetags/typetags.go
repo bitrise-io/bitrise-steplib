@@ -33,6 +33,7 @@ var projectTypeTags = []string{
 	"ionic",
 	"fastlane",
 	"web",
+	"flutter",
 }
 
 // Config ...
