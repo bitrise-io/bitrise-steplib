@@ -1,0 +1,28 @@
+title: Flutter Test
+summary: This step will run tests in a Flutter project
+description: This step will run tests in a Flutter project
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-test
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-test
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-test/issues
+published_at: 2018-12-14T12:07:56.108236789Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-test.git
+  commit: 1f0a60c7bdcfb18c60f4d9d9c139a4b30c19004a
+project_type_tags:
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- additional_params: null
+  opts:
+    description: The flags from this input field will be appended to the `flutter
+      test` command.
+    summary: The flags from this input field will be appended to the `flutter test`
+      command.
+    title: Additional parameters
