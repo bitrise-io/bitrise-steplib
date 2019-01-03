@@ -6,7 +6,7 @@ description: |
 website: https://github.com/dzinek/bitrise-step-android-detekt
 source_code_url: https://github.com/dzinek/bitrise-step-android-detekt
 support_url: https://github.com/dzinek/bitrise-step-android-detekt/issues
-published_at: 2019-01-03T02:01:42.481754+01:00
+published_at: 2019-01-03T02:07:37.522192+01:00
 source:
   git: https://github.com/dzinek/bitrise-step-android-detekt.git
   commit: d84ad2ac8475d1de20eb02b7f2fafc3f3286469b
