@@ -3,10 +3,10 @@ summary: |
   Step for running SonarQube MSBuild Scanner CLI.
 description: |
   Step for running SonarQube MSBuild Scanner CLI.
-website: https://github.com/tbrushwyler/bitrise-step-sonar-qube-msbuild-scanner
-source_code_url: https://github.com/tbrushwyler/bitrise-step-sonar-qube-msbuild-scanner
-support_url: https://github.com/tbrushwyler/bitrise-step-sonar-qube-msbuild-scanner/issues
-published_at: 2018-12-11T15:47:20.764047285-05:00
+website: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner
+source_code_url: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner
+support_url: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner/issues
+published_at: 2019-01-11T10:09:00.764047285-05:00
 source:
   git: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner.git
   commit: 130fd867ccf98641413eb79703925cdfaa551f8d
@@ -72,6 +72,7 @@ inputs:
       ```
     is_expand: true
     is_required: false
+    is_sensitive: true
     title: Scanner parameters for the `begin` step
   scanner_begin_properties: null
 - opts:
@@ -97,6 +98,7 @@ inputs:
       ```
     is_expand: true
     is_required: false
+    is_sensitive: true
     title: Scanner parameters for the `end` step
   scanner_end_properties: null
 - is_debug: "false"
