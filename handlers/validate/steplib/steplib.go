@@ -53,6 +53,7 @@ func NewStepLib(rootPath string) (StepLib, error) {
 			}
 			version := Version{
 				ID:          versionDirInfo.Name(),
+				StepID:      step.ID,
 				StepYMLPath: filepath.Join(stepDir, versionDirInfo.Name(), "step.yml"),
 			}
 			b, err := fileutil.ReadBytesFromFile(version.StepYMLPath)

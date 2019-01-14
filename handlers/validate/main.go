@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
+	stepid "github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/changed-stepid"
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/collection"
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/typetags"
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/valueoptions"
@@ -42,6 +43,7 @@ func main() {
 		&collection.Validator{},
 		&valueoptions.Validator{},
 		&typetags.Validator{},
+		&stepid.Validator{},
 	}
 
 	for i, validator := range validators {
