@@ -8,7 +8,7 @@ description: |
 website: https://github.com/mcaldas/bitrise-step-telegram-notify
 source_code_url: https://github.com/mcaldas/bitrise-step-telegram-notify
 support_url: https://github.com/mcaldas/bitrise-step-telegram-notify/issues
-published_at: 2019-01-24T01:23:23.274331+02:00
+published_at: 2019-01-24T01:27:09.291381+02:00
 source:
   git: https://github.com/mcaldas/bitrise-step-telegram-notify.git
   commit: 42ac68d36a295d751fcedc1096baca50e1d55bc6
