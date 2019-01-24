@@ -6,7 +6,7 @@ description: |
 website: https://github.com/fernanthonies/bitrise-step-browserstack-espresso-app-automate
 source_code_url: https://github.com/fernanthonies/bitrise-step-browserstack-espresso-app-automate
 support_url: https://github.com/fernanthonies/bitrise-step-browserstack-espresso-app-automate/issues
-published_at: 2019-01-24T10:38:44.605907-06:00
+published_at: 2019-01-24T12:07:22.267202-06:00
 source:
   git: https://github.com/fernanthonies/bitrise-step-browserstack-espresso-app-automate.git
   commit: 2be668ad39bf175a6b80791b257043b831f55987
