@@ -1,0 +1,132 @@
+title: Checkmarx SAST Analysis
+summary: Performs static code analysis using the Checkmarx SAST (https://checkmarx.com).
+description: |
+  Performs static code analysis using the Checkmarx SAST (https://checkmarx.com).
+website: https://checkmarx.com
+source_code_url: https://github.com/miguelfreitas93/bitrise_checkmarx_step
+support_url: https://github.com/miguelfreitas93/bitrise_checkmarx_step/issues
+source:
+  git: https://github.com/miguelfreitas93/bitrise_checkmarx_step.git
+  commit: ecc51c4c8b467b654e5e5a741e0679d7896ef70f
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+project_type_tags:
+- ios
+- xamarin
+- cordova
+- ionic
+- react-native
+- android
+type_tags:
+  - test
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+toolkit:
+  go:
+    package_name: github.com/miguelfreitas93/bitrise_checkmarx_step
+inputs:
+  - bitrise_source_dir: "$BITRISE_SOURCE_DIR"
+    opts:
+      title: Path to the source code folder
+      description: |
+        Recommended is $BITRISE_SOURCE_DIR.
+      is_expand: true
+      is_required: true      
+  - cx_server_url: 
+    opts:
+      title: Checkmarx Server URL
+      description: |
+        URL to access Checkmarx Server (https://www.checkmarx.company.com or http://10.10.0.21:443)
+      is_expand: true
+      is_required: true
+  - cx_username: 
+    opts:
+      title: CX Username
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - cx_password: 
+    opts:
+      title: CX Password
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - cx_project_name: 
+    opts:
+      title: Project Name
+      description: |
+        Project Name, for example: BitriseTest
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - cx_team_name: 
+    opts:
+      title: Team Name
+      description: |
+        Team Name, for example: \\CxServer\\SP\\Company
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - cx_preset_name: 
+    opts:
+      title: Preset Name
+      description: |
+        Preset Name, for example: Mobile
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - cx_exclude_folders: 
+    opts:
+      title: Exclude Folders
+      description: |
+        Exclude Folders, for example: *test, *mock*, example*
+      is_expand: true
+      is_required: false
+      is_sensitive: true
+  - cx_exclude_files: 
+    opts:
+      title: Exclude Files
+      description: |
+        Exclude Files, for example: *.sql, *Test.java
+      is_expand: true
+      is_required: false
+      is_sensitive: true
+  - cx_engine_configuration: 
+    opts:
+      title: Engine Configuration
+      description: |
+        Engine Configuration,: 1 - Default Configuration, 2- Japanese, 3- Korean, 5-MultiLanguage
+      is_expand: true
+      is_required: false
+      value_options:
+      - 1
+      - 2
+      - 3
+      - 5
+  - cx_high_threshold: 
+    opts:
+      title: High Threshold
+      description: |
+        High Threshold
+      is_expand: true
+      is_required: false
+      is_sensitive: true
+  - cx_medium_threshold: 
+    opts:
+      title: Medium Threshold
+      description: |
+        Medium Threshold
+      is_expand: true
+      is_required: false
+      is_sensitive: true
+  - cx_low_threshold: 
+    opts:
+      title: Low Threshold
+      description: |
+        Low Threshold
+      is_expand: true
+      is_required: false
+      is_sensitive: true
