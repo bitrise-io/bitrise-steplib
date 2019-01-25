@@ -35,6 +35,7 @@ inputs:
         Recommended is $BITRISE_SOURCE_DIR.
       is_expand: true
       is_required: true      
+      is_sensitive: false
   - cx_server_url: 
     opts:
       title: Checkmarx Server URL
@@ -42,12 +43,13 @@ inputs:
         URL to access Checkmarx Server (https://www.checkmarx.company.com or http://10.10.0.21:443)
       is_expand: true
       is_required: true
+      is_sensitive: false
   - cx_username: 
     opts:
       title: CX Username
       is_expand: true
       is_required: true
-      is_sensitive: true
+      is_sensitive: false
   - cx_password: 
     opts:
       title: CX Password
@@ -61,7 +63,7 @@ inputs:
         Project Name, for example: BitriseTest
       is_expand: true
       is_required: true
-      is_sensitive: true
+      is_sensitive: false
   - cx_team_name: 
     opts:
       title: Team Name
@@ -69,7 +71,7 @@ inputs:
         Team Name, for example: \\CxServer\\SP\\Company
       is_expand: true
       is_required: true
-      is_sensitive: true
+      is_sensitive: false
   - cx_preset_name: 
     opts:
       title: Preset Name
@@ -77,7 +79,7 @@ inputs:
         Preset Name, for example: Mobile
       is_expand: true
       is_required: true
-      is_sensitive: true
+      is_sensitive: false
   - cx_exclude_folders: 
     opts:
       title: Exclude Folders
@@ -85,7 +87,7 @@ inputs:
         Exclude Folders, for example: *test, *mock*, example*
       is_expand: true
       is_required: false
-      is_sensitive: true
+      is_sensitive: false
   - cx_exclude_files: 
     opts:
       title: Exclude Files
@@ -93,7 +95,7 @@ inputs:
         Exclude Files, for example: *.sql, *Test.java
       is_expand: true
       is_required: false
-      is_sensitive: true
+      is_sensitive: false
   - cx_engine_configuration: 
     opts:
       title: Engine Configuration
@@ -101,6 +103,7 @@ inputs:
         Engine Configuration,: 1 - Default Configuration, 2- Japanese, 3- Korean, 5-MultiLanguage
       is_expand: true
       is_required: false
+      is_sensitive: false
       value_options:
       - 1
       - 2
@@ -113,7 +116,7 @@ inputs:
         High Threshold
       is_expand: true
       is_required: false
-      is_sensitive: true
+      is_sensitive: false
   - cx_medium_threshold: 
     opts:
       title: Medium Threshold
@@ -121,7 +124,7 @@ inputs:
         Medium Threshold
       is_expand: true
       is_required: false
-      is_sensitive: true
+      is_sensitive: false
   - cx_low_threshold: 
     opts:
       title: Low Threshold
@@ -129,4 +132,4 @@ inputs:
         Low Threshold
       is_expand: true
       is_required: false
-      is_sensitive: true
+      is_sensitive: false
