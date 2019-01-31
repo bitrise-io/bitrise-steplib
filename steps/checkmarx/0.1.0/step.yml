@@ -5,6 +5,7 @@ description: |
 website: https://checkmarx.com
 source_code_url: https://github.com/miguelfreitas93/bitrise_checkmarx_step
 support_url: https://github.com/miguelfreitas93/bitrise_checkmarx_step/issues
+published_at: 2019-01-31T09:49:37.761092326+01:00
 source:
   git: https://github.com/miguelfreitas93/bitrise_checkmarx_step.git
   commit: 75575075e2554b4c26550ddc476640bd1b838415
