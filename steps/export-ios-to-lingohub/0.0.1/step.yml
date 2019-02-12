@@ -1,0 +1,61 @@
+title: iOS To LingoHub
+summary: |
+  Push iOS project default language to LingoHub
+description: |
+  Will take the default language in your iOS project and update the terms in LingoHub using the xliff file produced
+website: https://github.com/muzmatch/apps-ios-bitrise-lingohub-import
+source_code_url: https://github.com/muzmatch/apps-ios-bitrise-lingohub-import
+support_url: https://github.com/muzmatch/apps-ios-bitrise-lingohub-import/issues
+published_at: 2019-02-06T13:31:33.432215Z
+source:
+  git: https://github.com/muzmatch/apps-ios-bitrise-lingohub-import.git
+  commit: 0dd4e8f031021181b3b99a6575dc470842dcf32a
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- lingohub_ios_account: null
+  opts:
+    is_required: true
+    summary: Username of project owner
+    title: Account
+    value_options: []
+- lingohub_ios_project_name: null
+  opts:
+    description: |
+      project url, e.g. “Sample Project” -> “sample-project”
+    is_required: true
+    summary: Name of Project
+    title: Project
+    value_options: []
+- lingohub_ios_token: null
+  opts:
+    description: |
+      Can obtain from here https://translate.lingohub.com/user/edit
+    is_required: true
+    is_sensitive: true
+    summary: Auth Token to authenticate
+    title: Auth Token
+    value_options: []
+- lingohub_ios_upload_language: null
+  opts:
+    is_required: true
+    summary: This should be your default development language
+    title: Upload Language
+    value_options: []
+- lingohub_ios_project_path: null
+  opts:
+    is_required: true
+    summary: Path to .xcodeproj
+    title: Project Path
+    value_options: []
