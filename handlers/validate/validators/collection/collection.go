@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"io/ioutil"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -41,13 +42,20 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		return nil, err
 	}
 
+	body, err := ioutil.ReadAll(resp.Body)
+	if err != nil {
+		return nil, err
+	}
+
+	if err := resp.Body.Close(); err != nil {
+		return nil, err
+	}
+
 	var releases []struct {
 		TagName string `json:"tag_name"`
 	}
-	if err := json.NewDecoder(resp.Body).Decode(&releases); err != nil {
-		return nil, err
-	}
-	if err := resp.Body.Close(); err != nil {
+	if err := json.Unmarshal(body, &releases); err != nil {
+		fmt.Println("body:", string(body))
 		return nil, err
 	}
 
