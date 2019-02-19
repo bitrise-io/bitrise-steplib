@@ -132,7 +132,25 @@ func (v *Validator) Validate(sl steplib.StepLib) error {
 			return err
 		}
 
-		out, err := command.New(tmpBinaryPath, "run", "--config-base64", base64.StdEncoding.EncodeToString([]byte(testBitriseYML)), "test").RunAndReturnTrimmedCombinedOutput()
+		if err := os.RemoveAll(filepath.Join(os.Getenv("HOME"), ".bitrise/tools")); err != nil {
+			return err
+		}
+		if err := os.RemoveAll(filepath.Join(os.Getenv("HOME"), ".stepman")); err != nil {
+			return err
+		}
+
+		out, err := command.New(tmpBinaryPath, "version").RunAndReturnTrimmedCombinedOutput()
+		if err != nil {
+			return fmt.Errorf(" - CLI run failed, output:\n%s\n\nerror: %s", out, err)
+		}
+		fmt.Println("   > version:", out)
+
+		out, err = command.New(tmpBinaryPath, "setup").RunAndReturnTrimmedCombinedOutput()
+		if err != nil {
+			return fmt.Errorf(" - CLI run failed, output:\n%s\n\nerror: %s", out, err)
+		}
+
+		out, err = command.New(tmpBinaryPath, "run", "--config-base64", base64.StdEncoding.EncodeToString([]byte(testBitriseYML)), "test").RunAndReturnTrimmedCombinedOutput()
 		if err != nil {
 			return fmt.Errorf(" - CLI run failed, output:\n%s\n\nerror: %s", out, err)
 		}
