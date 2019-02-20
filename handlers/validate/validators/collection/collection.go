@@ -36,7 +36,7 @@ func (v *Validator) IsSkippable() bool {
 	return false
 }
 
-func getTestableCLIVersionDownloadURLs() ([]string, error) {
+func getTestableCLIVersionDownloadURLs() (releaseTags []string, err error) {
 	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/bitrise-io/bitrise/releases?per_page=20", nil)
 
 	if token := os.Getenv("github_access_token"); token != "" {
@@ -47,13 +47,12 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 	if err != nil {
 		return nil, err
 	}
+	defer func() {
+		err = resp.Body.Close()
+	}()
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
-		return nil, err
-	}
-
-	if err := resp.Body.Close(); err != nil {
 		return nil, err
 	}
 
@@ -72,7 +71,6 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		os = "Linux"
 	}
 
-	var releaseTags []string
 	for _, release := range releases {
 		releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
 	}
@@ -80,41 +78,39 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 	return releaseTags, nil
 }
 
-func setupBinary(url string) (string, error) {
+func setupBinary(url string) (binaryPath string, err error) {
 	tmpPath, err := pathutil.NormalizedOSTempDirPath("cli_version_test")
 	if err != nil {
 		return "", err
 	}
 
-	tmpBinaryPath := filepath.Join(tmpPath, "bitrise")
+	binaryPath = filepath.Join(tmpPath, "bitrise")
 
 	resp, err := http.Get(url)
 	if err != nil {
 		return "", err
 	}
+	defer func() {
+		err = resp.Body.Close()
+	}()
 
-	binaryFile, err := os.Create(tmpBinaryPath)
+	binaryFile, err := os.Create(binaryPath)
 	if err != nil {
 		return "", err
 	}
+	defer func() {
+		err = binaryFile.Close()
+	}()
 
 	if _, err := io.Copy(binaryFile, resp.Body); err != nil {
 		return "", err
 	}
 
-	if err := binaryFile.Close(); err != nil {
+	if err := os.Chmod(binaryPath, 0777); err != nil {
 		return "", err
 	}
 
-	if err := resp.Body.Close(); err != nil {
-		return "", err
-	}
-
-	if err := os.Chmod(tmpBinaryPath, 0777); err != nil {
-		return "", err
-	}
-
-	return tmpBinaryPath, nil
+	return binaryPath, nil
 }
 
 // Validate is the logic handler of the task
