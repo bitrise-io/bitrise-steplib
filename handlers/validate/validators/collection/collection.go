@@ -11,6 +11,7 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-utils/pathutil"
 
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
@@ -36,7 +37,7 @@ func (v *Validator) IsSkippable() bool {
 	return false
 }
 
-func getTestableCLIVersionDownloadURLs() (releaseTags []string, err error) {
+func getTestableCLIVersionDownloadURLs() ([]string, error) {
 	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/bitrise-io/bitrise/releases?per_page=20", nil)
 
 	if token := os.Getenv("github_access_token"); token != "" {
@@ -48,7 +49,9 @@ func getTestableCLIVersionDownloadURLs() (releaseTags []string, err error) {
 		return nil, err
 	}
 	defer func() {
-		err = resp.Body.Close()
+		if err := resp.Body.Close(); err != nil {
+			log.Errorf("Failed to close http response body, error: %s", err)
+		}
 	}()
 
 	body, err := ioutil.ReadAll(resp.Body)
@@ -71,6 +74,7 @@ func getTestableCLIVersionDownloadURLs() (releaseTags []string, err error) {
 		os = "Linux"
 	}
 
+	var releaseTags []string
 	for _, release := range releases {
 		releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
 	}
@@ -78,39 +82,43 @@ func getTestableCLIVersionDownloadURLs() (releaseTags []string, err error) {
 	return releaseTags, nil
 }
 
-func setupBinary(url string) (binaryPath string, err error) {
+func setupBinary(url string) (string, error) {
 	tmpPath, err := pathutil.NormalizedOSTempDirPath("cli_version_test")
 	if err != nil {
 		return "", err
 	}
 
-	binaryPath = filepath.Join(tmpPath, "bitrise")
+	tmpBinaryPath := filepath.Join(tmpPath, "bitrise")
 
 	resp, err := http.Get(url)
 	if err != nil {
 		return "", err
 	}
 	defer func() {
-		err = resp.Body.Close()
+		if err := resp.Body.Close(); err != nil {
+			log.Errorf("Failed to close http response body, error: %s", err)
+		}
 	}()
 
-	binaryFile, err := os.Create(binaryPath)
+	binaryFile, err := os.Create(tmpBinaryPath)
 	if err != nil {
 		return "", err
 	}
 	defer func() {
-		err = binaryFile.Close()
+		if err := binaryFile.Close(); err != nil {
+			log.Errorf("Failed to close file, error: %s", err)
+		}
 	}()
 
 	if _, err := io.Copy(binaryFile, resp.Body); err != nil {
 		return "", err
 	}
 
-	if err := os.Chmod(binaryPath, 0777); err != nil {
+	if err := os.Chmod(tmpBinaryPath, 0777); err != nil {
 		return "", err
 	}
 
-	return binaryPath, nil
+	return tmpBinaryPath, nil
 }
 
 // Validate is the logic handler of the task
