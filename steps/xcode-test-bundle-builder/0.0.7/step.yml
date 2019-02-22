@@ -1,0 +1,80 @@
+title: Build xcode test runner for remote testing service
+summary: Build your XCTest or XCUITest runner to upload to remote testing service
+description: Build your XCTest or XCUITest bundle to upload to remote testing service
+  such as AWS Device Farm
+website: https://github.com/otusweb/xCode-test-bundle-builder-for-bitrise
+source_code_url: https://github.com/otusweb/xCode-test-bundle-builder-for-bitrise
+support_url: https://github.com/otusweb/xCode-test-bundle-builder-for-bitrise/issues
+published_at: 2019-02-22T16:26:54.419905+01:00
+source:
+  git: https://github.com/otusweb/xCode-test-bundle-builder-for-bitrise.git
+  commit: 6cc7be8648c96cc329513fa02967832acb58f279
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path.
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+    is_required: true
+    summary: ""
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |
+      (optional) The configuration to use. By default your Scheme
+      defines which configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+      **Make sure that the Configuration you specify actually exists
+      in your Xcode Project**. If it does not, if you have a typo
+      in the value of this input Xcode will simply use the Configuration
+      specified by the Scheme and will silently ignore this parameter!
+    summary: ""
+    title: Configuration name
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_expand: false
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    description: |
+      This directory will contain the generated .ipa and .dSYM.zip files.
+    is_required: true
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+outputs:
+- TEST_BUNDLE_IPA_PATH: null
+  opts:
+    title: The created .ipa file's path
