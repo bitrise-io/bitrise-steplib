@@ -6,10 +6,10 @@ description: |
 website: https://github.com/magic-Pod/bitrise-step-magicpod-uitest
 source_code_url: https://github.com/magic-Pod/bitrise-step-magicpod-uitest
 support_url: https://github.com/magic-Pod/bitrise-step-magicpod-uitest/issues
-published_at: 2019-03-02T12:24:48.003794+09:00
+published_at: 2019-03-03T12:28:22.997104+09:00
 source:
   git: https://github.com/Magic-Pod/bitrise-step-magicpod-uitest.git
-  commit: 5052ea6fc7cd17ac2c7446e1a210626d469e52b2
+  commit: afb10ac0e72d111e5793e120c6080c9c0fd787ea
 project_type_tags:
 - ios
 - android
@@ -81,13 +81,17 @@ inputs:
 - device_type: Simulator
   opts:
     description: |-
-      Currently you can selet only
+      Currently you can select only
 
       * _Simulator_ for Magic Pod cloud service.
       * _Real Device_ for Remote TestKit.
     is_expand: true
     is_required: true
     title: Device type
+    value_options:
+    - Simulator
+    - Emulator
+    - Real Device
 - opts:
     description: "Currently you can select only \n\n* _12.1_ for Magic Pod cloud service."
     is_expand: true
@@ -100,6 +104,7 @@ inputs:
       Currently you can select only
 
       * _iPhone 8_ for Magic Pod cloud service.
+      * For Remote TestKit, please refer to model list on https://appkitbox.com/testkit/devicelist/.
     is_expand: true
     is_required: true
     title: Model
