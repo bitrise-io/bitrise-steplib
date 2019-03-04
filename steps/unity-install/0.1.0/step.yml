@@ -1,0 +1,102 @@
+title: Unity Install
+summary: |
+  Installs Unity packages
+description: |
+  Install Unity packages
+website: https://github.com/bdrelling/bitrise-step-unity-install
+source_code_url: https://github.com/bdrelling/bitrise-step-unity-install
+support_url: https://github.com/bdrelling/bitrise-step-unity-install/issues
+published_at: 2019-03-04T10:58:41.861458-06:00
+source:
+  git: https://bdrelling@github.com/bdrelling/bitrise-step-unity-install.git
+  commit: 63ce02bbaf1443921cd44f382cbf3feac9647875
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- xamarin
+type_tags:
+- installer
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- installer_id: ""
+  opts:
+    description: "The installer ID can be found within the Component Installer URLs
+      on the \"What's new?\" page for the Unity version you're trying to install.
+      If no value is specified, it will use the latest stable release version of Unity.
+      \ \nExample Component Installer URL: `https://download.unity3d.com/download_unity/a220877bc173/TargetSupportInstaller/...`
+      where `a220877bc173` is the ID for v2018.3.6.  \nExample **What's new?** page:
+      https://unity3d.com/unity/whats-new/2018.3.6\n"
+    is_expand: true
+    is_required: false
+    summary: The ID of the installer. If no value is specified, it will use the latest
+      stable release version of Unity.
+    title: Unity Installer ID
+- opts:
+    description: |
+      Downloads and installs Unity Android Target Support packages.
+    is_expand: false
+    is_required: true
+    summary: Downloads and installs Unity iOS Target Support packages.
+    title: Build iOS?
+    value_options:
+    - true
+    - false
+  should_build_ios: true
+- opts:
+    description: |
+      Downloads and installs Unity Android Target Support packages.
+    is_expand: false
+    is_required: true
+    summary: Downloads and installs Unity Android Target Support packages.
+    title: Build Android?
+    value_options:
+    - true
+    - false
+  should_build_android: true
+- opts:
+    description: |
+      The directory the packages are downloaded to. The default is `unity_packages`.
+    is_expand: false
+    is_required: true
+    summary: The directory the packages are downloaded to.
+    title: Package Directory
+  package_directory: unity_packages
+outputs:
+- UNITY_PACKAGE_DIRECTORY: null
+  opts:
+    description: |
+      The directory where the packages are stored.
+    summary: The directory where the packages are stored.
+    title: Unity Package Directory
+- UNITY_EDITOR_PACKAGE_PATH: null
+  opts:
+    description: |
+      The path to the Unity Editor package.
+    summary: The path to the Unity Editor package.
+    title: Unity Editor Package Path
+- UNITY_IOS_PACKAGE_PATH: null
+  opts:
+    description: |
+      The path to the Unity iOS Target Support package.
+    summary: The path to the Unity iOS Target Support package.
+    title: Unity iOS Target Support Package Path
+- UNITY_ANDROID_PACKAGE_PATH: null
+  opts:
+    description: |
+      The path to the Unity Android Target Support package.
+    summary: The path to the Unity Android Target Support package.
+    title: Unity Android Target Support Package Path
