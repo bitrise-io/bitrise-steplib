@@ -6,7 +6,7 @@ description: |
 website: https://github.com/bdrelling/bitrise-step-unity-install
 source_code_url: https://github.com/bdrelling/bitrise-step-unity-install
 support_url: https://github.com/bdrelling/bitrise-step-unity-install/issues
-published_at: 2019-03-04T19:48:11.697942-06:00
+published_at: 2019-03-06T20:47:18.791348-06:00
 source:
   git: https://bdrelling@github.com/bdrelling/bitrise-step-unity-install.git
   commit: 63ce02bbaf1443921cd44f382cbf3feac9647875
