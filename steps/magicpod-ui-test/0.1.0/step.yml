@@ -6,10 +6,10 @@ description: |
 website: https://github.com/magic-Pod/bitrise-step-magicpod-uitest
 source_code_url: https://github.com/magic-Pod/bitrise-step-magicpod-uitest
 support_url: https://github.com/magic-Pod/bitrise-step-magicpod-uitest/issues
-published_at: 2019-03-03T12:28:22.997104+09:00
+published_at: 2019-03-07T09:28:43.872845+09:00
 source:
   git: https://github.com/Magic-Pod/bitrise-step-magicpod-uitest.git
-  commit: afb10ac0e72d111e5793e120c6080c9c0fd787ea
+  commit: cf970756d28be9a6ecad5e6a1867a8696170f967
 project_type_tags:
 - ios
 - android
@@ -170,7 +170,7 @@ inputs:
 - opts:
     description: If _true_, the test result is sent to all project members by Magic
       Pod.
-    required: true
+    is_required: true
     title: Send mail
     value_options:
     - "true"
