@@ -6,10 +6,10 @@ description: |
 website: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac
 source_code_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac
 support_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac/issues
-published_at: 2019-03-11T01:15:26.094234+09:00
+published_at: 2019-03-15T00:15:09.065797+09:00
 source:
   git: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac.git
-  commit: fe03ca38ebc90d415f3c8dda78e4293009074124
+  commit: 07172e3cedac83dfd23f0fb5d435ae2ee4a78f88
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -36,7 +36,6 @@ inputs:
     is_expand: true
     is_required: false
     title: Build Path
-    value_options: []
 - is_skip_build: "no"
   opts:
     description: |
