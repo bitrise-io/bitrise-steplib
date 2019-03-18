@@ -11,6 +11,8 @@ import (
 	"path/filepath"
 	"runtime"
 
+	"github.com/hashicorp/go-version"
+
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-utils/pathutil"
 
@@ -38,7 +40,7 @@ func (v *Validator) IsSkippable() bool {
 }
 
 func getTestableCLIVersionDownloadURLs() ([]string, error) {
-	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/bitrise-io/bitrise/releases?per_page=5", nil)
+	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/bitrise-io/bitrise/releases?per_page=20", nil)
 
 	if token := os.Getenv("github_access_token"); token != "" {
 		req.Header.Set("Authorization", "token "+token)
@@ -74,9 +76,16 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		os = "Linux"
 	}
 
+	latestSupportedVersion, err := version.NewVersion("1.23.0")
+	if err != nil {
+		return nil, err
+	}
+
 	var releaseTags []string
 	for _, release := range releases {
-		releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
+		if version, err := version.NewVersion(release.TagName); err == nil && version.GreaterThan(latestSupportedVersion) {
+			releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
+		}
 	}
 
 	return releaseTags, nil
