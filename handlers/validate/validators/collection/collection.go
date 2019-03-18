@@ -76,7 +76,7 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		os = "Linux"
 	}
 
-	latestSupportedVersion, err := version.NewVersion("1.23.0")
+	latestSupportedVersion, err := version.NewVersion("1.20.0")
 	if err != nil {
 		return nil, err
 	}
