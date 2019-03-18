@@ -6,10 +6,10 @@ description: |
 website: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac
 source_code_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac
 support_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac/issues
-published_at: 2019-03-15T00:09:31.6352+09:00
+published_at: 2019-03-19T01:03:53.105517+09:00
 source:
   git: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac.git
-  commit: 0361521c9b1feb7a392182c4c402592702001c86
+  commit: dc3e70c725c02f9a81eed3e61be84dd65681ceee
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -33,7 +33,7 @@ inputs:
     description: |
       Path where the Xcode project should be generated
     is_expand: true
-    is_required: false
+    is_required: true
     title: Output path
   output: .
 - enable_code_coverage: "no"
