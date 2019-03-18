@@ -76,6 +76,8 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		os = "Linux"
 	}
 
+	// before version 1.21.0 we had a validator that fails for an unknown input option field and here we
+	// implemented the new is_sensitive input option which then causes older versions to fail with the current StepLib
 	latestSupportedVersion, err := version.NewVersion("1.20.0")
 	if err != nil {
 		return nil, err
