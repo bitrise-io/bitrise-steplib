@@ -38,7 +38,7 @@ func (v *Validator) IsSkippable() bool {
 }
 
 func getTestableCLIVersionDownloadURLs() ([]string, error) {
-	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/bitrise-io/bitrise/releases?per_page=20", nil)
+	req, err := http.NewRequest(http.MethodGet, "https://api.github.com/repos/bitrise-io/bitrise/releases?per_page=5", nil)
 
 	if token := os.Getenv("github_access_token"); token != "" {
 		req.Header.Set("Authorization", "token "+token)
