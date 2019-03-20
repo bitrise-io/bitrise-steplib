@@ -16,3 +16,6 @@ inputs:
 - step: $STEP_INFO_COMPOSITE
   opts:
     description: "step_id@step_version or leave empty to check all the steps"
+- github_access_token: $GITHUB_ACCESS_TOKEN
+  opts:
+    description: Github Access Token
