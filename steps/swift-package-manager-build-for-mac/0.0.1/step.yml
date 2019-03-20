@@ -1,0 +1,66 @@
+title: Swift Package Manager Build for Mac
+summary: |
+  Runs Build on your macOS project with Swift Package Manager
+description: |
+  Runs Swift Package Manager's `swift build` action for macOS app projects.
+website: https://github.com/kitasuke/bitrise-step-swift-package-manager-build-for-mac
+source_code_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-build-for-mac
+support_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-build-for-mac/issues
+published_at: 2019-03-19T00:58:00.147077+09:00
+source:
+  git: https://github.com/kitasuke/bitrise-step-swift-package-manager-build-for-mac.git
+  commit: b6842ac60b082e18db4d7864c474433b1dd61faf
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/kitasuke/bitrise-step-swift-package-manager-build-for-mac
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_path: ./.build
+  opts:
+    description: |
+      A build path, relative to the working directory.
+    is_expand: true
+    is_required: true
+    title: Build path
+- configuration: debug
+  opts:
+    description: |
+      Two build configurations, Debug (default) and Release.
+    title: Configuration
+    value_options:
+    - debug
+    - release
+- build_tests: "no"
+  opts:
+    description: |
+      Build both source and test targets
+    title: Build tests
+    value_options:
+    - "yes"
+    - "no"
+- disable_sandbox: "no"
+  opts:
+    description: |
+      Disable using the sandbox when executing subprocesses
+    title: Disable sandbox
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_EXECUTABLE_PATH: null
+  opts:
+    title: The executable path
