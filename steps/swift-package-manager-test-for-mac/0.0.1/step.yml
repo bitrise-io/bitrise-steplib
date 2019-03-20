@@ -1,0 +1,54 @@
+title: Swift Package Manager Test for Mac
+summary: |
+  Runs Test on your macOS project with Swift Package Manager
+description: |
+  Runs Swift Package Manager's `swift test` action for macOS app projects.
+website: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac
+source_code_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac
+support_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac/issues
+published_at: 2019-03-19T00:53:57.002409+09:00
+source:
+  git: https://github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac.git
+  commit: c41e9cb4f8225207c7961519a219a5145f12dec7
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/kitasuke/bitrise-step-swift-package-manager-test-for-mac
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_path: ./.build
+  opts:
+    description: |
+      A build path, relative to the working directory.
+    is_expand: true
+    is_required: true
+    title: Build Path
+- is_skip_build: "no"
+  opts:
+    description: |
+      Should skip building the test target?
+    title: Skip build
+    value_options:
+    - "yes"
+    - "no"
+- is_parallel: "no"
+  opts:
+    description: |
+      Should run the tests in parallel?
+    title: Parallel test
+    value_options:
+    - "yes"
+    - "no"
