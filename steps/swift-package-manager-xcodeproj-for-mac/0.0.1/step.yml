@@ -1,0 +1,53 @@
+title: Swift Package Manager Xcodeproj for Mac
+summary: |
+  Runs Generate Xcode project on your macOS project with Swift Package Manager
+description: |
+  Runs Swift Package Manager's `swift package generate-xcodeproj` action for macOS app projects.
+website: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac
+source_code_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac
+support_url: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac/issues
+published_at: 2019-03-19T01:03:53.105517+09:00
+source:
+  git: https://github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac.git
+  commit: dc3e70c725c02f9a81eed3e61be84dd65681ceee
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/kitasuke/bitrise-step-swift-package-manager-xcodeproj-for-mac
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path where the Xcode project should be generated
+    is_expand: true
+    is_required: true
+    title: Output path
+  output: .
+- enable_code_coverage: "no"
+  opts:
+    description: |
+      Enable code coverage in the generated project
+    title: Enable code coverage
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      Path to xcconfig file to override
+    is_expand: true
+    is_required: false
+    title: Path to xcconfig file
+  xcconfig_overrides: ""
