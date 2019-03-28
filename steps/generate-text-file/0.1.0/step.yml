@@ -1,0 +1,43 @@
+title: Generate Text File
+summary: |
+  Dynamically generate a text file
+description: |
+  This step lets you generate a dynamic text file which can use any environment
+  variables. The path of the file will be made available as
+  `$GENERATED_TEXT_FILE_PATH`. This script can e.g. be used to generate the Play
+  Store's "What's New" file based on the Git commit message.
+website: https://github.com/bitrise-community/bitrise-step-generate-text-file
+source_code_url: https://github.com/bitrise-community/bitrise-step-generate-text-file
+support_url: https://github.com/bitrise-community/bitrise-step-generate-text-file/issues
+published_at: 2019-03-28T11:25:52.233677+01:00
+source:
+  git: https://github.com/bitrise-community/bitrise-step-generate-text-file.git
+  commit: 64bff0968fb44bf265e40764fa2dfa966cc4bbfd
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/bitrise-step-generate-text-file
+deps: {}
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- file_name: generated_text_file.txt
+  opts:
+    is_required: true
+    title: File Name
+- file_content: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Add content for the text file here. You can also use all ENV variables.
+    title: Content of the text file
+outputs:
+- GENERATED_TEXT_FILE_PATH: null
+  opts:
+    title: Path to the generated text file
