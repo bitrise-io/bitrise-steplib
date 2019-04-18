@@ -1,0 +1,196 @@
+title: Xcode build for simulator
+summary: Runs Xcode Build command for simulators.
+description: |
+  Runs Xcode Build command for simulators
+  for iOS, tvOS or watchOS.
+website: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator
+support_url: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator/issues
+published_at: 2019-04-18T15:12:09.326086603Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator.git
+  commit: 32d7c3f99ae4571a2f5a5f0b39095190c5178c0a
+project_type_tags:
+- ios
+- react-native
+- cordova
+- ionic
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-build-for-simulator
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: go
+  check_only:
+  - name: xcode
+inputs:
+- opts:
+    description: A `.xcodeproj` or `.xcworkspace` path.
+    is_required: "true"
+    summary: A `.xcodeproj` or `.xcworkspace` path.
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: The Scheme to use.
+    is_required: "true"
+    summary: The Scheme to use.
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |-
+      Set it as it is shown in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iPhone 6
+      * iPhone 6 Plus
+      * iPad
+      * iPad Air
+      * Apple TV 1080p (don't forget to set the platform to `tvOS Simulator` to use this option!)
+    is_required: "true"
+    summary: Simulator name
+    title: Simulator
+  simulator_device: iPhone 6s Plus
+- opts:
+    description: |-
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+
+      A couple of format examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * "8.4"
+      * latest
+    is_required: "true"
+    title: OS version
+  simulator_os_version: latest
+- opts:
+    description: |-
+      Set it as it is shown in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iOS Simulator
+      * tvOS Simulator
+    is_required: "true"
+    title: Platform
+    value_options:
+    - iOS
+    - tvOS
+  simulator_platform: iOS
+- configuration: Debug
+  opts:
+    description: |-
+      (optional) The configuration to use. By default your Scheme
+      defines which configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+
+      **Make sure that the Configuration you specify actually exists
+      in your Xcode Project**. If it does not, if you have a typo
+      in the value of this input Xcode will simply use the Configuration
+      specified by the Scheme and will silently ignore this parameter!
+    is_required: "true"
+    title: Configuration name
+- disable_index_while_building: "yes"
+  opts:
+    description: |-
+      Could make the build faster by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command which will disable the indexing during the build.
+
+      Indexing is needed for
+
+      * Autocomplete
+      * Ability to quickly jump to definition
+      * Get class and method help by alt clicking.
+
+      Which are not needed in CI environment.
+
+      **Note:** In Xcode you can turn off the `Index-WhileBuilding` feature  by disabling the `Enable Index-WhileBuilding Functionality` in the `Build Settings`.<br/>
+      In CI environment you can disable it by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command.
+    summary: Could make the build faster by disabling the indexing during the build
+      run.
+    title: Disable indexing during the build
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: |-
+      Options added to the end of the xcodebuild call.
+
+      You can use multiple options, separated by a space
+      character. Example: `-xcconfig PATH -verbose`
+    title: Additional options for xcodebuild call
+  xcodebuild_options: ""
+- opts:
+    category: Debug
+    description: |-
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    category: Debug
+    description: This directory will contain the generated .app artifacts.
+    is_required: "true"
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- is_clean_build: "no"
+  opts:
+    category: Debug
+    is_required: "true"
+    title: Do a clean Xcode build before the build?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_expand: "false"
+    is_required: "true"
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: "true"
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+outputs:
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The generated (and copied) app directory
+- BITRISE_APP_DIR_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the main target app's path + every dependent target's app path.
+
+
+      The paths are separated with `|` character, eg: `/deploy109787178/sample-apps-ios-workspace-swift.app|/deploy109787178/bitfall.sample-apps-ios-workspace-swift-watch.app`
+    summary: List of the generated (and copied) app paths
+    title: List of the generated app paths
+- BITRISE_XCODE_BUILD_RAW_RESULT_TEXT_PATH: null
+  opts:
+    description: |-
+      This is the path of the raw build results log file.
+
+      If `output_tool=xcpretty` and the build fails this log will contain the build output.
+    title: The full, raw build output file path
