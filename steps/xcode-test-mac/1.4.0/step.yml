@@ -1,0 +1,123 @@
+title: Xcode Test for Mac
+summary: Runs Xcode Test on your macOS app project.
+description: Runs Xcode's `test` action, configured for macOS app projects.
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
+published_at: 2019-05-06T08:47:02.35417956Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
+  commit: 1a711844798adce59ec7e4b1e1cf5e74a69218b1
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- test
+dependencies:
+- manager: _
+  name: xcode
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-test-mac
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- destination: null
+  opts:
+    description: |
+      The Destination to use.
+
+      Read more in [Xcodebuild Destination Cheatsheet](http://www.mokacoding.com/blog/xcodebuild-destination-options/).
+
+      Example value: `platform=OS X,arch=x86_64`
+    is_required: false
+    title: Destination name
+- is_clean_build: "yes"
+  opts:
+    is_required: true
+    title: Should a clean Xcode build run before testing?
+    value_options:
+    - "yes"
+    - "no"
+- generate_code_coverage_files: "no"
+  opts:
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    description: |-
+      Options added to the end of the xcodebuild call.
+
+      You can use multiple options, separated by a space
+      character. Example: `-xcconfig PATH -verbose`
+    is_required: false
+    title: Additional options for xcodebuild call
+  xcodebuild_options: ""
+- disable_index_while_building: "yes"
+  opts:
+    description: |-
+      Could make the build faster by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command which will disable the indexing during the build.
+
+      Indexing is needed for
+
+      * Autocomplete
+      * Ability to quickly jump to definition
+      * Get class and method help by alt clicking.
+
+      Which are not needed in CI environment.
+
+      **Note:** In Xcode you can turn off the `Index-WhileBuilding` feature  by disabling the `Enable Index-WhileBuilding Functionality` in the `Build Settings`.<br/>
+      In CI environment you can disable it by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command.
+    summary: Could make the build faster by disabling the indexing during the build
+      run.
+    title: Disable indexing during the build
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      This input is __deprecated__, please __use change-workdir step__ instead.
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    title: '[Deprecated] Working directory'
+  workdir: $BITRISE_SOURCE_DIR
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
