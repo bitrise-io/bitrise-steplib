@@ -1,0 +1,44 @@
+title: ASCII art generator
+summary: |
+  Add a random Bitrise ASCII art to your build log
+description: |
+  Add a random Bitrise ASCII art to your build log
+website: https://github.com/bitrise-steplib/bitrise-step-ascii-art-generator
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-ascii-art-generator
+support_url: https://github.com/bitrise-steplib/bitrise-step-ascii-art-generator/issues
+published_at: 2019-05-08T17:57:21.319301+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-ascii-art-generator.git
+  commit: 380f3c5374ec77592a762663483c36f47184ab0c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-ascii-art-generator
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- addon_url: $BITRISE_SAMPLE_ADDON_URL
+  opts:
+    is_expand: true
+    is_required: true
+    summary: URL of the ASCII generator addon
+    title: URL of the ASCII generator addon
+    value_options: []
+- access_token: $BITRISE_SAMPLE_ADDON_ACCESS_TOKEN
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Access token for ASCII generator addon, which gets generated at the provisioning
+    title: Access token for the ASCII generator addon
+    value_options: []
+outputs:
+- BITRISE_ASCII_ART: null
+  opts:
+    summary: The Bitrise ASCII art fetched from the generator add-on
+    title: Generated random Bitrise ASCII art
