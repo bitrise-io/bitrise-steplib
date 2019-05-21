@@ -1,0 +1,56 @@
+title: Firebase-DSYM-Upload
+summary: |
+  This step uploads the dsym for your iOS project to Firebase
+description: |
+  This step uploads the dsym for your iOS project to Firebase
+website: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
+source_code_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
+support_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload/issues
+published_at: 2019-05-21T21:02:16.889739+01:00
+source:
+  git: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload.git
+  commit: 55053c7c9d5110b9b63c41cd12dd925b7927eb1b
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- fdu_fabric_location: null
+  opts:
+    description: "This is the location of where Fabric is stored. \nIt is usually
+      in ./Pods/Fabric/upload-symbols\n"
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Location of Fabric
+- fdu_google_services_location: null
+  opts:
+    description: |
+      The locations is usually in the form ./YOUR-APP-NAME/GoogleService-Info.plist
+    is_expand: true
+    is_required: true
+    title: Location of your GoogleService-Info.plist
+- fdu_dsym_location: null
+  opts:
+    description: |
+      You should use $BITRISE_DSYM_PATH here
+    is_expand: true
+    is_required: true
+    title: Location of the bitrise dsyms
