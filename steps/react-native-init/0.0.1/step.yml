@@ -1,0 +1,52 @@
+title: React Native Init
+summary: |
+  RN init
+description: |
+  RN init
+website: https://github.com/ivanzotov/bitrise-step-react-native-init
+source_code_url: https://github.com/ivanzotov/bitrise-step-react-native-init
+support_url: https://github.com/ivanzotov/bitrise-step-react-native-init/issues
+published_at: 2019-05-23T16:49:47.766481+03:00
+source:
+  git: https://github.com/ivanzotov/bitrise-step-react-native-init.git
+  commit: 9f438906e981347728da0ec797e1a6a9be2e41f4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- installer
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
