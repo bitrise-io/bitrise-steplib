@@ -6,7 +6,7 @@ description: |
 website: https://github.com/ivanzotov/bitrise-step-react-native-init
 source_code_url: https://github.com/ivanzotov/bitrise-step-react-native-init
 support_url: https://github.com/ivanzotov/bitrise-step-react-native-init/issues
-published_at: 2019-05-23T16:49:47.766481+03:00
+published_at: 2019-05-23T16:52:15.493202+03:00
 source:
   git: https://github.com/ivanzotov/bitrise-step-react-native-init.git
   commit: 9f438906e981347728da0ec797e1a6a9be2e41f4
