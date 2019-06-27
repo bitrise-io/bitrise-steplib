@@ -8,11 +8,11 @@ If you find something missing from the steps, you can drop us an issue, or [crea
 
 ### Important
 
-One PR should only contain one file (except the icon), and one change.
+One PR should contain only one file (except the icon), and one change.
 
 We require to create a new PR after addressing review concerns. This is needed to guarantee that the last (correct) tag/version of the step source repository is referenced.
 
-One PR should only contain one step.
+One PR should contain only one step.
 
 ### Install Bitrise CLI
 
