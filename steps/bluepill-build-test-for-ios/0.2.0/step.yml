@@ -1,67 +1,61 @@
-#
-# A Bitrise.io Step for building and running LinkedIn's bluepill parallel iOS testing software
-# https://github.com/linkedin/bluepill
-#
-
-title: |-
-  Bluepill Build/Test for iOS
-summary: |
-  Build and run parallel UI/Unit tests for iOS using LinkedIn's bluepill testing tool
-description: |
-  Run tests in parallel by using multiple simulators. Generate a JUnit report after each test run.
+title: Bluepill Build/Test for iOS
+summary: Build and run parallel UI/Unit tests for iOS using LinkedIn's bluepill testing tool
+description: Run tests in parallel by using multiple simulators. Generate a JUnit report after each test run.
 website: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
 source_code_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
 support_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios/issues
 host_os_tags:
   - osx-10.10
-  - ubuntu-16.04
 project_type_tags:
   - ios
 type_tags:
+  - build
   - test
-
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 run_if: ""
-
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
-
-
 toolkit:
   bash:
     entry_file: step.sh
-
-
 inputs:
-  - app_name: MyApp
+  - bluepill_version: bluepill_4_1_1__xcode_10_2
     opts:
-      title: "App Name"
-      summary: "App name in bundle (e.g. 'MyApp')"
-      is_expand: true
+      title: "Bluepill Version"
+      summary: "Which version of Bluepill to install/run?"
       is_required: true
-  - workspace: ""
+      value_options:
+      - bluepill_4_1_1__xcode_10_2
+      - bluepill_3_1_1__xcode_10_1
+      - bluepill_3_1_0__xcode_10_0
+      - bluepill_2_4_0__xcode_9_4
+      - bluepill_2_3_1__xcode_9_3
+      - bluepill_2_2_0__xcode_9_2
+      - bluepill_2_1_0__xcode_9_1
+      - bluepill_2_0_2__xcode_9_0
+      - bluepill_1_1_2__xcode_8_3
+  - target_name: ""
     opts:
-      title: "Workspace Name"
-      summary: "Xcode Workspace File (e.g. MyApp.xcworkspace)"
+      title: "Target Name"
+      summary: "Target name in bundle (e.g. 'MyApp')"
       is_expand: true
       is_required: true
   - scheme: ""
     opts:
       title: "Scheme"
-      summary: "Xcode Scheme (e.g. 'MyApp')"
+      summary: "Xcode scheme (e.g. 'MyApp')"
       is_expand: true
       is_required: true
-  - derived_data_path: "build"
+  - workspace: ""
+    opts:
+      title: "Workspace File"
+      summary: "Xcode workspace file (e.g. MyApp.xcworkspace)"
+      is_expand: true
+      is_required: true
+  - derived_data_path: ""
     opts:
       title: "Derived Data Path"
-      summary: "Derived data path (e.g. 'build')"
+      summary: "Derived data directory (e.g. 'build')"
       is_expand: true
       is_required: true
   - bluepill_output_dir: "bluepill-output"
@@ -75,31 +69,31 @@ inputs:
       title: "Device Type"
       summary: "iOS Device to build/run (e.g. 'iPhone 6', 'iPad Pro (12.9-inch)')"
       is_expand: true
-      is_required: false
+      is_required: true
   - ios_version: "12.2"
     opts:
       title: "iOS Version"
       summary: "iOS Version to build/run simulators (e.g. '11.0', '12.2')"
       is_expand: true
-      is_required: false
+      is_required: true
   - num_simulators: 3
     opts:
-      title: "Number of iOS simulators to run in parallel"
-      summary: "Lower numbers produce stability/timeouts. 3-4 is the sweet spot for 4-core processors."
+      title: "Num. Simulators"
+      summary: "Number of iOS simulators to run in parallel"
       is_expand: true
-      is_required: false
+      is_required: true
   - test_result_env_var: "TEST_RESULTS"
     opts:
-      title: "Env Var for test results"
-      summary: "This will also produce a '_SLACK' variable for the Slack markdown formatted copy e.g. ('MY_TEST_RESULTS' and 'MY_TEST_RESULTS_SLACK')"
+      title: "Test Results Env Var"
+      summary: "Environment variable to capture test results in (as a string). This will also produce a Markdown-formatted copy with the '_MARKDOWN' suffix. e.g. ('MY_RESULT' and 'MY_RESULT_MARKDOWN')"
       is_expand: true
-      is_required: false
+      is_required: true
   - retry_only_failed_tests: true
     opts:
       title: "Only retry tests that failed?"
       summary: "When Failure Tolerance > 0, only retry tests that failed."
       is_expand: true
-      is_required: false
+      is_required: true
       value_options:
       - true
       - false
@@ -108,10 +102,10 @@ inputs:
       title: "Failure Tolerance"
       summary: "Number of times to retry on test failures."
       is_expand: true
-      is_required: false
+      is_required: true
   - additional_bluepill_args: ""
     opts:
       title: "Additional bluepill arguments"
       summary: "See https://github.com/linkedin/bluepill for a full list of supported args."
       is_expand: true
-      is_required: false
+      is_required: true
