@@ -1,0 +1,126 @@
+title: Bluepill Build/Test for iOS
+summary: Build and run parallel UI/Unit tests for iOS using LinkedIn's bluepill testing
+  tool
+description: Run tests in parallel by using multiple simulators. Generate a JUnit
+  report after each test run.
+website: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
+source_code_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
+support_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios/issues
+published_at: 2019-07-08T14:21:32.915576+08:00
+source:
+  git: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios.git
+  commit: 3d278665edd5cf1b8ec38aa534eeb1acd041749b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- bluepill_version: bluepill_4_1_1__xcode_10_2
+  opts:
+    is_required: true
+    summary: Which version of Bluepill to install/run?
+    title: Bluepill Version
+    value_options:
+    - bluepill_4_1_1__xcode_10_2
+    - bluepill_3_1_1__xcode_10_1
+    - bluepill_3_1_0__xcode_10_0
+    - bluepill_2_4_0__xcode_9_4
+    - bluepill_2_3_1__xcode_9_3
+    - bluepill_2_2_0__xcode_9_2
+    - bluepill_2_1_0__xcode_9_1
+    - bluepill_2_0_2__xcode_9_0
+    - bluepill_1_1_2__xcode_8_3
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Target name in bundle (e.g. 'MyApp')
+    title: Target Name
+  target_name: ""
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Xcode scheme (e.g. 'MyApp')
+    title: Scheme
+  scheme: ""
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Xcode workspace file (e.g. MyApp.xcworkspace)
+    title: Workspace File
+  workspace: ""
+- derived_data_path: ""
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Derived data directory (e.g. 'build')
+    title: Derived Data Path
+- bluepill_output_dir: bluepill-output
+  opts:
+    is_expand: true
+    is_required: true
+    summary: 'Directory to place all the bluepill logs/results files. Individual run
+      reports will sit inside this directory, named like: "iPhone SE - 12.2 - TIMESTAMP"'
+    title: Directory for Bluepill logs/results
+- device_type: iPhone 6
+  opts:
+    is_expand: true
+    is_required: true
+    summary: iOS Device to build/run (e.g. 'iPhone 6', 'iPad Pro (12.9-inch)')
+    title: Device Type
+- ios_version: "12.2"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: iOS Version to build/run simulators (e.g. '11.0', '12.2')
+    title: iOS Version
+- num_simulators: 3
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Number of iOS simulators to run in parallel
+    title: Num. Simulators
+- fail_build_if_coverage_fails: false
+  opts:
+    is_required: true
+    summary: Fail the build if Bluepill fails to gather valid coverage data (e.g.
+      ${bluepill_output_dir}/${target_name}.app.coverage.txt)
+    title: Fail build if coverage fails
+    value_options:
+    - false
+    - true
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Environment variable to capture test results in (as a string). This will
+      also produce a Markdown-formatted copy with the '_MARKDOWN' suffix. e.g. ('MY_RESULT'
+      and 'MY_RESULT_MARKDOWN')
+    title: Test Results Env Var
+  test_result_env_var: TEST_RESULTS
+- opts:
+    is_expand: true
+    is_required: true
+    summary: When Failure Tolerance > 0, only retry tests that failed.
+    title: Only retry tests that failed?
+    value_options:
+    - true
+    - false
+  retry_only_failed_tests: true
+- failure_tolerance: 0
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Number of times to retry on test failures.
+    title: Failure Tolerance
+- additional_bluepill_args: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: See https://github.com/linkedin/bluepill for a full list of supported
+      args.
+    title: Additional bluepill arguments
