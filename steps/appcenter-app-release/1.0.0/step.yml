@@ -1,0 +1,53 @@
+title: AppCenter App Release
+summary: |
+  Release an application on Microsoft AppCenter
+description: |
+  Release an application on Microsoft AppCenter
+website: https://github.com/fileformat/bitrise-step-appcenter-app-release
+source_code_url: https://github.com/fileformat/bitrise-step-appcenter-app-release
+support_url: https://github.com/fileformat/bitrise-step-appcenter-app-release/issues
+published_at: 2019-07-01T10:50:42.111187111-04:00
+source:
+  git: https://github.com/fileformat/bitrise-step-appcenter-app-release.git
+  commit: e064d73405ff8c29ffaaf712fd7002083e8113ca
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: curl
+  apt_get:
+  - name: jq
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- appcenter_api_token: $APPCENTER_API_TOKEN
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: AppCenter API Token
+- appcenter_name: $APPCENTER_NAME
+  opts:
+    is_expand: true
+    is_required: true
+    title: AppCenter Application Name
+- appcenter_org: $APPCENTER_ORG
+  opts:
+    is_expand: true
+    is_required: true
+    title: AppCenter Organization
+- artifact_path: $ARTIFACT_PATH
+  opts:
+    is_expand: true
+    is_required: true
+    title: path to the built application file (.ipa or .apk)
