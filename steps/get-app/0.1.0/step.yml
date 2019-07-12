@@ -1,0 +1,81 @@
+title: getApp
+summary: |
+  A simple step to get any artifact from other Apps/Workflow downloaded to any directory.
+description: |
+  This step would help you to get artifact/app/files from the latest successful build of other workflows or even apps, downloaded to any directory inside your current bitrise/src
+  This step requires authorization key, which you can get from your "Account Settings -> Security -> Personal Access Token"
+website: https://github.com/shreyanshp/bitrise-step-getapp
+source_code_url: https://github.com/shreyanshp/bitrise-step-getapp
+support_url: https://github.com/shreyanshp/bitrise-step-getapp/issues
+published_at: 2019-07-13T00:14:27.994279+09:00
+source:
+  git: https://github.com/shreyanshp/bitrise-step-getapp.git
+  commit: a4d264342ea3b8a33545069e0ff4c5f9e9e0ec6e
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: jq
+  apt_get:
+  - name: git
+  - name: wget
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- artifact_name: null
+  opts:
+    description: |
+      Please enter the exact artifact/file name with extension that you want to download.
+    is_expand: true
+    is_required: true
+    summary: Artifact Name
+    title: Artifact Name
+    value_options: []
+- access_token: null
+  opts:
+    description: |
+      Please enter the access token, which you can get from your "Account Settings -> Security -> Personal Access Token".
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Access Token
+    title: Access Token
+    value_options: []
+- app_slug: null
+  opts:
+    description: |
+      Please enter the App ID from which you want to download the file.
+    is_expand: true
+    is_required: true
+    summary: App ID
+    title: App ID
+    value_options: []
+- opts:
+    description: |
+      Please enter the workflow name, primary is the default
+    is_expand: true
+    is_required: true
+    summary: Workflow
+    title: Workflow
+    value_options: []
+  workflow: primary
+- directory_name: getApp
+  opts:
+    description: |
+      Please enter the directory name, where you want the artifact/file to be downloaded. It would be created the directory does not exists. Incase the directory with same filename exists, then it would be overwritten.
+    is_expand: true
+    is_required: true
+    summary: Directory Name
+    title: Directory Name
+    value_options: []
