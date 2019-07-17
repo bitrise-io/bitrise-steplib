@@ -1,0 +1,58 @@
+title: Bitrise Start Build
+summary: Starts the given workflows in the same app
+description: Starts the given workflows in the same app
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start/issues
+published_at: 2019-07-16T06:28:31.292700808Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-start.git
+  commit: 9a51d1a3693bf151a051708038b97ab0750b3574
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-start
+is_always_run: false
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your access token\n\nTo acquire a `Personal Access Token` for your
+      user, sign in with that user on [bitrise.io](https://bitrise.io),  \ngo to your
+      `Account Settings` page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your access token
+    title: Bitrise Access Token
+- opts:
+    description: The workflow(s) to start. One workflow per line.
+    is_required: true
+    summary: The workflow(s) to start. One workflow per line.
+    title: Workflows
+  workflows: null
+- environment_key_list: null
+  opts:
+    description: "The keys of the envs which will be shared with the triggered workflows\n\n\n**FORMAT**
+      Seperate the keys with new line. E.g: \n`ENV_1\nENV_2\nENV_3`"
+    is_expand: false
+    is_required: false
+    summary: The keys of the envs which will be shared with the triggered workflows.
+    title: Environments to share
+- opts:
+    description: Should the step wait for the builds to be finished?
+    is_required: false
+    summary: Should the step wait for the builds to be finished?
+    title: Wait for builds
+    value_options:
+    - "false"
+    - "true"
+  wait_for_builds: "false"
+outputs:
+- ROUTER_STARTED_BUILD_SLUGS: null
+  opts:
+    description: Newline separated list of started build slugs.
+    summary: Newline separated list of started build slugs.
+    title: Started Build Slugs
