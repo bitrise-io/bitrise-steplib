@@ -1,0 +1,116 @@
+title: Github Release
+summary: Create Github Release
+description: Create Github Release
+website: https://github.com/bitrise-steplib/steps-github-release
+source_code_url: https://github.com/bitrise-steplib/steps-github-release
+support_url: https://github.com/bitrise-steplib/steps-github-release/issues
+published_at: 2019-07-19T07:57:11.281696682Z
+source:
+  git: https://github.com/bitrise-steplib/steps-github-release.git
+  commit: b29bd20146494395b9d4c7676505dc89814d8ef3
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-github-release
+inputs:
+- api_token: null
+  opts:
+    description: |-
+      Github Personal API token used to access the GitHub API.
+
+      Create your own token: https://github.com/settings/tokens
+
+      The following scope needs to be enabled for the token:
+
+      - repo/public_repo
+    is_required: true
+    is_sensitive: true
+    summary: Github Personal API token used to access the GitHub API.
+    title: Personal API token
+- opts:
+    description: Your Github user name
+    is_required: true
+    is_sensitive: true
+    summary: Your Github user name
+    title: Username
+  username: null
+- opts:
+    description: |-
+      URL of the Github repository to release.
+
+      Available formats:
+
+      - https://hostname/owner/repository.git
+      - git@hostname:owner/repository.git
+      - ssh://git@hostname:port/owner/repository.git
+    is_required: true
+    summary: Github repository URL
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- opts:
+    is_required: true
+    summary: The name of the tag.
+    title: Tag
+  tag: $BITRISE_GIT_TAG
+- commit: $BITRISE_GIT_COMMIT
+  opts:
+    description: "Specifies the commitish value that determines where the Git tag
+      is created from. \nCan be any branch or commit SHA. \nUnused if the Git tag
+      already exists. \nDefault: the repository's default branch (usually master)."
+    is_required: true
+    summary: The commit of the tag
+    title: Commit
+- name: null
+  opts:
+    is_required: true
+    summary: The name of the release.
+    title: Release name
+- body: null
+  opts:
+    is_required: true
+    summary: The body of the release.
+    title: Release body
+- draft: "yes"
+  opts:
+    description: Select `yes` to create a draft (unpublished) release, select `no`
+      to create a published one.
+    is_required: true
+    summary: If `no` is selected, the release will be published.
+    title: Draft
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      Specifies whether the release is identified as pre-release or not.
+      Select `yes` to identify release as pre-release, select `no` to identify the release as full release.
+      Default: `no`.
+    is_required: false
+    summary: If 'yes' is selected, the release is identifed as pre-release.
+    title: Pre-release
+    value_options:
+    - "yes"
+    - "no"
+  pre_release: "no"
+- files_to_upload: null
+  opts:
+    description: |-
+      One file path per line to upload to the release assets section. Optionally you can use a `|` separator at the end of the path
+      to set the uploaded file's name.
+
+      Example to use the file's __original name__:
+
+      ```
+      $BITRISE_DEPLOY_DIR/app-debug.apk
+      $BITRISE_DEPLOY_DIR/app-debug-androidTest.apk
+      ```
+
+      Example to use __custom file name__:
+
+      ```
+      $BITRISE_DEPLOY_DIR/app-debug.apk|mycompany_debug_app.apk
+      $BITRISE_DEPLOY_DIR/app-debug-androidTest.apk|mycompany_debug_app_test.apk
+      ```
+    summary: One file path per line to upload to the release assets section.
+    title: Files to upload
