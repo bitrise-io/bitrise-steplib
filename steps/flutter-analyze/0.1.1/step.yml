@@ -1,0 +1,31 @@
+title: Flutter Analyze
+summary: This step will run `flutter analyze` command in a Flutter project
+description: This step will run `flutter analyze` command in a Flutter project
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze/issues
+published_at: 2019-07-19T12:41:40.089487766Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze.git
+  commit: 558fc61b48acca823bf23ef8af63446f177dbb5e
+project_type_tags:
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-analyze
+inputs:
+- opts:
+    description: The root dir of your Flutter project.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- additional_params: null
+  opts:
+    description: The flags from this input field will be appended to the `flutter
+      analyze` command.
+    summary: The flags from this input field will be appended to the `flutter analyze`
+      command.
+    title: Additional Parameters
