@@ -1,0 +1,166 @@
+title: loco
+summary: |
+  Upload or download translations from Loco
+description: |
+  This step can upload your new assets to Loco and download updated assets from Loco. Importing (upload) is always done before exporting (download).
+website: https://github.com/3factr/bitrise-step-loco
+source_code_url: https://github.com/3factr/bitrise-step-loco
+support_url: https://github.com/3factr/bitrise-step-loco/issues
+published_at: 2019-07-27T12:06:24.186992+02:00
+source:
+  git: https://github.com/3factr/bitrise-step-loco.git
+  commit: 621cbd6e848596b89a131f216c6ab739029665ad
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- loco_api_key: null
+  opts:
+    description: |
+      You can get your API key under _Developer Tools > API keys_.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your Loco export key if you only want to download translations, or your
+      Loco Full access key if you want to upload new assets.
+    title: Loco API key
+- file_ext: csv
+  opts:
+    category: Import
+    is_required: true
+    summary: File extension for the type of data you're importing
+    title: File extension
+    value_options:
+    - arb
+    - bplist
+    - csv
+    - ini
+    - json
+    - mo
+    - php
+    - plist
+    - po
+    - pot
+    - properties
+    - res
+    - resx
+    - strings
+    - tmx
+    - ts
+    - txt
+    - xlf
+    - xml
+    - yml
+- index: id
+  opts:
+    category: Import
+    is_required: true
+    summary: Specify whether translations in your file are indexed by generic IDs
+      or human-readable source text
+    title: Index
+    value_options:
+    - id
+    - text
+- file_path: null
+  opts:
+    category: Import
+    summary: Path to the file that has to be imported in Loco. Leave this empty if
+      you don't want to import any translations.
+    title: Path to imported translations
+- locale: null
+  opts:
+    category: Import
+    summary: Specify target locale if importing translations
+    title: Locale
+- async: "false"
+  opts:
+    category: Import
+    summary: Specify that import should be done asynchronously (recommended for large
+      files)
+    title: Async
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Import
+    summary: Specify original file path for source code references (excluding line
+      number)
+    title: Path
+  source_path: null
+- ignore_new: "false"
+  opts:
+    category: Import
+    summary: Specify that new assets will NOT be added to the project
+    title: Ignore new
+    value_options:
+    - "true"
+    - "false"
+- ignore_existing: "false"
+  opts:
+    category: Import
+    summary: Specify that existing assets encountered in the file will NOT be updated
+    title: Ignore existing
+    value_options:
+    - "true"
+    - "false"
+- delete_absent: "false"
+  opts:
+    category: Import
+    summary: Permanently DELETES project assets NOT found in the file (use with extreme
+      caution)
+    title: Delete absent
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Import
+    summary: Tag any NEW assets added during the import with the given tags (comma
+      separated)
+    title: Tag new
+  tag_new: null
+- opts:
+    category: Import
+    summary: Tag ALL assets in the file with the given tags (comma separated)
+    title: Tag all
+  tag_all: null
+- opts:
+    category: Import
+    summary: Remove existing tags from any assets matched in the imported file (comma
+      separated)
+    title: Untag all
+  untag_all: null
+- opts:
+    category: Import
+    summary: Tag existing assets that are MODIFIED by this import
+    title: Tag updated
+  tag_updated: null
+- opts:
+    category: Import
+    summary: Remove existing tags from assets that are MODIFIED during import
+    title: Untag updated
+  untag_updated: null
+- opts:
+    category: Import
+    summary: Tag existing assets in the project that are NOT found in the imported
+      file
+    title: Tag absent
+  tag_absent: null
+- opts:
+    category: Import
+    summary: Remove existing tags from assets NOT found in the imported file
+    title: Untag absent
+  untag_absent: null
