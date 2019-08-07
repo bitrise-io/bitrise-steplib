@@ -6,10 +6,10 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
 source_code_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
 support_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios/issues
-published_at: 2019-04-18T14:19:54.547557479Z
+published_at: 2019-08-07T14:49:47.211789761Z
 source:
   git: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios.git
-  commit: a30e4b83fcd246c66f03340eedcf272febdfd51c
+  commit: ccc8b41c92ed8c0b2edecdff3be9318d1446c768
 project_type_tags:
 - ios
 type_tags:
@@ -26,6 +26,9 @@ deps:
 is_always_run: false
 is_skippable: false
 run_if: .IsCI
+meta:
+  bitrise.io.addons.required:
+  - addon_id:"addons-firebase-testlab": null
 inputs:
 - opts:
     description: |
@@ -102,9 +105,9 @@ inputs:
 - opts:
     category: Debug
     description: |
-      The max time this test execution can run before it is cancelled. It does not include any time necessary to prepare and clean up the target device. The maximum possible testing time is 3600 seconds.
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
     summary: |
-      The max time this test execution can run before it is cancelled. It does not include any time necessary to prepare and clean up the target device. The maximum possible testing time is 3600 seconds.
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
     title: Test timeout
   test_timeout: 900
 - download_test_results: "false"
