@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="recursive-touch-for-cache-a" x1="0%" x2="100%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="recursive-touch-for-cache-b" x1="102.409%" x2="6.374%" y1="-11.098%" y2="109.263%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <path id="recursive-touch-for-cache-c" d="M47.2222222,78.3333333 C29.9074074,78.3333333 15.7407407,64.2333333 15.7407407,47 L0,47 L0,94 L15.7407407,94 L15.7407407,82.25 C24.3981481,90.0833333 35.4166667,94 47.2222222,94 C62.1759259,94 76.3425926,86.95 85,75.2 L72.4074074,65.8 C66.1111111,73.6333333 57.4537037,78.3333333 47.2222222,78.3333333 Z M78.2592593,0 L78.2592593,11.75 C69.6018519,4.7 58.5833333,0 46.7777778,0 C31.8240741,0 17.6574074,7.05 9,18.8 L21.5925926,28.2 C27.1018519,20.3666667 36.5462963,15.6666667 46.7777778,15.6666667 C64.0925926,15.6666667 78.2592593,29.7666667 78.2592593,47 L94,47 L94,0 L78.2592593,0 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#recursive-touch-for-cache-a)" fill-rule="nonzero"/>
+    <path fill="url(#recursive-touch-for-cache-b)" d="M15.75,15.8 L15.75,142.2 L110.25,142.2 L110.25,46.0445743 L80.1011364,15.8 L15.75,15.8 Z M15.75,8.77076189e-15 L80.1011364,0 C84.2782961,0 88.2843702,1.66463808 91.2380682,4.62771286 L121.386932,34.8722871 C124.34063,37.8353619 126,41.8541537 126,46.0445743 L126,142.2 C126,150.926099 118.948485,158 110.25,158 L15.75,158 C7.05151519,158 0,150.926099 0,142.2 L0,15.8 C0,7.07390095 7.05151519,8.77076189e-15 15.75,8.77076189e-15 Z M24,24 L40,24 L40,63 L24,63 L24,24 Z M47,24 L63,24 L63,63 L47,63 L47,24 Z M71,32 L87,32 L87,63 L71,63 L71,32 Z" transform="translate(56 50)"/>
+    <use fill="#760FC3" transform="translate(128 82)" xlink:href="#recursive-touch-for-cache-c" style="mix-blend-mode:multiply"/>
+  </g>
+</svg>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>lingohub-to-ios</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.735768138" offset="100%"></stop>
+        </linearGradient>
+        <path d="M53.1240566,13.72 C58.9712264,6.86 57.9966981,0 57.9966981,0 C57.9966981,0 49.2259434,0 42.8915094,7.35 C37.0443396,13.72 38.506132,19.6 38.506132,19.6 C38.506132,19.6 46.3023585,20.58 53.1240566,13.72 Z M64.8183962,53.41 C64.8183962,40.67 75.0509434,35.28 75.0509434,35.28 C75.0509434,35.28 69.6910377,25.97 56.5349056,25.97 C48.7386792,25.97 42.8915094,30.38 39.4806603,30.38 C35.5825471,30.38 30.2226415,26.46 22.9136792,26.46 C11.7066037,26.46 0.0122640576,36.26 0.0122640576,55.37 C-0.475000094,73.99 13.6556603,98 24.8627358,98 C28.760849,98 34.6080188,94.08 40.4551886,94.08 C46.3023585,94.08 50.6877358,98 56.0476415,98 C68.2292453,98 77,73.01 77,73.01 C77,73.01 64.8183962,67.62 64.8183962,53.41 Z" id="path-2"></path>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="LingoHub-to-iOS">
+            <g id="lingohub-to-ios">
+                <rect id="Rectangle-path" fill="#E72A24" fill-rule="nonzero" x="0" y="0" width="256" height="256"></rect>
+                <path d="M85.5538462,57 L85.5538462,130.113846 C85.5538462,137.536553 91.5711391,143.553846 98.9938462,143.553846 L131.006154,143.553846 C138.428861,143.553846 144.446154,137.536553 144.446154,130.113846 L144.446154,57 L173,57 L173,141.08 C173,158.708929 158.708929,173 141.08,173 L88.92,173 C71.2910708,173 57,158.708929 57,141.08 L57,57 L85.5538462,57 Z M107.434783,57 L122.565217,57 L122.565217,109.956522 L107.434783,109.956522 L107.434783,57 Z" id="Combined-Shape" fill="url(#linearGradient-1)"></path>
+                <g id="icons-/-platforms-/-apple" style="mix-blend-mode: multiply;" transform="translate(137.000000, 106.000000)">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use fill="#492F5C" xlink:href="#path-2"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
