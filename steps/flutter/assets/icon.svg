@@ -1,30 +1,26 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
-  <!-- This work is licensed under a Creative Commons Attribution 4.0 International License: https://creativecommons.org/licenses/by/4.0/. Original work can be found on https://flutter.io  -->
-  <defs>
-    <style>
-      .cls-1 {
-        fill: #491284;
-      }
-
-      .cls-2 {
-        fill: #54c5f8;
-      }
-
-      .cls-3 {
-        fill: #01579b;
-      }
-
-      .cls-4 {
-        fill: #29b6f6;
-      }
-    </style>
-  </defs>
-  <title>bitriseflutter</title>
-  <rect class="cls-1" x="-23" y="-20" width="304.09366" height="291"/>
-  <g>
-    <path class="cls-2" d="M66.26652,151.698,42.57,128.00145l77.01585-77.01586,47.39087.00145Z"/>
-    <path class="cls-3" d="M101.8113,187.242l17.77239,17.77239h47.39158l-41.46818-41.46818Z"/>
-    <path class="cls-2" d="M166.97673,122.07732l-.00508.00073v-.00073h-47.388L101.8113,139.84971l23.69579,23.69652Z"/>
-    <path class="cls-4" d="M78.11551,163.5455l23.69579-23.69579,23.69652,23.69652L101.812,187.242Z"/>
-  </g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>Flutter Executes</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="98.4939487%" x2="50%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#4082C7" offset="0%"></stop>
+            <stop stop-color="#4EC5F7" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="82 164.75 69.8 177 21 128 69.8 79 82 91.25 45.4 128"></polygon>
+    </defs>
+    <g id="Flutter-Executes" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="256" height="256"></rect>
+        <g id="Group-12" transform="translate(56.000000, 43.000000)" fill="#FFFFFF" fill-opacity="0.9">
+            <polygon id="Fill-1" points="65.4723529 97.0937647 137.468824 169.411412 84.6017647 169.411412 38.9276471 123.493765"></polygon>
+            <polygon id="Fill-3" points="0.354 84.5996471 27.0010588 111.211412 139.024588 -0.000352941177 85.6951765 -0.000352941177"></polygon>
+            <polygon id="Fill-7" points="38.9294118 123.493765 65.5411765 150.105529 138.035294 77.7878824 84.8117647 77.7878824"></polygon>
+        </g>
+        <polygon id="Mask" fill="#17579B" style="mix-blend-mode: multiply;" transform="translate(202.500000, 128.000000) scale(-1, 1) translate(-202.500000, -128.000000) " points="233 164.75 220.8 177 172 128 220.8 79 233 91.25 196.4 128"></polygon>
+        <mask id="mask-3" fill="white">
+            <use xlink:href="#path-2"></use>
+        </mask>
+        <use id="icons-/-chevron-left" fill="#17579B" style="mix-blend-mode: multiply;" xlink:href="#path-2"></use>
+    </g>
 </svg>

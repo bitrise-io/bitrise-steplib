@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>bitbucket-snippet-runner-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="108.63338%" y1="30.2090548%" x2="46.9265964%" y2="65.7400744%" id="linearGradient-1">
+            <stop stop-color="#0052CC" offset="18%"></stop>
+            <stop stop-color="#2684FF" offset="100%"></stop>
+        </linearGradient>
+        <polygon id="path-2" points="40.6666667 67.465713 32.5333333 75.5395766 0 43.2441221 32.5333333 10.9486675 40.6666667 19.0225312 16.2666667 43.2441221"></polygon>
+        <polygon id="path-4" points="119.393939 67.465713 111.260606 75.5395766 78.7272727 43.2441221 111.260606 10.9486675 119.393939 19.0225312 94.9939394 43.2441221"></polygon>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bitbucket-Snippet-Runner">
+            <g id="bitbucket-snippet-runner-stepicon" transform="translate(128.002124, 128.000000) rotate(-180.000000) translate(-128.002124, -128.000000) translate(0.002124, -0.000000)">
+                <rect id="Rectangle" fill="#FFFFFF" x="1.13686838e-13" y="5.68434189e-14" width="256" height="256"></rect>
+                <g id="Bitbucket-blue" transform="translate(148.002124, 138.000000) scale(-1, -1) translate(-148.002124, -138.000000) translate(88.002124, 84.000000)">
+                    <polygon id="Path" points="47.7036096 72 72.9145907 72 79 36 41 36"></polygon>
+                    <path d="M3.89443625,0 C2.75860769,-0.0143415458 1.67443436,0.474441399 0.932745207,1.33555373 C0.191056054,2.19666606 -0.132227813,3.34196222 0.049614338,4.46421709 L16.3708834,103.631985 C16.790642,106.136953 18.9468495,107.978635 21.4844965,108 L99.7842947,108 C101.688992,108.024213 103.324498,106.649186 103.629117,104.7672 L119.950386,4.48345803 C120.132228,3.36120315 119.808944,2.21590699 119.067255,1.35479466 C118.325566,0.493682332 117.241392,0.00489938702 116.105564,0.019561603 L3.89443625,0 Z M72.6206279,71.6727956 L47.6292855,71.6727956 L40.8623989,36.28872 L78.6762224,36.28872 L72.6206279,71.6727956 Z" id="Shape" fill="#2684FF" fill-rule="nonzero"></path>
+                    <path d="M114,36 L78.1551621,36 L72.1396459,71.0331128 L47.313706,71.0331128 L18,105.742374 C18.929115,106.543816 20.1136951,106.989478 21.3419535,107 L99.1426298,107 C101.034721,107.023973 102.659402,105.662584 102.962005,103.799265 L114,36 Z" id="Path" fill="url(#linearGradient-1)" fill-rule="nonzero"></path>
+                </g>
+                <g id="Group" style="mix-blend-mode: multiply;" transform="translate(46.002124, 31.000000)">
+                    <mask id="mask-3" fill="white">
+                        <use xlink:href="#path-2"></use>
+                    </mask>
+                    <use id="icons-/-chevron-left" fill="#492F5C" style="mix-blend-mode: multiply;" xlink:href="#path-2"></use>
+                    <polygon id="Path" fill="#492F5C" transform="translate(58.759347, 43.500000) rotate(15.000000) translate(-58.759347, -43.500000) " points="52.5539405 0.644097164 65.210965 0.608112315 64.9647529 86.3559028 52.3077283 86.3918877"></polygon>
+                    <mask id="mask-5" fill="white">
+                        <use xlink:href="#path-4"></use>
+                    </mask>
+                    <use id="icons-/-chevron-left" fill="#492F5C" style="mix-blend-mode: multiply;" transform="translate(99.060606, 43.244122) scale(-1, 1) translate(-99.060606, -43.244122) " xlink:href="#path-4"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

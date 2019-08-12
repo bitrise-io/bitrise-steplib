@@ -1,1 +1,42 @@
-<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><defs><style>.cls-1{fill:#22b573;}.cls-2{fill:#fff;}</style></defs><title>Artboard 109</title><rect class="cls-1" width="256" height="256"/><path class="cls-2" d="M150.95,107.4a50,50,0,0,0-10.42-5.87,30.64,30.64,0,0,0-11.36-2q-10.81,0-10.81,7.21,0,2.82,3.37,4.7a60.88,60.88,0,0,0,8.46,3.76l11,4.07a54.27,54.27,0,0,1,11,5.56,31.06,31.06,0,0,1,8.46,8.22,20.38,20.38,0,0,1,3.37,11.9,24.44,24.44,0,0,1-6.74,17.15q-6.74,7.28-19.89,9.48V195H122V172.09a59.58,59.58,0,0,1-15.82-4,48.26,48.26,0,0,1-14.1-8.38l10-15.66a92.06,92.06,0,0,0,14.18,7.13,38.83,38.83,0,0,0,14.18,2.58q5.64,0,8.62-1.88a5.83,5.83,0,0,0,3-5.17q0-3.29-3.37-5.48a49.18,49.18,0,0,0-8.46-4.23q-5.09-2-11-4.23a55.71,55.71,0,0,1-11-5.48,30,30,0,0,1-8.46-8.15,20.64,20.64,0,0,1-3.37-12.06,22.67,22.67,0,0,1,6.89-16.92q6.89-6.73,18.8-8.61V61h15.35V81.4a39.74,39.74,0,0,1,14.18,4.46,47.06,47.06,0,0,1,10.89,8.38Z"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="android-manifest-info-stepicon-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#53A906"/>
+      <stop offset="100%" stop-color="#A4C639"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-info-stepicon-b" x1="92.985%" x2="14.218%" y1="-11.098%" y2="109.263%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-info-stepicon-c" x1="253.832%" x2="17.426%" y1="25.871%" y2="55.25%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="61.124%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-info-stepicon-d" x1="-26.536%" x2="122.497%" y1="-146.466%" y2="149.7%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-info-stepicon-e" x1="23.367%" x2="75.228%" y1="-146.466%" y2="149.7%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-info-stepicon-f" x1="-20.991%" x2="94.593%" y1="123.982%" y2="6.149%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#android-manifest-info-stepicon-a)"/>
+    <path fill="url(#android-manifest-info-stepicon-b)" d="M69,37 L159.738281,37 L193,71.9585974 L193,211 C193,214.313708 190.313708,217 187,217 L69,217 C65.6862915,217 63,214.313708 63,211 L63,43 C63,39.6862915 65.6862915,37 69,37 Z"/>
+    <path fill="url(#android-manifest-info-stepicon-c)" fill-rule="nonzero" d="M96.28,188.875 L91.69,194.68 L87.1,188.875 L87.1,199 L81.025,199 L81.025,180.1 L86.425,180.1 L91.69,186.85 L96.955,180.1 L102.355,180.1 L102.355,199 L96.28,199 L96.28,188.875 Z M116.210909,190.765 L114.860909,186.04 L113.510909,190.765 L116.210909,190.765 Z M117.560909,195.355 L112.160909,195.355 L111.080909,199 L104.600909,199 L111.485909,180.1 L118.235909,180.1 L125.120909,199 L118.640909,199 L117.560909,195.355 Z M139.651818,180.1 L145.726818,180.1 L145.726818,199 L140.596818,199 L133.441818,189.82 L133.441818,199 L127.366818,199 L127.366818,180.1 L132.496818,180.1 L139.651818,189.28 L139.651818,180.1 Z M150.267727,199 L150.267727,180.1 L156.342727,180.1 L156.342727,199 L150.267727,199 Z M160.883636,180.1 L176.003636,180.1 L176.003636,185.365 L166.958636,185.365 L166.958636,187.795 L173.843636,187.795 L173.843636,193.06 L166.958636,193.06 L166.958636,199 L160.883636,199 L160.883636,180.1 Z" style="mix-blend-mode:multiply"/>
+    <g fill-rule="nonzero" transform="translate(86 73)">
+      <path fill="url(#android-manifest-info-stepicon-d)" d="M42,73.2307692 C59.2482776,73.2307692 73.2307692,59.2482776 73.2307692,42 C73.2307692,24.7517224 59.2482776,10.7692308 42,10.7692308 C24.7517224,10.7692308 10.7692308,24.7517224 10.7692308,42 C10.7692308,59.2482776 24.7517224,73.2307692 42,73.2307692 Z M42,84 C18.8040405,84 0,65.1959595 0,42 C0,18.8040405 18.8040405,0 42,0 C65.1959595,0 84,18.8040405 84,42 C84,65.1959595 65.1959595,84 42,84 Z" style="mix-blend-mode:multiply"/>
+      <circle cx="42.269" cy="20.192" r="5.654" fill="url(#android-manifest-info-stepicon-d)" style="mix-blend-mode:multiply"/>
+      <path fill="url(#android-manifest-info-stepicon-e)" d="M32.1474004,42.849132 L28.8438594,32.5991102 L40.3482295,28.8912977 C44.1327799,27.6715522 47.8885488,30.8335933 47.3315167,34.7706374 L44.4292538,55.2835264 L48.9856354,53.771089 L52.3783294,63.9919481 L39.5770965,68.2411668 C35.7839015,69.5002733 31.9893353,66.3337046 32.5492328,62.3764085 L35.4632492,41.7804472 L32.1474004,42.849132 Z" style="mix-blend-mode:multiply"/>
+    </g>
+    <path fill="url(#android-manifest-info-stepicon-f)" d="M158.731207,37.3828125 L192.784706,72.2668851 L164.731207,72.2668851 C161.417498,72.2668851 158.731207,69.5805936 158.731207,66.2668851 L158.731207,37.3828125 Z"/>
+  </g>
+</svg>
