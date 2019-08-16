@@ -1,0 +1,31 @@
+title: Install specific bundler version
+summary: This step allows you to uninstall the system bundler version, and match the
+  one in your Gemfile.
+description: This step allows you to uninstall the system bundler version, and match
+  the one in your Gemfile..
+website: https://github.com/FutureWorkshops/bitrise-step-install-bundler
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-install-bundler
+published_at: 2019-08-16T15:38:41.589109+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-install-bundler.git
+  commit: 07b259097c9fa7263df3b862fc3802d5d1620be3
+host_os_tags:
+- osx-10.10
+- osx-10.9
+project_type_tags:
+- ios
+- xamarin
+type_tags:
+- xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- gemfilelock_dir: ./
+  opts:
+    description: Directory where the Gemfile lock is located
+    is_expand: true
+    is_required: true
+    summary: Directory where the Gemfile lock is located
+    title: Gemfile lock directory
