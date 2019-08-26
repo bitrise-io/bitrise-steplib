@@ -1,0 +1,74 @@
+title: xcodebuild
+summary: xcodebuild
+description: xcodebuild
+website: https://github.com/chrisfuller/bitrise-step-xcodebuild
+source_code_url: https://github.com/chrisfuller/bitrise-step-xcodebuild
+support_url: https://github.com/chrisfuller/bitrise-step-xcodebuild/issues
+published_at: 2019-08-25T17:07:47.574407-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-xcodebuild.git
+  commit: dd1b9ce21d711702fdba61d43e573840b71080d6
+host_os_tags:
+- osx
+type_tags:
+- build
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      The Xcode workspace.
+    is_expand: true
+    is_required: true
+    title: -workspace
+  xc_option_workspace: ${BITRISE_PROJECT_PATH}
+- opts:
+    description: |
+      The Xcode scheme.
+    is_expand: true
+    is_required: true
+    title: -scheme
+  xc_option_scheme: ${BITRISE_SCHEME}
+- opts:
+    description: |
+      The base SDK.
+    is_expand: true
+    is_required: true
+    title: -sdk
+    value_options:
+    - iphonesimulator
+  xc_option_sdk: iphonesimulator
+- opts:
+    description: |
+      The destination.
+    is_expand: true
+    is_required: true
+    title: -destination
+  xc_option_destination: platform=iOS Simulator,name=${SIMULATOR_DEVICE},OS=${SIMULATOR_OS_VERSION}
+- opts:
+    description: |
+      The actions.
+    is_expand: true
+    is_required: true
+    title: Actions
+  xcodebuild_actions: test
+- opts:
+    description: |
+      The raw xcodebuild output log.
+    is_expand: true
+    is_required: true
+    title: Log
+  raw_xcodebuild_output: ${BITRISE_DEPLOY_DIR}/raw-xcodebuild-output.log
+- opts:
+    description: |
+      The formatter to pipe raw xcodebuild output through.
+      Use `cat -u` if no formatting is desired.
+    is_expand: true
+    is_required: true
+    title: Formatter
+  xcodebuild_output_formatter: cat -u
