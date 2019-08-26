@@ -1,0 +1,48 @@
+title: generate-image-difference
+summary: |
+  Generate a difference image from two images.
+description: |
+  Generate a difference image from two images. Images can be specified by file or directory. Useful for checking UI etc.
+website: https://github.com/kvvzr/bitrise-step-generate-image-difference
+source_code_url: https://github.com/kvvzr/bitrise-step-generate-image-difference
+support_url: https://github.com/kvvzr/bitrise-step-generate-image-difference/issues
+published_at: 2019-08-21T15:55:11.961935+09:00
+source:
+  git: https://github.com/kvvzr/bitrise-step-generate-image-difference.git
+  commit: b5711e3f4886bbef227a53a014196c73ddeca1e6
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/kvvzr/bitrise-step-generate-image-difference
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- before_images: null
+  opts:
+    description: |
+      Input the file path of the image you want to compare.
+      `Before images path` and `After images path` must both be directories or files.
+    is_required: true
+    summary: The file name or directory of before images.
+    title: Before images path
+- after_images: null
+  opts:
+    description: |
+      Input the file path of the image you want to compare.
+      `Before images path` and `After images path` must both be directories or files.
+    is_required: true
+    summary: The file name or directory of after images.
+    title: After images path
+outputs:
+- GENERATED_DIFF_IMAGES_DIR: null
+  opts:
+    description: |
+      Directory of generated difference images. Note that no image is generated if `before image` and `after image` are the same.
+    summary: Directory of generated difference images.
+    title: Directory of generated difference images
