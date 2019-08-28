@@ -1,0 +1,41 @@
+title: Get npm package version
+summary: |
+  Sets an environment variable with the npm package version
+description: |
+  Sets environment variable `$NPM_PACKAGE_VERSION` with the value found in the "version" field of package.json, for use in later steps
+website: https://github.com/lafiosca/bitrise-step-get-npm-package-version
+source_code_url: https://github.com/lafiosca/bitrise-step-get-npm-package-version
+support_url: https://github.com/lafiosca/bitrise-step-get-npm-package-version/issues
+published_at: 2019-08-22T09:52:42.245098-04:00
+source:
+  git: https://github.com/lafiosca/bitrise-step-get-npm-package-version.git
+  commit: e5da6956d21638f18643088ece61aef98d98fdd4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  apt_get:
+  - name: jq
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    summary: The version field in the specified JSON file will be exported as `$NPM_PACKAGE_VERSION`
+    title: Path of package.json
+  package_json_path: $BITRISE_SOURCE_DIR/package.json
+outputs:
+- NPM_PACKAGE_VERSION: null
+  opts:
+    summary: The value of the version field found in package.json
+    title: npm package version

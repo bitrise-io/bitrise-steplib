@@ -1,0 +1,49 @@
+title: Icon overlay
+summary: This step allow to print any text on top of the app's icon in order to distinguish
+  different builds
+description: ""
+website: https://github.com/FutureWorkshops/bitrise-step-icon-overlay
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-icon-overlay
+published_at: 2019-08-22T17:10:52.188049+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-icon-overlay.git
+  commit: eafd98b021fe857821bcd4294972df686ed9353c
+host_os_tags:
+- osx-10.14
+project_type_tags:
+- ios
+- xamarin
+type_tags:
+- utility
+deps:
+  brew:
+  - name: imagemagick
+  apt_get:
+  - name: imagemagick
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- iconsbundle_name: AppIcon.appiconset
+  opts:
+    description: The name of the appiconset file including the extension '.appiconset'
+    is_expand: true
+    is_required: true
+    summary: The name of the appiconset file inside the xcasset.
+    title: Icon bundle name
+- opts:
+    description: Folder where the project and the asset files are stored in the repository.
+    is_expand: true
+    is_required: true
+    summary: Folder where the project and the asset files are stored in the repository.
+    title: Project Location
+  project_location: .
+- opts:
+    description: The first six characters of this text will be displayed at the bottom
+      on top of the app's icon image
+    is_expand: true
+    is_required: true
+    summary: The text to print over the app icon (6 characters maximum).
+    title: Overlay text
+  overlay_text: $BITRISE_GIT_COMMIT
