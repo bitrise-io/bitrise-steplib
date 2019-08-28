@@ -1,0 +1,135 @@
+title: Flutter Build
+summary: This step will build a Flutter project
+description: This step will build a Flutter project
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-build
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-build
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-build/issues
+published_at: 2019-08-26T14:02:56.529831946Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-build.git
+  commit: acfbae87b8c6831bf59303eead40a389977b6fae
+project_type_tags:
+- flutter
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-build
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root dir of your Flutter project.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- opts:
+    description: The selected platform will be built, or both iOs and Android if you
+      select both
+    is_required: true
+    summary: The selected platform will be built, or both iOS and Android if you select
+      both
+    title: Platform
+    value_options:
+    - both
+    - ios
+    - android
+  platform: both
+- is_debug_mode: "false"
+  opts:
+    description: If debug mode is enabled, the step will print verbose logs
+    is_required: true
+    summary: If debug mode is enabled, the step will print verbose logs
+    title: Debug mode?
+    value_options:
+    - "true"
+    - "false"
+- ios_codesign_identity: null
+  opts:
+    category: iOS Platform Configs
+    description: Override codesign identity in .flutter_settings
+    summary: Override codesign identity in .flutter_settings
+    title: Codesign Identity
+- ios_additional_params: --release --no-codesign
+  opts:
+    category: iOS Platform Configs
+    description: The flags from this input field will be appended to the `flutter
+      build ios` command.
+    summary: The flags from this input field will be appended to the `flutter build
+      ios` command.
+    title: Additional parameters
+- ios_output_pattern: '*build/ios/iphoneos/*.app'
+  opts:
+    category: iOS Platform Configs
+    description: Separate patterns with a newline.
+    is_required: true
+    summary: Pattern to find built artifacts relative to $BITRISE\_SOURCE\_DIR
+    title: Output pattern
+- android_output_type: apk
+  opts:
+    category: Android Platform Configs
+    description: The selected output type will be build, either APK or app bundle
+      (AAB)
+    is_required: true
+    summary: The selected output type will be build, either APK or app bundle (AAB)
+    title: Android output artifact type
+    value_options:
+    - apk
+    - appbundle
+- android_additional_params: --release
+  opts:
+    category: Android Platform Configs
+    description: The flags from this input field will be appended to the `flutter
+      build apk` command.
+    summary: The flags from this input field will be appended to the `flutter build
+      apk` command.
+    title: Additional parameters
+- android_output_pattern: |-
+    *build/app/outputs/apk/*/*.apk
+    *build/app/outputs/bundle/*/*.aab
+  opts:
+    category: Android Platform Configs
+    description: |
+      Will find the APK or AAB files - `depending on the build type input` - with the given pattern.<br/>
+      Separate patterns with a newline.
+      **Note**<br/>
+      The step will export only the selected artifact type - `Android output artifact type` - even if the filter would accept other artifact types as well.
+    is_required: true
+    summary: Pattern to find built APK or AAB artifacts relative to $BITRISE\_SOURCE\_DIR
+    title: Output (.apk, .aab) pattern
+- android_bundle_output_pattern: '*build/app/outputs/bundle/*/*.aab'
+  opts:
+    category: Deprecated
+    description: Pattern to find built AAB artifacts relative to $BITRISE_SOURCE_DIR
+    summary: Pattern to find built AAB artifacts relative to $BITRISE_SOURCE_DIR Deprecated,
+      use `android_output_pattern` instead.
+    title: '[DEPRECATED] App bundle output pattern'
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    title: The created .apk file's path
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    title: All created .apk file's path list
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The generated .app directory
+- BITRISE_AAB_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated AAB files,
+      after filtering based on the filter inputs.
+      The paths are separated with `|` character, eg: `app.aab|app2.aab`
+    summary: List of the generated (and copied) AAB file paths - after filtering.
+    title: List of the generated AAB file paths
+- BITRISE_AAB_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated AAB file,
+      after filtering based on the filter inputs.
+      If the build generates more than one AAB file which fulfills the
+      filter inputs this output will contain the last one's path.
+    summary: Path of the generated (and copied) AAB file - after filtering.
+    title: Path of the generated AAB
