@@ -8,7 +8,7 @@ source_code_url: https://github.com/dialogs/bitrise-step-dialog-notifier
 support_url: https://github.com/dialogs/bitrise-step-dialog-notifier/issues
 published_at: 2019-08-29T13:28:07.135529+03:00
 source:
-  git: https://github.com/dialogs/bitrise-step-dialog-notifier.git
+  git: git@github.com:dialogs/bitrise-step-dialog-notifier.git
   commit: 3d45e3e2b5eda44e4210d930235d52b499d30c3a
 host_os_tags:
 - osx-10.10
