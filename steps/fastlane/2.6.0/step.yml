@@ -1,0 +1,69 @@
+title: fastlane
+summary: Runs your fastlane lane.
+description: |-
+  Runs your fastlane lane.
+
+  If `Gemfile` exists in the `work_dir` directory, fastlane will be used by
+  calling `bundle install` then `bundle exec`.
+
+  Otherwise the system installed `fastlane` version will be used.
+website: https://github.com/bitrise-io/steps-fastlane
+source_code_url: https://github.com/bitrise-io/steps-fastlane
+support_url: https://github.com/bitrise-io/steps-fastlane/issues
+published_at: 2019-09-05T14:58:15.7688155Z
+source:
+  git: https://github.com/bitrise-steplib/steps-fastlane.git
+  commit: 34056f1e27bc075e51f95179eab2c913ee2b909a
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-fastlane
+inputs:
+- lane: null
+  opts:
+    description: |
+      fastlane lane to run
+      $ fastlane [lane]
+    is_required: true
+    title: fastlane lane
+- opts:
+    description: |-
+      Use this option if the fastlane directory is not in your repository's root.
+
+      Working directory should be the parent directory of your Fastfile's directory.
+
+      For example:
+
+      * If the Fastfile path is `./here/is/my/fastlane/Fastfile`
+      * Then the Fastfile's directory is `./here/is/my/fastlane`
+      * So the Working Directory should be `./here/is/my`
+    title: Working directory
+  work_dir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Should update fastlane gem before run?
+      *This option will be skipped if you have a `Gemfile` in the `work_dir` directory.*
+    title: Should update fastlane gem before run?
+    value_options:
+    - "true"
+    - "false"
+  update_fastlane: "true"
+- opts:
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- enable_cache: "yes"
+  opts:
+    description: "If enabled the step will add the following cache items (if they
+      exist):  \n- Pods -> Podfile.lock\n- Carthage -> Cartfile.resolved\n- Android
+      dependencies"
+    is_required: true
+    title: Enable collecting files to be included in the build cache
+    value_options:
+    - "yes"
+    - "no"
