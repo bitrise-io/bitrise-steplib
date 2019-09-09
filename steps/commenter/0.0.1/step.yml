@@ -1,0 +1,67 @@
+title: Commenter
+summary: Create and update comments on GitHub issues and pull requests
+description: Create and update comments on GitHub issues and pull requests
+website: https://github.com/chrisfuller/bitrise-step-commenter
+source_code_url: https://github.com/chrisfuller/bitrise-step-commenter
+support_url: https://github.com/chrisfuller/bitrise-step-commenter/issues
+published_at: 2019-09-08T18:46:11.386798-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-commenter.git
+  commit: 70457ad86bbd0c8a5cb28836c1e4d25f857005fe
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: chrisfuller/homebrew-tap/commenter
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- commenter_owner: ${BITRISEIO_GIT_REPOSITORY_OWNER}
+  opts:
+    description: |
+      The owner.
+    is_expand: true
+    is_required: true
+    title: --owner
+- commenter_repo: ${BITRISEIO_GIT_REPOSITORY_SLUG}
+  opts:
+    description: |
+      The repository.
+    is_expand: true
+    is_required: true
+    title: --repo
+- commenter_token: ${GITHUB_API_TOKEN}
+  opts:
+    description: |
+      The token.
+    is_expand: true
+    is_required: true
+    title: --token
+- commenter_issue: ${BITRISE_PULL_REQUEST}
+  opts:
+    description: |
+      The issue or pull request.
+    is_expand: true
+    is_required: true
+    title: --issue
+- commenter_id: ${BITRISE_TRIGGERED_WORKFLOW_ID}
+  opts:
+    description: |
+      The identifier.
+    is_expand: true
+    is_required: true
+    title: --id
+- commenter_comment: null
+  opts:
+    description: |
+      The comment.
+    is_expand: true
+    is_required: true
+    title: --comment
