@@ -1,0 +1,22 @@
+title: Update Homebrew
+summary: Update Homebrew
+description: Update Homebrew
+website: https://github.com/chrisfuller/bitrise-step-update-homebrew
+source_code_url: https://github.com/chrisfuller/bitrise-step-update-homebrew
+support_url: https://github.com/chrisfuller/bitrise-step-update-homebrew/issues
+published_at: 2019-09-08T18:43:50.05147-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-update-homebrew.git
+  commit: 8ae2cbc2eaf8a72caf99f80a175cf0af87b08406
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+- dependency
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
