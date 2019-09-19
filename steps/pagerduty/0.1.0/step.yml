@@ -9,7 +9,7 @@ support_url: https://github.com/PagerDuty/bitrise-step-pagerduty/issues
 published_at: 2019-09-16T16:15:01.059024-04:00
 source:
   git: https://github.com/PagerDuty/bitrise-step-pagerduty.git
-  commit: 1b1bf9ab212df4dd745f581d64d6941cf9d84a5b
+  commit: f725ec05df22c26c0926e7599af05e7fc32ffae2
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -21,11 +21,10 @@ toolkit:
 deps:
   brew:
   - name: git
-  - name: wget
+  - name: curl
   - name: jq
   apt_get:
   - name: git
-  - name: wget
   - name: curl
   - name: jq
 is_requires_admin_user: true
