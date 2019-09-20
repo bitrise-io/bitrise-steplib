@@ -76,7 +76,7 @@ inputs:
     - error
     - warning
     - info
-- skip_if_build_is_passing: true
+- skip_if_build_is_passing: "true"
   opts:
     description: Whether or not this step should be skipped if the build is passing.
       Usually you want this to be set to true.
@@ -85,8 +85,8 @@ inputs:
     summary: Whether or not this step should be skipped if the build is passing
     title: Skip if the build is passing
     value_options:
-    - true
-    - false
+    - "true"
+    - "false"
   
 outputs:
 - PAGERDUTY_EVENT_MESSAGE: null
