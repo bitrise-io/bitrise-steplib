@@ -1,0 +1,65 @@
+title: Cordova prepare
+summary: Prepares your Cordova project
+description: |-
+  Prepares your Cordova project.
+
+  The step prepares your Cordova project by calling:
+
+  - `cordova "prepare" "<platform>"`
+website: https://github.com/bitrise-community/steps-cordova-prepare
+source_code_url: https://github.com/bitrise-community/steps-cordova-prepare
+support_url: https://github.com/bitrise-community/steps-cordova-prepare/issues
+published_at: 2019-09-20T11:59:17.703041062Z
+source:
+  git: https://github.com/bitrise-steplib/steps-cordova-prepare.git
+  commit: 193701e71ed6539695956dd7126668fd5e4ea72a
+project_type_tags:
+- cordova
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-cordova-prepare
+deps:
+  brew:
+  - name: go
+inputs:
+- opts:
+    description: |-
+      Specify this input to apply cordova-cli commands to the desired platforms only.
+
+      `cordova build [OTHER_PARAMS] <platform>`
+    is_required: true
+    title: Platform to use in cordova-cli commands
+    value_options:
+    - ios,android
+    - ios
+    - android
+  platform: ios,android
+- cordova_version: null
+  opts:
+    description: |-
+      The version of cordova you want to use.
+
+      If value is set to `latest`, the step will update to the latest cordova version.
+      Leave this input empty to use the preinstalled cordova version.
+    title: Cordova version
+- opts:
+    description: Root directory of your Cordova project, where your Cordova config.xml
+      exists.
+    is_required: true
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- cache_local_deps: "false"
+  opts:
+    category: Cache
+    description: |
+      Select if the contents of node_modules directory should be cached.
+      `true`: Mark local dependencies to be cached.
+      `false`: Do not use cache.
+    is_required: true
+    title: Cache node_modules
+    value_options:
+    - "true"
+    - "false"
