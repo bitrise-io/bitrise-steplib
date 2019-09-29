@@ -4,10 +4,10 @@ description: Firebase App Distribution gives a holistic view of your be
 website: https://github.com/d-date/bitrise-step-firebase-app-distribution
 source_code_url: https://github.com/d-date/bitrise-step-firebase-app-distribution
 support_url: https://github.com/d-date/bitrise-step-firebase-app-distribution/issues
-published_at: 2019-09-28T22:08:04.945934+02:00
+published_at: 2019-09-29T16:34:18.880769+02:00
 source:
   git: https://github.com/d-date/bitrise-step-firebase-app-distribution.git
-  commit: 2e3120f6c72e583c63c67a18b51eaa67034d7e38
+  commit: 087c39aa0adbd10e0ab41fec856e89f562e4fac8
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -25,11 +25,9 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
-  - name: git
-  - name: wget
+  - name: curl
   apt_get:
-  - name: git
-  - name: wget
+  - name: curl
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
@@ -39,12 +37,14 @@ inputs:
     description: |
       Required. Your firebase token for CLI. https://firebase.google.com/docs/cli#cli-ci-systems
     is_required: true
+    is_sensitive: true
     title: Firebase Token
   token: $FIREBASE_TOKEN
-- ipa_path: $BITRISE_IPA_PATH
+- ipa_path: $APP_FILE_PATH
   opts:
+    description: Required. Either .ipa for iOS or .apk for Android should be included.
     is_required: true
-    title: IPA path
+    title: IPA / APK path
 - app: $FIREBASE_APP_ID
   opts:
     description: |-
