@@ -1,0 +1,86 @@
+title: Ionic prepare
+summary: Prepares your Ionic project
+description: |-
+  Prepares your Ionic project.
+
+  The step prepares your Ionic project by calling:
+
+  - `ionic cordova "prepare" "--no-build"`
+website: https://github.com/bitrise-community/steps-ionic-prepare
+source_code_url: https://github.com/bitrise-community/steps-ionic-prepare
+support_url: https://github.com/bitrise-community/steps-ionic-prepare/issues
+published_at: 2019-09-20T11:59:11.184621073Z
+source:
+  git: https://github.com/bitrise-steplib/steps-ionic-prepare.git
+  commit: 095f2c50124b74e7f9b9efa92fd2f47fb490cf6a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ionic
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-ionic-prepare
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      Specify this input to apply ionic-cli commands to desired platforms only.
+
+      `ionic [cordova] platform rm <platform>`
+    is_required: true
+    title: Platform to use in ionic-cli commands
+    value_options:
+    - ios,android
+    - ios
+    - android
+  platform: ios,android
+- ionic_version: null
+  opts:
+    description: |-
+      The version of ionic you want to use.
+
+      If value is set to `latest`, the step will update to the latest ionic version.
+      Leave this input empty to use the preinstalled ionic version.
+    title: Ionic version
+- cordova_version: null
+  opts:
+    description: |-
+      The version of cordova you want to use.
+
+      If value is set to `latest`, the step will update to the latest cordova version.
+      Leave this input empty to use the preinstalled cordova version.
+    title: Cordova version
+- opts:
+    description: Root directory of your Ionic project, where your Ionic config.xml
+      exists.
+    is_required: true
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- ionic_username: null
+  opts:
+    description: Use `Ionic username` and `Ionic password` to login with ionic-cli.
+    is_sensitive: true
+    title: Ionic username
+- ionic_password: null
+  opts:
+    description: Use `Ionic username` and `Ionic password` to login with ionic-cli.
+    is_sensitive: true
+    title: Ionic password
+- cache_local_deps: "false"
+  opts:
+    category: Cache
+    description: |
+      Select if the contents of node_modules directory should be cached.
+      `true`: Mark local dependencies to be cached.
+      `false`: Do not use cache.
+    is_required: true
+    title: Cache node_modules
+    value_options:
+    - "true"
+    - "false"

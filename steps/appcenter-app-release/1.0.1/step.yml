@@ -6,7 +6,7 @@ description: |
 website: https://github.com/fileformat/bitrise-step-appcenter-app-release
 source_code_url: https://github.com/fileformat/bitrise-step-appcenter-app-release
 support_url: https://github.com/fileformat/bitrise-step-appcenter-app-release/issues
-published_at: 2019-08-21T08:57:00-0400
+published_at: 2019-09-04T15:29:27.480646-04:00
 source:
   git: https://github.com/fileformat/bitrise-step-appcenter-app-release.git
   commit: 6e49525cb88bec3f4e098b314c4586d57b4b7274
@@ -51,13 +51,15 @@ inputs:
     is_expand: true
     is_required: true
     title: path to the built application file (.ipa or .apk)
-- release_notes: $RELEASE_NOTES
-  opts:
-    is_expand: true
-    is_required: false
-    title: release notes to include when distributing
 - distribution_groups: $DISTRIBUTION_GROUPS
   opts:
+    description: Groups should be comma separated e.g. group1, group2. If not specified,
+      artifact will be sent to all distribution groups
     is_expand: true
     is_required: false
-    title: "distribution groups to get this version.  If blank, all associated groups will get it"
+    title: AppCenter distribution groups
+- opts:
+    is_expand: true
+    is_required: false
+    title: Uploaded build related release notes
+  release_notes: $RELEASE_NOTES

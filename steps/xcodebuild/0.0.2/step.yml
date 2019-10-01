@@ -1,0 +1,79 @@
+title: xcodebuild
+summary: xcodebuild
+description: xcodebuild
+website: https://github.com/chrisfuller/bitrise-step-xcodebuild
+source_code_url: https://github.com/chrisfuller/bitrise-step-xcodebuild
+support_url: https://github.com/chrisfuller/bitrise-step-xcodebuild/issues
+published_at: 2019-08-26T08:42:32.587878-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-xcodebuild.git
+  commit: 777f5be885d843396da5da5e8983b5656bc79184
+host_os_tags:
+- osx
+type_tags:
+- build
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      The workspace.
+    is_expand: true
+    is_required: true
+    title: -workspace
+  xcodebuild_workspace: ${BITRISE_PROJECT_PATH}
+- opts:
+    description: |
+      The scheme.
+    is_expand: true
+    is_required: true
+    title: -scheme
+  xcodebuild_scheme: ${BITRISE_SCHEME}
+- opts:
+    description: |
+      The base SDK.
+    is_expand: true
+    is_required: true
+    title: -sdk
+    value_options:
+    - iphonesimulator
+  xcodebuild_sdk: iphonesimulator
+- opts:
+    description: |
+      The destination.
+    is_expand: true
+    is_required: true
+    title: -destination
+  xcodebuild_destination: platform=iOS Simulator,name=${SIMULATOR_DEVICE},OS=${SIMULATOR_OS_VERSION}
+- opts:
+    description: |
+      The actions.
+    is_expand: true
+    is_required: true
+    title: Actions
+  xcodebuild_actions: test
+- opts:
+    description: |
+      The raw output log.
+    is_expand: true
+    is_required: true
+    title: Log
+  raw_xcodebuild_output: ${BITRISE_DEPLOY_DIR}/raw-xcodebuild-output.log
+- opts:
+    description: |
+      The formatter to pipe raw output through.
+      Use `cat -u` if no formatting is desired.
+    is_expand: true
+    is_required: true
+    title: Formatter
+  xcodebuild_output_formatter: cat -u
+outputs:
+- XCRESULT_BUNDLE_PATH: null
+  opts:
+    description: The result bundle path.
+    title: Result Bundle Path

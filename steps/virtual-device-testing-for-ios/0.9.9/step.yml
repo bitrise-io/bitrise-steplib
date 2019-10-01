@@ -1,0 +1,146 @@
+title: '[BETA] iOS Device Testing'
+summary: Run iOS XCUItests on devices
+description: |-
+  Run iOS XCUItests on physical devices.
+  The minimal setup of this step would be to select test type.
+website: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+source_code_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+support_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios/issues
+published_at: 2019-09-05T13:35:05.179956895Z
+source:
+  git: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios.git
+  commit: 51013e9211f897e8c80052095a659cbbd2e1b562
+project_type_tags:
+- ios
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+meta:
+  bitrise.io:
+    addons_required:
+    - addons-testing
+inputs:
+- opts:
+    description: |
+      Open finder, and navigate to the directory you designated for Derived Data output.
+      Open the folder for your project, then the Build/Products folders inside it.
+      You should see a folder Debug-iphoneos and PROJECT_NAME_iphoneos_DEVELOPMENT_TARGET-arm64.xctestrun. Select them both, then right-click on one of them and select Compress 2 items.
+    is_required: true
+    summary: |
+      The path to the zip file which contains the folder Debug-iphoneos and PROJECT_NAME_iphoneos_DEVELOPMENT_TARGET-arm64.xctestrun.
+    title: Zip path
+  zip_path: $BITRISE_TEST_BUNDLE_ZIP_PATH
+- opts:
+    description: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+
+      For example:
+
+      `iphone7,11.2,en,portrait`
+
+      `iphone7,11.2,en,landscape`
+
+      Available devices and its versions:
+      ```
+      ┌─────────────┬───────────────────────┬─────────────────────┬──────────────────────────┐
+      │   MODEL_ID  │          NAME         │    OS_VERSION_IDS   │           TAGS           │
+      ├─────────────┼───────────────────────┼─────────────────────┼──────────────────────────┤
+      │ ipad5       │ iPad (5th generation) │ 11.2,12.0           │ deprecated=11.2          │
+      │ ipadmini4   │ iPad mini 4           │ 11.2,12.0           │ deprecated=11.2          │
+      │ ipadpro_105 │ iPad Pro (10.5-inch)  │ 11.2                │ deprecated=11.2          │
+      │ iphone6     │ iPhone 6              │ 11.4                │ deprecated=11.4          │
+      │ iphone6s    │ iPhone 6s             │ 10.3,11.2,11.4,12.0 │ deprecated=10.3,11.2     │
+      │ iphone7     │ iPhone 7              │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphone7plus │ iPhone 7 Plus         │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphone8     │ iPhone 8              │ 11.2,11.4,12.0      │ default, deprecated=11.2 │
+      │ iphone8plus │ iPhone 8 Plus         │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphonese    │ iPhone SE             │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphonex     │ iPhone X              │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphonexs    │ iPhone XS             │ 12.0,12.1           │                          │
+      │ iphonexsmax │ iPhone XS Max         │ 12.0,12.1           │                          │
+      └─────────────┴───────────────────────┴─────────────────────┴──────────────────────────┘
+      ```
+    is_required: true
+    summary: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+
+      For example:
+
+      `iphone7,11.2,en,portrait`
+
+      `iphone7,11.2,en,landscape`
+
+      Available devices and its versions:
+      ```
+      ┌─────────────┬───────────────────────┬─────────────────────┬──────────────────────────┐
+      │   MODEL_ID  │          NAME         │    OS_VERSION_IDS   │           TAGS           │
+      ├─────────────┼───────────────────────┼─────────────────────┼──────────────────────────┤
+      │ ipad5       │ iPad (5th generation) │ 11.2,12.0           │ deprecated=11.2          │
+      │ ipadmini4   │ iPad mini 4           │ 11.2,12.0           │ deprecated=11.2          │
+      │ ipadpro_105 │ iPad Pro (10.5-inch)  │ 11.2                │ deprecated=11.2          │
+      │ iphone6     │ iPhone 6              │ 11.4                │ deprecated=11.4          │
+      │ iphone6s    │ iPhone 6s             │ 10.3,11.2,11.4,12.0 │ deprecated=10.3,11.2     │
+      │ iphone7     │ iPhone 7              │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphone7plus │ iPhone 7 Plus         │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphone8     │ iPhone 8              │ 11.2,11.4,12.0      │ default, deprecated=11.2 │
+      │ iphone8plus │ iPhone 8 Plus         │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphonese    │ iPhone SE             │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphonex     │ iPhone X              │ 11.2,11.4,12.0      │ deprecated=11.2          │
+      │ iphonexs    │ iPhone XS             │ 12.0,12.1           │                          │
+      │ iphonexsmax │ iPhone XS Max         │ 12.0,12.1           │                          │
+      └─────────────┴───────────────────────┴─────────────────────┴──────────────────────────┘
+      ```
+    title: Test devices
+  test_devices: iphone7,11.2,en,portrait
+- opts:
+    category: Debug
+    description: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    summary: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    title: Test timeout
+  test_timeout: 900
+- download_test_results: "false"
+  opts:
+    category: Debug
+    description: |
+      If this input is set to `true` all files generated in the test run will be downloaded. Otherwise, no any file will be downloaded.
+    is_required: true
+    summary: |
+      If this input is set to `true` all files generated in the test run will be downloaded. Otherwise, no any file will be downloaded.
+    title: Download files
+    value_options:
+    - "false"
+    - "true"
+- api_base_url: https://vdt.bitrise.io/test
+  opts:
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- api_token: $ADDON_VDTESTING_API_TOKEN
+  opts:
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+outputs:
+- VDTESTING_DOWNLOADED_FILES_DIR: null
+  opts:
+    description: The directory containing the downloaded files if you have set `download_test_results`
+      inputs above.
+    summary: The directory containing the downloaded files if you have set `download_test_results`
+      inputs above.
+    title: Downloaded files directory
