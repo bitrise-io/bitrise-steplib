@@ -39,7 +39,7 @@ inputs:
 - app_path: $BITRISE_IPA_PATH|$BITRISE_APK_PATH
   opts:
     description: |-
-      Path for IPA or APK file to deploy.
+      Path of IPA or APK file to deploy.
 
       Default values:
       iOS: `$BITRISE_IPA_PATH`
