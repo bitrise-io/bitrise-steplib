@@ -30,7 +30,7 @@ inputs:
 - firebase_token: null
   opts:
     description: |
-      Firebase CI access token. You can create by `firebase login:ci` on your local machine.
+      Firebase CI access token. You can create it by `firebase login:ci` on your local machine.
 
       It is something in the form of `1/a1gqPSI3ryNcsDiZnCaHnY-hg9u9nJeosz3iNPe-S-RLdmqdypiJMOjoeOhOGsWK`
     is_required: true
