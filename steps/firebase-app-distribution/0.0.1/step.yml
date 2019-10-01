@@ -2,7 +2,7 @@ title: '[Alpha]Firebase App Distribution'
 summary: |
   [Alpha]Distributes your builds via Firebase App Distribution
 description: |
-  [Alpha]Upload your app binaries to Firebase and sends email to your testers.
+  [Alpha]Uploads your app binaries to Firebase and sends email to your testers.
 website: https://github.com/guness/bitrise-step-firebase-app-distribution
 source_code_url: https://github.com/guness/bitrise-step-firebase-app-distribution
 support_url: https://github.com/guness/bitrise-step-firebase-app-distribution
