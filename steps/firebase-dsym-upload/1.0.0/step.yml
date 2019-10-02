@@ -6,10 +6,10 @@ description: |
 website: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
 source_code_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
 support_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload/issues
-published_at: 2019-10-01T21:56:23.93122+01:00
+published_at: 2019-10-02T18:05:51.689807+01:00
 source:
   git: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload.git
-  commit: 3cf2886757c7525301dc53968dbf39846e192881
+  commit: 4e3a274501315398fd55aefd59dd9ed3ea478c10
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -27,10 +27,10 @@ run_if: ""
 inputs:
 - fdu_fabric_location: ./Pods/Fabric/upload-symbols
   opts:
-    description: "This is the location of where Fabric is stored. \n"
+    description: |
+      This is the location of where Fabric is stored.
     is_expand: true
     is_required: true
-    summary: Summary. No more than 2-3 sentences.
     title: Location of Fabric
 - fdu_google_services_location: null
   opts:
@@ -42,7 +42,7 @@ inputs:
 - fdu_dsym_location: $BITRISE_DSYM_PATH
   opts:
     description: |
-      This is the locaiton of your dSYMs
+      This is the location of your dSYMs
     is_expand: true
     is_required: true
     title: Location of the bitrise dSYMs
