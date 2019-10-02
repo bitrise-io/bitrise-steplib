@@ -6,10 +6,10 @@ description: |
 website: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
 source_code_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
 support_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload/issues
-published_at: 2019-10-02T18:49:13.646483+01:00
+published_at: 2019-10-02T18:52:20.67231+01:00
 source:
   git: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload.git
-  commit: a0b920704225f586a341702ccf89ce485464f65c
+  commit: 9a4e8305c2309b9effba8fbc5ecf5d5e097fe557
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -48,7 +48,7 @@ inputs:
 - fdu_dsym_location: $BITRISE_DSYM_PATH
   opts:
     description: |
-      This is the location of your dSYMs. Usually it is $BITRISE_DSYM_PATH
+      This is the location of your dSYMs. Usually it is $BITRISE\_DSYM\_PATH
     is_expand: true
     is_required: true
     summary: This is the location of your dSYMs that you want to upload to Firebase.
