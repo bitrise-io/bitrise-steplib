@@ -1,0 +1,82 @@
+title: Deploy to iTunes Connect - Application Loader
+summary: Uploads binaries (.ipa / .pkg files) to [iTunes Connect](https://itunesconnect.apple.com/).
+description: "Uploads binaries (.ipa / .pkg files) to [iTunes Connect](https://itunesconnect.apple.com/)\nusing
+  the Apple's Application Loader.\n\nSetup guide and notes:\n  \n* Register an app
+  on the **My Apps** page of iTunes Connect. Click on the *plus sign* and select the
+  **New App** option. This requires an **admin** account.\n* Requires an app signed
+  with **App Store distibution Provisioning Profile**.\n* Every build which you want
+  to push to iTunes Connect must have a **unique build and version number** pair (*increment
+  either or both before a new deploy to iTunes Connect*)."
+website: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
+source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
+support_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader/issues
+published_at: 2019-10-03T13:34:54.468730382Z
+source:
+  git: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader.git
+  commit: fa267631c5087c41e0c610a8e4222c1ca863442b
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
+inputs:
+- itunescon_user: ""
+  opts:
+    description: Login Apple ID for the iTunes Connect site.
+    is_sensitive: true
+    title: Apple ID
+- opts:
+    description: |-
+      Password for the specified Apple ID.
+      **NOTE:** Password or Application specific password is required when itunescon_user is specified.
+    is_sensitive: true
+    title: Password
+  password: ""
+- app_password: ""
+  opts:
+    description: |-
+      An Application specific password for the Apple ID.
+      **NOTE:** Application specific passwords can be created on the
+      [AppleID Website](https://appleid.apple.com). It can be used to
+      surpass Two Factor Authentication.
+      **NOTE:** Password or Application specific password is required when itunescon_user is specified.
+    is_sensitive: true
+    title: Application Specific Password
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: |-
+      Path to your IPA file to be deployed.
+      **NOTE:** This input or `PKG path` is required.
+    title: IPA path
+- opts:
+    description: |-
+      Path to your PKG file to be deployed.
+      **NOTE:** This input or `IPA path` is required.
+    title: PKG path
+  pkg_path: $BITRISE_PKG_PATH
+- api_key_path: ""
+  opts:
+    description: |-
+      Specify the path in an URL format where your API key is stored.
+      For example: `https://URL/TO/AuthKey_something.p8` or `file:///PATH/TO/AuthKey_something.p8`
+
+      You can upload your key on the **Generic File Storage** tab in the Workflow Editor and set the environment variable for the file here.
+      For example: `$BITRISEIO_MYKEY_URL`
+
+      **NOTE:** Only available from XCode 11.0 and above.
+    title: API Key URL
+- api_issuer: ""
+  opts:
+    description: |-
+      Issuer ID. Required if api_key_path is specified.
+
+      **NOTE:** Only available from XCode 11.0 and above.
+    title: Issuer ID
