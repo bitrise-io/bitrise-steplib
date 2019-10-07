@@ -1,4 +1,4 @@
-title: Firebase-DSYM-Upload
+title: Firebase dSYM Upload
 summary: |
   This step uploads the dsym for your iOS project to Firebase
 description: |
@@ -6,10 +6,10 @@ description: |
 website: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
 source_code_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
 support_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload/issues
-published_at: 2019-10-02T18:52:20.67231+01:00
+published_at: 2019-10-07T17:23:41.883306+01:00
 source:
   git: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload.git
-  commit: 9a4e8305c2309b9effba8fbc5ecf5d5e097fe557
+  commit: 506b18c2bcb86454a580fe2b2e6154fa12baa933
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
