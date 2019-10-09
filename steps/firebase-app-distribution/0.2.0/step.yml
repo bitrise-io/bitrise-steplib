@@ -6,10 +6,10 @@ description: |
 website: https://github.com/guness/bitrise-step-firebase-app-distribution
 source_code_url: https://github.com/guness/bitrise-step-firebase-app-distribution
 support_url: https://github.com/guness/bitrise-step-firebase-app-distribution
-published_at: 2019-10-08T19:30:49.34404+03:00
+published_at: 2019-10-09T14:30:02.127185+03:00
 source:
   git: https://github.com/guness/bitrise-step-firebase-app-distribution.git
-  commit: 542f1dbc38711153d1d5250963f3a59a72d48dde
+  commit: 9b48d12ee1f5c2d7898c3af612ee8e95abd07611
 project_type_tags:
 - ios
 - android
@@ -55,7 +55,6 @@ inputs:
 
       `1:1234567890:android:0a1b2c3d4e5f67890`
     is_required: true
-    summary: null
     title: Firebase App ID
 - opts:
     description: |
@@ -71,7 +70,6 @@ inputs:
 
       `ali@example.com, bri@example.com, cal@example.com`
     is_required: false
-    summary: null
     title: Testers
   testers: null
 - groups: null
@@ -84,13 +82,11 @@ inputs:
 
       `qa-team, trusted-testers`
     is_required: false
-    summary: null
     title: Test Groups
 - flags: null
   opts:
     description: |
-      Additional flags to be appended to firebase command.
+      Additional flags to be appended to Firebase command.
       ie. you can specify file inputs for groups, testers, and release notes.
     is_required: false
-    summary: null
     title: Additional Command Flags
