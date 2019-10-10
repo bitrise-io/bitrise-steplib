@@ -1,24 +1,26 @@
 title: Browserstack App Live Upload
 summary: |
   Uploads your APK or IPA to Browserstack for interactive app testing.
-description: "Uploads your APK or IPA to Browserstack for interactive app testing.
-  \nYou can find your username and access key at https://www.browserstack.com/app-live/rest-api\n"
+description: |
+  Uploads your APK or IPA to Browserstack for interactive app testing. You can find your username and access key at https://www.browserstack.com/app-live/rest-api
 website: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
 source_code_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
 support_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload/issues
-published_at: 2019-10-09T21:13:42.734529+01:00
+published_at: 2019-10-10T14:40:30.023377+01:00
 source:
   git: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload.git
-  commit: fbbb2908a9d69b2ac5215468736b2b49ac7a3e25
+  commit: 132ca90b3c3bd18badac2ce69a4c36b8fbf43bfd
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
+project_type_tags:
 - ios
 - android
 - xamarin
 - react-native
 - cordova
 - ionic
+- flutter
 type_tags:
 - deploy
 toolkit:
@@ -32,8 +34,7 @@ inputs:
 - apk_ipa_filepath: null
   opts:
     description: |
-      The app file you want to upload to BrowserStack, usually $BITRISE\_APK\_PATH
-      or $BITRISE\_IPA\_PATH
+      The app file you want to upload to BrowserStack, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
     is_expand: true
     is_required: true
     summary: Location of the IPA or APK that you want to upload.
@@ -41,11 +42,11 @@ inputs:
 - browserstack_username: null
   opts:
     description: |
-      The username you use to log into Browserstack
+      The username you use to log into Browserstack.
     is_expand: true
     is_required: true
     is_sensitive: true
-    summary: The username you use to log into Browserstack
+    summary: The username you use to log into Browserstack.
     title: Browserstack Username
 - browserstack_access_key: null
   opts:
