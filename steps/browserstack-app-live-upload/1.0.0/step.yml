@@ -6,10 +6,10 @@ description: |
 website: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
 source_code_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
 support_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload/issues
-published_at: 2019-10-10T15:27:24.836501+01:00
+published_at: 2019-10-10T16:51:25.06298+01:00
 source:
   git: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload.git
-  commit: cbc8c2edc43f143b6ed26d49e7b7b4c4db1d51ed
+  commit: d7100a123466d55bae8f93d536bdd3c7be8a4dca
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
