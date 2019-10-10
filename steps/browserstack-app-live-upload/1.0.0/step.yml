@@ -2,14 +2,14 @@ title: Browserstack App Live Upload
 summary: |
   Uploads your APK or IPA to Browserstack for interactive app testing.
 description: |
-  Uploads your APK or IPA to Browserstack for interactive app testing. You can find your username and access key at https://www.browserstack.com/app-live/rest-api
+  Uploads your APK or IPA to Browserstack for interactive app testing. You can find your username and access key at https://www.browserstack.com/accounts/settings
 website: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
 source_code_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
 support_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload/issues
-published_at: 2019-10-10T14:40:30.023377+01:00
+published_at: 2019-10-10T15:27:24.836501+01:00
 source:
   git: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload.git
-  commit: 132ca90b3c3bd18badac2ce69a4c36b8fbf43bfd
+  commit: cbc8c2edc43f143b6ed26d49e7b7b4c4db1d51ed
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
