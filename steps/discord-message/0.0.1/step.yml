@@ -8,7 +8,7 @@ description: |
 website: https://gitlab.com/lighthouseit/packages/bitrise-discord-message
 source_code_url: https://gitlab.com/lighthouseit/packages/bitrise-discord-message
 support_url: https://gitlab.com/lighthouseit/packages/bitrise-discord-message
-published_at: 2019-10-11T12:00:10.143197852-03:00
+published_at: 2019-10-11T12:01:15.134827991-03:00
 source:
   git: https://gitlab.com/lighthouseit/packages/bitrise-discord-message.git
   commit: efb70580af691fdaa4ac974fb70130721f46a31a
