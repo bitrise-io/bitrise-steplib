@@ -1,0 +1,59 @@
+title: Browserstack App Live Upload
+summary: |
+  Uploads your APK or IPA to Browserstack for interactive app testing.
+description: |
+  Uploads your APK or IPA to Browserstack for interactive app testing. You can find your username and access key at https://www.browserstack.com/accounts/settings
+website: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
+source_code_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload
+support_url: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload/issues
+published_at: 2019-10-10T16:51:25.06298+01:00
+source:
+  git: https://github.com/andrewmarmion/bitrise-step-browserstack-app-live-upload.git
+  commit: d7100a123466d55bae8f93d536bdd3c7be8a4dca
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- apk_ipa_filepath: null
+  opts:
+    description: |
+      The app file you want to upload to BrowserStack, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
+    is_expand: true
+    is_required: true
+    summary: Location of the IPA or APK that you want to upload.
+    title: Location of the IPA or APK
+- browserstack_username: null
+  opts:
+    description: |
+      The username you use to log into Browserstack.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The username you use to log into Browserstack.
+    title: Browserstack Username
+- browserstack_access_key: null
+  opts:
+    description: |
+      The access key for your Browserstack account.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The access key for your Browserstack account.
+    title: Browserstack Access Key
