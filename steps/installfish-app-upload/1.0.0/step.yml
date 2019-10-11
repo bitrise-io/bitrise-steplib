@@ -1,0 +1,58 @@
+title: Installfish App Upload
+summary: |
+  Uploads an APK or IPA to Installfish.
+description: |
+  Uploads an APK or IPA to Installfish.
+website: https://github.com/andrewmarmion/bitrise-step-installfish-app-upload
+source_code_url: https://github.com/andrewmarmion/bitrise-step-installfish-app-upload
+support_url: https://github.com/andrewmarmion/bitrise-step-installfish-app-upload/issues
+published_at: 2019-10-11T21:18:15.314091+01:00
+source:
+  git: https://github.com/andrewmarmion/bitrise-step-installfish-app-upload.git
+  commit: 7cc77aa1be3e48c25aba8633a1523e21326dea47
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- apk_ipa_filepath: null
+  opts:
+    description: |
+      The app file you want to upload to Installfish, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
+    is_expand: true
+    is_required: true
+    summary: Location of the IPA or APK that you want to upload.
+    title: Location of the IPA or APK
+- installfish_api_key: null
+  opts:
+    description: |
+      The API key you were given to use with Installfish.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The API key you were given to use with Installfish.
+    title: Installfish API Key
+- opts:
+    description: |
+      A description of what is new in the app. You could use $GIT\_CLONE\_COMMIT\_MESSAGE\_BODY or $BITRISE\_BUILD\_NUMBER.
+    is_expand: true
+    is_required: false
+    summary: A description of what is new in the app.
+    title: What is new
+  whats_new: null
