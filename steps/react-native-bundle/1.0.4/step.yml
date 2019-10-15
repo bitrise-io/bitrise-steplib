@@ -1,0 +1,70 @@
+title: React Native bundle
+summary: Bundles your React Native app.
+description: Bundles your React Native app.
+website: https://github.com/bitrise-steplib/steps-react-native-bundle
+source_code_url: https://github.com/bitrise-steplib/steps-react-native-bundle
+support_url: https://github.com/bitrise-steplib/steps-react-native-bundle/issues
+published_at: 2019-10-11T08:54:39.688481978Z
+source:
+  git: https://github.com/bitrise-steplib/steps-react-native-bundle.git
+  commit: 72af82bbea9d1690eb96bd2b09f9d418f3845653
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+- android
+- ios
+type_tags:
+- build
+deps:
+  brew:
+  - name: node
+inputs:
+- opts:
+    description: Specify either `ios`, or `android` as platform for the bundler.
+    is_required: true
+    title: Bundle platform
+    value_options:
+    - ios
+    - android
+  platform: ios
+- entry_file: index.${platform}.js
+  opts:
+    description: Path to the root JS file, either absolute or relative to JS root.
+    is_required: true
+    title: Entry file
+- opts:
+    description: File name where to store the resulting bundle, ex. /tmp/groups.bundle.
+    title: Bundle output
+  out: ${platform}/main.jsbundle
+- dev: "true"
+  opts:
+    description: If false, warnings are disabled and the bundle is minified.
+    title: DEV flag
+    value_options:
+    - "true"
+    - "false"
+- assetRoots: null
+  opts:
+    description: Directory name where to store assets referenced in the bundle.
+    title: Assets Destination
+- options: null
+  opts:
+    description: |-
+      Options are added to `react-native bundle`. You can use multiple options, separated
+      by a space character.
+    title: Additional options for running `react-native bundle`
+- opts:
+    description: |-
+      __DEPRECATED__, removed from react-native tool.
+
+      Specify the bundle file URL.
+    title: '[DEPRECATED] Bundle file URL'
+  url: null
+- opts:
+    description: |-
+      __DEPRECATED__, removed from react-native tool.
+
+      Add another root(s) to be used in bundling in this project.
+    title: '[DEPRECATED] Root'
+  root: null
