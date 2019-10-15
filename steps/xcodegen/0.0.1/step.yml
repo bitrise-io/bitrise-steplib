@@ -1,0 +1,39 @@
+title: XcodeGen
+summary: |
+  This Bitrise step runs XcodeGen to generate a project.
+description: |
+  This Bitrise step runs XcodeGen to generate a project.
+website: https://github.com/brandtdaniels/xcodegen-bitrise
+source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
+support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
+published_at: 2019-10-15T14:06:57.880833-07:00
+source:
+  git: https://github.com/brandtdaniels/xcodegen-bitrise.git
+  commit: 54b639736f1865a2de1e77b6bfc51a52d1af1b37
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: xcodegen
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path to project specification.
+    is_expand: true
+    is_required: true
+    summary: Path to project specification.
+    title: Path to Project Specification
+  path_to_spec: Path to the project specification file.
