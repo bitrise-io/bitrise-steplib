@@ -1,0 +1,87 @@
+title: Create a PagerDuty alert
+summary: |
+  Create a PagerDuty alert
+description: |
+  This step creates a PagerDuty alert with specific parameters. It can use Events API v1 or v2.
+website: https://github.com/PagerDuty/bitrise-step-pagerduty
+source_code_url: https://github.com/PagerDuty/bitrise-step-pagerduty
+support_url: https://github.com/PagerDuty/bitrise-step-pagerduty/issues
+published_at: 2019-10-16T14:00:23.140207-04:00
+source:
+  git: https://github.com/PagerDuty/bitrise-step-pagerduty.git
+  commit: 1e9e419f8b2bedaceee57b1fba0f085bc017c17e
+type_tags:
+- notification
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  apt_get:
+  - name: curl
+  - name: jq
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: '{{enveq "BITRISE_BUILD_STATUS" "0" | not}}'
+inputs:
+- api_version: v2
+  opts:
+    description: Events API v1 or v2 (available in the Integrations tab of the Service
+      Details).
+    is_expand: false
+    is_required: true
+    summary: Events API v1 or v2 (available in the Integrations tab of the Service
+      Details)
+    title: API version
+    value_options:
+    - v1
+    - v2
+- integration_key: null
+  opts:
+    description: The hexadecimal service key (available in the Integrations tab of
+      the Service Details).
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The hexadecimal service key (available in the Integrations tab of the
+      Service Details)
+    title: Integration key
+- event_description: null
+  opts:
+    description: The description that the event will be created with.
+    is_expand: true
+    is_required: true
+    summary: The description that the event will be created with
+    title: Event description
+- severity: error
+  opts:
+    description: The severity that the event will be created with (relevant to Event
+      Rules).
+    is_expand: false
+    is_required: true
+    summary: The severity that the event will be created with (relevant to Event Rules)
+    title: Event severity (API v2 only)
+    value_options:
+    - critical
+    - error
+    - warning
+    - info
+outputs:
+- PAGERDUTY_EVENT_MESSAGE: null
+  opts:
+    description: The PagerDuty Events API will return a 'message' which indicates
+      the result of the operation.
+    summary: The message returned by the PagerDuty Events API
+    title: PagerDuty event creation message
+- PAGERDUTY_INCIDENT_KEY: null
+  opts:
+    description: The PagerDuty Events API v1 will return a 'incident_key' which identifies
+      the incident.
+    summary: The incident key returned by the PagerDuty Events API v1
+    title: PagerDuty event creation incident_key
+- PAGERDUTY_DEDUP_KEY: null
+  opts:
+    description: The PagerDuty Events API v2 will return a 'dedup_key' which can be
+      used to group alerts into a single incident.
+    summary: The deduplication key returned by the PagerDuty Events API v2
+    title: PagerDuty event creation dedup_key
