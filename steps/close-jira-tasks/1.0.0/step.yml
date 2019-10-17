@@ -17,10 +17,10 @@ description: |
 website: https://github.com/orestesgaolin/bitrise-close-jira-tasks
 source_code_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks
 support_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks/issues
-published_at: 2019-10-17T21:14:44.722025+02:00
+published_at: 2019-10-17T21:18:50.355432+02:00
 source:
   git: https://github.com/orestesgaolin/bitrise-close-jira-tasks.git
-  commit: e405daeb7a99bf57c61378433a22b7ead17d003d
+  commit: a6efdb102ba4b70fa667268f8f66c85e1667edce
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -32,6 +32,7 @@ toolkit:
 deps:
   brew:
   - name: git
+  - name: jq
   apt_get:
   - name: git
   - name: jq
