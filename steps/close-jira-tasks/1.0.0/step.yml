@@ -17,10 +17,10 @@ description: |
 website: https://github.com/orestesgaolin/bitrise-close-jira-tasks
 source_code_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks
 support_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks/issues
-published_at: 2019-10-17T21:18:50.355432+02:00
+published_at: 2019-10-17T22:06:57.040904+02:00
 source:
   git: https://github.com/orestesgaolin/bitrise-close-jira-tasks.git
-  commit: a6efdb102ba4b70fa667268f8f66c85e1667edce
+  commit: d870ad85bb907c116429b2dada5324b0a5a8f6bc
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -63,6 +63,7 @@ inputs:
       You should use secret environment variable
     is_expand: true
     is_required: true
+    is_sensitive: true
     summary: Token used to authenticate to Jira
     title: Jira API token
 - from_status: Deploying
