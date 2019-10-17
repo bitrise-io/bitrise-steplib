@@ -14,13 +14,13 @@ description: |
   provided they are in `from_status` at the moment of execution.
 
   The step can also add custom value to the custom field in the Jira issue e.g. version of the app.
-website: https://github.com/orestesgaolin/bitrise-step-close-jira-tasks
-source_code_url: https://github.com/orestesgaolin/bitrise-step-close-jira-tasks
-support_url: https://github.com/orestesgaolin/bitrise-step-close-jira-tasks/issues
-published_at: 2019-10-17T17:14:04.666708+02:00
+website: https://github.com/orestesgaolin/bitrise-close-jira-tasks
+source_code_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks
+support_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks/issues
+published_at: 2019-10-17T21:14:44.722025+02:00
 source:
   git: https://github.com/orestesgaolin/bitrise-close-jira-tasks.git
-  commit: 0388ec9069c55aefe74baeab8d312c2aaee2ca6e
+  commit: e405daeb7a99bf57c61378433a22b7ead17d003d
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -32,11 +32,9 @@ toolkit:
 deps:
   brew:
   - name: git
-  - name: wget
-  - name: jq
   apt_get:
   - name: git
-  - name: wget
+  - name: jq
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
@@ -45,11 +43,11 @@ inputs:
 - jira_project_name: ""
   opts:
     description: |
-      Description of this input.
+      This will be used by script to determine tasks ids in git log e.g. TEST-123
     is_expand: true
     is_required: true
     summary: Acronym used in Jira e.g. TEMP, GAS, TEST
-    title: Jira Project name
+    title: Jira project name
 - jira_url: ""
   opts:
     description: |
@@ -57,7 +55,7 @@ inputs:
     is_expand: true
     is_required: true
     summary: Base URL to company Jira
-    title: Jira Project URL
+    title: Jira project URL
 - jira_token: $JIRA_TOKEN
   opts:
     description: |
