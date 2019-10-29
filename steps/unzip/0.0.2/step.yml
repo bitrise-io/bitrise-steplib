@@ -1,0 +1,37 @@
+title: Unzip
+summary: |
+  Unzip an archive into a directory
+description: |
+  This step takes a zip file as input and unzips its content to a directory.
+website: https://github.com/digitalrmdy/bitrise-step-unzip
+source_code_url: https://github.com/digitalrmdy/bitrise-step-unzip
+support_url: https://github.com/digitalrmdy/bitrise-step-unzip/issues
+published_at: 2019-10-29T18:14:36.367675+01:00
+source:
+  git: https://github.com/digitalrmdy/bitrise-step-unzip.git
+  commit: 431b56add9594e9093d876f96a8345cad19e8cb0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- archive_path: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Path to your ZIP file.
+    title: Archive path
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Path to the directory where your ZIP file should be unpacked.
+    title: Output path
+  output_path: null
