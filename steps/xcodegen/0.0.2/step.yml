@@ -1,4 +1,14 @@
-title: XcodeGen
+#
+# A couple of useful guides & docs:
+#
+# - Main Bitrise CLI docs: https://github.com/bitrise-io/bitrise/tree/master/_docs
+# - Step Development Guideline: https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+# - Bitrise.yml format spec: https://github.com/bitrise-io/bitrise/blob/master/_docs/bitrise-yml-format-spec.md
+# - Bitrise docs: http://devcenter.bitrise.io/
+# - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
+
+title: |-
+  Generate Xcode project
 summary: |
   This Bitrise step runs XcodeGen to generate a project.
 description: |
@@ -6,61 +16,74 @@ description: |
 website: https://github.com/brandtdaniels/xcodegen-bitrise
 source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
 support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
-published_at: 2019-10-15T15:34:57.183896-07:00
-source:
-  git: https://github.com/brandtdaniels/xcodegen-bitrise.git
-  commit: 3457781eb072e5673ddfa3a35806edc21eda8236
 host_os_tags:
-- osx-10.10
-- ubuntu-16.04
+  - osx-10.10
+  
+# If this step should be available only for certain project types
+# just uncomment this `project_type_tags` section and include all the
+# project types supported by the step. If the step can be used for all
+# project types then you can just remove this section.
+# If no `project_type_tags` specified (or specified as an empty array)
+# that means the step can be used for any project type.
+# You can find more information about project type tags in the Step Development Guideline:
+# https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+#
 project_type_tags:
-- ios
-- macos
+  - ios
+  - macos
+  - tvos
+  - watchos
+
+# Type tags are used for categorizing steps, for easier step discovery in Step Libraries.
+# You can find more information about type tags in the Step Development Guideline:
+# https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
 type_tags:
-- utility
-toolkit:
-  bash:
-    entry_file: step.sh
-deps:
-  brew:
-  - name: xcodegen
+  - utility
+
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 run_if: ""
+
+deps:
+  brew:
+  - name: xcodegen
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
 inputs:
-- opts:
-    category: Config
-    description: |
-      The path to the project spec file. Defaults to project.yml
-    is_expand: true
-    is_required: true
-    summary: The path to the project spec file.
-    title: The path to the project spec file
-  spec_path: $BITRISE_SOURCE_DIR/project.yml
-- opts:
-    category: Config
-    description: The path to the directory where the project should be generated.
-      Defaults to the directory the spec is in. The filename is defined in the project
-      spec
-    is_expand: true
-    is_required: false
-    summary: The path to the directory where the project should be generated.
-    title: The path to the directory where the project should be generated
-  project_path: $BITRISE_SOURCE_DIR
-- opts:
-    category: Config
-    description: Use a cache for the xcodegen spec. This will prevent unnecessarily
-      generating the project if nothing has changed.
-    is_required: false
-    summary: Use a cache for the xcodegen spec.
-    title: Use a cache for the xcodegen spec
-  use_cache: null
-- cache_path: null
-  opts:
-    category: Config
-    description: Where the cache file will be loaded from and save to. Defaults to
-      ~/.xcodegen/cache/{SPEC_PATH_HASH}
-    is_required: false
-    summary: Where the cache file will be loaded from and save to.
-    title: Where the cache file will be loaded from and save to
+  - spec_path: $BITRISE_SOURCE_DIR/project.yml
+    opts:
+      title: "The path to the project spec file"
+      summary: "The path to the project spec file."
+      description: |
+        The path to the project spec file. Defaults to project.yml
+      is_expand: true
+      is_required: true
+
+  - project_path: $BITRISE_SOURCE_DIR
+    opts:
+      title: "The path to the directory where the project should be generated"
+      summary: "The path to the directory where the project should be generated."
+      description: |-
+        The path to the directory where the project should be generated. Defaults to the directory the spec is in. The filename is defined in the project spec
+      is_expand: true
+      is_required: false
+
+  - use_cache:
+    opts:
+      title: "Use a cache for the xcodegen spec"
+      summary: "Use a cache for the xcodegen spec."
+      description: |-
+        Use a cache for the xcodegen spec. This will prevent unnecessarily generating the project if nothing has changed.
+      is_required: false
+
+  - cache_path:
+    opts:
+      title: "Where the cache file will be loaded from and save to"
+      summary: "Where the cache file will be loaded from and save to."
+      description: |-
+        Where the cache file will be loaded from and save to. Defaults to ~/.xcodegen/cache/{SPEC_PATH_HASH}
+      is_required: false
