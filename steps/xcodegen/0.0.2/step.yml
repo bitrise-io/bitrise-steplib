@@ -6,10 +6,10 @@ description: |
 website: https://github.com/brandtdaniels/xcodegen-bitrise
 source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
 support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
-published_at: 2019-10-30T13:27:31.957191-07:00
+published_at: 2019-10-30T13:56:01.13381-07:00
 source:
   git: https://github.com/brandtdaniels/xcodegen-bitrise.git
-  commit: 6671936d9af2461375de93e28fa3f0acdc8882ea
+  commit: ed0183de8c2e58eda1f8b87e48c418e7abc27aa7
 host_os_tags:
 - osx-10.10
 project_type_tags:
