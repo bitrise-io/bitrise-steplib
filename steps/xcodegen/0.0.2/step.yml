@@ -6,10 +6,10 @@ description: |
 website: https://github.com/brandtdaniels/xcodegen-bitrise
 source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
 support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
-published_at: 2019-10-30T13:26:12.577912-07:00
+published_at: 2019-10-30T13:27:31.957191-07:00
 source:
   git: https://github.com/brandtdaniels/xcodegen-bitrise.git
-  commit: d7dd615dcf1a9bf0155c7ab5f5f1a8d69cd36a57
+  commit: 6671936d9af2461375de93e28fa3f0acdc8882ea
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -47,17 +47,3 @@ inputs:
     summary: The path to the directory where the project should be generated.
     title: The path to the directory where the project should be generated
   project_path: $BITRISE_SOURCE_DIR
-- opts:
-    description: Use a cache for the xcodegen spec. This will prevent unnecessarily
-      generating the project if nothing has changed.
-    is_required: false
-    summary: Use a cache for the xcodegen spec.
-    title: Use a cache for the xcodegen spec
-  use_cache: null
-- cache_path: null
-  opts:
-    description: Where the cache file will be loaded from and save to. Defaults to
-      ~/.xcodegen/cache/{SPEC_PATH_HASH}
-    is_required: false
-    summary: Where the cache file will be loaded from and save to.
-    title: Where the cache file will be loaded from and save to
