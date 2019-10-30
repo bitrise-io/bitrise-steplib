@@ -7,10 +7,10 @@ description: |
 website: https://github.com/jabou/bitrise-step-tryoutapps-shaman
 source_code_url: https://github.com/jabou/bitrise-step-tryoutapps-shaman
 support_url: https://github.com/jabou/bitrise-step-tryoutapps-shaman/issues
-published_at: 2019-10-30T12:16:18.841073+01:00
+published_at: 2019-10-30T13:10:55.294173+01:00
 source:
   git: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy.git
-  commit: 0e4fb4510c780a883cf340229553c1796b528374
+  commit: 6e3c6f2bc86c58751a54fbb39f2d420928f4944a
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -24,6 +24,13 @@ is_always_run: false
 is_skippable: false
 run_if: ""
 inputs:
+- opts:
+    description: "Get your user token from https://[TENANT].tryoutapps.com/users/me
+      \n"
+    is_required: true
+    is_sensitive: true
+    title: Token used for auth with TryoutApps
+  shaman_token: null
 - environment_name: null
   opts:
     description: |
