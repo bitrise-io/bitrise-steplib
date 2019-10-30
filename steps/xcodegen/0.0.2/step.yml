@@ -6,7 +6,7 @@ description: |
 website: https://github.com/brandtdaniels/xcodegen-bitrise
 source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
 support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
-published_at: 2019-10-30T13:20:15.982334-07:00
+published_at: 2019-10-30T13:26:12.577912-07:00
 source:
   git: https://github.com/brandtdaniels/xcodegen-bitrise.git
   commit: d7dd615dcf1a9bf0155c7ab5f5f1a8d69cd36a57
