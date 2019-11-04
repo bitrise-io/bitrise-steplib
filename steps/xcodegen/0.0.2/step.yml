@@ -1,4 +1,4 @@
-title: Generate Xcode project
+title: XcodeGen
 summary: |
   This Bitrise step runs XcodeGen to generate a project.
 description: |
@@ -6,17 +6,16 @@ description: |
 website: https://github.com/brandtdaniels/xcodegen-bitrise
 source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
 support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
-published_at: 2019-10-30T13:56:01.13381-07:00
+published_at: 2019-11-04T09:45:46.072672-08:00
 source:
   git: https://github.com/brandtdaniels/xcodegen-bitrise.git
-  commit: ed0183de8c2e58eda1f8b87e48c418e7abc27aa7
+  commit: 3457781eb072e5673ddfa3a35806edc21eda8236
 host_os_tags:
 - osx-10.10
+- ubuntu-16.04
 project_type_tags:
 - ios
 - macos
-- tvos
-- watchos
 type_tags:
 - utility
 toolkit:
@@ -31,6 +30,7 @@ is_skippable: false
 run_if: ""
 inputs:
 - opts:
+    category: Config
     description: |
       The path to the project spec file. Defaults to project.yml
     is_expand: true
@@ -39,6 +39,7 @@ inputs:
     title: The path to the project spec file
   spec_path: $BITRISE_SOURCE_DIR/project.yml
 - opts:
+    category: Config
     description: The path to the directory where the project should be generated.
       Defaults to the directory the spec is in. The filename is defined in the project
       spec
@@ -47,3 +48,19 @@ inputs:
     summary: The path to the directory where the project should be generated.
     title: The path to the directory where the project should be generated
   project_path: $BITRISE_SOURCE_DIR
+- opts:
+    category: Config
+    description: Use a cache for the xcodegen spec. This will prevent unnecessarily
+      generating the project if nothing has changed.
+    is_required: false
+    summary: Use a cache for the xcodegen spec.
+    title: Use a cache for the xcodegen spec
+  use_cache: null
+- cache_path: null
+  opts:
+    category: Config
+    description: Where the cache file will be loaded from and save to. Defaults to
+      ~/.xcodegen/cache/{SPEC_PATH_HASH}
+    is_required: false
+    summary: Where the cache file will be loaded from and save to.
+    title: Where the cache file will be loaded from and save to
