@@ -1,0 +1,62 @@
+title: Send a Discord message
+summary: |
+  Send a [Discord](https://discordapp.com) message with the build status
+description: |
+  Send a [Discord](https://discordapp.com) message to a text channel with the build status using Discord Webhooks
+
+  To find your text channel **webhook** visit: [https://github.com/Akizo96/de.isekaidev.discord.wbbBridge/wiki/How-to-get-Webhook-ID-&-Token](https://github.com/Akizo96/de.isekaidev.discord.wbbBridge/wiki/How-to-get-Webhook-ID-&-Token)
+website: https://gitlab.com/lighthouseit/packages/bitrise-discord-message
+source_code_url: https://gitlab.com/lighthouseit/packages/bitrise-discord-message
+support_url: https://gitlab.com/lighthouseit/packages/bitrise-discord-message/issues
+published_at: 2019-10-16T09:47:25.406531335-03:00
+source:
+  git: https://gitlab.com/lighthouseit/packages/bitrise-discord-message.git
+  commit: 94ef4e833bf0bfd8209ff892f3bf49e89443c1a4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- opts:
+    description: |
+      **Webhook\_url with webhook token is required.**
+
+      To obtain the channel **Webhook** visit: https://github.com/Akizo96/de.isekaidev.discord.wbbBridge/wiki/How-to-get-Webhook-ID-&-Token
+    is_required: true
+    is_sensitive: true
+    title: Discord Webhook URL
+  webhook_url: null
+- mention_role: '@everyone'
+  opts:
+    description: The Discord role to be mentioned if a build failure
+    is_required: false
+    title: Mention Role
+- opts:
+    description: |-
+      If set, this step will set a specific status instead of reporting the current build status.
+
+      Can be one of auto, running, success, failed or aborted.
+      If you select `auto` the step will send `success` status if the current build status is success (no step failed previously)
+      and `failed` status if the build previously failed.
+    title: Set Specific Status
+    value_options:
+    - auto
+    - running
+    - success
+    - failed
+    - aborted
+  preset_status: auto
+- is_debug_mode: "no"
+  opts:
+    description: Step prints additional debug information if this option is enabled
+    title: Debug mode?
+    value_options:
+    - "yes"
+    - "no"
