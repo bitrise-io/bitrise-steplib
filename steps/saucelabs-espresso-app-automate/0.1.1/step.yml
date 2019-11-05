@@ -3,10 +3,10 @@ summary: |
   Upload an app apk and an Espresso test apk to SauceLabs and run tests with App Automate.
 description: |
   This step uploads a provided app apk and  test apk to SauceLabs.  It then will execute the Espresso Tests for the provided apks in SauceLabs app automate.
-website: https://github.com/moatazeldebsy/bitrise-step-browserstack-espresso-app-automate
-source_code_url: https://github.com/moatazeldebsy/bitrise-step-browserstack-espresso-app-automate
-support_url: https://github.com/moatazeldebsy/bitrise-step-browserstack-espresso-app-automate/issues
-published_at: 2019-11-05T17:02:08.750474+01:00
+website: https://github.com/moatazeldebsy/bitrise-step-saucelabs-espresso-app-automate
+source_code_url: https://github.com/moatazeldebsy/bitrise-step-saucelabs-espresso-app-automate
+support_url: https://github.com/moatazeldebsy/bitrise-step-saucelabs-espresso-app-automate/issues
+published_at: 2019-11-05T17:16:51.810497+01:00
 source:
   git: https://github.com/moatazeldebsy/bitrise-step-saucelabs-espresso-app-automate.git
   commit: 02d031d39bdbfa2be18ed52d327c4d73da29d1ff
@@ -14,9 +14,9 @@ host_os_tags:
 - ubuntu-16.04
 project_type_tags:
 - android
-- iOS
+
 type_tags:
-- utility
+- test
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
