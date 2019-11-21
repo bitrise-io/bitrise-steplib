@@ -1,0 +1,174 @@
+title: HockeyApp iOS Deploy
+summary: Deploy your iOS Application to HockeyApp. (Deprecated.)
+description: "__Deprecated__, see [https://www.hockeyapp.net/blog/2019/11/16/hockeyApp-is-being-retired.html](https://www.hockeyapp.net/blog/2019/11/16/hockeyApp-is-being-retired.html).\n\nDeploy
+  an iOS application to [HockeyApp](http://hockeyapp.net),\nadd notes even in markdown
+  format, notify testers, restrict download.\n\nRegister a HockeyApp account at [http://hockeyapp.net/](http://hockeyapp.net)\nand
+  create an app to utilize this step.\nYou also need to create a *HockeyApp Token*
+  for your app.\n\nIf an `app_id` is provided, the IPA file will be uploaded to the
+  specified app on HockeyApp. \nOtherwise HockeyApp will decide whether it's a new
+  app or an update to an existing app based on the bundle ID."
+website: https://github.com/bitrise-io/steps-hockeyapp-deploy
+source_code_url: https://github.com/bitrise-io/steps-hockeyapp-deploy
+support_url: https://github.com/bitrise-io/steps-hockeyapp-deploy/issues
+published_at: 2019-11-20T08:48:45.654828776Z
+source:
+  git: https://github.com/bitrise-steplib/steps-hockeyapp-deploy.git
+  commit: fcfec5e017498c2ea03cacfd97a09df0381aba08
+project_type_tags:
+- ios
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-hockeyapp-deploy
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    title: IPA file path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: |-
+      To turn on dSYM generation open your Xcode project,
+      select *Project Settings - Build Settings - Debug Information Format*
+      and make sure it's set to the *DWARF with dSYM File* option.
+      After dsym generated, zip it and provide the zipped path as input.
+    title: dSYM zip file path (optional)
+- api_token: ""
+  opts:
+    description: |-
+      Note: different access types exist when obtaining a api_token on your account page.
+
+      ## Where to get the HockeyApp API Token?
+
+      Sign in to your [http://hockeyapp.net/](http://hockeyapp.net) account,
+      click on your username at the top right corner to get to the
+      *Manage Account* page. Select the *API Tokens* option on the left side
+      and if you don't have an appropriate API Token for your app or account
+      you can register one here.
+
+      You can see your registered API Tokens at the bottom of this page
+      at the *Active API Tokens* section. Copy and paste here the API Token
+      you want to use.
+    is_required: true
+    is_sensitive: true
+    title: API Token
+- app_id: ""
+  opts:
+    description: |-
+      **Important:**
+      *If no App ID is specified HockeyApp will attach the build
+      to an app on HockeyApp based on the bundle ID, or create a new app on HockeyApp
+      if it does not match any existing HockeyApp app's bundle ID.*
+
+      *If you set the App ID the build will be uploaded for the specified
+      HockeyApp app/project!*
+
+      ## Where to get the HockeyApp App ID?
+
+      If you didn't register your app on [http://hockeyapp.net/](http://hockeyapp.net)
+      you first have to do so to get an App ID.
+
+      Once the app is registered select it from the Apps list on the
+      Dashboard page and on the left side you'll find the **App ID**
+      of the app. Copy and paste it here.
+    is_sensitive: true
+    title: 'HockeyApp: App ID'
+- notes: Deploy with Bitrise HockeyApp Deploy Step.
+  opts:
+    description: Additional notes to the deploy.
+    title: Notes attached to the deploy
+- notes_type: "0"
+  opts:
+    description: |-
+      Possible values:
+
+      * 0: Textile
+      * 1: Markdown
+    is_required: true
+    title: Notes type
+    value_options:
+    - "0"
+    - "1"
+- notify: "2"
+  opts:
+    description: |-
+      Sets who should be notified on deployment.
+      **Requires full-access tokens.**
+
+      Possible values:
+
+      * 0 - Don't notify testers
+      * 1 - Notify all testers that can install this app
+      * 2 - Notify all testers
+    is_required: true
+    title: Notify Testers?
+    value_options:
+    - "0"
+    - "1"
+    - "2"
+- opts:
+    description: |
+      Download status.
+
+      **Requires full-access tokens.**
+
+      Possible values:
+
+      * 1 - do not allow users to download the version
+      * 2 - make the version available for download.
+    is_required: true
+    title: Allow Download?
+    value_options:
+    - "1"
+    - "2"
+  status: "2"
+- mandatory: "false"
+  opts:
+    description: |
+      Set if version is mandatory to install.
+    is_required: true
+    title: Mandatory?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: |
+      Restrict download to comma-separated list of tags.
+    title: '(optional) Restrict download: Tags'
+  tags: ""
+- commit_sha: $BITRISE_GIT_COMMIT
+  opts:
+    title: (optional) Git commit sha for this build
+- build_server_url: $BITRISE_BUILD_URL
+  opts:
+    title: (optional) Build job URL (on your build server)
+- opts:
+    title: (optional) Source Code Repository URL
+  repository_url: ""
+outputs:
+- HOCKEYAPP_DEPLOY_STATUS: ""
+  opts:
+    title: 'Deployment result: ''success'' or ''failed'''
+- HOCKEYAPP_DEPLOY_PUBLIC_URL: ""
+  opts:
+    title: Public URL of the newly deployed version
+- HOCKEYAPP_DEPLOY_BUILD_URL: ""
+  opts:
+    title: URL of the HockeyApp build
+- HOCKEYAPP_DEPLOY_CONFIG_URL: ""
+  opts:
+    title: URL of the HockeyApp config view
