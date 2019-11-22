@@ -1,0 +1,87 @@
+title: NUnit runner
+summary: NUnit runner
+description: "Runs your NUnit 2.x and NUnit 3.0 or higher tests with NUnit Console
+  Runner (nunit3-console.exe),  \nagainst your xamarin projects."
+website: https://github.com/bitrise-steplib/steps-nunit-runner
+source_code_url: https://github.com/bitrise-steplib/steps-nunit-runner
+support_url: https://github.com/bitrise-steplib/steps-nunit-runner/issues
+published_at: 2019-11-22T12:32:34.697518673Z
+source:
+  git: https://github.com/bitrise-steplib/steps-nunit-runner.git
+  commit: 7e3ec9a5c5f3bd064779f3b9bba73cc0383a4621
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- xamarin
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-nunit-runner
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    category: Config
+    description: |
+      Path to Xamarin Solution
+    is_required: true
+    title: Path to Xamarin Solution
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- opts:
+    category: Config
+    description: |
+      Xamarin project configuration
+    is_required: true
+    title: Xamarin project configuration
+  xamarin_configuration: $BITRISE_XAMARIN_CONFIGURATION
+- opts:
+    category: Config
+    description: |
+      Xamarin platform
+    is_required: true
+    title: Xamarin platform
+  xamarin_platform: $BITRISE_XAMARIN_PLATFORM
+- build_before_test: "true"
+  opts:
+    category: Debug
+    description: |
+      Set this option to `true` if you want to build your test projects before running tests.
+    is_required: true
+    title: Build before test
+    value_options:
+    - "true"
+    - "false"
+- nunit_options: null
+  opts:
+    category: Debug
+    description: |
+      Additional option flags when running NUnit Console Runner (nunit3-console.exe).
+    title: NUnit Console Runner (nunit3-console.exe) command options
+- build_tool: msbuild
+  opts:
+    category: Debug
+    description: Which tool to use for building?
+    is_required: true
+    title: Which tool to use for building?
+    value_options:
+    - msbuild
+    - xbuild
+outputs:
+- BITRISE_XAMARIN_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XAMARIN_TEST_FULL_RESULTS_TEXT: null
+  opts:
+    description: ""
+    title: Result of the tests.
