@@ -1,0 +1,110 @@
+title: jira-move-task-step
+summary: |
+  This step update optional parameter and assign new status.
+description: |
+  This step update optional parameter and move all tasks from one column to another . Mainly to quckly dump everything from code review to QA. It does NOT audit git log and thus move ALL task from column
+website: https://github.com/frakc/jira-move-task
+source_code_url: https://github.com/frakc/jira-move-task
+support_url: https://github.com/frakc/jira-move-task/issues
+published_at: 2019-11-27T13:07:25.083251+02:00
+source:
+  git: https://github.com/frakc/jira-move-task.git
+  commit: 4c994b4418b9ad6bbedc04c9d80e455a3fc75e2a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- jira_user: null
+  opts:
+    description: |
+      User with privelige to move tasks
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: admin
+    title: JIRA User
+    value_options: []
+- jira_token: null
+  opts:
+    description: "API token is used to authenticate with JIRA API. \nIt can be created
+      here: https://id.atlassian.com/manage/api-tokens?_ga=2.43946604.875494627.1562923837-75487430.1434788493\n"
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Token created for supplied user
+    title: JIRA API Token
+    value_options: []
+- jira_url: null
+  opts:
+    description: |
+      ex.: https://[team].atlassian.net
+    is_expand: true
+    is_required: true
+    summary: The host used to connect with JIRA API
+    title: JIRA Host
+    value_options: []
+- opts:
+    description: |
+      ex.: Ready for QA
+    is_expand: true
+    is_required: true
+    summary: Task will be assigned to that status. Should be correct and should exist.
+      Case sencitive
+    title: JIRA resulting status
+    value_options: []
+  to_status: null
+- from_status: null
+  opts:
+    description: |
+      ex.: "Team Review"
+    is_expand: true
+    is_required: true
+    summary: Correct status if task. Only task with that status will be updated.
+    title: JIRA starting status
+    value_options: []
+- jira_project_name: null
+  opts:
+    description: |
+      ex. : BTTT
+    is_expand: true
+    is_required: true
+    summary: Short project tag
+    title: Jira project tag
+    value_options: []
+- custom_jira_field: null
+  opts:
+    description: |
+      ex.: Build number
+    is_expand: true
+    is_required: false
+    summary: set custom_jira_value to that field
+    title: ' version field which will be updated'
+    value_options: []
+- custom_jira_value: null
+  opts:
+    description: |
+      ex.: 15
+    is_expand: true
+    is_required: false
+    summary: that value will be inserted into custom_jira_field
+    title: ' extra value'
+    value_options: []
