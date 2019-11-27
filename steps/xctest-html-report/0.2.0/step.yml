@@ -1,0 +1,92 @@
+title: Generate Xcode test HTML/JUnit report
+summary: Generate Xcode-like HTML report for Unit and UI Tests
+description: Generate Xcode-like HTML report for Unit and UI Tests with XCTestHTMLReport
+website: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report
+source_code_url: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report
+support_url: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report/issues
+published_at: 2019-11-17T17:23:13.834871+01:00
+source:
+  git: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report.git
+  commit: 20d0ea8c9d9638bab2637a7e93642062a6091e16
+project_type_tags:
+- ios
+- macos
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/BirmacherAkos/bitrise-step-xctest-html-report
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: true
+inputs:
+- opts:
+    description: |-
+      The paths of the Xcode test generated .xctesresult files.
+
+      **Separated by a new line**
+
+      * $BITRISE\_SOURCE\_DIR/test.xctestresult
+      * $BITRISE\_SOURCE\_DIR/test\_2.xctestresult
+      * ./test\_3.xctestresult
+    is_required: true
+    summary: The paths of the Xcode test generated .xctesresult files.
+    title: Xcode test result (.xctesresult) paths
+  test_result_path: $BITRISE_XCRESULT_PATH
+- generate_junit: "yes"
+  opts:
+    description: |
+      Provide JUnit XML output if enabled.
+    is_required: true
+    summary: Generate JUnit report?
+    title: Generate JUnit report?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      This directory will contain the generated test reports.
+
+      By default it's the `$BITRISE\_DEPLOY_DIR`
+    is_required: "true"
+    summary: This directory will contain the generated test reports.
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- install_branch: develop
+  opts:
+    description: |
+      You can select from which branch do you want to install the XCTestHTMLReport.
+
+      **Master** for the stable version
+      **Develop** for the newest version
+    is_required: true
+    summary: Select from which branch should the step install the tool
+    title: Install branch of XCTestHTMLReport
+    value_options:
+    - develop
+    - master
+- opts:
+    description: |
+      You can enable the verbose logging for troubleshooting purposes.
+    is_required: true
+    summary: Enable verbose log?
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+outputs:
+- XC_HTML_REPORT: null
+  opts:
+    summary: The path of the generated `HTML report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )
+    title: The path of the generated `HTML report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )
+- XC_JUNIT_REPORT: null
+  opts:
+    summary: The path of the generated `JUnit report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )
+    title: The path of the generated `JUnit report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )

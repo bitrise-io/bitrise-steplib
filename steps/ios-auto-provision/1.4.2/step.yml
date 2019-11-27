@@ -1,0 +1,210 @@
+title: iOS Auto Provision
+summary: Automatically manages your iOS Provisioning Profiles for your Xcode project
+description: |-
+  ### Automatically manages your iOS Provisioning Profiles for your Xcode project.
+
+  __Setup guide__: [Managing iOS code signing files - automatic provisioning](https://devcenter.bitrise.io/code-signing/ios-code-signing/ios-auto-provisioning/)
+
+  In the case of __Xcode managed codesigning__ projects:
+
+  - downloads the __Xcode managed Provisioning Profiles__ and installs them for the build
+  - installs the provided __Codesigning Certificates__ into the Keychain
+
+  In the case of __Manual codesigning__ projects:
+
+  - ensures that the __Application Identifier__ exists on the Apple Developer Portal
+  - ensures that the __project's Capabilities__ are set correctly in the Application Identifier
+  - ensures that the __Provisioning Profiles__ exist on the Apple Developer Portal and are installed for the build
+  - ensure that all the available __Test Devices__ exist on the Apple Developer Portal and are included in the Provisioning Profiles
+  - installs the provided __Codesigning Certificates__ into the Keychain
+website: https://github.com/bitrise-steplib/steps-ios-auto-provision
+source_code_url: https://github.com/bitrise-steplib/steps-ios-auto-provision
+support_url: https://github.com/bitrise-steplib/steps-ios-auto-provision/issues
+published_at: 2019-11-22T12:55:21.080127157Z
+source:
+  git: https://github.com/bitrise-steplib/steps-ios-auto-provision.git
+  commit: f2f36ef6a6accdfdc9950b0d121bcedaa7169e62
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- code-sign
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- distribution_type: development
+  opts:
+    description: Describes how Xcode should sign your project.
+    is_required: true
+    title: Distribution type
+    value_options:
+    - development
+    - app-store
+    - ad-hoc
+    - enterprise
+- opts:
+    description: |-
+      The Developer Portal team to manage the project's code signing files.
+
+      __If your Developer Portal Account belongs to multiple development team, this input is required!__
+      Otherwise specify this input if you want to manage the Provisioning Profiles with a different team than the one set in your project.
+
+      If you leave it empty the team defined by the project will be used.
+
+      __Example:__ `1MZX23ABCD4`
+    title: The Developer Portal team ID
+  team_id: null
+- opts:
+    description: A `.xcodeproj` or `.xcworkspace` path.
+    is_required: true
+    title: Xcode Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: The Xcode Scheme to use.
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |-
+      The Xcode Configuration to use.
+
+      By default your Scheme defines which Configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+    title: Configuration name
+- generate_profiles: "no"
+  opts:
+    description: |-
+      In the case of __Xcode managed code signing__ projects, by default the step downloads and installs the Xcode managed Provisioning Profiles.
+
+      If this input is set to: `yes`, the step will try to manage the Provisioning Profiles by itself (__like in the case of Manual code signing projects__),
+      the step will fall back to use the Xcode managed Provisioning Profiles if there is an issue.
+
+      __This input has no effect in the case of Manual codesigning projects.__
+    title: Should the step try to generate Provisioning Profiles even if Xcode managed
+      signing is enabled in the Xcode project?
+    value_options:
+    - "yes"
+    - "no"
+- min_profile_days_valid: 0
+  opts:
+    description: |-
+      Sometimes you want to sign an app with a Provisioning Profile that is valid for at least 'x' days.
+
+      For example, an enterprise app won't open if your Provisioning Profile is expired. With this parameter, you can have a Provisioning Profile that's at least valid for 'x' days.
+
+      By default (0) it just renews the Provisioning Profile when expired.
+    is_required: false
+    title: The minimum days the Provisioning Profile should be valid
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- certificate_urls: $BITRISE_CERTIFICATE_URL
+  opts:
+    category: Debug
+    description: |
+      URLs of the certificates to download.
+
+      Multiple URLs can be specified, separated by a pipe (`|`) character,
+      you can specify a local path as well, using the `file://` scheme.
+
+      __Provide a development certificate__ url, to ensure development code signing files for the project and __also provide a distribution certificate__ url, to ensure distribution code signing files for your project.
+
+      __Example:__ `file://./development/certificate/path|https://distribution/certificate/url`
+    is_required: true
+    is_sensitive: true
+    title: Certificate URL
+- opts:
+    category: Debug
+    description: |
+      Certificate passphrases.
+
+      Multiple passphrases can be specified, separated by a pipe (`|`) character.
+
+      __Specified certificate passphrase count should match the count of the certificate urls.__
+
+      __Example__ (1 certificate with empty passphrase, 1 certificate with non-empty passphrase): `|distribution-passphrase`
+    is_required: true
+    is_sensitive: true
+    title: Certificate passphrase
+  passphrases: $BITRISE_CERTIFICATE_PASSPHRASE
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    category: Debug
+    description: The Keychain path.
+    is_required: true
+    title: Keychain path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    category: Debug
+    description: The Keychain's password.
+    is_required: true
+    is_sensitive: true
+    title: Keychain's password
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: Bitrise build url.
+    is_required: true
+    title: Bitrise build url
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: Bitrise build api token.
+    is_required: true
+    is_sensitive: true
+    title: Bitrise build api token
+outputs:
+- BITRISE_EXPORT_METHOD: null
+  opts:
+    description: |-
+      The selected distribution type.
+
+      One of: `development`, `app-store`, `ad-hoc` or `enterprise`
+    title: The selected distribution type
+- BITRISE_DEVELOPER_TEAM: null
+  opts:
+    description: |-
+      The development team's ID.
+
+      Example: `1MZX23ABCD4`
+    title: The development team's ID
+- BITRISE_DEVELOPMENT_CODESIGN_IDENTITY: null
+  opts:
+    description: |-
+      The development codesign identity's name.
+
+      Example: `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`
+    title: The development codesign identity's name
+- BITRISE_PRODUCTION_CODESIGN_IDENTITY: null
+  opts:
+    description: |-
+      The production codesign identity's name.
+
+      Example: `iPhone Distribution: Bitrise Bot (VV2J4SV8V4)`
+    title: The production codesign identity's name
+- BITRISE_DEVELOPMENT_PROFILE: null
+  opts:
+    description: |-
+      The main target's development provisioning profile's UUID.
+
+      Example: `c5be4123-1234-4f9d-9843-0d9be985a068`
+    title: The main target's development provisioning profile's UUID
+- BITRISE_PRODUCTION_PROFILE: null
+  opts:
+    description: |-
+      The main target's production provisioning profile's UUID.
+
+      Example: `c5be4123-1234-4f9d-9843-0d9be985a068`
+    title: The main target's production provisioning profile's UUID
