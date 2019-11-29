@@ -6,10 +6,10 @@ description: |
 website: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 source_code_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
-published_at: 2019-11-29T19:45:41.039071239+02:00
+published_at: 2019-11-29T19:52:50.120568739+02:00
 source:
   git: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step.git
-  commit: 41f7fd51248d801e6e86534ad7348ed37528751f
+  commit: 1894dcf471fca456bcf045eb18d5609ae212e4c3
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -19,8 +19,12 @@ toolkit:
   bash:
     entry_file: step.sh
 deps:
+  brew:
+  - name: git
+  - name: wget
   apt_get:
-  - name: nodejs
+  - name: git
+  - name: wget
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
@@ -31,20 +35,20 @@ inputs:
     description: |
       - If it's in your project directory, just type the file's name.
       - If it's in a relative path to your project directory, type that relative file path.
-    is_required: true
+    is_required: false
     summary: The path of your changelog file
     title: Changelog file path
-- opts:
+- keep_markdown_output: "No"
+  opts:
     description: |
-      - If set to 'true', the output will be trimmed of all '###' prefixes before change types.
-      - If set to 'false', the output will remain exactly as in the changelog.
-    is_required: true
+      - If set to 'Yes', the output will remain exactly as in the changelog.
+      - If set to 'No', the output will be trimmed of all '###' prefixes before change types.
+    is_required: false
     summary: Decides whether to keep the output release notes trimmed or not
-    title: Trim markdown output
+    title: Keep markdown output untrimmed
     value_options:
-    - true
-    - false
-  trim_markdown_output: true
+    - "Yes"
+    - "No"
 outputs:
 - RELEASE_NOTES: null
   opts:
