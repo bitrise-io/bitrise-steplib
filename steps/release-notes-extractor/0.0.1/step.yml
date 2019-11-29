@@ -6,7 +6,7 @@ description: |
 website: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 source_code_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
-published_at: 2019-11-28T18:11:41.499312058+02:00
+published_at: 2019-11-29T14:21:32.927017115+02:00
 source:
   git: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step.git
   commit: 1e9955a4e8f7ec223cb472b10d7fcc0f85f1f2c4
