@@ -6,10 +6,10 @@ description: |
 website: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 source_code_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
-published_at: 2019-11-29T14:33:17.697234229+02:00
+published_at: 2019-11-29T14:50:21.733695933+02:00
 source:
   git: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step.git
-  commit: 763f6e69e5edd5c931c5710a1578f93e4e70a8e3
+  commit: d8a1cc466992ee7de16ba21b2d92427229594348
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -37,17 +37,17 @@ inputs:
     is_required: true
     summary: The path of your changelog file
     title: Changelog file path
-- keep_markdown_output: false
-  opts:
+- opts:
     description: |
-      - If set to 'Yes', the output will remain exactly as in the changelog.
-      - If set to 'No', the output will be trimmed of all '###' prefixes before change types.
+      - If set to 'true', the output will be trimmed of all '###' prefixes before change types.
+      - If set to 'false', the output will remain exactly as in the changelog.
     is_required: true
     summary: Decides whether to keep the output release notes trimmed or not
-    title: Keep markdown output untrimmed
+    title: Trim markdown output
     value_options:
     - true
     - false
+  trim_markdown_output: true
 outputs:
 - RELEASE_NOTES: null
   opts:
