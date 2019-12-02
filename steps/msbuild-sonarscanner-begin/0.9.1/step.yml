@@ -1,0 +1,99 @@
+title: MSBuild SonarScanner (Begin)
+summary: |
+  Step for running SonarScanner agains .NET (Xamarin) projects.
+  This is the first step from two.
+description: "This step runs MSBuild SonarScanner. The scanner for dotnet consists
+  of two steps. \nThis is the first step that executes `begin` CLI command. \nIn between
+  of `begin` and `end` steps the build, test run and code coverage should happen.\n\nCheck
+  official documentation [SonarScanner for MSBuild](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)\nto
+  understand how the scan process happens for dotnet.\n\nThis step can be used for
+  self-hosted SonarQube and SonarCloud.\n"
+website: https://github.com/Diversido/bitrise-step-msbuild-sonarscanner-begin
+source_code_url: https://github.com/Diversido/bitrise-step-msbuild-sonarscanner-begin
+support_url: https://github.com/Diversido/bitrise-step-msbuild-sonarscanner-begin/issues
+published_at: 2019-11-23T01:23:13.680037+02:00
+source:
+  git: https://github.com/Diversido/bitrise-step-msbuild-sonarscanner-begin.git
+  commit: 3500d5ac9f222947116efb24625bf57bb221245a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- xamarin
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: wget
+  - name: unzip
+  apt_get:
+  - name: wget
+  - name: unzip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      The version used to download CLI.
+      Latest version can be found at [SonarQube](https://docs.sonarqube.org/latest/analysis/scan/sonarscanner-for-msbuild/)
+    is_required: true
+    title: SonarScanner for MSBuild CLI Version
+  scanner_version: 4.7.1.2311
+- opts:
+    description: This will be the value of `sonar.login`
+    is_required: true
+    is_sensitive: true
+    title: Username or access token to authenticate with to SonarQube
+  sonar_login: $SONAR_LOGIN
+- opts:
+    description: This will be the value of `sonar.projectKey`
+    is_required: true
+    title: Key of the analyzed project
+  sonar_project_key: $SONAR_PROJECT_KEY
+- opts:
+    description: |-
+      This will be the value of `sonar.host.url`.
+      It can be SonarQube or SonarCloud.
+    is_required: true
+    title: SonarQube host URL
+  sonar_host_url: https://sonarcloud.io
+- opts:
+    description: This will be the value of `sonar.organization`
+    is_required: false
+    title: Organization Key
+  sonar_organization: null
+- opts:
+    description: Specifies the version of your project.
+    is_required: false
+    title: Version of your project (Recommended)
+  sonar_project_version: null
+- opts:
+    description: |-
+      Specifies the name of the analyzed project in SonarQube.
+      Adding this argument will overwrite the project name in SonarQube if it already exists.
+    is_required: false
+    title: Name of the analyzed project
+  sonar_project_name: null
+- is_debug: "false"
+  opts:
+    category: Debug
+    description: |-
+      Whether trace of shell commands should be printd to a build log.
+      Options:
+      * "true"
+      * "false" (default)
+    is_expand: false
+    title: Print all executed shell commands to a build log?
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- SONAR_SCANNER_FILE_PATH: null
+  opts:
+    title: The path to `SonarScanner.MSBuild.exe` to be used in the MSBuild SonarScanner
+      End step
