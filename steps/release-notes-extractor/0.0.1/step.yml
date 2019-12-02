@@ -5,11 +5,11 @@ description: |
   With this step you can easily extract the last entry of your project's changelog to be used as release notes!
 website: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 source_code_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
-support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
-published_at: 2019-11-29T19:52:50.120568739+02:00
+support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step/issues
+published_at: 2019-12-02T16:42:18.439935278+02:00
 source:
   git: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step.git
-  commit: 1894dcf471fca456bcf045eb18d5609ae212e4c3
+  commit: 89437ceb48931a1de653526a1998617f19ec1967
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -19,12 +19,8 @@ toolkit:
   bash:
     entry_file: step.sh
 deps:
-  brew:
-  - name: git
-  - name: wget
   apt_get:
-  - name: git
-  - name: wget
+  - name: nodejs
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
@@ -35,20 +31,21 @@ inputs:
     description: |
       - If it's in your project directory, just type the file's name.
       - If it's in a relative path to your project directory, type that relative file path.
-    is_required: false
+      CHANGELOG.md format is expected to match the standards here keepachangelog.com.
+    is_required: true
     summary: The path of your changelog file
     title: Changelog file path
-- keep_markdown_output: "No"
-  opts:
+- opts:
     description: |
-      - If set to 'Yes', the output will remain exactly as in the changelog.
-      - If set to 'No', the output will be trimmed of all '###' prefixes before change types.
-    is_required: false
+      - If set to 'true', the output will be trimmed of all '###' prefixes before change types.
+      - If set to 'false', the output will remain exactly as in the changelog.
+    is_required: true
     summary: Decides whether to keep the output release notes trimmed or not
-    title: Keep markdown output untrimmed
+    title: Trim markdown output
     value_options:
-    - "Yes"
-    - "No"
+    - true
+    - false
+  trim_markdown_output: true
 outputs:
 - RELEASE_NOTES: null
   opts:
