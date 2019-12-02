@@ -6,10 +6,10 @@ description: |
 website: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 source_code_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
 support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step/issues
-published_at: 2019-12-02T16:42:18.439935278+02:00
+published_at: 2019-12-02T17:29:56.422118436+02:00
 source:
   git: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step.git
-  commit: 89437ceb48931a1de653526a1998617f19ec1967
+  commit: 810de322864506fb622408840a8cdb778c20a12c
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -18,9 +18,6 @@ type_tags:
 toolkit:
   bash:
     entry_file: step.sh
-deps:
-  apt_get:
-  - name: nodejs
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
