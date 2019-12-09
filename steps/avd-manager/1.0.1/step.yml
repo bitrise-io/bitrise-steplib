@@ -1,0 +1,108 @@
+title: AVD Manager
+summary: Create and run Android Virtual Device
+description: Create and run Android Virtual Device
+website: https://github.com/bitrise-steplib/steps-avd-manager
+source_code_url: https://github.com/bitrise-steplib/steps-avd-manager
+support_url: https://github.com/bitrise-steplib/steps-avd-manager/issues
+published_at: 2019-12-09T14:53:28.773467259Z
+source:
+  git: https://github.com/bitrise-steplib/steps-avd-manager.git
+  commit: 0d1ffeb956f3721fcd0671952a9774537b16a7b0
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-avd-manager
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Set the device profile to create the new AVD. This profile contains
+      all the parameters of the devices. To see the complete list of available profiles
+      please use the `avdmanager list device` command.
+    is_required: true
+    summary: Set the device profile to create the new AVD. This profile contains all
+      the parameters of the devices. To see the complete list of available profiles
+      please use the `avdmanager list device` command.
+    title: Device Profile
+  profile: pixel
+- api_level: 26
+  opts:
+    description: The device will run with the specified version of android.
+    is_required: true
+    summary: The device will run with the specified version of android.
+    title: Android API Level
+- opts:
+    description: Select OS tag to have the required toolset on the device.
+    is_expand: true
+    is_required: true
+    summary: Select OS tag to have the required toolset on the device.
+    title: OS Tag
+    value_options:
+    - google_apis
+    - google_apis_playstore
+    - android-wear
+    - android-tv
+    - default
+  tag: google_apis
+- abi: x86
+  opts:
+    category: Debug
+    description: Select which ABI to use running the emulator. Availability depends
+      on API level. Please use `sdkmanager --list` command to see the available ABIs.
+    is_expand: true
+    is_required: true
+    summary: Select which ABI to use running the emulator. Availability depends on
+      API level. Please use `sdkmanager --list` command to see the available ABIs.
+    title: ABI
+    value_options:
+    - x86
+    - x86_64
+    - armeabi-v7a
+    - arm64-v8a
+    - mips
+- emulator_id: emulator
+  opts:
+    category: Debug
+    description: Set the device's ID. (This will be the name under $HOME/.android/avd/)
+    is_required: true
+    summary: Set the device's ID. (This will be the name under $HOME/.android/avd/)
+    title: ID
+- create_command_flags: --sdcard 512M
+  opts:
+    category: Debug
+    description: Flags used when running the command to create the emulator.
+    is_required: false
+    summary: Flags used when running the command to create the emulator.
+    title: Create AVD command flags
+- opts:
+    category: Debug
+    description: Flags used when running the command to start the emulator.
+    is_required: false
+    summary: Flags used when running the command to start the emulator.
+    title: Start AVD command flags
+  start_command_flags: -camera-back none -camera-front none
+- emulator_channel: "0"
+  opts:
+    category: Debug
+    description: Select which channel to use with `sdkmanager` to fetch `emulator`
+      package. Available channels are 0 (Stable), 1 (Beta), 2 (Dev), and 3 (Canary).
+    is_expand: true
+    is_required: true
+    summary: Select which channel to use with `sdkmanager` to fetch `emulator` package.
+      Available channels are 0 (Stable), 1 (Beta), 2 (Dev), and 3 (Canary).
+    title: Emulator channel
+    value_options:
+    - "0"
+    - "1"
+    - "2"
+    - "3"
+outputs:
+- BITRISE_EMULATOR_SERIAL: null
+  opts:
+    description: Booted emulator serial
+    title: Emulator serial
