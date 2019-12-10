@@ -4,7 +4,7 @@ description: Create an archive for your Xamarin application.
 website: https://github.com/bitrise-steplib/steps-xamarin-archive
 source_code_url: https://github.com/bitrise-steplib/steps-xamarin-archive
 support_url: https://github.com/bitrise-steplib/steps-xamarin-archive/issues
-published_at: 2019-12-10T13:35:09.653873823Z
+published_at: 2019-12-10T13:51:17.099214569Z
 source:
   git: https://github.com/bitrise-steplib/steps-xamarin-archive.git
   commit: ac9feccde23c0ea19b0f05c078026aca37f8bfa6
