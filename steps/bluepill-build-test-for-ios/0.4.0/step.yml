@@ -6,10 +6,10 @@ description: Run tests in parallel by using multiple simulators. Generate a JUni
 website: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
 source_code_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
 support_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios/issues
-published_at: 2019-12-10T18:27:23.627052+08:00
+published_at: 2019-12-11T11:05:26.727538+08:00
 source:
   git: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios.git
-  commit: 2c8e58e1a43d62454c500abbeb6beb64945bc11e
+  commit: 51a77e3847a29a0d5ea21903ae7d5c99d20c708c
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -63,11 +63,11 @@ inputs:
     summary: iOS Device to build/run (e.g. 'iPhone 11', 'iPad Pro (12.9-inch) (3rd
       generation)')
     title: Device Type
-- ios_version: 13.2.2
+- ios_version: "13.2"
   opts:
     is_expand: true
     is_required: true
-    summary: iOS Version to build/run simulators (e.g. '12.4', '13.2.2')
+    summary: iOS Version to build/run simulators (e.g. '12.4', '13.2')
     title: iOS Version
 - derived_data_path: ""
   opts:
