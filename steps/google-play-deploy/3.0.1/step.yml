@@ -1,0 +1,140 @@
+title: Deploy to Google Play
+summary: Uploads and releases apps to Google Play Store
+description: |-
+  Uploads and releases apps to Google Play Store.
+
+  The step supports single APK, [multiple APK](https://developer.android.com/google/play/publishing/multiple-apks.html) and Bundle deploys.
+
+  To use this step:
+
+  1. Upload the first apk manually (using the web interface):
+
+    Visit the [Google Play Console](https://play.google.com/apps/publish) -> All applications -> CREATE APPLICATION
+
+  2. Link your Google Play Developer Console to an API project:
+
+    Described in [Google Play Developer API](https://developers.google.com/android-publisher/getting_started)'s __Linking your API Project__ section
+
+  3. Setup API Access Clients, using a service account:
+
+    Described in [Google Play Developer API](https://developers.google.com/android-publisher/getting_started)'s __Using a service account__ section
+
+    __NOTE__: When you create your service account on the Google Play Developer Console, choose json as `Key Type`.
+
+  4. Grant the necessary rights to the service account:
+
+    Visit the [Google Play Console](https://play.google.com/apps/publish) -> Settings -> Users & permissions -> Invite new user.
+
+    Due to the way the Google Play Publisher API works, you have to grant at least the following permissions to that service account:
+
+      - ACCESS LEVEL: View app information
+      - RELEASE MANAGEMENT: Manage production releases, Manage testing track releases
+      - STORE PRESENCE: Edit store listing, pricing & distribution
+
+  5. OPTIONAL - Add translations for your Store Listing:
+
+    To allow the step to assign your 'whatsnew' files to the uploaded apk version.
+
+    Visit [Play Console Help](https://support.google.com/googleplay/android-developer/answer/3125566?hl=en)'s __Add translations for your Store Listing__ section
+website: https://github.com/bitrise-io/steps-google-play-deploy
+source_code_url: https://github.com/bitrise-io/steps-google-play-deploy
+support_url: https://github.com/bitrise-io/steps-google-play-deploy/issues
+published_at: 2019-12-09T16:58:24.636775548Z
+source:
+  git: https://github.com/bitrise-steplib/steps-google-play-deploy.git
+  commit: 8dba7be97b04c53fb2a573f910b76436f032e550
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-google-play-deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: "Path to the Service Account's JSON key file.\n\nFor remote JSON
+      key file you can provide any download location (ex: `https://URL/TO/key.json`).
+      \ \nFor local JSON key file provide file path url. (ex: `file://PATH/TO/key.json`)."
+    is_required: true
+    is_sensitive: true
+    title: Service Account JSON key file path
+  service_account_json_key_path: null
+- opts:
+    description: Package name of the app.
+    is_required: true
+    title: Package name
+  package_name: null
+- app_path: $BITRISE_APK_PATH\n$BITRISE_AAB_PATH
+  opts:
+    description: |-
+      Path to the App Bundle or APK file(s) to deploy.
+
+      In case of [multiple APK](https://developer.android.com/google/play/publishing/multiple-apks.html) deploy, you can specify multiple APKs as a newline `\n` or pipe `|` separated list.
+    is_required: true
+    title: App file path
+- expansionfile_path: ""
+  opts:
+    description: |-
+      Path to the expansion file.
+
+      Leave empty or provide exactly the same number of paths as in app_path, separated by `|` character and start each path with the expansion file's type
+      separated by a `:`. (main, patch)
+
+      Format examples:
+
+      - `main:/path/to/my/app.obb`
+      - `patch:/path/to/my/app1.obb|main:/path/to/my/app2.obb|main:/path/to/my/app3.obb`
+    title: Expansion file Path
+- opts:
+    description: "The track in which you want to assign the uploaded app. \n\nCan
+      be one of the built-in tracks: internal, alpha, beta, production.\n\nOr you
+      can set your custom track name as well. \n\nFor example: `pre-release`, or any
+      of your closed track you added in Google Play Developer Console."
+    is_required: true
+    summary: The track in which you want to assign the uploaded app.
+    title: Track
+  track: alpha
+- opts:
+    description: |-
+      Portion of the users who should get the staged version of the app. Accepts values between 0.0 and 1.0 (exclusive-exclusive).
+      To release to all users, this input should not be defined (or should be blank).
+    is_required: false
+    title: User Fraction
+  user_fraction: null
+- opts:
+    description: |-
+      Use this input to specify localized 'what's new' files directory.
+
+      This directory should contain 'whatsnew' files postfixed with the locale.
+
+      what's new file name pattern: `whatsnew-LOCALE`
+
+      Example:
+
+      ```
+      + - [PATH/TO/WHATSNEW]
+          |
+          + - whatsnew-en-US
+          |
+          + - whatsnew-de-DE
+      ```
+
+      Format examples:
+
+      - "./"         # what's new files are in the repo root directory
+      - "./whatsnew" # what's new files are in the whatsnew directory
+    title: Directory of localized what's new files
+  whatsnews_dir: null
+- mapping_file: $BITRISE_MAPPING_PATH
+  opts:
+    description: The `mapping.txt` file provides a translation between the original
+      and obfuscated class, method, and field names.
+    title: Location of your mapping.txt file
