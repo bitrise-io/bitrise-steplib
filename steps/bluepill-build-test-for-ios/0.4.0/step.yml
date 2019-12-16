@@ -1,0 +1,141 @@
+title: Bluepill Build/Test for iOS
+summary: Build and run parallel UI/Unit tests for iOS using LinkedIn's bluepill testing
+  tool
+description: Run tests in parallel by using multiple simulators. Generate a JUnit
+  report after each test run.
+website: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
+source_code_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios
+support_url: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios/issues
+published_at: 2019-12-11T11:05:26.727538+08:00
+source:
+  git: https://github.com/HealthEngineAU/bitrise-step-bluepill-build-test-for-ios.git
+  commit: 51a77e3847a29a0d5ea21903ae7d5c99d20c708c
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- build
+- test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- bluepill_version: bluepill_5_1_1__xcode_11_2
+  opts:
+    is_required: true
+    summary: Which version of Bluepill to install/run?
+    title: Bluepill Version
+    value_options:
+    - bluepill_5_1_1__xcode_11_2
+    - bluepill_5_0_0__xcode_11_0
+    - bluepill_4_1_1__xcode_10_2
+    - bluepill_3_1_1__xcode_10_1
+    - bluepill_3_1_0__xcode_10_0
+    - bluepill_2_4_0__xcode_9_4
+    - bluepill_2_3_1__xcode_9_3
+    - bluepill_2_2_0__xcode_9_2
+    - bluepill_2_1_0__xcode_9_1
+    - bluepill_2_0_2__xcode_9_0
+    - bluepill_1_1_2__xcode_8_3
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Target name in bundle (e.g. 'MyApp')
+    title: Target Name
+  target_name: ""
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Xcode scheme (e.g. 'MyApp')
+    title: Scheme
+  scheme: ""
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Xcode workspace file (e.g. MyApp.xcworkspace)
+    title: Workspace File
+  workspace: ""
+- device_type: iPhone 11
+  opts:
+    is_expand: true
+    is_required: true
+    summary: iOS Device to build/run (e.g. 'iPhone 11', 'iPad Pro (12.9-inch) (3rd
+      generation)')
+    title: Device Type
+- ios_version: "13.2"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: iOS Version to build/run simulators (e.g. '12.4', '13.2')
+    title: iOS Version
+- derived_data_path: ""
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Derived data directory (e.g. 'build')
+    title: Derived Data Path
+- generate_coverage: "true"
+  opts:
+    is_required: true
+    summary: Generate code coverage for the build.
+    title: Generate Coverage
+    value_options:
+    - "true"
+    - "false"
+- bluepill_output_dir: bluepill-output
+  opts:
+    is_expand: true
+    is_required: true
+    summary: 'Directory to place all the bluepill logs/results files. Individual test
+      reports will sit inside this directory, named like: "iPhone SE - 12.2 - TIMESTAMP"'
+    title: Bluepill Logs Path
+- num_simulators: 4
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Number of iOS simulators to run in parallel.
+    title: Num. Simulators (-n)
+- failure_tolerance: 0
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Number of times to retry on test failures.
+    title: Failure Tolerance (-f)
+- opts:
+    is_required: true
+    summary: When Failure Tolerance is above zero, only retry tests that failed.
+    title: Only Retry Failed Tests? (-F)
+    value_options:
+    - "true"
+    - "false"
+  retry_only_failed_tests: "false"
+- additional_xcodebuild_args: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Additional arguments to send to `xcodebuild`
+    title: Additional Xcodebuild Arguments
+- additional_bluepill_args: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: See https://github.com/linkedin/bluepill for a full list of supported
+      argumentss.
+    title: Additional Bluepill Arguments
+- fail_build_if_coverage_fails: "false"
+  opts:
+    summary: Fail the build if Bluepill fails to gather valid coverage data (e.g.
+      `${bluepill_output_dir}/${target_name}.app.coverage.txt`)
+    title: Fail Build on Invalid Coverage Data
+    value_options:
+    - "false"
+    - "true"
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Environment variable to capture test results as a human-readable string.
+      This will also produce a Markdown-formatted copy with the `_MARKDOWN` suffix.
+      e.g. (`MY_RESULT` and `MY_RESULT_MARKDOWN`)
+    title: Test Results Output Environment Variable
+  test_result_env_var: TEST_RESULTS
