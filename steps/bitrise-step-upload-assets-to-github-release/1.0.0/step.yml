@@ -23,6 +23,9 @@ deps:
   brew:
   - name: git
   - name: hub
+  apt:
+  - name: git
+  - name: hub
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
@@ -37,7 +40,9 @@ inputs:
     summary: |
       Enables "hub" debug output
     title: Debug this step
-    value_options: []
+    value_options:
+    - "true"
+    - "false"
 - github_pat: null
   opts:
     description: |
