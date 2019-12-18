@@ -1,15 +1,14 @@
 title: Set Git Credentials
-summary: |
-  Sets the Git credentials used in a workflow
+summary: Sets the Git credentials used in a workflow
 description: |
   Sets the name and email address of the Git credentials used in a workflow
 website: https://github.com/prosperllc/bitrise-step-set-git-credentials
 source_code_url: https://github.com/prosperllc/bitrise-step-set-git-credentials
 support_url: https://github.com/prosperllc/bitrise-step-set-git-credentials/issues
-published_at: 2019-12-17T12:30:47.3997059-08:00
+published_at: 2019-12-18T12:38:06.7977513-08:00
 source:
   git: https://github.com/prosperllc/bitrise-step-set-git-credentials.git
-  commit: 22ad52d5ddb543a96792995bc94d1ea972da5867
+  commit: 0a25b468684fde8b3002e5a20792aec4112f6196
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -21,10 +20,8 @@ toolkit:
 deps:
   brew:
   - name: git
-  - name: wget
   apt_get:
   - name: git
-  - name: wget
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
