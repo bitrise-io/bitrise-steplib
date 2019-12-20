@@ -1,0 +1,58 @@
+title: Release notes extractor
+summary: |
+  Easily extract release notes for your project's changelog
+description: |
+  With this step you can easily extract the last entry of your project's changelog to be used as release notes!
+website: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
+source_code_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step
+support_url: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step/issues
+published_at: 2019-12-20T15:07:44.738594792+02:00
+source:
+  git: https://gitlab.com/areebgroup-open-source/bitrise-release-notes-step.git
+  commit: 34a864c0608728d84afe47d272dcf39e8bfd8052
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- changelog_file_path: CHANGELOG.md
+  opts:
+    description: |
+      - If it's in your project directory, just type the file's name.
+      - If it's in a relative path to your project directory, type that relative file path.
+      CHANGELOG.md format is expected to match the standards here keepachangelog.com.
+    is_required: true
+    summary: The path of your changelog file
+    title: Changelog file path
+- opts:
+    description: |
+      - If set to 'Yes', the output will be trimmed of all '###' prefixes before change types.
+      - If set to 'No', the output will remain exactly as in the changelog.
+    is_required: true
+    summary: Decides whether to keep the output release notes trimmed or not
+    title: Trim markdown output
+    value_options:
+    - "Yes"
+    - "No"
+  trim_markdown_output: "Yes"
+outputs:
+- EXTRACTED_RELEASE_NOTES: null
+  opts:
+    description: |
+      This output will contain the string value of the release notes as found in the Changelog entry.
+    summary: The string value of the extracted release notes
+    title: Release notes
+- EXTRACTED_VERSION_NAME: null
+  opts:
+    description: |
+      This output will contain the version name as found in the Changelog entry.
+    summary: The string value of the extracted version name
+    title: Version name
