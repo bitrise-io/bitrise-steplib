@@ -1,0 +1,38 @@
+title: Genymotion Cloud Stop Android Devices
+summary: |
+  Stop Genymotion Cloud SaaS instances
+description: |
+  Stop Genymotion Cloud SaaS instances.
+website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop/issues
+published_at: 2020-01-06T17:36:37.864519054+01:00
+source:
+  git: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop.git
+  commit: 4e7246a95229ee45d404abe73e6d7e76f8b128d6
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- instance_uuid: ""
+  opts:
+    description: Instance UUID of the instance you want to stop.
+    is_required: true
+    summary: ""
+    title: Instance UUID
