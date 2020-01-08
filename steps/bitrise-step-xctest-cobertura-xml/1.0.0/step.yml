@@ -1,0 +1,64 @@
+title: XCTest result to Cobertura XML
+summary: |
+  Converts XCTest results to cobertura compatible xml
+description: |
+  Converts test results from XCTest step to Cobertura formatted xml to be uploaded to Coveralls or Sonarqube
+website: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml
+source_code_url: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml
+support_url: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml/issues
+published_at: 2020-01-08T15:09:34.830324+02:00
+source:
+  git: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml.git
+  commit: a7c4241cd36da299b4093948bf6097f9c0e65fa2
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- utility
+- test
+toolkit:
+  go:
+    package_name: github.com/ollitapa/bitrise-step-xctest-cobertura-xml
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path to XCTest result bundle, usually located in  `..../DerivedData/<Project dir>/Logs/Test`
+      Bitrise Xcode test step provides this in variable `$BITRISE_XCRESULT_PATH`
+    is_expand: true
+    is_required: true
+    summary: Path to XCTest result bundle
+    title: Path to XCTest result bundle
+    value_options: []
+  path_to_xcresult: $BITRISE_XCRESULT_PATH
+- opts:
+    description: |
+      Directory where to put the resulting `coverage.json` and `cobertura.xml`
+      Defualt is `$BITRISE_DEPLOY_DIR`
+    is_expand: true
+    is_required: true
+    summary: Directory where to put the resulting cobertura.xml
+    title: Directory where to put the resulting cobertura.xml
+    value_options: []
+  xml_output_dir: $BITRISE_DEPLOY_DIR
+outputs:
+- COVERAGE_XML_TEST_RESULT_PATH: null
+  opts:
+    description: |
+      Path to the resulting `cobertura.xml`
+    summary: Path to the resulting `cobertura.xml`
+    title: Path to the resulting cobertura.xml
+- COVERAGE_JSON_TEST_RESULT_PATH: null
+  opts:
+    description: Path to the resulting `coverage.json`
+    summary: Path to the resulting `coverage.json`
+    title: Path to the resulting coverage.json
