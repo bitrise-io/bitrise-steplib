@@ -1,4 +1,4 @@
-title: XCTest result to Cobertura XML
+title: Convert XCTest result to Cobertura XML
 summary: |
   Converts XCTest results to cobertura compatible xml
 description: |
@@ -6,10 +6,10 @@ description: |
 website: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml
 source_code_url: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml
 support_url: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml/issues
-published_at: 2020-01-08T15:09:34.830324+02:00
+published_at: 2020-01-13T09:46:15.420146+02:00
 source:
   git: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml.git
-  commit: a7c4241cd36da299b4093948bf6097f9c0e65fa2
+  commit: c7a5ab2fb18259aebcf86ff5c8f8ac288a4a0dbe
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -19,14 +19,14 @@ project_type_tags:
 - react-native
 - cordova
 - ionic
+- flutter
 type_tags:
 - utility
-- test
 toolkit:
   go:
     package_name: github.com/ollitapa/bitrise-step-xctest-cobertura-xml
 is_requires_admin_user: false
-is_always_run: false
+is_always_run: true
 is_skippable: false
 run_if: ""
 inputs:
@@ -43,7 +43,7 @@ inputs:
 - opts:
     description: |
       Directory where to put the resulting `coverage.json` and `cobertura.xml`
-      Defualt is `$BITRISE_DEPLOY_DIR`
+      Default is `$BITRISE_DEPLOY_DIR`
     is_expand: true
     is_required: true
     summary: Directory where to put the resulting cobertura.xml
