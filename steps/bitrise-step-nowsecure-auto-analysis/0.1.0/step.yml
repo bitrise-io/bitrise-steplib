@@ -6,9 +6,9 @@ description: |
 website: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis
 source_code_url: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis
 support_url: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis/issues
-published_at: 2020-01-17T12:43:10.533217501-06:00
+published_at: 2020-01-17T12:44:34.638344468-06:00
 source:
-  git: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis.git
+  git: https://sp3nx0r:r8nAE47XvLXl@github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis.git
   commit: fa6a0e20bf8c53102e3f2e1a6939291dcad93be1
 host_os_tags:
 - osx-10.10
