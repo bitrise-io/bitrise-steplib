@@ -6,7 +6,7 @@ description: |
 website: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis
 source_code_url: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis
 support_url: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis/issues
-published_at: 2020-01-17T12:51:01.951733288-06:00
+published_at: 2020-01-17T12:54:28.055469969-06:00
 source:
   git: https://github.com/sp3nx0r/bitrise-step-nowsecure-auto-analysis.git
   commit: fa6a0e20bf8c53102e3f2e1a6939291dcad93be1
