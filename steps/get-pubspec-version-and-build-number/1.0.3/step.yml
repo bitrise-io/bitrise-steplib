@@ -6,7 +6,7 @@ description: |
 website: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number
 source_code_url: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number
 support_url: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number/issues
-published_at: 2020-01-23T19:12:12.081648-05:00
+published_at: 2020-01-23T19:14:51.218913-05:00
 source:
   git: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number.git
   commit: a058e9fc2e15c02b563bac1339ff03c4ca9637a4
