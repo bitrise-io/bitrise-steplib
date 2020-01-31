@@ -1,0 +1,82 @@
+title: NuGet restore
+summary: Installs packages with NuGet.
+description: "The **NuGet restore** Step downloads the latest or specified NuGet version
+  and runs a restore with it to install missing .NET packages based on your Xamarin
+  solution (.sln).\nYou can check the installed packages in your build's log.\n\n###
+  Configuring the Step\n1. Add the **NuGet restore** Step to your Workflow after the
+  **Git Clone Repository** Step so that the Step can download and install all the
+  necessary packages.\n2. Provide the **Path to Xamarin solution**. By default, the
+  Step will use the same solution file that you have provided when you added your
+  app, but you can also modify it if you wish.\n\nOptionally, you can set what to
+  cache if you click **Options** and then **Set the level of cache** input:\n- `local`
+  caches the packages in your build directory.\n- `global` caches the global-packages
+  folder.\n- `all` caches local and global.\n- `none` disables caching for the Step.\n\n###
+  Troubleshooting\nIf your build fails due to a specific NuGet version, you can try
+  to run your build with another version. Click the **NuGet version** input and select
+  a NuGet version.\n\n### Useful links\n- [Available NuGet Distribution Versions](https://www.nuget.org/downloads)\n-
+  [About NuGet and caching](https://docs.microsoft.com/en-us/nuget/consume-packages/managing-the-global-packages-and-cache-folders)\n\n###
+  Related Steps\n- [Xamarin Archive](https://www.bitrise.io/integrations/steps/xamarin-archive)\n-
+  [NUnit runner](https://www.bitrise.io/integrations/steps/nunit-runner) "
+website: https://github.com/bitrise-steplib/steps-nuget-restore
+source_code_url: https://github.com/bitrise-steplib/steps-nuget-restore
+support_url: https://github.com/bitrise-steplib/steps-nuget-restore/issues
+published_at: 2020-01-31T16:10:14.421203404Z
+source:
+  git: https://github.com/bitrise-steplib/steps-nuget-restore.git
+  commit: 406e3f86eb5a20c7e366b6ee2152ffc60b582f5b
+project_type_tags:
+- xamarin
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-nuget-restore
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Path to Xamarin solution
+    is_required: true
+    title: Path to Xamarin solution
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- nuget_version: latest
+  opts:
+    description: |
+      The default NuGet restore step uses the NuGet version that ships with Xamarin.
+
+      Specify this input if you would like to use a custom NuGet version.
+      You can find all the available NuGet distribution here: https://dist.nuget.org/index.html.
+
+      Format examples:
+
+      - 2.8.6
+      - latest
+    title: NuGet version
+- cache_level: local
+  opts:
+    category: Options
+    description: |-
+      Sets the level of cache.
+
+      'local' enables the caching the packages in the build directory.
+      'global' enables the caching of the global-packages folder, this is where NuGet installs any downloaded package.
+      'all' enables the caching of both local and global caches.
+      'none' disables the caching for the step.
+
+      Please find more information about caching here:
+      https://docs.microsoft.com/en-us/nuget/consume-packages/managing-the-global-packages-and-cache-folders
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - local
+    - global
+    - all
+    - none
