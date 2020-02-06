@@ -1,0 +1,13 @@
+title: Gate
+summary: This handler allows only specific files to be included in the PR
+description: This handler allows only specific files to be included in the PR
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-steplib/handlers/gate
+
+is_skippable: false
