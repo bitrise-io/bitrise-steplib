@@ -1,0 +1,56 @@
+title: Update JIRA Issue Status
+summary: Change status of JIRA issues.
+description: Automate process of moving issues from 'In Progress' to 'Code Review'
+  or 'In Test'.
+website: https://github.com/MiSikora/bitrise-step-update-jira-issue-status
+source_code_url: https://github.com/MiSikora/bitrise-step-update-jira-issue-status
+support_url: https://github.com/MiSikora/bitrise-step-update-jira-issue-status/issues
+published_at: 2020-02-09T16:41:09.656336+01:00
+source:
+  git: https://github.com/MiSikora/bitrise-step-jira-issue-status-update.git
+  commit: 78638095c0de6562b4e8b5e6e11878eec36f7889
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/MiSikora/bitrise-step-update-jira-issue-status
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- base_url: null
+  opts:
+    description: URL of the presonal JIRA software.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: URL of the presonal JIRA software.
+    title: JIRA base URL.
+- opts:
+    description: User name on JIRA (user's email).
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: User name on JIRA (user's email).
+    title: JIRA user name
+  user_name: null
+- api_token: null
+  opts:
+    description: Api token generated on JIRA.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Api token generated on JIRA.
+    title: JIRA api token
+- issue_keys: null
+  opts:
+    description: JIRA issue keys separatad with `|`
+    is_required: true
+    summary: JIRA issue keys separatad with `|`
+    title: JIRA issue keys
+- opts:
+    description: Status ID in which JIRA issues should be after this step
+    is_required: true
+    summary: Status ID in which JIRA issues should be after this step
+    title: To status
+  to_status_id: null
