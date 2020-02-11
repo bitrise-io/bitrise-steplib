@@ -1,6 +1,6 @@
-title: Gate
-summary: This handler allows only specific files to be included in the PR
-description: This handler allows only specific files to be included in the PR
+title: Reject step-info changes that are not manually approved
+summary: This handler reject specific file changes to be included in the PR, unless manually approved
+description: This handler reject specific file changes to be included in the PR, unless manually approved
 
 website: https://github.com/bitrise-io/bitrise-steplib
 source_code_url: https://github.com/bitrise-io/bitrise-steplib

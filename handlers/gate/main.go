@@ -20,6 +20,20 @@ type Config struct {
 	BypassGate bool `env:"BYPASS_GATE"`
 }
 
+// BuildTriggerRequestModel ...
+type BuildTriggerRequestModel struct {
+	HookInfo    HookInfoModel    `json:"hook_info"`
+	BuildParams BuildParamsModel `json:"build_params"`
+	UserAgent   string           `json:"triggered_by,omitempty"`
+}
+
+// HookInfoModel ...
+type HookInfoModel struct {
+	Type              string `json:"type"`
+	BuildTriggerToken string `json:"build_trigger_token,omitempty"`
+	APIToken          string `json:"api_token,omitempty"`
+}
+
 // BuildParamsModel ...
 type BuildParamsModel struct {
 	Branch                   string                     `json:"branch"`
@@ -68,15 +82,38 @@ func rebuildAPICall() (string, error) {
 			},
 		},
 	}
-
-	buildParamsBytes, err := json.Marshal(buildParams)
+	buildTrigger := BuildTriggerRequestModel{
+		HookInfo: HookInfoModel{
+			Type:              "bitrise",
+			BuildTriggerToken: " <insert_build_trigger_token> ",
+		},
+		UserAgent:   "curl",
+		BuildParams: buildParams,
+	}
+	buildTriggerRequestBody, err := json.Marshal(buildTrigger)
 	if err != nil {
-		return "", fmt.Errorf("rebuildAPICall: failed to marshal build params, buildParams: %+v, %v", buildParams, err)
+		return "", fmt.Errorf("rebuildAPICall: failed to marshal build trigger request body, buildTrigger: %+v, %v", buildTrigger, err)
+	}
+	buildStartURL := fmt.Sprintf("https://app.bitrise.io/app/%s/build/start.json", os.Getenv("BITRISE_APP_SLUG"))
+
+	return fmt.Sprintf("$ curl %s --data '%s'", buildStartURL, string(buildTriggerRequestBody)), nil
+}
+
+func changedFiles(branch string) ([]string, error) {
+	cmd := command.New("git", "diff", "--name-only", "HEAD", "origin/"+branch)
+	output, err := cmd.RunAndReturnTrimmedCombinedOutput()
+	if err != nil {
+		return nil, fmt.Errorf("git diff command returned error: %s: %s", cmd.PrintableCommandArgs(), err)
 	}
 
-	return fmt.Sprintf(`$ curl https://app.bitrise.io/app/a0bac497f75e1490/build/start.json --data '{"hook_info":{"type":"bitrise","build_trigger_token":" < insert_build_trigger_token > "},
-"build_params": %s,
-"triggered_by":"curl"}'`, string(buildParamsBytes)), nil
+	var files []string
+	for _, fileLine := range strings.Split(output, "\n") {
+		if file := strings.TrimSpace(fileLine); len(file) > 0 {
+			files = append(files, file)
+		}
+	}
+
+	return files, nil
 }
 
 func main() {
@@ -108,21 +145,4 @@ func main() {
 
 	fmt.Println()
 	log.Donef("- Done")
-}
-
-func changedFiles(branch string) ([]string, error) {
-	cmd := command.New("git", "diff", "--name-only", "HEAD", "origin/"+branch)
-	output, err := cmd.RunAndReturnTrimmedCombinedOutput()
-	if err != nil {
-		return nil, fmt.Errorf("git diff command returned error: %s: %s", cmd.PrintableCommandArgs(), err)
-	}
-
-	var files []string
-	for _, fileLine := range strings.Split(output, "\n") {
-		if file := strings.TrimSpace(fileLine); len(file) > 0 {
-			files = append(files, file)
-		}
-	}
-
-	return files, nil
 }
