@@ -70,7 +70,7 @@ func rebuildAPICall() (string, error) {
 		Branch:                   os.Getenv("BITRISE_GIT_BRANCH"),
 		Tag:                      os.Getenv("BITRISE_GIT_TAG"),
 		CommitHash:               os.Getenv("BITRISE_GIT_COMMIT"),
-		CommitMessage:            "Rebuilding with manually accepted step-info change.",
+		CommitMessage:            "Rebuilding with manually accepted step-info change. Approved by: insert_reviewer ",
 		WorkflowID:               PRCheckWorkflow,
 		BranchDest:               os.Getenv("BITRISEIO_GIT_BRANCH_DEST"),
 		PullRequestID:            os.Getenv("PULL_REQUEST_ID"),
@@ -87,7 +87,7 @@ func rebuildAPICall() (string, error) {
 	buildTrigger := BuildTriggerRequestModel{
 		HookInfo: HookInfoModel{
 			Type:              "bitrise",
-			BuildTriggerToken: " <insert_build_trigger_token> ",
+			BuildTriggerToken: " insert_build_trigger_token ",
 		},
 		UserAgent:   "curl",
 		BuildParams: buildParams,
