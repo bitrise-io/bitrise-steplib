@@ -14,7 +14,7 @@ import (
 const (
 	baseBranch             = "master"
 	PRCheckWorkflow        = "pr_check"
-	changesApprovedEnvName = "changes_approved"
+	changesApprovedEnvName = "STEPLIB_CHANGES_APPROVED"
 )
 
 // Config ...
