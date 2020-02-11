@@ -1,4 +1,4 @@
-git adtitle: Reject step-info changes that are not manually approved
+title: Reject step-info changes that are not manually approved
 summary: This handler reject specific file changes to be included in the PR, unless manually approved
 description: This handler reject specific file changes to be included in the PR, unless manually approved
 

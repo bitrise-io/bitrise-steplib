@@ -26,7 +26,7 @@ type Config struct {
 type BuildTriggerRequestModel struct {
 	HookInfo    HookInfoModel    `json:"hook_info"`
 	BuildParams BuildParamsModel `json:"build_params"`
-	UserAgent   string           `json:"triggered_by,omitempty"`
+	TriggeredBy string           `json:"triggered_by,omitempty"`
 }
 
 // HookInfoModel ...
