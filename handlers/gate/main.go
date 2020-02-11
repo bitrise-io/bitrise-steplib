@@ -26,30 +26,26 @@ func failf(format string, v ...interface{}) {
 }
 
 func rebuildAPICall() (string, error) {
-	envVars := [...]string{
-		"workflow_id",
-		"commit_hash",
-		"commit_message",
-		"branch",
-		"branch_repo_owner",
-		"branch_dest",
-		"branch_dest_repo_owner",
-		"pull_request_id",
-		"pull_request_repository_url",
-		"pull_request_merge_branch",
-		"pull_request_head_branch",
-		"pull_request_author",
-		"diff_url",
-		"commit_path",
+	buildParamToEnvVar := map[string]string{
+		"workflow_id":                 "BITRISE_TRIGGERED_WORKFLOW_ID",
+		"commit_hash":                 "BITRISE_GIT_COMMIT",
+		"branch":                      "BITRISE_GIT_BRANCH",
+		"branch_dest":                 "BITRISEIO_GIT_BRANCH_DEST",
+		"pull_request_id":             "PULL_REQUEST_ID",
+		"pull_request_repository_url": "BITRISEIO_PULL_REQUEST_REPOSITORY_URL",
+		"pull_request_merge_branch":   "BITRISEIO_PULL_REQUEST_MERGE_BRANCH",
 	}
-	envVarToContents := map[string]string{"BYPASS_GATE": "true"}
-	for _, envName := range envVars {
-		envVarToContents[envName] = os.Getenv(strings.ToUpper(envName))
+	buildParamToContents := map[string]string{
+		"BYPASS_GATE":    "true",
+		"commit_message": "Rebuilding with manually accepted step-info change.",
+	}
+	for buildParam, envName := range buildParamToEnvVar {
+		buildParamToContents[buildParam] = os.Getenv(strings.ToUpper(envName))
 	}
 
-	buildParams, err := json.Marshal(envVarToContents)
+	buildParams, err := json.Marshal(buildParamToContents)
 	if err != nil {
-		return "", fmt.Errorf("rebuildAPICall: failed to marshal build params, envVars: %s, %v", envVars, err)
+		return "", fmt.Errorf("rebuildAPICall: failed to marshal build params, envVars: %s, %v", buildParamToEnvVar, err)
 	}
 
 	return fmt.Sprintf(`$ curl https://app.bitrise.io/app/a0bac497f75e1490/build/start.json --data '{"hook_info":{"type":"bitrise","build_trigger_token":" < insert_build_trigger_token > "},
