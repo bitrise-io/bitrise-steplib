@@ -89,7 +89,7 @@ func rebuildAPICall() (string, error) {
 			Type:              "bitrise",
 			BuildTriggerToken: " insert_build_trigger_token ",
 		},
-		UserAgent:   "curl",
+		TriggeredBy: "curl",
 		BuildParams: buildParams,
 	}
 	buildTriggerRequestBody, err := json.Marshal(buildTrigger)
