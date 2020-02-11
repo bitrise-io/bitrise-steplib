@@ -12,10 +12,10 @@ toolkit:
 
 is_skippable: false
 
-# inputs:
-#   - changes_approved: "no"
-#     opts:
-#       title: "Skip protected files check"
-#       summary: "Set to `yes` to manually approve changes and skip this check"
-#       description: "Set to `yes` to manually approve changes and skip this check"
-#       is_required: true
+inputs:
+  - changes_approved: $changes_approved
+    opts:
+      title: "Skip protected files check"
+      summary: "Set to `yes` to manually approve changes and skip this check"
+      description: "Set to `yes` to manually approve changes and skip this check"
+      is_required: true
