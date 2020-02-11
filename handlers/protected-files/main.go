@@ -12,12 +12,14 @@ import (
 )
 
 const (
-	baseBranch = "master"
+	baseBranch             = "master"
+	PRCheckWorkflow        = "pr_check"
+	changesApprovedEnvName = "changes_approved"
 )
 
 // Config ...
 type Config struct {
-	BypassGate bool `env:"BYPASS_GATE"`
+	IsApproved bool `env:"changes_approved"`
 }
 
 // BuildTriggerRequestModel ...
@@ -69,7 +71,7 @@ func rebuildAPICall() (string, error) {
 		Tag:                      os.Getenv("BITRISE_GIT_TAG"),
 		CommitHash:               os.Getenv("BITRISE_GIT_COMMIT"),
 		CommitMessage:            "Rebuilding with manually accepted step-info change.",
-		WorkflowID:               "pr_check",
+		WorkflowID:               PRCheckWorkflow,
 		BranchDest:               os.Getenv("BITRISEIO_GIT_BRANCH_DEST"),
 		PullRequestID:            os.Getenv("PULL_REQUEST_ID"),
 		PullRequestRepositoryURL: os.Getenv("BITRISEIO_PULL_REQUEST_REPOSITORY_URL"),
@@ -77,7 +79,7 @@ func rebuildAPICall() (string, error) {
 		PullRequestHeadBranch:    os.Getenv("BITRISEIO_PULL_REQUEST_HEAD_BRANCH"),
 		Environments: []EnvironmentVariableModel{
 			EnvironmentVariableModel{
-				MappedTo: "BYPASS_GATE",
+				MappedTo: changesApprovedEnvName,
 				Value:    "true",
 			},
 		},
@@ -131,14 +133,14 @@ func main() {
 		failf("Failed to get changed files for branch: %s: %s", baseBranch, err)
 	}
 
-	if !c.BypassGate {
+	if !c.IsApproved {
 		for _, file := range changedFiles {
 			if strings.HasSuffix(file, "step-info.yml") {
 				rebuildCall, err := rebuildAPICall()
 				if err != nil {
 					log.Warnf("%s", err)
 				}
-				failf("step-info.yml has changed, please re-check changes and rebuild with BYPASS_GATE env to true to pass this check, using: " + rebuildCall)
+				failf("step-info.yml has changed, please re-check changes and rebuild with 'changes_approved' env to true to pass this check, using: " + rebuildCall)
 			}
 		}
 	}
