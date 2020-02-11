@@ -44,7 +44,7 @@ func rebuildAPICall() (string, error) {
 	}
 	envVarToContents := map[string]string{"BYPASS_GATE": "true"}
 	for _, envName := range envVars {
-		envVarToContents[envName] = os.Getenv(envName)
+		envVarToContents[envName] = os.Getenv(strings.ToUpper(envName))
 	}
 
 	buildParams, err := json.Marshal(envVarToContents)
