@@ -25,6 +25,7 @@ workflows:
     - path::./handlers/validate:
     - path::./handlers/generate-specs:
     - path::./handlers/deploy:
+    - path::./handlers/gate:
     - deploy-to-bitrise-io:
 
   pr_audit:
