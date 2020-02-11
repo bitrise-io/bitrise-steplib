@@ -1,3 +1,2 @@
 removal_date: "2019-02-28"
 deprecate_notes: This step is deprecated, use [Project scanner](https://github.com/bitrise-steplib/steps-project-scanner) instead.
-maintaner: official
