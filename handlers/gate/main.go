@@ -55,7 +55,7 @@ func rebuildAPICall() (string, error) {
 		Tag:                      os.Getenv("BITRISE_GIT_TAG"),
 		CommitHash:               os.Getenv("BITRISE_GIT_COMMIT"),
 		CommitMessage:            "Rebuilding with manually accepted step-info change.",
-		WorkflowID:               os.Getenv("BITRISE_TRIGGERED_WORKFLOW_ID"),
+		WorkflowID:               "pr_check",
 		BranchDest:               os.Getenv("BITRISEIO_GIT_BRANCH_DEST"),
 		PullRequestID:            os.Getenv("PULL_REQUEST_ID"),
 		PullRequestRepositoryURL: os.Getenv("BITRISEIO_PULL_REQUEST_REPOSITORY_URL"),
