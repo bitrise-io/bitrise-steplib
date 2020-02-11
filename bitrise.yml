@@ -31,7 +31,7 @@ workflows:
     title: Pull Request audit
     description: Performs an audit only on the changed step.yml files, and on the related Steps.
     steps:
-    - path::./handlers/gate:
+    - path::./handlers/protected-files:
     - path::./handlers/step-info:
     - path::./handlers/validate:
     - path::./handlers/generate-specs:
