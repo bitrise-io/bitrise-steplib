@@ -73,7 +73,7 @@ func rebuildInstructions() (string, error) {
 		Branch:                   os.Getenv("BITRISE_GIT_BRANCH"),
 		Tag:                      os.Getenv("BITRISE_GIT_TAG"),
 		CommitHash:               os.Getenv("BITRISE_GIT_COMMIT"),
-		CommitMessage:            "Rebuilding with manually accepted step-info change. Approved by: " + approvedByEnv,
+		CommitMessage:            "Rebuilding with manually accepted step-info change. Approved by: $" + approvedByEnv,
 		WorkflowID:               PRCheckWorkflow,
 		BranchDest:               os.Getenv("BITRISEIO_GIT_BRANCH_DEST"),
 		PullRequestID:            os.Getenv("PULL_REQUEST_ID"),
@@ -83,14 +83,14 @@ func rebuildInstructions() (string, error) {
 		Environments: []EnvironmentVariableModel{
 			EnvironmentVariableModel{
 				MappedTo: changesApprovedEnvName,
-				Value:    approvedEnv,
+				Value:    "$" + approvedEnv,
 			},
 		},
 	}
 	buildTrigger := BuildTriggerRequestModel{
 		HookInfo: HookInfoModel{
 			Type:              "bitrise",
-			BuildTriggerToken: buildTriggerEnv,
+			BuildTriggerToken: "$" + buildTriggerEnv,
 		},
 		TriggeredBy: "curl",
 		BuildParams: buildParams,
