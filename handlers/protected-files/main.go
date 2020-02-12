@@ -95,12 +95,13 @@ func rebuildInstructions() (string, error) {
 		TriggeredBy: "curl",
 		BuildParams: buildParams,
 	}
-	buildTriggerRequestBody, err := json.MarshalIndent(buildTrigger, "", "  ")
+	buildTriggerRequest, err := json.Marshal(buildTrigger)
 	if err != nil {
 		return "", fmt.Errorf("rebuildAPICall: failed to marshal build trigger request body, buildTrigger: %+v, %v", buildTrigger, err)
 	}
+	escapedBuildTriggerRequest := strings.ReplaceAll(string(buildTriggerRequest), "\"", "\\\"")
 	buildStartURL := fmt.Sprintf("https://app.bitrise.io/app/%s/build/start.json", os.Getenv("BITRISE_APP_SLUG"))
-	curlCommand := fmt.Sprintf("curl %s --data '%s'", buildStartURL, string(buildTriggerRequestBody))
+	curlCommand := fmt.Sprintf("curl %s --data \"%s\"", buildStartURL, escapedBuildTriggerRequest)
 	curlCommandWithParams := fmt.Sprintf("%s=false; %s=bitbot; %s=token; %s", approvedEnv, approvedByEnv, buildTriggerEnv, curlCommand)
 
 	buildTriggerURL := fmt.Sprintf("Get build trigger URL here: https://app.bitrise.io/app/%s#/code.", os.Getenv("BITRISE_APP_SLUG"))
