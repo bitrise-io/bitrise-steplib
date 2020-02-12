@@ -66,7 +66,6 @@ func failf(format string, v ...interface{}) {
 }
 
 func rebuildInstructions() (string, error) {
-	const approvedEnv = "APPROVED"
 	const approvedByEnv = "APPROVED_BY"
 	const buildTriggerEnv = "BUILD_TRIGGER_TOKEN"
 	buildParams := BuildParamsModel{
@@ -83,7 +82,7 @@ func rebuildInstructions() (string, error) {
 		Environments: []EnvironmentVariableModel{
 			EnvironmentVariableModel{
 				MappedTo: changesApprovedEnvName,
-				Value:    "$" + approvedEnv,
+				Value:    "true",
 			},
 		},
 	}
@@ -102,7 +101,7 @@ func rebuildInstructions() (string, error) {
 	escapedBuildTriggerRequest := strings.ReplaceAll(string(buildTriggerRequest), "\"", "\\\"")
 	buildStartURL := fmt.Sprintf("https://app.bitrise.io/app/%s/build/start.json", os.Getenv("BITRISE_APP_SLUG"))
 	curlCommand := fmt.Sprintf("curl %s --data \"%s\"", buildStartURL, escapedBuildTriggerRequest)
-	curlCommandWithParams := fmt.Sprintf("%s=false; %s=bitbot; %s=token; %s", approvedEnv, approvedByEnv, buildTriggerEnv, curlCommand)
+	curlCommandWithParams := fmt.Sprintf("%s=bitbot; %s=token; %s", approvedByEnv, buildTriggerEnv, curlCommand)
 
 	buildTriggerURL := fmt.Sprintf("Get build trigger URL here: https://app.bitrise.io/app/%s#/code.", os.Getenv("BITRISE_APP_SLUG"))
 
