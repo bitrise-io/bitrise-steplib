@@ -66,9 +66,9 @@ func failf(format string, v ...interface{}) {
 }
 
 func rebuildInstructions() (string, error) {
-	const approvedEnv = "$APPROVED"
-	const approvedByEnv = "$APPROVED_BY"
-	const buildTriggerEnv = "$BUILD_TRIGGER_TOKEN"
+	const approvedEnv = "APPROVED"
+	const approvedByEnv = "APPROVED_BY"
+	const buildTriggerEnv = "BUILD_TRIGGER_TOKEN"
 	buildParams := BuildParamsModel{
 		Branch:                   os.Getenv("BITRISE_GIT_BRANCH"),
 		Tag:                      os.Getenv("BITRISE_GIT_TAG"),
@@ -95,7 +95,7 @@ func rebuildInstructions() (string, error) {
 		TriggeredBy: "curl",
 		BuildParams: buildParams,
 	}
-	buildTriggerRequestBody, err := json.MarshalIndent(buildTrigger, "\n", "  ")
+	buildTriggerRequestBody, err := json.MarshalIndent(buildTrigger, "", "  ")
 	if err != nil {
 		return "", fmt.Errorf("rebuildAPICall: failed to marshal build trigger request body, buildTrigger: %+v, %v", buildTrigger, err)
 	}
