@@ -65,12 +65,15 @@ func failf(format string, v ...interface{}) {
 	os.Exit(1)
 }
 
-func rebuildAPICall() (string, error) {
+func rebuildInstructions() (string, error) {
+	const approvedEnv = "$APPROVED"
+	const approvedByEnv = "$APPROVED_BY"
+	const buildTriggerEnv = "$BUILD_TRIGGER_TOKEN"
 	buildParams := BuildParamsModel{
 		Branch:                   os.Getenv("BITRISE_GIT_BRANCH"),
 		Tag:                      os.Getenv("BITRISE_GIT_TAG"),
 		CommitHash:               os.Getenv("BITRISE_GIT_COMMIT"),
-		CommitMessage:            "Rebuilding with manually accepted step-info change. Approved by: insert_reviewer ",
+		CommitMessage:            "Rebuilding with manually accepted step-info change. Approved by: " + approvedByEnv,
 		WorkflowID:               PRCheckWorkflow,
 		BranchDest:               os.Getenv("BITRISEIO_GIT_BRANCH_DEST"),
 		PullRequestID:            os.Getenv("PULL_REQUEST_ID"),
@@ -80,25 +83,29 @@ func rebuildAPICall() (string, error) {
 		Environments: []EnvironmentVariableModel{
 			EnvironmentVariableModel{
 				MappedTo: changesApprovedEnvName,
-				Value:    "true",
+				Value:    approvedEnv,
 			},
 		},
 	}
 	buildTrigger := BuildTriggerRequestModel{
 		HookInfo: HookInfoModel{
 			Type:              "bitrise",
-			BuildTriggerToken: " insert_build_trigger_token ",
+			BuildTriggerToken: buildTriggerEnv,
 		},
 		TriggeredBy: "curl",
 		BuildParams: buildParams,
 	}
-	buildTriggerRequestBody, err := json.Marshal(buildTrigger)
+	buildTriggerRequestBody, err := json.MarshalIndent(buildTrigger, "\n", "  ")
 	if err != nil {
 		return "", fmt.Errorf("rebuildAPICall: failed to marshal build trigger request body, buildTrigger: %+v, %v", buildTrigger, err)
 	}
 	buildStartURL := fmt.Sprintf("https://app.bitrise.io/app/%s/build/start.json", os.Getenv("BITRISE_APP_SLUG"))
+	curlCommand := fmt.Sprintf("curl %s --data '%s'", buildStartURL, string(buildTriggerRequestBody))
+	curlCommandWithParams := fmt.Sprintf("%s=false; %s=bitbot; %s=token; %s", approvedEnv, approvedByEnv, buildTriggerEnv, curlCommand)
 
-	return fmt.Sprintf("$ curl %s --data '%s'", buildStartURL, string(buildTriggerRequestBody)), nil
+	buildTriggerURL := fmt.Sprintf("Get build trigger URL here: https://app.bitrise.io/app/%s#/code.", os.Getenv("BITRISE_APP_SLUG"))
+
+	return fmt.Sprintf("step-info.yml has changed, please re-check changes and rebuild. %s Command to rebuild: \n$ %s", buildTriggerURL, curlCommandWithParams), nil
 }
 
 func changedFiles(branch string) ([]string, error) {
@@ -136,11 +143,11 @@ func main() {
 	if !c.IsApproved {
 		for _, file := range changedFiles {
 			if strings.HasSuffix(file, "step-info.yml") {
-				rebuildCall, err := rebuildAPICall()
+				rebuildInstructions, err := rebuildInstructions()
 				if err != nil {
 					log.Warnf("%s", err)
 				}
-				failf("step-info.yml has changed, please re-check changes and rebuild with 'changes_approved' env to true to pass this check, using: " + rebuildCall)
+				failf(rebuildInstructions)
 			}
 		}
 	}
