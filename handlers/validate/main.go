@@ -6,6 +6,7 @@ import (
 
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
 	stepid "github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/changed-stepid"
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/collection"
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/typetags"
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/validators/valueoptions"
 	"github.com/bitrise-io/go-utils/log"
@@ -39,7 +40,7 @@ func main() {
 
 	log.Infof("Running validations:")
 	validators := []Validator{
-		//&collection.Validator{},
+		&collection.Validator{},
 		&valueoptions.Validator{},
 		&typetags.Validator{},
 		&stepid.Validator{},
