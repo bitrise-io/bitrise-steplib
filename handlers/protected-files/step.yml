@@ -1,0 +1,21 @@
+title: Reject step-info changes that are not manually approved
+summary: This handler reject specific file changes to be included in the PR, unless manually approved
+description: This handler reject specific file changes to be included in the PR, unless manually approved
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-steplib/handlers/protected-files
+
+is_skippable: false
+
+inputs:
+  - changes_approved: $STEPLIB_CHANGES_APPROVED
+    opts:
+      title: "Skip protected files check"
+      summary: "Set to `yes` to manually approve changes and skip this check"
+      description: "Set to `yes` to manually approve changes and skip this check"
+      is_required: true
