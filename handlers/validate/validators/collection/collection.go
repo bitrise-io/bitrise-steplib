@@ -83,9 +83,16 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		return nil, err
 	}
 
+	// in 1.39.0 we introduced a change in which collection activation encounters an issue
+	// because of the different collection URI coming from the steplib.yml and from the default_step_lib_source
+	unsupportedVersion, err := version.NewVersion("1.39.0")
+	if err != nil {
+		return nil, err
+	}
+
 	var releaseTags []string
 	for _, release := range releases {
-		if version, err := version.NewVersion(release.TagName); err == nil && version.GreaterThan(latestSupportedVersion) {
+		if version, err := version.NewVersion(release.TagName); err == nil && version.GreaterThan(latestSupportedVersion) && !version.Equal(unsupportedVersion) {
 			releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
 		}
 	}
