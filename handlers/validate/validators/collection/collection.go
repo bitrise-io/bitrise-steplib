@@ -11,10 +11,9 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"github.com/hashicorp/go-version"
-
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-io/go-utils/pathutil"
+	"github.com/hashicorp/go-version"
 
 	"github.com/bitrise-io/bitrise-steplib/handlers/validate/steplib"
 	"github.com/bitrise-io/go-utils/command"
@@ -83,21 +82,23 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 		return nil, err
 	}
 
-	// in 1.39.0 we introduced a change in which collection activation encounters an issue
-	// because of the different collection URI coming from the steplib.yml and from the default_step_lib_source
-	unsupportedVersion, err := version.NewVersion("1.39.0")
-	if err != nil {
-		return nil, err
-	}
-
 	var releaseTags []string
 	for _, release := range releases {
-		if version, err := version.NewVersion(release.TagName); err == nil && version.GreaterThan(latestSupportedVersion) && !version.Equal(unsupportedVersion) {
+		if version, err := version.NewVersion(release.TagName); err == nil && version.GreaterThan(latestSupportedVersion) && !isUnsupportedVersion(version, "1.39.0", "1.39.1") {
 			releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
 		}
 	}
 
 	return releaseTags, nil
+}
+
+func isUnsupportedVersion(ve *version.Version, unsupportedVersions ...string) bool {
+	for _, versionStr := range unsupportedVersions {
+		if ve.String() == versionStr {
+			return true
+		}
+	}
+	return false
 }
 
 func setupBinary(url string) (string, error) {
