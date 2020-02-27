@@ -5,7 +5,7 @@ description: Deploys app to device farm and starts a test run. [Please see the w
 website: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner
 source_code_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner
 support_url: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/issues
-published_at: 2017-08-22T10:41:26.570632632-07:00
+published_at: 2020-02-27T10:05:23.904013-08:00
 source:
   git: https://github.com/peartherapeutics/bitrise-aws-device-farm-runner.git
   commit: 161322fbcfbc33d0b01044fda0de1d6cceac6dfb
