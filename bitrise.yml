@@ -7,6 +7,8 @@ app:
   - AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
   - S3_UPLOAD_BUCKET: $S3_UPLOAD_BUCKET
   - S3_UPLOAD_BUCKET_REGION: $S3_UPLOAD_BUCKET_REGION
+  - ALGOLIA_APP_ID: $ALGOLIA_APP_ID
+  - ALGOLIA_API_KEY: $ALGOLIA_API_KEY
 
 workflows:
   full_audit:
@@ -24,6 +26,7 @@ workflows:
     steps:
     - path::./handlers/validate:
     - path::./handlers/generate-specs:
+    - path::./handlers/algolia-deploy:
     - path::./handlers/deploy:
     - deploy-to-bitrise-io:
 
