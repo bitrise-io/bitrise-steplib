@@ -1,0 +1,67 @@
+title: Diawi Upload
+summary: |
+  Upload an ipa/apk/zip to Diawi
+description: |
+  Upload an ipa/apk/zip to Diawi
+website: https://github.com/deanWombourne/bitrise-step-diawi-upload
+source_code_url: https://github.com/deanWombourne/bitrise-step-diawi-upload
+support_url: https://github.com/deanWombourne/bitrise-step-diawi-upload/issues
+published_at: 2020-02-18T22:15:10.236712Z
+source:
+  git: https://github.com/deanWombourne/bitrise-step-diawi-upload.git
+  commit: 3a5d94964a12c19c64dda02e4562eafe0a043ecc
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: npm
+  apt_get:
+  - name: npm
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_token: null
+  opts:
+    description: |
+      The API token for Diawi.
+
+      It's free to sign up and get one, just go here: https://dashboard.diawi.com/signup.
+      You create an api token in the profile tab.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Diawi API token
+    title: API token
+- filename: null
+  opts:
+    description: |
+      The path to the file to upload - defaults to an IPA created by a bitrise archive step
+    is_expand: true
+    is_required: true
+    summary: The path to the file to upload
+    title: ipa/akp/zip file path
+- opts:
+    description: Users will have to provide this to download the app from Diawi. No
+      value in here will allow anyone to download the app.
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    summary: Users will have to provide this to download the app from Diawi. No value
+      in here will allow anyone to download the app.
+    title: Password
+  password: null
+outputs:
+- DIAWI_UPLOAD_URL: null
+  opts:
+    description: |
+      The URL of the uploaded file
+    summary: The URL of the uploaded file
+    title: The URL of the uploaded file
