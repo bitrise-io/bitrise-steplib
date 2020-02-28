@@ -1,0 +1,23 @@
+title: Algolia Deploy
+summary: This handler will update algolia with the new StepLib spec.json.
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+inputs: 
+- spec_json_path: $SPEC_JSON
+  opts:
+    title: StepLib spec.json path
+    is_required: true
+- algolia_app_id: $ALGOLIA_APP_ID
+  opts:
+    title: Algolia App ID
+    is_required: true
+    is_sensitive: true
+- algolia_api_key: $ALGOLIA_API_KEY
+  opts:
+    title: Algolia API key
+    is_required: true
+    is_sensitive: true
+
