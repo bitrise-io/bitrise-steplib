@@ -1,0 +1,44 @@
+title: Zipalign APK
+summary: |
+  Runs the zipalign Android build tool on a signed APK.
+description: |
+  Runs the zipalign Android build tool on a signed APK. Allows for page aligning all shared object files in an APK to ensure libraries are properly extracted after install. Fixes "Failed to extract native libraries" error caused by "lib-xxxx.so is not page-aligned" install error.
+website: https://github.com/MCeley/bitrise-step-zipalign-apk
+source_code_url: https://github.com/MCeley/bitrise-step-zipalign-apk
+support_url: https://github.com/MCeley/bitrise-step-zipalign-apk/issues
+published_at: 2020-03-05T21:22:04.660953-05:00
+source:
+  git: https://github.com/MCeley/bitrise-step-zipalign-apk.git
+  commit: cb7d991f752a8edb0f6bc431ea74d0e3fdb1834d
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/MCeley/bitrise-step-zipalign-apk
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- bitrise_unaligned_apk_path: null
+  opts:
+    description: Usually `$BITRISE_APK_PATH` or `$BITRISE_SIGNED_APK_PATH`
+    is_expand: true
+    is_required: true
+    summary: The path of the APK that needs to be aligned.
+    title: Unaligned APK Path
+outputs:
+- BITRISE_ALIGNED_APK_PATH: null
+  opts:
+    summary: The path of the aligned APK.
+    title: Aligned APK Path
