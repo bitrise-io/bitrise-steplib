@@ -1,0 +1,75 @@
+title: YourAppBox App Upload
+summary: |
+  Upload your ipa or apk to YourAppBox.
+description: |
+  Upload your ipa or apk to YourAppBox, also provides legacy uploading to Installfish.
+website: https://github.com/andrewmarmion/bitrise-step-yourappbox-app-upload
+source_code_url: https://github.com/andrewmarmion/bitrise-step-yourappbox-app-upload
+support_url: https://github.com/andrewmarmion/bitrise-step-yourappbox-app-upload/issues
+published_at: 2020-03-21T08:27:04.301907Z
+source:
+  git: https://github.com/andrewmarmion/bitrise-step-yourappbox-app-upload.git
+  commit: 835f883fdf749df53595260591c65ce15f6d1df6
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      The app file you want to upload to Installfish, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
+    is_expand: true
+    is_required: true
+    summary: Location of the IPA or APK that you want to upload.
+    title: Location of the IPA or APK
+  yab_apk_ipa_filepath: null
+- opts:
+    description: |
+      The API key you were given to use with.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The API key you were given to use.
+    title: API Key
+  yab_api_key: null
+- opts:
+    description: |
+      A description of what is new in the app. You could use $GIT\_CLONE\_COMMIT\_MESSAGE\_BODY or $BITRISE\_BUILD\_NUMBER.
+    is_expand: true
+    is_required: false
+    summary: A description of what is new in the app.
+    title: What is new
+  whats_new: null
+- opts:
+    category: Legacy
+    description: "Installfish was the legacy system that was used before the creation
+      of YourAppBox. \nUse this option to upload to Installfish."
+    summary: Upload to Installfish instead of YourAppBox
+    title: Upload to Installfish
+    value_options:
+    - "yes"
+    - "no"
+  yab_use_legacy: "no"
