@@ -106,7 +106,97 @@
                     "versions": {
                         "type": "object",
                         "additionalProperties": {
-                            "type": "object"
+                            "type": "object",
+                            "additionalProperties": false,
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                                "summary": {
+                                    "type": "string"
+                                },
+                                "description": {
+                                    "type": "string"
+                                },
+                                "website": {
+                                    "type": "string"
+                                },
+                                "source_code_url": {
+                                    "type": "string"
+                                },
+                                "support_url": {
+                                    "type": "string"
+                                },
+                                "published_at": {
+                                    "type": "string"
+                                },
+                                "source": {
+                                    "type": "object"
+                                },
+                                "asset_urls": {
+                                    "type": "object"
+                                },
+                                "host_os_tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "project_type_tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "type_tags": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                },
+                                "dependencies": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "toolkit": {
+                                    "type": "object"
+                                },
+                                "deps": {
+                                    "type": "object"
+                                },
+                                "is_requires_admin_user": {
+                                    "type": "boolean"
+                                },
+                                "is_always_run": {
+                                    "type": "boolean"
+                                },
+                                "is_skippable": {
+                                    "type": "boolean"
+                                },
+                                "run_if": {
+                                    "type": "string"
+                                },
+                                "timeout": {
+                                    "type": "integer"
+                                },
+                                "meta": {
+                                    "type": "object"
+                                },
+                                "inputs": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                },
+                                "outputs": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object"
+                                    }
+                                }
+                            }
                         }
                     }
                 }

@@ -3,9 +3,12 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
+	"path/filepath"
 
 	rice "github.com/GeertJohan/go.rice"
+	"github.com/bitrise-io/go-utils/fileutil"
 	"github.com/bitrise-io/go-utils/log"
 	"github.com/bitrise-tools/go-steputils/stepconf"
 	"github.com/qri-io/jsonschema"
@@ -13,7 +16,7 @@ import (
 
 // Config ...
 type Config struct {
-	Spec bool `env:"spec"`
+	SpecPth string `env:"spec"`
 }
 
 func failf(format string, v ...interface{}) {
@@ -28,10 +31,30 @@ func main() {
 		failf("Issue with input: %s", err)
 	}
 	stepconf.Print(c)
+
+	if err := validate(c.SpecPth); err != nil {
+		failf("Spec (%s) validation failed: %s", err)
+	}
+}
+
+func validate(pth string) error {
+	spec, err := fileutil.ReadBytesFromFile(pth)
+	if err != nil {
+		return err
+	}
+
+	schema, err := loadAsset("schema.json")
+	if err != nil {
+		panic(err)
+	}
+
+	return validateSchema(spec, schema)
 }
 
 func loadAsset(name string) ([]byte, error) {
-	assetsBox, err := rice.FindBox("assets")
+	assetsPth := filepath.Join(os.Getenv("BITRISE_STEP_SOURCE_DIR"), "assets")
+	fmt.Printf("assetsPth: %s\n", assetsPth)
+	assetsBox, err := rice.FindBox(assetsPth)
 	if err != nil {
 		return nil, err
 	}
@@ -39,10 +62,10 @@ func loadAsset(name string) ([]byte, error) {
 	return assetsBox.Bytes(name)
 }
 
-func validateSchema(spec []byte) error {
+func validateSchema(spec, schema []byte) error {
 	rs := &jsonschema.RootSchema{}
-	if err := json.Unmarshal(schemaData, rs); err != nil {
-		panic("unmarshal schema: " + err.Error())
+	if err := json.Unmarshal(schema, rs); err != nil {
+		return err
 	}
 
 	issues, err := rs.ValidateBytes(spec)
@@ -59,14 +82,4 @@ func validateSchema(spec []byte) error {
 	}
 
 	return nil
-}
-
-var schemaData []byte
-
-func init() {
-	var err error
-	schemaData, err = loadAsset("schema.json")
-	if err != nil {
-		panic(err)
-	}
 }

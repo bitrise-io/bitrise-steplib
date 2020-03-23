@@ -14,12 +14,14 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:cc12e8d1756854b6bd1a806e0e62f2e2ce1e275be1f1d67b5e80dc5321db5fba"
+  digest = "1:14ee917b32a6ce0187e71c9943985fee03dd74608324dd89e9fa0ea0880a173a"
   name = "github.com/bitrise-io/go-utils"
   packages = [
     "colorstring",
+    "fileutil",
     "log",
     "parseutil",
+    "pathutil",
     "pointers",
   ]
   pruneopts = "UT"
@@ -97,6 +99,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/GeertJohan/go.rice",
+    "github.com/bitrise-io/go-utils/fileutil",
     "github.com/bitrise-io/go-utils/log",
     "github.com/bitrise-tools/go-steputils/stepconf",
     "github.com/qri-io/jsonschema",

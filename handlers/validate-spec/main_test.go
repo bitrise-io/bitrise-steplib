@@ -7,15 +7,11 @@ import (
 )
 
 func Test_validateSchema(t *testing.T) {
-	require.NoError(t, validateSchema(spec))
-}
+	schema, err := loadAsset("schema.json")
+	require.NoError(t, err)
 
-var spec []byte
+	spec, err := loadAsset("spec.json")
+	require.NoError(t, err)
 
-func init() {
-	var err error
-	spec, err = loadAsset("spec.json")
-	if err != nil {
-		panic(err)
-	}
+	require.NoError(t, validateSchema(spec, schema))
 }

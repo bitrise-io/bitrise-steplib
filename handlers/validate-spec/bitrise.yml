@@ -8,6 +8,9 @@ workflows:
     - golint:
     - errcheck:
     - go-test:
+    - path::./:
+        inputs:
+        - spec: $BITRISE_SOURCE_DIR/assets/spec.json
 
   dep-update:
     title: Dep update
