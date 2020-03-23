@@ -13,19 +13,29 @@
     "properties": {
         "format_version": {
             "type": "string",
-            "pattern": "^[0-9]*.[0-9]*.[0-9]*$",
-            "examples": ["1.0.0"]
+            "pattern": "^\\d+.\\d+.\\d+$",
+            "examples": [
+                "1.0.0"
+            ]
         },
         "generated_at_timestamp": {
             "type": "integer",
-            "examples": [1584720375]
+            "examples": [
+                1584720375
+            ]
         },
         "steplib_source": {
             "type": "string",
-            "examples": ["https://github.com/bitrise-io/bitrise-steplib.git"]
+            "pattern": "^https://github.com/bitrise-io/bitrise-steplib.git$",
+            "examples": [
+                "https://github.com/bitrise-io/bitrise-steplib.git"
+            ]
         },
         "download_locations": {
             "type": "array",
+            "minItems": 2,
+            "maxItems": 2,
+            "uniqueItems": true,
             "items": {
                 "type": "object",
                 "examples": [
@@ -44,20 +54,23 @@
                 ],
                 "additionalProperties": false,
                 "properties": {
-                    "type": {
-                        "type": "string",
-                        "examples": ["zip"]
-                    },
                     "src": {
                         "type": "string",
-                        "examples": ["https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/"]
+                        "pattern": "(^https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/$)|(^source/git$)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "pattern": "(^git$)|(^zip$)"
                     }
                 }
             }
         },
         "assets_download_base_uri": {
             "type": "string",
-            "examples": ["https://bitrise-steplib-collection.s3.amazonaws.com/steps"]
+            "pattern": "^https://bitrise-steplib-collection.s3.amazonaws.com/steps$",
+            "examples": [
+                "https://bitrise-steplib-collection.s3.amazonaws.com/steps"
+            ]
         },
         "steps": {
             "type": "object",
@@ -100,15 +113,28 @@
                     },
                     "latest_version_number": {
                         "type": "string",
-                        "pattern": "^[0-9]*.[0-9]*.[0-9]*$",
-                        "examples": ["1.0.0"]
+                        "pattern": "^\\d+.\\d+.\\d+$",
+                        "examples": [
+                            "1.0.0"
+                        ]
                     },
                     "versions": {
                         "type": "object",
+                        "propertyNames": {
+                            "pattern": "^\\d+.\\d+.\\d+$"
+                        },
                         "additionalProperties": {
                             "type": "object",
                             "additionalProperties": false,
-                            "required": ["title", "summary", "website", "source_code_url", "support_url", "published_at", "source", "type_tags"],
+                            "required": [
+                                "title",
+                                "summary",
+                                "website",
+                                "source_code_url",
+                                "support_url",
+                                "published_at",
+                                "source"
+                            ],
                             "properties": {
                                 "title": {
                                     "type": "string"
@@ -134,7 +160,10 @@
                                 },
                                 "source": {
                                     "type": "object",
-                                    "required": ["git", "commit"],
+                                    "required": [
+                                        "git",
+                                        "commit"
+                                    ],
                                     "additionalProperties": false,
                                     "properties": {
                                         "git": {
@@ -169,7 +198,17 @@
                                     "uniqueItems": true,
                                     "items": {
                                         "type": "string",
-                                        "enum": ["ios", "macos", "android", "xamarin", "react-native", "cordova", "ionic", "flutter", "web"]
+                                        "enum": [
+                                            "ios",
+                                            "macos",
+                                            "android",
+                                            "xamarin",
+                                            "react-native",
+                                            "cordova",
+                                            "ionic",
+                                            "flutter",
+                                            "web"
+                                        ]
                                     }
                                 },
                                 "type_tags": {
@@ -178,7 +217,18 @@
                                     "maxItems": 1,
                                     "items": {
                                         "type": "string",
-                                        "enum": ["access-control", "artifact-info", "installer", "deploy", "utility", "dependency", "code-sign", "build", "test", "notification"]
+                                        "enum": [
+                                            "access-control",
+                                            "artifact-info",
+                                            "installer",
+                                            "deploy",
+                                            "utility",
+                                            "dependency",
+                                            "code-sign",
+                                            "build",
+                                            "test",
+                                            "notification"
+                                        ]
                                     }
                                 },
                                 "dependencies": {
@@ -186,7 +236,10 @@
                                     "items": {
                                         "type": "object",
                                         "additionalProperties": false,
-                                        "required": ["manager", "name"],
+                                        "required": [
+                                            "manager",
+                                            "name"
+                                        ],
                                         "properties": {
                                             "manager": {
                                                 "type": "string"
@@ -204,7 +257,9 @@
                                         "bash": {
                                             "type": "object",
                                             "additionalProperties": false,
-                                            "required": ["entry_file"],
+                                            "required": [
+                                                "entry_file"
+                                            ],
                                             "properties": {
                                                 "entry_file": {
                                                     "type": "string"
@@ -214,7 +269,9 @@
                                         "go": {
                                             "type": "object",
                                             "additionalProperties": false,
-                                            "required": ["package_name"],
+                                            "required": [
+                                                "package_name"
+                                            ],
                                             "properties": {
                                                 "package_name": {
                                                     "type": "string"
@@ -262,7 +319,9 @@
                                             "items": {
                                                 "type": "object",
                                                 "additionalProperties": false,
-                                                "required": ["name"],
+                                                "required": [
+                                                    "name"
+                                                ],
                                                 "properties": {
                                                     "name": {
                                                         "type": "string"
@@ -294,7 +353,9 @@
                                     "type": "array",
                                     "items": {
                                         "type": "object",
-                                        "required": ["opts"],
+                                        "required": [
+                                            "opts"
+                                        ],
                                         "minProperties": 2,
                                         "maxProperties": 2,
                                         "properties": {
@@ -354,7 +415,9 @@
                                     "type": "array",
                                     "items": {
                                         "type": "object",
-                                        "required": ["opts"],
+                                        "required": [
+                                            "opts"
+                                        ],
                                         "minProperties": 2,
                                         "maxProperties": 2,
                                         "properties": {
@@ -416,5 +479,5 @@
                 }
             }
         }
-	}
+    }
 }
