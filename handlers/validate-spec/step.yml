@@ -10,6 +10,6 @@ toolkit:
     package_name: github.com/bitrise-io/bitrise-steplib/handlers/validate-spec
 
 inputs: 
-- spec:
+- spec: $SPEC_JSON
   opts:
     description: StepLib spec (spec.json) path
