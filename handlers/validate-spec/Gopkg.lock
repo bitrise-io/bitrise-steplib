@@ -2,17 +2,6 @@
 
 
 [[projects]]
-  digest = "1:07f7314344b2771963ada0b2a4a426c59d782dac227dcfff2499188a186446c0"
-  name = "github.com/GeertJohan/go.rice"
-  packages = [
-    ".",
-    "embedded",
-  ]
-  pruneopts = "UT"
-  revision = "cd53cd147dd5288bc2fb990fb983e58e301abb5e"
-  version = "v1.0.0"
-
-[[projects]]
   branch = "master"
   digest = "1:14ee917b32a6ce0187e71c9943985fee03dd74608324dd89e9fa0ea0880a173a"
   name = "github.com/bitrise-io/go-utils"
@@ -34,14 +23,6 @@
   packages = ["stepconf"]
   pruneopts = "UT"
   revision = "94490ca44ddb645764676a94988f6fc7e3187383"
-
-[[projects]]
-  digest = "1:8e8da6cc8cca12851d4e089d970a0f7387b3a6bcc8c459ff432213b03076a66d"
-  name = "github.com/daaku/go.zipexe"
-  packages = ["."]
-  pruneopts = "UT"
-  revision = "74d766ac1dde7458348221869a7d1e7e5fa0597e"
-  version = "v1.0.1"
 
 [[projects]]
   digest = "1:ffe9824d294da03b391f44e1ae8281281b4afc1bdaa9588c9097785e3af10cec"
@@ -98,7 +79,6 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/GeertJohan/go.rice",
     "github.com/bitrise-io/go-utils/fileutil",
     "github.com/bitrise-io/go-utils/log",
     "github.com/bitrise-tools/go-steputils/stepconf",
