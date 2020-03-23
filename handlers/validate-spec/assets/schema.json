@@ -108,6 +108,7 @@
                         "additionalProperties": {
                             "type": "object",
                             "additionalProperties": false,
+                            "required": ["title", "summary", "website", "source_code_url", "support_url", "published_at", "source", "type_tags"],
                             "properties": {
                                 "title": {
                                     "type": "string"
@@ -289,13 +290,121 @@
                                 "inputs": {
                                     "type": "array",
                                     "items": {
-                                        "type": "object"
+                                        "type": "object",
+                                        "required": ["opts"],
+                                        "minProperties": 2,
+                                        "maxProperties": 2,
+                                        "properties": {
+                                            "opts": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "is_expand": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "skip_if_empty": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "summary": {
+                                                        "type": "string"
+                                                    },
+                                                    "category": {
+                                                        "type": "string"
+                                                    },
+                                                    "value_options": {
+                                                        "type": "array",
+                                                        "minProperties": 2,
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "is_required": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_dont_change_value": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_template": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_sensitive": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "unset": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "meta": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 },
                                 "outputs": {
                                     "type": "array",
                                     "items": {
-                                        "type": "object"
+                                        "type": "object",
+                                        "required": ["opts"],
+                                        "minProperties": 2,
+                                        "maxProperties": 2,
+                                        "properties": {
+                                            "opts": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "is_expand": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "skip_if_empty": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "title": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "summary": {
+                                                        "type": "string"
+                                                    },
+                                                    "category": {
+                                                        "type": "string"
+                                                    },
+                                                    "value_options": {
+                                                        "type": "array",
+                                                        "minProperties": 2,
+                                                        "items": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "is_required": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_dont_change_value": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_template": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "is_sensitive": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "unset": {
+                                                        "type": "boolean"
+                                                    },
+                                                    "meta": {
+                                                        "type": "object"
+                                                    }
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
