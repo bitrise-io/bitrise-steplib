@@ -128,13 +128,34 @@
                                     "type": "string"
                                 },
                                 "published_at": {
-                                    "type": "string"
+                                    "type": "string",
+                                    "format": "date-time"
                                 },
                                 "source": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "required": ["git", "commit"],
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "git": {
+                                            "type": "string"
+                                        },
+                                        "commit": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "asset_urls": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "maxProperties": 2,
+                                    "properties": {
+                                        "icon.svg": {
+                                            "type": "string"
+                                        },
+                                        "icon.png": {
+                                            "type": "string"
+                                        }
+                                    }
                                 },
                                 "host_os_tags": {
                                     "type": "array",
@@ -145,19 +166,31 @@
                                 "project_type_tags": {
                                     "type": "array",
                                     "items": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "enum": ["ios", "macos", "android", "xamarin", "react-native", "cordova", "ionic", "flutter", "web"]
                                     }
                                 },
                                 "type_tags": {
                                     "type": "array",
                                     "items": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "enum": ["access-control", "artifact-info", "installer", "deploy", "utility", "dependency", "code-sign", "build", "test", "notification"]
                                     }
                                 },
                                 "dependencies": {
                                     "type": "array",
                                     "items": {
-                                        "type": "object"
+                                        "type": "object",
+                                        "additionalProperties": false,
+                                        "required": ["manager", "name"],
+                                        "properties": {
+                                            "manager": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            }
+                                        }
                                     }
                                 },
                                 "toolkit": {
