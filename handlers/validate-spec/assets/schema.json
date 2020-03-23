@@ -194,10 +194,79 @@
                                     }
                                 },
                                 "toolkit": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "bash": {
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "required": ["entry_file"],
+                                            "properties": {
+                                                "entry_file": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        },
+                                        "go": {
+                                            "type": "object",
+                                            "additionalProperties": false,
+                                            "required": ["package_name"],
+                                            "properties": {
+                                                "package_name": {
+                                                    "type": "string"
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 "deps": {
-                                    "type": "object"
+                                    "type": "object",
+                                    "additionalProperties": false,
+                                    "properties": {
+                                        "brew": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "bin_name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "apt_get": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "bin_name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "check_only": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "additionalProperties": false,
+                                                "required": ["name"],
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
                                 },
                                 "is_requires_admin_user": {
                                     "type": "boolean"
