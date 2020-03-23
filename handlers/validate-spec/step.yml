@@ -1,0 +1,15 @@
+title: Validate StepLib spec
+summary: This step format checks a given StepLib spec
+
+website: https://github.com/bitrise-io/bitrise-steplib
+source_code_url: https://github.com/bitrise-io/bitrise-steplib
+support_url: https://github.com/bitrise-io/bitrise-steplib/issues
+
+toolkit:
+  go:
+    package_name: github.com/godrei/validate-spec
+
+inputs: 
+- spec:
+  opts:
+    description: StepLib spec (spec.json) path

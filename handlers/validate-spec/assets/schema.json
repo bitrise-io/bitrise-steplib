@@ -1,0 +1,116 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "type": "object",
+    "required": [
+        "format_version",
+        "generated_at_timestamp",
+        "steplib_source",
+        "download_locations",
+        "assets_download_base_uri",
+        "steps"
+    ],
+    "additionalProperties": false,
+    "properties": {
+        "format_version": {
+            "type": "string",
+            "pattern": "^[0-9]*.[0-9]*.[0-9]*$",
+            "examples": ["1.0.0"]
+        },
+        "generated_at_timestamp": {
+            "type": "integer",
+            "examples": [1584720375]
+        },
+        "steplib_source": {
+            "type": "string",
+            "examples": ["https://github.com/bitrise-io/bitrise-steplib.git"]
+        },
+        "download_locations": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "examples": [
+                    {
+                        "src": "https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/",
+                        "type": "zip"
+                    },
+                    {
+                        "src": "source/git",
+                        "type": "git"
+                    }
+                ],
+                "required": [
+                    "type",
+                    "src"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "type": {
+                        "type": "string",
+                        "examples": ["zip"]
+                    },
+                    "src": {
+                        "type": "string",
+                        "examples": ["https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/"]
+                    }
+                }
+            }
+        },
+        "assets_download_base_uri": {
+            "type": "string",
+            "examples": ["https://bitrise-steplib-collection.s3.amazonaws.com/steps"]
+        },
+        "steps": {
+            "type": "object",
+            "additionalProperties": {
+                "type": "object",
+                "required": [
+                    "info",
+                    "latest_version_number",
+                    "versions"
+                ],
+                "additionalProperties": false,
+                "properties": {
+                    "info": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "properties": {
+                            "removal_date": {
+                                "type": "string"
+                            },
+                            "deprecate_notes": {
+                                "type": "string"
+                            },
+                            "asset_urls": {
+                                "type": "object",
+                                "additionalProperties": false,
+                                "maxProperties": 2,
+                                "properties": {
+                                    "icon.svg": {
+                                        "type": "string"
+                                    },
+                                    "icon.png": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "maintainer": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "latest_version_number": {
+                        "type": "string",
+                        "pattern": "^[0-9]*.[0-9]*.[0-9]*$",
+                        "examples": ["1.0.0"]
+                    },
+                    "versions": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "object"
+                        }
+                    }
+                }
+            }
+        }
+	}
+}
