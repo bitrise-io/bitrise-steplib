@@ -1,22 +1,21 @@
 package main
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
 
-func Test_validateSchema_validSpec(t *testing.T) {
+func TestValidateSchemaValidSpec(t *testing.T) {
 	require.NoError(t, validateSchema(spec, schema))
 }
 
-func Test_validateSchema_invalidSpec(t *testing.T) {
+func TestValidateSchemaInvalidSpec(t *testing.T) {
+	expected := `/format_version: "1" regexp pattrn ^\d+.\d+.\d+$ mismatch on string: 1
+/steplib_source: "file://." regexp pattrn ^https://github.com/bitrise-io/bitrise-steplib.git$ mismatch on string: file://.`
 	err := validateSchema(invalidSpec, schema)
-	fmt.Println(err)
 	require.Error(t, err)
-	require.Equal(t, `/format_version: "1" regexp pattrn ^\d+.\d+.\d+$ mismatch on string: 1
-/steplib_source: "file://." regexp pattrn ^https://github.com/bitrise-io/bitrise-steplib.git$ mismatch on string: file://.`, err.Error())
+	require.Equal(t, expected, err.Error())
 }
 
 var spec = []byte(`{
