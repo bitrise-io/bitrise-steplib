@@ -1,0 +1,51 @@
+title: apptestai-test
+summary: |
+  bitrise step for apptest.ai test execution
+description: |
+  bitrise step for apptest.ai test execution.
+
+  Input your apptest.ai Access Key, Project ID, Package file
+  refer to more information from https://app.apptest.ai/#/main/integrations
+
+  Setup Access Key using workflow Secrets : APPTEST_AI_ACCESS_KEY
+website: https://github.com/forcemax/bitrise-step-apptestai-test
+source_code_url: https://github.com/forcemax/bitrise-step-apptestai-test
+support_url: https://github.com/forcemax/bitrise-step-apptestai-test/issues
+published_at: 2020-03-25T14:51:43.868252+09:00
+source:
+  git: https://github.com/forcemax/bitrise-step-apptestai-test.git
+  commit: 1b28682738bb9be425f5e91e37327c8c86e179be
+host_os_tags:
+- osx-10.14
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/forcemax/bitrise-step-apptestai-test
+deps: {}
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- access_key: $APPTEST_AI_ACCESS_KEY
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: apptest.ai access key (userid:accesskey). must set APPTEST_AI_ACCESS_KEY
+      env to Secrets on Workflow Editor.
+- opts:
+    is_expand: true
+    is_required: true
+    title: apptest.ai project id
+  project_id: 12389
+- binary_path: app-release.apk
+  opts:
+    is_expand: true
+    is_required: true
+    title: package file path
