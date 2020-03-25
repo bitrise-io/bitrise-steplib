@@ -102,10 +102,12 @@
                                 "maxProperties": 2,
                                 "properties": {
                                     "icon.svg": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "pattern": "^https://bitrise-steplib-collection\\.s3\\.amazonaws\\.com/steps/.+/assets/icon\\.svg$"
                                     },
                                     "icon.png": {
-                                        "type": "string"
+                                        "type": "string",
+                                        "pattern": "^https://bitrise-steplib-collection\\.s3\\.amazonaws\\.com/steps/.+/assets/icon\\.png$"
                                     }
                                 }
                             },
@@ -173,10 +175,12 @@
                                     "additionalProperties": false,
                                     "properties": {
                                         "git": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "pattern": "^.+\\.git$"
                                         },
                                         "commit": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "pattern": "^[0-9a-f]{5,40}$"
                                         }
                                     }
                                 },
@@ -186,10 +190,12 @@
                                     "maxProperties": 2,
                                     "properties": {
                                         "icon.svg": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "pattern": "^https://bitrise-steplib-collection\\.s3\\.amazonaws\\.com/steps/.+/assets/icon\\.svg$"
                                         },
                                         "icon.png": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "pattern": "^https://bitrise-steplib-collection\\.s3\\.amazonaws\\.com/steps/.+/assets/icon\\.png$"
                                         }
                                     }
                                 },
@@ -330,7 +336,8 @@
                                                 ],
                                                 "properties": {
                                                     "name": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "pattern": "^xcode$"
                                                     }
                                                 }
                                             }
