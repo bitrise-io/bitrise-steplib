@@ -4,7 +4,6 @@ import (
 	"encoding/json"
 	"errors"
 	"os"
-	"path/filepath"
 
 	"github.com/bitrise-io/go-utils/fileutil"
 	"github.com/bitrise-io/go-utils/log"
@@ -14,7 +13,8 @@ import (
 
 // Config ...
 type Config struct {
-	SpecPth string `env:"spec"`
+	SpecPth   string `env:"spec_path,required"`
+	SchemaPth string `env:"schema_path,required"`
 }
 
 func failf(format string, v ...interface{}) {
@@ -30,8 +30,7 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	schemaPth := filepath.Join(os.Getenv("BITRISE_SOURCE_DIR"), "schema.json")
-	if err := validate(c.SpecPth, schemaPth); err != nil {
+	if err := validate(c.SpecPth, c.SchemaPth); err != nil {
 		failf("Spec (%s) validation failed: %s", err)
 	}
 }

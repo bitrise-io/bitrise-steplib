@@ -10,6 +10,11 @@ toolkit:
     package_name: github.com/bitrise-io/bitrise-steplib/handlers/validate-spec
 
 inputs: 
-- spec: $SPEC_JSON
+- spec_path: $SPEC_JSON
   opts:
-    description: StepLib spec (spec.json) path
+    title: StepLib spec (spec.json) path
+    summary: Path to the StepLib spec (spec.json) to be validated.
+- schema_path: $BITRISE_SOURCE_DIR/schema.json
+  opts:
+    title: JSON Schema path
+    description: Path to the JSON schema to use for validating the StepLib spec (spec.json).
