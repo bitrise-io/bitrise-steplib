@@ -153,11 +153,11 @@
                                     "type": "string"
                                 },
                                 "website": {
-                                    "type": "string"
-                                },
-                                "source_code_url": {
                                     "type": "string",
                                     "minLength": 1
+                                },
+                                "source_code_url": {
+                                    "type": "string"
                                 },
                                 "support_url": {
                                     "type": "string"
@@ -357,7 +357,8 @@
                                     "type": "string"
                                 },
                                 "timeout": {
-                                    "type": "integer"
+                                    "type": "integer",
+                                    "minimum": 0
                                 },
                                 "meta": {
                                     "type": "object"
@@ -386,7 +387,8 @@
                                                         "type": "boolean"
                                                     },
                                                     "title": {
-                                                        "type": "string"
+                                                        "type": "string",
+                                                        "minLength": 1
                                                     },
                                                     "description": {
                                                         "type": "string"
