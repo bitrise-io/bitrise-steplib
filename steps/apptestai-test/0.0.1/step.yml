@@ -11,7 +11,7 @@ description: |
 website: https://github.com/forcemax/bitrise-step-apptestai-test
 source_code_url: https://github.com/forcemax/bitrise-step-apptestai-test
 support_url: https://github.com/forcemax/bitrise-step-apptestai-test/issues
-published_at: 2020-03-25T14:51:43.868252+09:00
+published_at: 2020-03-25T14:55:50.108876+09:00
 source:
   git: https://github.com/forcemax/bitrise-step-apptestai-test.git
   commit: 1b28682738bb9be425f5e91e37327c8c86e179be
