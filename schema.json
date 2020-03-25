@@ -13,7 +13,7 @@
     "properties": {
         "format_version": {
             "type": "string",
-            "pattern": "^\\d+.\\d+.\\d+$",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
             "examples": [
                 "1.0.0"
             ]
@@ -26,7 +26,7 @@
         },
         "steplib_source": {
             "type": "string",
-            "pattern": "^https://github.com/bitrise-io/bitrise-steplib.git$",
+            "pattern": "^https://github\\.com/bitrise-io/bitrise-steplib\\.git$",
             "examples": [
                 "https://github.com/bitrise-io/bitrise-steplib.git"
             ]
@@ -56,11 +56,11 @@
                 "properties": {
                     "src": {
                         "type": "string",
-                        "pattern": "(^https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/$)|(^source/git$)"
+                        "pattern": "^https://bitrise-steplib-collection\\.s3\\.amazonaws\\.com/step-archives/$|^source/git$"
                     },
                     "type": {
                         "type": "string",
-                        "pattern": "(^git$)|(^zip$)"
+                        "pattern": "^git$|^zip$"
                     }
                 }
             }
@@ -75,7 +75,7 @@
         "steps": {
             "type": "object",
             "propertyNames": {
-                "minLength": 1
+                "pattern": "^[a-z0-9-]+$"
             },
             "additionalProperties": {
                 "type": "object",
@@ -116,7 +116,7 @@
                     },
                     "latest_version_number": {
                         "type": "string",
-                        "pattern": "^\\d+.\\d+.\\d+$",
+                        "pattern": "^\\d+\\.\\d+\\.\\d+$",
                         "examples": [
                             "1.0.0"
                         ]
@@ -124,7 +124,7 @@
                     "versions": {
                         "type": "object",
                         "propertyNames": {
-                            "pattern": "^\\d+.\\d+.\\d+$"
+                            "pattern": "^\\d+\\.\\d+\\.\\d+$"
                         },
                         "additionalProperties": {
                             "type": "object",
