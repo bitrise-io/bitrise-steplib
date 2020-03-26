@@ -1,6 +1,6 @@
 title: Stamp AppIcon with version number
 summary: |
-  This script will use ImageMagick to stamp the version number to all icons.
+  This step will use ImageMagick to stamp the version number to all icons.
 description: |
   Stamps version "version(build number)" to the bottom of the icon.
 website: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
@@ -9,7 +9,7 @@ support_url: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version
 published_at: 2020-03-25T08:34:01.972373+02:00
 source:
   git: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number.git
-  commit: 90cf472e219e4588ffb899c3566546c1f67c7e6e
+  commit: 3fd47f61abba83b6f7500958dfe4cd0e8569ec8b
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
