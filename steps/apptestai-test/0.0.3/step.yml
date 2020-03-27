@@ -1,0 +1,53 @@
+title: apptestai-test
+summary: |
+  bitrise step for apptest.ai test execution
+description: |
+  bitrise step for apptest.ai test execution.
+
+  Input your apptest.ai Access Key, Project ID, Package file
+  refer to more information from https://app.apptest.ai/#/main/integrations
+
+  We recommend to use Access Key using bitrise workflow secret variable.
+website: https://github.com/forcemax/bitrise-step-apptestai-test
+source_code_url: https://github.com/forcemax/bitrise-step-apptestai-test
+support_url: https://github.com/forcemax/bitrise-step-apptestai-test/issues
+published_at: 2020-03-27T11:23:14.759866+09:00
+source:
+  git: https://github.com/forcemax/bitrise-step-apptestai-test.git
+  commit: 1e15f4ae9097e4d66f5572578f726c38fd776593
+host_os_tags:
+- osx-10.14
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/forcemax/bitrise-step-apptestai-test
+deps: {}
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- access_key:
+  opts:
+    description: 'apptest.ai access key. (e.g.: ci_support:4b55ec5999ea636b0aafb402816ac50b)'
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: apptest.ai access key.
+- project_id: 
+  opts:
+    description: apptest.ai project id. (e.g. 19049)
+    is_expand: true
+    is_required: true
+    title: apptest.ai project id.
+- binary_path: $BITRISE_APK_PATH
+  opts:
+    description: 'package file path. You can use $BITRISE_APK_PATH or $BITRISE_IPA_PATH or app file path. supported file type: apk,ipa,xapk'
+    is_expand: true
+    is_required: true
+    title: package file path.
