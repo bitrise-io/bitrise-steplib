@@ -19,13 +19,13 @@ func TestValidateSchemaInvalidSpec(t *testing.T) {
 }
 
 var spec = []byte(`{
-    "format_version": "1.0.0",
+    "format_version": "0.0.0",
     "generated_at_timestamp": 1584720375,
 	"steplib_source": "https://github.com/bitrise-io/bitrise-steplib.git"
 }`)
 
 var invalidSpec = []byte(`{
-    "format_version": "1",
+    "format_version": "1.0.0\n0.0.0",
     "generated_at_timestamp": 1584720375,
 	"steplib_source": "file://."
 }`)
@@ -42,7 +42,7 @@ var schema = []byte(`{
     "properties": {
         "format_version": {
             "type": "string",
-            "pattern": "^\\d+.\\d+.\\d+$",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
             "examples": [
                 "1.0.0"
             ]
@@ -55,7 +55,7 @@ var schema = []byte(`{
         },
         "steplib_source": {
             "type": "string",
-            "pattern": "^https://github.com/bitrise-io/bitrise-steplib.git$",
+            "pattern": "^https://github\\.com/bitrise-io/bitrise-steplib\\.git$",
             "examples": [
                 "https://github.com/bitrise-io/bitrise-steplib.git"
             ]

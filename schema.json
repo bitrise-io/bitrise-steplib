@@ -207,41 +207,11 @@
                                 },
                                 "project_type_tags": {
                                     "type": "array",
-                                    "uniqueItems": true,
-                                    "items": {
-                                        "type": "string",
-                                        "enum": [
-                                            "ios",
-                                            "macos",
-                                            "android",
-                                            "xamarin",
-                                            "react-native",
-                                            "cordova",
-                                            "ionic",
-                                            "flutter",
-                                            "web"
-                                        ]
-                                    }
+                                    "uniqueItems": true
                                 },
                                 "type_tags": {
                                     "type": "array",
-                                    "minItems": 1,
-                                    "maxItems": 1,
-                                    "items": {
-                                        "type": "string",
-                                        "enum": [
-                                            "access-control",
-                                            "artifact-info",
-                                            "installer",
-                                            "deploy",
-                                            "utility",
-                                            "dependency",
-                                            "code-sign",
-                                            "build",
-                                            "test",
-                                            "notification"
-                                        ]
-                                    }
+                                    "minItems": 1
                                 },
                                 "dependencies": {
                                     "type": "array",
@@ -337,7 +307,7 @@
                                                 "properties": {
                                                     "name": {
                                                         "type": "string",
-                                                        "pattern": "^xcode$"
+                                                        "pattern": "^xcode$|^gradle$"
                                                     }
                                                 }
                                             }

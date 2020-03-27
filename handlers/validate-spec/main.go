@@ -3,10 +3,13 @@ package main
 import (
 	"encoding/json"
 	"errors"
+	"fmt"
 	"os"
+	"strings"
 
 	"github.com/bitrise-io/go-utils/fileutil"
 	"github.com/bitrise-io/go-utils/log"
+	"github.com/bitrise-io/stepman/models"
 	"github.com/bitrise-tools/go-steputils/stepconf"
 	"github.com/qri-io/jsonschema"
 )
@@ -46,7 +49,20 @@ func validate(specPth, schemaPth string) error {
 		return err
 	}
 
-	return validateSchema(spec, schema)
+	schemaErr := validateSchema(spec, schema)
+	tagErr := validateTypeAndProjectTypeTags(spec)
+
+	var errs []string
+	if schemaErr != nil {
+		errs = append(errs, schemaErr.Error())
+	}
+	if tagErr != nil {
+		errs = append(errs, tagErr.Error())
+	}
+	if len(errs) > 0 {
+		return errors.New(strings.Join(errs, "\n"))
+	}
+	return nil
 }
 
 func validateSchema(spec, schema []byte) error {
@@ -70,5 +86,63 @@ func validateSchema(spec, schema []byte) error {
 		return errors.New(errs)
 	}
 
+	return nil
+}
+
+var projectTypeTags = map[string]bool{
+	"ios":          true,
+	"macos":        true,
+	"android":      true,
+	"xamarin":      true,
+	"react-native": true,
+	"cordova":      true,
+	"ionic":        true,
+	"flutter":      true,
+	"web":          true,
+}
+
+var typeTags = map[string]bool{
+	"access-control": true,
+	"artifact-info":  true,
+	"installer":      true,
+	"deploy":         true,
+	"utility":        true,
+	"dependency":     true,
+	"code-sign":      true,
+	"build":          true,
+	"test":           true,
+	"notification":   true,
+}
+
+func validateTypeAndProjectTypeTags(spec []byte) error {
+	var stepLib models.StepCollectionModel
+	if err := json.Unmarshal(spec, &stepLib); err != nil {
+		return err
+	}
+
+	var errs string
+	for stepID, stepGroup := range stepLib.Steps {
+		step := stepGroup.Versions[stepGroup.LatestVersionNumber]
+
+		if len(step.TypeTags) == 0 {
+			errs += fmt.Sprintf("%s (version %s) has no type_tags\n", stepID, stepGroup.LatestVersionNumber)
+		} else {
+			for _, tag := range step.TypeTags {
+				if _, ok := typeTags[tag]; !ok {
+					errs += fmt.Sprintf("%s (version %s) has invalid type_tag: %s\n", stepID, stepGroup.LatestVersionNumber, tag)
+				}
+			}
+		}
+
+		for _, tag := range step.ProjectTypeTags {
+			if _, ok := projectTypeTags[tag]; !ok {
+				errs += fmt.Sprintf("%s (version %s) has invalid project_type_tag: %s\n", stepID, stepGroup.LatestVersionNumber, tag)
+			}
+		}
+	}
+
+	if errs != "" {
+		return errors.New(errs)
+	}
 	return nil
 }
