@@ -13,6 +13,8 @@ host_os_tags:
 - osx-10.10
 - osx-10.11
 - osx-10.12
+type_tags:
+- utility
 is_requires_admin_user: false
 is_always_run: false
 inputs:
