@@ -3,6 +3,14 @@
 
 [[projects]]
   branch = "master"
+  digest = "1:4e1c0cc22c53c5ebda9bd380afd5b56a2f1fc9e6fd2eed59ab8ba0c1522eee19"
+  name = "github.com/bitrise-io/envman"
+  packages = ["models"]
+  pruneopts = "UT"
+  revision = "24a8f72875981710a8b21e60d81c4126a3af3c67"
+
+[[projects]]
+  branch = "master"
   digest = "1:14ee917b32a6ce0187e71c9943985fee03dd74608324dd89e9fa0ea0880a173a"
   name = "github.com/bitrise-io/go-utils"
   packages = [
@@ -15,6 +23,14 @@
   ]
   pruneopts = "UT"
   revision = "e212188d99b41373b4ff8b69e7b1f677bc427bde"
+
+[[projects]]
+  digest = "1:b1346ca132021ca4f0c38b546de5d579ccf406eede745c2f147b35e8c04ad997"
+  name = "github.com/bitrise-io/stepman"
+  packages = ["models"]
+  pruneopts = "UT"
+  revision = "32658664414b6aee27ea23d6848026a2fb0b490e"
+  version = "0.12.2"
 
 [[projects]]
   branch = "master"
@@ -81,6 +97,7 @@
   input-imports = [
     "github.com/bitrise-io/go-utils/fileutil",
     "github.com/bitrise-io/go-utils/log",
+    "github.com/bitrise-io/stepman/models",
     "github.com/bitrise-tools/go-steputils/stepconf",
     "github.com/qri-io/jsonschema",
     "github.com/stretchr/testify/require",
