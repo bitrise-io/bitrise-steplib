@@ -27,6 +27,15 @@ workflows:
     - path::./handlers/validate:
     - path::./handlers/generate-specs:
     - path::./handlers/validate-spec:
+        title: Validate spec.json
+        inputs:
+        - spec_path: $SPEC_JSON
+        - schema_path: $BITRISE_SOURCE_DIR/spec_schema.json
+    - path::./handlers/validate-spec:
+        title: Validate slim_spec.json
+        inputs:
+        - spec_path: $SLIM_SPEC_JSON
+        - schema_path: $BITRISE_SOURCE_DIR/slim_spec_schema.json
     - path::./handlers/algolia-deploy:
     - path::./handlers/deploy:
     - deploy-to-bitrise-io:
@@ -40,4 +49,13 @@ workflows:
     - path::./handlers/validate:
     - path::./handlers/generate-specs:
     - path::./handlers/validate-spec:
+        title: Validate spec.json
+        inputs:
+        - spec_path: $SPEC_JSON
+        - schema_path: $BITRISE_SOURCE_DIR/spec_schema.json
+    - path::./handlers/validate-spec:
+        title: Validate slim_spec.json
+        inputs:
+        - spec_path: $SLIM_SPEC_JSON
+        - schema_path: $BITRISE_SOURCE_DIR/slim_spec_schema.json
     - path::./handlers/audit:

@@ -14,14 +14,8 @@ import (
 
 // Config ...
 type Config struct {
-	SpecPth     string `env:"spec_path,file"`
-	SlimSpecPth string `env:"slim_spec_path,file"`
-	SchemaPth   string `env:"schema_path,file"`
-}
-
-func failf(format string, v ...interface{}) {
-	log.Errorf(format, v...)
-	os.Exit(1)
+	SpecPth   string `env:"spec_path,file"`
+	SchemaPth string `env:"schema_path,file"`
 }
 
 func main() {
@@ -32,53 +26,52 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	specErrs, slimSpecErrs, err := validate(c.SpecPth, c.SlimSpecPth, c.SchemaPth)
+	specErrs, err := validate(c.SpecPth, c.SchemaPth)
 	if err != nil {
 		failf(err.Error())
 	}
 
-	if len(specErrs) > 0 || len(slimSpecErrs) > 0 {
-		if err := joinErrors(specErrs); err != nil {
-			log.Errorf("Invalid spec\n%s", err)
-		}
-
-		if err := joinErrors(slimSpecErrs); err != nil {
-			log.Errorf("Invalid slim spec\n%s", err)
-		}
-
-		os.Exit(1)
+	if err := joinErrors(specErrs); err != nil {
+		failf("Invalid spec\n%s", err)
 	}
 
 	log.Printf("Spec and slim spec are valid")
 }
 
-func validate(specPth, slimSpecPth, schemaPth string) ([]error, []error, error) {
-	specReader, err := os.Open(specPth)
-	if err != nil {
-		return nil, nil, fmt.Errorf("failed to open spec: %s", err)
+func failf(format string, v ...interface{}) {
+	log.Errorf(format, v...)
+	os.Exit(1)
+}
+
+func joinErrors(errs []error) error {
+	var s []string
+	for _, err := range errs {
+		s = append(s, err.Error())
 	}
 
-	slimSpecReader, err := os.Open(slimSpecPth)
+	if len(s) > 0 {
+		return errors.New(strings.Join(s, "\n"))
+	}
+	return nil
+}
+
+func validate(specPth, schemaPth string) ([]error, error) {
+	specReader, err := os.Open(specPth)
 	if err != nil {
-		return nil, nil, fmt.Errorf("failed to open spec: %s", err)
+		return nil, fmt.Errorf("failed to open spec: %s", err)
 	}
 
 	schemaReader, err := os.Open(schemaPth)
 	if err != nil {
-		return nil, nil, fmt.Errorf("failed to open schema: %s", err)
+		return nil, fmt.Errorf("failed to open schema: %s", err)
 	}
 
 	specErrs, err := validateSpec(specReader, schemaReader)
 	if err != nil {
-		return nil, nil, fmt.Errorf("failed to validate spec: %s", err)
+		return nil, fmt.Errorf("failed to validate spec: %s", err)
 	}
 
-	slimSpecErrs, err := validateSlimSpec(slimSpecReader, schemaReader)
-	if err != nil {
-		return specErrs, nil, fmt.Errorf("failed to validate slim spec: %s", err)
-	}
-
-	return specErrs, slimSpecErrs, nil
+	return specErrs, nil
 }
 
 func validateSpec(specReader, schemaReader io.Reader) ([]error, error) {
@@ -97,34 +90,4 @@ func validateSpec(specReader, schemaReader io.Reader) ([]error, error) {
 		return schemaErrs, fmt.Errorf("failed to validate type and project type tags: %s", err)
 	}
 	return append(schemaErrs, tagErrs...), nil
-}
-
-func validateSlimSpec(slimSpecReader, schemaReader io.Reader) ([]error, error) {
-	v, err := validator.New(slimSpecReader)
-	if err != nil {
-		return nil, fmt.Errorf("failed to initialise validator: %s", err)
-	}
-
-	schemaErrs, err := v.ValidateSchema(schemaReader)
-	if err != nil {
-		return nil, fmt.Errorf("failed to validate schame: %s", err)
-	}
-
-	tagErrs, err := v.ValidateTags()
-	if err != nil {
-		return schemaErrs, fmt.Errorf("failed to validate type and project type tags: %s", err)
-	}
-	return append(schemaErrs, tagErrs...), nil
-}
-
-func joinErrors(errs []error) error {
-	var s []string
-	for _, err := range errs {
-		s = append(s, err.Error())
-	}
-
-	if len(s) > 0 {
-		return errors.New(strings.Join(s, "\n"))
-	}
-	return nil
 }
