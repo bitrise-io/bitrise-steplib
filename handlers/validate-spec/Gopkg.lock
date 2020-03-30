@@ -11,7 +11,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:14ee917b32a6ce0187e71c9943985fee03dd74608324dd89e9fa0ea0880a173a"
+  digest = "1:94402442eff19730aa9d8aa7879ae324d34dd841f3cc47feeb5411471c18ae11"
   name = "github.com/bitrise-io/go-utils"
   packages = [
     "colorstring",
@@ -20,6 +20,7 @@
     "parseutil",
     "pathutil",
     "pointers",
+    "sliceutil",
   ]
   pruneopts = "UT"
   revision = "e212188d99b41373b4ff8b69e7b1f677bc427bde"
@@ -95,8 +96,8 @@
   analyzer-name = "dep"
   analyzer-version = 1
   input-imports = [
-    "github.com/bitrise-io/go-utils/fileutil",
     "github.com/bitrise-io/go-utils/log",
+    "github.com/bitrise-io/go-utils/sliceutil",
     "github.com/bitrise-io/stepman/models",
     "github.com/bitrise-tools/go-steputils/stepconf",
     "github.com/qri-io/jsonschema",
