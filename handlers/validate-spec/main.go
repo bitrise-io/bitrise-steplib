@@ -35,7 +35,7 @@ func main() {
 		failf("Invalid spec\n%s", err)
 	}
 
-	log.Printf("Spec and slim spec are valid")
+	log.Printf("Spec is valid")
 }
 
 func failf(format string, v ...interface{}) {
