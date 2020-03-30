@@ -1,23 +1,22 @@
 package main
 
 import (
-	"encoding/json"
 	"errors"
 	"fmt"
+	"io"
 	"os"
 	"strings"
 
-	"github.com/bitrise-io/go-utils/fileutil"
+	"github.com/bitrise-io/bitrise-steplib/handlers/validate-spec/validator"
 	"github.com/bitrise-io/go-utils/log"
-	"github.com/bitrise-io/stepman/models"
 	"github.com/bitrise-tools/go-steputils/stepconf"
-	"github.com/qri-io/jsonschema"
 )
 
 // Config ...
 type Config struct {
-	SpecPth   string `env:"spec_path,required"`
-	SchemaPth string `env:"schema_path,required"`
+	SpecPth     string `env:"spec_path,file"`
+	SlimSpecPth string `env:"slim_spec_path,file"`
+	SchemaPth   string `env:"schema_path,file"`
 }
 
 func failf(format string, v ...interface{}) {
@@ -33,116 +32,99 @@ func main() {
 	}
 	stepconf.Print(c)
 
-	if err := validate(c.SpecPth, c.SchemaPth); err != nil {
-		failf("Spec (%s) validation failed: %s", err)
-	}
-}
-
-func validate(specPth, schemaPth string) error {
-	spec, err := fileutil.ReadBytesFromFile(specPth)
+	specErrs, slimSpecErrs, err := validate(c.SpecPth, c.SlimSpecPth, c.SchemaPth)
 	if err != nil {
-		return err
+		failf(err.Error())
 	}
 
-	schema, err := fileutil.ReadBytesFromFile(schemaPth)
-	if err != nil {
-		return err
-	}
-
-	schemaErr := validateSchema(spec, schema)
-	tagErr := validateTypeAndProjectTypeTags(spec)
-
-	var errs []string
-	if schemaErr != nil {
-		errs = append(errs, schemaErr.Error())
-	}
-	if tagErr != nil {
-		errs = append(errs, tagErr.Error())
-	}
-	if len(errs) > 0 {
-		return errors.New(strings.Join(errs, "\n"))
-	}
-	return nil
-}
-
-func validateSchema(spec, schema []byte) error {
-	rs := &jsonschema.RootSchema{}
-	if err := json.Unmarshal(schema, rs); err != nil {
-		return err
-	}
-
-	issues, err := rs.ValidateBytes(spec)
-	if err != nil {
-		return err
-	}
-	if len(issues) > 0 {
-		var errs string
-		for i, issue := range issues {
-			errs += issue.Error()
-			if i < len(issues)-1 {
-				errs += "\n"
-			}
-		}
-		return errors.New(errs)
-	}
-
-	return nil
-}
-
-var projectTypeTags = map[string]bool{
-	"ios":          true,
-	"macos":        true,
-	"android":      true,
-	"xamarin":      true,
-	"react-native": true,
-	"cordova":      true,
-	"ionic":        true,
-	"flutter":      true,
-	"web":          true,
-}
-
-var typeTags = map[string]bool{
-	"access-control": true,
-	"artifact-info":  true,
-	"installer":      true,
-	"deploy":         true,
-	"utility":        true,
-	"dependency":     true,
-	"code-sign":      true,
-	"build":          true,
-	"test":           true,
-	"notification":   true,
-}
-
-func validateTypeAndProjectTypeTags(spec []byte) error {
-	var stepLib models.StepCollectionModel
-	if err := json.Unmarshal(spec, &stepLib); err != nil {
-		return err
-	}
-
-	var errs string
-	for stepID, stepGroup := range stepLib.Steps {
-		step := stepGroup.Versions[stepGroup.LatestVersionNumber]
-
-		if len(step.TypeTags) == 0 {
-			errs += fmt.Sprintf("%s (version %s) has no type_tags\n", stepID, stepGroup.LatestVersionNumber)
-		} else {
-			for _, tag := range step.TypeTags {
-				if _, ok := typeTags[tag]; !ok {
-					errs += fmt.Sprintf("%s (version %s) has invalid type_tag: %s\n", stepID, stepGroup.LatestVersionNumber, tag)
-				}
-			}
+	if len(specErrs) > 0 || len(slimSpecErrs) > 0 {
+		if err := joinErrors(specErrs); err != nil {
+			log.Errorf("Invalid spec\n%s", err)
 		}
 
-		for _, tag := range step.ProjectTypeTags {
-			if _, ok := projectTypeTags[tag]; !ok {
-				errs += fmt.Sprintf("%s (version %s) has invalid project_type_tag: %s\n", stepID, stepGroup.LatestVersionNumber, tag)
-			}
+		if err := joinErrors(slimSpecErrs); err != nil {
+			log.Errorf("Invalid slim spec\n%s", err)
 		}
+
+		os.Exit(1)
 	}
 
-	if errs != "" {
-		return errors.New(errs)
+	log.Printf("Spec and slim spec are valid")
+}
+
+func validate(specPth, slimSpecPth, schemaPth string) ([]error, []error, error) {
+	specReader, err := os.Open(specPth)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to open spec: %s", err)
+	}
+
+	slimSpecReader, err := os.Open(slimSpecPth)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to open spec: %s", err)
+	}
+
+	schemaReader, err := os.Open(schemaPth)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to open schema: %s", err)
+	}
+
+	specErrs, err := validateSpec(specReader, schemaReader)
+	if err != nil {
+		return nil, nil, fmt.Errorf("failed to validate spec: %s", err)
+	}
+
+	slimSpecErrs, err := validateSlimSpec(slimSpecReader, schemaReader)
+	if err != nil {
+		return specErrs, nil, fmt.Errorf("failed to validate slim spec: %s", err)
+	}
+
+	return specErrs, slimSpecErrs, nil
+}
+
+func validateSpec(specReader, schemaReader io.Reader) ([]error, error) {
+	v, err := validator.New(specReader)
+	if err != nil {
+		return nil, fmt.Errorf("failed to initialise validator: %s", err)
+	}
+
+	schemaErrs, err := v.ValidateSchema(schemaReader)
+	if err != nil {
+		return nil, fmt.Errorf("failed to validate schame: %s", err)
+	}
+
+	tagErrs, err := v.ValidateTags()
+	if err != nil {
+		return schemaErrs, fmt.Errorf("failed to validate type and project type tags: %s", err)
+	}
+	return append(schemaErrs, tagErrs...), nil
+}
+
+func validateSlimSpec(slimSpecReader, schemaReader io.Reader) ([]error, error) {
+	v, err := validator.New(slimSpecReader)
+	if err != nil {
+		return nil, fmt.Errorf("failed to initialise validator: %s", err)
+	}
+
+	schemaErrs, err := v.ValidateSchema(schemaReader)
+	if err != nil {
+		return nil, fmt.Errorf("failed to validate schame: %s", err)
+	}
+
+	tagErrs, err := v.ValidateTags()
+	if err != nil {
+		return schemaErrs, fmt.Errorf("failed to validate type and project type tags: %s", err)
+	}
+	return append(schemaErrs, tagErrs...), nil
+}
+
+func joinErrors(errs []error) error {
+	var s []string
+	for _, err := range errs {
+		s = append(s, err.Error())
+	}
+
+	if len(s) > 0 {
+		return errors.New(strings.Join(s, "\n"))
 	}
 	return nil
 }

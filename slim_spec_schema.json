@@ -13,23 +13,14 @@
     "properties": {
         "format_version": {
             "type": "string",
-            "pattern": "^\\d+\\.\\d+\\.\\d+$",
-            "examples": [
-                "1.0.0"
-            ]
+            "pattern": "^\\d+\\.\\d+\\.\\d+$"
         },
         "generated_at_timestamp": {
-            "type": "integer",
-            "examples": [
-                1584720375
-            ]
+            "type": "integer"
         },
         "steplib_source": {
             "type": "string",
-            "pattern": "^https://github\\.com/bitrise-io/bitrise-steplib\\.git$",
-            "examples": [
-                "https://github.com/bitrise-io/bitrise-steplib.git"
-            ]
+            "pattern": "^https://github\\.com/bitrise-io/bitrise-steplib\\.git$"
         },
         "download_locations": {
             "type": "array",
@@ -38,16 +29,6 @@
             "uniqueItems": true,
             "items": {
                 "type": "object",
-                "examples": [
-                    {
-                        "src": "https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/",
-                        "type": "zip"
-                    },
-                    {
-                        "src": "source/git",
-                        "type": "git"
-                    }
-                ],
                 "required": [
                     "type",
                     "src"
@@ -67,10 +48,7 @@
         },
         "assets_download_base_uri": {
             "type": "string",
-            "pattern": "^https://bitrise-steplib-collection.s3.amazonaws.com/steps$",
-            "examples": [
-                "https://bitrise-steplib-collection.s3.amazonaws.com/steps"
-            ]
+            "pattern": "^https://bitrise-steplib-collection.s3.amazonaws.com/steps$"
         },
         "steps": {
             "type": "object",
@@ -81,7 +59,6 @@
                 "type": "object",
                 "required": [
                     "info",
-                    "latest_version_number",
                     "versions"
                 ],
                 "additionalProperties": false,
@@ -115,13 +92,6 @@
                                 "type": "string"
                             }
                         }
-                    },
-                    "latest_version_number": {
-                        "type": "string",
-                        "pattern": "^\\d+\\.\\d+\\.\\d+$",
-                        "examples": [
-                            "1.0.0"
-                        ]
                     },
                     "versions": {
                         "type": "object",
