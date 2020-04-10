@@ -8,6 +8,7 @@ description: |
 website: https://github.com/dmiluski/bitrise-step-swiftformat
 source_code_url: https://github.com/dmiluski/bitrise-step-swiftformat
 support_url: https://github.com/dmiluski/bitrise-step-swiftformat/issues
+published_at: 2020-04-09T10:32:19-07:00
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
