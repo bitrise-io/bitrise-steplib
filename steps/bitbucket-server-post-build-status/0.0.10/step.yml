@@ -6,10 +6,10 @@ description: |
 website: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status
 source_code_url: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status
 support_url: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status/issues
-published_at: 2020-01-21T16:06:15.174176+01:00
+published_at: 2020-04-16T14:38:44.138332+02:00
 source:
   git: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status.git
-  commit: 5697327a4f8f8c975982659ee34fd06595fd79b2
+  commit: e9c2699942f07972e16bc4c2ed6e24ad74849b2b
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -61,7 +61,6 @@ inputs:
   preset_status: AUTO
 - git_clone_commit_hash: $GIT_CLONE_COMMIT_HASH
   opts:
-    is_dont_change_value: true
     is_required: true
     title: Git commit hash
 - app_title: $BITRISE_APP_TITLE
