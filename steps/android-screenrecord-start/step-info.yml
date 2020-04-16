@@ -1,4 +1,7 @@
 deprecate_notes: |
   This step is deprecated, android emulators no longer support screen recording
+<<<<<<< HEAD
 maintainer: bitrise
 removal_date: "2018-09-20"
+=======
+>>>>>>> removed bad value
