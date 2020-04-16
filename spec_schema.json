@@ -67,6 +67,9 @@
                     "info": {
                         "type": "object",
                         "additionalProperties": false,
+                        "required": [
+                            "maintainer"
+                        ],
                         "properties": {
                             "removal_date": {
                                 "type": "string"
