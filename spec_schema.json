@@ -93,7 +93,8 @@
                                 }
                             },
                             "maintainer": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": ["bitrise", "community", "verified"]
                             }
                         }
                     },
