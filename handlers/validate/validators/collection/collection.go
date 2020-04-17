@@ -85,7 +85,7 @@ func getTestableCLIVersionDownloadURLs() ([]string, error) {
 	var releaseTags []string
 	for _, release := range releases {
 		if version, err := version.NewVersion(release.TagName); err == nil && version.GreaterThan(latestSupportedVersion) && !isUnsupportedVersion(version, "1.39.0", "1.39.1", "1.40.0") {
-			releaseTags = append(releaseTags, fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch))
+			releaseTags = append([]string{fmt.Sprintf("https://github.com/bitrise-io/bitrise/releases/download/%s/bitrise-%s-%s", release.TagName, os, arch)}, releaseTags...)
 		}
 	}
 
