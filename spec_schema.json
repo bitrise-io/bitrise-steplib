@@ -67,6 +67,9 @@
                     "info": {
                         "type": "object",
                         "additionalProperties": false,
+                        "required": [
+                            "maintainer"
+                        ],
                         "properties": {
                             "removal_date": {
                                 "type": "string"
@@ -90,7 +93,8 @@
                                 }
                             },
                             "maintainer": {
-                                "type": "string"
+                                "type": "string",
+                                "enum": ["bitrise", "community", "verified"]
                             }
                         }
                     },
