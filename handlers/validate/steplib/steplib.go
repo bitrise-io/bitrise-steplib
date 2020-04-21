@@ -9,6 +9,7 @@ import (
 
 	"github.com/bitrise-io/go-utils/fileutil"
 	"github.com/bitrise-io/go-utils/pathutil"
+	"github.com/bitrise-io/stepman/models"
 	version "github.com/hashicorp/go-version"
 )
 
@@ -37,9 +38,27 @@ func NewStepLib(rootPath string) (StepLib, error) {
 			continue
 		}
 		stepDir := filepath.Join(stepsDir, stepDirInfo.Name())
-		if exists, err := pathutil.IsPathExists(filepath.Join(stepDir, "step-info.yml")); err == nil && exists {
-			continue
+		stepInfoPath := filepath.Join(stepDir, "step-info.yml")
+
+		exists, err := pathutil.IsPathExists(stepInfoPath)
+		if err != nil {
+			return StepLib{}, err
 		}
+
+		if exists {
+			content, err := ioutil.ReadFile(stepInfoPath)
+			if err != nil {
+				return StepLib{}, err
+			}
+			var info models.StepGroupInfoModel
+			if err := yaml.Unmarshal(content, &info); err != nil {
+				return StepLib{}, err
+			}
+			if len(info.DeprecateNotes) > 0 {
+				continue
+			}
+		}
+
 		versionDirs, err := ioutil.ReadDir(stepDir)
 		if err != nil {
 			return StepLib{}, err

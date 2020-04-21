@@ -38,7 +38,7 @@ func (v *Validator) Validate(sl steplib.StepLib) error {
 
 		version := sl.FindStepByID(stepID).FindVersionByID(vers)
 		if version.ID == "" {
-			return fmt.Errorf("Failed to find step by ID: %s and version: %s", stepID, vers)
+			return fmt.Errorf("Failed to find step by ID: %s and version: %s, steplib: %#v", stepID, vers, sl)
 		}
 		return validateStepYML(version.Raw)
 	}
