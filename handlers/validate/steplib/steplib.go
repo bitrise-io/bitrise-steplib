@@ -39,8 +39,13 @@ func NewStepLib(rootPath string) (StepLib, error) {
 		}
 		stepDir := filepath.Join(stepsDir, stepDirInfo.Name())
 		stepInfoPath := filepath.Join(stepDir, "step-info.yml")
-		if exists, err := pathutil.IsPathExists(stepInfoPath); err == nil && exists {
-			// deprecate_notes
+
+		exists, err := pathutil.IsPathExists(stepInfoPath)
+		if err != nil {
+			return StepLib{}, err
+		}
+
+		if exists {
 			content, err := ioutil.ReadFile(stepInfoPath)
 			if err != nil {
 				return StepLib{}, err
@@ -53,6 +58,7 @@ func NewStepLib(rootPath string) (StepLib, error) {
 				continue
 			}
 		}
+
 		versionDirs, err := ioutil.ReadDir(stepDir)
 		if err != nil {
 			return StepLib{}, err
