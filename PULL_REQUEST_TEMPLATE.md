@@ -1,3 +1,7 @@
+### What to do if the build fails?
+
+Right now contributors do not have access to the CI workflow triggered by StepLib PRs. In case of a failed build do not worry, no actions are needed from your side. Members of the Bitrise tooling team will come and sort it out for you or inform you if any further actions are needed from your side.
+
 ### New Pull Request Checklist
 
 *Please mark the points which you did / accept.*
