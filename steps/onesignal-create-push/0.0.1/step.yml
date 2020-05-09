@@ -20,7 +20,7 @@ support_url: https://github.com/sonifex/bitrise-step-onesignal-create-push/issue
 published_at: 2020-05-09T13:53:15+00:00
 source:
   git: https://github.com/sonifex/bitrise-step-onesignal-create-push.git
-  branch: master
+  commit: 2c05994e6a465eda27cb61527d1c895e9880b4a5
 host_os_tags:
     - osx-10.10
     - ubuntu-16.04
