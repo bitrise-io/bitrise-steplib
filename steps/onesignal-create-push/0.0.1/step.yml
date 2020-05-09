@@ -1,0 +1,84 @@
+
+#
+# A couple of useful guides & docs:
+#
+# - Main Bitrise CLI docs: https://github.com/bitrise-io/bitrise/tree/master/_docs
+# - Step Development Guideline: https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md
+# - Bitrise.yml format spec: https://github.com/bitrise-io/bitrise/blob/master/_docs/bitrise-yml-format-spec.md
+# - Bitrise docs: http://devcenter.bitrise.io/
+# - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
+
+title: |
+    OneSignal Create Push
+summary: |
+    Create a notification with onesignal. You can send notification with existing OneSignal app
+description: |
+    Create a notification with onesignal. You can send notification with existing OneSignal app
+website: https://github.com/sonifex/bitrise-step-onesignal-create-push
+source_code_url: https://github.com/sonifex/bitrise-step-onesignal-create-push
+support_url: https://github.com/sonifex/bitrise-step-onesignal-create-push/issues
+host_os_tags:
+    - osx-10.10
+    - ubuntu-16.04
+
+
+project_type_tags:
+    - ios
+    - macos
+    - android
+    - xamarin
+    - react-native
+    - cordova
+    - ionic
+
+type_tags:
+    - notification
+
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+
+deps:
+    brew:
+        - name: git
+        - name: wget
+    apt_get:
+        - name: git
+        - name: wget
+
+toolkit:
+    bash:
+    entry_file: step.sh
+
+inputs:
+    - onesignal_rest_api_key: ""
+      opts:
+        title: |
+            "OneSignal Rest API KEY"
+        is_expand: true
+        is_required: true
+        is_sensitive: true
+    - onesignal_app_id: ""
+      opts:
+        title: |
+            "OneSignal App ID"
+        is_expand: true
+        is_required: true
+        is_sensitive: true
+    - app_public_install_page: "$BITRISE_PUBLIC_INSTALL_PAGE_URL"
+      opts:
+        title: "App Public Install Page Url"
+        is_expand: true
+    - push_title: ""
+      opts:
+        title: |
+            "Push Notification Title"
+        is_expand: true
+        is_required: true
+    - push_body: ""
+      opts:
+        title: |
+            "Push Notification Message"
+        is_expand: true
+        is_required: true
