@@ -40,12 +40,12 @@ func NewStepLib(rootPath string) (StepLib, error) {
 		stepDir := filepath.Join(stepsDir, stepDirInfo.Name())
 		stepInfoPath := filepath.Join(stepDir, "step-info.yml")
 
-		exists, err := pathutil.IsPathExists(stepInfoPath)
+		stepInfoExists, err := pathutil.IsPathExists(stepInfoPath)
 		if err != nil {
 			return StepLib{}, err
 		}
 
-		if exists {
+		if stepInfoExists {
 			content, err := ioutil.ReadFile(stepInfoPath)
 			if err != nil {
 				return StepLib{}, err
@@ -63,6 +63,7 @@ func NewStepLib(rootPath string) (StepLib, error) {
 		if err != nil {
 			return StepLib{}, err
 		}
+
 		step := Step{
 			ID: stepDirInfo.Name(),
 		}
@@ -86,6 +87,13 @@ func NewStepLib(rootPath string) (StepLib, error) {
 			}
 
 			step.Versions = append(step.Versions, version)
+		}
+
+		if len(step.Versions) == 0 {
+			if stepInfoExists {
+				continue
+			}
+			return StepLib{}, fmt.Errorf("No versions and no step-info.yml found for step at path: %s", stepDir)
 		}
 
 		latestVersion, err := findLatestVersion(step.Versions)
