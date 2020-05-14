@@ -9,7 +9,7 @@
 # - Bitrise CLI guides: http://devcenter.bitrise.io/bitrise-cli/
 
 title: |
-    OneSignal Create Push
+    Send OneSignal push message
 summary: |
     Create a notification with onesignal. You can send notification with existing OneSignal app
 description: |
@@ -43,13 +43,6 @@ is_always_run: true
 is_skippable: false
 run_if: ""
 
-deps:
-    brew:
-        - name: git
-        - name: wget
-    apt_get:
-        - name: git
-        - name: wget
 
 toolkit:
     bash:
