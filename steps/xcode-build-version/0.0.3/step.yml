@@ -6,7 +6,7 @@ description: |
 website: https://github.com/nodes-ios/bitrise-step-xcode-build-version
 source_code_url: https://github.com/nodes-ios/bitrise-step-xcode-build-version
 support_url: https://github.com/nodes-ios/bitrise-step-xcode-build-version/issues
-published_at: 2020-05-11T10:07:18.599768+01:00
+published_at: 2020-05-14T14:36:01.578668+01:00
 source:
   git: https://github.com/nodes-ios/bitrise-step-xcode-build-version.git
   commit: b3adc05db9188ef24126307f5b8c5aab1654d681
