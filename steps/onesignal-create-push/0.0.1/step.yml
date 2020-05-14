@@ -1,5 +1,5 @@
 title: |
-  OneSignal Create Push
+    Send OneSignal push message
 summary: |
   Create a notification with onesignal. You can send notification with existing OneSignal app
 description: |
@@ -36,6 +36,11 @@ is_requires_admin_user: true
 is_always_run: true
 is_skippable: false
 run_if: ""
+
+toolkit:
+    bash:
+    entry_file: step.sh
+
 inputs:
 - onesignal_rest_api_key: ""
   opts:
