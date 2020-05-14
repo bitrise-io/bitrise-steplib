@@ -25,13 +25,7 @@ project_type_tags:
 type_tags:
 - notification
 toolkit: {}
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
+
 is_requires_admin_user: true
 is_always_run: true
 is_skippable: false
