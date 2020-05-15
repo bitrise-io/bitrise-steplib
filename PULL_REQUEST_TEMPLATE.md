@@ -1,7 +1,6 @@
 ### What to do if the build fails?
 
 At the moment contributors do not have access to the CI workflow triggered by StepLib PRs. In case of a failed build, we ask for your patience. Maintainers of Bitrise Steplib will sort it out for you or inform you if any further action is needed.
-For steps added for the first time, the GitHub option **Allow edits from maintainers** is required (See the documentation on how to select it: https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/allowing-changes-to-a-pull-request-branch-created-from-a-fork).
 
 ### New Pull Request Checklist
 
