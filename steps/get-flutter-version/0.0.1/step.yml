@@ -5,10 +5,10 @@ description: Extracts the Flutter version from *pubspec.lock* (if present) or *p
 website: https://github.com/dgimb89/bitrise-step-get-flutter-version
 source_code_url: https://github.com/dgimb89/bitrise-step-get-flutter-version
 support_url: https://github.com/dgimb89/bitrise-step-get-flutter-version/issues
-published_at: 2020-05-19T01:40:03.276019+02:00
+published_at: 2020-05-19T01:56:39.201454+02:00
 source:
   git: https://github.com/dgimb89/bitrise-step-get-flutter-version.git
-  commit: c896780bfe9a803f388d63b930704e755224b481
+  commit: 91bc7d7b2cf1412d9ab79e3bca5e50fce25ce3f7
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -39,9 +39,8 @@ inputs:
 outputs:
 - FLUTTER_PUBSPEC_VERSION: null
   opts:
-    description: 'Minimum Flutter version requirement that is defined by pubspec at
-      the **project location**: The version defined in *pubspec.lock* takes precendence
-      over *pubspec.yaml* definition.'
+    description: Minimum Flutter version requirement that is defined in pubspec files
+      (*pubspec.lock*, *pubspec.yaml*) at the **project location**.
     title: Flutter version that is defined by pubspec
 - FLUTTER_PUBSPEC_YAML_VERSION: null
   opts:
