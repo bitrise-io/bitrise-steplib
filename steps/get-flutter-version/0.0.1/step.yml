@@ -6,7 +6,7 @@ description: |
 website: https://github.com/dgimb89/bitrise-step-get-flutter-version
 source_code_url: https://github.com/dgimb89/bitrise-step-get-flutter-version
 support_url: https://github.com/dgimb89/bitrise-step-get-flutter-version/issues
-published_at: 2020-05-17T22:24:38.682957+02:00
+published_at: 2020-05-19T00:54:24.119654+02:00
 source:
   git: https://github.com/dgimb89/bitrise-step-get-flutter-version.git
   commit: e0f02f459ea0987e21f8a6df52b99e12b02037ff
