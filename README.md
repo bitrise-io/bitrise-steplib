@@ -18,7 +18,7 @@ One PR should contain only one step.
 
 Install the [Bitrise CLI](https://www.bitrise.io/cli) to run `bitrise` on your machine locally.
 
-You can install it via Homebrew:
+You can install it via Ho mebrew:
 
 `brew update && brew install bitrise`
 
