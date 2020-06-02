@@ -1,0 +1,41 @@
+title: Set Git Credentials
+summary: Sets the Git credentials used in a workflow
+description: |
+  Sets the name and email address of the Git credentials used in a workflow
+website: https://github.com/prosperllc/bitrise-step-set-git-credentials
+source_code_url: https://github.com/prosperllc/bitrise-step-set-git-credentials
+support_url: https://github.com/prosperllc/bitrise-step-set-git-credentials/issues
+published_at: 2019-12-18T12:38:06.7977513-08:00
+source:
+  git: https://github.com/prosperllc/bitrise-step-set-git-credentials.git
+  commit: 0a25b468684fde8b3002e5a20792aec4112f6196
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- git_user_name: Bitrise Buildbot
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Username to set in Git during workflow execution
+    title: Git Username
+- git_email_address: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Email address to set in Git during workflow execution
+    title: Git Email Address

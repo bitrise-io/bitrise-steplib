@@ -1,0 +1,74 @@
+title: Deploy to Huawei App Gallery
+summary: |
+  Uploads APK to Huawei App Gallery
+description: |
+  This step is based on [Huawei Publishing API](https://developer.huawei.com/consumer/en/service/hms/catalog/AGCConnectAPI.html?page=hmssdk_appGalleryConnect_getstarted)
+website: https://github.com/FutureMind/bitrise-step-huawei-app-gallery-apk-distribution
+source_code_url: https://github.com/FutureMind/bitrise-step-huawei-app-gallery-apk-distribution
+support_url: https://github.com/FutureMind/bitrise-step-huawei-app-gallery-apk-distribution/issues
+published_at: 2020-01-20T13:19:43.423533+01:00
+source:
+  git: https://github.com/FutureMind/bitrise-step-huawei-app-gallery-apk-distribution.git
+  commit: f79d0b1208466246453a8edada218b4eba556775
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  apt_get:
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: Path to generated APK file to deploy.
+    is_expand: true
+    is_required: true
+    title: APK path
+- huawei_filename: build_${BITRISE_BUILD_NUMBER}.apk
+  opts:
+    description: Unique name of APK file upload.
+    is_expand: true
+    is_required: true
+    title: File name
+- huawei_app_id: null
+  opts:
+    description: App ID can be found in App information tab.
+    is_expand: true
+    is_required: true
+    title: App ID
+- huawei_client_id: null
+  opts:
+    description: Client ID generated in `Users and permissions -> Api Key -> AppGalleryConnect
+      API`
+    is_expand: true
+    is_required: true
+    title: Client ID
+- huawei_client_secret: null
+  opts:
+    description: Client Secret generated in `Users and permissions -> Api Key -> AppGalleryConnect
+      API`
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Client Secret
+- lang: en-EN
+  opts:
+    description: For more languages refer to [Language Types](https://developer.huawei.com/consumer/en/service/hms/catalog/AGCConnectAPI.html?page=hmssdk_appGalleryConnect_api_reference_language_type)
+    is_expand: true
+    is_required: true
+    title: Language Type

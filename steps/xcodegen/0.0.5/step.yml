@@ -1,0 +1,47 @@
+title: Generate Xcode project
+summary: |
+  This Bitrise step runs XcodeGen to generate a project.
+description: |
+  This Bitrise step runs XcodeGen to generate a project.
+website: https://github.com/brandtdaniels/xcodegen-bitrise
+source_code_url: https://github.com/brandtdaniels/xcodegen-bitrise
+support_url: https://github.com/brandtdaniels/xcodegen-bitrise/issues
+published_at: 2019-11-07T08:41:31.184131-08:00
+source:
+  git: https://github.com/brandtdaniels/xcodegen-bitrise.git
+  commit: d1904d7249a4eba3a0422c3bf46d6cf646f56cae
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: xcodegen
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      The path to the project spec file. Defaults to project.yml
+    is_expand: true
+    is_required: true
+    summary: The path to the project spec file.
+    title: The path to the project spec file
+  spec_path: $BITRISE_SOURCE_DIR/project.yml
+- opts:
+    description: The path to the directory where the project should be generated.
+      Defaults to the directory the spec is in. The filename is defined in the project
+      spec
+    is_expand: true
+    is_required: false
+    summary: The path to the directory where the project should be generated.
+    title: The path to the directory where the project should be generated
+  project_path: $BITRISE_SOURCE_DIR

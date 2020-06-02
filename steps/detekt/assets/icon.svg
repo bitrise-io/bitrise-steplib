@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="send-tdetektwitter-message-a" x1="26.599%" x2="73.845%" y1="74.825%" y2="50.612%">
+      <stop offset="9.677%" stop-color="#0095D5"/>
+      <stop offset="30.07%" stop-color="#238AD9"/>
+      <stop offset="62.11%" stop-color="#557BDE"/>
+      <stop offset="86.43%" stop-color="#7472E2"/>
+      <stop offset="100%" stop-color="#806EE3"/>
+    </linearGradient>
+    <linearGradient id="send-tdetektwitter-message-b" x1="20.158%" x2="65.48%" y1="37.105%" y2="-13.554%">
+      <stop offset="11.83%" stop-color="#0095D5"/>
+      <stop offset="41.78%" stop-color="#3C83DC"/>
+      <stop offset="69.62%" stop-color="#6D74E1"/>
+      <stop offset="83.33%" stop-color="#806EE3"/>
+    </linearGradient>
+    <linearGradient id="send-tdetektwitter-message-c" x1="-16.836%" x2="76.219%" y1="91.94%" y2="-1.116%">
+      <stop offset="10.75%" stop-color="#C757BC"/>
+      <stop offset="21.38%" stop-color="#D0609A"/>
+      <stop offset="42.54%" stop-color="#E1725C"/>
+      <stop offset="60.48%" stop-color="#EE7E2F"/>
+      <stop offset="74.3%" stop-color="#F58613"/>
+      <stop offset="82.32%" stop-color="#F88909"/>
+    </linearGradient>
+    <path id="send-tdetektwitter-message-d" d="M137.277487,103.235602 C152.65445,103.235602 165.235602,90.6544503 165.235602,75.2774869 C165.235602,59.9005236 152.65445,47.3193717 137.277487,47.3193717 C121.900524,47.3193717 109.319372,59.9005236 109.319372,75.2774869 C109.319372,90.6544503 121.900524,103.235602 137.277487,103.235602 Z M166.633508,98.1099476 L189,120.47644 L182.47644,127 L160.109948,104.633508 C154.052356,109.759162 145.664921,112.554974 137.277487,112.554974 C116.774869,112.554974 100,95.7801047 100,75.2774869 C100,54.7748691 116.774869,38 137.277487,38 C157.780105,38 174.554974,54.7748691 174.554974,75.2774869 C174.554974,83.6649215 171.759162,92.052356 166.633508,98.1099476 Z"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="#FFF" fill-rule="nonzero"/>
+    <polygon fill="url(#send-tdetektwitter-message-a)" fill-rule="nonzero" points="57 199 128.237 127 199 199"/>
+    <polygon fill="url(#send-tdetektwitter-message-b)" fill-rule="nonzero" points="57 57 128 57 57 135"/>
+    <polygon fill="url(#send-tdetektwitter-message-c)" fill-rule="nonzero" points="128.237 57 57 132.023 57 199 128.237 127.763 199 57"/>
+    <use fill="#492F5C" xlink:href="#send-tdetektwitter-message-d" style="mix-blend-mode:multiply"/>
+  </g>
+</svg>

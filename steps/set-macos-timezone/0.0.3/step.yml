@@ -1,0 +1,28 @@
+title: Set macOS Time Zone
+summary: Set macOS Time Zone
+description: Set macOS Time Zone
+website: https://github.com/chrisfuller/bitrise-step-set-macos-timezone
+source_code_url: https://github.com/chrisfuller/bitrise-step-set-macos-timezone
+support_url: https://github.com/chrisfuller/bitrise-step-set-macos-timezone/issues
+published_at: 2019-09-03T02:21:46.21835-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-set-macos-timezone.git
+  commit: 03d89dc37b20b326acb1c8297f96d09784f059e3
+host_os_tags:
+- osx
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Execute `systemsetup -listtimezones` for supported time zones.
+    is_expand: true
+    is_required: true
+    title: Time Zone
+  timezone: GMT

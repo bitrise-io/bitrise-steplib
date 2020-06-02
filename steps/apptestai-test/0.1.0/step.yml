@@ -1,0 +1,91 @@
+title: apptest.ai Test
+summary: |
+  Bitrise step for apptest.ai test execution
+description: |
+  Bitrise step for apptest.ai test execution.
+
+  Input your apptest.ai Access Key, Project ID, Package file path
+  refer to more information from https://app.apptest.ai/#/main/integrations
+
+  We recommend to use Access Key using bitrise workflow secret variable.
+website: https://github.com/forcemax/bitrise-step-apptestai-test
+source_code_url: https://github.com/forcemax/bitrise-step-apptestai-test
+support_url: https://github.com/forcemax/bitrise-step-apptestai-test/issues
+published_at: 2020-04-02T15:15:51.7726+09:00
+source:
+  git: https://github.com/forcemax/bitrise-step-apptestai-test.git
+  commit: 0c74c431abce60886a627ebc023e970b33bf5208
+host_os_tags:
+- osx-10.14
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/forcemax/bitrise-step-apptestai-test
+deps: {}
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- access_key:
+  opts:
+    description: 'Access key to use for apptest.ai test. (e.g.: ci_support:4b55ec5999ea636b0aafb402816ac50b)'
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: 'Access key to use for apptest.ai test.'
+- project_id:
+  opts:
+    description: 'Project ID to use for apptest.ai test. (e.g. 19049)'
+    is_expand: true
+    is_required: true
+    title: 'Project ID to use for apptest.ai test.'
+- binary_path:
+  opts:
+    description: 'Package file path. You can use $BITRISE_APK_PATH or $BITRISE_IPA_PATH or app file path. supported file type: apk,ipa,xapk'
+    is_expand: true
+    is_required: true
+    title: 'Package file path.'
+- testset_name:
+  opts:
+    description: 'Specify test set name.'
+    is_expand: true
+    is_required: false
+    title: 'Specify test set name.'
+- time_limit:
+  opts:
+    description: 'Specify test time limit (minutes) (range: 5 - 30). If the value is empty, it follows the time-limit saved in the project.'
+    is_expand: true
+    is_required: false
+    title: 'Specify test time limit.'
+- use_vo:
+  opts:
+    description: 'Whether AT&T Video Optimizer(ARO) is used. (true|false)'
+    is_expand: true
+    is_required: false
+    title: 'Whether AT&T Video Optimizer(ARO) is used.'
+- callback:
+  opts:
+    description: 'Callback URL to be called after test completion.'
+    is_expand: true
+    is_required: false
+    title: 'Callback URL to be called after test completion.'
+- login_id:
+  opts:
+    description: 'ID of the test account required to test the app. If the value is empty, it follows the time-limit saved in the project.'
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: 'ID of the test account required to test the app.'
+- login_pw:
+  opts:
+    description: 'Password of the test account required to test the app. If the value is empty, it follows the time-limit saved in the project.'
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: 'Password of the test account required to test the app.'

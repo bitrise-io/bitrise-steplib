@@ -1,0 +1,74 @@
+title: Android Detekt
+summary: |
+  This step runs detekt gradle task on your project.
+description: |
+  This step runs detekt gradle task on your project.
+website: https://github.com/dzinek/bitrise-step-android-detekt
+source_code_url: https://github.com/dzinek/bitrise-step-android-detekt
+support_url: https://github.com/dzinek/bitrise-step-android-detekt/issues
+published_at: 2020-03-31T01:05:34.697406+02:00
+source:
+  git: https://github.com/dzinek/bitrise-step-android-detekt.git
+  commit: 1c0a9f3a08f4100b036103775f67dcaa1a0b087c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/dzinek/bitrise-step-android-detekt
+deps:
+  apt_get:
+  - name: git
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exists (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exists (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to run detekt. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: false
+    summary: |
+      Set the module that you want to run detekt. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    category: Options
+    description: |
+      Will find the report file with the given pattern. If you need the xml file then you can use: "*/build/reports/detekt/detekt*.xml"
+    is_required: true
+    summary: |
+      Will find the report file with the given pattern. If you need the xml file then you can use: "*/build/reports/detekt/detekt*.xml"
+    title: Report location pattern
+  report_path_pattern: '*/build/reports/detekt/detekt*.html'
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments

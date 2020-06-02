@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="generate-text-file-stepicon-a" x1="0%" x2="100%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="generate-text-file-stepicon-b" x1="92.985%" x2="14.218%" y1="-11.098%" y2="109.263%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <linearGradient id="generate-text-file-stepicon-c" x1="-22.246%" x2="95.381%" y1="123.982%" y2="6.149%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#generate-text-file-stepicon-a)" fill-rule="nonzero"/>
+    <path fill="url(#generate-text-file-stepicon-b)" d="M69,37 L159.738281,37 L193,71.9585974 L193,211 C193,214.313708 190.313708,217 187,217 L69,217 C65.6862915,217 63,214.313708 63,211 L63,43 C63,39.6862915 65.6862915,37 69,37 Z"/>
+    <rect width="96" height="10" x="80" y="96" fill="#760FC3" style="mix-blend-mode:multiply"/>
+    <rect width="96" height="10" x="80" y="119" fill="#760FC3" style="mix-blend-mode:multiply"/>
+    <rect width="65" height="10" x="80" y="142" fill="#760FC3" style="mix-blend-mode:multiply"/>
+    <path fill="url(#generate-text-file-stepicon-c)" d="M158.731207,37.3828125 L192.784706,72.2668851 L164.731207,72.2668851 C161.417498,72.2668851 158.731207,69.5805936 158.731207,66.2668851 L158.731207,37.3828125 Z"/>
+    <text fill="#760FC3" font-family="TTNorms-Black, TT Norms" font-size="27" font-weight="700" letter-spacing="3" style="mix-blend-mode:multiply">
+      <tspan x="95" y="199">TXT</tspan>
+    </text>
+  </g>
+</svg>

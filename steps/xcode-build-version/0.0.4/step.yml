@@ -1,0 +1,58 @@
+title: Get Xcode project version
+summary: |
+  Gets version and build number of the project
+description: |
+  Gets project's version and build number
+website: https://github.com/nodes-ios/bitrise-step-xcode-build-version
+source_code_url: https://github.com/nodes-ios/bitrise-step-xcode-build-version
+support_url: https://github.com/nodes-ios/bitrise-step-xcode-build-version/issues
+published_at: 2020-05-26T12:27:36.983107+01:00
+source:
+  git: https://github.com/nodes-ios/bitrise-step-xcode-build-version.git
+  commit: f9b5c936bc586769dce3daa5762e5e4f597b1955
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Use it with Xcode 11 and higher.
+
+      If not set it tries to find it.
+    is_required: false
+    summary: Path to the 'xcodeproj'.
+    title: Path to the 'xcodeproj'
+  project_path: ""
+- info_plist_path: ""
+  opts:
+    description: |
+      File of your release 'Info.plist' file.
+
+      If not set it tries to find it.
+    is_required: false
+    summary: Path to the 'Info.plist' file.
+    title: Path to the 'Info.plist'
+outputs:
+- XBV_PROJECT_VERSION: null
+  opts:
+    description: |
+      Project Version, eg, 1.3.9
+    summary: Project version.
+    title: CFBundleShortVersionString
+- XBV_PROJECT_BUILD: null
+  opts:
+    description: |
+      Project build number, e.g., 85
+    summary: Project build number.
+    title: CFBundleVersion

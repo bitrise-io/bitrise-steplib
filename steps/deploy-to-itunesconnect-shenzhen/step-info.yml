@@ -1,3 +1,4 @@
-removal_date: "2018-09-20"	
-deprecate_notes: |	
+deprecate_notes: |
   This step is deprecated, use deploy-to-itunesconnect-application-loader step instead.
+maintainer: bitrise
+removal_date: "2018-09-20"

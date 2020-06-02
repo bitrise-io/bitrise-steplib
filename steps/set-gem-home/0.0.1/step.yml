@@ -1,0 +1,21 @@
+title: Set GEM_HOME
+summary: Set GEM_HOME
+description: Set GEM_HOME
+website: https://github.com/chrisfuller/bitrise-step-set-gem-home
+source_code_url: https://github.com/chrisfuller/bitrise-step-set-gem-home
+support_url: https://github.com/chrisfuller/bitrise-step-set-gem-home/issues
+published_at: 2019-08-25T17:04:27.365047-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-set-gem-home.git
+  commit: 8052c8be7113bb47638e23785dd50f318a9a2fe6
+host_os_tags:
+- osx
+type_tags:
+- utility
+- dependency
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false

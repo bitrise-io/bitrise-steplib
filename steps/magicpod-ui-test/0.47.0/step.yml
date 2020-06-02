@@ -1,0 +1,291 @@
+title: Magic Pod UI test
+summary: |
+  Magic Pod UI test step
+description: |
+  Magic Pod UI test step
+website: https://github.com/magic-Pod/bitrise-step-magicpod-uitest
+source_code_url: https://github.com/magic-Pod/bitrise-step-magicpod-uitest
+support_url: https://github.com/magic-Pod/bitrise-step-magicpod-uitest/issues
+published_at: 2020-02-13T13:29:09.814995+09:00
+source:
+  git: https://github.com/Magic-Pod/bitrise-step-magicpod-uitest.git
+  commit: e2b9e5eb3f8083ac238eb56099e989a2de265261
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/magic-Pod/bitrise-step-magicpod-uitest
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- magic_pod_api_token: null
+  opts:
+    description: "Access token to use Magic Pod Web API.\n\n* Key: Arbitrary new Secret
+      Env name like `MAGIC_POD_API_TOKEN`\n* Value: API token copied from https://magic-pod.com/accounts/api-token/. "
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Magic Pod API token
+- opts:
+    description: |-
+      Organization name in Magic Pod.
+      Please be sure to use **organization name**, not **display name**.
+    is_expand: true
+    is_required: true
+    title: Organization name
+  organization_name: null
+- opts:
+    description: |-
+      Project name in Magic Pod.
+      Please be sure to use **project name**, not **display name**.
+    is_expand: true
+    is_required: true
+    title: Project name
+  project_name: null
+- environment: Magic Pod
+  opts:
+    description: |-
+      Environment (cloud service) on which you want to execute your tests.
+      Each environment has its own limitation of OS/devices.  Please refer to project batch runs page for available choices.
+    is_expand: true
+    is_required: true
+    title: Environment
+    value_options:
+    - Magic Pod
+    - Remote TestKit
+    - Remote TestKit Onpremise
+- external_service_token: null
+  opts:
+    description: |-
+      Access token to use external cloud services (ex. Remote TestKit) for testing.
+      Required when you select _Remote Testkit_ for _Environment_.
+    is_expand: true
+    is_sensitive: true
+    title: External service token
+- external_service_user_name: null
+  opts:
+    description: User name which is required when you select _Remote TestKit Onpremise_.
+    is_expand: true
+    title: External service user name
+- external_service_password: null
+  opts:
+    description: Password which is required when you select _Remote TestKit Onpremise_.
+    is_expand: true
+    is_sensitive: true
+    title: External service password
+- external_service_server_url: null
+  opts:
+    description: Server url which is required when you select _Remote TestKit Onpremise_.
+    is_expand: true
+    title: External service server url
+- opts:
+    is_expand: true
+    is_required: true
+    title: OS
+    value_options:
+    - iOS
+    - Android
+  os: iOS
+- device_type: Simulator
+  opts:
+    description: |-
+      Currently you can select only
+
+      * _Simulator_ or _Emulator_ for Magic Pod cloud service.
+      * _Real Device_ for Remote TestKit and Remote TestKit Onpremise.
+    is_expand: true
+    is_required: true
+    title: Device type
+    value_options:
+    - Simulator
+    - Emulator
+    - Real Device
+- opts:
+    description: |-
+      When you use Magic Pod cloud environment, you don't care about this field.
+      Version is automatically replaced with the one currently supported by Magic Pod.
+    is_expand: true
+    is_required: true
+    title: Version
+  version: "13.1"
+- model: iPhone 8
+  opts:
+    description: |-
+      * For Magic Pod cloud environment, please see available model list on your project's batch run page.
+      * For Remote TestKit and Remote TestKit Onpremise, please refer to model list on https://appkitbox.com/testkit/devicelist/.
+    is_expand: true
+    is_required: true
+    title: Model
+- app_type: App file (cloud upload)
+  opts:
+    description: |-
+      Specify how you submit your app to the cloud.
+
+      * When you select _App file (cloud upload)_, then fill in _App path_ field below.
+      * When you select _App file (URL)_, then fill in _App URL_ field below.
+      * When you select _Installed app_, then fill in _Bundle ID_ field for iOS, or _App package_ and _App activity_ for Android.
+    is_expand: true
+    is_required: true
+    title: App type
+    value_options:
+    - App file (cloud upload)
+    - App file (URL)
+    - Installed app
+- app_path: $BITRISE_APP_DIR_PATH
+  opts:
+    description: "Required when you select _App file (cloud upload)_ for _App type_.\nNote
+      that _Bundle ID_ is also required when you select _iOS_ for _OS_ and _Remote
+      TestKit_ or _Remote TestKit Onpremise_ for _Environment_ due to their restriction.\n*
+      *Warning: The file of the specified path is uploaded to Magic Pod cloud and
+      can be seen by project members.*\n* For iOS simulator testing, specify the directory
+      _xx.app_ so that included files are automatically ziped into one file before
+      uploading. "
+    is_expand: true
+    title: App path
+- app_url: null
+  opts:
+    description: |-
+      Required when you select _App file (URL)_ for _App type_.
+      Note that _Bundle ID_ is also required when you select _iOS_ for _OS_ and _Remote TestKit_ or _Remote TestKit Onpremise_ for _Environment_ due to their restriction.
+    is_expand: true
+    title: App URL
+- bundle_id: null
+  opts:
+    description: "Specify the unique ID for the iOS app under test. \n* ex) `com.apple.Preferences`\n\nThis
+      field is required in one of the following conditions.\n1. When you select _iOS_
+      for _OS_ and _Installed_ for _App type_.\n2. When you select _iOS_ for _OS_
+      and _Remote TestKit_ or _Remote TestKit Onpremise_ for _Environment_."
+    is_expand: true
+    title: Bundle ID
+- app_package: null
+  opts:
+    description: |-
+      Required when you select _Android_ for _OS_ and _Installed_ for _App type_.
+
+      * ex) `com.android.settings`
+    is_expand: true
+    title: App package
+- app_activity: null
+  opts:
+    description: |-
+      Required when you select _Android_ for _OS_ and _Installed_ for _App type_.
+
+      * ex) `.Settings`
+    is_expand: true
+    title: App activity
+- opts:
+    description: |-
+      If set to true, this step waits until Magic Pod testing is completed and succeeds only when the test is successful.
+      Otherwise this step immediately exits with success.
+    title: Wait for result
+  wait_for_result: "true"
+- opts:
+    description: If _true_, the test result is sent to all project members by Magic
+      Pod.
+    is_required: true
+    title: Send mail
+    value_options:
+    - "true"
+    - "false"
+  send_mail: "true"
+- opts:
+    category: detail
+    description: |-
+      Each test in the project is executed at most the specified number of times when it failed.
+      Please set to 0 for no retry.
+    title: Retry count
+  retry_count: "0"
+- capture_type: Every step
+  opts:
+    category: detail
+    description: Specify how often you want to save captures of your app screen.
+    is_expand: true
+    is_required: true
+    title: Capture type
+    value_options:
+    - Every step
+    - Every UI transit
+    - Failure capture only
+- device_language: Default
+  opts:
+    category: detail
+    is_expand: true
+    title: Device language
+    value_options:
+    - Default
+    - English
+    - Japanese
+    - Korean
+- device_region: Default
+  opts:
+    category: detail
+    is_expand: true
+    title: Device region
+    value_options:
+    - Default
+    - Australia
+    - Brazil
+    - Canada
+    - China mainland
+    - France
+    - Germany
+    - India
+    - Indonesia
+    - Italy
+    - Japan
+    - Mexico
+    - Netherlands
+    - Russia
+    - Saudi Arabia
+    - South Korea
+    - Spain
+    - Switzerland
+    - Taiwan
+    - Turkey
+    - United Kingdom
+    - United States
+- multi_lang_data: null
+  opts:
+    category: detail
+    description: |-
+      Required when you have Multi-lang data patterns for the project.
+      This feature is only for enterprise users.
+    is_expand: true
+    title: Multi-lang data pattern
+- base_url: https://magic-pod.com/api/v1.0
+  opts:
+    category: debug
+    description: Cannot be changed
+    is_dont_change_value: true
+    title: Magic Pod web API URL
+outputs:
+- MAGIC_POD_TEST_STATUS: null
+  opts:
+    summary: Status of batch test run. The value is either of 'succeeded', 'failed',
+      'aborted', 'running'.
+    title: MAGIC_POD_TEST_STATUS
+- MAGIC_POD_TEST_PASSED_COUNT: null
+  opts:
+    summary: The number of succeeded test cases in the batch run.
+    title: MAGIC_POD_TEST_PASSED_COUNT
+- MAGIC_POD_TEST_FAILED_COUNT: null
+  opts:
+    summary: The number of failed test cases in the batch run.
+    title: MAGIC_POD_TEST_FAILED_COUNT
+- MAGIC_POD_TEST_UNRESOLVED_COUNT: null
+  opts:
+    summary: The number of unresolved test cases in the batch run.
+    title: MAGIC_POD_TEST_UNRESOLVED_COUNT
+- MAGIC_POD_TEST_TOTAL_COUNT: null
+  opts:
+    summary: The number of total test cases in the batch run.
+    title: MAGIC_POD_TEST_TOTAL_COUNT
+- MAGIC_POD_TEST_URL: null
+  opts:
+    summary: URL of Magic Pod batch run page
+    title: MAGIC_POD_TEST_URL

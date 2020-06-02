@@ -1,0 +1,319 @@
+title: Xcode Test for iOS
+summary: Runs your project's pre-defined Xcode tests on every build.
+description: "This Steps runs all those Xcode tests that are included in your project.
+  \nThe Step will work out of the box if your project has test targets and your Workflow
+  has the **Deploy to Bitrise.io** Step which exports the test results and (code coverage
+  files if needed) to the Test Reports page. \nThis Step does not need any code signing
+  files since the Step deploys only the test results to [bitrise.io](https://www.bitrise.io).\n\n###
+  Configuring the Step\nIf you click into the Step, there are some required input
+  fields whose input must be set in accordance with the Xcode configuration of the
+  project.  \nThe **Scheme name** input field must be marked as Shared in Xcode. \nThe
+  **Device**, **OS version**, **Platform** input fields must be set to the value that's
+  shown in Xcode’s device selection dropdown menu.\nIf you wish to export code coverage
+  files as well, set the \"Generate code coverage files?\" to `yes`.\n\n### Troubleshooting\nIf
+  the **Deploy to Bitrise.io** Step is missing from your Workflow, then the **Xcode
+  Test for iOS** Step will not be able to export the test results on the Test Reports
+  page and you won't be able to view them either.\nThe xcpretty output tool does not
+  support parallel tests. \nIf parallel tests are enabled in your project, go to the
+  Step’s Debug section and set the **Output tool** input’s value to xcodebuild.\nIf
+  the Xcode test fails with the error `Unable to find a destination matching the provided
+  destination specifier`, then check our [system reports](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports)
+  to see if the requested simulator is on the stack or not. \nIf it is not, then pick
+  a simulator that is on the stack.\n\n### Useful links\n- [About Test Reports](https://devcenter.bitrise.io/testing/test-reports/)\n-
+  [Running Xcode Tests for iOS](https://devcenter.bitrise.io/testing/running-xcode-tests/)\n\n###
+  Related Steps\n- [Deploy to Bitrise.io](https://www.bitrise.io/integrations/steps/deploy-to-bitrise-io)\n-
+  [iOS Device Testing](https://www.bitrise.io/integrations/steps/virtual-device-testing-for-ios)"
+website: https://github.com/bitrise-steplib/steps-xcode-test
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test
+support_url: https://github.com/bitrise-steplib/steps-xcode-test/issues
+published_at: 2020-03-10T13:53:41.864816202Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test.git
+  commit: 2f36e5fc43f2d1f1133e69c8fa095a3c7dfaa544
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-test
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      A `.xcodeproj` or `.xcworkspace` path, relative to
+      the Working directory (if specified).
+    is_required: true
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |-
+      The Scheme to use.
+
+      **IMPORTANT**: The Scheme has to be marked as __shared__ in Xcode!
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |-
+      Set it as it is shown in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iPhone 8 Plus
+      * iPhone Xs Max
+      * iPad Air (3rd generation)
+      * iPad Pro (12.9-inch) (3rd generation)
+      * Apple TV 4K (don't forget to set the platform to `tvOS Simulator` to use this option!)
+    is_required: true
+    title: Device
+  simulator_device: iPhone 8 Plus
+- opts:
+    description: |-
+      Set it as it is shown in
+      Xcode's device selection dropdown UI.
+
+      A couple of format examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * 8.4
+      * latest
+    is_required: true
+    title: OS version
+  simulator_os_version: latest
+- opts:
+    description: |-
+      Set it as it is shown in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iOS Simulator
+      * tvOS Simulator
+    is_required: true
+    title: Platform
+    value_options:
+    - iOS Simulator
+    - tvOS Simulator
+  simulator_platform: iOS Simulator
+- export_uitest_artifacts: "false"
+  opts:
+    description: |-
+      If enabled, the attachments of the UITest will be exported into the BITRISE_DEPLOY_DIR, as a compressed ZIP file.
+      Attachments include screenshots taken during the UI test, and other artifacts.
+
+      __NOTE:__ works only with Xcode version < 11.
+    title: Export UITest Artifacts
+    value_options:
+    - "true"
+    - "false"
+- generate_code_coverage_files: "no"
+  opts:
+    description: |-
+      In case of `generate_code_coverage_files: "yes"`
+      `xcodebuild` gets two additional flags:
+
+      * GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+      * GCC_GENERATE_TEST_COVERAGE_FILES=YES
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- disable_index_while_building: "yes"
+  opts:
+    description: |-
+      Could make the build faster by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command which will disable the indexing during the build.
+
+      Indexing is needed for
+
+      * Autocomplete
+      * Ability to quickly jump to definition
+      * Get class and method help by alt clicking.
+
+      Which are not needed in CI environment.
+
+      **Note:** In Xcode you can turn off the `Index-WhileBuilding` feature  by disabling the `Enable Index-WhileBuilding Functionality` in the `Build Settings`.<br/>
+      In CI environment you can disable it by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command.
+    is_required: true
+    summary: Could make the build faster by disabling the indexing during the build
+      run.
+    title: Disable indexing during the build
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: You can enable the verbose log for easier debugging.
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+- headless_mode: "yes"
+  opts:
+    category: Debug
+    description: |-
+      If you run your tests in headless mode the xcodebuild will start a simulator in a background.
+      In headless mode the simulator will not be visible but your tests (even the screenshots) will run just like if you run a simulator in foreground.
+
+      **NOTE:** Headless mode is available with Xcode 9.x or newer.
+    summary: In headless mode the simulator is not launched in the foreground.
+    title: Run the test in headless mode?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: |-
+      Working directory of the step.
+      You can leave it empty to leave the working directory unchanged.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- is_clean_build: "no"
+  opts:
+    category: Debug
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    category: Debug
+    description: |-
+      Options added to the end of the `xcodebuild build test` call.
+
+      If you leave empty this input, xcodebuild will be called as:
+
+      `xcodebuild
+        -project\-workspace PROJECT.xcodeproj\WORKSPACE.xcworkspace
+        -scheme SCHEME
+        build test
+        -destination platform=PLATFORM Simulator,name=NAME,OS=VERSION`
+
+      In case of `generate_code_coverage_files: "yes"`
+      `xcodebuild` gets two additional flags:
+
+      * GCC_INSTRUMENT_PROGRAM_FLOW_ARCS=YES
+      * GCC_GENERATE_TEST_COVERAGE_FILES=YES
+
+      If you want to add more options, list that separated by space character.
+      Example: `-xcconfig PATH -verbose`
+    title: Additional options for `xcodebuild build test` call
+  xcodebuild_test_options: ""
+- opts:
+    category: Debug
+    description: "If `single_build` is set to false, the step runs `xcodebuild OPTIONS
+      build OPTIONS` before the test \nto generate the project derived data. After
+      that comes `xcodebuild OPTIONS build test OPTIONS`. This command's log is presented
+      in the step's log.\n\nIf `single_build` is set to true, then the step calls
+      only `xcodebuild OPTIONS build test OPTIONS`."
+    title: Run xcodebuild test only
+    value_options:
+    - "true"
+    - "false"
+  single_build: "true"
+- opts:
+    category: Debug
+    description: |-
+      Previous Xcode versions and configurations may throw the error `iPhoneSimulator: Timed out waiting 120 seconds for simulator to boot, current state is 1.`
+      when the compilation before performing the tests takes too long.
+
+      This is fixed by running `xcodebuild OPTIONS build test OPTIONS` instead of `xcodebuild OPTIONS test OPTIONS`.
+      Calling an explicit build before the test results in the code being compiled twice, thus creating an overhead.
+
+      Unless you are sure that your configuration is not prone to this error, it is recommended to leave this option turned on.
+    is_required: true
+    title: Should run a build before testing?
+    value_options:
+    - "yes"
+    - "no"
+  should_build_before_test: "yes"
+- opts:
+    category: Debug
+    description: 'If `should_retry_test_on_fail: yes` step will retry the test if
+      first attempt failed.'
+    is_required: true
+    title: Should retry test on failure?
+    value_options:
+    - "yes"
+    - "no"
+  should_retry_test_on_fail: "no"
+- opts:
+    category: Debug
+    description: |-
+      Options added to the end of the `xcpretty` test call.
+
+      If you leave empty this input, xcpretty will be called as:
+
+      `set -o pipefail && XCODEBUILD_TEST_COMMAND | xcpretty`
+
+      In case of leaving this input on default value:
+
+      `set -o pipefail && XCODEBUILD_TEST_COMMAND | xcpretty --color --report html --output "${BITRISE_DEPLOY_DIR}/xcode-test-results-${BITRISE_SCHEME}.html"
+
+      If you want to add more options, list that separated by space character.
+    title: Additional options for `xcpretty` test call
+  xcpretty_test_options: --color --report html --output "${BITRISE_DEPLOY_DIR}/xcode-test-results-${BITRISE_SCHEME}.html"
+- cache_level: swift_packages
+  opts:
+    category: Debug
+    description: |-
+      Available options:
+      - `none` : Disable caching
+      - `swift_packages` : Cache Swift PM packages added to the Xcode project
+    title: Enable caching of Swift Package Manager packages
+    value_options:
+    - none
+    - swift_packages
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XCODE_RAW_TEST_RESULT_TEXT_PATH: null
+  opts:
+    description: |-
+      This is the path of the raw test results log file.
+
+      If the compilation fails this log will contain the compilation output,
+      if the tests can be started it'll only include the test output.
+    title: The full, raw test output file path
+- BITRISE_XCRESULT_PATH: null
+  opts:
+    description: The path of the generated `.xcresult`.
+    title: The path of the generated `.xcresult`
+- BITRISE_XCODE_TEST_ATTACHMENTS_PATH: null
+  opts:
+    description: This is the path of the test attachments zip.
+    title: The full, test attachments zip path

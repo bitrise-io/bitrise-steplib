@@ -1,13 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
     <title>fabric-crashlytics-beta-deploy-stepicon</title>
     <desc>Created with Sketch.</desc>
-    <defs></defs>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#16628F" offset="0%"></stop>
+            <stop stop-color="#02233E" offset="100%"></stop>
+        </linearGradient>
+    </defs>
     <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Fabric/Crashlytics-Deployer" fill-rule="nonzero">
+        <g id="Fabric/Crashlytics-Deployer" transform="translate(0.000000, 0.000000)" fill-rule="nonzero">
             <g id="fabric-crashlytics-beta-deploy-stepicon">
-                <rect id="Rectangle-path" fill="#02233E" x="0" y="0" width="256" height="256"></rect>
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" x="0" y="0" width="256" height="256"></rect>
                 <g id="Group" transform="translate(38.000000, 36.000000)">
                     <path d="M44.5091603,142.825958 L86.882111,114.383655 C89.2693195,112.781272 92.2533301,112.881421 94.6405386,114.483804 L135.521484,142.926107 C139.500165,145.630129 139.500165,151.538917 135.521484,154.343088 L94.6405386,182.785391 C92.3527971,184.387774 89.2693195,184.387774 86.882111,182.88554 L44.5091603,154.443237 C40.4310125,151.639066 40.4310125,145.52998 44.5091603,142.825958 Z" id="Shape" fill="#024998"></path>
                     <path d="M20.826688,98.0294789 L84.8654178,55.3291226 C88.3566258,52.9347101 93.0448194,53.0344773 96.5360274,55.4288898 L158.280535,98.1292461 C164.265463,102.219701 164.265463,111.098981 158.280535,115.189435 L96.4362786,157.889792 C92.9450706,160.284204 88.3566258,160.383971 84.765669,157.989559 L20.7269392,115.289202 C14.6422624,111.198748 14.6422624,102.219701 20.826688,98.0294789 Z" id="Shape" fill="#4FADE8"></path>
