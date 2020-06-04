@@ -3,9 +3,9 @@ summary: |
   The Step runs ionic build with the arguments you provide.
 description: |
   The Step runs ionic build with the arguments you provide.
-website: https://github.com/non-binary/bitrise-step-steps-ionic-build
-source_code_url: https://github.com/non-binary/bitrise-step-steps-ionic-build
-support_url: https://github.com/non-binary/bitrise-step-steps-ionic-build/issues
+website: https://github.com/non-binary/steps-ionic-build
+source_code_url: https://github.com/non-binary/steps-ionic-build
+support_url: https://github.com/non-binary/steps-ionic-build/issues
 published_at: 2020-06-04T13:05:17.524965-04:00
 source:
   git: https://github.com/non-binary/steps-ionic-build.git
