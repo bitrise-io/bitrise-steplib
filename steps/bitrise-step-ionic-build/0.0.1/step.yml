@@ -1,0 +1,50 @@
+title: Ionic Build
+summary: |
+  The Step runs ionic build with the arguments you provide.
+description: |
+  The Step runs ionic build with the arguments you provide.
+website: https://github.com/non-binary/bitrise-step-ionic-build
+source_code_url: https://github.com/non-binary/bitrise-step-ionic-build
+support_url: https://github.com/non-binary/bitrise-step-ionic-build/issues
+published_at: 2020-06-04T14:00:54.594696-04:00
+source:
+  git: https://github.com/non-binary/bitrise-step-ionic-build.git
+  commit: 0d5664d634c89c2c3dd52cd24f09615ba3575921
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ionic
+type_tags:
+- build
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  check_only:
+  - name: ionic
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Set to yes if you want `--prod` to be used.
+    is_expand: true
+    is_required: true
+    summary: To use the production configuration.
+    title: Production Configuration
+    value_options:
+    - "true"
+    - "false"
+  production_mode: "no"
+- advanced_options: ""
+  opts:
+    description: |
+      You can pass advanced options to this (just the flag) to customize your build.
+      Flags that are available can be found here: https://ionicframework.com/docs/cli/commands/build#advanced-options.
+    is_expand: true
+    is_required: false
+    summary: To optionally use advanced options flags.
+    title: Advanced Options
