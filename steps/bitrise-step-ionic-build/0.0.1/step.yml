@@ -20,9 +20,6 @@ type_tags:
 toolkit:
   bash:
     entry_file: step.sh
-deps:
-  check_only:
-  - name: ionic
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
