@@ -1,15 +1,15 @@
-title: steps-ionic-build
+title: Ionic Build
 summary: |
   The Step runs ionic build with the arguments you provide.
 description: |
   The Step runs ionic build with the arguments you provide.
-website: https://github.com/non-binary/steps-ionic-build
-source_code_url: https://github.com/non-binary/steps-ionic-build
-support_url: https://github.com/non-binary/steps-ionic-build/issues
-published_at: 2020-06-04T13:05:17.524965-04:00
+website: https://github.com/non-binary/bitrise-step-ionic-build
+source_code_url: https://github.com/non-binary/bitrise-step-ionic-build
+support_url: https://github.com/non-binary/bitrise-step-ionic-build/issues
+published_at: 2020-06-04T13:46:49.550227-04:00
 source:
   git: https://github.com/non-binary/steps-ionic-build.git
-  commit: 91f4f9339cc7b4d50e553b0d417278e19b67127e
+  commit: 4be96df45fab1fc7aec77b5539fbf9952334f2e5
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
