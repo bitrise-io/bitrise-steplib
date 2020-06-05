@@ -6,10 +6,10 @@ description: |
 website: https://github.com/non-binary/bitrise-step-ionic-build
 source_code_url: https://github.com/non-binary/bitrise-step-ionic-build
 support_url: https://github.com/non-binary/bitrise-step-ionic-build/issues
-published_at: 2020-06-04T14:00:54.594696-04:00
+published_at: 2020-06-05T18:28:26.287509-04:00
 source:
   git: https://github.com/non-binary/bitrise-step-ionic-build.git
-  commit: 0d5664d634c89c2c3dd52cd24f09615ba3575921
+  commit: 75fd0a83570e42bbb207a841d4b64ec71e473d79
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
