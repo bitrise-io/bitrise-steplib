@@ -1,0 +1,52 @@
+title: unsigned-xcarchive
+summary: Execute `unsigned-xcarchive`
+description: Execute `unsigned-xcarchive`
+
+website: https://github.com/matuslittva/bitrise-step-unsigned-xcarchive
+source_code_url: https://github.com/matuslittva/bitrise-step-unsigned-xcarchive
+support_url: https://github.com/matuslittva/bitrise-step-unsigned-xcarchive/issues
+
+host_os_tags:
+- ios
+
+type_tags:
+- build
+- test
+
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+- xcodebuild_workspace: "${BITRISE_PROJECT_PATH}"
+  opts:
+    title: The Xcode workspace.
+    description: |
+      The value of the `-workspace` option.
+    is_expand: true
+    is_required: true
+- xcodebuild_scheme: "${BITRISE_SCHEME}"
+  opts:
+    title: The Xcode scheme.
+    description: |
+      The value of the `-scheme` option.
+    is_expand: true
+    is_required: true
+- xcodebuild_config: Release
+  opts:
+    title: Project`s configuration.
+    description: |
+      Configuration name e.g. Release, Debug.
+    is_expand: true
+    is_required: true
+
+outputs:
+- XCRESULT_ARCHIVE_PATH:
+  opts:
+    title: Archive path
+    description: |-
+      The result archive path.
