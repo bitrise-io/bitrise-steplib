@@ -1,0 +1,66 @@
+title: JIRA issue number
+summary: |
+  Extract JIRA issue number from Git branch
+description: |
+  Get JIRA issue number from current Git branch
+website: https://github.com/denys-meloshyn/bitrise-step-jira-number-from-branch
+source_code_url: https://github.com/denys-meloshyn/bitrise-step-jira-number-from-branch
+support_url: https://github.com/denys-meloshyn/bitrise-step-jira-number-from-branch/issues
+published_at: 2020-06-17T13:06:55.898291+02:00
+source:
+  git: https://github.com/denys-meloshyn/bitrise-step-jira-number-from-branch.git
+  commit: 9d2ecf364d74e60de31431db97311e11da349547
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: python
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- bitrise_jira_branch_name: $BITRISE_GIT_BRANCH
+  opts:
+    description: |
+      Branch name from which extract JIRA issue number. For example: $BITRISE_GIT_BRANCH, $BITRISEIO_GIT_BRANCH_DEST
+    is_required: true
+    summary: Branch name from which extract JIRA issue number
+    title: Branch name
+- bitrise_jira_number_prefix: ""
+  opts:
+    description: |
+      JIRA issue has next format PROJECT-XXX where ``PROJECT`` is prefix and ``XXX`` is issue number
+    is_required: true
+    summary: JIRA project prefix
+    title: JIRA prefix
+- bitrise_jira_number_should_fail: "false"
+  opts:
+    description: |
+      In case value option selected as ``true`` step will return error, otherwise ``JIRA_ISSUE_NUMBER_FROM_BRANCH``
+      ``JIRA_ISSUE_NUMBER_FROM_BRANCH`` will contain empty string.
+    is_expand: true
+    is_required: true
+    summary: Should step fail in case of missed JIRA number
+    title: Should fail?
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- JIRA_ISSUE_NUMBER_FROM_BRANCH: null
+  opts:
+    description: |
+      This value will contain extracted JIRA issue number from branch
+    summary: Extracted JIRA issue number
+    title: JIRA issue number
