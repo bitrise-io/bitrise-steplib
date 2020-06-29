@@ -9,7 +9,7 @@ support_url: https://github.com/jimmithy/bitrise-step-find-jira-issue/issues
 published_at: 2020-06-26T09:10:58.5386-04:00
 source:
   git: https://github.com/jimmithy/bitrise-step-find-jira-issue.git
-  commit: 86ee7cdff9975d65bdee4b78ed2500773f1ee2f7
+  commit: 4b1566842f7147cbdad6fd65f1d145f56c08c9ed
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -23,19 +23,19 @@ is_always_run: false
 is_skippable: false
 run_if: ""
 inputs:
-- FIND_ISSUE_INPUT: $BITRISE_GIT_MESSAGE
+- find_issue_content: $BITRISE_GIT_MESSAGE
   opts:
     description: |
-      The input used to locate the jira commit message.
+      The input text content used to locate the jira commit message.
 
       For example, the git commit message or branch name.
     is_expand: true
     is_required: true
     summary: Where should we look for jira issues
-    title: Input
+    title: Text Content
     value_options: []
 outputs:
-- JIRA_ISSUE: null
+- JIRA_ISSUE_LIST: null
   opts:
     description: |
       Unique Jira issues found from the input. Multiple results will have a | delimiter.
