@@ -26,7 +26,7 @@ inputs:
 - find_issue_content: $BITRISE_GIT_MESSAGE
   opts:
     description: |
-      The input text content used to locate the jira commit message.
+      The input text content used to locate the jira ticket number.
 
       For example, the git commit message or branch name.
     is_expand: true
