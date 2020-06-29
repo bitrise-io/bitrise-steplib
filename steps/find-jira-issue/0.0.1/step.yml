@@ -6,7 +6,7 @@ description: |
 website: https://github.com/jimmithy/bitrise-step-find-jira-issue
 source_code_url: https://github.com/jimmithy/bitrise-step-find-jira-issue
 support_url: https://github.com/jimmithy/bitrise-step-find-jira-issue/issues
-published_at: 2020-06-26T09:10:58.5386-04:00
+published_at: 2020-06-29T16:13:40.854864-04:00
 source:
   git: https://github.com/jimmithy/bitrise-step-find-jira-issue.git
   commit: 4b1566842f7147cbdad6fd65f1d145f56c08c9ed
