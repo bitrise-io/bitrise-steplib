@@ -1,0 +1,234 @@
+title: Amazon Device Farm Runner
+summary: Amazon Device Farm Runner
+description: Deploys app to device farm and starts a test run. [Please see the wiki
+  for setup instructions](https://github.com/peartherapeutics/bitrise-aws-device-farm-runner/wiki).
+website: https://github.com/lautarochiarle/bitrise-aws-device-farm-runner
+source_code_url: https://github.com/lautarochiarle/bitrise-aws-device-farm-runner
+support_url: https://github.com/lautarochiarle/bitrise-aws-device-farm-runner/issues
+published_at: 2020-07-20T11:19:20.051479742-03:00
+source:
+  git: https://github.com/lautarochiarle/bitrise-aws-device-farm-runner.git
+  commit: c76d89246c8d5f59d7f27e4567beed41137436c1
+host_os_tags:
+- linux
+- osx-10.9
+- osx-10.10
+type_tags:
+- test
+deps:
+  brew:
+  - name: awscli
+    bin_name: aws
+  - name: jq
+    bin_name: jq
+  apt_get:
+  - name: awscli
+    bin_name: aws
+  - name: jq
+    bin_name: jq
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- access_key_id: ""
+  opts:
+    description: Access key for your AWS/IAM user. Define this as a secret environment
+      variable in your workflow.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: AWS Access Key
+- opts:
+    description: Secret key for your AWS/IAM user. Define this as a secret environment
+      variable in your workflow.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: AWS Secret Key
+  secret_access_key: ""
+- device_farm_project: ""
+  opts:
+    description: Project ARNs can be obtained using the AWS CLI `devicefarm list-projects`
+      command.
+    is_required: true
+    summary: ""
+    title: Device Farm Project ARN
+- billing_method: METERED
+  opts:
+    description: This step specifies the billing method for your test run. Use `METERED`
+      for free tier and pay-as-you-go billing, and `UNMETERED` to use [pre-paid device
+      slots](https://docs.aws.amazon.com/devicefarm/latest/developerguide/how-to-purchase-device-slots.html).
+    is_required: false
+    summary: ""
+    title: Billing Method
+    value_options:
+    - METERED
+    - UNMETERED
+- locale: en_US
+  opts:
+    description: The locale as ISO language and country code to be used by the test
+      devices
+    is_required: false
+    summary: ""
+    title: The locale for the devices to use
+    value_options:
+    - ar_IL
+    - bg_BG
+    - ca_ES
+    - zh_CN
+    - zh_TW
+    - hr_HR
+    - cs_CZ
+    - da_DK
+    - nl_BE
+    - nl_NL
+    - en_AU
+    - en_GB
+    - en_CA
+    - en_IE
+    - en_IN
+    - en_NZ
+    - en_US
+    - fi_FI
+    - fr_BE
+    - fr_CA
+    - fr_FR
+    - fr_CH
+    - de_AT
+    - de_DE
+    - de_LI
+    - de_CH
+    - el_GR
+    - he_IL
+    - hi_IN
+    - hu_HU
+    - id_ID
+    - it_IT
+    - it_CH
+    - ja_JP
+    - ko_KR
+    - lv_LV
+    - lt_LT
+    - nb_NO
+    - pl_PL
+    - ro_RO
+    - ru_RU
+    - sr_RS
+    - sk_SK
+    - sl_SI
+    - es_ES
+    - es_US
+    - sv_SE
+    - tl_PH
+    - th_TH
+    - tr_TR
+    - uk_UA
+    - vi_VN
+- opts:
+    description: |-
+      Filename of test package to run.
+      This should be a filename (not a path) that matches the name of the test bundle previously uploaded with the [aws-device-farm-file-deploy](https://github.com/peartherapeutics/bitrise-aws-device-farm-file-deploy) step.
+      The most recently uploaded package with this name will be used.
+    is_required: true
+    summary: ""
+    title: Test Package Filename
+  test_package_name: ""
+- opts:
+    description: '[See the Test.type documentation](http://docs.aws.amazon.com/devicefarm/latest/APIReference/API_Test.html#devicefarm-Type-Test-type).'
+    is_required: true
+    summary: ""
+    title: Test Type
+  test_type: ""
+- filter: ""
+  opts:
+    description: This step adds the opportunity to filter your tests. For example
+      com.android.abc.test1. [See the ScheduleRunTest.filter documentation](https://docs.aws.amazon.com/devicefarm/latest/APIReference/API_ScheduleRunTest.html#devicefarm-Type-ScheduleRunTest-filter).
+    is_required: false
+    summary: ""
+    title: Test Filter
+- opts:
+    description: Environment ARNs can be obtained using the AWS CLI `devicefarm list-uploads`
+      command.
+    is_required: false
+    summary: ""
+    title: Device Farm Custom TestSpec ARN
+  test_spec: $TEST_SPEC
+- opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Platform
+    value_options:
+    - ios
+    - android
+    - ios+android
+  platform: ios+android
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: Required for iOS runs.
+    title: IPA file path
+- ios_pool: ""
+  opts:
+    description: Required for iOS runs. ARNs can be obtained using the AWS CLI `devicefarm
+      list-device-pools` command.
+    title: Device Farm iOS Device Pool ARN
+- apk_path: $BITRISE_SIGNED_APK_PATH
+  opts:
+    description: Required for Android runs.
+    title: APK file path
+- android_pool: ""
+  opts:
+    description: Required for Android runs. ARNs can be obtained using the AWS CLI
+      `devicefarm list-device-pools` command.
+    title: Device Farm Android Device Pool ARN
+- opts:
+    description: |
+      If you want to specify a name, this prefix will be used
+      followed by platform and bitrise build number.
+    summary: ""
+    title: Run Name Prefix
+  run_name_prefix: ""
+- build_version: $BITRISE_BUILD_NUMBER
+  opts:
+    description: Build number
+    is_required: true
+    title: Build Number
+- aws_region: ""
+  opts:
+    description: |
+      If you want to specify a different AWS region. Leave
+      empty to use the default config/env setting.
+    is_sensitive: true
+    summary: ""
+    title: AWS Region
+- opts:
+    description: |-
+      If set to true, the script waits for the test run to complete on
+      Device farm before returning success/failure. This will slow down your
+      Bitrise runs, however allows you to make decisions in subsequent steps
+      based on success/failure of the tests.
+    title: Whether or not to wait for the test results from device farm
+    value_options:
+    - "true"
+    - "false"
+  run_wait_for_results: "true"
+- opts:
+    description: |-
+      Depending on your tests, you may or may not wish to fail the step if
+      Device farm returns a WARNED result. Only takes effect if
+      `run_wait_for_results` is also enabled.
+    title: Fail if the device farm results return result of WARNED
+    value_options:
+    - "true"
+    - "false"
+  run_fail_on_warning: "true"
+outputs:
+- BITRISE_DEVICEFARM_RESULTS_RAW: null
+  opts:
+    description: This is the full results of the run in JSON from AWS Device Farm
+    title: The full output from the device farm run
+- BITRISE_DEVICEFARM_RESULTS_SUMMARY: null
+  opts:
+    description: A nice summary suitable for feeding into something like a slack message.
+    title: A human-readable summary of the results.
