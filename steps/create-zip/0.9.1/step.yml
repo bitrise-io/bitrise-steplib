@@ -1,0 +1,48 @@
+title: |
+  Create ZIP
+summary: |
+  Creates a ZIP from the given file/dir to the given destination.
+description: |
+  Creates a ZIP from the given file/dir to the given destination.
+  It stores symlinks as symlinks (it will not copy the file which the symlink is pointing to).
+website: https://github.com/bitrise-steplib/steps-create-zip
+source_code_url: https://github.com/bitrise-steplib/steps-create-zip
+support_url: https://github.com/bitrise-steplib/steps-create-zip
+published_at: 2020-07-23T09:03:07.544658192Z
+source:
+  git: https://github.com/bitrise-steplib/steps-create-zip.git
+  commit: 3fcc1a7c2fd324dacf9f826f33409860074375be
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/birmachera/bitrise-step-create-zip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: The path of the directory which you want to compress with zip.
+    is_expand: true
+    is_required: true
+    summary: The path of the directory which you want to compress with zip.
+    title: Source directory path
+    value_options: []
+  source_path: null
+- destination: null
+  opts:
+    description: |
+      The path where you want to move the compressed file.
+
+      Can be a direcory or the archive path.
+
+      The `.zip` extension will be added automatically if it was omitted.
+    is_expand: true
+    is_required: true
+    summary: The path where you want to move the compressed file.
+    title: Target directory path
+    value_options: []
