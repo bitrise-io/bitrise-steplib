@@ -1,0 +1,62 @@
+title: Bitrise Wait for Build
+summary: Waiting for the given builds to be finished
+description: Waiting for the given builds to be finished
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-wait
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-wait
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-wait/issues
+published_at: 2020-08-05T16:50:40.533100729Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-wait.git
+  commit: b79b54d67c22cd0b6d9c5701a2acc74698d249b5
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-wait
+is_always_run: true
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your access token\n\nTo acquire a `Personal Access Token` for your
+      user, sign in with that user on [bitrise.io](https://bitrise.io),  \ngo to your
+      `Account Settings` page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_required: true
+    is_sensitive: true
+    summary: Your access token
+    title: Bitrise Access Token
+- buildslugs: $ROUTER_STARTED_BUILD_SLUGS
+  opts:
+    description: The build slug(s) to check. One build slug per line.
+    is_required: true
+    summary: The build slug(s) to check. One build slug per line.
+    title: Build Slugs
+- build_artifacts_save_path: null
+  opts:
+    description: |
+      This is where the artifacts will be saved to so you can access them in the workflow
+    is_required: false
+    is_sensitive: false
+    summary: This is where the artifacts will be saved to
+    title: Path to save the Artifacts in (leave empty to not save artifacts)
+- abort_on_fail: "no"
+  opts:
+    description: Abort all started builds if any build fails
+    is_required: true
+    is_sensitive: false
+    title: Abort all if any fail
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: You can enable the verbose log for easier debugging.
+    is_required: true
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
