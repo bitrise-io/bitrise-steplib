@@ -1,0 +1,60 @@
+title: Sentry dSYM Upload
+summary: |
+  Sentry dSYM Upload
+description: |
+  Automatically upload your iOS dSYM information directly to Sentry
+website: https://github.com/SimonRice/bitrise-step-sentry-dsym-upload
+source_code_url: https://github.com/SimonRice/bitrise-step-sentry-dsym-upload
+support_url: https://github.com/SimonRice/bitrise-step-sentry-dsym-upload/issues
+published_at: 2020-08-06T07:32:41.934292+01:00
+source:
+  git: https://github.com/SimonRice/bitrise-step-sentry-dsym-upload.git
+  commit: 8de62dd9e1b77d7d7642b2a03b9fb650570d2b41
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: getsentry/tools/sentry-cli
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Auth token for Sentry
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Auth token for Sentry
+  sentry_auth_token: $SENTRY_AUTH_TOKEN
+- opts:
+    description: |
+      Org Slug
+    is_expand: true
+    is_required: true
+    title: Org Slug for Sentry
+  sentry_org_slug: null
+- opts:
+    description: |
+      Project Slug
+    is_expand: true
+    is_required: true
+    title: Project Slug for Sentry
+  sentry_project_slug: null
+- opts:
+    description: |
+      Path to your dSYM file
+    is_expand: true
+    is_required: true
+    title: Path to your dSYM file
+  sentry_dsym_path: $BITRISE_DSYM_PATH
