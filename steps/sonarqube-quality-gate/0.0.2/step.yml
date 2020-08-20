@@ -1,0 +1,83 @@
+title: SonarQube Quality Gate
+summary: |
+  Check SonarQube Quality gate, fail the build if it didn't pass
+description: |
+  Check SonarQube Quality gate, fail the build if it didn't pass
+website: https://github.com/abonham/bitrise-step-sonarqube-quality-gate
+source_code_url: https://github.com/abonham/bitrise-step-sonarqube-quality-gate
+support_url: https://github.com/abonham/bitrise-step-sonarqube-quality-gate/issues
+published_at: 2020-08-20T17:16:20.345903+10:00
+source:
+  git: https://github.com/abonham/bitrise-step-sonarqube-quality-gate.git
+  commit: 96c3eaa68570e9f8e1e16b53d43c58ff7b7547b4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- artifact-info
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: git
+  - name: wget
+  apt_get:
+  - name: jq
+  - name: git
+  - name: wget
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- opts:
+    description: |
+      API token from sonar qube provider
+    is_expand: true
+    is_required: true
+    summary: API token from sonar qube provider
+    title: SonarQube Token
+    value_options: []
+  sonar_token: $SONAR_TOKEN
+- opts:
+    is_required: true
+    summary: Sonarcloud organisation key
+    title: Organisation Key
+  organisation_key: null
+- opts:
+    is_required: true
+    summary: Sonarcloud project key
+    title: Project Key
+  project_key: null
+- fail_on_missing_task: "false"
+  opts:
+    description: |-
+      Should the build fail if there is no sonar scanner output?
+
+      Options:
+      * "true"
+      * "false" (default)
+    is_expand: false
+    title: Fail build
+    value_options:
+    - "true"
+    - "false"
+- is_debug: "false"
+  opts:
+    description: |-
+      Whether trace of shell commands should be printed to a build log.
+      In addition, debug logging will be enabled for SonarQube (by adding the -X argument).
+
+      Options:
+      * "true"
+      * "false" (default)
+    is_expand: false
+    title: Print all executed shell commands to a build log?
+    value_options:
+    - "true"
+    - "false"
