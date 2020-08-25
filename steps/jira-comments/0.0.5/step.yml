@@ -1,0 +1,74 @@
+title: Jira Comments
+summary: |
+  Creates comments for all tasks from pull request merge commits. It uses the commit message to determine which tasks should be commented.
+description: |
+  This steps scans last merge commits or last commit if it is not a merge commit, and gathers all Jira tasks names found in commit messages.
+  Once the tasks are found it uses the credentials provided to use Jira API and posts a comment for each found task.
+
+  The regex pattern to look for Jira tasks is "<project_prefix>[0-9]{1,5}"
+
+  This step is using Jira API v2.
+website: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment
+source_code_url: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment
+support_url: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment/issues
+published_at: 2020-08-25T17:13:59.438684+02:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment.git
+  commit: 2c700b411dd1a5879cae25c2a49c488af6e847f8
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Project prefix to search for tasks.
+
+      e.g. "PROJ-"
+    is_expand: true
+    is_required: true
+    title: Jira project prefix
+    value_options: []
+  project_prefix: null
+- backlog_default_url: null
+  opts:
+    description: |
+      Jira company domain.
+
+      e.g. "example.atlassian.net"
+    is_expand: true
+    is_required: true
+    title: Jira domain
+- jira_user: null
+  opts:
+    description: |
+      Jira user used to authenticate with Jira API
+
+      e.g. "someone@example.pl"
+    is_sensitive: true
+    title: Jira user
+- jira_token: null
+  opts:
+    description: |
+      Jira user token used to authenticate with Jira API
+
+      24 character string
+    is_sensitive: true
+    title: Jira user token
+- jira_comment: null
+  opts:
+    description: Comment that will be posted for each found Jira task
+    title: Comment
