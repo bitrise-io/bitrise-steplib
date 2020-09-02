@@ -1,0 +1,52 @@
+title: hoge
+summary: |
+  hoge2
+description: |
+  hoge3
+website: https://github.com/kitajimaoct/bitrise-step-hoge
+source_code_url: https://github.com/kitajimaoct/bitrise-step-hoge
+support_url: https://github.com/kitajimaoct/bitrise-step-hoge/issues
+published_at: 2020-09-02T13:12:19.079086+09:00
+source:
+  git: https://github.com/kitajimaoct/bitrise-step-hoge.git
+  commit: fe5d20a6c1af8b16ab0dee3d2eaf5056e32e6d5e
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
