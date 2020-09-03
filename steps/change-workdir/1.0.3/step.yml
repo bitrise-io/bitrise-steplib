@@ -1,0 +1,45 @@
+title: Change Working Directory for subsequent Steps
+summary: Set bitrise source directory (`BITRISE_SOURCE_DIR`) to a specified path.
+description: |-
+  By setting `$BITRISE_SOURCE_DIR` to the specified path every subsequent
+  Step will run with this path as its base Working Directory.
+
+  Useful for projects which expect a fixed project/workspace hierarchy,
+  like `Go` which requires the project inside a "workspace" with
+  the structure: `$GOPATH/src/domain/user/project`.
+website: https://github.com/bitrise-io/steps-change-workdir
+source_code_url: https://github.com/bitrise-io/steps-change-workdir
+support_url: https://github.com/bitrise-io/steps-change-workdir/issues
+published_at: 2020-09-03T09:09:53.735576754Z
+source:
+  git: https://github.com/bitrise-steplib/steps-change-workdir.git
+  commit: 5a24bad8029a435421dafddb73c9c80e6b7767da
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: New working directory path
+    title: Directory path
+    value_options: []
+  path: null
+- is_create_path: "true"
+  opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: Enable/disable the creation of the directory path in case it doesn't
+      exist yet.
+    title: Create path if doesn't exist?
+    value_options:
+    - "true"
+    - "false"
