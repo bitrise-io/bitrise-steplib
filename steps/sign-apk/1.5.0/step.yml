@@ -23,10 +23,10 @@ description: "Once you have uploaded your keystore file and provided your keysto
 website: https://github.com/bitrise-steplib/steps-sign-apk
 source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
 support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
-published_at: 2020-09-04T08:21:53.931709313Z
+published_at: 2020-09-04T09:45:18.416982003Z
 source:
   git: https://github.com/bitrise-steplib/steps-sign-apk.git
-  commit: f4d34571e58f82958e6df216fbd5a6b464eee8b6
+  commit: fec3dff57cc4a3ebb93cbb89e531e06ee6e22a8b
 host_os_tags:
 - osx-10.10
 - ubuntu
@@ -124,16 +124,10 @@ inputs:
     summary: ""
     title: Private key password
   private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
-- jarsigner_options: ""
-  opts:
-    description: |
-      __deprecated!__ jarsigner options are detected from the keystore
-    summary: ""
-    title: Additional options for jarsigner
 - opts:
     description: |
       If enabled, it tells zipalign to use memory page alignment for stored shared object files
-    is_required: false
+    is_required: true
     is_sensitive: false
     summary: ""
     title: Page alignment
