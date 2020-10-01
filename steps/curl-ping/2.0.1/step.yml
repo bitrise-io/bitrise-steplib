@@ -6,16 +6,16 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-curl-ping
 source_code_url: https://github.com/bitrise-steplib/steps-curl-ping
 support_url: https://github.com/bitrise-steplib/steps-curl-ping/issues
-published_at: 2020-09-29T11:42:27.564863664Z
+published_at: 2020-10-01T07:52:25.283285964Z
 source:
   git: https://github.com/bitrise-steplib/steps-curl-ping.git
-  commit: fec960e84977fb5c5fb54bcc0292eb27283f8e03
+  commit: c18362a18872573b2f8308d4fddf44b2bb401a37
 host_os_tags:
 - osx-10.9
-type_tags:
+project_type_tags:
 - web
-- utils
-- ping
+type_tags:
+- utility
 is_requires_admin_user: false
 is_always_run: false
 is_skippable: false
