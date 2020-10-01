@@ -1,0 +1,39 @@
+title: Generic File Storage
+summary: The step will download all your files you uploaded in the GENERIC FILE STORAGE
+  section of the Code Signing tab in your Workflow Editor.
+description: |
+  The step will download all your files you uploaded in the GENERIC FILE STORAGE section of the Code Signing tab in your Workflow Editor with the same name, under `$GENERIC_FILE_STORAGE` path.
+  As an example, if you upload `myconfig.ini` to GENERIC FILE STORAGE, then the step will download it and it will be available as `$GENERIC_FILE_STORAGE/myconfig.ini`
+website: https://github.com/bitrise-steplib/steps-generic-file-storage
+source_code_url: https://github.com/bitrise-steplib/steps-generic-file-storage
+support_url: https://github.com/bitrise-steplib/steps-generic-file-storage/issues
+published_at: 2020-10-01T14:43:11.867090424Z
+source:
+  git: https://github.com/bitrise-steplib/steps-generic-file-storage.git
+  commit: 76593aa798cf36600806026fe35dfc9692d88766
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-generic-file-storage
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- enable_debug: "false"
+  opts:
+    category: Debug
+    description: |
+      Enables debug mode. If this input is active, the log of the step will contain more information for easier debugging.
+    is_expand: false
+    is_required: true
+    title: Enable debug mode
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- GENERIC_FILE_STORAGE: null
+  opts:
+    description: Path to the files in Generic File Storage.
+    summary: Path to the files in GENERIC FILE STORAGE.
+    title: Generic File Storage Path
