@@ -1,0 +1,52 @@
+title: test-step1
+summary: |
+  Hello world123123123
+description: |
+  Lorem ipsum dolor elat
+website: https://github.com/zsolt-marta-bitrise/bitrise-step-test-step1
+source_code_url: https://github.com/zsolt-marta-bitrise/bitrise-step-test-step1
+support_url: https://github.com/zsolt-marta-bitrise/bitrise-step-test-step1/issues
+published_at: 2020-10-06T11:15:56.429762+02:00
+source:
+  git: https://github.com/zsolt-marta-bitrise/bitrise-step-test-step1.git
+  commit: 25ca13cb300ff28e768332dc20c10ba2c50c7210
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/zsolt-marta-bitrise/bitrise-step-test-step1
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
