@@ -1,0 +1,98 @@
+title: Carthage
+summary: Runs the selected Carthage command.
+description: |-
+  Downloads and builds the dependencies your Cocoa application needs.
+
+  ### Configuring the Step
+  1. Add the **Carthage** Step in your Workflow.
+  2. Select `bootstrap` Carthage command in the **Carthage command to run** input. Make sure you have the **Bitrise.io Cache:Pull** Step before and the **Bitrise.io Cache:Push** Step after the **Carthage** Step in your Workflow to cache files and speed up your Bitrise build.
+  2. Provide your GitHub credentials in the **GitHub Personal Access Token** input to avoid GitHub rate limit issues. Don't worry, your credentials are safe with us since we store them encrypted and do not print them out in build logs.
+  3. Optionally, you can provide any extra flag for the Carthage command you wish to run in the **Additional options for Carthage command** input.
+  5. To get more information printed out, set the **Enable verbose logging** to `yes`.
+
+  ### Troubleshooting
+  It is important that you use `bootstrap` Carthage command, as this is the only command that can leverage the cache! If you run, for example, the `update` command, it won't generate the required cache information, because the `update` command will disregard the available files or the cache.
+
+  ### Useful links
+  - [Official Carthage documentation](https://github.com/Carthage/Carthage)
+  - [About Secrets and Env Vars ](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/)
+
+  ### Related Steps
+  - [Bitrise.io Cache Push](https://www.bitrise.io/integrations/steps/cache-push)
+  - [Bitrise.io Cache Pull](https://www.bitrise.io/integrations/steps/cache-pull)
+  - [iOS Auto Provision](https://www.bitrise.io/integrations/steps/ios-auto-provision)
+website: https://github.com/bitrise-steplib/steps-carthage
+source_code_url: https://github.com/bitrise-steplib/steps-carthage
+support_url: https://github.com/bitrise-steplib/steps-carthage/issues
+published_at: 2020-10-20T09:33:47.410039459Z
+source:
+  git: https://github.com/bitrise-steplib/steps-carthage.git
+  commit: 6702c999b3e387404abad0bfd8bc8a05a18d08de
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-carthage
+deps:
+  brew:
+  - name: go
+  - name: carthage
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- carthage_command: bootstrap
+  opts:
+    description: |-
+      Select a command to set up your dependencies.
+
+      The step will cache your dependencies only when using `bootstrap` in this input and you have `cache-pull` and `cache-push` steps in your workflow.
+
+      To see available commands run: `carthage help` on your local machine.
+    is_required: true
+    summary: Select a command to set up your dependencies. The step will cache your
+      dependencies only when using `bootstrap` in this input and you have `cache-pull`
+      and `cache-push` steps in your workflow.
+    title: Carthage command to run
+- carthage_options: null
+  opts:
+    description: "Options added to the end of the Carthage call.\nYou can use multiple
+      options, separated by a space character.\n\nTo see available command's options,
+      call `carthage help COMMAND` \n\nFormat example: `--platform ios`"
+    title: Additional options for `carthage` command
+- github_access_token: $GITHUB_ACCESS_TOKEN
+  opts:
+    description: "Use this input to avoid Github rate limit issues.\n\nSee the github's
+      guide: [Creating an access token for command-line use](https://help.github.com/articles/creating-an-access-token-for-command-line-use/),
+      \  \nhow to create Personal Access Token.\n\n__UNCHECK EVERY SCOPE BOX__ when
+      creating this token. There is no reason this token needs access to private information."
+    is_sensitive: true
+    title: Github Personal Access Token
+- opts:
+    description: |-
+      Use this input to provide an `xcconfig` file as a workaround for the Xcode 12 issue. For more information, see [the Github issue](https://github.com/Carthage/Carthage/issues/3019).
+
+      Can either be a local file provided with the `file://` scheme (like `file://path/to/file.xcconfig`) or an URL (like https://domain.com/file.xconfig).
+    title: Custom xcconfig file to add to Carthage environment
+  xcconfig: null
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
