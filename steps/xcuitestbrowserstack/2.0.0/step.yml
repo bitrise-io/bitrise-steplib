@@ -1,0 +1,92 @@
+title: Browserstack iOS UI Test
+summary: |
+  Execute XCUITests on Browserstack Platform with retry logic
+description: |
+  This step will help you to execute iOS UI Automation tests on Browserstack platform. Automatically manages device queue and retries failed tests and also reports test status.
+website: https://github.com/satheeshkumarf/bitrise-step-executexcuitestonbrowserstack
+source_code_url: https://github.com/satheeshkumarf/bitrise-step-executexcuitestonbrowserstack
+support_url: https://github.com/satheeshkumarf/bitrise-step-executexcuitestonbrowserstack/issues
+published_at: 2020-11-01T13:11:12.505238+04:00
+source:
+  git: https://github.com/satheeshkumarf/bitrise-step-executexcuitestonbrowserstack.git
+  commit: 740b6af5777a3afb62206447349f394e5d27c5cd
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: browserstack.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- browserstack_app_url: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: IPA url of the app uploaded to Browserstack Server. You can use browserstack-upload
+      bitrise step to upload your ipa.
+    title: Browserstack ipa url
+- opts:
+    description: |
+      Sample file format:
+          SearchListingsTest/testXYZ=iPhone 6-11.2
+          SearchFilterTest/testABC=iPhone XS-12.1
+    is_expand: true
+    is_required: true
+    summary: Specifiy path to the file which contains your test and device details.
+      Use .txt file to specify your test name and device details separated by equal
+      to sign.
+    title: Test file path
+  tests_file_path: null
+- browserstack_xcuitest_url: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Build your XCUITests and publish it to Browserstack server. Specify the
+      test_url path returned from browserstack in this variable.
+    title: Browserstack xcuitest url
+- browserstack_username: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Browserstack username
+- browserstack_password: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Browserstack access key
+- browserstack_local: "false"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Set this value to true for enabling testing on your private test environment.
+    title: Enable local testing feature of Browserstack
+    value_options:
+    - "true"
+    - "false"
+- browserstack_local_id: null
+  opts:
+    is_expand: true
+    is_required: false
+    title: Specify unique local connection name
+- browserstack_env_vars: ENVIRONMENT_VARIABLES
+  opts:
+    is_expand: true
+    is_required: false
+    title: Specify environemnt variables to be set while executing tests on Browserstack
+- opts:
+    is_expand: true
+    is_required: true
+    summary: By default retry count is set as zero, which will not re-execute failed
+      tests. If you specify a value greater than zero, only the failed tests will
+      be re-executed to see if the issue was a random flakiness.
+    title: Retry count for failed tests
+  retry_count: "0"
