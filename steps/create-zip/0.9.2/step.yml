@@ -1,0 +1,53 @@
+title: Create ZIP
+summary: Creates a ZIP from the given file/dir to the given destination.
+description: "It stores symlinks as symlinks (it will not copy the file which the
+  symlink is pointing to).\n\n### Configuring the Step\n\n1. In the **Source directory**
+  path, provide the directory you want to compress.          \n2. In the **Target
+  directory path** input, you can select where to output the compressed file. \n\n###
+  Troubleshooting\n\nIf the **Source directory** path does not exist, there will be
+  an error.\nIf the folder structure belonging to the destination does not exist,
+  you will be notified with a warning in the log and then the Step will create it.\nIf
+  a ZIP exists on the specified destination, the user will be notified with a warning
+  in the log and then the previous file will be overwritten.\n\n### Related Steps\n\n
+  - [Deploy to Bitrise.io](https://www.bitrise.io/integrations/steps/deploy-to-bitrise-io)"
+website: https://github.com/bitrise-steplib/steps-create-zip
+source_code_url: https://github.com/bitrise-steplib/steps-create-zip
+support_url: https://github.com/bitrise-steplib/steps-create-zip
+published_at: 2020-11-19T17:21:33.355606447Z
+source:
+  git: https://github.com/bitrise-steplib/steps-create-zip.git
+  commit: ae17119fbd6676f0a17436ae1eb8de69c4d164f3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/birmachera/bitrise-step-create-zip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: The path of the directory which you want to compress with zip.
+    is_expand: true
+    is_required: true
+    summary: The path of the directory which you want to compress with zip.
+    title: Source directory path
+    value_options: []
+  source_path: null
+- destination: null
+  opts:
+    description: |
+      The path where you want to move the compressed file.
+
+      Can be a direcory or the archive path.
+
+      The `.zip` extension will be added automatically if it was omitted.
+    is_expand: true
+    is_required: true
+    summary: The path where you want to move the compressed file.
+    title: Target directory path
+    value_options: []
