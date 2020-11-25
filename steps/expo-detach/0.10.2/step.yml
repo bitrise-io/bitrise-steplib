@@ -1,0 +1,101 @@
+title: '[Beta] Expo Eject'
+summary: Creates Xcode and Android Studio projects for your app.
+description: |2-
+
+  Expo is a toolchain that allows you to quickly get a React Native app up and running without having to use native code in Xcode or Android Studio. The Expo Eject Step is necessary to eject your app to install any missing native dependencies. Installing the native dependencies is done by our dedicated Steps, such as **Install missing Android SDK components** and **Run CocoaPods install**.
+
+  ### Configuring the Step
+
+  1. Add the Step to your Workflow after the Step or Steps that install your app's Javascript dependencies (such as **Run npm command** or **Run yarn command**).
+
+  1. Set the **Working directory input field** to the value of your project directory. By default, you do not have to change this.
+
+  1. Specify the Expo CLI version.
+
+     The default value is `latest` but you can specify an exact version, such as 3.0.0.
+
+  1. If your app uses an Expo SDK, you must provide the username and password for your Expo account! Without it, the Expo SDK imports will stop working.
+
+  ### Troubleshooting
+
+  If the Expo CLI used the default `--eject-method` and your SDK imports stop working, check your Expo username and password.
+
+  Make sure that the Expo CLI version you use is compatible with your app.
+
+  ### Useful links
+
+  - [Expo Development CLI](https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli)
+  - [Getting started with Expo apps](https://devcenter.bitrise.io/getting-started/getting-started-with-expo-apps/)
+
+  ### Related Steps
+
+  - [Install React Native](https://www.bitrise.io/integrations/steps/install-react-native)
+  - [Install missing Android SDK components](https://www.bitrise.io/integrations/steps/install-missing-android-tools)
+  - [Run CocoaPods install](https://www.bitrise.io/integrations/steps/cocoapods-install)
+website: https://github.com/bitrise-steplib/steps-expo-detach
+source_code_url: https://github.com/bitrise-steplib/steps-expo-detach
+support_url: https://github.com/bitrise-steplib/steps-expo-detach/issues
+published_at: 2020-11-19T17:30:22.187155575Z
+source:
+  git: https://github.com/bitrise-steplib/steps-expo-detach.git
+  commit: 9041582b6020bf1a8acd7c134d6cd3b5ca481651
+project_type_tags:
+- react-native
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-expo-detach
+inputs:
+- opts:
+    description: The root directory of the React Native project (the directory of
+      the project package.js file).
+    summary: The root directory of the React Native project
+    title: Working directory
+  project_path: $BITRISE_SOURCE_DIR
+- expo_cli_verson: latest
+  opts:
+    description: "Specify the Expo CLI version to install.  \nThe Expo CLI ejects
+      your project and creates Xcode and Android Studio projects for your app.\n\n[https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli](https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli)\n\nA
+      couple of examples:\n\n* \"3.0.0\"\n* latest"
+    is_required: "true"
+    summary: Specify the Expo CLI version to install.
+    title: Expo CLI version
+- opts:
+    description: "Your account's username for `https://expo.io/` .\n\nIn case of React
+      Native project __using Expo Kit__ library (any .js file imports expo),  \nthe
+      `user_name` and `password` inputs are __required__.\n\nIf you provide these
+      inputs the step will run: `expo eject --eject-method expoKit`,  \notherwise:
+      `expo eject --eject-method bare`.\n\n**NOTE:** You need to use your username
+      and not your e-mail address."
+    summary: Username for Expo
+    title: Username for Expo
+  user_name: ""
+- opts:
+    description: "Your password for `https://expo.io/` .\n\nIn case of React Native
+      project __using Expo Kit__ library (any .js file imports expo),  \nthe `user_name`
+      and `password` inputs are __required__.\n\nIf you provide these inputs the step
+      will run: `expo eject --eject-method expoKit`,  \notherwise: `expo eject --eject-method
+      bare`."
+    is_sensitive: true
+    summary: Password for your Expo account.
+    title: Password for your Expo account
+  password: ""
+- opts:
+    description: "Should the step run `expo publish` after eject?\n\nIn case of React
+      Native project using Expo Kit library (any .js file imports expo),  \n`expo
+      publis` command generates the:\n\n- ./android/app/src/main/assets/shell-app-manifest.json\n-
+      ./android/app/src/main/assets/shell-app.bundle\n- ./ios/bitriseexpokit/Supporting/shell-app-manifest.json\n-
+      ./ios/bitriseexpokit/Supporting/shell-app.bundle\n\nfiles, which are required
+      for the native builds."
+    summary: Should the step run `expo publish` after eject?
+    title: Run expo publish after eject?
+    value_options:
+    - "yes"
+    - "no"
+  run_publish: "no"
+- opts:
+    description: React Native version to set in package.json after the eject process.
+    summary: React Native version to set in package.json after the eject process.
+    title: React Native version to set in package.json
+  override_react_native_version: null
