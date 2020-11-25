@@ -1,0 +1,174 @@
+title: Xcode Analyze
+summary: |-
+  Find flaws and potential bugs in the source code of an app with the
+  static analyzer built into Xcode.
+description: "The Step uses the static analyzer built directly into Xcode to analyze
+  your app's source code: the static analyzer tries out thousands of possible code
+  paths in a few seconds, reporting potential bugs that might have remained hidden
+  or bugs that might be nearly impossible to replicate. \n\nThis process also identifies
+  areas in your code that don’t follow recommended API usage, such as Foundation,
+  UIKit, and AppKit idioms. \n\n### Configuring the Step \n\nIn most cases, you don't
+  need to change the Step's configuration. The default input values work well if you
+  added your iOS app on the website, using automatic configuration. \n\nTo make sure
+  the Step works well for you:\n\n1. Make sure the **Project (or Workspace) path**
+  points to the path of the `.xcodeproj` or `.xcworkspace` file of your app, relative
+  to the app's root directory.\n1. Make sure the **Scheme name** input points to a
+  valid shared Xcode scheme. Note that it must be a shared scheme! \n1. Optionally,
+  you can force the Step to use specific code signing identities. To do so, use the
+  **Force code signing with Identity** and **Force code signing with Provisioning
+  Profile** inputs. \n\n   For detailed instructions on their use, see the inputs
+  themselves.\n\n### Useful links \n\n* [Running Xcode tests](https://devcenter.bitrise.io/testing/running-xcode-tests/)\n*
+  [Device testing for iOS](https://devcenter.bitrise.io/testing/device-testing-for-ios/)\n\n###
+  Related Steps \n\n* [Xcode build for simulator](https://app.bitrise.io/integrations/steps/xcode-build-for-simulator)\n*
+  [Xcode Test for iOS](https://app.bitrise.io/integrations/steps/xcode-test)"
+website: https://github.com/bitrise-steplib/steps-xcode-analyze
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-analyze
+support_url: https://github.com/bitrise-steplib/steps-xcode-analyze/issues
+published_at: 2020-11-19T17:33:32.378195885Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-analyze.git
+  commit: c881256bef1f2c29415b980716ec22dbc5ad0749
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-analyze
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the Step.
+      If you leave it empty, the default working directory will be used.
+    is_expand: true
+    is_required: false
+    summary: Working directory of the Step
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |
+      The path to your app's `.xcodeproj` or `.xcworkspace` file, relative to
+      the Step's working directory (if one is specified).
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: The path of the `.xcodeproj` or `.xcworkspace` file
+    title: Xcode project or workspace path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Xcode scheme to use for the analysis.
+      **IMPORTANT**: The scheme must be marked as shared in Xcode!
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: The Xcode scheme to use.
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- is_clean_build: "no"
+  opts:
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    title: Do a clean Xcode build before testing?
+    value_options:
+    - "yes"
+    - "no"
+- force_code_sign_identity: null
+  opts:
+    description: |-
+      Force the `xcodebuild` command to use specified code signing identity.
+      Specify a code signing identity as a full ID (for example, `iPhone Developer: Bitrise Bot (VV2J4SV8V4)`)
+      or specify a code signing group (for example, `iPhone Developer` or `iPhone Distribution`).
+    title: Force code signing with identity
+- force_provisioning_profile: null
+  opts:
+    description: |-
+      Force the `xcodebuild` command to use a specified provisioning profile.
+      You must use the provisioning profile's UUID. The profile's name is NOT accepted by xcodebuild.
+      To get your UUID:
+      - In Xcode select your project -> Build Settings -> Code Signing
+      - Select the desired Provisioning Profile, then scroll down in profile list and click on Other...
+      - The popup will show your profile's UUID.
+      Format example:
+      - c5be4123-1234-4f9d-9843-0d9be985a068
+    title: Force code signing with provisioning profile
+- disable_codesign: "yes"
+  opts:
+    description: In order to skip code signing, set this option to `yes`.
+    title: Disable code signing
+    value_options:
+    - "yes"
+    - "no"
+- disable_index_while_building: "yes"
+  opts:
+    description: |-
+      Add `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command which will disable the indexing during the build.
+      Indexing is needed for
+
+      * Autocomplete.
+      * Ability to quickly jump to definition.
+      * Get class and method help by alt clicking.
+      None of the above ar needed in a CI environment.
+      **Note:** In Xcode you can turn off the `Index-WhileBuilding` feature  by disabling the `Enable Index-WhileBuilding Functionality` in the `Build Settings`.<br/>
+      In a CI environment you can disable it by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command.
+    summary: Disable indexing during the build run to potentially make the build faster.
+    title: Disable indexing during the build
+    value_options:
+    - "yes"
+    - "no"
+- cache_level: swift_packages
+  opts:
+    description: |-
+      Available options:
+      - `none` : Disable caching.
+      - `swift_packages` : Cache Swift PM packages added to the Xcode project.
+    is_required: true
+    title: Enable caching of Swift Package Manager packages
+    value_options:
+    - none
+    - swift_packages
+- opts:
+    category: Debug
+    description: |-
+      If the input is set to `xcpretty`, the xcodebuild output will be prettified by xcpretty.
+      If the input is set to `xcodebuild`, the raw xcodebuild output will be printed.
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    category: Debug
+    description: This directory will contain the generated `raw-xcodebuild-output.log`.
+    is_required: true
+    summary: Output directory path
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "yes"
