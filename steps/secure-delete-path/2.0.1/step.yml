@@ -8,10 +8,12 @@ description: |
 website: https://github.com/bitrise-io/steps-secure-delete-path
 source_code_url: https://github.com/bitrise-io/steps-secure-delete-path
 support_url: https://github.com/bitrise-io/steps-secure-delete-path/issues
-published_at: 2020-11-26T09:23:26.035735446Z
+published_at: 2020-11-26T10:05:26.270255479Z
 source:
   git: https://github.com/bitrise-steplib/steps-secure-delete-path.git
-  commit: 2812b63dc6d15e37495a65b16243ce9e5aedab22
+  commit: 4b71bda8491656ef585166d28392395d3e6069d5
+type_tags:
+- utility
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
