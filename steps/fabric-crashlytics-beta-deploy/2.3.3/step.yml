@@ -1,0 +1,119 @@
+title: Fabric/Crashlytics deployer
+summary: |-
+  Use the awesome Crashlytics/Fabric beta distribution service during your
+  workflow. Add notes, send notification to the testers, groups or to any email
+  address and let the search for those nasty bugs begin!
+description: |-
+  Deploys to Fabric/Crashlytics beta testing service.
+
+  ## How to setup your Xcode project for [Fabric](https://get.fabric.io/) / Crashlytics beta testing?
+
+  * Register a Fabric account at [https://get.fabric.io/](https://get.fabric.io/).
+  * Add Fabric & Crashlytics to your Xcode project as described when you first sign into your Fabric account.
+  * After your first Fabric & Crashlytics app setup, the app should be listed on [https://fabric.io](https://fabric.io).
+  * You should also test that everything works correctly with a manual version upload: just Create an Archive in Xcode, if the Fabric menu bar app is running, it'll show an upload popup.
+
+  Your app is now ready to be deployed with this Step!
+website: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+source_code_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy
+support_url: https://github.com/bitrise-io/steps-fabric-crashlytics-beta-deploy/issues
+published_at: 2020-12-01T09:26:24.0277899Z
+source:
+  git: https://github.com/bitrise-steplib/steps-fabric-crashlytics-beta-deploy.git
+  commit: 8cafee25f118b78de8f4deed1506384a37367f62
+project_type_tags:
+- ios
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: |-
+      Required for Crashlytics Beta.
+      Required for Crashlytics dSYM upload with projects that use or migrated from Fabric to Firebase Crashlytics.
+
+      You can get your API Key under **Organizations**
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to.
+      At the top, you'll see a text: **API Key**.
+      Click it and the API key will appear.
+    is_required: false
+    is_sensitive: true
+    summary: ""
+    title: 'Fabric: API Key'
+- build_secret: ""
+  opts:
+    description: |-
+      Required for Crashlytics Beta. Not needed for dSYM upload with upload-symbols.
+
+      You can get the Build Secret key on the same
+      page as the API Key.
+
+      Select the **Organizations** option
+      at [https://fabric.io/settings](https://fabric.io/settings).
+
+      Select the organization your app belongs to.
+      At the top, you'll see a text: **Build Secret**.
+      Click it and the Build Secret will appear.
+    is_required: false
+    is_sensitive: true
+    summary: ""
+    title: 'Fabric: Build Secret'
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: Set this input to empty string to perform only dSYM upload (no Crashlytics
+      Beta deploy).
+    summary: ""
+    title: IPA file path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    category: dSYM upload
+    description: |-
+      To turn on dSYM generation, open your Xcode project,
+      select *Project Settings - Build Settings - Debug Information Format*
+      and make sure it's set to the *DWARF with dSYM File* option.
+      After dsym generated, zip it and provide the zipped path as input.
+    title: dSYM zip file path
+- opts:
+    category: dSYM upload
+    description: |-
+      The path to GoogleService-Info.plist when using upload-symbols with Firebase Crashlytics.
+
+      Important: If you're working with an app that you previously linked from Fabric to Firebase Crashlytics, pass in your Fabric API Key to run the upload symbols script.
+    title: GoogleService-Info.plist path
+  service_info_plist_path: ""
+- email_list: ""
+  opts:
+    description: "Optional list of individual addresses (comma-separated)\uFEFF\n"
+    is_sensitive: true
+    summary: ""
+    title: 'Notify: Emails'
+- group_aliases_list: ""
+  opts:
+    description: Optional list of group aliases from web dashboard (comma-separated)
+    summary: ""
+    title: 'Notify: Group Aliases'
+- notification: "Yes"
+  opts:
+    description: Should send email notification to testers about the new release?
+    is_required: true
+    summary: ""
+    title: Notify testers?
+    value_options:
+    - "Yes"
+    - "No"
+- opts:
+    description: ""
+    summary: ""
+    title: Release Notes
+  release_notes: Automatic build with Bitrise
