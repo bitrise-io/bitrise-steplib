@@ -1,0 +1,43 @@
+title: Secure Delete a given path
+summary: Delete a file or a folder. You can even use sudo to do so.
+description: |
+  Calls 'rm -rfP the-path' to securely delete the given file or folder.
+  From the OS X rm man documentation (https://developer.apple.com/library/mac/documentation/Darwin/Reference/Manpages/man1/rm.1.html):
+  Option -P: Overwrite regular files before deleting them.  Files are overwritten three times, first
+  with the byte pattern 0xff, then 0x00, and then 0xff again, before they are deleted.
+website: https://github.com/bitrise-io/steps-secure-delete-path
+source_code_url: https://github.com/bitrise-io/steps-secure-delete-path
+support_url: https://github.com/bitrise-io/steps-secure-delete-path/issues
+published_at: 2020-11-26T10:05:26.270255479Z
+source:
+  git: https://github.com/bitrise-steplib/steps-secure-delete-path.git
+  commit: 4b71bda8491656ef585166d28392395d3e6069d5
+type_tags:
+- utility
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: true
+    is_required: true
+    summary: File or Folder path to delete.
+    title: File or Folder path to delete.
+  path: ""
+- opts:
+    description: |-
+      Use sudo for delete? Options:
+        * true (default): use sudo
+        * false: don't use sudo
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: When this flag is enabled, the step will use sudo for the deletion.
+    title: Use sudo for delete.
+    value_options:
+    - "true"
+    - "false"
+  with_sudo: "true"
