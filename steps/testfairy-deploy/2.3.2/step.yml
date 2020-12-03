@@ -1,0 +1,114 @@
+title: TestFairy Deploy
+summary: Deploy your App to TestFairy.
+description: |-
+  Deploy your awesome App to Testfairy easily, making use of multiple configuration options.
+
+  * Set tester groups to be notified
+  * Enable email notification for the build
+  * Enable in-app notification of new versions
+  * Set recording duration
+  * Enable or disable video recording
+  * Add your comments
+
+  Once you're done setting up, you can simply let TestFairy do its magic!
+
+  To use this step you have to register
+  an account on [TestFairy.com](http://testfairy.com/).
+website: https://github.com/bitrise-steplib/steps-testfairy-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-testfairy-deploy
+support_url: https://github.com/bitrise-steplib/steps-testfairy-deploy/issues
+published_at: 2020-10-15T14:45:56.595888763Z
+source:
+  git: https://github.com/bitrise-steplib/steps-testfairy-deploy.git
+  commit: b0f601944f0594c84093e615227425702f211c68
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- api_key: ""
+  opts:
+    description: |-
+      API key from TestFairy.
+
+
+      **NOTE** You can find your API key under the settings menu.
+    is_required: true
+    is_sensitive: true
+    summary: TestFairy API key
+    title: TestFairy API key
+- opts:
+    description: If you are using a private cloud endpoint for TestFairy, specify
+      it here
+    summary: Private cloud endpoint for TestFairy
+    title: Private cloud endpoint
+  server_endpoint: ""
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: Path for the IPA to upload to TestFairy.
+    is_required: true
+    summary: IPA path
+    title: IPA path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: Path for the dSYM to upload to TestFairy.
+    summary: dSYM path
+    title: dSYM path
+- opts:
+    description: "Tester Groups that will be notified when the app is ready.\nSetup
+      groups in your TestFairy account testers page.   "
+    summary: Tester groups
+    title: Tester groups
+  tester_groups: ""
+- notify: "off"
+  opts:
+    description: Sets if should email testers about new version.
+    summary: Email notification
+    title: Email notification
+    value_options:
+    - "on"
+    - "off"
+- auto_update: "off"
+  opts:
+    description: |-
+      If auto update is on all users will be prompt to update
+      to this build next time they run the app.
+    summary: ""
+    title: Auto update
+    value_options:
+    - "on"
+    - "off"
+- max_test_duration: 10m
+  opts:
+    description: Maximum session recording length, eg 20m or 1h. Maximum 24h.
+    summary: Recording duration
+    title: Recording duration
+- opts:
+    description: Sets if video recording is enabled for this build.
+    summary: Video recording
+    title: Video recording
+    value_options:
+    - "on"
+    - wifi
+    - "off"
+  video_recording: "off"
+- comment: ""
+  opts:
+    description: Comment text will be included in the email sent to testers.
+    summary: Comments
+    title: Comments
+outputs:
+- TESTFAIRY_PUBLIC_INSTALL_PAGE_URL: null
+  opts:
+    description: Public Install Page's URL
+    title: Public Install Page URL

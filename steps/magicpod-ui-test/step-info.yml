@@ -1,0 +1,3 @@
+deprecate_notes: This step is deprecated. Please use magic-pod step instead.
+maintainer: community
+removal_date: "2020-09-01"

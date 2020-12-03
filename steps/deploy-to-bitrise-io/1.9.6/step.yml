@@ -1,0 +1,216 @@
+title: Deploy to Bitrise.io - Apps, Logs, Artifacts
+summary: Deploys build artifacts to make them available for the user on the build's
+  **APPS & ARTIFACTS** tab. Sends test results to the Test Reports add-on.
+description: "The Step collects artifacts from previous Steps in the Workflow and
+  places them in a specified deploy directory or compresses them into a single .zip
+  file in the deploy directory. These artifacts are then available on the **APPS &
+  ARTIFACTS** tab of any given build. For installable artifacts, such as IPAs or APKs,
+  the Step can create a public install page that allows testers to install the app
+  on their devices. You can also use the Step to notify users about the build.\n\nThis
+  Step is required in order to use the Test Reports add-on. It converts the test results
+  to the right format and sends them to the add-on.\n\n### Configuring the Step\n\n1.
+  Set the value for the Deploy directory of file path. The default is the $BITRISE_DEPLOY_DIR
+  environment variable which is exposed by the Bitrise CLI.\n2. Set the **Notify:
+  User Roles** and the **Notify: Emails** inputs to configure notifications for the
+  users. Note that the **Notify: Emails** input is only used if a public install page
+  is created and you must use a Secret to set it.\n3. Optionally, you can create a
+  zip file for all your build artifacts by setting the **Compress the artifacts into
+  one file?** input to `true`. \n\nGet a public install page that allows testers to
+  install the app on their devices:\n\n1. Set the **Enable public page for the App?**
+  input to `true`.\n2. Set the **Compress the artifacts into one file?** input to
+  `false`. If all the contents of the deploy directory are compressed into a single
+  zip file, there won't be a public install page.\n\n### Troubleshooting\n\nIf your
+  users did not get notified via email, check the **Enable public page for the App?**
+  input. If it is set to `false`, no email notifications will be sent.\n\nIf you can't
+  find the artifacts on the **APPS & ARTIFACTS** tab, check the **Deploy directory
+  or file path** input. You can use [remote access](https://devcenter.bitrise.io/builds/remote-access/)
+  to check if your artifacts are available at the specified location.\n\n### Useful
+  links\n- [Deployment on Bitrise](https://devcenter.bitrise.io/deploy/deployment-index/)\n\n###
+  Related Steps\n- [Deploy to Google Play](https://www.bitrise.io/integrations/steps/google-play-deploy)\n-
+  [Deploy to iTunesConnect](https://www.bitrise.io/integrations/steps/deploy-to-itunesconnect-deliver)"
+website: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io
+source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io
+support_url: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io/issues
+published_at: 2020-02-13T12:42:28.307470719Z
+source:
+  git: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io.git
+  commit: b74fb07f34f8a76469896e2116b1f8932826a254
+host_os_tags:
+- osx-10.10
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-deploy-to-bitrise-io
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: .IsCI
+inputs:
+- deploy_path: $BITRISE_DEPLOY_DIR
+  opts:
+    description: |
+      Specify the directory or file path which will be deployed.
+      If the specified path is a directory, then every file
+      in the specified directory will be deployed, sub-directories, however,
+      won't be uploaded. To upload the directory's content
+      recursively, you should use the *Compress* option
+      which will compress the whole directory, with
+      every sub-directory included.
+
+      If you specify a file path, then only the specified
+      file will be deployed.
+    is_required: true
+    title: Deploy directory or file path
+- notify_user_groups: everyone
+  opts:
+    description: |
+      Your App's user roles you want to notify. Separate the role names with commas.
+      Possible role names:
+
+      * none
+      * testers
+      * developers
+      * admins
+      * owner
+      * everyone
+
+      An example to notify your developers and testers:
+
+      `testers, developers`
+
+      If you want to notify everyone in the app's team, just specify `everyone`.
+
+      If you don't want to notify anyone, set this to `none`.
+    title: 'Notify: User Roles'
+- notify_email_list: null
+  opts:
+    description: |
+      Email addresses to notify. Separate them with commas.
+
+      You can specify any email address, the recipients
+      don't have to be in your team.
+    is_sensitive: true
+    title: 'Notify: Emails'
+- is_enable_public_page: "true"
+  opts:
+    description: |
+      If this option is enabled, a public install page
+      will be available with a long and random URL which can be shared
+      with others who are not registered on Bitrise.
+
+      **If you disable this option, the `Notify Emails` option will
+      be ignored and the `Notify User Roles` users will receive the build's
+      URL instead of the public page's URL!**
+    is_expand: false
+    is_required: true
+    title: Enable public page for the App?
+    value_options:
+    - "true"
+    - "false"
+- is_compress: "false"
+  opts:
+    description: |-
+      If this option is allowed, the artifacts
+      found in the *Deploy directory* folder will be compressed
+      into a single file.
+
+      You can specify a custom name for the ZIP using the *zip_name*
+      option - otherwise we're going to use the *Deploy directory* name.
+
+      If this option is turned off, the artifacts
+      found in the *Deploy directory* folder will be deployed
+      separately.
+    is_expand: false
+    is_required: true
+    summary: |-
+      If this option is allowed, the artifacts
+      found in the *Deploy directory* folder will be compressed
+      into a single (ZIP) file.
+    title: Compress the artifacts into one file?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: 'Specify the output pattern with golang template: [https://golang.org/pkg/text/template](https://golang.org/pkg/text/template)'
+    is_expand: false
+    is_required: true
+    summary: You can change the format of the BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP
+      output
+    title: Format for the BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP output
+  public_install_page_url_map_format: '{{range $index, $element := .}}{{if $index}}|{{end}}{{$element.File}}=>{{$element.URL}}{{end}}'
+- opts:
+    category: Debug
+    description: |-
+      Specify a custom name for the compressed artifact. We're going to
+      use the *Deploy directory* name if you leave it blank.
+
+      This option only works if you selected *true* for *is_compress*.
+    summary: |-
+      Specify a custom name for the compressed artifact. We're going to
+      use the deploy directory name if you leave it blank.
+    title: Name of the compressed artifact (without .zip extension)
+  zip_name: null
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: Unique build URL of this build on Bitrise.io
+    is_dont_change_value: true
+    is_required: true
+    summary: Unique build URL of this build on Bitrise.io
+    title: Bitrise Build URL
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: The build's API Token for the build on Bitrise.io
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise Build API Token
+- addon_api_base_url: https://vdt.bitrise.io/test
+  opts:
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- addon_api_token: $ADDON_VDTESTING_API_TOKEN
+  opts:
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_sensitive: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+- debug_mode: "false"
+  opts:
+    category: Debug
+    description: The step will print more verbose logs if enabled.
+    is_required: true
+    summary: The step will print more verbose logs if enabled.
+    title: Enable Debug Mode
+    value_options:
+    - "false"
+    - "true"
+outputs:
+- BITRISE_PUBLIC_INSTALL_PAGE_URL: null
+  opts:
+    description: |-
+      Public Install Page's URL, if the
+      *Enable public page for the App?* option was *enabled*.
+    title: Public Install Page URL
+- BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP: null
+  opts:
+    description: |-
+      Public Install Page URLs by the artifact's file path.
+      Only set it if the *Enable public page for the App?* option was *enabled*.
+
+      The format is `KEY1=>VALUE|KEY2=>VALUE`
+
+      Examples:
+
+      - $BITRISE_DEPLOY_DIR/ios_app.ipa=>https://ios_app/public/install/page
+      - $BITRISE_DEPLOY_DIR/android_app.apk=>https://android_app/public/install/page|$BITRISE_DEPLOY_DIR/ios_app.ipa=>https://ios_app/public/install/page
+    title: Map of filenames and Public Install Page URLs

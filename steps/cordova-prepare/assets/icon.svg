@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49.3 (51167) - http://www.bohemiancoding.com/sketch -->
+    <!-- Generator: Sketch 50.2 (55047) - http://www.bohemiancoding.com/sketch -->
     <title>cordova-prepare-stepicon</title>
     <desc>Created with Sketch.</desc>
     <defs>
@@ -16,14 +16,6 @@
             <stop stop-color="#FFFFFF" offset="0%"></stop>
             <stop stop-color="#FFFFFF" stop-opacity="0.261407382" offset="100%"></stop>
         </linearGradient>
-        <linearGradient x1="50%" y1="0%" x2="50%" y2="97.094021%" id="linearGradient-4">
-            <stop stop-color="#00AEFF" offset="0%"></stop>
-            <stop stop-color="#0007E5" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="50%" y1="-230.295139%" x2="50%" y2="242.144097%" id="linearGradient-5">
-            <stop stop-color="#00AEFF" offset="0%"></stop>
-            <stop stop-color="#0007E5" offset="100%"></stop>
-        </linearGradient>
     </defs>
     <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Cordova-Prepare">
@@ -37,14 +29,10 @@
                         <path d="M58.811139,72.637 C60.8567137,72.637 62.5167895,78.8242743 62.5167895,86.4548981 C62.5167895,94.0855219 60.8601866,100.272796 58.811139,100.272796 C56.7620914,100.272796 55.1054886,94.0924778 55.1054886,86.4722879 C55.1054886,78.8520979 56.7655644,72.6543898 58.811139,72.6543898 L58.811139,72.637 Z" id="logo-path" fill="url(#linearGradient-3)"></path>
                     </g>
                 </g>
-                <g id="icon-/-minus-remove" style="mix-blend-mode: multiply;" transform="translate(38.000000, 128.000000)">
-                    <path d="M45,81 C64.882251,81 81,64.882251 81,45 C81,25.117749 64.882251,9 45,9 C25.117749,9 9,25.117749 9,45 C9,64.882251 25.117749,81 45,81 Z M45,90 C20.1471863,90 0,69.8528137 0,45 C0,20.1471863 20.1471863,0 45,0 C69.8528137,0 90,20.1471863 90,45 C90,69.8528137 69.8528137,90 45,90 Z" id="Oval-6" fill="url(#linearGradient-4)" fill-rule="nonzero"></path>
-                    <rect id="Combined-Shape" fill="url(#linearGradient-5)" x="22.5" y="40.5" width="45" height="9"></rect>
-                </g>
-                <g id="icon-/-plus-add" style="mix-blend-mode: multiply;" transform="translate(128.000000, 38.000000)" fill="url(#linearGradient-4)">
-                    <path d="M45,81 C64.882251,81 81,64.882251 81,45 C81,25.117749 64.882251,9 45,9 C25.117749,9 9,25.117749 9,45 C9,64.882251 25.117749,81 45,81 Z M45,90 C20.1471863,90 0,69.8528137 0,45 C0,20.1471863 20.1471863,0 45,0 C69.8528137,0 90,20.1471863 90,45 C90,69.8528137 69.8528137,90 45,90 Z" id="Oval-6" fill-rule="nonzero"></path>
-                    <path d="M49.5,40.5 L67.5,40.5 L67.5,49.5 L49.5,49.5 L49.5,67.5 L40.5,67.5 L40.5,49.5 L22.5,49.5 L22.5,40.5 L40.5,40.5 L40.5,22.5 L49.5,22.5 L49.5,40.5 Z" id="Combined-Shape"></path>
-                </g>
+                <path d="M167,200 C185.777681,200 201,184.777681 201,166 C201,147.222319 185.777681,132 167,132 C148.222319,132 133,147.222319 133,166 C133,184.777681 148.222319,200 167,200 Z M167,220 C137.176624,220 113,195.823376 113,166 C113,136.176624 137.176624,112 167,112 C196.823376,112 221,136.176624 221,166 C221,195.823376 196.823376,220 167,220 Z" id="Oval-6" fill="#0058FF" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
+                <polygon id="Line-2-Copy" fill="#0058FF" fill-rule="nonzero" style="mix-blend-mode: multiply;" points="186.538487 161.115724 186.538487 171.115724 147.6 171.115724 147.6 161.115724"></polygon>
+                <path d="M87,123 C105.777681,123 121,107.777681 121,89 C121,70.2223185 105.777681,55 87,55 C68.2223185,55 53,70.2223185 53,89 C53,107.777681 68.2223185,123 87,123 Z M87,143 C57.1766235,143 33,118.823376 33,89 C33,59.1766235 57.1766235,35 87,35 C116.823376,35 141,59.1766235 141,89 C141,118.823376 116.823376,143 87,143 Z" id="Oval-6" fill="#0058FF" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
+                <path d="M92,84.1157237 L106.538487,84.1157237 L106.538487,94.1157237 L92,94.1157237 L92,107.517925 L82,107.517925 L82,94.1157237 L67.6,94.1157237 L67.6,84.1157237 L82,84.1157237 L82,70.5833333 L92,70.5833333 L92,84.1157237 Z" id="Combined-Shape" fill="#0058FF" fill-rule="nonzero" style="mix-blend-mode: multiply;"></path>
             </g>
         </g>
     </g>

@@ -1,0 +1,115 @@
+title: SonarQube MSBuild Scanner
+summary: |
+  Step for running SonarQube MSBuild Scanner CLI.
+description: |
+  Step for running SonarQube MSBuild Scanner CLI.
+website: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner
+source_code_url: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner
+support_url: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner/issues
+published_at: 2019-01-18T10:49:37.164573-05:00
+source:
+  git: https://github.com/tbrushwyler/bitrise-step-sonarqube-msbuild-scanner.git
+  commit: 51530e8d46158bb8f1471ab0b649c7720314f127
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- xamarin
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: wget
+  - name: unzip
+  apt_get:
+  - name: wget
+  - name: unzip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Scanner CLI version to be used. Step will fail if invalid or non-existent
+      is specified.
+    is_required: true
+    title: Scanner CLI version
+  scanner_version: 4.5.0.1761
+- opts:
+    description: Specifies the key of the analyzed project in SonarQube.
+    is_required: true
+    title: Key of the analyzed project in SonarQube.
+  sonarqube_project_key: null
+- opts:
+    description: Specifies the name of the analyzed project in SonarQube. Adding this
+      argument will overwrite the project name in SonarQube if it already exists.
+    is_required: false
+    title: Name of the analyzed project in SonarQube.
+  sonarqube_project_name: null
+- opts:
+    description: Specifies the version of your project.
+    is_required: false
+    title: Version of your project in SonarQube.
+  sonarqube_project_version: null
+- opts:
+    description: |-
+      See [analysis parameters](https://docs.sonarqube.org/display/SONAR/Analysis+Parameters) documentation
+      for list of possible options.
+
+      Example:
+      ```
+      sonar.sources=.
+      sonar.java.binaries=build/classes/kotlin/main
+      sonar.login=TOKEN_HERE
+      #environment variables are evaluated
+      sonar.projectKey=$BITRISE_APP_TITLE
+      sonar.host.url=https://sonar.example.test
+      sonar.analysis.mode=preview
+      sonar.report.export.path=sonar-report.json
+      ```
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: Scanner parameters for the `begin` step
+  scanner_begin_properties: null
+- opts:
+    description: |-
+      Commands to run between "begin" and "end" steps.
+      You may want to build your project, execute unit tests, and generate code coverage data.
+
+      Example:
+      ```
+      msbuild $BITRISE_PROJECT_PATH /t:Rebuild
+      ```
+    title: Build commands.
+  scanner_build_commands: null
+- opts:
+    description: |-
+      See [documentation](https://docs.sonarqube.org/display/SCAN/Analyzing+with+SonarQube+Scanner+for+MSBuild)
+      for list of possible options.
+
+      Example:
+      ```
+      sonar.login=TOKEN_HERE
+      sonar.password=PASSWORD_HERE
+      ```
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: Scanner parameters for the `end` step
+  scanner_end_properties: null
+- is_debug: "false"
+  opts:
+    description: |-
+      Whether trace of shell commands should be printd to a build log.
+      Options:
+      * "true"
+      * "false" (default)
+    is_expand: false
+    title: Print all executed shell commands to a build log?
+    value_options:
+    - "true"
+    - "false"

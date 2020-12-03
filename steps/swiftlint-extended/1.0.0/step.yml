@@ -1,0 +1,106 @@
+title: Swiftlint
+summary: |
+  Generates swiftlint reports in different formats, compatible with Bitrise test reports add-on
+description: |
+  This step generates the swiftlint report and saves it to a file in the bitrise deploy folder. It produces 2 environment variables, one with the report and the other one with the path to the report file. The first variable is useful if you want to p pass your report directly to somewhere, for example a Slack channel. The second variable is useful if you want to process the report file further, for example upload it to S3 or attach it to a pull request. Finally, this step is compatible with the Bitrise test reports add-on, so in case the linting fails, you can easily see the details there.
+website: https://github.com/lawicko/bitrise-step-swiftlint
+source_code_url: https://github.com/lawicko/bitrise-step-swiftlint
+support_url: https://github.com/lawicko/bitrise-step-swiftlint/issues
+published_at: 2020-05-07T11:15:19.326789+02:00
+source:
+  git: https://github.com/lawicko/bitrise-step-swiftlint.git
+  commit: a875b43bc88c36ddc45fc291692bab07b78f50e6
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: swiftlint
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- linting_path: null
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Select the path where Swiftlint should lint
+- lint_config_file: $BITRISE_SOURCE_DIR/.swiftlint.yml
+  opts:
+    description: If you use a custom linting configuration for Bitrise, you can specify
+      the path here.
+    is_required: false
+    summary: ""
+    title: Linting configuration file
+- opts:
+    description: Sets the reporter type when printing violations or errors.
+    summary: ""
+    title: Select the reporter type
+    value_options:
+    - checkstyle
+    - csv
+    - emoji
+    - github-actions-logging
+    - html
+    - json
+    - junit
+    - markdown
+    - sonarqube
+    - xcode
+  reporter: xcode
+- opts:
+    description: When using the strict mode, the warnings will become errors.
+    is_required: false
+    summary: ""
+    title: Select yest if you want to use the strict mode
+    value_options:
+    - "yes"
+    - "no"
+  strict: "no"
+- opts:
+    description: This will be used as a report file name. Please don't put the extension
+      here. The extension will be determined depending on the reporter that you choose.
+      The default is `swiftlint_report`.
+    is_required: true
+    summary: The report file name, without extension.
+    title: The report file name, without extension.
+  report_file: swiftlint_report
+outputs:
+- SWIFTLINT_REPORT: null
+  opts:
+    description: The generated Swiftlint report. May be empty if the Swiftlint succeeded
+      with 0 errors or warnings. This is useful when you want to pass it somewhere
+      else, for example on a Slack channel.
+    is_dont_change_value: true
+    summary: The generated Swiftlint report. May be empty if the Swiftlint succeeded
+      with 0 errors or warnings. This is useful when you want to pass it somewhere
+      else, for example on a Slack channel.
+    title: A Swiftlint report
+- SWIFTLINT_REPORT_PATH: null
+  opts:
+    description: The path to the generated Swiftlint report (by default, it is created
+      by concatenating the `$BITRISE_DEPLOY_DIR` with the `report_file` you provide
+      as one of the inputs to this step. The file name depends on the reporter that
+      was selected, for example for the `junit` reporter, the generated file name
+      will have the extension `xml`, and for the `html` reporter it will be `html`).
+      This is useful if you want to have this report in a separate file and do something
+      with it, for example upload to S3.
+    is_dont_change_value: true
+    summary: The path to the generated Swiftlint report (by default, it is created
+      by concatenating the `$BITRISE_DEPLOY_DIR` with the `report_file` you provide
+      as one of the inputs to this step. The file name depends on the reporter that
+      was selected, for example for the `junit` reporter, the generated file name
+      will have the extension `xml`, and for the `html` reporter it will be `html`).
+      This is useful if you want to have this report in a separate file and do something
+      with it, for example upload to S3.
+    title: A Swiftlint report path

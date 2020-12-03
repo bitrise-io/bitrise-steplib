@@ -1,0 +1,39 @@
+title: TheAppsPajamas Service Account Key Installer
+summary: Installs a service account key to your pipeline before build time
+description: |
+  Installs a service account key to your pipeline before build time
+website: https://www.theappspajamas.com
+source_code_url: https://github.com/TheAppsPajamas/bitrise-step-theappspajamas-service-account-key-installer
+support_url: https://www.theappspajamas.com/support
+published_at: 2019-03-06T06:50:24.706568Z
+source:
+  git: https://github.com/TheAppsPajamas/bitrise-step-theappspajamas-service-account-key-installer.git
+  commit: 80e22d5ceb95d51d1a1ddbf93074aaa5042a9c6a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- xamarin
+type_tags:
+- access-control
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    is_sensitive: true
+    summary: TheAppsPajamas Service Account Key.
+    title: TheAppsPajamas Service Account Key
+  service_account_key: null
+- bitrise_source_dir: $BITRISE_SOURCE_DIR
+  opts:
+    title: Bitrise source dir
+outputs:
+- TAP_SECURITY_PATH: null
+  opts:
+    title: The path tapsecurity.json was installed at

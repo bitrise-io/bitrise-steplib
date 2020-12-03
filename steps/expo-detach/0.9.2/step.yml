@@ -1,0 +1,63 @@
+title: '[Beta] Expo Eject'
+summary: Creates Xcode and Android Studio projects for your app.
+description: |-
+  Using the The Expo Development CLI to create Xcode and Android Studio projects for your app.
+  **EXPO DEVELOPMENT CLI** https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli
+website: https://github.com/bitrise-steplib/steps-expo-detach
+source_code_url: https://github.com/bitrise-steplib/steps-expo-detach
+support_url: https://github.com/bitrise-steplib/steps-expo-detach/issues
+published_at: 2018-09-28T14:19:18.992377701Z
+source:
+  git: https://github.com/bitrise-steplib/steps-expo-detach.git
+  commit: b3ca09b95db8cbf3ed72a2235994ec4721854401
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-expo-detach
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+inputs:
+- opts:
+    description: The path of your project directory
+    is_required: true
+    summary: Project path
+    title: Project path
+  project_path: $BITRISE_SOURCE_DIR
+- expo_cli_verson: latest
+  opts:
+    description: |-
+      Specify the Expo CLI version to install.
+      The Expo CLI ejects your project and creates Xcode and Android Studio projects for your app.
+
+
+      [https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli](https://docs.expo.io/versions/latest/introduction/installation#local-development-tool-expo-cli)
+
+
+      A couple of examples:
+
+
+      * "2.0.0"
+      * latest
+    is_required: "true"
+    summary: Specify the Expo CLI version to install.
+    title: Expo CLI version
+- opts:
+    description: |-
+      Your account's username for `https://expo.io/` .
+
+
+      **NOTE** You need to use your username and not your e-mail address.
+    summary: Username for Expo
+    title: Username for Expo
+  user_name: ""
+- opts:
+    description: Your password for `https://expo.io/` .
+    is_sensitive: true
+    summary: Password for your Expo account.
+    title: Password for your Expo account
+  password: ""

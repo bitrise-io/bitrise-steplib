@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>zip-directory-and-export-its-path</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0.688674133%" x2="50%" y2="97.6477244%" id="linearGradient-1">
+            <stop stop-color="#64C9EF" offset="0%"></stop>
+            <stop stop-color="#2292BD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="132.409355%" y1="4.00494607%" x2="-18.5997596%" y2="94.6141589%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M17.3333332,17.3333332 L17.3333332,86.6666664 L78.0000001,86.6666664 L78.0000001,95.3333335 L17.3333332,95.3333335 C12.5666665,95.3333335 8.66666645,91.4333335 8.66666645,86.6666664 L8.66666645,17.3333332 C8.66666645,12.5666665 12.5666665,8.66666645 17.3333332,8.66666645 L78.0000001,8.66666645 L78.0000001,17.3333332 L17.3333332,17.3333332 Z M78.4333335,47.6666666 L67.1666667,36.3999999 L73.2333334,30.3333332 L94.4666669,51.5666667 L73.2333334,72.8000001 L67.1666667,66.7333334 L78.0000001,56.3333332 L43.3333333,56.3333332 L43.3333333,47.6666666 L78.4333335,47.6666666 Z" id="path-3"></path>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Zip-Directory-and-Export-its-Path">
+            <g id="zip-directory-and-export-its-path">
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" fill-rule="nonzero" x="0" y="0" width="256" height="256"></rect>
+                <path d="M56,53 L105.658482,53 C107.886777,53 109.93154,54.2348904 110.968794,56.2070476 L118.216903,69.9880638 C119.254157,71.960221 121.29892,73.1951114 123.527215,73.1951114 L180,73.1951114 C183.313708,73.1951114 186,75.8814029 186,79.1951114 L186,165 C186,168.313708 183.313708,171 180,171 L56,171 C52.6862915,171 50,168.313708 50,165 L50,59 C50,55.6862915 52.6862915,53 56,53 Z" id="Rectangle-12" fill="url(#linearGradient-2)"></path>
+                <text id="ZIP" fill="#760FC3" style="mix-blend-mode: multiply;" font-family="TTNorms-Black, TT Norms" font-size="27" font-weight="700" letter-spacing="3">
+                    <tspan x="60" y="161.138672">ZIP</tspan>
+                </text>
+                <g id="icons-/-logout" style="mix-blend-mode: multiply;" transform="translate(128.000000, 99.138672)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use fill="#760FC3" fill-rule="evenodd" xlink:href="#path-3"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

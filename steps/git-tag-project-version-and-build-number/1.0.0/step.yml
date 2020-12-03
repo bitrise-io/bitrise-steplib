@@ -1,0 +1,39 @@
+title: Git tag project version and build number
+summary: |
+  Git tag project version and build number
+description: |
+  This step will create Git tag with project version and build number
+website: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number
+source_code_url: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number
+support_url: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number/issues
+published_at: 2018-06-14T21:16:51.282274243+02:00
+source:
+  git: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number.git
+  commit: e2cb1a7eff22ceca25843e0eaa65adf489e9dc1a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- bitrise_tag_info_plist_path: ""
+  opts:
+    description: |
+      File of your release 'Info.plist' file
+    is_required: true
+    summary: Path to the 'Info.plist' file
+    title: Path to the 'Info.plist'
+- bitrise_tag_format: v%s(%s)
+  opts:
+    description: |
+      Provide format of generated tag & build number
+    is_required: false
+    summary: Provide format of generated tag & build number
+    title: Result format

@@ -1,0 +1,93 @@
+title: '[BETA] Firebase App Distribution'
+summary: |
+  [BETA] Distributes your builds via Firebase App Distribution
+description: |
+  [BETA] Uploads your app binaries to Firebase and sends email to your testers.
+website: https://github.com/guness/bitrise-step-firebase-app-distribution
+source_code_url: https://github.com/guness/bitrise-step-firebase-app-distribution
+support_url: https://github.com/guness/bitrise-step-firebase-app-distribution/issues
+published_at: 2019-10-10T10:59:37.157535+03:00
+source:
+  git: https://github.com/guness/bitrise-step-firebase-app-distribution.git
+  commit: 10cab751fd88e9ff5afa723c7a920360bae10a7e
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- firebase_token: null
+  opts:
+    description: |
+      Firebase CI access token. You can create it by `firebase login:ci` on your local machine.
+
+      It is something in the form of `1/a1gqPSI3r-RLgCQO47pJW7WdmqdypiJMO`
+    is_required: true
+    is_sensitive: true
+    title: Firebase Token
+- app_path: $BITRISE_IPA_PATH|$BITRISE_APK_PATH
+  opts:
+    description: |-
+      Path of IPA or APK file to deploy.
+
+      Default values:
+      iOS: `$BITRISE_IPA_PATH`
+      Android: `$BITRISE_APK_PATH`
+    is_required: true
+    title: App Path
+- app: null
+  opts:
+    description: |
+      You can find the App ID in the Firebase console, on the [General Settings page](https://console.firebase.google.com/project/_/settings/general/).
+
+      It is something in the form of:
+
+      `1:1234567890:android:0a1b2c3d4e5f67890`
+    is_required: true
+    title: Firebase App ID
+- opts:
+    description: |
+      Release notes for this build.
+    is_required: false
+    title: Release Notes
+  release_notes: null
+- opts:
+    description: |
+      The email addresses of the testers you want to invite.
+
+      You can specify the testers as a comma-separated list of email addresses:
+
+      `ali@example.com, bri@example.com, cal@example.com`
+    is_required: false
+    title: Testers
+  testers: null
+- groups: null
+  opts:
+    description: |
+      The tester groups you want to invite (refer to [Manage testers](https://firebase.google.com/docs/app-distribution/manage-testers)).
+      Groups are specified using group aliases, which you can look up in the Firebase console.
+
+      You can specify the groups as a comma-separated list:
+
+      `qa-team, trusted-testers`
+    is_required: false
+    title: Test Groups
+- flags: null
+  opts:
+    description: |
+      Additional flags to be appended to Firebase command.
+      ie. you can specify file inputs for groups, testers, and release notes.
+    is_required: false
+    title: Additional Command Flags

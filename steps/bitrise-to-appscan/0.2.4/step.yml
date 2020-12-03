@@ -1,0 +1,73 @@
+title: AppScan Security Analysis
+summary: Performs security analysis using the IBM AppScan Cloud.
+description: |
+  Performs security analysis using the IBM AppScan Cloud.
+website: https://github.com/ipiranga-atq/bitrise_appscan_step
+source_code_url: https://github.com/ipiranga-atq/bitrise_appscan_step
+support_url: https://github.com/ipiranga-atq/bitrise_appscan_step/issues
+published_at: 2018-09-28T15:14:10.722212144-03:00
+source:
+  git: https://github.com/ipiranga-atq/bitrise_appscan_step.git
+  commit: b1623ebc6a5858092ce936919b6a074c45fd0146
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/ipiranga-atq/bitrise_appscan_step
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- app_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      Recommended is *$BITRISE_APK_PATH* or *$BITRISE_IPA_PATH*.
+    is_expand: true
+    is_required: true
+    title: Path to the applications IPA/PATH.
+- app_name: null
+  opts:
+    description: |
+      (If no application is found with the given name, the step will fail)
+    is_expand: true
+    is_required: true
+    title: Application's Name on AppScan
+- opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Username for AppScan
+  user_name: null
+- opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Password for AppScan
+  user_password: null
+- app_user: null
+  opts:
+    description: |
+      Username to log in the application
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: Application's Username
+- app_password: null
+  opts:
+    description: |
+      Password to log in the application
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: Application's Password
+- opts:
+    description: |
+      The Presence Id to access the private network of the application.
+    is_expand: true
+    is_required: false
+    title: Presence Id
+  presence_id: null

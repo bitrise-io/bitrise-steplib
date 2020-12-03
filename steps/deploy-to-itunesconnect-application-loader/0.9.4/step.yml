@@ -1,0 +1,66 @@
+title: Deploy to iTunes Connect - Application Loader
+summary: Uploads binaries (.ipa / .pkg files) to [iTunes Connect](https://itunesconnect.apple.com/).
+description: "Uploads binaries (.ipa / .pkg files) to [iTunes Connect](https://itunesconnect.apple.com/)\nusing
+  the Apple's Application Loader.\n\nSetup guide and notes:\n  \n* Register an app
+  on the **My Apps** page of iTunes Connect. Click on the *plus sign* and select the
+  **New App** option. This requires an **admin** account.\n* Requires an app signed
+  with **App Store distibution Provisioning Profile**.\n* Every build which you want
+  to push to iTunes Connect must have a **unique build and version number** pair (*increment
+  either or both before a new deploy to iTunes Connect*)."
+website: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
+source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
+support_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader/issues
+published_at: 2018-08-31T08:29:37.331218933Z
+source:
+  git: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader.git
+  commit: 8af9b455a231d50737cd038fa676984f40f4a160
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
+inputs:
+- itunescon_user: ""
+  opts:
+    description: Login Apple ID for the iTunes Connect site.
+    is_required: true
+    is_sensitive: true
+    title: Apple ID
+- opts:
+    description: |-
+      Password for the specified Apple ID.
+      **NOTE:** Password or Application specific password is required.
+    is_required: false
+    is_sensitive: true
+    title: Password
+  password: ""
+- app_password: ""
+  opts:
+    description: |-
+      An Application specific password for the Apple ID.
+      **NOTE:** Application specific passwords can be created on the
+      [AppleID Website](https://appleid.apple.com). It can be used to
+      surpass Two Factor Authentication.
+      **NOTE:** Password or Application specific password is required.
+    is_required: false
+    is_sensitive: true
+    title: Application Specific Password
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: |-
+      Path to your IPA file to be deployed.
+      **NOTE:** This input or `PKG path` is required.
+    title: IPA path
+- opts:
+    description: |-
+      Path to your PKG file to be deployed.
+      **NOTE:** This input or `IPA path` is required.
+    title: PKG path
+  pkg_path: $BITRISE_PKG_PATH

@@ -1,0 +1,116 @@
+title: Run Danger
+summary: Danger runs during your CI process, and gives teams the chance to automate
+  common code review chores.
+description: |
+  Danger runs during your CI process, and gives teams the chance to automate common code review chores. This provides another logical step in your build, through this Danger can help lint your rote tasks in daily code review. You can use Danger to codify your teams norms. Leaving humans to think about harder problems. She does this by leaving messages inside your PRs based on rules that you create with the Ruby scripting language. Over time, as rules are adhered to, the message is amended to reflect the current state of the code review.
+website: https://github.com/bitrise-steplib/steps-danger
+source_code_url: https://github.com/bitrise-steplib/steps-danger
+support_url: https://github.com/bitrise-steplib/steps-danger/issues
+published_at: 2019-09-19T07:43:58.944313965Z
+source:
+  git: https://github.com/bitrise-steplib/steps-danger.git
+  commit: 4a5c307120be154bea78e294ec655da5713c785f
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-danger
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Repository URL of your project
+    title: Repository URL of your project
+  repository_url: $GIT_REPOSITORY_URL
+- github_api_token: null
+  opts:
+    category: GitHub
+    description: |-
+      **SETTING UP AN ACCESS TOKEN**
+
+      [Here’s the link](https://github.com/settings/tokens/new), you should open this in the private session where you just created the new GitHub account. Again, the rights that you give to the token depend on the openness of your projects. You’ll want to save for later, when you add a `github_api_token` to the step.
+
+      **TOKENS FOR OSS PROJECTS**
+
+      We recommend giving the token the smallest scope possible. This means just public\_repo, this scopes limits Danger’s abilities to just writing comments on OSS projects. Because the token can be quite easily be extracted from the CI environment, this minimizes the chance for bad actors to cause chaos with it.
+
+      **TOKENS FOR CLOSED SOURCE PROJECTS**
+
+      We recommend giving access to the whole repo scope, and its children.
+
+      **You can read more about it here:** [https://danger.systems/guides/getting_started.html](https://danger.systems/guides/getting_started.html)
+    is_sensitive: true
+    summary: Access token for your project
+    title: Access token for your project
+- github_host: null
+  opts:
+    category: GitHub
+    description: |-
+      The host that GitHub is running on. You need to set this if you are using **Enterprise GitHub**.
+      You can work with GitHub Enterprise by setting the `github_host` and the `github_api_base_url` inputs.
+
+      **For example:** `git.corp.evilcorp.com`
+
+      **You can read more about it here:** [https://danger.systems/guides/getting_started.html](https://danger.systems/guides/getting_started.html)
+    summary: The host that GitHub is running on. You need to set this if you are using
+      **Enterprise GitHub**.
+    title: GitHub host
+- github_api_base_url: null
+  opts:
+    category: GitHub
+    description: |-
+      The host that the GitHub Enterprise API is reachable on. You need to set this if you are using **Enterprise GitHub**.
+      You can work with GitHub Enterprise by setting the `github_host` and the `github_api_base_url` inputs.
+
+      **For example:** `https://git.corp.evilcorp.com/api/v3`
+
+      **You can read more about it here:** [https://danger.systems/guides/getting_started.html](https://danger.systems/guides/getting_started.html)
+    summary: The host that the GitHub Enterprise API is reachable on. You need to
+      set this if you are using **Enterprise GitHub**.
+    title: GitHub API base URL
+- gitlab_api_token: null
+  opts:
+    category: GitLab
+    description: |-
+      **SETTING UP AN ACCESS TOKEN**
+
+      Here’s the link, you should open this in the private session where you have just created the new GitLab account. You’ll want to copy the token for later, when you add a `gitlab_api_token` to the step.
+
+
+      If you are self hosting GitLab, you’ll need to generate an access token for the bot user. You can find the section under “Access Tokens” in the bot user’s profile.
+
+      **NOTE:** You can read more about it:
+
+      [https://danger.systems/guides/getting_started.html](https://danger.systems/guides/getting_started.html)
+    is_sensitive: true
+    summary: Access token for your project
+    title: Access token for your project
+- gitlab_host: null
+  opts:
+    category: GitLab
+    description: |-
+      The host that GitLab is running on. You need to set this if you are using **Self-Managed GitLab**.
+      You can work with Self-Managed GitLab by setting the `gitlab_host` and the `gitlab_api_base_url` inputs.
+
+      **For example:** `git.corp.evilcorp.com`
+
+      **You can read more about it here:** [https://danger.systems/guides/getting_started.html](https://danger.systems/guides/getting_started.html)
+    summary: The host that GitLab is running on. You need to set this if you are using
+      **Self-Managed GitLab**.
+    title: GitLab host
+- gitlab_api_base_url: null
+  opts:
+    category: GitLab
+    description: |-
+      The host that the Self-Managed GitLab API is reachable on. You need to set this if you are using **Self-Managed GitLab**.
+      You can work with Self-Managed GitLab by setting the `gitlab_host` and the `gitlab_api_base_url` inputs.
+
+      **For example:** `https://git.corp.evilcorp.com/api/v4`
+
+      **You can read more about it here:** [https://danger.systems/guides/getting_started.html](https://danger.systems/guides/getting_started.html)
+    summary: The host that the Self-Managed GitLab API is reachable on. You need to
+      set this if you are using **Self-Managed GitLab**.
+    title: GitLab API base URL

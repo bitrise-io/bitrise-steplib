@@ -1,0 +1,54 @@
+title: Get Flutter version from pubspec
+summary: Extracts minimum required Flutter version from pubspec files
+description: Extracts the Flutter version from *pubspec.lock* (if present) or *pubspec.yaml*
+  and sets `$FLUTTER_PUBSPEC_VERSION` environment variable.
+website: https://github.com/dgimb89/bitrise-step-get-flutter-version
+source_code_url: https://github.com/dgimb89/bitrise-step-get-flutter-version
+support_url: https://github.com/dgimb89/bitrise-step-get-flutter-version/issues
+published_at: 2020-05-19T01:56:39.201454+02:00
+source:
+  git: https://github.com/dgimb89/bitrise-step-get-flutter-version.git
+  commit: 91bc7d7b2cf1412d9ab79e3bca5e50fce25ce3f7
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: perl
+  apt_get:
+  - name: perl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: The root dir of your Flutter project that contains *pubspec.yaml*
+      and optionally *pubspec.lock*.
+    is_required: true
+    summary: The root dir of your Flutter project
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+outputs:
+- FLUTTER_PUBSPEC_VERSION: null
+  opts:
+    description: Minimum Flutter version requirement that is defined in pubspec files
+      (*pubspec.lock*, *pubspec.yaml*) at the **project location**.
+    title: Flutter version that is defined by pubspec
+- FLUTTER_PUBSPEC_YAML_VERSION: null
+  opts:
+    description: Minimum Flutter version requirement that is defined in *pubspec.yaml*
+      file at the **project location**.
+    title: Flutter version that is defined by pubspec.yaml
+- FLUTTER_PUBSPEC_LOCK_VERSION: null
+  opts:
+    description: Minimum Flutter version requirement that is defined in *pubspec.lock*
+      file at the **project location**.
+    title: Flutter version that is defined by pubspec.lock

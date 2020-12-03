@@ -1,0 +1,52 @@
+title: Bitrise Start Build
+summary: Starts the given workflows in the same app
+description: Starts the given workflows in the same app
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start/issues
+published_at: 2018-04-19T16:17:00.302411204+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-start.git
+  commit: 52e6fb7e14e7a9e9c327f0e627dc3a34c5ed7cc0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-start
+is_always_run: false
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your access token that has access to the app in you want to run
+      workflows.\n\nTo acquire a Personal Access Token for your user, sign in with
+      that user on [bitrise.io](https://bitrise.io),  \ngo to your Account Settings
+      page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_required: true
+    summary: Your access token that has access to the app in you want to run workflows.
+    title: Bitrise Access Token
+- opts:
+    description: The workflow(s) to start. One workflow per line.
+    is_required: true
+    summary: The workflow(s) to start. One workflow per line.
+    title: Workflows
+  workflows: null
+- opts:
+    description: Shall the step wait for the builds to be finished?
+    is_required: false
+    summary: Shall the step wait for the builds to be finished?
+    title: Wait for builds
+    value_options:
+    - "false"
+    - "true"
+  wait_for_builds: "false"
+outputs:
+- ROUTER_STARTED_BUILD_SLUGS: null
+  opts:
+    description: Newline separated list of started build slugs.
+    summary: Newline separated list of started build slugs.
+    title: Started Build Slugs

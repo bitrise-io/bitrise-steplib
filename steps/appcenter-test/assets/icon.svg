@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>appcenter-test-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#E03579" offset="0%"></stop>
+            <stop stop-color="#9F2455" offset="96.701138%"></stop>
+        </linearGradient>
+        <linearGradient x1="-315.418124%" y1="50%" x2="100%" y2="50%" id="linearGradient-2">
+            <stop stop-color="#CB2E6D" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="AppCenter-Test">
+            <g id="appcenter-test-stepicon">
+                <rect id="Rectangle" fill="#FFFFFF" x="0" y="0" width="256" height="256"></rect>
+                <rect id="Rectangle-2" fill="url(#linearGradient-1)" x="0" y="0" width="256" height="256"></rect>
+                <path d="M99,137.508457 L99,117.94042 L122.920052,102.827054 L166.24665,74 L202.920225,85.2933578 L202.920225,171.293544 L166.24665,182.587227 L122.920052,153.760498 L99,137.508457 Z M122.413384,128.293451 L169.58682,151.706835 L169.58682,104.886896 L122.413384,128.293451 Z" id="path0_fill" fill="url(#linearGradient-2)" fill-rule="nonzero"></path>
+                <path d="M94.0800999,118.753906 L48,90.5932913 L48,72.8865862 L94.0800999,35 L118.000152,42.1330236 L118.000152,109.330078 L94.0800999,118.753906 Z M91.3334273,60.1132252 L62.3133644,80.5266028 L91.3334273,96.026799 L91.3334273,60.1132252 Z" id="path0_fill-copy" fill="#0378D7" fill-rule="nonzero" style="mix-blend-mode: multiply;" transform="translate(83.000076, 76.876953) scale(1, -1) rotate(-180.000000) translate(-83.000076, -76.876953) "></path>
+                <path d="M118.0801,237.753906 L72,209.593291 L72,191.886586 L118.0801,154 L142.000152,161.133024 L142.000152,228.330078 L118.0801,237.753906 Z M115.333427,179.113225 L86.3133644,199.526603 L115.333427,215.026799 L115.333427,179.113225 Z" id="path0_fill-copy-2" fill="#0378D7" fill-rule="nonzero" style="mix-blend-mode: multiply;" transform="translate(107.000076, 195.876953) rotate(-180.000000) translate(-107.000076, -195.876953) "></path>
+            </g>
+        </g>
+    </g>
+</svg>

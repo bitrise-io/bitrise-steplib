@@ -1,0 +1,83 @@
+title: Bitrise Start Build
+summary: Starts the given workflows in the same app
+description: Starts the given workflows in the same app
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start/issues
+published_at: 2020-08-05T16:47:54.606978353Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-start.git
+  commit: 63a29bf46ca6346a88030bd5208163e241cff8f8
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-start
+is_always_run: false
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your access token\n\nTo acquire a `Personal Access Token` for your
+      user, sign in with that user on [bitrise.io](https://bitrise.io),  \ngo to your
+      `Account Settings` page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your access token
+    title: Bitrise Access Token
+- opts:
+    description: The workflow(s) to start. One workflow per line.
+    is_required: true
+    summary: The workflow(s) to start. One workflow per line.
+    title: Workflows
+  workflows: null
+- environment_key_list: null
+  opts:
+    description: "The keys of the envs which will be shared with the triggered workflows\n\n\n**FORMAT**
+      Seperate the keys with new line. E.g: \n`ENV_1\nENV_2\nENV_3`"
+    is_expand: false
+    is_required: false
+    summary: The keys of the envs which will be shared with the triggered workflows.
+    title: Environments to share
+- opts:
+    description: Should the step wait for the builds to be finished?
+    is_required: false
+    summary: Should the step wait for the builds to be finished?
+    title: Wait for builds
+    value_options:
+    - "false"
+    - "true"
+  wait_for_builds: "false"
+- build_artifacts_save_path: null
+  opts:
+    description: |
+      This is where the artifacts will be saved to so you can access them in the workflow
+    is_required: false
+    is_sensitive: false
+    summary: This is where the artifacts will be saved to if wait_for_builds == true
+    title: Path to save the Artifacts in (leave empty to not save artifacts)
+- abort_on_fail: "no"
+  opts:
+    description: Abort all started builds if any build fails
+    is_required: true
+    is_sensitive: false
+    title: Abort all if any fail
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: You can enable the verbose log for easier debugging.
+    is_required: true
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+outputs:
+- ROUTER_STARTED_BUILD_SLUGS: null
+  opts:
+    description: Newline separated list of started build slugs.
+    summary: Newline separated list of started build slugs.
+    title: Started Build Slugs

@@ -1,0 +1,100 @@
+title: close-jira-tasks
+summary: |
+  Step moves Jira tasks from given initial state to target state if their ids are in git log
+description: |
+  Step searches Jira project for tasks that are in `from_status` (e.g. `Deploying`) state
+  and after successful build moves them to `to_status` (e.g. `Stabilization on QA`) state.
+
+  This is useful if you use smart commits in Jira, e.g. if your commit message
+  includes `TEST-123 #Do`.
+  This would cause the issue TEST-123 to transition according to `Do` keyword.
+
+  The step works for multiple issues mentioned in last 100 commits, so if
+  you finished multiple tasks it should move all of them to the `to_status` state
+  provided they are in `from_status` at the moment of execution.
+
+  The step can also add custom value to the custom field in the Jira issue e.g. version of the app.
+website: https://github.com/orestesgaolin/bitrise-close-jira-tasks
+source_code_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks
+support_url: https://github.com/orestesgaolin/bitrise-close-jira-tasks/issues
+published_at: 2019-10-17T22:06:57.040904+02:00
+source:
+  git: https://github.com/orestesgaolin/bitrise-close-jira-tasks.git
+  commit: d870ad85bb907c116429b2dada5324b0a5a8f6bc
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: jq
+  apt_get:
+  - name: git
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- jira_project_name: ""
+  opts:
+    description: |
+      This will be used by script to determine tasks ids in git log e.g. TEST-123
+    is_expand: true
+    is_required: true
+    summary: Acronym used in Jira e.g. TEMP, GAS, TEST
+    title: Jira project name
+- jira_url: ""
+  opts:
+    description: |
+      This can be e.g. https://company.atlassian.net
+    is_expand: true
+    is_required: true
+    summary: Base URL to company Jira
+    title: Jira project URL
+- jira_token: $JIRA_TOKEN
+  opts:
+    description: |
+      You should use secret environment variable
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Token used to authenticate to Jira
+    title: Jira API token
+- from_status: Deploying
+  opts:
+    description: |
+      Status of tasks which are closed by developer and are currently being dpeloyed (may be a column name in Jira)
+    is_expand: true
+    is_required: true
+    summary: Status of tasks which are closed by developer
+    title: Initial status
+- opts:
+    description: |
+      Status of tasks which were deployed successfully (may be a column name in Jira)
+    is_expand: true
+    is_required: true
+    summary: Status of tasks which were deployed successfully
+    title: Initial status
+  to_status: Stabilization on QA
+- custom_jira_field: ""
+  opts:
+    description: |
+      This should be in format `customfield_xxxxx`
+    is_expand: true
+    is_required: false
+    summary: Current version number will be set in this custom field of Jira issues
+    title: Custom field to update version number
+- opts:
+    description: |
+      You should use Bitrise env variable
+    is_expand: true
+    is_required: false
+    summary: Current version number will be set in `custom_jira_field` of Jira issues
+    title: App version
+  version: $BITRISE_BUILD_NUMBER

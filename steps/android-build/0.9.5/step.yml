@@ -1,0 +1,101 @@
+title: Android Build
+summary: Builds your Android project with gradle.
+description: Builds your Android project with gradle.
+website: https://github.com/bitrise-steplib/bitrise-step-android-build
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-build
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-build/issues
+published_at: 2018-08-17T13:46:07.603768321Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-build.git
+  commit: e209a75ea1cfaa24a836df7cd1408d63c9d424de
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-build
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exist (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exist (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to build. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: false
+    summary: |
+      Set the module that you want to build. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    is_required: false
+    summary: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- apk_path_pattern: '*/build/outputs/apk/*.apk'
+  opts:
+    category: Options
+    description: Will find the APK files with the given pattern.
+    is_required: true
+    summary: Will find the APK files with the given pattern.
+    title: APK location pattern
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK
+      after filtering based on the filter inputs.
+      If the build generates more than one APK which fulfills the
+      filter inputs, this output will contain the last one's path.
+    summary: Path of the generated (and copied) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated APKs
+      after filtering based on the filter inputs.
+      The paths are separated with `|` character, for example, `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+    summary: List of the generated (and copied) APK paths - after filtering.
+    title: List of the generated APK paths
+- BITRISE_MAPPING_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated mapping.txt.
+      If more than one mapping.txt exist in the project, this output will contain the last one's path.
+    summary: Path of the generated (and copied) mapping.txt.
+    title: Path of the generated mapping.txt

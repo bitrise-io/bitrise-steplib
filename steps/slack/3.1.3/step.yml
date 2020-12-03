@@ -1,0 +1,284 @@
+title: Send a Slack message
+summary: Send a [Slack](https://slack.com/) message to a channel or group.
+description: |
+  Send a [Slack](https://slack.com/) message to a channel or group.
+
+  You can either setup a **bot user with API token** or setup **Incoming WebHook integration**.
+
+  To register an **Incoming WebHook integration** visit: https://api.slack.com/incoming-webhooks
+
+  To setup a **bot with an API token** visit: https://api.slack.com/bot-users
+
+  *Don't forget to enable this Step to **Always run** if
+  you want to get notified about failed builds as well!*
+website: https://github.com/bitrise-io/steps-slack-message
+source_code_url: https://github.com/bitrise-io/steps-slack-message
+support_url: https://github.com/bitrise-io/steps-slack-message/issues
+published_at: 2019-05-31T09:01:38.068185284Z
+source:
+  git: https://github.com/bitrise-steplib/steps-slack-message.git
+  commit: 178fc8990a4118dfdd124991777a25b2917aaa57
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-slack-message
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- is_debug_mode: "no"
+  opts:
+    description: |
+      Step prints additional debug information if this option
+      is enabled
+    title: Debug mode?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      **Either webhook\_url or api\_token input is required.**
+
+      To register an **Incoming WebHook integration** visit: https://api.slack.com/incoming-webhooks
+    is_required: false
+    is_sensitive: true
+    title: Slack Webhook URL (Webhook or API token is required)
+  webhook_url: null
+- api_token: null
+  opts:
+    description: |
+      **Either webhook\_url or api\_token input is required.**
+
+      To setup a **bot with an API token** visit: https://api.slack.com/bot-users
+    is_required: false
+    is_sensitive: true
+    title: Slack API token (Webhook or API token is required)
+- channel: null
+  opts:
+    description: |
+      Can be an encoded ID, or the channel's name.
+
+       Examples:
+
+       * channel ID: C024BE91L
+       * channel: #general
+       * username: @username
+    title: Target Slack channel, group or username
+- channel_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      * channel example: #general
+      * username example: @username
+    title: Target Slack channel, group or username if the build failed
+- opts:
+    description: |
+      Text of the message to send.
+      Required, unless providing only attachments instead.
+    title: Text of the message to send.
+  text: null
+- opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Text of the message to send, if the build failed
+  text_on_error: null
+- emoji: null
+  opts:
+    description: |
+      Optionally you can specify a Slack emoji as the sender
+      icon. You can use the Ghost icon for example
+      if you specify `:ghost:` here as an input.
+
+      **If you specify an Icon URL then this Emoji input will be ignored!**
+    title: Emoji to use as the icon for the message
+- emoji_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Emoji to use as the icon for the message if the build failed
+- icon_url: https://github.com/bitrise-io.png
+  opts:
+    description: |
+      Optionally you can specify a custom icon image URL
+      which will be presented as the sender icon.
+
+      Slack recommends an image a square image,
+      which can't be larger than 128px in width nor in height,
+      and it must be smaller than 64K in size.
+      Slack custom emoji guideline: [https://slack.zendesk.com/hc/en-us/articles/202931348-Using-emoji-and-emoticons](https://slack.zendesk.com/hc/en-us/articles/202931348-Using-emoji-and-emoticons)
+
+      *If you specify this input, the Emoji input will be ignored!*
+    title: URL to an image to use as the icon for the message.
+- icon_url_on_error: https://github.com/bitrise-io.png
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: URL to an image to use as the icon for the message if the build failed
+- link_names: "yes"
+  opts:
+    description: |
+      Linkify names in the message such as `@slackbot` or `#random`
+    title: Linkify channel names and usernames?
+    value_options:
+    - "yes"
+    - "no"
+- from_username: Bitrise
+  opts:
+    description: |
+      The one which should be presented as the sender of the message
+    title: the bot's username for the message
+- from_username_on_error: Bitrise
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: the bot's username for the message if the build failed
+- color: '#3bc3a3'
+  opts:
+    description: |
+      Color is used to color the border along the left side of the attachment.
+      Can either be one of good, warning, danger, or any hex color code (eg. #439FE0).
+
+      You can find more info about the color and other text formatting
+      in [Slack's documentation](https://api.slack.com/docs/message-attachments).
+    is_required: true
+    title: Message color
+- color_on_error: '#f0741f'
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Message color if the build failed
+- opts:
+    description: An optional text that appears above the attachment block.
+    title: An optional text that appears above the attachment block.
+  pretext: '*Build Succeeded!*'
+- opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: An optional text that appears above the attachment block if the build failed
+  pretext_on_error: '*Build Failed!*'
+- author_name: $GIT_CLONE_COMMIT_AUTHOR_NAME
+  opts:
+    description: A small text used to display the author's name.
+    title: A small text used to display the author's name.
+- opts:
+    description: Title is displayed as larger, bold text near the top of a attachment.
+    title: The title of the attachment
+  title: $GIT_CLONE_COMMIT_MESSAGE_SUBJECT
+- opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: The title of the attachment if the build failed
+  title_on_error: null
+- opts:
+    description: A URL that will hyperlink the title.
+    title: A URL that will hyperlink the title.
+  title_link: null
+- message: $GIT_CLONE_COMMIT_MESSAGE_BODY
+  opts:
+    description: |
+      Text is the main text of the attachment, and can contain standard message markup.
+
+      The content will automatically collapse if it contains 700+ characters or 5+ linebreaks,
+      and will display a "Show more..." link to expand the content.
+    title: Text is the main text of the attachment
+- message_on_error: $GIT_CLONE_COMMIT_MESSAGE_BODY
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Text is the main text of the attachment if the build failed
+- image_url: null
+  opts:
+    description: |
+      A URL to an image file that will be displayed inside the attachment.
+
+      Supported formats: GIF, JPEG, PNG, and BMP.
+      Large images will be resized to a maximum width of 400px or a maximum height of 500px.
+    title: A URL to an image file that will be displayed inside the attachment
+- image_url_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Image URL if build failed
+- opts:
+    description: |
+      A URL to an image file that will be displayed as a thumbnail on the right side of a attachment.
+
+      Supported formats: GIF, JPEG, PNG, and BMP.
+      The thumbnail's longest dimension will be scaled down to 75px.
+    title: A URL to an image file that will be displayed as a thumbnail
+  thumb_url: null
+- opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Thumbnail if the build failed
+  thumb_url_on_error: null
+- footer: Bitrise
+  opts:
+    description: |
+      The footer adds some brief text to help contextualize and identify an attachment.
+
+      Limited to 300 characters.
+    title: Footer adds some brief text as footer
+- footer_icon: https://github.com/bitrise-io.png?size=16
+  opts:
+    description: |
+      Renders a small icon beside the footer text
+
+      It will be scaled down to 16px by 16px.
+    title: Renders a small icon beside the footer text
+- opts:
+    description: Show the current time as part of the attachment's footer?
+    title: Show the current time as part of the attachment's footer?
+    value_options:
+    - "yes"
+    - "no"
+  timestamp: "yes"
+- fields: |
+    App|${BITRISE_APP_TITLE}
+    Branch|${BITRISE_GIT_BRANCH}
+    Workflow|${BITRISE_TRIGGERED_WORKFLOW_ID}
+  opts:
+    description: |
+      Fields separated by newlines and each field contains a `title` and a `value`.
+      The `title` and the `value` fields are separated by a pipe `|` character.
+      Empty lines and lines without a separator are omitted.
+
+      The *title* shown as a bold heading above the `value` text.
+      The *value* is the text value of the field.
+    title: A list of fields to be displayed in a table inside the attachment
+- buttons: |
+    View App|${BITRISE_APP_URL}
+    View Build|${BITRISE_BUILD_URL}
+    Install Page|${BITRISE_PUBLIC_INSTALL_PAGE_URL}
+  opts:
+    description: |
+      Buttons separated by newlines and each field contains a `text` and a `url`.
+      The `text` and the `url` fields are separated by a pipe `|` character.
+      Empty lines and lines without a separator are omitted.
+
+      The *text* is the label for the button.
+      The *url* is the fully qualified http or https url to deliver users to.
+
+      An attachment may contain 1 to 5 buttons.
+    title: A list of buttons attached to the message as link buttons

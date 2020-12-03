@@ -1,0 +1,57 @@
+title: Flutter
+summary: |
+  Executes one or more Flutter commands. E.g. build, test or install.
+website: https://github.com/DroidsOnRoids/bitrise-step-flutter
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-flutter
+support_url: https://github.com/DroidsOnRoids/bitrise-step-flutter/issues
+published_at: 2018-05-02T03:39:36.966499418+02:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-flutter.git
+  commit: 3ea421d3e5efcb8327dab0089ee4fb043e53d0a0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/DroidsOnRoids/bitrise-step-flutter
+deps:
+  brew:
+  - name: git
+  - name: curl
+  - name: unzip
+  apt_get:
+  - name: git
+  - name: curl
+  - name: xz-utils
+  - name: libglu1-mesa
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Flutter version including channel. Without `v` prefix. E.g. `0.2.8-alpha`
+      or `0.3.0-dev`.
+    title: Flutter version
+  version: 0.2.8-beta
+- opts:
+    is_expand: true
+    is_required: true
+    summary: The root directory of your Flutter project, where your `pubspec.yaml`
+      file is located.
+    title: Root directory of Flutter project
+  working_dir: $BITRISE_SOURCE_DIR
+- commands: build
+  opts:
+    is_expand: true
+    is_required: true
+    summary: |
+      `|` separated Flutter commands to be executed in order. E.g. `build`, `test` or `install`.
+    title: Flutter commands to be executed

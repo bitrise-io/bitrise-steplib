@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>swiftlint</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0.688674133%" x2="50%" y2="97.6477244%" id="linearGradient-1">
+            <stop stop-color="#FBB040" offset="0%"></stop>
+            <stop stop-color="#FF3527" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-2" x="0" y="0" width="256" height="256"></rect>
+        <linearGradient x1="82.1124691%" y1="50%" x2="0%" y2="50%" id="linearGradient-4">
+            <stop stop-color="#0D83CD" stop-opacity="0.530348558" offset="0%"></stop>
+            <stop stop-color="#054AB0" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="125.514915%" y1="66.6692824%" x2="58.984375%" y2="42.9177328%" id="linearGradient-5">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M63.79,144.68 L91.51,144.68 L91.51,157 L49.16,157 L49.16,103.1 L90.74,103.1 L90.74,115.42 L63.79,115.42 L63.79,123.89 L84.58,123.89 L84.58,135.44 L63.79,135.44 L63.79,144.68 Z M138.0675,103.1 L152.6975,103.1 L152.6975,157 L140.0695,157 L116.8925,126.97 L116.8925,157 L102.2625,157 L102.2625,103.1 L114.9675,103.1 L138.0675,133.13 L138.0675,103.1 Z M180.39,157 L161.14,103.1 L176.925,103.1 L188.475,140.06 L200.025,103.1 L215.81,103.1 L196.56,157 L180.39,157 Z" id="path-6"></path>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Swift-Environment-Variable-Injector">
+            <g id="swiftlint">
+                <mask id="mask-3" fill="white">
+                    <use xlink:href="#path-2"></use>
+                </mask>
+                <use id="Rectangle-path" fill="url(#linearGradient-1)" fill-rule="nonzero" xlink:href="#path-2"></use>
+                <path d="M139.355315,44 C214.503932,94.9114489 190.19107,150.962963 190.19107,150.962963 C190.19107,150.962963 211.556924,174.949994 202.961318,196 C202.961318,196 194.120474,181.31397 179.385252,181.31397 C165.141591,181.31397 156.791765,196 128.058481,196 C64.206879,196 34,142.885692 34,142.885692 C91.4925069,180.643983 130.75989,153.900169 130.75989,153.900169 C104.823969,138.884931 49.7174373,67.2528652 49.7174373,67.2528652 C97.7502059,107.972407 118.480659,118.653698 118.480659,118.653698 C106.070647,108.469383 71.3287096,58.6860296 71.3287096,58.6860296 C99.1269395,86.7186565 154.335955,125.752021 154.335955,125.752021 C170.083503,82.6050858 139.355315,44 139.355315,44" id="Fill-1" fill="url(#linearGradient-4)" fill-rule="nonzero" style="mix-blend-mode: multiply;" mask="url(#mask-3)"></path>
+                <g id="ENV" mask="url(#mask-3)">
+                    <use fill="#FFFFFF" xlink:href="#path-6"></use>
+                    <use fill="url(#linearGradient-5)" xlink:href="#path-6"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,154 @@
+title: Create Apple's documentation
+summary: |
+  This step helps to create a HTML representation of the Framework documentation, using Jazzy as engine
+description: |
+  This step helps to create a HTML representation of the Framework documentation, using Jazzy as engine.
+  Objective-C and Swift are supported, but there is no declared supported for mixed language projects.
+  This was created with the goal to export as a reach HTML documents for Frameworks.
+website: https://github.com/FutureWorkshops/bitrise-step-create-apple-documentation
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-create-apple-documentation
+support_url: https://github.com/FutureWorkshops/bitrise-step-create-apple-documentation/issues
+published_at: 2020-06-12T14:02:09.857363+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-create-apple-documentation.git
+  commit: 250e1818fab00f490105afe5bd9875c82fdfc380
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- jazzy_configuration: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Path to the jazzy.yaml file used to configure the build. If none is provided,
+      a new one may be created
+    title: Path to the jazzy configuration
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Path in where the script will be run
+    title: Project path
+  project_path: ./
+- language: swift
+  opts:
+    description: |
+      Language used in the project. Either 'swift', or 'objc'.
+
+      At the moment, the step do not support the generation, of documentation
+      for project with mixed language, even if it is a supported feature on Jazzy.
+    is_expand: true
+    is_required: true
+    summary: Language used in the project.
+    title: Language
+    value_options:
+    - objc
+    - swift
+- author: null
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    summary: Author of the Framework
+    title: Author
+- opts:
+    is_expand: true
+    is_required: true
+    summary: SDK to which the code is directed
+    title: SDK
+    value_options:
+    - iphone
+    - mac
+    - tv
+    - none
+  sdk: iphone
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    summary: Version string that will be used as Module Version in the documentation
+    title: Module Version
+  version: 1.0.0
+- framework_root: ./
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Root path of where the Framework is
+    title: Root path of the Framework
+- module: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Name of the module (also used as scheme)
+    title: Module name
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Name of the scheme that will be used to build the project. Optional for
+      Objective-C
+    title: Scheme name
+  scheme: null
+- acl: public
+  opts:
+    is_expand: true
+    is_required: true
+    title: The minimun ACL used to list the included classes on the doc set
+    value_options:
+    - open
+    - public
+    - internal
+    - private
+- opts:
+    description: You can set this to $BITRISE_DEPLOY_DIR/Docs if you want to have
+      the docs as artifacts
+    is_expand: true
+    is_required: true
+    summary: Path to where the generated files will be saved
+    title: Output of the doc set
+  output: ./docs
+- opts:
+    description: |
+      This is used to compose the final documentation with a reach index page. The Markdown file is placed as the initial page
+      and all classes are accessible through the class index. By default, the tool uses any README.md file placed in the root of the command,
+      but this can be overwritten with this input.
+    is_expand: true
+    is_required: true
+    summary: Path to the Markdown file that will be used as index of the documentation.
+    title: README file path
+  readme: ./README.md
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Message used as header title in the doc set
+    title: Title of the project
+  title: null
+- copyright: null
+  opts:
+    is_expand: true
+    is_required: false
+    title: Copyright message
+- opts:
+    is_expand: true
+    is_required: false
+    summary: This is used by Objective-C documentation generation. Optional for Swift
+    title: Path to the Framework umbrella header
+  umbrella_header: null
+outputs:
+- DOCUMENTATION_PATH: null
+  opts:
+    summary: This variable exposes the path created with the documentation, to be
+      used on further steps
+    title: Path with the generated files

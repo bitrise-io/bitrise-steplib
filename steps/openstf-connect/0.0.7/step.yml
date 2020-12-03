@@ -1,0 +1,106 @@
+title: Open STF Connect
+summary: |
+  Connects with devices from Open Smartphone Test Farm
+description: |
+  To use this step, you need an access to running [Open STF](https://openstf.io/) instance with at least 1 device connected.
+  [Access token](https://github.com/openstf/stf/blob/master/doc/API.md#authentication) and ADB keys has to be set up using STF web UI.
+  Typical workflow:
+
+  1. App compilation e.g. using Gradle Runner step.
+
+  2. Open STF Connect (this step).
+
+  3. Android instrumention and/or UI tests e.g. using Gradle Unit Test step.
+
+  4. Open STF Disconnect step with `is_always_run: true` (to stop using remote devices).
+website: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect
+support_url: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect/issues
+published_at: 2018-11-27T04:03:34.710176114+01:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-openstf-connect.git
+  commit: 4ee070d7347b5eae573a34c71000050c606c40fd
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/DroidsOnRoids/bitrise-step-openstf-connect
+deps:
+  brew:
+  - name: jq
+  apt_get:
+  - name: jq
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      URL of your STF instance e.g. `https://stf.example.com`
+    is_expand: true
+    is_required: true
+    title: STF Host URL
+  stf_host_url: null
+- opts:
+    description: |
+      STF API access token. Go to `Settings->Keys` on your STF web UI to generate one.
+      Read more about tokens in [OpenSTF API documentation](https://github.com/openstf/stf/blob/master/doc/API.md#authentication).
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: STF API access token
+  stf_access_token: null
+- device_filter: .
+  opts:
+    description: |-
+      If not empty will be passed to `jq` as a select expression. Syntax details can be found in [jq manual](https://stedolan.github.io/jq/manual/#select(boolean_expression)).
+      Non-matching devices will be filtered out. Note that `.present and .owner == null` filter is applied implicitly so you don't need to add it manually.
+    is_expand: true
+    is_required: false
+    summary: Optional device requirements e.g. API level or manufacturer declared
+      as jq select expression. For example to use only devices with API level 21 or
+      newer `.sdk >= "21"`. Only present and not used devices are taken into account.
+    title: Device requirements e.g. API level
+- device_number_limit: null
+  opts:
+    description: |
+      Maximum number of devices to be used. 0 and empty mean unlimited.
+      If there are more available devices (after applying filter if any), only amount up to this number will be used. Devices will be chosen randomly.
+    is_expand: true
+    is_required: false
+    title: Device number limit
+- adb_key: null
+  opts:
+    description: |
+      Private ADB key to be used when debugging on STF devices. If not empty value will be saved to `~/.android/adbkey`.
+      Key used during build has to be registered in STF under `Settings->Keys->ADB Keys`.
+      You have to either provide value here or modify `~/.android/adbkey` before this step.
+      Otherwise devices will be listed as unauthorized and cannot be used during build.
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    title: Private ADB key
+- adb_key_pub: null
+  opts:
+    description: |
+      Public ADB key to be used when debugging on STF devices. If not empty value will be saved to `~/.android/adbkey.pub`.
+      Key used during build has to be registered in STF under `Settings->Keys->ADB Keys`.
+      You have to either provide value here or modify `~/.android/adbkey.pub` before this step.
+      Otherwise devices will be listed as unauthorized and cannot be used during build.
+    is_expand: true
+    is_required: false
+    title: Public ADB key
+outputs:
+- STF_DEVICE_SERIAL_LIST: null
+  opts:
+    description: |-
+      List of serials in JSON string array format to be used to disconnect devices after tests in next steps.
+      List will contain serials of all present and not used devices (matching filter if any), even those for which connection has failed.
+    title: Connected devices serials

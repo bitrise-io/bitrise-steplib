@@ -1,0 +1,97 @@
+title: Sign APK
+summary: Sign APK
+description: With this step, you can digitally sign your app's APK file in your workflow.
+  All you have to do is upload your keystore file in the Code signing tab of the Workflow
+  Editor.
+website: https://github.com/bitrise-steplib/steps-sign-apk
+source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
+support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
+published_at: 2018-11-09T12:06:17.464146743Z
+source:
+  git: https://github.com/bitrise-steplib/steps-sign-apk.git
+  commit: 80363a9611b8d37477092a51ad6d506c0b86a4f7
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-sign-apk
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |-
+      Path(s) to the build artifact file to sign (`.aab` or `.apk`).
+
+      You can provide multiple build artifact file paths separated by `|` character.
+
+      Format examples:
+
+      - `/path/to/my/app.apk`
+      - `/path/to/my/app1.apk|/path/to/my/app2.apk|/path/to/my/app3.apk`
+
+      - `/path/to/my/app.aab`
+      - `/path/to/my/app1.aab|/path/to/my/app2.apk|/path/to/my/app3.aab`
+    is_required: true
+    summary: '`Android App Bundle (.aab)` or `Android Aplication Package (.apk)`'
+    title: Build artifact path.
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    description: |-
+      For remote keystores you can provide any download location (ex: https://URL/TO/keystore.jks).
+      For local keystores provide file path url. (ex: file://PATH/TO/keystore.jks).
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Keystore url
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Keystore password
+- keystore_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Keystore alias
+- opts:
+    description: |
+      If key password equals to keystore password, you can leave it empty.
+      Otherwise specify the private key password.
+    is_sensitive: true
+    summary: ""
+    title: Private key password
+  private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+- jarsigner_options: ""
+  opts:
+    description: |
+      __deprecated!__ jarsigner options are detected from the keystore
+    summary: ""
+    title: Additional options for jarsigner
+outputs:
+- BITRISE_SIGNED_APK_PATH: null
+  opts:
+    title: Bitrise signed build artifact path
+- BITRISE_APK_PATH: null
+  opts:
+    title: Bitrise signed build artifact path

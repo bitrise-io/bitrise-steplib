@@ -1,0 +1,80 @@
+title: Activate SSH key (RSA private key)
+summary: Setup the SSH Key to use with the current workflow
+description: |-
+  This step saves the provided **RSA private SSH key** to a file
+  and then loads it into the user's ssh-agent with `ssh-add`.
+
+  **The SSH key should not have a passphrase but an empty passphrase**.
+
+  *Warning: the provided key will overwrite an existing key at
+  the specified path (if another key at the path already exists).*
+
+  The step will start the ssh-agent if it can't connect to the agent.
+website: https://github.com/bitrise-io/steps-activate-ssh-key
+source_code_url: https://github.com/bitrise-io/steps-activate-ssh-key
+support_url: https://github.com/bitrise-io/steps-activate-ssh-key/issues
+published_at: 2018-08-22T09:43:08.222832748Z
+source:
+  git: https://github.com/bitrise-io/steps-activate-ssh-key.git
+  commit: 29e73e8056a05ecf681ddac659afcfe9f3385a9e
+host_os_tags:
+- osx-10.9
+type_tags:
+- access-control
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-activate-ssh-key
+deps:
+  apt_get:
+  - name: expect
+  - name: git
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    is_sensitive: true
+    title: SSH private key in RSA format
+  ssh_rsa_private_key: $SSH_RSA_PRIVATE_KEY
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    title: (Optional) path to save the private key.
+  ssh_key_save_path: $HOME/.ssh/bitrise_step_activate_ssh_key
+- is_remove_other_identities: "true"
+  opts:
+    description: |-
+      (Optional) Remove other or previously loaded keys and restart ssh-agent?
+
+      Options:
+
+      * "true"
+      * "false"
+    is_dont_change_value: true
+    is_expand: false
+    title: Remove other identities?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: Enable verbose log option for better debug
+    is_expand: true
+    is_required: true
+    summary: Enable verbose log option for better debug
+    title: Enable verbose logging
+    value_options:
+    - true
+    - false
+  verbose: false
+outputs:
+- SSH_AUTH_SOCK: null
+  opts:
+    description: |-
+      If the `is_should_start_new_agent` option is enabled, and no accessible
+      ssh-agent is found, the step will start a new ssh-agent.
+
+      This output environment variable will contain the path of the
+      SSH Auth Socket, which can be used to access the started ssh-agent.
+    title: SSH Auth Socket info, in case the ssh-agent was started by this step

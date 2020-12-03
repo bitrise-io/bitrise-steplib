@@ -1,0 +1,65 @@
+title: Appetize.io deploy
+summary: Deploy your app to Appetize.io
+description: "Deploy your app to [Appetize.io](https://appetize.io/) and run it in
+  your browser.\nFor app demos, training, customer support, development, testing,
+  and more.\n\n**NOTE:** For iOS, provide a `.zip` or a `.tar.gz` file containing
+  your compressed .app bundle or the `.app` bundle. For Android, provide the `.apk`
+  containing your app. "
+website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
+published_at: 2019-12-17T09:27:06.889342486Z
+source:
+  git: https://github.com/bitrise-steplib/steps-appetize-io-deploy.git
+  commit: d8af79622e3970e4efc22ee90e7f952bcbdbf704
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appetize-io-deploy
+inputs:
+- app_path: null
+  opts:
+    description: "The full path to the application file (.app, .zip, .tar.gz, or .apk)\n\n**NOTE:**
+      For iOS, provide a `.zip` or `.tar.gz` file containing your compressed .app
+      bundle or the `.app` bundle. For Android, provide the `.apk` containing your
+      app. "
+    is_required: true
+    summary: The full path to the application file (.app, .zip, .tar.gz, or .apk)
+    title: Application path
+- appetize_token: null
+  opts:
+    description: |-
+      The token provided by Appetize.io
+
+      **NOTE:** You can reaquest an api token for Appetize.io here:
+      [Appetize.io/request-api-token](https://appetize.io/docs#request-api-token)
+    is_required: true
+    is_sensitive: true
+    summary: The token provided by Appetize.io
+    title: Appetize.io token
+- opts:
+    description: The public key in case you want to deploy this build to an existing
+      app
+    is_required: false
+    summary: The public key in case you want to deploy this build to an existing app
+    title: Public key
+  public_key: null
+- opts:
+    description: Enable verbose log option for better debugging
+    is_expand: true
+    is_required: true
+    summary: Enable verbose log option for better debugging
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- APPETIZE_APP_URL: null
+  opts:
+    description: The public URL to use the app
+    is_expand: false
+    is_required: true
+    summary: The public URL to use the app
+    title: Public URL for the app

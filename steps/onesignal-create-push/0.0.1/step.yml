@@ -1,0 +1,68 @@
+title: |
+    Send OneSignal push message
+summary: |
+  Create a notification with onesignal. You can send notification with existing OneSignal app
+description: |
+  Create a notification with onesignal. You can send notification with existing OneSignal app
+website: https://github.com/sonifex/bitrise-step-onesignal-create-push
+source_code_url: https://github.com/sonifex/bitrise-step-onesignal-create-push
+support_url: https://github.com/sonifex/bitrise-step-onesignal-create-push/issues
+published_at: 2020-05-09T17:07:55.992745+03:00
+source:
+  git: https://github.com/sonifex/bitrise-step-onesignal-create-push.git
+  commit: 2c05994e6a465eda27cb61527d1c895e9880b4a5
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- notification
+toolkit: {}
+
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+
+toolkit:
+    bash:
+    entry_file: step.sh
+
+inputs:
+- onesignal_rest_api_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: |
+      "OneSignal Rest API KEY"
+- onesignal_app_id: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: |
+      "OneSignal App ID"
+- app_public_install_page: $BITRISE_PUBLIC_INSTALL_PAGE_URL
+  opts:
+    is_expand: true
+    title: App Public Install Page Url
+- opts:
+    is_expand: true
+    is_required: true
+    title: |
+      "Push Notification Title"
+  push_title: ""
+- opts:
+    is_expand: true
+    is_required: true
+    title: |
+      "Push Notification Message"
+  push_body: ""

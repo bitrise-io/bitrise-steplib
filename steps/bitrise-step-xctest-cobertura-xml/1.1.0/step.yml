@@ -1,0 +1,75 @@
+title: Convert XCTest result to Cobertura XML
+summary: |
+  Converts XCTest results to cobertura compatible xml
+description: |
+  Converts test results from XCTest step to Cobertura formatted xml to be uploaded to Coveralls or Sonarqube
+website: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml
+source_code_url: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml
+support_url: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml/issues
+published_at: 2020-03-27T11:15:58.609528+02:00
+source:
+  git: https://github.com/ollitapa/bitrise-step-xctest-cobertura-xml.git
+  commit: e1d25a018c6bf6106e68895cd8841ba6d0de19cf
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/ollitapa/bitrise-step-xctest-cobertura-xml
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path to XCTest result bundle, usually located in  `..../DerivedData/<Project dir>/Logs/Test`
+      Bitrise Xcode test step provides this in variable `$BITRISE_XCRESULT_PATH`
+    is_expand: true
+    is_required: true
+    summary: Path to XCTest result bundle
+    title: Path to XCTest result bundle
+    value_options: []
+  path_to_xcresult: $BITRISE_XCRESULT_PATH
+- opts:
+    description: |
+      Directory where to put the resulting `coverage.json` and `cobertura.xml`
+      Default is `$BITRISE_DEPLOY_DIR`
+    is_expand: true
+    is_required: true
+    summary: Directory where to put the resulting cobertura.xml
+    title: Directory where to put the resulting cobertura.xml
+    value_options: []
+  xml_output_dir: $BITRISE_DEPLOY_DIR
+- opts:
+    description: |
+      Directory where the source files that used by xcode to create the test "Path to the resulting coverage.json"
+      This directory is referenced by the <sources> item of cobertura xml.
+      Default is `$BITRISE_SOURCE_DIR`
+    is_expand: true
+    is_required: true
+    summary: Directory where the source files are located.
+    title: Directory where the source files are located.
+    value_options: []
+  path_to_source_dir: $BITRISE_SOURCE_DIR
+outputs:
+- COVERAGE_XML_TEST_RESULT_PATH: null
+  opts:
+    description: |
+      Path to the resulting `cobertura.xml`
+    summary: Path to the resulting `cobertura.xml`
+    title: Path to the resulting cobertura.xml
+- COVERAGE_JSON_TEST_RESULT_PATH: null
+  opts:
+    description: Path to the resulting `coverage.json`
+    summary: Path to the resulting `coverage.json`
+    title: Path to the resulting coverage.json

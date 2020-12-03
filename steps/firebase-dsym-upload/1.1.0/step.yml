@@ -1,0 +1,67 @@
+title: Firebase dSYM Upload
+summary: |
+  This step uploads the dsym for your iOS project to Firebase
+description: |
+  This step uploads the dsym for your iOS project to Firebase
+website: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
+source_code_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
+support_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload/issues
+published_at: 2020-05-14T09:58:37.310824+01:00
+source:
+  git: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload.git
+  commit: 2f288800b2f04969f55898e4f9b260d2bbec18e0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- fdu_fabric_location: null
+  opts:
+    description: |
+      For Fabric it is usually `./Pods/Fabric/upload-symbols`
+      and FirebaseCrashlytics it is usually `./Pods/FirebaseCrashlytics/upload-symbols`
+    is_expand: true
+    is_required: true
+    summary: This is the location of where Fabric or FirebaseCrashlytics is stored.
+    title: Location of Fabric or FirebaseCrashlytics
+- fdu_google_services_location: null
+  opts:
+    description: |
+      The location is usually in the form ./YOUR-APP-NAME/GoogleService-Info.plist
+    is_expand: true
+    is_required: true
+    summary: This is the location of your GoogleService-Info.plist
+    title: Location of your GoogleService-Info.plist
+- fdu_dsym_location: $BITRISE_DSYM_PATH
+  opts:
+    description: |
+      This is the location of your dSYMs. Usually it is $BITRISE\_DSYM\_PATH
+    is_expand: true
+    is_required: true
+    summary: This is the location of your dSYMs that you want to upload to Firebase.
+    title: Location of the bitrise dSYMs
+- fdu_logging: "no"
+  opts:
+    category: Debug
+    description: Prints the location of the Fabric or FirebaseCrashlytics, the GoogleService-Info.plist
+      and the location of the dSYMs on the server.
+    summary: Shows additional logging output
+    title: Show additional logging
+    value_options:
+    - "yes"
+    - "no"

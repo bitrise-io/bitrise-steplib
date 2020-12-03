@@ -1,0 +1,64 @@
+title: Brew install
+summary: Install or upgrade formula with brew
+description: Install or upgrade formula with brew
+website: https://github.com/bitrise-steplib/steps-brew-install
+source_code_url: https://github.com/bitrise-steplib/steps-brew-install
+support_url: https://github.com/bitrise-steplib/steps-brew-install/issues
+published_at: 2019-09-04T14:05:28.633248533Z
+source:
+  git: https://github.com/bitrise-steplib/steps-brew-install.git
+  commit: f852abd2db2d170f23829787ec472e397f90662f
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-brew-install
+inputs:
+- opts:
+    description: Name of the formula to install/upgrade
+    is_expand: true
+    is_required: true
+    summary: Name of the formula to install/upgrade
+    title: Name of the formula to install/upgrade
+  packages: null
+- options: null
+  opts:
+    description: |
+      Flags to pass to the bew install/reinstall command.
+
+      `brew install/reinstall [options] [packages]`
+    is_expand: true
+    summary: Options for Brew install/upgrade
+    title: Options for Brew install/upgrade
+- opts:
+    description: |
+      If set the step will upgrade the defined packages by calling `brew reinstall [options] [packages]` command.
+
+      Otherwise the step calls `brew install [options] [packages]`
+    is_expand: true
+    summary: Upgrade formula if previously installed
+    title: Upgrade formula if previously installed
+    value_options:
+    - "yes"
+    - "no"
+  upgrade: "yes"
+- cache_enabled: "no"
+  opts:
+    category: Cache
+    description: |
+      Select if the contents of ~/Library/Caches/Homebrew directory should be cached.
+      `true`: Mark brew installers to be cached.
+      `false`: Do not use cache.
+    is_required: true
+    title: Cache
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"

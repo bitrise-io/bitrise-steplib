@@ -1,0 +1,4 @@
+deprecate_notes: This step is deprecated, use [Project scanner](https://github.com/bitrise-steplib/steps-project-scanner)
+  instead.
+maintainer: bitrise
+removal_date: "2019-02-28"

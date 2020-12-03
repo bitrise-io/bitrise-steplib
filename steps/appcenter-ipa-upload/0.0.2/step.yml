@@ -1,0 +1,50 @@
+title: AppCenter ipa upload
+summary: |
+  Upload ipa to Microsoft AppCenter
+description: |
+  This step is upload iOS ipa archive file to AppCenter.
+  Using AppCenter CLI.
+website: https://github.com/kanari3/bitrise-step-appcenter-ipa-upload
+source_code_url: https://github.com/kanari3/bitrise-step-appcenter-ipa-upload
+support_url: https://github.com/kanari3/bitrise-step-appcenter-ipa-upload/issues
+published_at: 2019-07-15T21:29:09.119266+09:00
+source:
+  git: https://github.com/kanari3/bitrise-step-appcenter-ipa-upload.git
+  commit: 2e9810e71558b613a495c1169644d2038c51adca
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_id: $APP_CENTER_APP_ID
+  opts:
+    description: |
+      AppCenter Application Identifier is a combination of your Organization/Owner Name
+      and an Application Name.
+      For example: "MyOrganization/MyApplication"
+    is_required: true
+    summary: AppCenter application identifier (Owner + App Name).
+    title: Application Identifier
+- api_token: $APP_CENTER_ACCESS_TOKEN
+  opts:
+    description: |
+      [Obtain API Token from AppCenter](https://appcenter.ms/settings/apitokens)
+    is_required: true
+    is_sensitive: true
+    title: AppCenter API Token
+- distribution_group: $APP_CENTER_DISTRIBUTION_GROUP
+  opts:
+    description: |
+      For example and default: "Collaborators"
+    is_required: true
+    title: AppCenter Distribution Group Name

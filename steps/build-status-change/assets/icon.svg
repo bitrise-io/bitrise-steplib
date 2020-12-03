@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 55.2 (78181) - https://sketchapp.com -->
+    <title>build-status-change</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#0DD3C5" offset="0%"></stop>
+            <stop stop-color="#0D83CD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="132.409355%" y1="-11.0977103%" x2="-18.5997596%" y2="109.263393%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+        <path d="M95,174.166667 C138.722543,174.166667 174.166667,138.722543 174.166667,95 C174.166667,51.2774573 138.722543,15.8333333 95,15.8333333 C51.2774573,15.8333333 15.8333333,51.2774573 15.8333333,95 C15.8333333,138.722543 51.2774573,174.166667 95,174.166667 Z M95,190 C42.5329488,190 0,147.467051 0,95 C0,42.5329488 42.5329488,0 95,0 C147.467051,0 190,42.5329488 190,95 C190,147.467051 147.467051,190 95,190 Z" id="path-3"></path>
+        <path d="M47.2222222,78.3333333 C29.9074074,78.3333333 15.7407407,64.2333333 15.7407407,47 L0,47 L0,94 L15.7407407,94 L15.7407407,82.25 C24.3981481,90.0833333 35.4166667,94 47.2222222,94 C62.1759259,94 76.3425926,86.95 85,75.2 L72.4074074,65.8 C66.1111111,73.6333333 57.4537037,78.3333333 47.2222222,78.3333333 Z M78.2592593,0 L78.2592593,11.75 C69.6018519,4.7 58.5833333,0 46.7777778,0 C31.8240741,0 17.6574074,7.05 9,18.8 L21.5925926,28.2 C27.1018519,20.3666667 36.5462963,15.6666667 46.7777778,15.6666667 C64.0925926,15.6666667 78.2592593,29.7666667 78.2592593,47 L94,47 L94,0 L78.2592593,0 Z" id="path-5"></path>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Build-Status-Change">
+            <g id="build-status-change">
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" fill-rule="nonzero" x="0" y="0" width="256" height="256"></rect>
+                <g id="icons-/-buildstatus-/-successful" transform="translate(33.000000, 33.000000)">
+                    <mask id="mask-4" fill="white">
+                        <use xlink:href="#path-3"></use>
+                    </mask>
+                    <use fill="url(#linearGradient-2)" xlink:href="#path-3"></use>
+                </g>
+                <g id="icons-/-refresh" transform="translate(81.000000, 81.000000)">
+                    <mask id="mask-6" fill="white">
+                        <use xlink:href="#path-5"></use>
+                    </mask>
+                    <use fill="#760FC3" style="mix-blend-mode: multiply;" xlink:href="#path-5"></use>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

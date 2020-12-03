@@ -1,0 +1,109 @@
+title: Send Email with Mailgun
+summary: Send emails using your Mailgun account.
+description: |-
+  Send emails with [Mailgun](https://mailgun.com).
+
+  How to get step inputs from Mailgun?
+
+  - [Sign up](https://mailgun.com/signup) or [Log in](https://mailgun.com/cp) to Mailgun.
+  - Go to [Domains](https://mailgun.com/app/domains) and select a domain you want to use or create a new domain.
+  - On the selected domain's page you can grab the:
+    - `MAILGUN_DOMAIN`'s environment value (sandbox...mailgun.org)
+    - `MAILGUN_API_KEY`'s environment value (key-...)
+
+  With the free Mailgun account you can send 10,000 emails/month, 300 emails/day.
+
+  If you don't get the email, check your spam folder and your Mailgun log on `Logs` tab after you logged in.
+website: https://github.com/bitrise-io/steps-email-with-mailgun
+source_code_url: https://github.com/bitrise-io/steps-email-with-mailgun
+support_url: https://github.com/bitrise-io/steps-email-with-mailgun/issues
+published_at: 2018-08-31T08:17:31.528266763Z
+source:
+  git: https://github.com/bitrise-io/steps-email-with-mailgun.git
+  commit: f64779287399f42b6f005e8d86106c5985283e17
+host_os_tags:
+- osx-10.9
+- osx-10.10
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-email-with-mailgun
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: $MAILGUN_API_KEY
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Mailgun API Key
+- domain: $MAILGUN_DOMAIN
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Mailgun Domain
+- from_email: Bitrise Mailgun Step <postmaster@$domain>
+  opts:
+    description: |
+      Email address for From header
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Email address for From header
+- opts:
+    description: |
+      Comma separated email address list.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Send To emails
+  send_to: ""
+- opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Email Subject
+  subject: $BITRISE_APP_TITLE Build $BITRISE_BUILD_NUMBER finished
+- message: $BITRISE_APP_TITLE Build $BITRISE_BUILD_NUMBER succeeded on Bitrise.io
+  opts:
+    description: |
+      The message can be HTML or plain text.
+    is_required: true
+    summary: ""
+    title: Email Message
+- error_message: $BITRISE_APP_TITLE Build $BITRISE_BUILD_NUMBER failed on Bitrise.io
+  opts:
+    description: |
+      The message can be HTML or plain text.
+    is_required: true
+    summary: ""
+    title: Email Message on build failed
+- message_format: html
+  opts:
+    description: |
+      Message format.
+    is_required: true
+    summary: ""
+    title: Message format
+    value_options:
+    - html
+    - text
+- attachments: null
+  opts:
+    description: |
+      You can post multiple attachments separated with commas.
+      example: image1.jpg,image2.jpg,image3.jpg
+    summary: ""
+    title: File attachments

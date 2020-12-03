@@ -1,0 +1,56 @@
+title: Appledoc
+summary: This step allows the creation of apple docs
+description: This step allows the creation of apple docs HTML files from a template,
+  and code comments.
+website: https://github.com/FutureWorkshops/bitrise-step-appledoc
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-appledoc
+published_at: 2019-08-22T16:13:29.664503+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-appledoc.git
+  commit: abbf9fd315669905a205afc70d8f7fc67651f278
+host_os_tags:
+- osx-10.14
+project_type_tags:
+- ios
+- xamarin
+type_tags:
+- utility
+deps: {}
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Documentation will be generated for the source files found at this
+      location.
+    is_expand: true
+    is_required: true
+    summary: The path to the directory containing the source files to process.
+    title: Source files
+    value_options: []
+  source_path: ""
+- appledoc_conf: config.plist
+  opts:
+    description: This file contains all the necessary configuration to run appledoc.
+    is_expand: true
+    is_required: true
+    summary: The configuration file of appledoc.
+    title: Appledoc configuration plist
+    value_options: []
+- opts:
+    description: The readme will be included as the landing page of the docs.
+    is_expand: true
+    is_required: true
+    summary: The path to a README.md to include in the docs.
+    title: Readme path
+    value_options: []
+  readme_path: ""
+- opts:
+    description: This archive contains the generated appledocs.
+    is_expand: true
+    is_required: true
+    summary: The filepath of the final zip archive.
+    title: Output file
+    value_options: []
+  output_file: docs.zip
