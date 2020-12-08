@@ -1,0 +1,131 @@
+title: Azure DevOps status
+summary: |
+  Update commit status for Azure DevOps repositories
+description: |
+  Update commit status for Azure DevOps repositories.
+  This step always runs, no matter if build succeeded or failed.
+website: https://github.com/mediusoft/bitrise-step-azure-devops-status
+source_code_url: https://github.com/mediusoft/bitrise-step-azure-devops-status
+support_url: https://github.com/mediusoft/bitrise-step-azure-devops-status/issues
+published_at: 2020-03-17T00:04:11.37749+02:00
+source:
+  git: https://github.com/mediusoft/bitrise-step-azure-devops-status.git
+  commit: 1c28119b926f95b405ddad80b258ce9e414d44bf
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+run_if: not (enveq "BITRISE_GIT_COMMIT" "")
+inputs:
+- devops_user: $AZURE_DEVOPS_USER
+  opts:
+    description: |
+      Azure DevOps user name.
+
+      Can also be taken from secret `AZURE_DEVOPS_USER`. Cannot be empty.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Azure DevOps user name
+- devops_pat: $AZURE_DEVOPS_PAT
+  opts:
+    description: |
+      Azure DevOps Personal Access Token.
+
+      Can also be taken from secret `AZURE_DEVOPS_PAT`. Cannot be empty.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Azure DevOps Personal Access Token
+- devops_organization: $AZURE_DEVOPS_ORGANIZATION
+  opts:
+    description: |
+      Azure DevOps organization.
+
+      Can also be taken from env var `AZURE_DEVOPS_ORGANIZATION`. Cannot be empty.
+    is_expand: true
+    is_required: true
+    title: Azure DevOps organization
+- devops_project: $AZURE_DEVOPS_PROJECT
+  opts:
+    description: |
+      Azure DevOps project.
+
+      Can also be taken from env var `AZURE_DEVOPS_PROJECT`. Cannot be empty.
+    is_expand: true
+    is_required: true
+    title: Azure DevOps project
+- devops_repository_id: $AZURE_DEVOPS_REPOSITORY_ID
+  opts:
+    description: |
+      Azure DevOps repository ID.
+
+      Can also be taken from env var `AZURE_DEVOPS_REPOSITORY_ID`. Cannot be empty.
+    is_expand: true
+    is_required: true
+    title: Azure DevOps repository ID
+- devops_commit_state: auto
+  opts:
+    description: |
+      Status to set on commit.
+
+      Possible values are `auto`, `error`, `failed`, `notApplicable`, `notSet`, `pending`, `succeeded`.
+      If set to `auto` then step will automatically set `succeeded` or `failed` based on build status.
+    is_expand: true
+    is_required: true
+    title: Commit status
+    value_options:
+    - auto
+    - pending
+    - succeeded
+    - failed
+    - error
+    - notSet
+    - notApplicable
+- devops_description: ""
+  opts:
+    description: "Status description.\n\nTypically describes current state of the
+      status. \nIf no value provided, then will be set to `$BITRISE_APP_TITLE build
+      #$BITRISE_BUILD_NUMBER $state`.\n"
+    is_expand: true
+    is_required: false
+    title: Commit status description
+- devops_target_url: $BITRISE_BUILD_URL
+  opts:
+    description: |
+      URL with status details.
+
+      This URL will be opened when status description is clicked from Azure DevOps. Cannot be empty
+    is_expand: true
+    is_required: true
+    title: Target URL
+- devops_context_name: build/$BITRISE_APP_TITLE
+  opts:
+    description: |
+      Name identifier of the status.
+
+      Typically name of the build pipeline/configuration. Cannot be empty.
+    is_expand: true
+    is_required: true
+    title: Name identifier
+- devops_context_genre: continuous-integration
+  opts:
+    description: |
+      Genre of the status.
+
+      Typically name of the service/tool generating the status. Can be empty.
+    is_expand: true
+    is_required: false
+    title: Status genre

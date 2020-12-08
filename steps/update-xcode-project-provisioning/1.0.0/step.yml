@@ -1,0 +1,98 @@
+title: Update Xcode Project Provisioning
+summary: |
+  Updates Xcode's project file signing config to use a specific certificate and provisioning profile
+description: |
+  Updates Xcode's project file signing config to use a specific certificate and provisioning profile
+website: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning
+source_code_url: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning.git
+support_url: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning/issues
+published_at: 2020-03-03T23:07:22.000457-05:00
+source:
+  git: https://github.com/cupojoe/bitrise-step-update-xcode-project-provisioning.git
+  commit: 89ddef54f6072bca950708ca608d77b50694618b
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- utility
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: "Your project.xcodeproj file path. (e.g. MyAwesomeProject/MyAwesomeProject.xcodeproj)
+      \ \nProvide `.xcodeproj` path even if using `.xcworkspace`.\n"
+    is_expand: true
+    is_required: true
+    summary: Your project.xcodeproj file path.
+    title: Xcode project.xcodeproj Path
+    value_options: []
+  xcode_xcodeproj_file: null
+- opts:
+    description: |
+      The target name of your Xcode project. (e.g. MyAwesomeProject)
+    is_expand: true
+    is_required: true
+    summary: Project Target Name
+    title: Project Target
+    value_options: []
+  project_target: null
+- code_sign_style: Automatic
+  opts:
+    description: "The **CODE__SIGN__STYLE** value will be replaced.  \nValue either
+      `Automatic` or `Manual`.\n"
+    is_expand: true
+    is_required: true
+    summary: The **CODE__SIGN__STYLE** value will be replaced.
+    title: Code Sign Style
+    value_options:
+    - Automatic
+    - Manual
+- development_team: null
+  opts:
+    description: "The **configurations** of **DEVELOPMENT_TEAM** value will be replaced.
+      \ \nLeft blank means `None`.\n"
+    is_expand: true
+    is_required: false
+    summary: The **configurations** of **DEVELOPMENT_TEAM** value will be replaced.
+    title: Development Team
+    value_options: []
+- code_sign_identity: null
+  opts:
+    description: "The **configurations** of **CODE__SIGN__IDENTITY** value will be
+      replaced.   \nValue will be `iPhone Developer`, `iPhone Distribution` or others.\n"
+    is_expand: true
+    is_required: true
+    summary: The **configurations** of **CODE__SIGN__IDENTITY** value will be replaced.
+    title: Code Sign Identity
+    value_options: []
+- opts:
+    description: "The **configurations** of **PROVISIONING__PROFILE__SPECIFIER** value
+      will be replaced.  \nPlease specify the provisioning profile name which is same
+      as one created at **Certificates, Identifiers & Profiles** at **Apple Developer
+      Program**.  \nDon't forget to upload that provisioning profile file.\n"
+    is_expand: true
+    is_required: true
+    summary: The **configurations** of **PROVISIONING__PROFILE__SPECIFIER** value
+      will be replaced.
+    title: Provisioning Profile Specifier
+    value_options: []
+  provisioning_profile_specifier: null
+- dry_run: "no"
+  opts:
+    description: |
+      If set this value `yes`, it will Dry-run this steps to preview the signing settings.
+    is_expand: true
+    is_required: true
+    summary: If set this value `yes`, it will Dry-run this steps to preview the signing
+      settings.
+    title: Dry-run preview (settings preview)
+    value_options:
+    - "no"
+    - "yes"

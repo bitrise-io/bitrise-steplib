@@ -1,3 +1,4 @@
-removal_date: "2018-10-26"
 deprecate_notes: |
   This step is deprecated, please use App Center upload and schedule tests instead
+maintainer: bitrise
+removal_date: "2018-10-26"

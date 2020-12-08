@@ -1,0 +1,49 @@
+title: Generate Changelog
+summary: Generates changelog based on git commits
+description: |-
+  Generates changelog based on git commits.
+
+  The step collects commits since the latest tag.
+
+  In the case of the first tag, the commits are from the first commit, till there is a new version.
+  In other cases, the first commit is the first commit after the previous tag.
+website: https://github.com/bitrise-steplib/steps-generate-changelog
+source_code_url: https://github.com/bitrise-steplib/steps-generate-changelog
+support_url: https://github.com/bitrise-steplib/steps-generate-changelog/issues
+published_at: 2020-08-25T10:50:44.127824133Z
+source:
+  git: https://github.com/bitrise-steplib/steps-generate-changelog.git
+  commit: 262938c5fc3d057c538d53553a041e549e1a733a
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-generate-changelog
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- new_version: $BITRISE_GIT_TAG
+  opts:
+    description: Next release version.
+    is_required: true
+    summary: Next release version
+    title: Next version
+- changelog_pth: $BITRISE_DEPLOY_DIR/CHANGELOG.md
+  opts:
+    description: Changelog path.
+    is_required: true
+    summary: Changelog path
+    title: Changelog path
+- opts:
+    description: The directory path where your git repository is initialized.
+    is_required: true
+    summary: The directory path where your git repository is initialized.
+    title: Working dir
+  working_dir: $BITRISE_SOURCE_DIR
+outputs:
+- BITRISE_CHANGELOG: null
+  opts:
+    summary: Bitrise changelog content
+    title: Bitrise changelog content

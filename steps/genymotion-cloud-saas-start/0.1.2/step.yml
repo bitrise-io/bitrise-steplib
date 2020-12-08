@@ -1,0 +1,107 @@
+title: Genymotion Cloud Start Android Devices
+summary: |
+  Start Genymotion Cloud SaaS Android Devices
+description: |-
+  This step launches Android devices on Genymotion Cloud SaaS.
+  Appium, Espresso, and others test automation frameworks can be run on those devices.
+  Setup instructions:
+  1. Create a Genymotion Cloud SaaS account: [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)
+  1. Navigate to Default templates or templates:
+    - Select a device.
+    - Click on dot menu and select details.
+    - On the description field, get the recipe UUID.
+    - Copy paste it to use it in this step.
+website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start
+support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start/issues
+published_at: 2020-06-24T11:04:56.55438045+02:00
+source:
+  git: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start.git
+  commit: 3a24825b31c23835f975c213884129519ce4826b
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/genymobile/bitrise-step-genymotion-cloud-saas-start
+deps:
+  brew:
+  - name: python3
+  - bin_name: pip3
+  apt_get:
+  - name: python3-pip
+  - bin_name: pip3
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- email: ""
+  opts:
+    description: Email of your Genymotion Cloud SaaS account, if you don't have an
+      account please create it first on [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)
+    is_required: true
+    summary: ""
+    title: Genymotion Cloud SaaS email
+- opts:
+    description: Password of your Genymotion Cloud SaaS account.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Genymotion Cloud SaaS password
+  password: ""
+- opts:
+    description: |-
+      Instance recipe to use. Recipes can be listed with command line 'gmsaas recipes list',
+      or check https://support.genymotion.com/hc/en-us/articles/360007473658-Supported-Android-devices-templates-for-Genymotion-Cloud-SaaS
+      for a comprehensive list of all currently available recipes UUIDs
+
+      Format:
+      You can specify several recipe UUIDs in order to start several instances. Recipe UUIDs are separated with a comma.
+
+      For example:
+      `e20da1a3-313c-434a-9d43-7268b12fee08,c52fdfc2-6914-4266-aa6e-50258f50ef91,06867de4-4b99-4842-ba40-fd3daaabdf23`
+
+      or specify only one recipe UUID:
+      `e20da1a3-313c-434a-9d43-7268b12fee08`
+    is_required: true
+    summary: ""
+    title: Recipe UUID
+  recipe_uuid: ""
+- adb_serial_port: ""
+  opts:
+    description: |-
+      If `adb_serial_port` option is set,
+      the instance will be connected to ADB on localhost:`adb_serial_port`.
+      Otherwise it will be connected to a port given by your system,
+      `gmsaas instances list` to know which one.
+
+      Format:
+      You can specify several ADB Serial ports. ADB Serial ports are separated with a comma.
+
+      For example:
+      `4321,4322,4323`
+    summary: ""
+    title: ADB serial port
+outputs:
+- GMCLOUD_SAAS_INSTANCE_UUID: null
+  opts:
+    description: |-
+      This output will include the instances UUIDs of started and connected instances.
+      The UUIDs are separated with a comma, eg: `594d606a-e6f7-43e1-99ac-77e07738a6dc,18e75e62-534e-4407-9700-564d767d6578`
+    title: UUID list of started and connected instances
+- GMCLOUD_SAAS_INSTANCE_ADB_SERIAL_PORT: null
+  opts:
+    description: |
+      This output will include the ADB Serial Port list of connected instances.
+      The  ADB Serial Port are separated with a comma, eg: `localhost:4321,localhost:4322`
+    title: ADB Serial Port list of connected instances

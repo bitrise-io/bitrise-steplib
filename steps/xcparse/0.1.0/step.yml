@@ -1,0 +1,315 @@
+title: xcparse
+summary: |
+  Extract screenshots, attachments, code coverage, logs, & more from Xcode 11+ xcresult
+description: |
+  Extract screenshots, attachments, code coverage, logs, & more from Xcode 11+ xcresult
+website: https://github.com/ChargePoint/bitrise-step-xcparse
+source_code_url: https://github.com/ChargePoint/bitrise-step-xcparse
+support_url: https://github.com/ChargePoint/bitrise-step-xcparse/issues
+published_at: 2019-12-06T13:53:38.578101-08:00
+source:
+  git: https://github.com/ChargePoint/bitrise-step-xcparse.git
+  commit: bebc76ff386912e4cac4045220ad325d40dadaba
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  - name: ChargePoint/xcparse/xcparse
+  check_only:
+  - name: xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: A `.xcresult` path, relative to the working directory (if specified).
+    is_expand: true
+    is_required: true
+    title: xcresult path
+  xcresult_path: $BITRISE_XCRESULT_PATH
+- extract_attachments: "yes"
+  opts:
+    description: If enabled, the attachments within the xcresult will be extracted.
+    title: Extract Attachments
+    value_options:
+    - "yes"
+    - "no"
+- extract_code_coverage: "yes"
+  opts:
+    description: If enabled, the code coverage files within the xcresult will be extracted.
+    title: Extract Code Coverage
+    value_options:
+    - "yes"
+    - "no"
+- extract_logs: "yes"
+  opts:
+    description: If enabled, the logs & diagnostics within the xcresult will be extracted.
+    title: Extract Logs
+    value_options:
+    - "yes"
+    - "no"
+- extract_screenshots: "yes"
+  opts:
+    description: If enabled, the screenshots within the xcresult will be extracted.
+    title: Extract Screenshots
+    value_options:
+    - "yes"
+    - "no"
+- export_to_deploy: "yes"
+  opts:
+    description: If enabled, all generated output will be exported into the ```BITRISE_DEPLOY_DIR```.
+    title: Export to BITRISE_DEPLOY_DIR
+    value_options:
+    - "yes"
+    - "no"
+- attachments_divide_by_model: "no"
+  opts:
+    category: Attachment Options
+    description: If enabled, divides attachments by model
+    title: Divide By Model?
+    value_options:
+    - "yes"
+    - "no"
+- attachments_divide_by_os: "no"
+  opts:
+    category: Attachment Options
+    description: If enabled, divides attachments by OS
+    title: Divide By OS?
+    value_options:
+    - "yes"
+    - "no"
+- attachments_divide_by_language: "no"
+  opts:
+    category: Attachment Options
+    description: If enabled, divides attachments by test language
+    title: Divide By Language?
+    value_options:
+    - "yes"
+    - "no"
+- attachments_divide_by_region: "no"
+  opts:
+    category: Attachment Options
+    description: If enabled, divides attachments by test region
+    title: Divide By Region?
+    value_options:
+    - "yes"
+    - "no"
+- attachments_divide_by_test_plan_config: "no"
+  opts:
+    category: Attachment Options
+    description: If enabled, divides attachments by test plan configuration
+    title: Divide By Test Plan Configuration?
+    value_options:
+    - "yes"
+    - "no"
+- attachments_divide_by_test: "no"
+  opts:
+    category: Attachment Options
+    description: If enabled, divides attachments by test
+    title: Divide By Test?
+    value_options:
+    - "yes"
+    - "no"
+- attachments_whitelist_activity_type: ""
+  opts:
+    category: Attachment Options
+    description: |-
+      Only extract attachments in the ```.xcresult``` whose activity type matches at least one of the provided activity type strings. If blank, all activity types are allowed.
+
+      Activity types can be found using verbose logging.  Below are a listing of common ones:
+
+      * ```com.apple.dt.xctest.activity-type.attachmentContainer```
+
+        Placeholder activity that contains an attachment, may contain user created screenshot
+      * ```com.apple.dt.xctest.activity-type.deletedAttachment```
+
+        Deleted attachment placeholder activity
+      * ```com.apple.dt.xctest.activity-type.internal```
+
+        Internal test step, may have automatic screenshot to show test progression
+      * ```com.apple.dt.xctest.activity-type.testAssertionFailure```
+
+        Step where the test failed in an assertion, may have failure screenshot
+      * ```com.apple.dt.xctest.activity-type.userCreated```
+
+        User created screenshot/attachment
+
+      **Note:** When an activity type string is provided which doesn't have a reverse-DNS style domain, it is assumed to be of ```com.apple.dt.xctest.activity-type.``` and the domain is automatically added.
+
+      So ```userCreated attachmentContainer``` would be equivalent to ```com.apple.dt.xctest.activity-type.userCreated com.apple.dt.xctest.activity-type.attachmentContainer```
+    title: Activity Type Whitelist
+- attachments_whitelist_test_status: ""
+  opts:
+    category: Attachment Options
+    description: |-
+      Only extract attachments in the ```.xcresult``` tied to tests that have a status that matches at least one of the provided status strings. If blank, all test statuses are allowed.
+
+      * ```Success```
+
+        Passing tests only
+      * ```Failure```
+
+        Failing tests only
+      * ```Success Failure```
+
+        Passing or failing tests only
+
+
+      Test status strings can be found by using verbose logging.
+    title: Test Status Whitelist
+- attachments_whitelist_uti: ""
+  opts:
+    category: Attachment Options
+    description: |-
+      Only extract attachments in the ```.xcresult``` that conform to at least one of the given UTIs. If left empty, all attachments, regardless of UTI conformance, are extracted.
+
+      Common attachment UTIs in xcresults are:
+      * ```public.image```
+
+        Screenshots
+      * ```public.plain-text```
+
+        Test failure debug descriptions
+
+      Read [this Apple documentation](https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/UTIRef/Articles/System-DeclaredUniformTypeIdentifiers.html#//apple_ref/doc/uid/TP40009259-SW1) for a list of publicly documented UTIs.
+    title: UTI Whitelist
+- opts:
+    category: Screenshot Options
+    description: If enabled, divides screenshots by model
+    title: Divide By Model?
+    value_options:
+    - "yes"
+    - "no"
+  screenshots_divide_by_model: "no"
+- opts:
+    category: Screenshot Options
+    description: If enabled, divides screenshots by OS
+    title: Divide By OS?
+    value_options:
+    - "yes"
+    - "no"
+  screenshots_divide_by_os: "no"
+- opts:
+    category: Screenshot Options
+    description: If enabled, divides screenshots by test language
+    title: Divide By Language?
+    value_options:
+    - "yes"
+    - "no"
+  screenshots_divide_by_language: "no"
+- opts:
+    category: Screenshot Options
+    description: If enabled, divides screenshots by test region
+    title: Divide By Region?
+    value_options:
+    - "yes"
+    - "no"
+  screenshots_divide_by_region: "no"
+- opts:
+    category: Screenshot Options
+    description: If enabled, divides screenshots by test plan configuration
+    title: Divide By Test Plan Configuration?
+    value_options:
+    - "yes"
+    - "no"
+  screenshots_divide_by_test_plan_config: "no"
+- opts:
+    category: Screenshot Options
+    description: If enabled, divides screenshots by test
+    title: Divide By Test?
+    value_options:
+    - "yes"
+    - "no"
+  screenshots_divide_by_test: "no"
+- opts:
+    category: Screenshot Options
+    description: |-
+      Only extract screenshots in the ```.xcresult``` whose activity type matches at least one of the provided activity type strings. If blank, all activity types are allowed.
+
+      Activity types can be found using verbose logging.  Below are a listing of common ones:
+
+      * ```com.apple.dt.xctest.activity-type.attachmentContainer```
+
+        Placeholder activity that contains an attachment, may contain user created screenshot
+      * ```com.apple.dt.xctest.activity-type.deletedAttachment```
+
+        Deleted attachment placeholder activity
+      * ```com.apple.dt.xctest.activity-type.internal```
+
+        Internal test step, may have automatic screenshot to show test progression
+      * ```com.apple.dt.xctest.activity-type.testAssertionFailure```
+
+        Step where the test failed in an assertion, may have failure screenshot
+      * ```com.apple.dt.xctest.activity-type.userCreated```
+
+        User created screenshot/attachment
+
+      **Note:** When an activity type string is provided which doesn't have a reverse-DNS style domain, it is assumed to be of ```com.apple.dt.xctest.activity-type.``` and the domain is automatically added.
+
+      So ```userCreated attachmentContainer``` would be equivalent to ```com.apple.dt.xctest.activity-type.userCreated com.apple.dt.xctest.activity-type.attachmentContainer```
+    title: Activity Type Whitelist
+  screenshots_whitelist_activity_type: ""
+- opts:
+    category: Screenshot Options
+    description: |-
+      Only extract screenshots in the ```.xcresult``` tied to tests that have a status that matches at least one of the provided status strings. If blank, all test statuses are allowed.
+
+      * ```Success```
+
+        Passing tests only
+      * ```Failure```
+
+        Failing tests only
+      * ```Success Failure```
+
+        Passing or failing tests only
+
+
+      Test status strings can be found by using verbose logging.
+    title: Test Status Whitelist
+  screenshots_whitelist_test_status: ""
+- opts:
+    category: Debug
+    description: You can enable verbose logging within xcparse to debug issues. All
+      xcresulttool commands and output will be shown when used.
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+outputs:
+- XCPARSE_ATTACHMENTS_PATH: null
+  opts:
+    description: This is the path of the test attachments zip.
+    title: The full test attachments zip path
+- XCPARSE_CODE_COVERAGE_PATH: null
+  opts:
+    description: This is the path of the test code coverage zip.
+    title: The full test code coverage zip path
+- XCPARSE_LOGS_PATH: null
+  opts:
+    description: This is the path of the test logs zip.
+    title: The full test logs zip path
+- XCPARSE_SCREENSHOTS_PATH: null
+  opts:
+    description: This is the path of the test screenshots zip.
+    title: The full test screenshots zip path
+- XCPARSE_VERSION: null
+  opts:
+    description: This is the version of xcparse used for extraction.
+    title: xcparse version

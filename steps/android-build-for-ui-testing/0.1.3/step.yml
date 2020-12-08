@@ -1,0 +1,90 @@
+title: Android Build for UI Testing
+summary: Builds your Android project with gradle with the belonging AndroidTest variant.
+description: Builds your Android project with gradle with the belonging AndroidTest
+  variant.
+website: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing/issues
+published_at: 2020-11-25T14:52:40.388696881Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing.git
+  commit: ffff234b0d635cce005becfca22f753b33adbd19
+project_type_tags:
+- android
+- react-native
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exist (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exist (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to build. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: true
+    summary: |
+      Set the module that you want to build. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    is_required: true
+    summary: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- apk_path_pattern: '*/build/outputs/apk/*.apk'
+  opts:
+    category: Options
+    description: Will find the APK files with the given pattern.
+    is_required: true
+    summary: Will find the APK files with the given pattern.
+    title: APK location pattern
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK
+      after filtering based on the filter inputs.
+    summary: Path of the generated (and copied) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_TEST_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated test APK
+      after filtering based on the filter inputs.
+    summary: Path of the generated (and copied) test APK - after filtering.
+    title: Path of the generated test APK

@@ -1,0 +1,39 @@
+title: Ping an URL with cURL
+summary: Ping an URL using cURL. You can also add optional parameters.
+description: |-
+  Performs a [cURL](http://curl.haxx.se/) request on the given URL
+  and reports the result (success/failed) of the response.
+website: https://github.com/bitrise-steplib/steps-curl-ping
+source_code_url: https://github.com/bitrise-steplib/steps-curl-ping
+support_url: https://github.com/bitrise-steplib/steps-curl-ping/issues
+published_at: 2020-10-01T07:52:25.283285964Z
+source:
+  git: https://github.com/bitrise-steplib/steps-curl-ping.git
+  commit: c18362a18872573b2f8308d4fddf44b2bb401a37
+host_os_tags:
+- osx-10.9
+project_type_tags:
+- web
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: ""
+    is_dont_change_value: false
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Full URL
+  ping_url: ""
+- curl_params: ""
+  opts:
+    description: 'cURL parameters (like: `-dx ''key=some_data''`)'
+    is_dont_change_value: false
+    is_expand: false
+    is_required: false
+    summary: ""
+    title: (optional) cURL parameters

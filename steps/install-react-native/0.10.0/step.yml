@@ -1,0 +1,52 @@
+title: Install React Native
+summary: Installs the React Native CLI tools.
+description: "The Step installs the React Native command line tools with npm. \nIt
+  exposes the `react-native` binary, so you can call `yarn react-native` or `npx react-native`
+  directly from your project.\n  \n### Configuring the Step\n\nYou can set which version
+  of the CLI you want to use, and add any additional options to the `npm install`
+  command.\n\n1. In the **Version of the `@react-native-community/cli` package to
+  install**, set the version you need.\n  \n   For example, set it to `0.9.1`. If
+  you leave the input empty, the Step will use the latest version.\n   \n2. In the
+  **Additional options when installing React Native CLI with `npm install`** input,
+  set any additional flags you want to use with the `npm-install` command.\n\n   The
+  default is set to `global`. You can use multiple options, separated by a space.
+  \n  \n### Useful links\n\n- [Getting started with React Native apps](https://devcenter.bitrise.io/getting-started/getting-started-with-react-native-apps/)\n-
+  [React Native CLI](https://github.com/react-native-community/cli)\n  \n### Related
+  Steps \n\n- [React Native Bundle](https://www.bitrise.io/integrations/steps/react-native-bundle)\n-
+  [Expo Eject](https://www.bitrise.io/integrations/steps/expo-detach)"
+website: https://github.com/bitrise-steplib/steps-install-react-native
+source_code_url: https://github.com/bitrise-steplib/steps-install-react-native
+support_url: https://github.com/bitrise-steplib/steps-install-react-native/issues
+published_at: 2020-12-01T07:47:21.198469049Z
+source:
+  git: https://github.com/bitrise-steplib/steps-install-react-native.git
+  commit: e455baf35c16185ad3169da93059e365a739c42f
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+- ios
+- android
+type_tags:
+- installer
+deps:
+  brew:
+  - name: node
+  - name: watchman
+  - name: flow
+inputs:
+- opts:
+    description: |-
+      Version of the `@react-native-community/cli` package to install.
+      If not specified, the latest version will be selected.
+      Check the logs for the available versions from this
+      package and specify the desired version. For example, `0.1.9`.
+    title: Version of the `@react-native-community/cli` package to install
+  version: null
+- npm_options: null
+  opts:
+    description: |-
+      Options are added to `npm install`. `-g` (global) option is set by default.
+      You can use multiple options, separated by a space
+      character, for example `-dd -ll`
+    title: Additional options when installing React Native CLI with `npm install`

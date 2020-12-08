@@ -1,0 +1,51 @@
+title: Get pubspec version and build number
+summary: |
+  Get the `version` from the pubspec and sets the environment variables
+description: |
+  Get the `version` from pubspec and sets `$PUBSPEC_VERSION`, `$PUBSPEC_VERSION_NAME` and `$PUBSPEC_BUILD_NUMBER`
+website: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number
+source_code_url: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number
+support_url: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number/issues
+published_at: 2020-01-10T18:03:30.761905-05:00
+source:
+  git: https://github.com/ianko/bitrise-step-get-pubspec-version-and-build-number.git
+  commit: 2ac4f5945b262723ef12bbfd425a66a52e29c0aa
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: Path to pubspec.yaml
+  pubspec_path: $BITRISE_SOURCE_DIR/pubspec.yaml
+outputs:
+- PUBSPEC_VERSION: null
+  opts:
+    summary: 'Example: `1.2.43+10`'
+    title: Value of the `version` attribute in the pubspec.yml
+- PUBSPEC_VERSION_NAME: null
+  opts:
+    summary: 'Example: `1.2.43`'
+    title: Part before the `+` in the `PUBSPEC_VERSION`
+- PUBSPEC_BUILD_NUMBER: null
+  opts:
+    summary: 'Example: `10`'
+    title: Part after the `+` in the `PUBSPEC_VERSION`

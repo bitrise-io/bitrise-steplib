@@ -1,0 +1,57 @@
+title: Xcode Project Info
+summary: Extracts Xcode project info data to environment variables.
+description: |-
+  This step will simply extract Xcode project information (Version and Build),
+  and export them into environment variables prefixed with **XPI_**.
+
+  Afterwards, you can use these environment variables in other steps (ie. sending message on Slack).
+website: https://github.com/tadija/bitrise-step-xcode-project-info
+source_code_url: https://github.com/tadija/bitrise-step-xcode-project-info
+support_url: https://github.com/tadija/bitrise-step-xcode-project-info/issues
+published_at: 2020-04-22T19:28:47.441149+02:00
+source:
+  git: https://github.com/tadija/bitrise-step-xcode-project-info.git
+  commit: 24855768b9d73f84942e293c4550e49b09440dd5
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- artifact-info
+deps:
+  check_only:
+  - name: xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- info_plist_path: Info.plist
+  opts:
+    description: "Source directory is considered to be root directory created by the
+      Git Clone step.\nIf your `Info.plist` file is in **RootDir/ProjectName** directory
+      (for example), \nthen you should set this input to `ProjectName/Info.plist`."
+    is_required: true
+    summary: ""
+    title: Relative path from Source directory to Info.plist file
+- opts:
+    description: |-
+      Required for Xcode 11+, since version & build numbers are no longer stored in Info.plist, but replaced by the variables $(MARKETING_VERSION) and $(CURRENT_PROJECT_VERSION).
+      The actual numbers should be extracted from the pbxproj file.
+    is_required: false
+    summary: ""
+    title: Relative path from Source directory to Xcode project file
+  xcodeproj_path: null
+- opts:
+    description: The version & build number can differ depending on the target. If
+      not specified, the default target will be used.
+    is_required: false
+    summary: ""
+    title: For Xcode 11+ projects, get the version & build for this target
+  target: null
+outputs:
+- XPI_VERSION: null
+  opts:
+    title: Version ($CFBundleShortVersionString or $MARKETING_VERSION)
+- XPI_BUILD: null
+  opts:
+    title: Build ($CFBundleVersion or $CURRENT_PROJECT_VERSION)
