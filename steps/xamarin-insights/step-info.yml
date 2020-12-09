@@ -1,0 +1,4 @@
+deprecate_notes: |
+  This step is deprecated, the Xamarin Insights service will be shutted down on March 31, 2018.
+maintainer: bitrise
+removal_date: "2018-08-01"

@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="browserstack-upload-stepicon-a" x1="50%" x2="50%" y1=".689%" y2="97.648%">
+      <stop offset="0%" stop-color="#004F67"/>
+      <stop offset="100%" stop-color="#022029"/>
+    </linearGradient>
+    <radialGradient id="browserstack-upload-stepicon-b" cx="50.079%" cy="50.66%" r="51.258%" fx="50.079%" fy="50.66%" gradientTransform="matrix(.98333 0 0 1 .008 0)">
+      <stop offset="0%" stop-color="#797979"/>
+      <stop offset="100%" stop-color="#4C4C4C"/>
+    </radialGradient>
+    <linearGradient id="browserstack-upload-stepicon-c" x1="50%" x2="50%" y1="0%" y2="66.209%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#browserstack-upload-stepicon-a)" fill-rule="nonzero"/>
+    <g fill-rule="nonzero" transform="translate(43 43.5)">
+      <ellipse cx="85" cy="85" fill="#F4B960" rx="85" ry="84.5"/>
+      <ellipse cx="77" cy="77" fill="#E66F32" rx="77" ry="76.5"/>
+      <circle cx="87.5" cy="67" r="66.5" fill="#E43C41"/>
+      <circle cx="93" cy="72.5" r="61" fill="#BDD041"/>
+      <circle cx="88.5" cy="77" r="56.5" fill="#6DB54C"/>
+      <circle cx="79.5" cy="68" r="47.5" fill="#AEDAE6"/>
+      <circle cx="87" cy="59.5" r="40" fill="#56B8DE"/>
+      <circle cx="92" cy="64.5" r="35" fill="#00B1D5"/>
+      <ellipse cx="87" cy="70" fill="url(#browserstack-upload-stepicon-b)" rx="30" ry="29.5"/>
+      <ellipse cx="87" cy="70" fill="#221F1F" rx="30" ry="29.5"/>
+      <ellipse cx="98.611" cy="59.133" fill="#FFF" rx="9.365" ry="5.874" transform="rotate(-65.834 98.611 59.133)"/>
+    </g>
+    <path fill="url(#browserstack-upload-stepicon-c)" d="M196.100044,197.171318 L214.007385,179.263977 L224,189.256591 L188.974151,224.28244 L154,189.308289 L164.007385,179.300904 L182.518456,197.811974 L182.518456,129.01498 L196.100044,129.01498 L196.100044,197.171318 Z M182.109594,108.372381 L195.691182,108.372381 L195.691182,121.953969 L182.109594,121.953969 L182.109594,108.372381 Z M182.109594,88 L195.691182,88 L195.691182,101.581588 L182.109594,101.581588 L182.109594,88 Z" transform="matrix(1 0 0 -1 0 312.282)"/>
+  </g>
+</svg>

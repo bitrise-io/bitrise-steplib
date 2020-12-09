@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<!-- Creator: CorelDRAW -->
+<svg xmlns="http://www.w3.org/2000/svg" xml:space="preserve" width="259px" height="259px" version="1.1" style="shape-rendering:geometricPrecision; text-rendering:geometricPrecision; image-rendering:optimizeQuality; fill-rule:evenodd; clip-rule:evenodd"
+viewBox="0 0 258.999 258.999"
+ xmlns:xlink="http://www.w3.org/1999/xlink"
+ xmlns:xodm="http://www.corel.com/coreldraw/odm/2003">
+ <defs>
+  <style type="text/css">
+   <![CDATA[
+    .str0 {stroke:#EBEBEB;stroke-width:2.001;stroke-linecap:square;stroke-miterlimit:22.9256;stroke-opacity:0.101961}
+    .str1 {stroke:#F8F0FF;stroke-width:2.001;stroke-linecap:square;stroke-miterlimit:22.9256;stroke-opacity:0.200000}
+    .fil1 {fill:none}
+    .fil2 {fill:none}
+    .fil4 {fill:#760FC3}
+    .fil3 {fill:url(#id0)}
+    .fil0 {fill:url(#id1);fill-rule:nonzero}
+   ]]>
+  </style>
+  <linearGradient id="id0" gradientUnits="userSpaceOnUse" x1="211.211" y1="45.143" x2="57.142" y2="215.152">
+   <stop offset="0" style="stop-opacity:0.4; stop-color:white"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:white"/>
+  </linearGradient>
+  <linearGradient id="id1" gradientUnits="userSpaceOnUse" x1="1.416" y1="257.584" x2="257.584" y2="1.415">
+   <stop offset="0" style="stop-opacity:1; stop-color:#0DD3C5"/>
+   <stop offset="1" style="stop-opacity:1; stop-color:#0D83CD"/>
+  </linearGradient>
+ </defs>
+ <g id="Layer_x0020_1">
+  <metadata id="CorelCorpID_0Corel-Layer"/>
+  <rect id="Rectangle-path" class="fil0" x="1.415" y="1.415" width="256.168" height="256.168"/>
+  <g id="Icon-Grid">
+   <line id="Line-Copy-2" class="fil1 str0" x1="1.415" y1="1.415" x2="257.584" y2= "257.584" />
+   <line id="Line-Copy" class="fil1 str0" x1="257.584" y1="1.415" x2="1.415" y2= "257.584" />
+   <line id="Line" class="fil2 str1" x1="19.427" y1="1.415" x2="19.427" y2= "257.584" />
+   <line id="Line-Copy-7" class="fil1 str0" x1="72.462" y1="1.415" x2="72.462" y2= "257.584" />
+   <line id="Line-Copy-8" class="fil1 str0" x1="186.537" y1="1.415" x2="186.537" y2= "257.584" />
+   <line id="Line-Copy-3" class="fil1 str0" x1="129.5" y1="1.415" x2="129.5" y2= "257.584" />
+   <line id="Line-Copy-10" class="fil2 str1" x1="239.072" y1="1.415" x2="239.072" y2= "257.584" />
+   <line id="Line-Copy-6" class="fil2 str1" x1="1.415" y1="238.571" x2="257.584" y2= "238.571" />
+   <line id="Line-Copy-4" class="fil2 str1" x1="1.415" y1="19.427" x2="257.584" y2= "19.427" />
+   <line id="Line-Copy-9" class="fil1 str0" x1="1.415" y1="72.462" x2="257.584" y2= "72.462" />
+   <line id="Line-Copy-11" class="fil1 str0" x1="1.415" y1="186.537" x2="257.584" y2= "186.537" />
+   <line id="Line-Copy-5" class="fil1 str0" x1="1.415" y1="129.5" x2="257.584" y2= "129.5" />
+   <path id="Oval-34-Copy-3" class="fil2 str1" d="M208.552 129.5c0,-43.66 -35.393,-79.052 -79.052,-79.052 -43.66,0 -79.052,35.392 -79.052,79.052 0,43.659 35.392,79.052 79.052,79.052 43.659,0 79.052,-35.393 79.052,-79.052z"/>
+   <path id="Oval-34-Copy-6" class="fil1 str0" d="M239.572 129.5c0,-60.792 -49.281,-110.073 -110.072,-110.073 -60.792,0 -110.073,49.281 -110.073,110.073 0,60.791 49.281,110.072 110.073,110.072 60.791,0 110.072,-49.281 110.072,-110.072z"/>
+   <path id="Oval-34-Copy-5" class="fil1 str0" d="M186.537 129.5c0,-31.501 -25.537,-57.038 -57.037,-57.038 -31.501,0 -57.038,25.537 -57.038,57.038 0,31.5 25.537,57.037 57.038,57.037 31.5,0 57.037,-25.537 57.037,-57.037z"/>
+  </g>
+  <g id="_105554052418464">
+   <path id="Rectangle-6" class="fil3" d="M70.461 38.44l27.28 0 63.518 0 27.279 0c3.316,0 6.004,2.688 6.004,6.004l0 28.977 0 139.133c0,3.316 -2.688,6.004 -6.004,6.004l-118.077 0c-3.316,0 -6.004,-2.688 -6.004,-6.004l0 -139.133 0 -28.977c0,-3.316 2.688,-6.004 6.004,-6.004zm90.798 0l0 0z"/>
+   <path class="fil4" d="M155.283 165.256l0 69.378 60.707 0 0 8.673 -60.707 0c-4.77,0 -8.672,-3.903 -8.672,-8.673l0 -69.378c0,-4.77 3.902,-8.673 8.672,-8.673l60.707 0 0 8.673 -60.707 0zm61.141 30.353l-11.275 -11.274 6.071 -6.071 21.247 21.248 -21.247 21.247 -6.071 -6.071 10.841 -10.407 -34.69 0 0 -8.672 35.124 0z"/>
+   <g>
+    <rect id="Rectangle-Copy" class="fil4" x="104.107" y="62.456" width="71.597" height="10.006"/>
+    <rect id="Rectangle-Copy-2" class="fil4" x="104.107" y="85.471" width="71.597" height="10.006"/>
+    <rect id="Rectangle-Copy-4" class="fil4" x="114.085" y="108.486" width="61.568" height="10.006"/>
+    <rect id="Rectangle-Copy-2_0" class="fil4" x="104.078" y="108.486" width="71.597" height="10.006"/>
+    <rect id="Rectangle-Copy-4_1" class="fil4" x="104.079" y="131.501" width="71.538" height="10.006"/>
+    <rect id="Rectangle-Copy-2_2" class="fil4" x="83.295" y="62.456" width="10.007" height="10.007"/>
+    <rect id="Rectangle-Copy-2_3" class="fil4" x="83.295" y="85.471" width="10.007" height="10.007"/>
+    <rect id="Rectangle-Copy-2_4" class="fil4" x="83.295" y="108.486" width="10.007" height="10.007"/>
+    <rect id="Rectangle-Copy-2_5" class="fil4" x="83.295" y="131.501" width="10.007" height="10.007"/>
+   </g>
+  </g>
+ </g>
+</svg>

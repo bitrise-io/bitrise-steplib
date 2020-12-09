@@ -1,0 +1,81 @@
+title: Change Android versionCode and versionName
+summary: Change Android versionCode and versionName in build.gradle file.
+description: Change your Android project's versionCode and versionName in build.gradle
+  file.
+website: https://github.com/bitrise-steplib/steps-change-android-versioncode-and-versionname
+source_code_url: https://github.com/bitrise-steplib/steps-change-android-versioncode-and-versionname
+support_url: https://github.com/bitrise-steplib/steps-change-android-versioncode-and-versionname
+published_at: 2019-11-11T10:41:38.513157243Z
+source:
+  git: https://github.com/bitrise-steplib/steps-change-android-versioncode-and-versionname.git
+  commit: 13dbe83cefc3b674d09a3cab96f434ba3d3343a3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-change-android-versioncode-and-versionname
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_gradle_path: $BITRISE_SOURCE_DIR/app/build.gradle
+  opts:
+    is_required: true
+    summary: Path to the build.gradle file shows the versionCode and versionName settings.
+    title: Path to the build.gradle file
+- new_version_name: null
+  opts:
+    description: |-
+      New versionName to set.
+
+      For example: 1.0.0
+
+      Leave this input empty so that versionName remains unchanged.
+    summary: |-
+      New versionName to set.
+
+      For example: 1.0.0
+
+      Leave this input empty so that versionName remains unchanged.
+    title: New versionName
+- new_version_code: $BITRISE_BUILD_NUMBER
+  opts:
+    description: "New versionCode to set.\n\nFor example: 1\n\nLeave this input empty
+      so that versionCode remains unchanged. "
+    summary: "New versionCode to set.\n\nFor example: 1\n\nLeave this input empty
+      to do not modify versionCode. "
+    title: New versionCode
+- opts:
+    description: |-
+      Offset value for versionCode.
+
+      For example: 1
+
+      Leave this input empty if you want the exact value you set in
+      `New versionCode` input otherwise it will be added to it.
+    summary: |-
+      Offset value for versionCode.
+
+      For example: 1
+
+      Leave this input empty if you want the exact value you set in
+      `New versionCode` input otherwise it will be added to it.
+    title: versionCode Offset
+  version_code_offset: null
+outputs:
+- ANDROID_VERSION_NAME: null
+  opts:
+    title: Final Android versionName in build.gradle file
+- ANDROID_VERSION_CODE: null
+  opts:
+    title: Final Android versionCode in build.gradle file

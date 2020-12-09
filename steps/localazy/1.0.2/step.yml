@@ -1,0 +1,87 @@
+title: Localazy CLI
+summary: Runs Localazy CLI and download updated translations
+description: "This step runs [Localazy CLI](https://localazy.com/docs/cli) and download
+  updated translations.\n[Localazy](https://localazy.com) is a translation management
+  platform built by developers for developers \nto localize apps in the modern way. "
+website: https://localazy.com
+source_code_url: https://github.com/localazy/bitrise-step-localazy
+support_url: https://github.com/localazy/bitrise-step-localazy/issues
+published_at: 2020-11-27T11:28:48.095620718+01:00
+source:
+  git: https://github.com/localazy/bitrise-step-localazy.git
+  commit: bd3931c466ca793a3bb567b7577dd9e5dcc9aa35
+type_tags:
+- build
+deps:
+  brew:
+  - name: java
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- config_file: localazy.json
+  opts:
+    description: |-
+      If you use different filename for the configuration file (not `localazy.json`), please specify the filename here.
+
+      For more information, visit [Localazy CLI - Command-Line Options](https://localazy.com/docs/cli/command-line-options).
+    is_required: false
+    summary: The filename of the configuration file. Default is `localazy.json`.
+    title: Configuration file
+- key_file: null
+  opts:
+    description: |-
+      If you provide read and write keys in the key file, please specify its filename here.
+
+      For more information, visit [Localazy CLI - Authorization](https://localazy.com/docs/cli/authorization).
+    is_required: false
+    summary: The filename of the key file
+    title: Key file
+- opts:
+    description: "If you don't provide read and write keys in the configuration or
+      key file, please provide it here.\n\nFor more information, visit [Localazy CLI
+      - Authorization](https://localazy.com/docs/cli/authorization) \nand [Localazy
+      CLI - Command-Line Options](https://localazy.com/docs/cli/command-line-options)."
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    summary: The custom read key
+    title: Read Key
+  read_key: null
+- opts:
+    description: "If you don't provide read and write keys in the configuration or
+      key file, please provide it here.\n\nFor more information, visit [Localazy CLI
+      - Authorization](https://localazy.com/docs/cli/authorization) \nand [Localazy
+      CLI - Command-Line Options](https://localazy.com/docs/cli/command-line-options)."
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    summary: The custom write key
+    title: Write Key
+  write_key: null
+- groups_list: null
+  opts:
+    description: |-
+      Groups allow for running only selected rules from the configuration file.
+
+      For more information, visit [Localazy CLI - Command-Line Options](https://localazy.com/docs/cli/command-line-options#groups).
+    is_required: false
+    summary: The list of download groups separated by space
+    title: Groups
+- opts:
+    description: 'You should invoke Localazy CLI in the directory containing the configuration
+      file `localazy.json`.      '
+    is_required: false
+    summary: Change the working directory
+    title: Working directory
+  working_directory: null
+- custom_command: null
+  opts:
+    description: "Provide parameters that you would normally use after the `localazy`
+      command.\nExample: `download -r read-key -w write-key -s` \n\nNote: Providing
+      custom parameters override other options defined above.    \n\nFor more information,
+      visit [Localazy CLI - Command-Line Options](https://localazy.com/docs/cli/command-line-options)."
+    is_required: false
+    summary: Invoke Localazy CLI with custom parameters
+    title: Custom parameters

@@ -1,22 +1,33 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 21.0.2, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
-	 xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 256 256"
-	 style="enable-background:new 0 0 256 256;" xml:space="preserve">
-<style type="text/css">
-	.st0{fill:#A3C82B;}
-	.st1{enable-background:new    ;}
-	.st2{fill:#FFFFFF;}
-</style>
-<title>Rectangle 1 + #</title>
-<desc>Created with Sketch.</desc>
-<rect id="Rectangle-1" x="0" sketch:type="MSShapeGroup" class="st0" width="256" height="256">
-</rect>
-<g class="st1">
-	<path class="st2" d="M81.2,168h-4.6c-7,0-12.8-5.8-12.8-12.8c0-7,5.8-12.8,12.8-12.8h9l5-29.6h-7c-7,0-12.8-5.8-12.8-12.8
-		c0-7,5.8-12.8,12.8-12.8H95l3.4-19.8c1-6.4,6.4-10.6,12.8-10.6c7.8,0,14,7.4,12.8,15l-2.6,15.4h27l3.4-19.8
-		c1-6.4,6.4-10.6,12.8-10.6c7.8,0,14,7.4,12.8,15l-2.6,15.4h4.6c7,0,12.8,5.8,12.8,12.8c0,7-5.8,12.8-12.8,12.8h-9l-5,29.6h7
-		c7,0,12.8,5.8,12.8,12.8c0,7-5.8,12.8-12.8,12.8H161l-3.6,20.6c-1,6.2-6.4,10.6-12.8,10.6c-7.8,0-14.2-7.4-12.8-15l2.8-16.2h-27
-		l-3.6,20.6c-1,5.4-5.6,10.6-12.8,10.6c-7.8,0-14.2-6.6-12.8-15L81.2,168z M139,142.4l5-29.6h-27l-5,29.6H139z"/>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="android-manifest-version-code-stepicon-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#53A906"/>
+      <stop offset="100%" stop-color="#A4C639"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-version-code-stepicon-b" x1="92.985%" x2="14.218%" y1="-11.098%" y2="109.263%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-version-code-stepicon-c" x1="-26.536%" x2="122.497%" y1="-140.971%" y2="146.911%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-version-code-stepicon-d" x1="253.832%" x2="17.426%" y1="25.871%" y2="55.25%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="61.124%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-version-code-stepicon-e" x1="-20.991%" x2="94.593%" y1="123.982%" y2="6.149%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#android-manifest-version-code-stepicon-a)"/>
+    <path fill="url(#android-manifest-version-code-stepicon-b)" d="M69,37 L159.738281,37 L193,71.9585974 L193,211 C193,214.313708 190.313708,217 187,217 L69,217 C65.6862915,217 63,214.313708 63,211 L63,43 C63,39.6862915 65.6862915,37 69,37 Z"/>
+    <path fill="url(#android-manifest-version-code-stepicon-c)" fill-rule="nonzero" d="M149.71831,126.760563 L164.929577,126.760563 L162.676056,138.028169 L147.464789,138.028169 L143.521127,158.873239 L130.56338,158.873239 L134.507042,138.028169 L118.169014,138.028169 L114.225352,158.873239 L101.267606,158.873239 L105.211268,138.028169 L90,138.028169 L92.2535211,126.760563 L107.464789,126.760563 L110.28169,112.112676 L95.0704225,112.112676 L97.3239437,100.84507 L112.535211,100.84507 L116.478873,80 L129.43662,80 L125.492958,100.84507 L141.830986,100.84507 L145.774648,80 L158.732394,80 L154.788732,100.84507 L170,100.84507 L167.746479,112.112676 L152.535211,112.112676 L149.71831,126.760563 Z M136.760563,126.760563 L139.577465,112.112676 L123.239437,112.112676 L120.422535,126.760563 L136.760563,126.760563 Z" style="mix-blend-mode:multiply"/>
+    <path fill="url(#android-manifest-version-code-stepicon-d)" fill-rule="nonzero" d="M96.28,188.875 L91.69,194.68 L87.1,188.875 L87.1,199 L81.025,199 L81.025,180.1 L86.425,180.1 L91.69,186.85 L96.955,180.1 L102.355,180.1 L102.355,199 L96.28,199 L96.28,188.875 Z M116.210909,190.765 L114.860909,186.04 L113.510909,190.765 L116.210909,190.765 Z M117.560909,195.355 L112.160909,195.355 L111.080909,199 L104.600909,199 L111.485909,180.1 L118.235909,180.1 L125.120909,199 L118.640909,199 L117.560909,195.355 Z M139.651818,180.1 L145.726818,180.1 L145.726818,199 L140.596818,199 L133.441818,189.82 L133.441818,199 L127.366818,199 L127.366818,180.1 L132.496818,180.1 L139.651818,189.28 L139.651818,180.1 Z M150.267727,199 L150.267727,180.1 L156.342727,180.1 L156.342727,199 L150.267727,199 Z M160.883636,180.1 L176.003636,180.1 L176.003636,185.365 L166.958636,185.365 L166.958636,187.795 L173.843636,187.795 L173.843636,193.06 L166.958636,193.06 L166.958636,199 L160.883636,199 L160.883636,180.1 Z" style="mix-blend-mode:multiply"/>
+    <path fill="url(#android-manifest-version-code-stepicon-e)" d="M158.731207,37.3828125 L192.784706,72.2668851 L164.731207,72.2668851 C161.417498,72.2668851 158.731207,69.5805936 158.731207,66.2668851 L158.731207,37.3828125 Z"/>
+  </g>
 </svg>

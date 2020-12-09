@@ -1,0 +1,78 @@
+title: Set Xcode Project Build Number
+summary: |-
+  Sets the value of Bundle version in the specified Info.plist file. A great
+  way to keep track of version when submitting bug reports.
+
+  If your IPA contains multiple build targets ( e.g watch app, extensions ), they would need to have the same version number as your app's main target has.<br/>
+  You need to add this step to your workflow for every build target one by one.
+
+  If there are targets with different version numbers the app cannot be submitted for App Review or Beta App Review.
+description: Set the value of Bundle version in the project's Info.plist file to the
+  specified version number.
+website: https://github.com/bitrise-io/set-xcode-build-number
+source_code_url: https://github.com/bitrise-io/set-xcode-build-number
+support_url: https://github.com/bitrise-io/set-xcode-build-number/issues
+published_at: 2019-05-17T12:58:49.904417433Z
+source:
+  git: https://github.com/bitrise-steplib/steps-set-xcode-build-number.git
+  commit: b803006326613a3f005bd5037820233c1ad9d22e
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- utility
+deps:
+  check_only:
+  - name: xcode
+run_if: .IsCI
+inputs:
+- opts:
+    description: |
+      **NOTE:**<br/>
+      If your IPA contains multiple build targets ( e.g watch app, extensions ), they would need to have the same version number as your app's main target has.<br/>
+      You need to add this step to your workflow for every build target one by one.
+
+      If there are targets with different version numbers the app cannot be submitted for App Review or Beta App Review.
+    is_required: true
+    summary: Path to the given target's Info.plist file. You need to use this step
+      for each archivable target of your project.
+    title: Info.plist file path
+  plist_path: null
+- build_version: $BITRISE_BUILD_NUMBER
+  opts:
+    description: |
+      Set the CFBundleVersion to this value.
+
+      You can find this in Xcode:
+
+      - Select the your project in Project navigator
+      - Under General tab, in Identity section
+      - Build field
+    is_required: true
+    title: Build Number
+- build_version_offset: null
+  opts:
+    description: |
+      This offset will be added to `build_version` input's value.
+    title: Build Number Offset
+- build_short_version_string: null
+  opts:
+    description: |
+      Set the CFBundleShortVersionString to this value.
+
+      You can find this in Xcode:
+
+      - Select the your project in Project navigator
+      - Under General tab, in Identity section
+      - Version field
+    title: Version Number
+outputs:
+- XCODE_BUNDLE_VERSION: null
+  opts:
+    title: The bundle version used in the Info.plist file

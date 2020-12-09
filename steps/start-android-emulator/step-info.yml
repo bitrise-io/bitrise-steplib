@@ -1,0 +1,4 @@
+deprecate_notes: |
+  This step is deprecated, use avd-manager step instead.
+maintainer: bitrise
+removal_date: "2019-08-25"

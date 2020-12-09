@@ -1,0 +1,39 @@
+title: Install React Native
+summary: Installs the `react-native-cli` command line tools.
+description: Installs the [React Native CLI npm package](https://www.npmjs.com/package/react-native-cli).
+website: https://github.com/bitrise-steplib/steps-install-react-native
+source_code_url: https://github.com/bitrise-steplib/steps-install-react-native
+support_url: https://github.com/bitrise-steplib/steps-install-react-native/issues
+published_at: 2019-10-11T13:37:50.107626531Z
+source:
+  git: https://github.com/bitrise-steplib/steps-install-react-native.git
+  commit: a2bda02c15d8b288ea9f7cc1f4ea0c8ce1c18fa6
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+- ios
+- android
+type_tags:
+- installer
+deps:
+  brew:
+  - name: node
+  - name: watchman
+  - name: flow
+inputs:
+- opts:
+    description: |-
+      Version of the `react-native-cli` package to install.
+      If not specified, the latest version will be selected.
+      Check the logs for the available versions from this
+      package and specify the desired verion as `0.1.9` for example.
+    title: Version of the `react-native-cli` package to install
+  version: null
+- npm_options: null
+  opts:
+    description: |-
+      Options are added to `npm install`. `-g` (global) option is set by default.
+      You can use multiple options, separated by a space
+      character, for example `-dd -ll`
+    title: Additional options when installing React Native CLI with `npm install`

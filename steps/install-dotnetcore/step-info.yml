@@ -1,0 +1,4 @@
+maintainer: community
+removal_date: "2020-11-30"
+deprecate_notes: |
+  This step is deprecated as it is no longer maintained.

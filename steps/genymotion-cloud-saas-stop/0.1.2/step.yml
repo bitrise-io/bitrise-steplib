@@ -1,0 +1,42 @@
+title: Genymotion Cloud Stop Android Devices
+summary: |
+  Stop Genymotion Cloud SaaS instances
+description: |
+  Stop Genymotion Cloud SaaS instances.
+website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop/issues
+published_at: 2020-06-24T11:07:15.547480237+02:00
+source:
+  git: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop.git
+  commit: cde177fce4db835795c811365474f99eb966c604
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/genymobile/bitrise-step-genymotion-cloud-saas-stop
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- instance_uuid: $GMCLOUD_SAAS_INSTANCE_UUID
+  opts:
+    description: |-
+      Instance UUIDs list you want to stop.
+
+      This input will include the instances UUIDs of started and connected instances.
+      The UUIDs are separated with a comma, eg: `594d606a-e6f7-43e1-99ac-77e07738a6dc,18e75e62-534e-4407-9700-564d767d6578`
+    is_required: true
+    summary: ""
+    title: Instance UUID

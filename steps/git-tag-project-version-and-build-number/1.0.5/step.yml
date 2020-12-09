@@ -1,0 +1,71 @@
+title: Git tag project version and build number
+summary: |
+  Git tag project version and build number
+description: |
+  This step will create Git tag with project version and build number
+website: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number
+source_code_url: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number
+support_url: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number
+published_at: 2019-12-14T10:04:46.910757+01:00
+source:
+  git: https://github.com/ned1988/bitrise-step-git-tag-project-version-and-build-number.git
+  commit: f6b249853663509cfa5cda3d6a93fab3e6096126
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- bitrise_tag_xcodeproj_path: ""
+  opts:
+    description: |
+      Use it with Xcode 11 and higher.
+    is_required: false
+    summary: Path to the 'xcodeproj'
+    title: Path to the 'xcodeproj'
+- bitrise_tag_info_plist_path: ""
+  opts:
+    description: |
+      File of your release 'Info.plist' file.
+    is_required: true
+    summary: Path to the 'Info.plist' file
+    title: Path to the 'Info.plist'
+- bitrise_tag_format: v_VERSION_(_BUILD_)
+  opts:
+    description: |
+      Provide format of generated tag & build number. You can use the following placeholders: ``_VERSION_``, ``_BUILD_``
+    is_required: false
+    summary: Provide format of generated tag & build number
+    title: Result format
+- opts:
+    category: Config
+    description: |
+      If yes, the tag will be lightweight, i.e. not trigger a commit/push
+    title: Use lightweight tag?
+    value_options:
+    - "no"
+    - "yes"
+  use_lightweight_tag: "no"
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output

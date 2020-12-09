@@ -1,0 +1,169 @@
+title: Deploy to Bitrise.io - Apps, Logs, Artifacts
+summary: Generic artifacts deployer, attaches the artifacts to bitrise.io builds.
+description: |-
+  Generic artifacts deployer, attaches the artifacts to bitrise.io builds.
+
+  You'll see the deployed files on bitrise.io, on the build's page,
+  in the "Apps and Artifacts" section.
+website: https://github.com/bitrise-io/steps-deploy-to-bitrise-io
+source_code_url: https://github.com/bitrise-io/steps-deploy-to-bitrise-io
+support_url: https://github.com/bitrise-io/steps-deploy-to-bitrise-io/issues
+published_at: 2018-08-22T13:45:39.164539422Z
+source:
+  git: https://github.com/bitrise-io/steps-deploy-to-bitrise-io.git
+  commit: f7639bae932fc8a02586b10e95468059fef25c95
+host_os_tags:
+- osx-10.10
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-deploy-to-bitrise-io
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+run_if: .IsCI
+inputs:
+- deploy_path: $BITRISE_DEPLOY_DIR
+  opts:
+    description: |
+      Specify the directory or file path which will be deployed.
+      If the specified path is a directory then every file
+      in the directory will be deployed - but only the
+      files in the specified directory, sub-directories
+      won't be uploaded. For uploading the directory's content
+      recursively you should use the *Compress* option
+      which will compress the whole directory, with
+      every sub-directory included.
+
+      If you specify a file path then only the specified
+      file will be deployed.
+    is_required: true
+    title: Deploy directory or file path
+- notify_user_groups: everyone
+  opts:
+    description: |
+      Your App's user roles to notify, comma separated.
+      Possible role names:
+
+      * none
+      * testers
+      * developers
+      * admins
+      * owner
+      * everyone
+
+      An example to notify your developers and testers:
+
+      `testers, developers`
+
+      If you want to notify everyone in the app's team just specify `everyone`.
+
+      If you don't want to notify anyone set this to `none`.
+    title: 'Notify: User Roles'
+- notify_email_list: null
+  opts:
+    description: |
+      Email addresses to notify, comma separated.
+
+      You can specify any email address, the recepients
+      don't have to be in your team.
+    is_sensitive: true
+    title: 'Notify: Emails'
+- is_enable_public_page: "true"
+  opts:
+    description: |
+      If this option is enabled a public install page
+      will be available with a long and random URL which can be shared
+      with others who are not registered on Bitrise.
+
+      **If you disable this option the Notify Emails option will
+      be ignored and the Notify User Roles users will receive the build's
+      URL instead of the public page's URL!**
+    is_expand: false
+    is_required: true
+    title: Enable public page for the App?
+    value_options:
+    - "true"
+    - "false"
+- is_compress: "false"
+  opts:
+    description: |-
+      If this option is allowed the artifacts
+      found in the *Deploy directory* folder will be compressed
+      into a single file.
+
+      You can specify a custom name for the ZIP using the *zip_name*
+      option - otherwise we're going to use the *Deploy directory* name.
+
+      If this option is turned off the artifacts
+      found in the *Deploy directory* folder will be deployed
+      separately.
+    is_expand: false
+    is_required: true
+    summary: |-
+      If this option is allowed the artifacts
+      found in the *Deploy directory* folder will be compressed
+      into a single (ZIP) file.
+    title: Compress the artifacts into one file?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: 'Specify the output pattern with golang template: [https://golang.org/pkg/text/template](https://golang.org/pkg/text/template)'
+    is_expand: false
+    is_required: true
+    summary: You can change the format of the BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP
+      output
+    title: Format for the BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP output
+  public_install_page_url_map_format: '{{range $index, $element := .}}{{if $index}}|{{end}}{{$element.File}}=>{{$element.URL}}{{end}}'
+- opts:
+    category: Debug
+    description: |-
+      Specify a custom name for the compressed artifact. We're going to
+      use the *Deploy directory* name if you leave it blank.
+
+      This option only works if you selected *true* for *is_compress*.
+    summary: |-
+      Specify a custom name for the compressed artifact. We're going to
+      use the deploy directory name if you leave it blank.
+    title: Name of the compressed artifact (without .zip extension)
+  zip_name: null
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: Unique build URL of this build on Bitrise.io
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: Unique build URL of this build on Bitrise.io
+    title: Bitrise Build URL
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: The build's API Token for the build on Bitrise.io
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise Build API Token
+outputs:
+- BITRISE_PUBLIC_INSTALL_PAGE_URL: null
+  opts:
+    description: |-
+      Public Install Page's URL, if the
+      *Enable public page for the App?* option was *enabled*.
+    title: Public Install Page URL
+- BITRISE_PUBLIC_INSTALL_PAGE_URL_MAP: null
+  opts:
+    description: |-
+      Public Install Page URLs by the artifact's file path.
+      Only set if the *Enable public page for the App?* option was *enabled*.
+
+      The format is `KEY1=>VALUE|KEY2=>VALUE`
+
+      Examples:
+
+      - $BITRISE_DEPLOY_DIR/ios_app.ipa=>https://ios_app/public/install/page
+      - $BITRISE_DEPLOY_DIR/android_app.apk=>https://android_app/public/install/page|$BITRISE_DEPLOY_DIR/ios_app.ipa=>https://ios_app/public/install/page
+    title: Map of filenames and Public Install Page URLs

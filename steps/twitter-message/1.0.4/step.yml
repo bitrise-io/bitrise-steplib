@@ -1,0 +1,86 @@
+title: Send twitter message
+summary: Update a [Twitter](https://twitter.com/) account status.
+description: |
+  This step is used to update a twitter account status.
+
+  For that you need to create a twitter application here : [https://apps.twitter.com](https://apps.twitter.com)
+
+  **Use the same credentials as the account you want to update !**
+
+  And get the four important information in your app : **Consumer Key (API Key)** / **Consumer Secret (API Secret)** / **Access Token** / **Access Token Secret**
+
+  Find all the error code list [here](https://developer.twitter.com/en/docs/basics/response-codes)
+website: https://github.com/kawaiseb/bitrise-step-twitter-message
+source_code_url: https://github.com/kawaiseb/bitrise-step-twitter-message
+support_url: https://github.com/kawaiseb/bitrise-step-twitter-message/issues
+published_at: 2018-04-17T14:40:31.496937+02:00
+source:
+  git: https://github.com/kawaiseb/bitrise-step-twitter-message.git
+  commit: b08f1c24c016e08559ce8c94b80da4553391ffe3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Your application's Consumer Key and Secret are used to authenticate requests to the Twitter Platform.
+
+      You will find the key in your [twitter application](https://apps.twitter.com/) inside the *Keys and Access Tokens* section.
+    is_required: true
+    title: Consumer Key (API Key)
+  tw_consumer_key: null
+- opts:
+    description: |
+      You will find the key in your [twitter application](https://apps.twitter.com/) inside the *Keys and Access Tokens* section.
+    is_required: true
+    title: Consumer Secret (API Secret)
+  tw_consumer_secret: null
+- opts:
+    description: |
+      This access token can be used to make API requests on your own account's behalf.
+      Do not share your access token secret with anyone.
+
+      You will find the key in your [twitter application](https://apps.twitter.com/) inside the *Keys and Access Tokens* section.
+    is_required: true
+    title: Access Token
+  tw_access_token_key: null
+- opts:
+    description: |
+      You will find the key in your [twitter application](https://apps.twitter.com/) inside the *Keys and Access Tokens* section.
+    is_required: true
+    title: Access Token Secret
+  tw_access_token_secret: null
+- opts:
+    description: "The screen name, handle, or alias that this user identifies themselves
+      with. \n\n**screen_names** are unique but subject to change. Use id_str as a
+      user identifier whenever possible. \n\nTypically a maximum of 15 characters
+      long, but some historical accounts may exist with longer names\n"
+    is_expand: true
+    is_required: true
+    summary: null
+    title: Screen name where to post
+  tw_screen_name: null
+- opts:
+    is_required: true
+    summary: null
+    title: Text to post on twitter
+  tw_status: null
+- opts:
+    description: |
+      Step prints additional debug information if this option
+      is enabled
+    is_required: true
+    title: Debug mode ?
+    value_options:
+    - "yes"
+    - "no"
+  tw_debug_mode: "no"

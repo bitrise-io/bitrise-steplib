@@ -1,0 +1,83 @@
+title: Android Unit Test
+summary: This step runs your Android project's unit tests.
+description: This step runs your Android project's unit tests.
+website: https://github.com/bitrise-steplib/bitrise-step-android-unit-test
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-unit-test
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-unit-test/issues
+published_at: 2018-10-24T10:26:11.028083639Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-unit-test.git
+  commit: ab10871cdde264bd3716ebc7ffadb944784e2f70
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-unit-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exists (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exists (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to test. To see your available modules, please open your project in Android Studio and go to [Project Structure] and see the list on the left.
+    is_required: false
+    summary: |
+      Set the module that you want to test. To see your available modules, please open your project in Android Studio and go to [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to test. To see your available variants, please open your project in Android Studio and go to [Project Structure] -> variants section.
+    is_required: false
+    summary: |
+      Set the variant that you want to test. To see your available variants, please open your project in Android Studio and go to [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+- opts:
+    category: Options
+    description: Will find the report dir with the given pattern.
+    is_required: true
+    summary: Will find the report dir with the given pattern.
+    title: Report location pattern
+  report_path_pattern: '*build/reports'
+- opts:
+    category: Options
+    description: Will find test-results dir with the given pattern.
+    is_required: true
+    summary: Will find the test-results dir with the given pattern.
+    title: Test results location pattern
+  result_path_pattern: '*build/test-results'
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build-cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - won't cache any of the above
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none

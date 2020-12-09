@@ -1,0 +1,297 @@
+title: Gradle Runner
+summary: Runs the specified gradle task.
+description: |-
+  Runs the specified gradle task and copies the generated APK and AAB files into
+  the Bitrise Deploy Directory (`$BITRISE_DEPLOY_DIR`).
+website: https://github.com/bitrise-io/steps-gradle-runner
+source_code_url: https://github.com/bitrise-io/steps-gradle-runner
+support_url: https://github.com/bitrise-io/steps-gradle-runner/issues
+published_at: 2020-02-17T12:52:25.03157879Z
+source:
+  git: https://github.com/bitrise-steplib/steps-gradle-runner.git
+  commit: 2f275978dc9d8140ba307b0d116bf4bd6502a545
+project_type_tags:
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-gradle-runner
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- gradle_file: $GRADLE_BUILD_FILE_PATH
+  opts:
+    category: Config
+    description: |
+      Optional path to the gradle build file to use
+    title: Optional path to the gradle build file to use
+- gradle_task: assemble
+  opts:
+    category: Config
+    description: |
+      Gradle task to run.
+
+      You can call `gradle tasks` or `gradle tasks --all` in your
+      Gradle project directory to get the list of available tasks.
+    is_required: true
+    title: Gradle task to run
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    category: Config
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper ensures
+      that the right Gradle version is installed and used for the build.
+
+      You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root. For example, `./gradlew`,
+      or if it is in a sub directory, `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- app_file_include_filter: |
+    *.apk
+    *.aab
+  opts:
+    category: Export Config
+    description: |
+      The step will copy the generated APK and AAB files that match this filter into the Bitrise Deploy Directory.
+
+      Seperate patterns with a newline.
+
+      Example:
+
+      Copy every APK and AAB file:
+
+      ```
+      *.apk
+      *.aab
+      ```
+
+      Copy every APK file with a filename that contains `release`, like (`./app/build/outputs/apk/app-release-unsigned.apk`):
+
+      ```
+      *release*.apk
+      ```
+    title: APK and AAB file include filter
+- app_file_exclude_filter: |
+    *unaligned.apk
+    *Test*.apk
+  opts:
+    category: Export Config
+    description: |
+      One filter per line. The step will **not** copy the generated APK and AAB files that match this filters into the Bitrise Deploy Directory.
+      You can use this filter to avoid moving unalinged and/or unsigned APK and AAB files.
+
+      If you specify an empty filter, every APK and AAB file (selected by `APK and AAB file include filter`) will be copied.
+
+      Seperate patterns with a newline.
+
+      Examples:
+
+      Do not copy APK files with a filename that contains `unaligned`:
+
+      ```
+      *unaligned*.apk
+      ```
+
+      Do not copy APK files with a filename that contains `unaligned` and/or `Test`:
+
+      ```
+      *unaligned*.apk
+      *Test*.apk
+      ```
+    title: APK and AAB file exclude filter
+- opts:
+    category: Export Config
+    description: |
+      The step will copy the generated apk files that match this filter into the Bitrise Deploy Directory.
+
+      Example:
+      Copy every APK if its filename contains Test, like (./app/build/outputs/apk/app-debug-androidTest-unaligned.apk):
+
+      ```
+      *Test*.apk
+      ```
+    title: Test APK file include filter
+  test_apk_file_include_filter: '*Test*.apk'
+- opts:
+    category: Export Config
+    description: |
+      One filter per line. The step will **not** copy the generated apk files that match this filters into the Bitrise Deploy Directory.
+      You can use this filter to avoid moving unalinged and/or unsigned apk files.
+
+      If you specify an empty filter, every APK file (selected by `apk_file_include_filter`) will be copied.
+
+      Example:
+
+      Do not copy the test APK file if its filename contains `unaligned`:
+
+      ```
+      *unaligned*.apk
+      ```
+    title: Test APK file exclude filter
+  test_apk_file_exclude_filter: ""
+- mapping_file_include_filter: '*/mapping.txt'
+  opts:
+    category: Export Config
+    description: "The step will copy the generated mapping files that match this filter
+      into the Bitrise Deploy Directory.\n\nIf you specify an empty filter, no mapping
+      files will be copied.\n\nExample: \n\nCopy every mapping.txt file:\n\n```\n*mapping.txt\n```\n"
+    title: Mapping file include filter
+- mapping_file_exclude_filter: null
+  opts:
+    category: Export Config
+    description: "The step will **not** copy the generated mapping files that match
+      this filter into the Bitrise Deploy Directory.\nYou can use this step to avoid
+      moving beta mapping file.\n\nIf you specify an empty filter, every mapping files
+      (selected by `mapping_file_include_filter`) will be copied.\n\nExample: \n\nDo
+      not copy any mapping.txt file that is in a `beta` directoy:\n\n```\n*/beta/mapping.txt\n```
+      \n"
+    title: Mapping file exclude filter
+- cache_level: only_deps
+  opts:
+    category: Debug
+    description: |-
+      `all` - will cache build-cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - won't cache any of the above
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- gradle_options: --stacktrace --no-daemon
+  opts:
+    category: Debug
+    description: |-
+      Options added to the end of the Gradle call.
+
+      You can use multiple options, separated by a space
+      character. Example: `--stacktrace --debug`
+    title: Additional options for Gradle call
+- opts:
+    category: Debug
+    description: Retry failed Gradle command, in case of temporary failure (for example
+      a network timeout).
+    title: Retry failed Gradle command, in case of temporary failure (for example
+      a network timeout).
+    value_options:
+    - "no"
+    - "yes"
+  retry_on_failure: "yes"
+- apk_file_include_filter: null
+  opts:
+    category: Deprecated
+    description: |
+      This input is **DEPRECATED** - use the `APK and AAB file include filter` input instead and set this input to empty value.
+
+      The step will copy the generated APK files that match this filter into the Bitrise Deploy Directory.
+
+      If you specify an empty filter, the new input "APK and AAB file include filter" will be used.
+
+      Example:
+
+      Copy every APK file:
+
+      ```
+      "*.apk"
+      ```
+
+      Copy every APK file with a filename that contains `release`, like (`./app/build/outputs/apk/app-release-unsigned.apk`):
+
+      ```
+      *release*.apk
+      ```
+    title: APK file include filter
+- apk_file_exclude_filter: null
+  opts:
+    category: Deprecated
+    description: |
+      This input is **DEPRECATED** - use the `APK and AAB file exclude filter` input instead and set this input to empty value.
+
+      One filter per line. The step will **not** copy the generated APK files that match this filters into the Bitrise Deploy Directory.
+      You can use this filter to avoid moving unalinged and/or unsigned apk files.
+
+      If you specify an empty filter, the new input "APK and AAB file exclude filter" will be used.
+
+      Examples:
+
+      Do not copy APK files with a filename that contains `unaligned`:
+
+      ```
+      *unaligned*.apk
+      ```
+
+      Do not copy APK files with a filename that contains `unaligned` and/or `Test`:
+
+      ```
+      *unaligned*.apk
+      *Test*.apk
+      ```
+    title: APK file exclude filter
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK file,
+      after filtering based on the filter inputs.
+
+      If the build generates more than one APK file which fulfills the
+      filter inputs this output will contain the last one's path.
+    summary: Path of the generated (and copied) APK file - after filtering.
+    title: Path of the generated APK
+- BITRISE_AAB_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated AAB file,
+      after filtering based on the filter inputs.
+
+      If the build generates more than one AAB file which fulfills the
+      filter inputs this output will contain the last one's path.
+    summary: Path of the generated (and copied) AAB file - after filtering.
+    title: Path of the generated AAB
+- BITRISE_TEST_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated test APK file,
+      after filtering based on the filter inputs.
+
+      If the build generates more than one APK file which fulfills the
+      filter inputs this output will contain the last one's path.
+    summary: Path of the generated (and copied) test APK file - after filtering.
+    title: Path of the generated test APK file
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated APK files,
+      after filtering based on the filter inputs.
+
+      The paths are separated with `|` character, eg: `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+    summary: List of the generated (and copied) APK file paths - after filtering.
+    title: List of the generated APK file paths
+- BITRISE_AAB_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated AAB files,
+      after filtering based on the filter inputs.
+
+      The paths are separated with `|` character, eg: `app.aab|app2.aab`
+    summary: List of the generated (and copied) AAB file paths - after filtering.
+    title: List of the generated AAB file paths
+- BITRISE_MAPPING_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated mapping.txt.
+
+      If more than one mapping.txt exist in project this output will contain the last one's path.
+    summary: Path of the generated (and copied) mapping.txt.
+    title: Path of the generated mapping.txt

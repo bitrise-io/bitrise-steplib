@@ -1,0 +1,45 @@
+title: Bitrise Wait for Build
+summary: Waiting for the given builds to be finished
+description: Waiting for the given builds to be finished
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-wait
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-wait
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-wait/issues
+published_at: 2020-05-19T13:37:04.878962882Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-wait.git
+  commit: 97ec5358a6295397b74f617895fd70057093bbb3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-wait
+is_always_run: true
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your access token\n\nTo acquire a `Personal Access Token` for your
+      user, sign in with that user on [bitrise.io](https://bitrise.io),  \ngo to your
+      `Account Settings` page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_required: true
+    is_sensitive: true
+    summary: Your access token
+    title: Bitrise Access Token
+- buildslugs: $ROUTER_STARTED_BUILD_SLUGS
+  opts:
+    description: The build slug(s) to check. One build slug per line.
+    is_required: true
+    summary: The build slug(s) to check. One build slug per line.
+    title: Build Slugs
+- opts:
+    description: You can enable the verbose log for easier debugging.
+    is_required: true
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"

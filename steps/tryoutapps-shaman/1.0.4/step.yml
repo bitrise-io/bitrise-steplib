@@ -1,0 +1,69 @@
+title: TryoutApps Shaman
+summary: |
+  Uploads apps to Infinum's TryoutApps
+description: |
+  Uploads apps to Infinum's TryoutApps using shaman deploy script.
+  Only one build at the time can be uploaded.
+website: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy
+source_code_url: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy
+support_url: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy/issues
+published_at: 2019-12-02T15:12:06.72745+01:00
+source:
+  git: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy.git
+  commit: 8192d50a1b282dd2239c8283d47e636df8578eec
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+- android
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: "Get your user token from https://[TENANT].tryoutapps.com/users/me
+      \n"
+    is_required: true
+    is_sensitive: true
+    title: Token used for auth with TryoutApps
+  shaman_token: null
+- environment_name: null
+  opts:
+    description: |
+      Name defined in shaman.yml
+    is_required: true
+    title: Deploy environment name
+- opts:
+    description: |
+      By default, this value is set to './.shaman.yml'
+    is_required: true
+    title: Path to the shaman file
+  shaman_config_path: ./.shaman.yml
+- file_path: ${BITRISE_IPA_PATH}
+  opts:
+    is_required: true
+    title: Path to the file that have to be uploaded
+- changelog_message: null
+  opts:
+    category: Config
+    description: |
+      If you are using tag based deployment, you can store changelog in "${TAG_MESSAGE}" global variable and then use it here.
+
+      If you don't use tag message or tag deploy approach, you can remove this message from the deploy step.
+    is_required: false
+    title: Message used for setting the changelog
+- opts:
+    category: Config
+    description: |
+      Release name used only if ZIP is uploaded to TryoutApps.
+    is_required: false
+    title: Release name (ZIP platform only)
+  release_name: null

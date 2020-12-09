@@ -1,14 +1,24 @@
-<?xml version="1.0" encoding="utf-8"?>
-<!-- Generator: Adobe Illustrator 19.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
-<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-	 viewBox="0 0 256 256" enable-background="new 0 0 256 256" xml:space="preserve">
-<rect x="0" y="0" fill="#02233E" width="256" height="256"/>
-<g>
-	<path fill="#024998" d="M82.3,178.9l42.6-28.4c2.4-1.6,5.4-1.5,7.8,0.1l41.1,28.4c4,2.7,4,8.6,0,11.4l-41.1,28.4
-		c-2.3,1.6-5.4,1.6-7.8,0.1l-42.6-28.4C78.2,187.7,78.2,181.6,82.3,178.9z"/>
-	<path fill="#4FADE8" d="M59.2,134.2l64.2-42.8c3.5-2.4,8.2-2.3,11.7,0.1l61.9,42.8c6,4.1,6,13,0,17.1L135,194.2
-		c-3.5,2.4-8.1,2.5-11.7,0.1l-64.2-42.8C53,147.4,53,138.4,59.2,134.2z"/>
-	<path opacity="0.5" fill="#FFFFFF" d="M43.7,90.5l78.6-52.4c4.3-2.9,10-2.8,14.3,0.1l75.8,52.4c7.3,5.1,7.3,15.9,0,21L136.6,164
-		c-4.3,3-10,3-14.3,0.1l-78.6-52.4C36.2,106.7,36.2,95.6,43.7,90.5z"/>
-</g>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>fabric-crashlytics-beta-deploy-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
+            <stop stop-color="#16628F" offset="0%"></stop>
+            <stop stop-color="#02233E" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Fabric/Crashlytics-Deployer" transform="translate(0.000000, 0.000000)" fill-rule="nonzero">
+            <g id="fabric-crashlytics-beta-deploy-stepicon">
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" x="0" y="0" width="256" height="256"></rect>
+                <g id="Group" transform="translate(38.000000, 36.000000)">
+                    <path d="M44.5091603,142.825958 L86.882111,114.383655 C89.2693195,112.781272 92.2533301,112.881421 94.6405386,114.483804 L135.521484,142.926107 C139.500165,145.630129 139.500165,151.538917 135.521484,154.343088 L94.6405386,182.785391 C92.3527971,184.387774 89.2693195,184.387774 86.882111,182.88554 L44.5091603,154.443237 C40.4310125,151.639066 40.4310125,145.52998 44.5091603,142.825958 Z" id="Shape" fill="#024998"></path>
+                    <path d="M20.826688,98.0294789 L84.8654178,55.3291226 C88.3566258,52.9347101 93.0448194,53.0344773 96.5360274,55.4288898 L158.280535,98.1292461 C164.265463,102.219701 164.265463,111.098981 158.280535,115.189435 L96.4362786,157.889792 C92.9450706,160.284204 88.3566258,160.383971 84.765669,157.989559 L20.7269392,115.289202 C14.6422624,111.198748 14.6422624,102.219701 20.826688,98.0294789 Z" id="Shape" fill="#4FADE8"></path>
+                    <path d="M5.6298818,54.5797489 L84.2980968,2.12775557 C88.6018286,-0.77512192 94.3067755,-0.675022696 98.6105074,2.2278548 L174.476292,54.6798481 C181.782628,59.7849085 181.782628,70.5956247 174.476292,75.7006851 L98.6105074,128.152678 C94.3067755,131.155655 88.6018286,131.155655 84.2980968,128.252778 L5.6298818,75.8007843 C-1.87662727,70.7958231 -1.87662727,59.6848093 5.6298818,54.5797489 Z" id="Shape" fill="#FFFFFF" opacity="0.5"></path>
+                </g>
+            </g>
+        </g>
+    </g>
 </svg>

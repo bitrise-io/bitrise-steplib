@@ -1,0 +1,83 @@
+title: Flutter Build
+summary: This step will build a Flutter project
+description: This step will build a Flutter project
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-build
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-build
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-build/issues
+published_at: 2019-01-25T09:29:52.106328047Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-build.git
+  commit: e8725d71e5e6404a43e88ddf650da90de8cd14a1
+project_type_tags:
+- flutter
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-build
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root dir of your Flutter project.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- opts:
+    description: The selected platform will be built, or both iOs and Android if you
+      select both
+    is_required: true
+    summary: The selected platform will be built, or both iOS and Android if you select
+      both
+    title: Platform
+    value_options:
+    - both
+    - ios
+    - android
+  platform: both
+- ios_codesign_identity: null
+  opts:
+    category: iOS Platform Configs
+    description: Override codesign identity in .flutter_settings
+    summary: Override codesign identity in .flutter_settings
+    title: Codesign Identity
+- ios_additional_params: --release
+  opts:
+    category: iOS Platform Configs
+    description: The flags from this input field will be appended to the `flutter
+      build ios` command.
+    summary: The flags from this input field will be appended to the `flutter build
+      ios` command.
+    title: Additional parameters
+- ios_output_pattern: '*build/ios/iphoneos/*.app'
+  opts:
+    category: iOS Platform Configs
+    description: Pattern to find built artifacts relative to $BITRISE_SOURCE_DIR
+    summary: Pattern to find built artifacts relative to $BITRISE_SOURCE_DIR
+    title: Output pattern
+- android_additional_params: --release
+  opts:
+    category: Android Platform Configs
+    description: The flags from this input field will be appended to the `flutter
+      build apk` command.
+    summary: The flags from this input field will be appended to the `flutter build
+      apk` command.
+    title: Additional parameters
+- android_output_pattern: '*build/app/outputs/apk/*/*.apk'
+  opts:
+    category: Android Platform Configs
+    description: Pattern to find built artifacts relative to $BITRISE_SOURCE_DIR
+    summary: Pattern to find built artifacts relative to $BITRISE_SOURCE_DIR
+    title: Output pattern
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    title: The created .apk file's path
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    title: All created .apk file's path list
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The generated .app directory

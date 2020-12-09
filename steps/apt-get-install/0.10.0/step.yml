@@ -1,0 +1,70 @@
+title: apt-get install
+summary: |
+  Install or upgrade packages with apt-get
+description: |
+  Install or upgrade packages with apt-get
+website: https://github.com/bitrise-steplib/steps-apt-get-install
+source_code_url: https://github.com/bitrise-steplib/steps-apt-get-install
+support_url: https://github.com/bitrise-steplib/steps-apt-get-install/issues
+published_at: 2019-11-04T14:47:50.397507394Z
+source:
+  git: https://github.com/bitrise-steplib/steps-apt-get-install.git
+  commit: 44c9fe8318037f71b5ce21c17b854dcda2ced80a
+host_os_tags:
+- ubuntu
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-apt-get-install
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Name of the packages to install/upgrade, separated with spaces
+    is_expand: true
+    is_required: true
+    summary: Name of the packages to install/upgrade, separated with spaces
+    title: Name of the packages to install/upgrade, separated with spaces
+    value_options: []
+  packages: null
+- options: null
+  opts:
+    description: |
+      Flags to pass to the apt-get install/upgrade command.
+
+      `apt-get install/upgrade -y [options] [packages]`
+    is_expand: true
+    is_required: false
+    summary: Options for apt-get install/upgrade
+    title: Options for apt-get install/upgrade
+    value_options: []
+- opts:
+    description: |
+      If set the step will upgrade the defined packages by calling `apt-get upgrade -y [options] [packages]` command.
+
+      Otherwise the step calls `apt-get install -y [options] [packages]`
+    is_expand: true
+    is_required: false
+    summary: Upgrade packages if previously installed
+    title: Upgrade packages if previously installed
+    value_options:
+    - "yes"
+    - "no"
+  upgrade: "yes"
+- cache_level: all
+  opts:
+    category: Options
+    description: |-
+      Sets the level of cache.
+
+      'all' enables the caching of all files under /var/cache/apt/archives folder (default directory for apt cache).
+      'none' disables the caching for the step.
+    is_required: true
+    summary: Sets the level of cache
+    title: Cache level
+    value_options:
+    - all
+    - none

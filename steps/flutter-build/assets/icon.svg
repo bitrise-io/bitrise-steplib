@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <polygon id="flutter-icon-a" points=".456 27.137 46.492 73.415 99.776 73.415 27.2 .525"/>
+    <polygon id="flutter-icon-d" points="27.357 53.971 54.059 27.319 27.266 .526 .521 27.136"/>
+    <filter id="flutter-icon-c" width="126.1%" height="126.2%" x="-13.1%" y="-9.4%" filterUnits="objectBoundingBox">
+      <feOffset dy="2" in="SourceAlpha" result="shadowOffsetOuter1"/>
+      <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation="2"/>
+      <feColorMatrix in="shadowBlurOuter1" values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.2 0"/>
+    </filter>
+    <linearGradient id="flutter-icon-e" x1="99.731%" x2="0%" y1="60.369%" y2="100%">
+      <stop offset="0%" stop-color="#17579B" stop-opacity="0"/>
+      <stop offset="100%" stop-opacity=".4"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="#FFF"/>
+    <g transform="translate(51 43)">
+      <g transform="translate(38.415 97.317)">
+        <mask id="flutter-icon-b" fill="#fff">
+          <use xlink:href="#flutter-icon-a"/>
+        </mask>
+        <use fill="#17579B" xlink:href="#flutter-icon-a"/>
+        <g mask="url(#flutter-icon-b)">
+          <use fill="#000" filter="url(#flutter-icon-c)" xlink:href="#flutter-icon-d"/>
+          <use fill="#34B2EC" xlink:href="#flutter-icon-d"/>
+        </g>
+        <polygon fill="url(#flutter-icon-e)" points="27.254 53.972 54.059 27.305 66.633 40.229" mask="url(#flutter-icon-b)"/>
+      </g>
+      <polygon fill="#4EC5F7" points="86.02 0 0 85.252 26.835 112.088 139.753 0"/>
+      <polygon fill="#4EC5F7" points="38.869 124.453 65.705 151.289 138.738 78.394 85.113 78.394"/>
+      <polygon fill="#34B2EC" points="65.772 151.289 92.474 124.636 65.68 97.843 38.935 124.453"/>
+    </g>
+  </g>
+</svg>

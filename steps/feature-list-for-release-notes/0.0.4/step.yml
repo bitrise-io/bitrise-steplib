@@ -1,0 +1,75 @@
+title: Features and epics list for release notes
+summary: |
+  Creates a list of features and gathered from git commits and tags using given pattern.
+description: |
+  Feature descriptions are derived from commit messages. List of the features is based on previous commits messages.
+
+  The regex pattern to look for features is "<project_prefix>[0-9]{1,5}"
+
+  Epics are derived from tags.
+
+  The regex pattern to look for epics is "<project_prefix>[0-9]{1,5}_"
+
+  An alternative use, would be to create links to appropriate features and epics in the backlog system using the <default_backlog_url> variable.
+website: https://github.com/DroidsOnRoids/bitrise_set_jira_features
+source_code_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features
+support_url: https://github.com/DroidsOnRoids/bitrise_set_jira_features/issues
+published_at: 2018-09-04T10:14:38.946874683+02:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise_set_jira_features.git
+  commit: 3acaaee1a98e6d134702d464be1fe74697c3ae7a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- backlog_default_url: null
+  opts:
+    description: |
+      Base URL for prefixing the features and epics.
+
+      e.g. "https://example.com/"
+
+      Can be empty.
+    is_expand: true
+    is_required: true
+    title: Default URL for the backlog system
+- opts:
+    description: |
+      Project prefix to search for features and epics.
+
+      e.g. "PROJ-"
+
+      Can be empty.
+    is_expand: true
+    is_required: true
+    title: Project prefix
+  project_prefix: null
+outputs:
+- FEATURES_FROM_COMMITS: null
+  opts:
+    description: |
+      If the backlog_default_url is specified, each element is prefixed with the given URL
+
+      e.g. https://example.com/PROJ-1
+    title: List of features derived from commits
+- EPICS_FROM_TAGS: null
+  opts:
+    description: |-
+      If the backlog_default_url is specified, each element is prefixed with the given URL
+
+      e.g. https://example.com/PROJ-1
+    title: List of epics with titles derived from tags

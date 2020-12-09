@@ -1,0 +1,146 @@
+title: Ionic archive
+summary: Archives your Ionic project
+description: |-
+  Archives your Ionic project.
+
+  First, the step prepares your Ionic project by calling:
+
+  - `ionic cordova "prepare" "--no-build"`
+
+  After, it archives the project by calling:
+
+  - `ionic cordova "build" "--debug|--release" "--device|--emulator" "<platform>" "--buildConfig=$BITRISE_CORDOVA_BUILD_CONFIGURATION"`
+website: https://github.com/bitrise-community/steps-ionic-archive
+source_code_url: https://github.com/bitrise-community/steps-ionic-archive
+support_url: https://github.com/bitrise-community/steps-ionic-archive/issues
+published_at: 2018-12-14T10:56:27.323161782Z
+source:
+  git: https://github.com/bitrise-community/steps-ionic-archive.git
+  commit: 42a4fa1cd6b4d67cf659f3f92afea4ed4615bb55
+project_type_tags:
+- ionic
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-ionic-archive
+deps:
+  brew:
+  - name: go
+  - name: gradle
+inputs:
+- opts:
+    description: |-
+      Specify this input to apply ionic-cli commands to desired platforms only.
+
+      `ionic cordova build [OTHER_PARAMS] <platform>`
+    is_required: true
+    title: Platform to use in ionic-cli commands
+    value_options:
+    - ios,android
+    - ios
+    - android
+  platform: ios,android
+- configuration: release
+  opts:
+    description: |-
+      Specify build command configuration.
+
+      `ionic cordova build [OTHER_PARAMS] [--release | --debug]`
+    is_required: true
+    title: Build command configuration
+    value_options:
+    - release
+    - debug
+- opts:
+    description: |-
+      Specify build command target.
+
+      `ionic cordova build [OTHER_PARAMS] [--device | --emulator]`
+    is_required: true
+    title: Build command target
+    value_options:
+    - device
+    - emulator
+  target: device
+- build_config: $BITRISE_CORDOVA_BUILD_CONFIGURATION
+  opts:
+    description: Path to the build configuration file (build.json), which describes
+      code signing properties.
+    title: Build configuration path, to describe code signing properties
+- options: -- --buildFlag="-UseModernBuildSystem=0"
+  opts:
+    description: |-
+      Use this input to specify custom options, to append to the end of the ionic-cli build command.
+
+      Cordova does not yet support the new build system made default in XCode 10 (https://github.com/apache/cordova-ios/issues/407).
+      To use the legacy build system add `-- --buildFlag="-UseModernBuildSystem=0"` to the options string.
+
+      Example:
+      - `--browserify`
+
+      `ionic cordova build [OTHER_PARAMS] [options]`
+    title: Options to append to the ionic-cli build command
+- ionic_username: null
+  opts:
+    description: Use `Ionic username` and `Ionic password` to login with ionic-cli.
+    is_sensitive: true
+    title: Ionic username
+- ionic_password: null
+  opts:
+    description: Use `Ionic username` and `Ionic password` to login with ionic-cli.
+    is_sensitive: true
+    title: Ionic password
+- ionic_version: null
+  opts:
+    description: |-
+      The version of ionic you want to use.
+
+      If value is set to `latest`, the step will update to the latest ionic version.
+      Leave this input empty to use the preinstalled ionic version.
+    title: Ionic version
+- opts:
+    description: |-
+      It should be set to false if ionic-prepare step is used.
+
+      - false: `ionic cordova build`
+      - true: `ionic cordova prepare --no-build` followed by `ionic cordova build`
+    title: Should `ionic cordova prepare` be executed before `ionic cordova build`?
+  run_ionic_prepare: "true"
+- cordova_version: null
+  opts:
+    description: |-
+      The version of cordova you want to use.
+
+      If value is set to `latest`, the step will update to the latest cordova version.
+      Leave this input empty to use the preinstalled cordova version.
+    title: Cordova version
+- opts:
+    description: Root directory of your Ionic project, where your Ionic config.xml
+      exists.
+    is_required: true
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created ios .ipa file's path
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The created ios .app dir's path
+- BITRISE_APP_PATH: null
+  opts:
+    title: The created ios .app.zip file's path
+- BITRISE_DSYM_DIR_PATH: null
+  opts:
+    title: The created ios .dSYM dir's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created ios .dSYM.zip file's path
+- BITRISE_APK_PATH: ""
+  opts:
+    title: The created android .apk file's path
+- BITRISE_APK_PATH_LIST: ""
+  opts:
+    title: The created android .apk file paths (separated via |)

@@ -1,0 +1,37 @@
+title: Flutter Install
+summary: This step will git clone the selected branch or tag of the official Flutter
+  repository and will run the initial setup of the Flutter SDK.
+description: This step will git clone the selected branch or tag of the official Flutter
+  repository and will run the initial setup of the Flutter SDK.
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-installer
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-installer
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-installer/issues
+published_at: 2019-04-29T14:05:08.052748217Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-installer.git
+  commit: bd585b116b975e6a0c626cb04c5e5b1de8035e5f
+project_type_tags:
+- flutter
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-installer
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    description: "The tag or branch of the Flutter SDK's git repository. \n\nTo find
+      the available version tags see this list: [https://github.com/flutter/flutter/releases](https://github.com/flutter/flutter/releases)\n\nTo
+      see the the avilable branches visit: [https://github.com/flutter/flutter/branches](https://github.com/flutter/flutter/branches)"
+    is_required: true
+    summary: The tag or branch of the Flutter SDK's git repository.
+    title: Flutter SDK Version
+  version: stable

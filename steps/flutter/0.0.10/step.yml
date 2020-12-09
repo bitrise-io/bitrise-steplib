@@ -1,0 +1,72 @@
+title: Flutter
+summary: |
+  Executes one or more Flutter commands. E.g. build, test or install.
+description: |
+  Sample `bitrise.yml` snippet for building iOS and Android apps:
+  ```yaml
+  primary:
+  steps:
+  - certificate-and-profile-installer:
+      inputs:
+      - install_defaults: 'no'
+  - activate-ssh-key:
+      run_if: '{{getenv "SSH_RSA_PRIVATE_KEY" | ne ""}}'
+  - git-clone: {}
+  - flutter:
+      inputs:
+      - commands: test|build ios|build apk
+  ```
+website: https://github.com/DroidsOnRoids/bitrise-step-flutter
+source_code_url: https://github.com/DroidsOnRoids/bitrise-step-flutter
+support_url: https://github.com/DroidsOnRoids/bitrise-step-flutter/issues
+published_at: 2020-06-27T03:22:59.401845+02:00
+source:
+  git: https://github.com/DroidsOnRoids/bitrise-step-flutter.git
+  commit: 08299c223a02409cfb10256e8036c7d0d765d62f
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- flutter
+type_tags:
+- build
+- test
+toolkit:
+  go:
+    package_name: github.com/DroidsOnRoids/bitrise-step-flutter
+deps:
+  brew:
+  - name: git
+  - name: curl
+  - name: unzip
+  apt_get:
+  - name: git
+  - name: curl
+  - name: unzip
+  - name: libglu1-mesa
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Flutter release version or repository tag, without `v` prefix. E.g. `0.9.4-beta`
+      or `0.10.0` or `master`.
+    title: Flutter version
+  version: 1.17.4
+- opts:
+    is_expand: true
+    is_required: true
+    summary: The root directory of your Flutter project, where your `pubspec.yaml`
+      file is located.
+    title: Root directory of Flutter project
+  working_dir: $BITRISE_SOURCE_DIR
+- commands: build
+  opts:
+    is_expand: true
+    is_required: true
+    summary: |
+      `|` separated Flutter commands to be executed in order. E.g. `build`, `test` or `install`.
+    title: Flutter commands to be executed

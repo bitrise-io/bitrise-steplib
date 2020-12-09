@@ -1,0 +1,78 @@
+title: Android Lint
+summary: Runs lint gradle task on your project.
+description: Runs lint gradle task on your project.
+website: https://github.com/bitrise-steplib/bitrise-step-android-lint
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-lint
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-lint/issues
+published_at: 2018-05-23T15:16:52.992466727+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-lint.git
+  commit: 8b5597a0ea586579b6fd6698e2111ea13659a0f2
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-lint
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: 'The root directory of your android project, e.g.: where your root
+      build gradle file exist (also gradlew, settings.gradle, etc...)'
+    is_required: true
+    summary: 'The root directory of your android project, e.g.: where your root build
+      gradle file exist (also gradlew, settings.gradle, etc...)'
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to lint. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: false
+    summary: |
+      Set the module that you want to lint. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to lint. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    is_required: false
+    summary: |
+      Set the variant that you want to lint. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- opts:
+    category: Options
+    description: |
+      Will find the report file with the given pattern. If you need the xml file then you can use: "*/build/reports/lint-results*.xml"
+    is_required: true
+    summary: |
+      Will find the report file with the given pattern. If you need the xml file then you can use: "*/build/reports/lint-results*.xml"
+    title: Report location pattern
+  report_path_pattern: '*/build/reports/lint-results*.html'
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments

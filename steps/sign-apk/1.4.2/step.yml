@@ -1,0 +1,190 @@
+title: Android Sign
+summary: Signs your APK or Android App Bundle before uploading it to Google Play Store.
+description: "Once you have uploaded your keystore file and provided your keystore
+  credentials on the **Code Signing** tab of the Workflow Editor, the **Android Sign**
+  Step signs your APK digitally. \nBitrise assigns Environment Variables to the uploaded
+  file and credentials, and uses those in the respective fields of the **Android Sign**
+  Step. \nOnce the Step runs, it produces a signed APK or App Bundle which will be
+  used as the input value of the **App file path** field in the **Google Play Deploy**
+  Step.   \n\n### Configuring the Step\n\n1. Add the **Android Sign** Step after a
+  build Step in your deploy workflow.\n2. Upload the keystore file to the **Upload
+  file** field on the **Code Signing** tab.\n3. Provide your keystore password, keystore
+  alias and private key password to the relevant fields on the **Code Signing** tab.\n4.
+  Run your build.\n\n\n### Troubleshooting\nMake sure you have the **Android Sign**
+  Step right after a build Steps but before **Deploy to Google Play** Step in your
+  deploy workflow.\nIf you wish to get your Android project signed automatically,
+  use the **Android Sign** Step and do not set any gradle task for the signing, otherwise,
+  the Step will fail.\n\n\n### Useful links\n[Android code signing using Android Sign
+  Step](https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/)\n[Android
+  deployment](https://devcenter.bitrise.io/deploy/android-deploy/android-deployment-index/)\n\n\n###
+  Related Steps\n[Android Build](https://www.bitrise.io/integrations/steps/android-build)\n[Gradle
+  Runner](https://www.bitrise.io/integrations/steps/gradle-runner)\n[Deploy to Bitrise.io](https://www.bitrise.io/integrations/steps/deploy-to-bitrise-io)"
+website: https://github.com/bitrise-steplib/steps-sign-apk
+source_code_url: https://github.com/bitrise-steplib/steps-sign-apk
+support_url: https://github.com/bitrise-steplib/steps-sign-apk/issues
+published_at: 2020-01-09T11:51:04.941239287Z
+source:
+  git: https://github.com/bitrise-steplib/steps-sign-apk.git
+  commit: c7a9393243444790cda9deb25f9a57d51909825f
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-sign-apk
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: null
+  opts:
+    category: Deprecated
+    description: |-
+      __This input is deprecated and will be removed on 20 August 2019, use `App file path` input instead!__
+
+      Path(s) to the build artifact file to sign (`.aab` or `.apk`).
+
+      You can provide multiple build artifact file paths separated by `|` character.
+
+      Deprecated, use `android_app` instead.
+
+      Format examples:
+
+      - `/path/to/my/app.apk`
+      - `/path/to/my/app1.apk|/path/to/my/app2.apk|/path/to/my/app3.apk`
+
+      - `/path/to/my/app.aab`
+      - `/path/to/my/app1.aab|/path/to/my/app2.apk|/path/to/my/app3.aab`
+    is_required: true
+    summary: '`Android App Bundle (.aab)` or `Android Aplication Package (.apk)`.
+      Deprecated, use `android_app` instead.'
+    title: '[DEPRECATED] Build artifact path.'
+- android_app: |-
+    $BITRISE_APK_PATH
+    $BITRISE_AAB_PATH
+  opts:
+    description: |-
+      Path(s) to the build artifact file to sign (`.aab` or `.apk`).
+
+      You can provide multiple build artifact file paths separated by `|` character.
+
+      Format examples:
+
+      - `/path/to/my/app.apk`
+      - `/path/to/my/app1.apk|/path/to/my/app2.apk|/path/to/my/app3.apk`
+
+      - `/path/to/my/app.aab`
+      - `/path/to/my/app1.aab|/path/to/my/app2.apk|/path/to/my/app3.aab`
+    is_required: true
+    summary: '`Android App Bundle (.aab)` or `Android Aplication Package (.apk)`'
+    title: App file path.
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    description: |-
+      For remote keystores you can provide any download location (ex: https://URL/TO/keystore.jks).
+      For local keystores provide file path url. (ex: file://PATH/TO/keystore.jks).
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Keystore url
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Keystore password
+- keystore_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Keystore alias
+- opts:
+    description: |
+      If key password equals to keystore password, you can leave it empty.
+      Otherwise specify the private key password.
+    is_sensitive: true
+    summary: ""
+    title: Private key password
+  private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+- jarsigner_options: ""
+  opts:
+    description: |
+      __deprecated!__ jarsigner options are detected from the keystore
+    summary: ""
+    title: Additional options for jarsigner
+- opts:
+    description: |
+      If is empty then the output name is "app-release-bitrise-signed".
+      Else it's the specified name. Do not add extensione here.
+    is_sensitive: false
+    summary: Name of the produced output artifact
+    title: Artifact name
+  output_name: ""
+- opts:
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "true"
+    - "false"
+  verbose_log: "false"
+outputs:
+- BITRISE_SIGNED_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the signed APK.
+      If the build generates more than one APK this output will contain the last one's path.
+    summary: Path of the signed APK
+    title: Path of the signed APK
+- BITRISE_SIGNED_APK_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated APKs
+      If multiple APKs are provided for signing the output paths are separated with `|` character, for example, `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+    summary: List of the signed (and copied) APK paths
+    title: List of the signed APK paths
+- BITRISE_SIGNED_AAB_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the signed AAB.
+      If the build generates more than one AAB this output will contain the last one's path.
+    summary: Path of the signed AAB
+    title: Path of the signed AAB
+- BITRISE_SIGNED_AAB_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated AABs.
+      If multiple AABs are provided for signing the output paths are separated with `|` character, for example, `app-armeabi-v7a-debug.aab|app-mips-debug.aab|app-x86-debug.aab`
+    summary: List of the signed (and copied) AAB paths
+    title: List of the signed AAB paths
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path(s) of the signed APK(s).
+      If multiple APKs are provided for signing the output paths are separated with `|` character, for example, `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+    summary: Path of the signed APK
+    title: Path of the signed APK
+- BITRISE_AAB_PATH: null
+  opts:
+    description: |-
+      This output will include the path(s) of the signed AAB(s).
+      If multiple AABs are provided for signing the output paths are separated with `|` character, for example, `app-armeabi-v7a-debug.aab|app-mips-debug.aab|app-x86-debug.aab`
+    summary: Path of the signed AAB
+    title: Path of the signed AAB

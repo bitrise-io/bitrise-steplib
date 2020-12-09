@@ -1,0 +1,92 @@
+title: Genymotion Cloud Start Android Devices
+summary: |
+  Start Genymotion Cloud SaaS Android Devices
+description: |-
+  This step launches Android devices on Genymotion Cloud SaaS.
+  Appium, Espresso, and others test automation frameworks can be run on those devices.
+  Setup instructions:
+  1. Create a Genymotion Cloud SaaS account: [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)
+  1. Navigate to Default templates or templates:
+    - Select a device.
+    - Click on dot menu and select details.
+    - On the description field, get the recipe UUID.
+    - Copy paste it to use it in this step.
+website: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start
+support_url: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start/issues
+published_at: 2020-01-06T17:33:28.928568045+01:00
+source:
+  git: https://github.com/genymobile/bitrise-step-genymotion-cloud-saas-start.git
+  commit: 577a9454bd58e9c7c5512e2d077b8eb3163a0073
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/genymobile/bitrise-step-genymotion-cloud-saas-start
+deps:
+  brew:
+  - name: python3
+  - bin_name: pip3
+  apt_get:
+  - name: python3-pip
+  - bin_name: pip3
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- email: ""
+  opts:
+    description: Email of your Genymotion Cloud SaaS account, if you don't have an
+      account please create it first on [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)
+    is_required: true
+    summary: ""
+    title: Genymotion Cloud SaaS email
+- opts:
+    description: Password of your Genymotion Cloud SaaS account.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Genymotion Cloud SaaS password
+  password: ""
+- opts:
+    description: Recipe UUID is the identifier used when starting an instance, Recipe
+      UUID can be retrieved using `gmsaas recipes list`.
+    is_required: true
+    summary: ""
+    title: Recipe UUID
+  recipe_uuid: ""
+- instance_name: ""
+  opts:
+    description: Name given to the newly created instance.
+    is_required: true
+    summary: ""
+    title: Instance name
+- adb_serial_port: ""
+  opts:
+    description: "If `adb_serial_port` option is set,  \nthe instance will be connected
+      to ADB on localhost:`adb_serial_port`.  \nOtherwise it will be connected to
+      a port given by your system,  \n`gmsaas instances list` to know which one."
+    summary: ""
+    title: ADB serial port
+outputs:
+- GMCLOUD_SAAS_INSTANCE_UUID: null
+  opts:
+    description: |
+      Return the UUID of the instance started and connected.
+    title: UUID of the instance connected
+- GMCLOUD_SAAS_INSTANCE_ADB_SERIAL_PORT: null
+  opts:
+    description: |
+      Return the ADB Serial Port of the instance started and connected.
+    title: ADB Serial Port of the instance connected

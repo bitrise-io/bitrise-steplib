@@ -1,0 +1,4 @@
+deprecate_notes: |
+  This step is deprecated, Push Notifications are no longer supported by Parse server.
+maintainer: bitrise
+removal_date: 2019-02-29

@@ -1,0 +1,105 @@
+title: Send a Jandi message
+summary: Send a [Jandi](http://bit.ly/2FiXoc5) message to a topic.
+description: |
+  Send a [Jandi](http://bit.ly/2FiXoc5) message to a topic.
+  You can setup **Incoming WebHook integration**.
+  To register an **Incoming WebHook integration** visit http://bit.ly/31Bxeeh
+website: https://github.com/kimjunil/bitrise-step-jandi-message
+source_code_url: https://github.com/kimjunil/bitrise-step-jandi-message
+support_url: https://github.com/kimjunil/bitrise-step-jandi-message/issues
+published_at: 2019-06-20T11:01:49.447064+09:00
+source:
+  git: https://github.com/kimjunil/bitrise-step-jandi-message.git
+  commit: c5432abe0f57a24de5b540ac7eaf0a489af2127d
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/kimjunil/bitrise-step-jandi-message
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: true
+inputs:
+- is_debug_mode: "no"
+  opts:
+    description: |
+      Step prints additional debug information if this option
+      is enabled
+    title: Debug mode?
+    value_options:
+    - "yes"
+    - "no"
+- jandi_webhook_url: null
+  opts:
+    description: |
+      To register an **Incoming WebHook integration** visit http://bit.ly/31Bxeeh
+    is_required: true
+    is_sensitive: true
+    title: Jandi Webhook URL (Webhook URL is required)
+- message_body: null
+  opts:
+    description: |
+      Text of the message to send.
+      This field is required and will not generate a message if there is no content in this field.
+    is_required: true
+    title: Text of the message to send.
+- message_body_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Text of the message to send, if the build failed
+- color: '#3bc3a3'
+  opts:
+    description: |
+      You can specify the color value of the attachment area, which is divided into separate areas at the bottom of the body message.
+      Can be any hex color code (eg. #439FE0).
+    title: Message color
+- color_on_error: '#f0741f'
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Message color if the build failed
+- attachment_area_title: null
+  opts:
+    description: |
+      Title of the attachment area, displayed in bold by default.
+    title: Title of the attachment area.
+- attachment_area_title_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Title of the attachment area if the build failed
+- attachment_area_description: null
+  opts:
+    description: |
+      Description of the attachment area.
+    title: Description of the attachment area.
+- attachment_area_description_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Description of the attachment area if the build failed
+- attachment_area_image_url: null
+  opts:
+    description: "If you have an image file attached to that webhook message, you
+      can attach it as a URL. \nWe will provide a thumbnail of the image corresponding
+      to the URL later with the message.\n"
+    title: A URL to an image file that will be displayed as a thumbnail
+- attachment_area_image_url_on_error: null
+  opts:
+    category: If Build Failed
+    description: |
+      **This option will be used if the build failed.** If you
+      leave this option empty then the default one will be used.
+    title: Thumbnail if the build failed
