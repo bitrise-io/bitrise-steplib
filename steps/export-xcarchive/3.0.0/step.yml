@@ -1,0 +1,126 @@
+title: Export iOS and tvOS Xcode archive
+summary: Export iOS and tvOS Xcode archive
+description: |-
+  Export iOS and tvOS Xcode archive.
+
+  Exports .ipa from iOS and tvOS .xcarchive.
+website: https://github.com/bitrise-steplib/steps-export-xcarchive
+source_code_url: https://github.com/bitrise-steplib/steps-export-xcarchive
+support_url: https://github.com/bitrise-steplib/steps-export-xcarchive/issues
+published_at: 2020-12-10T08:28:43.637754883Z
+source:
+  git: https://github.com/bitrise-steplib/steps-export-xcarchive.git
+  commit: d57006554c32507971a8676af3df5b0753f08644
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+- xamarin
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-export-xcarchive
+is_always_run: false
+is_skippable: false
+inputs:
+- archive_path: $BITRISE_XCARCHIVE_PATH
+  opts:
+    description: Path to the iOS or tvOS archive (.xcarchive) which should be exported.
+    is_required: true
+    summary: iOS or tvOS archive path
+    title: iOS or tvOS archive path
+- export_method: auto-detect
+  opts:
+    description: "`auto-detect` option is **DEPRECATED** - use direct export methods!\n\nDescribes
+      how Xcode should export the archive.   \n\nIf you select `auto-detect`, the
+      step will figure out the proper export method  \nbased on the provisioning profile
+      embedded into the generated xcode archive."
+    is_required: true
+    summary: ""
+    title: Select method for export
+    value_options:
+    - auto-detect
+    - app-store
+    - ad-hoc
+    - enterprise
+    - development
+- opts:
+    description: "__Export option:__  \n\nFor __App Store__ exports, should the package
+      include bitcode?"
+    is_required: true
+    summary: ""
+    title: Include bitcode
+    value_options:
+    - "yes"
+    - "no"
+  upload_bitcode: "yes"
+- compile_bitcode: "yes"
+  opts:
+    description: "__Export option:__  \n\nFor __non-App Store__ exports, should Xcode
+      re-compile the app from bitcode?"
+    is_required: true
+    summary: ""
+    title: Rebuild from bitcode
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: "__Export option:__  \n\nThe Developer Portal team to use for this
+      export.\n\nFormat example:\n\n- `1MZX23ABCD4`"
+    summary: ""
+    title: The Developer Portal team to use for this export
+  team_id: null
+- opts:
+    description: "Describes which product to export.   \nPossible options are App
+      or App Clip."
+    is_required: true
+    summary: ""
+    title: Select a product to distribute
+    value_options:
+    - app
+    - app-clip
+  product: app
+- custom_export_options_plist_content: null
+  opts:
+    description: |-
+      Specifies a custom export options plist content that configures archive exporting.
+      If empty, step generates these options based on the embedded provisioning profile,
+      with default values.
+
+      Auto generated export options available for export methods:
+
+      - app-store
+      - ad-hoc
+      - enterprise
+      - development
+
+      If step doesn't find export method based on provisioning profile, development will be use.
+
+      Call `xcodebuild -help` for available export options.
+    title: Custom export options plist content
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "yes"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created iOS or tvOS .ipa file's path.
+- BITRISE_DSYM_PATH: null
+  opts:
+    description: Step will collect every dsym (app dsym and framwork dsyms) in a directory,
+      zip it and export the zipped directory path.
+    title: The created iOS or tvOS .dSYM zip file's path.
+- BITRISE_IDEDISTRIBUTION_LOGS_PATH: null
+  opts:
+    title: Path to the xcdistributionlogs zip
