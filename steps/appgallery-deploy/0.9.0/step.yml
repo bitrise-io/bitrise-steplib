@@ -1,14 +1,16 @@
 title: Deploy to Huawei App Gallery
 summary: Uploads APK/AAB to Huawei App Gallery
-description: |-
-  This step is based on [AppGallery Connect API](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/agcapi-getstarted)
+description: "This step deploys a .apk/.aab file to Huawei App Gallery. It's based on [AppGallery Connect API](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/agcapi-getstarted)
 website: https://github.com/ferPrieto/steps-app-gallery-deploy
 source_code_url: https://github.com/ferPrieto/steps-app-gallery-deploy
 support_url: https://github.com/ferPrieto/steps-app-gallery-deploy/issues
+published_at: 2020-12-13T23:39:33+00:00
+source:
+   git: https://github.com/ferPrieto/steps-app-gallery-deploy.git
+   commit: 6d0cc1649adf7ca185ce4c910b2f59d6227e835d
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
-
 project_type_tags:
   - android
   - xamarin
