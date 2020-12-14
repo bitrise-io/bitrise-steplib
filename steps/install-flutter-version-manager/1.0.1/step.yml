@@ -1,0 +1,33 @@
+title: Install Flutter Version Manager
+summary: |
+  Installs Flutter Version Manager for the project
+description: |
+  Installs FVM (Flutter Version Manager): https://github.com/leoafarias/fvm.
+  It reads fvm config the project and replaces Flutter with version from fvm config so that other Bitrise steps can use it.
+website: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise
+source_code_url: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise.git
+support_url: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise/issues
+published_at: 2020-12-14T13:53:08.140619+01:00
+source:
+  git: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise.git
+  commit: 206e2ed676b6048635cd66d30913952f7b83991e
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- flutter
+type_tags:
+- installer
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
