@@ -1,0 +1,31 @@
+title: Golint
+summary: Runs golint
+description: |-
+  Runs golint command on the given packages one-by-one:
+
+  `golint -set_exit_status <package>`
+website: https://github.com/bitrise-steplib/steps-golint
+source_code_url: https://github.com/bitrise-steplib/steps-golint
+support_url: https://github.com/bitrise-steplib/steps-golint/issues
+published_at: 2020-12-16T16:35:53.750615602Z
+source:
+  git: https://github.com/bitrise-steplib/steps-golint.git
+  commit: 1b9692a4a6bc64a2ddb2090c4761465b61fbac22
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-golint
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      Newline (`\n`) separated list of go packages, to run the golint command against.
+
+      Example: `github.com/my/step\ngithub.com/bitrise/step/tool`
+    summary: golint target packages
+    title: golint target packages
+  packages: $BITRISE_GO_PACKAGES
