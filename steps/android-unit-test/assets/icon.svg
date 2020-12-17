@@ -1,43 +1,46 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 49.1 (51147) - http://www.bohemiancoding.com/sketch -->
-    <title>android-unittest-stepicon</title>
-    <desc>Created with Sketch.</desc>
-    <defs>
-        <linearGradient x1="50%" y1="0%" x2="50%" y2="100%" id="linearGradient-1">
-            <stop stop-color="#53A906" offset="0%"></stop>
-            <stop stop-color="#A4C639" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="50%" y1="33.1830019%" x2="50%" y2="184.077381%" id="linearGradient-2">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#92C02E" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="40.0369162%" y1="123.964237%" x2="11.7745536%" y2="0%" id="linearGradient-3">
-            <stop stop-color="#0DD3C5" offset="0%"></stop>
-            <stop stop-color="#0D83CD" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="-36.3754735%" y1="50%" x2="415.400095%" y2="50%" id="linearGradient-4">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#92C02E" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="50%" y1="89.7310697%" x2="50%" y2="381.280048%" id="linearGradient-5">
-            <stop stop-color="#FFFFFF" offset="0%"></stop>
-            <stop stop-color="#92C02E" offset="100%"></stop>
-        </linearGradient>
-    </defs>
-    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="Android-Unit-Test">
-            <g id="android-unittest-stepicon">
-                <rect id="Rectangle" fill="url(#linearGradient-1)" x="0" y="0" width="256" height="256"></rect>
-                <g id="Group" transform="translate(37.000000, 72.000000)">
-                    <path d="M65.9925245,45.1787136 C65.991645,39.5558169 61.5160284,34.9986599 55.9947233,35.0000033 C50.473858,34.9955254 45.9986811,39.5607425 46.0000003,45.184087 L46.007036,87.8203942 C46.0065963,93.4491121 50.4800143,97.9982088 56.0048372,98 C61.5257025,97.9991044 65.9986808,93.4491121 66,87.8159163 L65.9925245,45.1787136 Z" id="Path" fill="url(#linearGradient-2)"></path>
-                    <path d="M78,35.0152671 L78.0156663,101.272023 C78.0107426,107.298916 82.8699964,112.163268 88.874684,112.164615 L158.136059,112.153838 C164.125975,112.156083 168.998657,107.284547 169,101.257654 L168.98881,35 L78,35.0152671 Z" id="Path" fill="url(#linearGradient-3)" style="mix-blend-mode: multiply;" transform="translate(123.500000, 73.582307) rotate(-360.000000) translate(-123.500000, -73.582307) "></path>
-                    <path d="M35,114 L57.5,114 C63.2989899,114 68,118.70101 68,124.5 L68,124.5 C68,130.29899 63.2989899,135 57.5,135 L35,135 L35,114 Z" id="Rectangle-2" fill="url(#linearGradient-3)" style="mix-blend-mode: multiply;"></path>
-                    <path d="M0,77 L22.5,77 C28.2989899,77 33,81.7010101 33,87.5 L33,87.5 C33,93.2989899 28.2989899,98 22.5,98 L0,98 L0,77 Z" id="Rectangle-2-Copy" fill="url(#linearGradient-4)" transform="translate(16.500000, 87.500000) scale(-1, 1) translate(-16.500000, -87.500000) "></path>
-                    <path d="M22.9960429,2.10806327e-06 C17.4754661,-0.00268461177 13.001319,4.56339575 13,10.1808791 L13.0074745,52.8159885 C13.0087935,58.4527267 17.4846993,63.0008956 23.0057158,63 C28.5298101,63.0004478 33.0048364,58.4495922 32.9991206,52.8164362 L33,10.1750579 C32.9978016,4.55891789 28.5170594,-0.00358018505 22.9960429,2.10806327e-06 Z" id="Path" fill="url(#linearGradient-3)" style="mix-blend-mode: multiply;"></path>
-                </g>
-                <path d="M149.003728,73.9999977 C146.796272,74.0023248 144.999538,72.2156012 145.000004,70.0044203 C145.007463,67.8146484 146.793941,66.0074466 149.005593,66 C151.200928,66.0060504 153.001858,67.8127867 152.999993,70.0067474 C153.005121,72.2132742 151.210252,74.0004631 149.003728,73.9999977 Z M106.989516,74 C104.791299,73.9948769 103.00047,72.2092336 103.000004,70.0034938 C103.000936,67.8061372 104.78757,65.9995357 106.993245,66.0000014 C109.206844,65.9981385 110.997207,67.8061372 111.000004,70.0025623 C111.000936,72.2064392 109.206378,73.9986028 106.989516,74 Z M150.560576,54.1472365 L157.688845,41.1043483 C158.069313,40.4229732 157.82001,39.5548275 157.130047,39.170035 C156.435143,38.8009944 155.575834,39.051672 155.208393,39.7379977 L148.008252,52.9168008 C141.948168,50.216053 135.169372,48.6998358 127.995285,48.7079367 C120.840064,48.7020861 114.063065,50.2115525 108.029484,52.8969986 L100.821707,39.7528493 C100.44618,39.0593228 99.5841759,38.8086452 98.9036461,39.1862368 C98.2096404,39.5602281 97.9562947,40.4297239 98.3408053,41.1097489 L105.472668,54.142736 C91.4600424,61.3835844 81.992817,75.1708546 82,91 L173.999999,90.990549 C174.002695,75.1636538 164.552539,61.4051868 150.560576,54.1472365 Z" id="Fill-10" fill="url(#linearGradient-5)" transform="translate(128.000002, 65.000000) rotate(-360.000000) translate(-128.000002, -65.000000) "></path>
-            </g>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="android-unittest-stepicon-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#53A906"/>
+      <stop offset="100%" stop-color="#A4C639"/>
+    </linearGradient>
+    <linearGradient id="android-unittest-stepicon-b" x1="50%" x2="50%" y1="33.183%" y2="184.077%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#92C02E"/>
+    </linearGradient>
+    <linearGradient id="android-unittest-stepicon-c" x1="-26.536%" x2="122.497%" y1="-23.221%" y2="87.157%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-unittest-stepicon-d" x1="-26.536%" x2="122.497%" y1="-29.561%" y2="90.374%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-unittest-stepicon-e" x1="-36.375%" x2="415.4%" y1="50%" y2="50%">
+      <stop offset="0%" stop-color="#FFF"/>
+      <stop offset="100%" stop-color="#92C02E"/>
+    </linearGradient>
+    <linearGradient id="android-unittest-stepicon-f" x1="42.287%" x2="57.306%" y1="-146.466%" y2="149.7%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-unittest-stepicon-g" x1="50%" x2="50%" y1="121.488%" y2="0%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".7"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#android-unittest-stepicon-a)"/>
+    <g transform="translate(43 44)">
+      <path fill="url(#android-unittest-stepicon-b)" d="M65.9925245,79.1787136 C65.991645,73.5558169 61.5160284,68.9986599 55.9947233,69.0000033 C50.473858,68.9955254 45.9986811,73.5607425 46.0000003,79.184087 L46.007036,121.820394 C46.0065963,127.449112 50.4800143,131.998209 56.0048372,132 C61.5257025,131.999104 65.9986808,127.449112 66,121.815916 L65.9925245,79.1787136 Z"/>
+      <path fill="url(#android-unittest-stepicon-c)" d="M77,69.0152671 L77.0158385,114.272023 C77.0108607,120.298916 81.9235128,125.163268 87.994186,125.164615 L158.016675,125.153838 C164.072414,125.156083 168.998642,120.284547 169,114.257654 L168.988687,69 L77,69.0152671 Z" style="mix-blend-mode:multiply"/>
+      <path fill="url(#android-unittest-stepicon-d)" d="M35,148 L57.5,148 C63.2989899,148 68,152.70101 68,158.5 L68,158.5 C68,164.29899 63.2989899,169 57.5,169 L35,169 L35,148 Z" style="mix-blend-mode:multiply"/>
+      <path fill="url(#android-unittest-stepicon-e)" d="M0,111 L22.5,111 C28.2989899,111 33,115.70101 33,121.5 L33,121.5 C33,127.29899 28.2989899,132 22.5,132 L0,132 L0,111 Z" transform="matrix(-1 0 0 1 33 0)"/>
+      <path fill="url(#android-unittest-stepicon-f)" d="M22.9960429,34.0000021 C17.4754661,33.9973154 13.001319,38.5633958 13,44.1808791 L13.0074745,86.8159885 C13.0087935,92.4527267 17.4846993,97.0008956 23.0057158,97 C28.5298101,97.0004478 33.0048364,92.4495922 32.9991206,86.8164362 L33,44.1750579 C32.9978016,38.5589179 28.5170594,33.9964198 22.9960429,34.0000021 L22.9960429,34.0000021 Z" style="mix-blend-mode:multiply"/>
+      <path fill="url(#android-unittest-stepicon-g)" d="M74.1333333,15.2631579 C79.5,12.9736842 84.8666667,12.2105263 91,12.2105263 C96.3666667,12.2105263 100.966667,12.9736842 105.566667,14.5 L117.833333,2.28947368 C120.9,-0.763157895 125.5,-0.763157895 128.566667,2.28947368 C131.633333,5.34210526 131.633333,9.92105263 128.566667,12.9736842 L119.366667,22.1315789 C130.1,30.5263158 137,43.5 137,58 L45,58 C45,44.2631579 51.1333333,32.0526316 61.1,23.6578947 L50.3666667,12.9736842 C47.3,9.92105263 47.3,5.34210526 50.3666667,2.28947368 C53.4333333,-0.763157895 58.0333333,-0.763157895 61.1,2.28947368 L74.1333333,15.2631579 Z M114.5,51 C119,51 122,48 122,43.5 C122,39.75 119,36 114.5,36 C110,36 107,39.75 107,43.5 C107,48 110,51 114.5,51 Z M68.5,51 C73,51 76,48 76,43.5 C76,39.75 73,36 68.5,36 C64,36 61,39.75 61,43.5 C61,48 64,51 68.5,51 Z"/>
     </g>
+  </g>
 </svg>

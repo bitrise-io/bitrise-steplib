@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="android-manifest-application-attributes-a" x1="50%" x2="50%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#53A906"/>
+      <stop offset="100%" stop-color="#A4C639"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-application-attributes-b" x1="92.985%" x2="14.218%" y1="-11.098%" y2="109.263%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-application-attributes-c" x1="253.832%" x2="17.426%" y1="25.871%" y2="55.25%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="61.124%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-application-attributes-d" x1="-26.536%" x2="122.497%" y1="-146.466%" y2="149.7%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="8.751%" stop-color="#0DC0C7"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <linearGradient id="android-manifest-application-attributes-e" x1="-20.991%" x2="94.593%" y1="123.982%" y2="6.149%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#android-manifest-application-attributes-a)"/>
+    <path fill="url(#android-manifest-application-attributes-b)" d="M69,37 L159.738281,37 L193,71.9585974 L193,211 C193,214.313708 190.313708,217 187,217 L69,217 C65.6862915,217 63,214.313708 63,211 L63,43 C63,39.6862915 65.6862915,37 69,37 Z"/>
+    <path fill="url(#android-manifest-application-attributes-c)" fill-rule="nonzero" d="M96.28,188.875 L91.69,194.68 L87.1,188.875 L87.1,199 L81.025,199 L81.025,180.1 L86.425,180.1 L91.69,186.85 L96.955,180.1 L102.355,180.1 L102.355,199 L96.28,199 L96.28,188.875 Z M116.210909,190.765 L114.860909,186.04 L113.510909,190.765 L116.210909,190.765 Z M117.560909,195.355 L112.160909,195.355 L111.080909,199 L104.600909,199 L111.485909,180.1 L118.235909,180.1 L125.120909,199 L118.640909,199 L117.560909,195.355 Z M139.651818,180.1 L145.726818,180.1 L145.726818,199 L140.596818,199 L133.441818,189.82 L133.441818,199 L127.366818,199 L127.366818,180.1 L132.496818,180.1 L139.651818,189.28 L139.651818,180.1 Z M150.267727,199 L150.267727,180.1 L156.342727,180.1 L156.342727,199 L150.267727,199 Z M160.883636,180.1 L176.003636,180.1 L176.003636,185.365 L166.958636,185.365 L166.958636,187.795 L173.843636,187.795 L173.843636,193.06 L166.958636,193.06 L166.958636,199 L160.883636,199 L160.883636,180.1 Z" style="mix-blend-mode:multiply"/>
+    <path fill="url(#android-manifest-application-attributes-d)" fill-rule="nonzero" d="M135.944505,86 L156.175916,86 C160.497038,86 164,89.5029618 164,93.8240842 L164,114.055495 C164,116.130571 163.175679,118.120657 161.708379,119.587958 L122.587958,158.708379 C119.532463,161.763874 114.578527,161.763874 111.523032,158.708379 L91.2916212,138.476968 C88.2361263,135.421473 88.2361263,130.467537 91.2916212,127.412042 L130.412042,88.2916212 C131.879343,86.8243208 133.869429,86 135.944505,86 Z M135.944505,93.8240842 L96.8240842,132.944505 L117.055495,153.175916 L156.175916,114.055495 L156.175916,93.8240842 L135.944505,93.8240842 Z M140.527747,117.296337 C136.206625,117.296337 132.703663,113.793375 132.703663,109.472253 C132.703663,105.15113 136.206625,101.648168 140.527747,101.648168 C144.84887,101.648168 148.351832,105.15113 148.351832,109.472253 C148.351832,113.793375 144.84887,117.296337 140.527747,117.296337 Z" style="mix-blend-mode:multiply"/>
+    <path fill="url(#android-manifest-application-attributes-e)" d="M158.731207,37.3828125 L192.784706,72.2668851 L164.731207,72.2668851 C161.417498,72.2668851 158.731207,69.5805936 158.731207,66.2668851 L158.731207,37.3828125 Z"/>
+  </g>
+</svg>

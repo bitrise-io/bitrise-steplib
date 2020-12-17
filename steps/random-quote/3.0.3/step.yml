@@ -1,0 +1,34 @@
+title: Random Quote
+summary: |-
+  Got no idea how to spice up your every day build notifications? How about a
+  random quote to pass the time while your app is being installed on your device?
+description: |-
+  Prints a random quote and saves it into the $quote environment variable (adds it to the ~/.bash_profile)
+  Uses the http://www.iheartquotes.com API
+website: https://github.com/bitrise-io/steps-random-quote
+source_code_url: https://github.com/bitrise-io/steps-random-quote
+support_url: https://github.com/bitrise-io/steps-random-quote/issues
+published_at: 2018-05-08T12:41:11.221348039+02:00
+source:
+  git: https://github.com/bitrise-io/steps-random-quote.git
+  commit: fb8949254189d11476daab846ea2dd5eca148f00
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+deps:
+  brew:
+  - name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+outputs:
+- RANDOM_QUOTE: null
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: the quote

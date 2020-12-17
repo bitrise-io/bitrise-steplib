@@ -1,0 +1,68 @@
+title: cocoapods-dependency-check
+summary: |
+  OWASP dependency analysis for iOS / CocoaPods
+description: |
+  Uses jeremylong/DependencyCheck to search Podfile.lock for CVE vulnerabilites.
+
+  The generated HTML document will be placed into BITRISE_DEPLOY_DIR by default.
+  Remember to run the "Deploy to bitrise.io" step in order to persist artifacts.
+website: https://github.com/johnjcsmith/bitrise-step-cocoapods-dependency-checker
+source_code_url: https://github.com/johnjcsmith/bitrise-step-cocoapods-dependency-checker
+support_url: https://github.com/johnjcsmith/bitrise-step-cocoapods-dependency-checker/issues
+published_at: 2018-08-02T18:41:13.220054924+09:30
+source:
+  git: https://github.com/johnjcsmith/bitrise-step-cocoapods-dependency-checker.git
+  commit: 539aff879569d0d78ee2c5df527ad19c849164d0
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- dependency
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: dependency-check
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    title: Source Code Directory path
+  source_root_path: $BITRISE_SOURCE_DIR
+- app_title: $BITRISE_APP_TITLE
+  opts:
+    is_required: true
+    title: App title
+- deploy_dir: $BITRISE_DEPLOY_DIR
+  opts:
+    is_required: true
+    title: Deploy directory to output scan artifacts
+- opts:
+    description: |
+      (Optional) will default to $BITRISE_SOURCE_DIR/Podfile.lock
+    is_expand: true
+    is_required: false
+    summary: The path to your Podfile.lock file.
+    title: Podfile.lock path
+    value_options: []
+  podfile_lock_path: $BITRISE_SOURCE_DIR/Podfile.lock
+- fail_on_cvss_level: 11
+  opts:
+    description: |-
+      (Optional) Specifies if the build should be failed
+      if a CVSS score above a specified level is identified.
+
+      The default is 11; since
+      the CVSS scores are 0-10, by default the
+      build will never fail.
+    is_expand: true
+    is_required: false
+    summary: Sepcifies what level of CVSS should trigger a build failure
+    title: Fail on CVSS Level
+    value_options: []

@@ -1,0 +1,60 @@
+title: Send a Chatwork message
+summary: |
+  Send a Chatwork message
+description: |
+  Send a Chatwork message from your Bitrise build!
+website: https://github.com/monolithic-adam/bitrise-step-chatwork-message
+source_code_url: https://github.com/monolithic-adam/bitrise-step-chatwork-message
+support_url: https://github.com/monolithic-adam/bitrise-step-chatwork-message/issues
+published_at: 2019-10-11T09:42:56.644067+09:00
+source:
+  git: https://github.com/monolithic-adam/bitrise-step-chatwork-message.git
+  commit: 40cfdbdc3a25e2e0c79f7fe4955df60ca7a6d1be
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/monolithic-adam/bitrise-step-chatwork-message
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- api_token: null
+  opts:
+    description: |
+      **An api_token input is required.**
+
+      To get your **API token** visit: https://www.chatwork.com/service/packages/chatwork/subpackages/api/token.php
+    is_required: true
+    is_sensitive: true
+    title: Chatwork API Token
+- opts:
+    description: |
+      **An room_id input is required.**
+
+      To get your **Room ID** look at the #!rid in your URL or in the group chat setting screen.
+      For more information visit: https://help.chatwork.com/hc/ja/articles/360000142942-%E3%83%AB%E3%83%BC%E3%83%A0ID%E3%82%92%E7%A2%BA%E8%AA%8D%E3%81%99%E3%82%8B
+    is_required: true
+    is_sensitive: true
+    title: Chatwork Room ID
+  room_id: null
+- build_status: $BITRISE_BUILD_STATUS
+  opts:
+    is_required: true
+    title: Build Status
+- app_title: $BITRISE_APP_TITLE
+  opts:
+    is_required: true
+    title: App Title
+- git_branch: $BITRISE_GIT_BRANCH
+  opts:
+    title: Git Branch
+- git_message: $BITRISE_GIT_MESSAGE
+  opts:
+    title: Git Message
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    title: Bitrise Build URL
+- install_page_url: $BITRISE_PUBLIC_INSTALL_PAGE_URL
+  opts:
+    title: Install Page URL

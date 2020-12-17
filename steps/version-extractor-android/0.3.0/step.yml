@@ -1,0 +1,68 @@
+title: Get versionName and versionCode on Android
+summary: |
+  Extract the versionName and the versionCode on an Android project using a Gradle task
+description: |
+  Extracts the version name and the version code from the Android project. It is useful if the versionName and versionCode values are defined somewhere else. Therefore, this step uses a Gradle task to print these two values. It supports only Groovy files for now.
+website: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android
+source_code_url: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android
+support_url: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android/issues
+published_at: 2020-05-13T17:58:05.089605+02:00
+source:
+  git: https://github.com/vladimirpetrovski/bitrise-step-version-extractor-android.git
+  commit: b07f737f632568fa7a64001f4d63652c1282b21e
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_gradle_path: $BITRISE_SOURCE_DIR/app/build.gradle
+  opts:
+    is_required: true
+    summary: Path to the app's build.gradle file where the versionCode and versionName
+      are defined.
+    title: Path to the build.gradle file
+- gradlew_path: ./gradlew
+  opts:
+    category: Config
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper ensures
+      that the right Gradle version is installed and used for the build.
+      You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+      **The path should be relative** to the repository root. For example, `./gradlew`,
+      or if it is in a sub directory, `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- opts:
+    description: |
+      Define a build variant if you need get a specific version defined in a flavor, for example: `Flavor1Debug`. If it is not defined, by default extracts the version from the `defaultConfig` section in the `build.gradle` file.
+    is_required: false
+    summary: Set a custom variant, in case you need to print the version name and
+      version code for a specific build.
+    title: Build variant
+  variant: ""
+outputs:
+- EXTRACTED_ANDROID_VERSION_NAME: null
+  opts:
+    summary: The extracted versionName value usually located in the app's `build.gradle`
+      file.
+    title: Extracted versionName value
+- EXTRACTED_ANDROID_VERSION_CODE: null
+  opts:
+    summary: The extracted versionCode value located in the app's `build.gradle` file.
+    title: Extracted versionCode value

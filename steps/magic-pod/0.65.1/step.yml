@@ -1,0 +1,111 @@
+title: Magic Pod
+summary: |
+  Magic Pod UI test step
+description: |
+  You can execute E2E testing of iOS/Android apps on Magic Pod (https://magic-pod.com).
+website: https://github.com/magic-Pod/bitrise-step-magic-pod
+source_code_url: https://github.com/magic-Pod/bitrise-step-magic-pod
+support_url: https://github.com/magic-Pod/bitrise-step-magic-pod/issues
+published_at: 2020-11-05T16:48:29.202842+09:00
+source:
+  git: https://github.com/Magic-Pod/bitrise-step-magic-pod.git
+  commit: 447853bb7409859be9db3f0ad0ce232753c6e9ed
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/magic-Pod/bitrise-step-magic-pod
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- magic_pod_api_token: null
+  opts:
+    description: "Access token to use Magic Pod Web API.\n\n* Key: Arbitrary new Secret
+      Env name like `MAGIC_POD_API_TOKEN`\n* Value: API token copied from https://magic-pod.com/accounts/api-token/. "
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Magic Pod API token
+- opts:
+    description: |-
+      Organization name in Magic Pod.
+      Please be sure to use **organization name**, not **display name**.
+    is_expand: true
+    is_required: true
+    title: Organization name
+  organization_name: null
+- opts:
+    description: |-
+      Project name in Magic Pod.
+      Please be sure to use **project name**, not **display name**.
+    is_expand: true
+    is_required: true
+    title: Project name
+  project_name: null
+- opts:
+    description: Test settings number specified on Magic Pod project batch run page.
+    is_required: false
+    title: Test settings number
+  test_settings_number: "1"
+- opts:
+    category: detail
+    description: |-
+      If you would like to define test settings from scratch or overwrite pre-defined test settings, please specify this parameter.
+      You can generate an example JSON on your project's batch run page (Setting -> menu -> Advanced -> Copy as magic-pod-api-client (detailed settings))
+    is_required: false
+    title: Test settings
+  test_settings: null
+- app_path: $BITRISE_APP_DIR_PATH
+  opts:
+    description: "Path to app (apk/app/ipa) file you want to test.\nNote that you
+      need to select _App file (cloud upload)_ for _App Type_ on Magic Pod project
+      batch run page.\n* *Warning: The file of the specified path is uploaded to Magic
+      Pod cloud and can be seen by project members.*\n* For iOS simulator testing,
+      specify the directory _xx.app_ so that included files are automatically ziped
+      into one file before uploading. "
+    is_expand: true
+    title: App path
+- opts:
+    description: |-
+      If set to true, this step waits until Magic Pod testing is completed and succeeds only when the test is successful.
+      Otherwise this step immediately exits with success.
+    title: Wait for result
+  wait_for_result: "true"
+- opts:
+    description: Wait limit in seconds. If 0 is specified, the value is test count
+      x 10 minutes.
+    title: Wait limit
+  wait_limit: "0"
+- delete_app_after_test: Not delete
+  opts:
+    description: |-
+      Define how to treat the uploaded app file after the test.
+      This option is valid only when you specify _App path_.
+    title: Delete app after test
+    value_options:
+    - Not delete
+    - Always delete
+    - Delete only when tests succeeded
+- base_url: https://magic-pod.com
+  opts:
+    category: debug
+    description: Cannot be changed
+    is_dont_change_value: true
+    title: Magic Pod web API URL
+outputs:
+- MAGIC_POD_TEST_SUCCEEDED: null
+  opts:
+    summary: This variable becomes 'true' only when all batch runs succeeded, otherwise
+      'false'.
+    title: MAGIC_POD_TEST_SUCCEEDED
+- MAGIC_POD_TEST_RESULT: null
+  opts:
+    summary: |-
+      Array which contains status/URL information of all batch runs.  The format is like
+      [{"Url":"https://magic-pod.com/ORG_NAME/PRJ_NAME/batch-run/10/","Status":"failed","Batch_Run_Number":10,"Test_Cases":{"Succeeded":3,"Failed":1,"Aborted":0,"Unresolved":0,"Total":4}}]
+    title: MAGIC_POD_TEST_RESULT

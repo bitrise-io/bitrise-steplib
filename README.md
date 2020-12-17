@@ -6,6 +6,14 @@ You can find the collection of all [Bitrise integrations](https://www.bitrise.io
 
 If you find something missing from the steps, you can drop us an issue, or [create your own step](http://devcenter.bitrise.io/bitrise-cli/create-your-own-step). See our example for creating & sharing a new step under [/step-template](https://github.com/bitrise-steplib/step-template).
 
+### Important
+
+One PR should contain only one file (except the icon), and one change.
+
+We require to create a new PR after addressing review concerns. This is needed to guarantee that the last (correct) tag/version of the step source repository is referenced.
+
+One PR should contain only one step.
+
 ### Install Bitrise CLI
 
 Install the [Bitrise CLI](https://www.bitrise.io/cli) to run `bitrise` on your machine locally.

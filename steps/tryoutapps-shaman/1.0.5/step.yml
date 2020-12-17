@@ -1,0 +1,72 @@
+title: TryoutApps Shaman
+summary: |
+  Uploads apps to Infinum's TryoutApps
+description: |
+  Uploads apps to Infinum's TryoutApps using shaman deploy script.
+  Only one build at the time can be uploaded.
+website: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy
+source_code_url: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy
+support_url: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy/issues
+published_at: 2019-12-12T13:23:25.733749+01:00
+source:
+  git: https://github.com/infinum/TryoutApps-Shaman-Bitrise-Deploy.git
+  commit: 2f1fea9e153dfbe92e3cf3c91f634eb687639b82
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+- android
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: "Get your user token from https://[TENANT].tryoutapps.com/users/me
+      \n"
+    is_required: true
+    is_sensitive: true
+    title: Token used for authentication with TryoutApps
+  shaman_token: null
+- opts:
+    description: |
+      By default, this value is set to './.shaman.yml'
+    is_required: true
+    title: Path to the shaman.yml file
+  shaman_config_path: ./.shaman.yml
+- environment_name: null
+  opts:
+    description: |
+      Name defined in shaman.yml
+    is_required: true
+    title: Deploy environment name
+- file_path: null
+  opts:
+    category: Config
+    description: |
+      By default, this value is read from shaman.yml file. If you need to use a custom path, you can set it here.
+    is_required: false
+    title: Path to the file that have to be uploaded
+- changelog_message: null
+  opts:
+    category: Config
+    description: "A message that can be used as a changelog, you can store value from
+      tag/commit/script in a custom global variable (e.g. \"${TAG_MESSAGE}\") and
+      then use it here.       \n"
+    is_required: false
+    title: Message used for setting the change log
+- opts:
+    category: Config
+    description: |
+      Release name used only if ZIP is uploaded to TryoutApps.
+    is_required: false
+    title: Release name (ZIP platform only)
+  release_name: null

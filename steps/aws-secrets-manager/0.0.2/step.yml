@@ -1,0 +1,71 @@
+title: Fetch secrets
+summary: Fetch secrets from AWS Secrets Manager
+description: |
+  The main intention of this custom step is to allow us to store sensitive data on AWS Secrets Manager, and fetching them on-demand during Bitrise workflow execution.
+
+  When a Bitrise workflow runs, this step fetches the secrets from AWS Secrets Manager, based on the list of secrets provided as input.
+
+  Each secret stored on AWS Secrets Manager is represented as a JSON object. For each secret that it fetches, it then retrieve the JSON object value from the secret's JSON object, using a specified JSON object key. The value is then stored in an environment variable, exported and propagated to be consumed in subsequent steps in the workflow.
+website: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager
+source_code_url: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager
+support_url: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager/issues
+published_at: 2020-11-13T14:50:21.621537+08:00
+source:
+  git: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager.git
+  commit: 58b123623a351dcbe1621af4784d096caf3f58b9
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: moneylion.com/security/bitrise-step-aws-secrets-manager
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- aws_access_key_id: $AWS_ACCESS_KEY_ID
+  opts:
+    description: The access key ID for your AWS IAM user
+    is_required: true
+    is_sensitive: true
+    summary: AWS Access Key ID
+    title: AWS Access Key ID
+- aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+  opts:
+    description: The secret access key for your AWS IAM user
+    is_required: true
+    is_sensitive: true
+    summary: AWS Secret Access Key
+    title: AWS Secret Access Key
+- aws_default_region: $AWS_DEFAULT_REGION
+  opts:
+    description: The AWS region where the secrets are created
+    is_required: true
+    is_sensitive: true
+    summary: AWS region
+    title: AWS region
+- aws_role_arn: $AWS_ROLE_ARN
+  opts:
+    description: The ARN of AWS IAM role to assume. This role should have the necessary
+      permission to read secrets from AWS Secrets Manager.
+    is_required: true
+    is_sensitive: true
+    summary: ARN of AWS IAM role to assume
+    title: AWS Role ARN
+- opts:
+    description: |
+      The newline separated list of secrets to be fetched from AWS Secrets Manager.
+
+      Each secret itself consists of three components:
+
+        - The ARN of the secret. This can be either full ARN, or partial ARN, which contains only the name of the secret, without the six random character suffix.
+
+        - The secret's JSON object key. The JSON object key for identifying the value that we want to retrieve in the secret's JSON object.
+
+        - The environment variable to store the value in. The environment variable where the JSON object value, identified by the JSON object key, is stored in.
+    is_required: true
+    summary: |
+      Newline separated list of secret. Each secret is delimited with hash symbol, consisting of the secret ARN, the secret's JSON object key, and the environment variable in which to store the corresponding JSON object value in.
+
+      Example: `arn:aws:secretsmanager:us-east-1:123456789012:secret:db-credential#username#USERNAME`.
+    title: Secret list
+  secret_list: null

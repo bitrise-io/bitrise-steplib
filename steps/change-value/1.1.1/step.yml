@@ -1,0 +1,51 @@
+title: Change value in file
+summary: Change value in file. (e.g. constants)
+description: Change value in file. (e.g. constants)
+website: https://github.com/bitrise-steplib/steps-change-value
+source_code_url: https://github.com/bitrise-steplib/steps-change-value
+support_url: https://github.com/bitrise-steplib/steps-change-value/issues
+published_at: 2020-09-21T09:31:06.524544486Z
+source:
+  git: https://github.com/bitrise-steplib/steps-change-value.git
+  commit: 0e1b11a92d02ab6524b1a21db0bdda58b0ae0379
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-change-value
+inputs:
+- file: null
+  opts:
+    description: |
+      The file that you want to change a value.
+    is_required: true
+    summary: ""
+    title: File path
+- old_value: null
+  opts:
+    description: |
+      current value in file
+    is_required: true
+    summary: For replace
+    title: Old value
+- new_value: null
+  opts:
+    description: |
+      new value
+    is_required: true
+    summary: To replace
+    title: New value
+- opts:
+    summary: For debug
+    title: Show old and new file content
+    value_options:
+    - "true"
+    - "false"
+  show_file: "false"
+- notfound_exit: "true"
+  opts:
+    summary: To mark a step as "Failed" if value for replacing isn't found.
+    title: Mark as "Failed" if value isn't found.
+    value_options:
+    - "true"
+    - "false"

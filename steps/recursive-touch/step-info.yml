@@ -1,0 +1,4 @@
+deprecate_notes: |
+  This step is deprecated as it is not reliable in daily development.
+maintainer: bitrise
+removal_date: "2019-12-14"

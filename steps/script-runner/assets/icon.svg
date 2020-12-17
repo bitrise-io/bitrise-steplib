@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="script-runner-stepicon-a" x1="0%" x2="100%" y1="100%" y2="0%">
+      <stop offset="0%" stop-color="#0DD3C5"/>
+      <stop offset="100%" stop-color="#0D83CD"/>
+    </linearGradient>
+    <polygon id="script-runner-stepicon-b" points="61.091 85.75 48.891 98 .091 49 48.891 0 61.091 12.25 24.491 49"/>
+    <linearGradient id="script-runner-stepicon-c" x1="52.36%" x2="48.035%" y1="-11.098%" y2="109.263%">
+      <stop offset="0%" stop-color="#FFF" stop-opacity=".399"/>
+      <stop offset="100%" stop-color="#FFF"/>
+    </linearGradient>
+    <polygon id="script-runner-stepicon-d" points="61.091 85.75 48.891 98 .091 49 48.891 0 61.091 12.25 24.491 49"/>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#script-runner-stepicon-a)" fill-rule="nonzero"/>
+    <use fill="#760FC3" transform="translate(27 79)" xlink:href="#script-runner-stepicon-b" style="mix-blend-mode:multiply"/>
+    <rect width="22" height="130" x="117" y="63" fill="url(#script-runner-stepicon-c)" transform="rotate(15 128 128)"/>
+    <use fill="#760FC3" transform="matrix(-1 0 0 1 229.182 79)" xlink:href="#script-runner-stepicon-d" style="mix-blend-mode:multiply"/>
+  </g>
+</svg>

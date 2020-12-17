@@ -1,0 +1,36 @@
+title: Bundler
+summary: Install Ruby Dependencies with Bundler
+description: Install Ruby Dependencies with Bundler
+website: https://github.com/chrisfuller/bitrise-step-bundler
+source_code_url: https://github.com/chrisfuller/bitrise-step-bundler
+support_url: https://github.com/chrisfuller/bitrise-step-bundler/issues
+published_at: 2019-09-11T08:58:52.875111-07:00
+source:
+  git: https://github.com/chrisfuller/bitrise-step-bundler.git
+  commit: 0e27995bfe32237fe7b61fa64445cc6885dae03e
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- dependency
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- bundle_install_jobs: "4"
+  opts:
+    description: |
+      The value of the `--jobs` Bundler option.
+    is_expand: true
+    is_required: true
+    title: The maximum number of parallel download and install jobs.
+- bundle_install_retry: "1"
+  opts:
+    description: |
+      The value of the `--retry` Bundler option.
+    is_expand: true
+    is_required: true
+    title: The number of times to retry failed network or git requests.

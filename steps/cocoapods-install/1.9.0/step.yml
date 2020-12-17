@@ -1,0 +1,89 @@
+title: Run CocoaPods install
+summary: |-
+  You don't need to keep the installed pods in your repo, simply add this step
+  and Bitrise will do the pod install for you on the VM!
+description: |-
+  Run CocoaPods install (`$ pod install`) in your App's directory.
+
+  CocoaPods version is determined based on the Podfile.lock or
+  on the Gemfile.lock (if Podfile.lock does not exist in the Podfile's
+  directory and Gemfile.lock contains cocoapods gem)
+  in the Podfile's directory.
+website: https://github.com/bitrise-io/steps-cocoapods-install
+source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
+support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues
+published_at: 2019-10-07T13:04:28.289296742Z
+source:
+  git: https://github.com/bitrise-steplib/steps-cocoapods-install.git
+  commit: b9b0fe33f245f2ef636d77337e7081504dbef8cb
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-cocoapods-install
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_required: true
+    title: Source Code Directory path.
+  source_root_path: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      (optional) `Podfile` path, relative to the `source_root_path`.
+
+      If not provided, the Step will search for root Podfile,
+      and run `pod install` with.
+    summary: (optional) Podfile path, relative to the source_root_path
+    title: Podfile path
+  podfile_path: ""
+- is_update_cocoapods: "false"
+  opts:
+    description: |
+      __Deprecated!__
+
+      CocoaPods version is determined based on the Podfile.lock or the Gemfile.lock in the Podfile's directory.
+    is_expand: false
+    is_required: true
+    title: Update CocoaPods to the latest version?
+    value_options:
+    - "true"
+    - "false"
+- install_cocoapods_version: ""
+  opts:
+    description: |
+      __Deprecated!__
+
+      CocoaPods version is determined based on the Podfile.lock or the Gemfile.lock in the Podfile's directory.
+    title: Install specified CocoaPods version
+- opts:
+    description: |
+      (optional) True to execute the command in verbose mode or false to execute it without verbose
+    is_expand: false
+    is_required: false
+    title: Execute cocoapods in verbose mode?
+    value_options:
+    - "true"
+    - "false"
+  verbose: "true"
+- is_cache_disabled: "false"
+  opts:
+    description: "True to disable pods caching \n"
+    is_expand: false
+    is_required: false
+    title: Disable built-in cache
+    value_options:
+    - "true"
+    - "false"

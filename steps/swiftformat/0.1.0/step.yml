@@ -1,0 +1,48 @@
+title: |-
+  SwiftFormat
+summary: |
+  Runs SwiftFormat lint on the project
+description: |
+  Runs SwiftFormat on the project to verify formatted code
+  For more information about SwiftFormat please visit: https://github.com/nicklockwood/SwiftFormat
+website: https://github.com/dmiluski/bitrise-step-swiftformat
+source_code_url: https://github.com/dmiluski/bitrise-step-swiftformat
+support_url: https://github.com/dmiluski/bitrise-step-swiftformat/issues
+published_at: 2020-04-09T10:32:19-07:00
+source:
+  git: https://github.com/dmiluski/bitrise-step-swiftformat.git
+  commit: f131b2235ed2e2773822f3799141c6526ef5157f
+host_os_tags:
+  - osx-10.10
+  - ubuntu-16.04
+project_type_tags:
+  - ios
+  - macos
+type_tags:
+  - utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: swiftformat
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+  - formatting_path: null
+    opts:
+      category: Config
+      description: ""
+      is_required: true
+      title: "Select the path where SwiftFormat should lint"
+      summary: ""
+  - format_config_file: $BITRISE_SOURCE_DIR/.swiftformat
+    opts:
+      category: Config
+      description: |-
+        If you use a custom format configuration for Bitrise, you can specify the path here.
+      is_required: false
+      summary: ""
+      title: "Format configuration file"

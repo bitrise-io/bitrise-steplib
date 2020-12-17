@@ -1,0 +1,43 @@
+title: Find Jira Issue
+summary: |
+  Find the jira issue and add it as an environment variable
+description: |
+  Step that locates the a jira issue from the input and sets it as an environment variable for future steps
+website: https://github.com/jimmithy/bitrise-step-find-jira-issue
+source_code_url: https://github.com/jimmithy/bitrise-step-find-jira-issue
+support_url: https://github.com/jimmithy/bitrise-step-find-jira-issue/issues
+published_at: 2020-06-29T16:13:40.854864-04:00
+source:
+  git: https://github.com/jimmithy/bitrise-step-find-jira-issue.git
+  commit: 4b1566842f7147cbdad6fd65f1d145f56c08c9ed
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- find_issue_content: $BITRISE_GIT_MESSAGE
+  opts:
+    description: |
+      The input text content used to locate the jira ticket number.
+
+      For example, the git commit message or branch name.
+    is_expand: true
+    is_required: true
+    summary: Where should we look for jira issues
+    title: Text Content
+    value_options: []
+outputs:
+- JIRA_ISSUE_LIST: null
+  opts:
+    description: |
+      Unique Jira issues found from the input. Multiple results will have a | delimiter.
+    summary: The jira issues found in the input
+    title: Jira Issue(s)

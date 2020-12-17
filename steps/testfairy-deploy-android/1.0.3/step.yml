@@ -1,0 +1,111 @@
+title: TestFairy Deploy Android
+summary: Deploy your awesome App to TestFairy.
+description: |-
+  Deploy your awesome App to Testfairy easily, making use of multiple configuration options.
+
+  * Set tester groups to be notified
+  * Enable email notification for the build
+  * Enable in-app notification of new versions
+  * Set recording duration
+  * Enable or disable video recording
+  * Add your comments
+
+  Once you're done setting up, you can simply let TestFairy do its magic!
+
+  To use this step you have to register
+  an account on [TestFairy.com](http://testfairy.com/).
+website: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
+source_code_url: https://github.com/bitrise-steplib/steps-testfairy-deploy-android
+support_url: https://github.com/bitrise-steplib/steps-testfairy-deploy-android/issues
+published_at: 2018-08-31T11:15:58.990371126Z
+source:
+  git: https://github.com/bitrise-steplib/steps-testfairy-deploy-android.git
+  commit: 1b57d100739c7c3d581f4b78fd56afc397b17c60
+host_os_tags:
+- osx-10.10
+- ubuntu
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: $TEST_FAIRY_API_KEY
+  opts:
+    description: |-
+      API key from TestFairy.
+      You can find your API key under the settings menu.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: TestFairy API key
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: Path for the APK to upload to TestFairy.
+    is_required: true
+    summary: ""
+    title: APK path
+- opts:
+    description: |-
+      Tester Groups that will be notified when the app is ready.
+      Setup groups in your TestFairy account testers page.
+    summary: ""
+    title: Tester groups
+  tester_groups: ""
+- notify: "off"
+  opts:
+    description: Sets if should email testers about new version.
+    summary: ""
+    title: Email notification
+    value_options:
+    - "on"
+    - "off"
+- auto_update: "off"
+  opts:
+    description: |-
+      If auto update is on all users will be prompt to update
+      to this build next time they run the app.
+    summary: ""
+    title: Auto update
+    value_options:
+    - "on"
+    - "off"
+- max_test_duration: 10m
+  opts:
+    description: Maximum session recording length, eg 20m or 1h. Maximum 24h.
+    summary: ""
+    title: Recording duration
+- opts:
+    description: Sets if video recording is enabled for this build.
+    summary: ""
+    title: Video recording
+    value_options:
+    - "on"
+    - wifi
+    - "off"
+  video_recording: "off"
+- icon_watermark: "off"
+  opts:
+    description: Sets Icon Watermark.
+    summary: ""
+    title: Icon Watermark
+    value_options:
+    - "on"
+    - "off"
+- comment: ""
+  opts:
+    description: Comment text will be included in the email sent to testers.
+    summary: ""
+    title: Comments
+outputs:
+- TESTFAIRY_PUBLIC_INSTALL_PAGE_URL_ANDROID: null
+  opts:
+    description: Public Install Page's URL
+    title: Public Install Page URL

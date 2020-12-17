@@ -1,0 +1,68 @@
+title: ApiSpotter Test Group Runner
+summary: |
+  Run your ApiSpotter tests and get the test result to your Bitrise build.
+description: |
+  ApiSpotter (https://apispotter.com) is an online tool for testing, monitoring and documenting your API systems.
+  It makes you sure that your API's are up and running as they should.
+
+  Use this step to run your test groups on APISpotter and retrieve their results.
+  Make sure your API's are working before build complete.
+website: https://github.com/loopdigital/bitrise-step-apispotter-test-runner
+source_code_url: https://github.com/loopdigital/bitrise-step-apispotter-test-runner
+support_url: https://github.com/loopdigital/bitrise-step-apispotter-test-runner/issues
+published_at: 2018-08-16T14:55:41.386017695+03:00
+source:
+  git: https://github.com/loopdigital/bitrise-step-apispotter-test-runner.git
+  commit: 8ece866dd6372940318520b97d430b928e8135b5
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- apispotter_api_token: null
+  opts:
+    description: |
+      Your user API token from ApiSpotter.
+      You can get it from your account settings page.
+    is_expand: true
+    is_required: true
+    title: ApiSpotter User API Token
+- apispotter_test_group_id: null
+  opts:
+    description: |
+      The ID of the test group you would like to run.
+    is_expand: true
+    is_required: true
+    title: Test Group ID
+- abort_build: "no"
+  opts:
+    description: "Abort the current build if we detect that your API's having some
+      troubles.\n\nWith this option set to 'no', build will not be aborted if the
+      test result is false, it will only abort when a fatal error occur. (Like internal
+      errors or exceptions, if we can't run the test group.) \nIf you set this option
+      to 'yes', build will be aborted when the retrieved test result is false too.
+      \n"
+    summary: Abort the current build if we detect that your API's having some troubles.
+    title: Abort The Current Build
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- AS_RUN_RESULT: null
+  opts:
+    description: |
+      Boolean value of the requested test group run result.
+    title: Test Group Run Result
+- AS_ERROR_MESSAGE: null
+  opts:
+    description: "If any type of error occurs in the process, you can retrieve the
+      error message with this variable. \n"
+    title: Error Message

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 56.2 (81672) - https://sketch.com -->
+    <title>connect-to-openvpn-server</title>
+    <desc>Created with Sketch.</desc>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Connect-to-OpenVPN-Server" fill-rule="nonzero">
+            <g id="connect-to-openvpn-server">
+                <rect id="Rectangle-path" fill="#FFFFFF" x="0" y="0" width="256" height="256"></rect>
+                <g id="Group" transform="translate(31.000000, 31.000000)">
+                    <path d="M97,0 C43.42205,0 0,43.4483471 0,97.0587447 C0,132.946216 19.51155,164.184572 48.4418,181 L70.2862,143.219884 C54.37335,133.984744 43.65,116.790787 43.65,97.0587447 C43.65,67.5820039 67.5411,43.6764351 97,43.6764351 C126.4589,43.6764351 150.35,67.5820039 150.35,97.0587447 C150.35,116.790787 139.6315,133.989597 123.7138,143.219884 L145.5582,181 C174.48845,164.184572 194,132.946216 194,97.0587447 C194,43.4483471 150.57795,0 97,0 Z" id="Path" fill="#FF9100"></path>
+                    <path d="M126,97.0769231 C126,81.0216154 113.008,68 97,68 C80.9871667,68 68,81.0264615 68,97.0769231 C68.0072879,109.112037 75.4097879,119.898411 86.618,124.205692 L74.2495,191.179538 C81.6936616,193.026127 89.331448,193.973011 97,194 C104.854167,194 112.4425,192.958077 119.7505,191.198923 L107.382,124.205692 C118.590212,119.898411 125.992712,109.112037 126,97.0769231 L126,97.0769231 Z" id="Path" fill="#1A237E"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

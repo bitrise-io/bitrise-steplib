@@ -1,0 +1,100 @@
+title: Generate Xcode test HTML/JUnit report
+summary: Generate Xcode-like HTML report for Unit and UI Tests
+description: Generate Xcode-like HTML report for Unit and UI Tests with XCTestHTMLReport
+website: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report
+source_code_url: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report
+support_url: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report/issues
+published_at: 2020-09-23T21:06:29.048917+02:00
+source:
+  git: https://github.com/BirmacherAkos/bitrise-step-xctest-html-report.git
+  commit: a117b7f0da39c3fec27d17ee49b31718fd0d1514
+project_type_tags:
+- ios
+- macos
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/BirmacherAkos/bitrise-step-xctest-html-report
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: true
+inputs:
+- github_access_token: null
+  opts:
+    description: |-
+      Use this input to avoid Github rate limit issues.
+      See the github's guide: [Creating an access token for command-line use](https://help.github.com/articles/creating-an-access-token-for-command-line-use/).
+      __UNCHECK EVERY SCOPE BOX__ when creating this token. There is no reason this token needs access to private information.
+    is_sensitive: true
+    summary: Use this input to avoid Github rate limit issues for the XCTestHTMLReport
+      download
+    title: Github Personal Access Token
+- opts:
+    description: |-
+      The paths of the Xcode test generated .xctestresult files.
+
+      **Separated by a new line**
+
+      * $BITRISE\_SOURCE\_DIR/test.xctestresult
+      * $BITRISE\_SOURCE\_DIR/test\_2.xctestresult
+      * ./test\_3.xctestresult
+    is_required: true
+    summary: The paths of the Xcode test generated .xctestresult files.
+    title: Xcode test result (.xctestresult) paths
+  test_result_path: $BITRISE_XCRESULT_PATH
+- generate_junit: "yes"
+  opts:
+    description: |
+      Provide JUnit XML output if enabled.
+    is_required: true
+    summary: Generate JUnit report?
+    title: Generate JUnit report?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      This directory will contain the generated test reports.
+
+      By default it's the `$BITRISE\_DEPLOY_DIR`
+    is_required: "true"
+    summary: This directory will contain the generated test reports.
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- opts:
+    description: |
+      The version of XCTestHTMLReport you want to use from https://github.com/TitouanVanBelle/XCTestHTMLReport/releases.
+      If the value is set to `latest`, the step will download to the latest XCTestHTMLReport version.
+    is_required: true
+    summary: Select which version to install
+    title: Version of the XCTestHTMLReport
+    value_options:
+    - develop
+    - master
+  version: latest
+- opts:
+    description: |
+      You can enable the verbose logging for troubleshooting purposes.
+    is_required: true
+    summary: Enable verbose log?
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+outputs:
+- XC_HTML_REPORT: null
+  opts:
+    summary: The path of the generated `HTML report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )
+    title: The path of the generated `HTML report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )
+- XC_JUNIT_REPORT: null
+  opts:
+    summary: The path of the generated `JUnit report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )
+    title: The path of the generated `JUnit report`. Which was exported to the output\_dir
+      ( $BITRISE\_DEPLOY\_DIR by default )

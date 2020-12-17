@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 50 (54983) - http://www.bohemiancoding.com/sketch -->
+    <title>set-environment-variable-stepicon</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="0%" y1="100%" x2="100%" y2="0%" id="linearGradient-1">
+            <stop stop-color="#0DD3C5" offset="0%"></stop>
+            <stop stop-color="#0D83CD" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="125.514915%" y1="209.349245%" x2="58.984375%" y2="-17.7026099%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.399060236" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="New-Icons" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Set-Environment-Variable">
+            <g id="set-environment-variable-stepicon">
+                <rect id="Rectangle-path" fill="url(#linearGradient-1)" fill-rule="nonzero" x="0" y="0" width="256" height="256"></rect>
+                <text id="ENV" fill="url(#linearGradient-2)" font-family="TTNorms-ExtraBold, TT Norms" font-size="77" font-weight="600" letter-spacing="1.51250005">
+                    <tspan x="43" y="157">ENV</tspan>
+                </text>
+                <text id="$" style="mix-blend-mode: multiply;" font-family="TTNorms-Bold, TT Norms" font-size="171" font-weight="bold" letter-spacing="3.35892797" fill="#760FC3">
+                    <tspan x="79" y="187">$</tspan>
+                </text>
+            </g>
+        </g>
+    </g>
+</svg>

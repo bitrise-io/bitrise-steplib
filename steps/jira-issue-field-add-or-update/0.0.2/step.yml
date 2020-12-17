@@ -1,0 +1,118 @@
+title: Jira Issue Field Add Or Update
+summary: |
+  Adds or updates field value for all issues from pull request merge commits. It uses the commit message to determine which issues should be commented.
+description: |
+  This steps scans last merge commits or last commit if it is not a merge commit, and gathers all Jira issues names found in commit messages.
+  Once the tasks are found it uses the credentials provided to use Jira API and update each found issue field with specified value.
+  Value can be added as an array element or the whole field can be updated.
+
+  The regex pattern to look for Jira tasks is "<project_prefix>[0-9]{1,5}"
+
+  This step is using Jira API v2.
+website: https://github.com/maqoo/bitrise-step-jira-issue-field-update
+source_code_url: https://github.com/maqoo/bitrise-step-jira-issue-field-update
+support_url: https://github.com/maqoo/bitrise-step-jira-issue-field-update/issues
+published_at: 2020-11-09T14:41:49.00993+01:00
+source:
+  git: https://github.com/maqoo/bitrise-step-jira-issue-field-update.git
+  commit: 461fdf70387fd9a1f87bdf5b0b0233395a11354d
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Jira project prefix to search for tasks.
+
+      e.g. "PROJ-"
+    is_expand: true
+    is_required: true
+    summary: Jira project prefix to search for tasks.
+    title: Jira project prefix
+  project_prefix: null
+- backlog_default_url: null
+  opts:
+    description: |
+      Jira company domain.
+
+      e.g. "example.atlassian.net"
+    is_expand: true
+    is_required: true
+    summary: Jira company domain
+    title: Jira domain
+- jira_user: null
+  opts:
+    description: |
+      Jira user used to authenticate with Jira API
+
+      e.g. "someone@example.pl"
+    is_sensitive: true
+    summary: Jira user used to authenticate with Jira API
+    title: Jira user
+- jira_token: null
+  opts:
+    description: |
+      Jira user token used to authenticate with Jira API
+
+      24 character string
+    is_sensitive: true
+    summary: Jira user token used to authenticate with Jira API
+    title: Jira user token
+- jira_issue_field_name: null
+  opts:
+    description: |
+      The name of the field you want to update. This is the field name NOT field description.
+
+      To find the name of the field you need admin access to "Screens" page for your Jira project.
+    is_required: true
+    summary: The name of the field you want to update
+    title: Jira issue field name
+- jira_issue_field_type: single
+  opts:
+    description: |
+      Type of issue field.
+
+      Can be a single value or an array.
+    is_required: true
+    summary: Type of issue field.
+    title: Jira issue field type
+    value_options:
+    - single
+    - array
+- jira_issue_field_value: null
+  opts:
+    description: |
+      Value to update the issue field with.
+
+      If you want to add array of values or replace array with another array, you need to specify values as strings divided by `|` delimeter.
+    is_required: true
+    summary: Value to update the issue field with.
+    title: Jira issue field value to update or add
+- jira_should_array_add_or_set: add
+  opts:
+    description: |
+      If you specify the field type as "array", you can append ("add") values to the array or you can replace whole array with new values.
+
+      If you want to add array of values or replace array with another array, you need to specify values as strings divided by `|` delimeter.
+    is_required: true
+    summary: If the type is array, you can specify if the values are set or added.
+    title: If field type is array, should add or set values?
+    value_options:
+    - add
+    - set

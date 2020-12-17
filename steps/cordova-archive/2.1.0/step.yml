@@ -1,0 +1,141 @@
+title: Cordova archive
+summary: Archives your Cordova project
+description: |-
+  Archives your Cordova project.
+
+  First, the step prepares your Cordova project by calling:
+
+  - `cordova "prepare" "<platform>"`
+
+  Then it archives the project by calling:
+
+  - `cordova "compile" "--debug|--release" "--device|--emulator" "<platform>" "--buildConfig=$BITRISE_CORDOVA_BUILD_CONFIGURATION"`
+website: https://github.com/bitrise-community/steps-cordova-archive
+source_code_url: https://github.com/bitrise-community/steps-cordova-archive
+support_url: https://github.com/bitrise-community/steps-cordova-archive/issues
+published_at: 2019-09-23T08:44:57.626931011Z
+source:
+  git: https://github.com/bitrise-steplib/steps-cordova-archive.git
+  commit: 186a448946a263b9a8df5d768cafbe88a5cdba1d
+project_type_tags:
+- cordova
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-cordova-archive
+deps:
+  brew:
+  - name: go
+  - name: gradle
+inputs:
+- opts:
+    description: |-
+      Specify this input to apply cordova-cli commands to the desired platforms only.
+
+      `cordova build [OTHER_PARAMS] <platform>`
+    is_required: true
+    title: Platform to use in cordova-cli commands
+    value_options:
+    - ios,android
+    - ios
+    - android
+  platform: ios,android
+- configuration: release
+  opts:
+    description: |-
+      Specify build command configuration.
+
+      `cordova build [OTHER_PARAMS] [--release | --debug]`
+    is_required: true
+    title: Build command configuration
+    value_options:
+    - release
+    - debug
+- opts:
+    description: |-
+      Specify build command target.
+
+      `cordova build [OTHER_PARAMS] [--device | --emulator]`
+    is_required: true
+    title: Build command target
+    value_options:
+    - device
+    - emulator
+  target: device
+- build_config: $BITRISE_CORDOVA_BUILD_CONFIGURATION
+  opts:
+    description: Path to the build configuration file (build.json), which describes
+      code signing properties.
+    title: Build configuration path to describe code signing properties
+- opts:
+    description: |-
+      Should be left at the default (true) value, except if the cordova-prepare step is used.
+
+      - true: `cordova prepare <platform>` followed by `cordova compile <platform>`
+      - false: `cordova compile <platform>`
+    is_required: true
+    title: Should `cordova prepare` be executed before `cordova compile`?
+    value_options:
+    - "true"
+    - "false"
+  run_cordova_prepare: "true"
+- cordova_version: null
+  opts:
+    description: |-
+      The version of cordova you want to use.
+
+      If the value is set to `latest`, the step will update to the latest cordova version.
+      Leave this input field empty to use the preinstalled cordova version.
+    title: Cordova version
+- opts:
+    description: Root directory of your Cordova project, where your Cordova config.xml
+      exists.
+    is_required: true
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- options: --buildFlag="-UseModernBuildSystem=0"
+  opts:
+    description: |-
+      Use this input to specify custom options, to append to the end of the cordova-cli build command.
+
+      Cordova does not yet support the new build system made default in XCode 10 (https://github.com/apache/cordova-ios/issues/407).
+      To use the legacy build system add `--buildFlag="-UseModernBuildSystem=0"` to the options string.
+
+      Example:
+      - `--browserify`
+
+      `cordova build [OTHER_PARAMS] [options]`
+    title: Options to append to the cordova-cli build command
+- cache_local_deps: "false"
+  opts:
+    category: Cache
+    description: |
+      Select if the contents of node_modules directory should be cached.
+      `true`: Mark local dependencies to be cached.
+      `false`: Do not use cache.
+    is_required: true
+    title: Cache node_modules
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created ios .ipa file's path
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The created ios .app dir's path
+- BITRISE_APP_PATH: null
+  opts:
+    title: The created ios .app.zip file's path
+- BITRISE_DSYM_DIR_PATH: null
+  opts:
+    title: The created ios .dSYM dir's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created ios .dSYM.zip file's path
+- BITRISE_APK_PATH: ""
+  opts:
+    title: The created android .apk file's path

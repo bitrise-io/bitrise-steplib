@@ -1,0 +1,87 @@
+title: AppCenter App Release
+summary: |
+  Release an application on Microsoft AppCenter
+description: |
+  Release an application on Microsoft AppCenter
+website: https://github.com/fileformat/bitrise-step-appcenter-app-release
+source_code_url: https://github.com/fileformat/bitrise-step-appcenter-app-release
+support_url: https://github.com/fileformat/bitrise-step-appcenter-app-release/issues
+published_at: 2019-11-22T11:09:49.651925-05:00
+source:
+  git: https://github.com/fileformat/bitrise-step-appcenter-app-release.git
+  commit: caa8294515c2902721a1d72b831446d2ea89bd1c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: curl
+  apt_get:
+  - name: jq
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- appcenter_api_token: $APPCENTER_API_TOKEN
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: AppCenter API Token
+- appcenter_name: $APPCENTER_NAME
+  opts:
+    is_expand: true
+    is_required: true
+    title: AppCenter Application Name
+- appcenter_org: $APPCENTER_ORG
+  opts:
+    is_expand: true
+    is_required: true
+    title: AppCenter Organization
+- artifact_path: $ARTIFACT_PATH
+  opts:
+    is_expand: true
+    is_required: true
+    title: path to the built application file (.ipa or .apk)
+- distribution_groups: $DISTRIBUTION_GROUPS
+  opts:
+    description: Groups should be comma separated e.g. group1, group2. If not specified,
+      artifact will be sent to all distribution groups
+    is_expand: true
+    is_required: false
+    title: AppCenter distribution groups
+- mandatory_update: $MANDATORY_UPDATE
+  opts:
+    description: Whether this release is a mandatory update (default = false)
+    is_expand: true
+    is_required: false
+    title: AppCenter Mandatory Update flag
+    value_options:
+    - "true"
+    - "false"
+- notify_testers: $NOTIFY_TESTERS
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Do you want to notify testers of a new release (default = true)
+    title: Notify testers?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_expand: true
+    is_required: false
+    title: Uploaded build related release notes
+  release_notes: $RELEASE_NOTES
+outputs:
+- APPCENTER_DOWNLOAD_URL: $APPCENTER_DOWNLOAD_URL
+  opts:
+    title: Download URL from AppCenter

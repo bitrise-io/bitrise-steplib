@@ -1,0 +1,70 @@
+title: Deploy to AppCenter - apk & mapping
+summary: |
+  Upload apk and mapping.txt to Microsoft AppCenter
+description: |
+  This step is upload Android apk archive file to AppCenter support mapping.txt.
+website: https://github.com/kanari3/bitrise-step-appcenter-apk-upload
+source_code_url: https://github.com/kanari3/bitrise-step-appcenter-apk-upload
+support_url: https://github.com/kanari3/bitrise-step-appcenter-apk-upload/issues
+published_at: 2019-07-25T00:12:17.685785+09:00
+source:
+  git: https://github.com/kanari3/bitrise-step-appcenter-apk-upload.git
+  commit: 8fd5f903714eba07ef2451c27de74607528e3c4c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: curl
+  apt_get:
+  - name: jq
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_id: $APP_CENTER_RELEASE_NOTE
+  opts:
+    description: |
+      Doesn't support markdown format.
+    is_required: false
+    summary: for AppCenter Release Note Message
+    title: AppCenter Release Note
+- app_id: $APP_PROJECT_NAME
+  opts:
+    description: |
+      Target project inclued by setting.gradle
+    is_required: true
+    summary: Application Project file name.
+    title: App Project Name
+- app_id: $APP_CENTER_APP_ID
+  opts:
+    description: |
+      AppCenter Application Identifier is a combination of your Organization/Owner Name
+      and an Application Name.
+      For example: "MyOrganization/MyApplication"
+    is_required: true
+    summary: AppCenter application identifier (Owner + App Name).
+    title: Application Identifier
+- api_token: $APP_CENTER_ACCESS_TOKEN
+  opts:
+    description: |
+      [Obtain API Token from AppCenter](https://appcenter.ms/settings/apitokens)
+    is_required: true
+    is_sensitive: true
+    title: AppCenter API Token
+- distribution_group: $APP_CENTER_DISTRIBUTION_GROUP
+  opts:
+    description: |
+      For example and default: "Collaborators"
+    is_required: true
+    title: AppCenter Distribution Group Name

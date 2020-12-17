@@ -1,0 +1,215 @@
+title: Deploy to iTunes Connect
+summary: Upload screenshots, metadata and binaries to [iTunes Connect](https://itunesconnect.apple.com/)
+  and submit your app for App Store review.
+description: |-
+  Upload screenshots, metadata and binaries to [iTunes Connect](https://itunesconnect.apple.com/) and submit your app for App Store review,
+  using the fantastic [deliver](https://docs.fastlane.tools/actions/deliver/) fastlane action.
+
+  Setup guide and notes:
+
+  * Register an app on the **My Apps** page of iTunes Connect. Click on the *plus sign* and select the **New App** option. This requires an **admin** account.
+  * Requires an app signed with **App Store iOS distibution Provisioning Profile**.
+  * Every build that you want to push to iTunes Connect must have a **unique build and version number** pair (*increment either or both before a new deploy to iTunes Connect*).
+website: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver
+source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver
+support_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver/issues
+published_at: 2020-06-30T12:47:16.457540759Z
+source:
+  git: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver.git
+  commit: fd288ae43e834cf35a9c5eabba6b12eec5450163
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: |-
+      Path to your IPA file to be deployed.
+
+      **NOTE:** This input or the `PKG path` is required.
+    title: IPA path
+- opts:
+    description: |-
+      Path to your PKG file to be deployed.
+
+      **NOTE:** This input or the `IPA path` is required.
+    title: PKG path
+  pkg_path: $BITRISE_PKG_PATH
+- opts:
+    description: The platform will be delivered to iTunes Connect.
+    is_required: true
+    title: Platform
+    value_options:
+    - ios
+    - osx
+    - appletvos
+  platform: ios
+- itunescon_user: ""
+  opts:
+    description: Login Apple ID for iTunes Connect.
+    is_required: true
+    is_sensitive: true
+    title: Apple ID
+- opts:
+    description: Password for the specified Apple ID.
+    is_required: true
+    is_sensitive: true
+    title: Password
+  password: ""
+- app_password: ""
+  opts:
+    description: |-
+      An Application specific password for the Apple ID.
+
+      **NOTE:** Application specific passwords can be created on the
+      [AppleID Website](https://appleid.apple.com). It can be used to
+      surpass Two Factor Authentication.
+    is_required: false
+    is_sensitive: true
+    title: Application Specific Password
+- opts:
+    description: |-
+      The App's *Team ID* on iTunes Connect.
+
+      **NOTE:** This field or the `Team name` is required when using iTunes Connect account
+      linked to multiple publish teams.
+    title: Team ID
+  team_id: ""
+- opts:
+    description: |-
+      The App's *Team Name* on iTunes Connect.
+
+      **NOTE:** This field or the `Team ID` is required when using iTunes Connect account
+      linked to multiple publish teams.
+    title: Team name
+  team_name: ""
+- app_id: ""
+  opts:
+    description: |-
+      The App's *Apple ID* on iTunes Connect.
+
+      **NOTE:** This input or the `App Bundle ID` is required.
+
+      Open the **App's page on iTunes Connect**, click on **App Information**,
+      scroll down to the *General Information* section,
+      copy the *Apple ID*'s value from here (numeric value, for example, 846814360).
+    title: App Apple ID
+- bundle_id: ""
+  opts:
+    description: |-
+      The App's *Bundle ID* on iTunes Connect.
+
+      **NOTE:** This input or the `App Apple ID` is required.
+    title: App Bundle ID
+- opts:
+    description: |
+      Wait for the submission to be processed and then
+      submit the app for review for this specific version?
+
+      If this option is disabled, then this step won't wait
+      for the new version to be processed on iTunes Connect
+      and won't submit it for review automatically.
+
+      *Enabling this option will wait for the submission to be
+      processed which might take a couple of minutes after the
+      new version is deployed to iTunes Connect*.
+
+      **NOTE:** with this option enabled, the step will only
+      be successful, if the submission is accepted by iTunes Connect.
+    is_required: true
+    title: Submit for Review?
+    value_options:
+    - "yes"
+    - "no"
+  submit_for_review: "no"
+- opts:
+    description: Don't upload the metadata. This will still upload screenshots.
+    is_required: true
+    title: Skip Metadata?
+    value_options:
+    - "yes"
+    - "no"
+  skip_metadata: "yes"
+- opts:
+    description: Don't upload the screenshots.
+    is_required: true
+    title: Skip Screenshots?
+    value_options:
+    - "yes"
+    - "no"
+  skip_screenshots: "yes"
+- opts:
+    description: Don't update app version for submission.
+    is_required: true
+    title: Skip App Version Update?
+    value_options:
+    - "yes"
+    - "no"
+  skip_app_version_update: "no"
+- gemfile_path: ./Gemfile
+  opts:
+    category: Debug
+    description: |
+      Path to the `Gemfile` which contains `fastlane` gem.
+
+      If `Gemfile` doesn't exist or doesn't contain fastlane gem and
+      if `fastlane version` input isn't specified, latest fastlen version will be used.
+    title: Gemfile path
+- fastlane_version: latest-stable
+  opts:
+    category: Debug
+    description: |-
+      This option lets you specify a specific version of the **fastlane** gem to be installed.
+
+      - `latest-stable` installs the latest stable version.
+      - `latest` installs the latest version of fastlane including prerelease (release candidate) versions.
+    title: fastlane version
+- options: null
+  opts:
+    category: Debug
+    description: |-
+      Options added to the end of the `deliver` call.
+
+      If you want to add more options, list those separated by space character.
+
+      Example: `--skip_metadata --skip_screenshots`
+    title: Additional options for `deliver` call
+- itms_upload_parameters: -t DAV
+  opts:
+    category: Debug
+    description: |-
+      `deliver` uses the iTunes Transporter to upload metadata and binaries.
+      In case you are behind a firewall, you can specify a different transporter protocol using this input.
+
+      Read more on Apple [Transporter User Guide](https://help.apple.com/itc/transporteruserguide/#/apdATD1E1288-D1E1A1303-D1E1288A1126).
+    title: Transporter delivery method
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"

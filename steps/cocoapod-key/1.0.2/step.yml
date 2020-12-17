@@ -1,0 +1,60 @@
+title: Install cocoapod keys
+summary: This step allows you to install & configure a set of keys
+description: Through the use of the gem cocoapod-keys, this step creates secure values
+  to be useb by your application
+website: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key.git
+support_url: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key/issues
+published_at: 2019-10-25T19:04:45.353733+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key.git
+  commit: d3e24368a33dde7e5f9779140a5cc944f784e4fe
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- react-native
+- xamarin
+type_tags:
+- installer
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    description: In case that your workspace has multiple projects, and multiple targets,
+      a `pod key` command may fail because of the conflict in the configuration list.
+      This solves this issue
+    is_expand: true
+    is_required: false
+    summary: The name of the project. It will be used to resolve project conflict,
+      in the case of multiple targets in the workspace
+    title: Project name
+  project_name: ""
+- opts:
+    description: In case where the Podfile is not hosted at the root of the repo,
+      this variable can be used to point to the right place
+    is_expand: true
+    is_required: true
+    summary: Path where the Podfile configuration is hosted
+    title: Podfile path
+  podfile_path: ./
+- keys: ""
+  opts:
+    description: The list of keys that will be set. With `|` as a separator. It needs
+      to match the order and size of the `values` property
+    is_expand: true
+    is_required: true
+    summary: The list of keys that will be set. With `|` as a separator
+    title: Keys
+- opts:
+    description: The list of values that will be set. With `|` as a separator. It
+      needs to match the order and size of the `keys` property
+    is_expand: true
+    is_required: true
+    summary: The list of values that will be set. With `|` as a separator.
+    title: Values
+  values: ""

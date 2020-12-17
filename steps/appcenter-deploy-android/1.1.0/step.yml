@@ -1,0 +1,158 @@
+title: AppCenter Android Deploy
+summary: Deploy your awesome Android app to AppCenter.
+description: Deploy an Android application to [AppCenter](https://appcenter.ms).
+website: https://github.com/bitrise-steplib/steps-appcenter-deploy-android
+source_code_url: https://github.com/bitrise-steplib/steps-appcenter-deploy-android
+support_url: https://github.com/bitrise-steplib/steps-appcenter-deploy-android/issues
+published_at: 2020-09-25T09:24:01.531290521Z
+source:
+  git: https://github.com/bitrise-steplib/steps-appcenter-deploy-android.git
+  commit: 6408133236abf61f266d53f0d3563c56d4edf301
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appcenter-deploy-android
+is_always_run: false
+is_skippable: false
+inputs:
+- app_path: $BITRISE_APP_PATH
+  opts:
+    description: |-
+      Path to binary file
+
+      For APKs, only single or universal APKs are supported: https://docs.microsoft.com/en-us/appcenter/build/react-native/android/#63-building-multiple-apks
+    is_required: true
+    summary: Path to binary file
+    title: APP path
+- mapping_path: null
+  opts:
+    description: Path to an Android mapping.txt file.
+    summary: Path to an Android mapping.txt file.
+    title: mapping.txt file path
+- api_token: null
+  opts:
+    description: App Center API token
+    is_required: true
+    is_sensitive: true
+    summary: App Center API token
+    title: API Token
+- opts:
+    description: |-
+      Owner of the App Center app.
+
+      For an app owned by a user, the URL in App Center might look like https://appcenter.ms/users/JoshuaWeber/apps/APIExample.
+
+      Here, the {owner_name} is JoshuaWeber. For an app owned by an org, the URL might be
+      https://appcenter.ms/orgs/Microsoft/apps/APIExample and the {owner_name} would be Microsoft
+    is_required: true
+    summary: Owner of the App Center app
+    title: Owner name
+  owner_name: null
+- app_name: null
+  opts:
+    description: |-
+      The name of the App Center app.
+
+      For an app owned by a user, the URL in App Center might look like https://appcenter.ms/users/JoshuaWeber/apps/APIExample.
+
+      Here, the {app_name} is ApiExample.
+    is_required: true
+    summary: The name of the App Center app
+    title: App name
+- distribution_group: null
+  opts:
+    description: |-
+      User groups you wish to distribute the app. One group name per line.
+
+      Distribution of AAB is supported only for Google Play store deployment: https://docs.microsoft.com/en-us/appcenter/distribution/uploading#android
+    summary: User groups you wish to distribute the app. One group name per line.
+    title: Distribution groups
+- distribution_store: null
+  opts:
+    description: |-
+      Distribution stores you wish to distribute the app. One store name per line.
+
+      Distribution of AAB is supported only for Google Play store deployment: https://docs.microsoft.com/en-us/appcenter/distribution/uploading#android
+    summary: Distribution stores you wish to distribute the app. One store name per
+      line.
+    title: Distribution stores
+- distribution_tester: null
+  opts:
+    description: |-
+      List of individual testers. One email per line.
+
+      Distribution of AAB is supported only for Google Play store deployment: https://docs.microsoft.com/en-us/appcenter/distribution/uploading#android
+    summary: List of individual testers. One email per line.
+    title: Testers
+- opts:
+    description: Additional notes for the deployed artifact.
+    summary: Release notes text
+    title: Release notes text
+  release_notes: Release notes
+- notify_testers: "yes"
+  opts:
+    description: Send notification email to testers and distribution groups.
+    is_required: true
+    summary: Send notification email to testers and distribution groups.
+    title: Notify Testers
+    value_options:
+    - "yes"
+    - "no"
+- mandatory: "no"
+  opts:
+    description: Enforce installation of distribution version. Requires SDK integration.
+    is_required: true
+    summary: Enforce installation of distribution version. Requires SDK integration.
+    title: Mandatory
+    value_options:
+    - "no"
+    - "yes"
+- debug: "no"
+  opts:
+    description: Enable verbose logs
+    is_required: true
+    summary: Enable verbose logs
+    title: Debug
+    value_options:
+    - "no"
+    - "yes"
+outputs:
+- APPCENTER_DEPLOY_STATUS: null
+  opts:
+    description: 'Deployment status: ''success'' or ''failed'''
+    summary: 'Deployment status: ''success'' or ''failed'''
+    title: Deployment status
+- APPCENTER_DEPLOY_INSTALL_URL: null
+  opts:
+    description: Install page URL of the newly deployed version.
+    summary: Install page URL of the newly deployed version
+    title: Install page URL
+- APPCENTER_DEPLOY_DOWNLOAD_URL: null
+  opts:
+    description: Download URL of the newly deployed version.
+    summary: Download URL of the newly deployed version
+    title: Download URL
+- APPCENTER_DEPLOY_RELEASE_ID: null
+  opts:
+    description: ID of the new release for later retrieval via App Center APIs.
+    summary: ID of the new release for later retrieval via App Center APIs.
+    title: Release ID
+- APPCENTER_PUBLIC_INSTALL_PAGE_URL: null
+  opts:
+    description: Public install page URL of the latest version.
+    summary: Public install page URL of the latest version
+    title: Public install page URL
+- APPCENTER_RELEASE_PAGE_URL: null
+  opts:
+    description: URL to the release page containing release notes, easily share with
+      business partners and QA for testing.
+    summary: URL to the release page containing release notes.
+    title: Release Page URL

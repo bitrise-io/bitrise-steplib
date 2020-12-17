@@ -1,0 +1,100 @@
+title: Applivery.com Android Deploy
+summary: Deploy your awesome Android App to Applivery.com
+description: |-
+  Deploy an Android application to [Applivery](http://www.applivery.com),
+  add notes and notify Collaborators and Employees.
+
+  Register a Applivery account at [http://www.applivery..com/](http://www.applivery.com)
+  and create an App to utilize this step.
+
+  You also need to get your *App Token* of your App that can be found under your App Settings.
+website: https://github.com/applivery/steps-applivery-android-deploy
+source_code_url: https://github.com/applivery/steps-applivery-android-deploy
+support_url: https://github.com/applivery/steps-applivery-android-deploy/issues
+published_at: 2020-06-08T21:37:04.862208+02:00
+source:
+  git: https://github.com/applivery/steps-applivery-android-deploy.git
+  commit: c135fabb437e4209acedaa99342e8affe5070449
+host_os_tags:
+- ubuntu
+- osx-10.10
+project_type_tags:
+- android
+type_tags:
+- deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: ""
+    is_required: false
+    summary: ""
+    title: APK file path
+- aab_path: $BITRISE_AAB_PATH
+  opts:
+    description: ""
+    is_required: false
+    summary: ""
+    title: AAB file path
+- appToken: $APPLIVERY_APP_TOKEN
+  opts:
+    description: |-
+      This is your App Token
+
+      ## Where to get the Applivery Account API Key?
+
+      Sign in to your [Applivery](http://dashboard.applivery.io) account,
+      click on your App and the navigate to the Settings menu option. Scroll down to the Integrations section and click on New Token button to generate a new token. Then, copy & paste it here. [Read more](https://www.applivery.com/docs/rest-api/authentication/)
+    is_required: true
+    summary: ""
+    title: App Token
+- changelog: ""
+  opts:
+    description: Additional build/release notes or changelog attached to the deploy
+    summary: ""
+    title: (Optional) Changelog or release notes
+- notifyCollaborators: "true"
+  opts:
+    description: This flag allows you to automatically notify your project Collaborators
+      vía email.
+    is_required: true
+    summary: ""
+    title: Notify Collaborators?
+    value_options:
+    - "true"
+    - "false"
+- notifyEmployees: "true"
+  opts:
+    description: This flag allows you to automatically notify your project Employees
+      vía email.
+    is_required: true
+    summary: ""
+    title: Notify Employees?
+    value_options:
+    - "true"
+    - "false"
+- notifyMessage: ""
+  opts:
+    description: Notification message to be sent along with the email notification
+    summary: ""
+    title: (Optional) Notification message
+- opts:
+    description: Comma-separated list of tags to easily identify the build
+    is_required: false
+    summary: ""
+    title: (Optional) Comma-separated list of tags
+  tags: ""
+- opts:
+    description: Human readable version name for this build.
+    summary: ""
+    title: (Optional) Human readable version name
+  versionName: ""
+outputs:
+- APPLIVERY_DEPLOY_STATUS: null
+  opts:
+    description: ""
+    summary: ""
+    title: 'Deployment result: ''success'' or ''failed'''

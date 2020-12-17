@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="flutter-test-a" x1="50%" x2="50%" y1="98.494%" y2="0%">
+      <stop offset="0%" stop-color="#4082C7"/>
+      <stop offset="100%" stop-color="#4EC5F7"/>
+    </linearGradient>
+  </defs>
+  <g fill="none" fill-rule="evenodd">
+    <rect width="256" height="256" fill="url(#flutter-test-a)"/>
+    <g transform="translate(45 36)">
+      <g fill="#FFF" fill-opacity=".9" transform="translate(0 15)">
+        <polygon points="65.472 97.094 137.469 169.411 84.602 169.411 38.928 123.494"/>
+        <polygon points=".354 84.6 27.001 111.211 139.025 0 85.695 0"/>
+        <polygon points="38.929 123.494 65.541 150.106 138.035 77.788 84.812 77.788"/>
+      </g>
+      <g fill="#17579B">
+        <polygon points="65.472 97.094 137.469 169.411 84.602 169.411 38.928 123.494" style="mix-blend-mode:multiply"/>
+        <polygon points=".354 84.6 27.001 111.211 139.025 0 85.695 0" style="mix-blend-mode:multiply"/>
+        <polygon points="38.929 123.494 65.541 150.106 138.035 77.788 84.812 77.788" style="mix-blend-mode:multiply"/>
+      </g>
+    </g>
+  </g>
+</svg>

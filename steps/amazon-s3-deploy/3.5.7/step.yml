@@ -1,0 +1,143 @@
+title: Deploy to Amazon S3
+summary: Upload your iOS Application to Amazon S3
+description: "This step deploys an Xcode archive to Amazon S3.\nRequirements: An Xcode
+  Archive Step must run before this step and you must have an Amazon S3 account. \nTo
+  register an Amazon S3 account, [click here](http://aws.amazon.com/s3/)."
+website: https://github.com/bitrise-io/steps-amazon-s3-deploy
+source_code_url: https://github.com/bitrise-io/steps-amazon-s3-deploy
+support_url: https://github.com/bitrise-io/steps-amazon-s3-deploy/issues
+published_at: 2018-09-13T09:16:07.117061453Z
+source:
+  git: https://github.com/bitrise-io/steps-amazon-s3-deploy.git
+  commit: 1561f7d7a99a730dba8aa4357cf87ff8a00b2e2f
+project_type_tags:
+- ios
+- react-native
+- xamarin
+- cordova
+- ionic
+type_tags:
+- deploy
+deps:
+  brew:
+  - name: awscli
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: IPA path
+- dsym_path: $BITRISE_DSYM_PATH
+  opts:
+    description: ""
+    summary: ""
+    title: DSYM path (optional)
+- app_slug: $BITRISE_APP_SLUG
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: BITRISE's App-Slug variable (passed automatically on Bitrise)
+- build_slug: $BITRISE_BUILD_SLUG
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    summary: ""
+    title: BITRISE's Build-Slug variable (passed automatically on Bitrise)
+- aws_access_key: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Amazon AWS Access Key
+- aws_secret_key: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Amazon AWS Secret Access Key
+- bucket_name: ""
+  opts:
+    description: ""
+    is_required: true
+    summary: ""
+    title: Amazon S3 Bucket Name
+- bucket_region: ""
+  opts:
+    description: |
+      Amazon S3 Bucket Region
+
+      If you use default s3 region (us-east-1), you can leave it empty,
+      otherwise you should provide this input.
+    summary: ""
+    title: Amazon S3 Bucket Region
+- opts:
+    description: |-
+      Optional, if there is no specified value, then the default will be:
+
+          bitrise_$BITRISE_APP_SLUG/${BITRISE_BUILD_TRIGGER_TIMESTAMP}_build_${BITRISE_BUILD_SLUG}
+    summary: ""
+    title: Amazon S3 File Path In Bucket
+  path_in_bucket: bitrise_$BITRISE_APP_SLUG/${BITRISE_BUILD_TRIGGER_TIMESTAMP}_build_${BITRISE_BUILD_SLUG}
+- file_access_level: public_read
+  opts:
+    is_required: true
+    title: Amazon S3 file access level
+    value_options:
+    - private
+    - public_read
+outputs:
+- S3_DEPLOY_STEP_URL_IPA: ""
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Amazon S3 Deploy IPA URL
+- S3_DEPLOY_STEP_URL_DSYM: ""
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Amazon S3 Deploy DSYM URL
+- S3_DEPLOY_STEP_URL_PLIST: ""
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Amazon S3 Deploy .plist URL
+- S3_DEPLOY_STEP_STATUS: ""
+  opts:
+    description: ""
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Amazon S3 Deploy result ('success' or 'failed')
+- S3_DEPLOY_STEP_EMAIL_READY_URL: ""
+  opts:
+    description: |-
+      In a link-ready format, for example:
+
+          itms-services://?action=download-manifest&url=...
+    is_dont_change_value: true
+    is_expand: false
+    is_required: true
+    summary: ""
+    title: Amazon S3 Deploy .plist URL

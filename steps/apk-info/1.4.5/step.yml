@@ -1,0 +1,54 @@
+title: APK info
+summary: APK Android info provider
+description: Provides all possible Android APK information as package name, version
+  name or version code.
+website: https://github.com/thefuntasty/bitrise-step-apk-info
+source_code_url: https://github.com/thefuntasty/bitrise-step-apk-info
+support_url: https://github.com/thefuntasty/bitrise-step-apk-info/issues
+published_at: 2020-04-16T09:44:38.920347+02:00
+source:
+  git: https://github.com/futuredapp/bitrise-step-apk-info.git
+  commit: fce22a7a9cbf3c4c42e1afff1032c8d8981edacc
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+type_tags:
+- artifact-info
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      File path to APK file to get info from.
+    is_required: true
+    title: APK file path
+outputs:
+- ANDROID_APP_PACKAGE_NAME: null
+  opts:
+    description: Android application package name, ex. com.package.my
+    title: Android application package name
+- ANDROID_APK_FILE_SIZE: null
+  opts:
+    description: Android APK file size, in bytes
+    title: Android APK file size
+- ANDROID_APP_NAME: null
+  opts:
+    description: Android application name from APK
+    title: Android application name
+- ANDROID_APP_VERSION_NAME: null
+  opts:
+    description: Android application version name from APK, ex. 1.0.0
+    title: Android application version name
+- ANDROID_APP_VERSION_CODE: null
+  opts:
+    description: Android application version code from APK, ex. 10
+    title: Android application version code
+- ANDROID_ICON_PATH: null
+  opts:
+    description: File path to android application icon
+    title: File path to icon
