@@ -6,10 +6,10 @@ description: |
 website: https://oversecured.com/
 source_code_url: https://github.com/oversecured/oversecured-bitrise-step
 support_url: https://github.com/oversecured/oversecured-bitrise-step/issues
-published_at: 2020-12-19T23:19:27.761241+03:00
+published_at: 2020-12-20T02:38:09.581189+03:00
 source:
   git: https://github.com/oversecured/oversecured-bitrise-step.git
-  commit: d78e7490a88b3a111ec9414c8bb4f8566b26b431
+  commit: 429c68390965e3048e7ff5017b667f61a31e7274
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -20,13 +20,6 @@ type_tags:
 toolkit:
   go:
     package_name: github.com/oversecured/oversecured-bitrise-step
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
