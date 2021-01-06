@@ -6,7 +6,7 @@ description: |
 website: https://app-ray.co/
 source_code_url: https://github.com/App-Ray/bitrise-step-app-ray-mobile-security
 support_url: https://github.com/App-Ray/bitrise-step-app-ray-mobile-security/issues
-published_at: 2021-01-06T18:27:22.149701888+01:00
+published_at: 2021-01-06T18:32:26.245548181+01:00
 source:
   git: https://github.com/App-Ray/bitrise-step-app-ray-mobile-security.git
   commit: 9ac4ec92debbacaec18cb86e7c360b80a6e39936
