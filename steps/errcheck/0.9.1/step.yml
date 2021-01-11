@@ -1,0 +1,31 @@
+title: Errcheck
+summary: Checks for unchecked errors in go program
+description: |-
+  Runs errcheck command on the given packages one-by-one:
+
+  `errcheck -asserts=true -blank=true -verbose <package>`
+website: https://github.com/bitrise-steplib/steps-errcheck
+source_code_url: https://github.com/bitrise-steplib/steps-errcheck
+support_url: https://github.com/bitrise-steplib/steps-errcheck/issues
+published_at: 2020-12-16T16:28:01.382958573Z
+source:
+  git: https://github.com/bitrise-steplib/steps-errcheck.git
+  commit: 9846afc8e53c9c453105af50f386931b35fc325a
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-errcheck
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |-
+      Newline (`\n`) separated list of go packages, to run the errcheck command against.
+
+      Example: `github.com/my/step\ngithub.com/bitrise/step/tool`
+    summary: errcheck target packages
+    title: errcheck target packages
+  packages: $BITRISE_GO_PACKAGES
