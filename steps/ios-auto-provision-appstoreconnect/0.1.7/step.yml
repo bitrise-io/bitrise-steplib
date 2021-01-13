@@ -39,10 +39,10 @@ description: "The Step uses the official [App Store Connect API](https://develop
 website: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect
 source_code_url: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect
 support_url: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect/issues
-published_at: 2020-12-17T08:56:53.211644163Z
+published_at: 2021-01-13T12:10:15.080428478Z
 source:
   git: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect.git
-  commit: fa70b441073f4d69487d7fe78a40df381f4eb091
+  commit: e175864cd4d36ed49383aa05ffffe5ea7f8b587c
 project_type_tags:
 - ios
 type_tags:
