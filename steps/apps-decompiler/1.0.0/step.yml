@@ -11,10 +11,10 @@ description: |
 website: https://github.com/odemolliens/bitrise-step-apps-decompiler
 source_code_url: https://github.com/odemolliens/bitrise-step-apps-decompiler
 support_url: https://github.com/odemolliens/bitrise-step-apps-decompiler/issues
-published_at: 2021-01-21T11:09:02.877448+01:00
+published_at: 2021-01-21T12:04:43.593758+01:00
 source:
   git: https://github.com/odemolliens/bitrise-step-apps-decompiler.git
-  commit: fe8270fa667f0a725288e18cb66503df516529da
+  commit: 9d55d0cb5e332c4be62952c78329efbf8dd5f8e8
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
