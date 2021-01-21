@@ -18,10 +18,10 @@ description: |
 website: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions
 source_code_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions
 support_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions/issues
-published_at: 2021-01-21T12:36:58.251023+01:00
+published_at: 2021-01-21T12:42:50.16025+01:00
 source:
   git: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions.git
-  commit: 94c990e215844f3e6c24dded27ee871a61345949
+  commit: 51ba8f1810bb8e204730a330858a7f040bda99cc
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
