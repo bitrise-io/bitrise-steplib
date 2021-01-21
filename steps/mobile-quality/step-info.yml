@@ -1,1 +1,3 @@
-maintainer: community
+removal_date: "2018-03-26"
+deprecate_notes: |
+  This step is deprecated. The wetransfer API does not work anymore.
