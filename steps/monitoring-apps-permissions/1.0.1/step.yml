@@ -18,10 +18,10 @@ description: |
 website: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions
 source_code_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions
 support_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions/issues
-published_at: 2021-01-25T09:13:47.548562+01:00
+published_at: 2021-01-25T10:17:07.909756+01:00
 source:
   git: https://github.com/odemolliens/bitrise-step-monitoring-apps-permissions.git
-  commit: 809f6f6530a15a4993a75cbf665910131d30476a
+  commit: 789545d567969e0a46c9d0459cce9038c3d577af
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -39,7 +39,7 @@ deps:
   brew:
   - name: gnu-sed
 is_requires_admin_user: false
-is_always_run: false
+is_always_run: true
 is_skippable: false
 inputs:
 - check_android: "yes"
