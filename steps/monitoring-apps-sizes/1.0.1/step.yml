@@ -1,0 +1,112 @@
+title: Mobile apps sizes monitoring
+summary: |
+  Check and monitor mobile applications sizes
+description: |
+  Check mobile applications sizes and compare with configured values to be warned when apps sizes increased
+
+  ### Usage
+
+
+  To give to our step the information about the expected values, you have:
+  - create a config file (which should be added to your project repository) and set `config_file_path`  to find them. You can find a config example file [here](#config-file-example)
+  - **OR** set these keys with expected values directly on Bitrise side
+    - android_apk_size
+    - ios_ipa_size
+    - alert_threshold
+
+  ### Troubleshooting
+
+  - Be aware, you have to launch this step after [apps-decompiler](https://github.com/imranMnts/bitrise-step-apps-decompiler) step
+website: https://github.com/odemolliens/bitrise-step-monitoring-apps-sizes
+source_code_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-sizes
+support_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-sizes/issues
+published_at: 2021-01-25T10:18:16.323562+01:00
+source:
+  git: https://github.com/odemolliens/bitrise-step-monitoring-apps-sizes.git
+  commit: ac8c4730107c9cb6627209966fb23dfce2c0e13f
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- check_android: "yes"
+  opts:
+    description: To check or not Android size
+    is_expand: true
+    is_required: true
+    summary: Do you want check Android size?
+    title: Check Android
+    value_options:
+    - "yes"
+    - "no"
+- check_ios: "yes"
+  opts:
+    description: To check or not iOS size
+    is_expand: true
+    is_required: true
+    summary: Do you want check iOS size?
+    title: Check iOS
+    value_options:
+    - "yes"
+    - "no"
+- config_file_path: null
+  opts:
+    description: |
+      The config file where we have some information like the current Android app size eg. to compare with next builds and alert if needed.
+      If you want use Environment Variables instead of the config file, do not set this key and add variables. (See [README](https://github.com/imranMnts/bitrise-step-monitoring-apps-sizes/blob/master/README.md) to see all needed variables)
+    is_expand: false
+    is_required: false
+    summary: Path of the config file
+    title: Config file path
+- android_apk_size: null
+  opts:
+    description: |
+      Set this key if you want to follow up on your project's Android APK size
+      You can add a config file where you can add all application information and set `config_file_path` to find it.
+
+      Tip: You can set it to 0 and launch one time this step to check report file to know the current value.
+    is_expand: false
+    is_required: false
+    summary: Android APK size (MB)
+    title: Android APK size
+- ios_ipa_size: null
+  opts:
+    description: |
+      Set this key if you want follow up your project's ios IPA size
+      You can add a config file where you can add all application information and set `config_file_path` to find it.
+
+      Tip: You can set it to 0 and launch one time this step to check report file to know the current value.
+    is_expand: false
+    is_required: false
+    summary: iOS IPA size (MB)
+    title: iOS IPA size
+- alert_threshold: "5"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Threshold to alert when app size increase (MB)
+    title: Alert threshold
+    value_options:
+    - "3"
+    - "5"
+    - "10"
+    - "20"
+outputs:
+- NEW_IPA_SIZE: null
+  opts:
+    title: Current build's ios IPA size (MB)
+- NEW_APK_SIZE: null
+  opts:
+    title: Current build's Android APK size (MB)
