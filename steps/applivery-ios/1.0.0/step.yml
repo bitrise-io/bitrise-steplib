@@ -11,7 +11,7 @@ description: |-
 website: https://github.com/applivery/steps-applivery-ios-deploy
 source_code_url: https://github.com/applivery/steps-applivery-ios-deploy
 support_url: https://github.com/applivery/steps-applivery-ios-deploy/issues
-published_at: 2021-01-31T23:25:04.082214+01:00
+published_at: 2021-01-31T23:28:08.574208+01:00
 source:
   git: https://github.com/applivery/steps-applivery-ios-deploy.git
   commit: 8ebcd01013efeabf07ea53248da4d49b0a7c4825
