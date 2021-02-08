@@ -1,0 +1,54 @@
+title: Add Trace SDK
+summary: |
+  Add the Trace SDK before the build process
+
+  Important: Please read the Trace license terms in the SDK. By clicking here to add the Trace SDK, you are agreeing to those license terms.
+description: "Adds the Trace SDK static library during the Xcode build process into
+  the resulting app artifact.\n\niOS:\n  The step works by linking and modifying the
+  relevant Xcode project descriptor files to include necessary configurations in `other
+  linker flags`. These are the following:\n    - Trace static library path\n    -
+  System libraries: `C` and `C++` \n    - System Framework `SystemConfiguration.framework`\n
+  \ \n  System libraries and frameworks are linked if they are not present. It’s recommended
+  to add this step just before the Xcode build and archive step. \n  This step is
+  compatible with all Xcode projects that use Swift only, interoperability (mixed)
+  and Objective-C only languages. \n\n  Source code for the iOS SDK can be found here:
+  https://github.com/bitrise-io/trace-cocoa-sdk\n\n  Supported stack: Xcode 11 and
+  12\n\nAndroid:\nFor Android, please find the details below.\n**Source for Android
+  step:**\n[https://github.com/bitrise-steplib/bitrise-add-trace-sdk-android](https://github.com/bitrise-steplib/bitrise-add-trace-sdk-android)\n\n
+  \ \nOnce the app has been deployed, developers can view the results of the app in
+  the Trace addon.\n\nTrace: https://trace.bitrise.io\nWhat's Trace? https://www.bitrise.io/add-ons/trace-mobile-monitoring\nGetting
+  started guide: https://trace.bitrise.io/o/getting-started\n"
+website: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk
+support_url: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk/issues
+published_at: 2021-02-08T12:30:46.172739Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk.git
+  commit: 7fd0a48ded1ba7af2c5286d5c3f835c28e613002
+project_type_tags:
+- ios
+type_tags:
+- utility
+is_requires_admin_user: false
+inputs:
+- opts:
+    description: A `.xcodeproj` or `.xcworkspace` path.
+    is_required: true
+    summary: ""
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: The Scheme to use. For Apple related platforms only
+    is_required: true
+    summary: The Scheme to use. For Apple related platforms only
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- lib_version: latest
+  opts:
+    description: |-
+      The version of the Bitrise Trace SDK to link into the app. Use `latest` to always download the most recent stable release.
+
+      List of available releases for Apple related platforms: https://github.com/bitrise-io/trace-cocoa-sdk/releases
+    is_required: true
+    summary: The version of the Bitrise Trace SDK to link into the app. See more https://github.com/bitrise-io/trace-cocoa-sdk/releases
+    title: Library version
