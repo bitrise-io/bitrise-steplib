@@ -1,0 +1,69 @@
+title: Flutter Analyze
+summary: This Step runs the `flutter analyze` command in a Flutter project.
+description: |2-
+
+  The `flutter analyze` command is a wrapper around the [dartanalyzer](https://pub.dev/packages/analyzer) tool. It performs static analysis of your code. Check out the [available analysis options](https://github.com/flutter/flutter/blob/master/analysis_options.yaml) in the Flutter repository.
+
+  ### Configuring the Step
+
+  1. Set the **Project Location** input to the source directory of your app.
+
+     By default, you do not have to change this.
+
+  2. Set the **Fail Severity** input to the minimum level that should make the Step fail.
+
+     By default, the Step fails on errors only. For example, you can set it to warning to make the Step fail on both analyze errors and analyze warnings.
+
+  3. Add any flags you want to the `flutter analyze` command in the **Additional Parameters** input.
+
+     Run `flutter analyze --help` to check out the available flags. For example, you can set a flag so that the command only shows an output when there are some errors, warnings, hints or lints.
+
+  ### Useful links
+
+  - [Getting started with Flutter apps](https://devcenter.bitrise.io/getting-started/getting-started-with-flutter-apps/)
+
+  ### Related Steps
+
+  - [Flutter Install](https://www.bitrise.io/integrations/steps/flutter-installer)
+  - [Flutter Build](https://www.bitrise.io/integrations/steps/flutter-build)
+  - [Flutter Test](https://www.bitrise.io/integrations/steps/flutter-test)
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze/issues
+published_at: 2021-02-10T21:41:03.774879979Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-analyze.git
+  commit: af44c7b592b9c7435da57d08dd1eb7124c450fab
+project_type_tags:
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-analyze
+inputs:
+- opts:
+    description: The root dir of your Flutter project.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- fail_severity: error
+  opts:
+    description: The minimum severity to fail the Step. Any issue with a severity
+      at least as high as the specified one will make the Step fail.
+    is_required: true
+    summary: The minimum severity to fail the Step. Any issue with a severity at least
+      as high as the specified one will make the Step fail.
+    title: Fail Severity
+    value_options:
+    - error
+    - warning
+    - info
+- additional_params: null
+  opts:
+    description: The flags from this input field will be appended to the `flutter
+      analyze` command.
+    summary: The flags from this input field will be appended to the `flutter analyze`
+      command.
+    title: Additional Parameters
