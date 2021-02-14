@@ -4,7 +4,7 @@ description: This setp uploads your app to Veracode Security for app security te
 website: https://github.com/ryanphillipthomas/bitrise-step-veracode-security
 source_code_url: https://github.com/ryanphillipthomas/bitrise-step-veracode-security
 support_url: https://github.com/ryanphillipthomas/bitrise-step-veracode-security/issues
-published_at: 2021-02-14T01:20:24.146973-05:00
+published_at: 2021-02-14T01:36:15.358758-05:00
 source:
   git: https://github.com/ryanphillipthomas/bitrise-step-veracode-security.git
   commit: 99a940437b30765be61998468d854b0d979c72e3
