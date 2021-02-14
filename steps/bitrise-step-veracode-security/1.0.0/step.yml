@@ -1,0 +1,57 @@
+title: Veracode Security
+summary: This step uploads your app to Veracode Security for app security testing.
+description: This setp uploads your app to Veracode Security for app security testing.
+website: https://github.com/ryanphillipthomas/bitrise-step-veracode-security
+source_code_url: https://github.com/ryanphillipthomas/bitrise-step-veracode-security
+support_url: https://github.com/ryanphillipthomas/bitrise-step-veracode-security/issues
+published_at: 2021-02-14T01:09:47.239711-05:00
+source:
+  git: https://github.com/ryanphillipthomas/bitrise-step-veracode-security.git
+  commit: 99a940437b30765be61998468d854b0d979c72e3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_required: true
+    is_sensitive: true
+    title: API ID
+  veracode_api_id: $VERACODE_API_ID
+- opts:
+    is_required: true
+    is_sensitive: true
+    title: API Secret
+  veracode_api_secret: $VERACODE_API_SECRET
+- opts:
+    is_required: true
+    title: App ID
+  veracode_app_id: $VERACODE_APP_ID
+- file_upload_path: $FILE_UPLOAD_PATH
+  opts:
+    is_required: true
+    title: File Upload Path
+- auto_scan: "yes"
+  opts:
+    title: Automatically starts a staic scan after pre-scan is complete.
+    value_options:
+    - "no"
+    - "yes"
