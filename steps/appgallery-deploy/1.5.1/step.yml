@@ -7,10 +7,10 @@ description: |-
 website: https://github.com/ferPrieto/steps-app-gallery-deploy
 source_code_url: https://github.com/ferPrieto/steps-app-gallery-deploy
 support_url: https://github.com/ferPrieto/steps-app-gallery-deploy/issues
-published_at: 2021-02-19T17:35:01.068025Z
+published_at: 2021-02-23T15:06:39.301374Z
 source:
   git: https://github.com/ferPrieto/steps-app-gallery-deploy.git
-  commit: b09aaa21bf5f7d842a52bedad5815f21b97f2ab1
+  commit: a78aae58e21f29bd38068708813188d5ea74d946
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -85,15 +85,15 @@ inputs:
   release_type: Entire Network
 - opts:
     category: Config
-    description: By default is marked as For Review (true). Setting to false will
+    description: By default is marked as For Review ("true"). Setting to "false" will
       submit the relase as a Draft.
     is_expand: true
     is_required: false
     title: Submit for Review
     value_options:
-    - true
-    - false
-  submit_for_review: true
+    - "true"
+    - "false"
+  submit_for_review: "true"
 - opts:
     category: Phase
     description: Start time of the validity period of the release by phase. The value
