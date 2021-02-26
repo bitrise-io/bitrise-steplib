@@ -46,7 +46,7 @@ description: "Upload screenshots, metadata and binaries to [App Store Connect (i
 website: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver
 source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver
 support_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver/issues
-published_at: 2021-02-25T09:20:20.153234256Z
+published_at: 2021-02-26T09:11:53.12125867Z
 source:
   git: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-deliver.git
   commit: 4a4d9384c6333b148b95d048b12f513e42dcd170
