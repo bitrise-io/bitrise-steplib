@@ -31,7 +31,7 @@ description: |-
 website: https://github.com/bitrise-io/steps-fastlane
 source_code_url: https://github.com/bitrise-io/steps-fastlane
 support_url: https://github.com/bitrise-io/steps-fastlane/issues
-published_at: 2021-02-26T08:18:45.455608011Z
+published_at: 2021-02-26T09:11:02.678652111Z
 source:
   git: https://github.com/bitrise-steplib/steps-fastlane.git
   commit: e2ead355a8e9f43605281d2e0ed64e44c0ace4bb
