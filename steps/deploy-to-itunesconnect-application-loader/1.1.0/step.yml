@@ -43,7 +43,7 @@ description: "Upload your binaries to [iTunes Connect](https://itunesconnect.app
 website: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
 source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader
 support_url: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader/issues
-published_at: 2021-02-25T14:24:46.490957406Z
+published_at: 2021-02-26T09:11:29.977561345Z
 source:
   git: https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader.git
   commit: 00ee9f188406713306239a8879f81a7a25554b01
