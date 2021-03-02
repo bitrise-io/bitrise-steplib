@@ -1,0 +1,180 @@
+title: Microsoft Teams Integration
+summary: Allows you to receive build status updates on Microsoft Team using Incoming
+  Webhooks
+description: |
+  Uses Incoming Webhooks feature in Microsft Teams to send updates on your builds
+website: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
+source_code_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration
+support_url: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration/issues
+published_at: 2021-02-28T12:36:53.583905+11:00
+source:
+  git: https://github.com/amrfarid140/bitrise-step-microsoft-teams-integration.git
+  commit: e885ffeaf7812f6f96397190155c05ee134e62fb
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/amrfarid140/bitrise-step-microsoft-teams-integration
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: true
+inputs:
+- card_title: $BITRISE_APP_TITLE
+  opts:
+    description: |
+      Primary MessageCard title text.
+
+      If no value is given, the default value will be the `BITRISE_APP_TITLE`.
+    summary: The heading text at the top of the MessageCard
+    title: Card Title
+- enable_debug: "no"
+  opts:
+    description: |
+      Enables debug logging to the Bitrise console.
+
+      WARNING: This will output the JSON value of the Teams Webhook body, be mindful of what is output here.
+    summary: Toggles whether to log debug info to the build output
+    title: Enable debug logging
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Theme Customisation
+    description: |
+      Given value should be a hexadecimal color, minus the leading `#`.
+
+      Defaults to `359914` if not overridden.
+    summary: Sets the cards theme color to the given hex value for successful builds
+    title: Theme Color - Build Success
+  success_theme_color: 359914
+- failed_theme_color: E04504
+  opts:
+    category: Theme Customisation
+    description: |
+      Given value should be a hexadecimal color, minus the leading `#`.
+
+      Defaults to `E04504` if not overridden.
+    summary: Sets the cards theme color to the given hex value for failed builds
+    title: Theme Color - Build Failed
+- enable_primary_section_markdown: "yes"
+  opts:
+    category: Markdown Rules
+    description: |
+      Sets whether to enable Markdown rendering for the each field of the first section of the MessageCard.
+
+      User input fields affected:
+      * section_title
+      * section_subtitle
+      * section_text
+    summary: Sets whether the text fields within the MessageCard's first section should
+      render Markdown text
+    title: Primary Section Markdown
+    value_options:
+    - "yes"
+    - "no"
+- enable_build_status_facts_markdown: "no"
+  opts:
+    category: Markdown Rules
+    description: |
+      Sets whether to enable Markdown rendering for the default Facts within the MessageCard.
+
+      Fact fields affected:
+      * Build Status
+      * Build Number
+      * Git Branch
+      * Build Triggered
+      * Workflow
+    summary: Sets whether each of the facts should render their values as Markdown
+      text
+    title: Build Status Facts Markdown
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: MessageCard Content
+    description: |
+      Sets the text value of `activityTitle` within the primary Section of the MessageCard.
+
+      By default, this will be set to the commit authors' name that triggered the build.
+    summary: Text that is displayed within the MessageCard Section `activityTitle`
+    title: Section Title
+  section_title: $GIT_CLONE_COMMIT_AUTHOR_NAME
+- opts:
+    category: MessageCard Content
+    description: |
+      Sets the text value of `activitySubtitle` within the primary Section of the MessageCard.
+
+      By default, this will be set to the commit message subject that triggered the build.
+    summary: Text that is displayed within the MessageCard Section `activitySubtitle`
+    title: Section Subtitle
+  section_subtitle: $GIT_CLONE_COMMIT_MESSAGE_SUBJECT
+- opts:
+    category: MessageCard Content
+    description: |
+      Sets the text value of `text` within the primary Section of the MessageCard. By default,
+      this will be set to the commit message body that triggered the build.
+
+      If desired, this is the perfect place to include release notes via the `generate-changelog` Bitrise step, however
+      setting `enable_primary_section_markdown` to `yes` may be necessary to properly format the changelog content.
+    summary: Text that is displayed within the MessageCard Section `text`
+    title: Section Text
+  section_text: $GIT_CLONE_COMMIT_MESSAGE_BODY
+- opts:
+    category: MessageCard Content
+    summary: Image that is displayed within the MessageCard Section `activityImage`
+    title: Section Image
+  section_header_image: null
+- enable_default_actions: "yes"
+  opts:
+    category: MessageCard Actions
+    description: "Allows for disabling the default 'Go To Repo' and 'Go To Build'
+      MessageCard Actions if you wish to provide only your own custom actions \nvia
+      the `actions` step input (up to a limit of 4 actions in total).\n"
+    summary: Toggles the default actions within the MessageCard.
+    title: Default MessageCard Actions
+    value_options:
+    - "yes"
+    - "no"
+- actions: '[]'
+  opts:
+    category: MessageCard Actions
+    description: "A stringified JSON object array of additional custom actions to
+      display on the card.\n\nThe maximum amount of actions a single card can display
+      is 4, 2 of which are used if \n`enable_default_actions` is set to `yes`.\n\nEach
+      action button object must have a `text` key/value pair, and a list of `target`
+      objects\nwhich define the `uri`, specific to which platform-client (`os` value)
+      the Teams message is viewed on.\n\nValid `os` values are (case-sensitive):\n\n*
+      iOS\n* android\n* windows\n* default (shows action button on every Teams client,
+      regardless of platform)\n\nNOTE: Step input must be valid JSON. Trailing commas
+      are not permitted.\n\nExample input:\n```json\n[\n  {\n    \"text\": \"Open
+      deep link\", \n    \"targets\": [\n      {\n        \"uri\": \"your_universal_link\",\n
+      \       \"os\": \"iOS\"\n      },\n      {\n        \"uri\": \"your_android_app_link\",\n
+      \       \"os\": \"android\"\n      },\n      {\n        \"uri\": \"https://www.google.com\",\n
+      \       \"os\": \"default\"\n      }\n    ]\n  }                  \n]\n```\nWhile
+      this isn't the most user-friendly way to define custom buttons, Bitrise step\nparsing
+      is currently limited to string value inputs and does not allow defining a YAML
+      object list, which\nhas been [feature requested here](https://github.com/bitrise-io/go-steputils/issues/23).\n"
+    summary: Additional extra custom actions to display on the MessageCard
+    title: MessageCard Actions
+- opts:
+    description: |
+      If no value is given, the step automatically uses the `$GIT_REPOSITORY_URL` var.
+
+      If a Bitrise project is configured via SSH, `$GIT_REPOSITORY_URL` is not a useable
+      URI Target for the MessageCard, so this allows for overriding this value if SSH is configured.
+    summary: Define a custom repository location
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- opts:
+    description: |
+      * Go to Microsoft Teams
+      * Click on the three dots next to channel name then **Add Connector**
+      * Select **Incoming Webhook* and in the text input type **Bitrise**
+      * Save and copy the link to the input for this step
+    is_required: true
+    summary: Url of the Incoming Webhook generated by Microsoft Teams
+    title: Incoming Webhook URL
+  webhook_url: null
