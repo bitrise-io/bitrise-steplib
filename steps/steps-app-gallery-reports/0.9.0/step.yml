@@ -1,0 +1,245 @@
+title: Huawei AppGallery Connect Reports
+summary: Gets the different Reports from AppGallery Connect for a specific published
+  app.
+description: |-
+  Gets the next reports from AppGallery Connect:
+  - Download and Installation Report
+  - In-app Payment Report
+  - Paid Download Report
+  - Installation Failure Data Report
+
+  This step is based on [AppGallery Connect Reports](https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-References/agcapi-appdownloadexport)
+website: https://github.com/ferPrieto/steps-app-gallery-reports
+source_code_url: https://github.com/ferPrieto/steps-app-gallery-reports
+support_url: https://github.com/ferPrieto/steps-app-gallery-reports/issues
+published_at: 2021-03-06T00:13:45.025487Z
+source:
+  git: https://github.com/ferPrieto/steps-app-gallery-reports.git
+  commit: 6c74a96cdf30aa2ce82f753ae6f33a702e644916
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  apt_get:
+  - name: jq
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- huawei_app_id: null
+  opts:
+    category: Required Config
+    description: App ID can be found in the `App information` section in App Gallery
+      Connect.
+    is_expand: true
+    is_required: true
+    title: App ID
+- huawei_client_id: null
+  opts:
+    category: Required Config
+    description: Client ID generated in `AppGallery Connect -> Users and permissions
+      -> API key -> Connect API -> API client`
+    is_expand: true
+    is_required: true
+    title: Client ID
+- huawei_client_secret: null
+  opts:
+    category: Required Config
+    description: Key Secret generated in `AppGallery Connect -> Users and permissions
+      -> API key -> Connect API -> API client`
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Key
+- download_installation_language: en-US
+  opts:
+    category: Download and Installation
+    description: Query language. The report title is displayed in different languages.
+      Only simplified Chinese (zh-CN), English (en-US), and Russian (ru-RU) are supported.
+    is_expand: true
+    is_required: false
+    title: Language
+- download_installation_start_time: null
+  opts:
+    category: Download and Installation
+    description: Query start time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: Start Time
+- download_installation_end_time: null
+  opts:
+    category: Download and Installation
+    description: Query end time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: End Time
+- download_installation_export_type: CSV
+  opts:
+    category: Download and Installation
+    description: Format of an exported file. The options are as follows CSV, EXCEL.
+    is_expand: true
+    is_required: false
+    title: Export Type
+    value_options:
+    - CSV
+    - EXCEL
+- in_app_payment_language: en-US
+  opts:
+    category: In-App Payment
+    description: Query language. The report title is displayed in different languages.
+      Only simplified Chinese (zh-CN), English (en-US), and Russian (ru-RU) are supported.
+    is_expand: true
+    is_required: false
+    title: Language
+- in_app_payment_start_time: null
+  opts:
+    category: In-App Payment
+    description: Query start time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: Start Time
+- in_app_payment_end_time: null
+  opts:
+    category: In-App Payment
+    description: Query end time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: End Time
+- in_app_payment_export_type: CSV
+  opts:
+    category: In-App Payment
+    description: Format of an exported file. The options are as follows CSV, EXCEL.
+    is_expand: true
+    is_required: false
+    title: Export Type
+    value_options:
+    - CSV
+    - EXCEL
+- in_app_payment_currency: EUR
+  opts:
+    category: In-App Payment
+    description: Currency code. Only CNY, EUR, USD, GBP, and JPY are supported.
+    is_expand: true
+    is_required: false
+    title: Currency
+    value_options:
+    - CNY
+    - EUR
+    - USD
+    - GBP
+    - JPY
+- opts:
+    category: Paid Download
+    description: Domain name related to the region of the app payment.
+    is_expand: true
+    is_required: false
+    title: Domain
+    value_options:
+    - China
+    - Europe
+    - Asia Pacific
+    - Russia
+  paid_download_domain: Europe
+- opts:
+    category: Paid Download
+    description: Query language. The report title is displayed in different languages.
+      Only simplified Chinese (zh-CN), English (en-US), and Russian (ru-RU) are supported.
+    is_expand: true
+    is_required: false
+    title: Language
+  paid_download_language: en-US
+- opts:
+    category: Paid Download
+    description: Query start time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: Start Time
+  paid_download_start_time: null
+- opts:
+    category: Paid Download
+    description: Query end time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: End Time
+  paid_download_end_time: null
+- opts:
+    category: Paid Download
+    description: This parameter is mandatory in Paid Download Reports. Available country
+      IDs https://developer.huawei.com/consumer/en/doc/development/AppGallery-connect-Guides/agcapi-reference-countrycode
+    is_expand: true
+    is_required: false
+    title: Country Id
+  paid_download_country_id: null
+- installation_failure_data_language: en-US
+  opts:
+    category: Installation Failure Data
+    description: Query language. The report title is displayed in different languages.
+      Only simplified Chinese (zh-CN), English (en-US), and Russian (ru-RU) are supported.
+    is_expand: true
+    is_required: false
+    title: Language
+- installation_failure_data_start_time: null
+  opts:
+    category: Installation Failure Data
+    description: Query start time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: Start Time
+- installation_failure_data_end_time: null
+  opts:
+    category: Installation Failure Data
+    description: Query end time in UTC time. The format is YYYYMMDD. The interval
+      between startTime and EndTime cannot exceed 180 days.
+    is_expand: true
+    is_required: false
+    title: End Time
+- opts:
+    category: Debug
+    description: |
+      If debug=yes the step will print debug infos
+    title: Show debug logs?
+    value_options:
+    - "no"
+    - "yes"
+  show_debug_logs: "no"
+outputs:
+- DOWNLOAD_INSTALLATION_REPORT_LINK: null
+  opts:
+    category: Download and Installation
+    is_dont_change_value: false
+    title: Download and Installation Report Link
+- IN_APP_PAYMENT_REPORT_REPORT_LINK: null
+  opts:
+    category: In-App Payment
+    is_dont_change_value: false
+    title: In-App Payment Report Link
+- PAID_DOWNLOAD_REPORT_LINK: null
+  opts:
+    category: Paid Download
+    is_dont_change_value: false
+    title: Paid Download Report Link
+- INSTALLATION_FAILURE_DATA_REPORT_LINK: null
+  opts:
+    category: Installation Failure Data
+    is_dont_change_value: false
+    title: Installation Failure Data Report Link
