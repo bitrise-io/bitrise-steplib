@@ -1,0 +1,66 @@
+title: S3 Download
+summary: This step allows to download a file from an S3 bucket.
+description: This step allows to download a file from an S3 bucket using an Access/secret
+  keypair for authentication.
+website: https://github.com/FutureWorkshops/bitrise-step-s3-download
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-s3-download
+published_at: 2021-04-14T23:29:59.538838+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-s3-download.git
+  commit: fb93dbb6b02c69677bddf2ef232da197ff55163e
+host_os_tags:
+- osx-10.10
+- osx-10.9
+type_tags:
+- utility
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- aws_access_key: ""
+  opts:
+    description: This is the AWS Access key of an user with read permission to the
+      S3 bucket/file.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The Access Key for the S3 user
+    title: AWS Access Key
+- aws_secret_access_key: ""
+  opts:
+    description: This is the AWS Secret Access key of an user with read permission
+      to the S3 bucket/file.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The Secret Access Key for the S3 user
+    title: AWS Secret Access Key
+- opts:
+    description: This is the S3 bucket containing the file to download
+    is_expand: true
+    is_required: true
+    summary: The S3 bucket containing the file to download
+    title: S3 Bucket
+  s3_bucket: ""
+- opts:
+    description: This is the file path of the file to download from the bucket.
+    is_expand: true
+    is_required: true
+    summary: The file path of the file to download
+    title: File path
+  s3_filepath: ""
+- opts:
+    description: The folder where to store the downloaded file (must exist).
+    is_expand: true
+    is_required: true
+    summary: Where to store the downloaded file.
+    title: File path
+  output_location: .
+outputs:
+- S3_DOWNLOAD_OUTPUT_PATH: null
+  opts:
+    description: This is the full path to the downloaded file. It will be composed
+      by resolved output_location and s3_filepath
+    summary: Path were the file was saved
+    title: S3 Download output
