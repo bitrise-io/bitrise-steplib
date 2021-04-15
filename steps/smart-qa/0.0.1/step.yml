@@ -1,0 +1,44 @@
+title: SmartQA
+summary: |
+  SmartQA E2E test step.
+description: |
+  Deploy build to SmartQA. (https://smart-qa.io)
+website: https://github.com/Levetty/bitrise-step-smartqa
+source_code_url: https://github.com/Levetty/bitrise-step-smartqa
+support_url: https://github.com/Levetty/bitrise-step-smartqa/issues
+published_at: 2021-03-21T20:33:43.550291+09:00
+source:
+  git: https://github.com/Levetty/bitrise-step-smartqa.git
+  commit: 5ac7d12e24f37c0578b142918392c8fab672326c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/Levetty/bitrise-step-smartqa
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_path: null
+  opts:
+    description: |
+      Path to your .app file.
+    is_expand: true
+    is_required: true
+    summary: Your application build path.
+    title: Build Path
+- api_key: null
+  opts:
+    description: |
+      Access token to access SmartQA API.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your API Key.
+    title: API KEY

@@ -1,0 +1,47 @@
+title: Jasmine Test Runner
+summary: Runs Jasmine tests.
+description: "Perform unit testing with our **Jasmine Test Runner** Step. \nIf your
+  Cordova/Ionic project has Jasmine dependency in its package.json file, the **Jasmine
+  Test Runner** Step will get automatically inserted in your Workflow. \nIf the dependency
+  is missing from your project, you can manually insert the **Jasmine Test Runner**
+  Step from our StepLib.\n\n### Configuring the Step\n1. Provide your project's working
+  directory in the **Working directory** input.\n3. Add custom options in `jasmine
+  [options]` in the **Options to append to the jasmine command** input.\n\n### Troubleshooting\nMake
+  sure you insert the **Jasmine Test Runner** Step right after **Run npm command**
+  or **Run yarn command package manager** Step.\n\n\n### Useful links\n- [Getting
+  started with Ionic/Cordova apps](https://devcenter.bitrise.io/getting-started/getting-started-with-ionic-cordova-apps/)\n-
+  [Testing on Bitrise](https://devcenter.bitrise.io/testing/testing-index/)\n\n###
+  Related Steps\n- [Karma Jasmine Test Runner](https://www.bitrise.io/integrations/steps/karma-jasmine-runner)\n-
+  [Run npm command](https://www.bitrise.io/integrations/steps/npm)"
+website: https://github.com/bitrise-community/steps-jasmine-runner
+source_code_url: https://github.com/bitrise-community/steps-jasmine-runner
+support_url: https://github.com/bitrise-community/steps-jasmine-runner/issues
+published_at: 2021-02-10T15:18:41.896891286Z
+source:
+  git: https://github.com/bitrise-steplib/steps-jasmine-runner.git
+  commit: a92e1d18b9f0ac9f3e6861e39a6d1ff5429a6c3a
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- cordova
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-jasmine-runner
+deps:
+  brew:
+  - name: go
+inputs:
+- opts:
+    description: Working directory.
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- options: null
+  opts:
+    description: |-
+      Use this input to specify custom options, to append to the end of the jasmine command.
+
+      `jasmine [options]`
+    title: Options to append to the jasmine command

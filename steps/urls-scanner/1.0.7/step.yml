@@ -1,0 +1,53 @@
+title: Mobile apps URL scanner
+summary: |
+  Scan source code to extract all HTTP/HTTPS URLs and execute an analysis of those URLs with SSLLabs
+description: |
+  Scan source code to extract all HTTP/HTTPS URLs and execute an analysis of those URLs with SSLLabs
+website: https://github.com/odemolliens/bitrise-step-urls-scanner
+source_code_url: https://github.com/odemolliens/bitrise-step-urls-scanner
+support_url: https://github.com/odemolliens/bitrise-step-urls-scanner/issues
+published_at: 2021-04-07T15:38:08.541902+02:00
+source:
+  git: https://github.com/odemolliens/bitrise-step-urls-scanner.git
+  commit: e60a617c33eaa4eb192698dd4f7f2a770b2191b5
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: ssllabs-scan
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Define the list of domains like this: google.com;apple.com;flutter.com;bitrise.io (using ; as separator).
+      The list set by default can help you to remove URLs that are only used from a development perspective.
+    is_expand: true
+    is_required: false
+    summary: Analyze HTTPS URLs with SSLLabs and generate a report for each domain
+    title: Analyze HTTPS URLs with SSLLabs
+    value_options:
+    - "yes"
+    - "no"
+  ssl_labs_scan: "no"
+- black_list: apache.org;cloudflare.com;bintray.com;w3.org;apple-mapkit.com;apple.com;mzstatic.com;mozilla.org;github.io;github.com;youtube.com;withgoogle.com;android.com;google.com;jitpack.io;microsoft.com;firebaseio.com
+  opts:
+    description: |
+      Define the list of domains like this: google.com;apple.com;flutter.com;bitrise.io (using ; as separator).
+      The list set by default can help you to remove URLs that are only used from a development perspective.
+    is_expand: true
+    is_required: false
+    summary: List of domains that will not be analyzed by SSLLabs
+    title: HTTPS Domains blacklisted
