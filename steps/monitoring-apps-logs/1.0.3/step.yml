@@ -1,0 +1,49 @@
+title: Mobile apps logs
+summary: |
+  Check if your Android app kept any logs in your release build
+description: "Check if an Android application contain any logs in the release app\nIf
+  yes, this step will fail and generate a failure where you can see the count \n\n###
+  Troubleshooting\n\n- Be aware, you have to launch this step after [apps-decompiler](https://github.com/imranMnts/bitrise-step-apps-decompiler)
+  to have informations from your APK\n"
+website: https://github.com/odemolliens/bitrise-step-monitoring-apps-logs
+source_code_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-logs
+support_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-logs/issues
+published_at: 2021-04-06T14:50:50.331496+02:00
+source:
+  git: https://github.com/imranMnts/bitrise-step-monitoring-apps-logs.git
+  commit: 1cc364a606fff650d95d1321dd0eee4ea8855f2f
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+- flutter
+- ionic
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- check_android: "yes"
+  opts:
+    description: Do you want to check if the Android app contain any logs?
+    is_expand: true
+    is_required: true
+    summary: Do you want to check if the Android app contain any logs?
+    title: Check Android logs
+    value_options:
+    - "yes"
+    - "no"
+- log_count: null
+  opts:
+    description: If you have some logs in your app and want to keep them, set here
+      the count to not fail the step and be aware when new logs added to project
+    is_expand: true
+    is_required: false
+    summary: If you have some logs in your app and want to keep them
+    title: The count of logs in your app

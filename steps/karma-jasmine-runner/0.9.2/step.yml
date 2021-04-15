@@ -1,0 +1,45 @@
+title: Karma Jasmine Test Runner
+summary: Run your Jasmine tests with the Karma tool on Bitrise.
+description: "The Step allows you to run Jasmine tests using the Karma tool in your
+  build. Karma lets you spawn different browsers and re-run the tests within each
+  browser. \n\n### Configuring the Step \n\nThe Step runs the `karma start` command
+  to run your Jasmine tests. To set this up:\n\n1. Choose the browsers in which you
+  want to run tests. Separate each browser with a comma. \n1. In the **Options to
+  append to the karma start command**, add custom options to the `karma start` command.
+  For the available options, run `karma start --help` in a command line. \n\n### Useful
+  links \n\n[Testing on Bitrise](devcenter.bitrise.io/testing/)\n\n### Related Steps
+  \n\n[Jasmine Test Runner](https://www.bitrise.io/integrations/steps/jasmine-runner)"
+website: https://github.com/bitrise-community/steps-karma-jasmine-runner
+source_code_url: https://github.com/bitrise-community/steps-karma-jasmine-runner
+support_url: https://github.com/bitrise-community/steps-karma-jasmine-runner/issues
+published_at: 2021-03-17T15:25:34.634029494Z
+source:
+  git: https://github.com/bitrise-steplib/steps-karma-jasmine-runner.git
+  commit: 93ff7ea9a0a78b99df08f0040ce36c99fa70b122
+project_type_tags:
+- cordova
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-community/steps-karma-jasmine-runner
+deps:
+  brew:
+  - name: go
+inputs:
+- opts:
+    is_required: true
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- browsers: Safari
+  opts:
+    description: |-
+      Use this input to specify which browser to use by karma start command.
+      Comma separated list of browsers (eg. `Safari,Chrome,Firefox`).
+    is_required: true
+    title: List of browsers to start
+- options: null
+  opts:
+    description: Use this input to specify custom options, to append to the end of
+      the karma start command.
+    title: Options to append to the karma start command

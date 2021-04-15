@@ -1,0 +1,83 @@
+title: Mobile apps decompiler
+summary: |
+  Decompile mobile APK and/or IPA to look inside
+description: |
+  Decompile mobile APK and/or IPA to look inside
+
+  ### Troubleshooting
+
+  - Be aware, you have to launch this step after the compilation step ("Android Build" for android, "Xcode Archive" for iOS)
+  - Launch "Deploy to Bitrise.io" step after this one to deploy report files to artifacts
+website: https://github.com/odemolliens/bitrise-step-apps-decompiler
+source_code_url: https://github.com/odemolliens/bitrise-step-apps-decompiler
+support_url: https://github.com/odemolliens/bitrise-step-apps-decompiler/issues
+published_at: 2021-02-04T13:51:59.397006+01:00
+source:
+  git: https://github.com/odemolliens/bitrise-step-apps-decompiler.git
+  commit: d6cf3d7977fd440a9f964310348c1732d864c087
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: apktool
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- decompile_android: "yes"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Do you want decompile Android APK?
+    title: Decompile Android APK
+    value_options:
+    - "yes"
+    - "no"
+- decompile_ios: "yes"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Do you want decompile iOS IPA?
+    title: Decompile iOS IPA
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      You can use the artifacts from another bitrise build of the same project.
+      If you launch this step on the build where you launched Android build step eg. you don't have to set this key
+    is_expand: true
+    is_required: false
+    summary: Build slug of the build where you have the APK/IPA into artifacts
+    title: External Build slug
+  outside_build_slug: null
+- android_apk_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      You have to set this key if you launch this step directly in the build where you generate your APK, in that case, be careful to launch it necessarily after these build steps
+          - `Android Build` for android
+      Otherwis, you can launch this step in another Bitrise build, in that case, you don't need to setup this key but `outside_build_slug` to download your APK to do quality checks
+    is_expand: true
+    is_required: true
+    title: APK path
+- ios_ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: |
+      You have to set this key if you launch this step directly in the build where you generate your IPA, in that case, be careful to launch it necessarily after these build steps
+          - `Xcode Archive` for iOS
+      Otherwis, you can launch this step in another Bitrise build, in that case, you don't need to setup this key but `outside_build_slug` to download your IPA to do quality checks
+    is_expand: true
+    is_required: true
+    title: IPA path

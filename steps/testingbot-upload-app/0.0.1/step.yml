@@ -1,0 +1,59 @@
+title: TestingBot App Upload
+summary: |
+  Uploads your APK or IPA to TestingBot for mobile app testing.
+description: |
+  Uploads your APK or IPA to TestingBot for mobile app testing. You can find more information on https://testingbot.com
+website: https://github.com/testingbot/bitrise-step-testingbot-app-upload
+source_code_url: https://github.com/testingbot/bitrise-step-testingbot-app-upload
+support_url: https://github.com/testingbot/bitrise-step-testingbot-app-upload/issues
+published_at: 2021-03-25T13:38:48.923785+01:00
+source:
+  git: https://github.com/testingbot/bitrise-step-testingbot-app-upload.git
+  commit: 9cf3095969e1183046bbf1ccc0eab3f8737354af
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- apk_ipa_filepath: null
+  opts:
+    description: |
+      The app file you want to upload to TestingBot, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
+    is_expand: true
+    is_required: true
+    summary: Location of the IPA or APK that you want to upload.
+    title: Location of the IPA or APK
+- opts:
+    description: |
+      You can find the key in the TestingBot member area.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The key to authenticate with TestingBot.
+    title: TestingBot Key
+  testingbot_key: null
+- opts:
+    description: |
+      You can find the secret in the TestingBot member area.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The secret to authenticate with TestingBot.
+    title: TestingBot Secret
+  testingbot_secret: null

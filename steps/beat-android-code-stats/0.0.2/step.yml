@@ -1,0 +1,79 @@
+title: Android code stats
+summary: |
+  Generates some Android project stats
+description: |
+  Generates some variables for Android project stats
+website: https://github.com/luismunyoz/bitrise-step-beat-android-code-stats
+source_code_url: https://github.com/luismunyoz/bitrise-step-beat-android-code-stats
+support_url: https://github.com/luismunyoz/bitrise-step-beat-android-code-stats/issues
+published_at: 2021-02-15T09:32:24.642047+01:00
+source:
+  git: https://github.com/luismunyoz/bitrise-step-beat-android-code-stats.git
+  commit: 66b93dc2032902bdf3babf70d0c8ca9e29f90602
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: cloc
+  apt_get:
+  - name: cloc
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- opts:
+    description: The root directory of your Android project. For example, where your
+      root build gradle file exist (also gradlew, settings.gradle, and so on)
+    is_required: true
+    summary: The root directory of your Android project.
+    title: Project Location
+  project_location: $BITRISE_PROJECT_PATH
+outputs:
+- KOTLIN_LINES_CODE: null
+  opts:
+    summary: Lines of code written in Kotlin
+    title: Kotlin lines of code
+- JAVA_LINES_CODE: null
+  opts:
+    summary: Lines of code written in Java
+    title: Java lines of code
+- XML_LINES_CODE: null
+  opts:
+    summary: Lines of code written in XML
+    title: XML lines of code
+- KOTLIN_PERCENTAGE_CODE: null
+  opts:
+    summary: Percentage of the code written in Kotlin
+    title: Kotlin percentage of code
+- JAVA_PERCENTAGE_CODE: null
+  opts:
+    summary: Percentage of the code written in Java
+    title: Java percentage of code
+- DOCUMENTATION_FILES: null
+  opts:
+    summary: Number of documentation files in the project
+    title: Documentation files
+- UNIT_TESTS_COUNT: null
+  opts:
+    summary: Number of unit tests in the project
+    title: Unit tests
+- UI_TESTS_COUNT: null
+  opts:
+    summary: Number of UI tests in the project
+    title: UI tests
+- MVP_PRESENTERS_COUNT: null
+  opts:
+    summary: Number of MVP Presenters in the project
+    title: MVP Presenters
+- VIEWMODEL_COUNT: null
+  opts:
+    summary: Number of ViewModels in the project
+    title: ViewModels
