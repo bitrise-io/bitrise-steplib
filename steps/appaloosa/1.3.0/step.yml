@@ -5,10 +5,10 @@ description: |
   Bitrise Step to Deploy an iOS .ipa or Android .apk to Appaloosa-Store.
 
   Required:
-    For iOS: an Xcode Archive Step should run before this Step!
-    For Android: an apk should exist
+    For iOS: an ipa should have been generated before running this step.
+    For Android: an apk should have been generated before running this step.
 
-  This step requires an Appaloosa-Store account or an email address to create your account
+  This step requires an Appaloosa-Store account.
 website: https://www.appaloosa-store.com
 source_code_url: https://github.com/appaloosa-store/bitrise_appaloosa
 support_url: https://github.com/appaloosa-store/bitrise_appaloosa/issues
@@ -41,34 +41,16 @@ inputs:
     is_required: true
     summary: ""
     title: BINARY PATH
-- opts:
-    description: |-
-      ***Only if you haven't created an account on Appaloosa yet.***
-
-      You'll receive an email with your credentials to access your private store.
-    is_dont_change_value: false
-    is_expand: true
-    is_required: false
-    summary: If you don't have an account we'll automatically create one for you.
-      At the end of the step you'll receive an email with your credentials to access
-      your store, and install your application. For all future runs of this step,
-      remove your email address and setup this step as a registered user.
-    title: User Email Address
-  user_email: null
 - appaloosa_api_key: null
   opts:
-    description: '***Only if you are already registered on Appaloosa***'
+    description: 'This is your unique Appaloosa API Key that can be found in your settings'
     is_dont_change_value: false
     is_expand: true
     is_required: false
-    summary: This is your unique Appaloosa API Key that can be found in your user's
-      profile on Appaloosa
+    summary: You can find this value in your store settings
     title: User API Key
 - opts:
-    description: |-
-      ***Only if you are already registered on Appaloosa***
-
-      This is the store id of the store you want your application uploaded to.
+    description: 'This is the store id of the store you want your application uploaded to.'
     is_dont_change_value: false
     is_expand: true
     is_required: false
@@ -135,10 +117,7 @@ inputs:
     title: Changelog
 - group_ids: null
   opts:
-    description: |-
-      ***Only for registered users. ***
-
-      Groups ids of the groups you want your application published to. If you do not specify at least one group id, you will have to change the visibility directly on Appaloosa website.
+    description: 'Groups ids of the groups you want your application published to. If you do not specify at least one group id, you will have to change the visibility directly on Appaloosa website.'
     is_dont_change_value: false
     is_expand: true
     is_required: false
