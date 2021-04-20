@@ -1,0 +1,175 @@
+title: Ionic archive
+summary: Generates builds for the requested platforms.
+description: |-
+  Generates an iOS, Android or an iOS and Android build based on your Step settings and a `build.json` file which is inherited from the **Generate cordova build configuration** Step.
+
+  ### Configuring the Step
+  1. In the **Platform to use in ionic-cli commands** input, select the platform you wish to build for from the drop-down menu.
+  2. In the **Build command configuration** input, select either `debug` or `release` mode from the drop-down menu. If you set `release` to generate a release build, then you should select `device` instead of `emulator` in the **Build command target**.
+  3. Select either `emulator` or `device` in the **Build command target** field.
+  4. Make sure the file path set in the **Working directory** is pointing to the path where your project's code got downloaded to.
+  If you're using any services of the Ionic framework which requires login credentials, you have to provide those in the **Ionic username** and **Ionic password** inputs. Don't worry, these are stored as secret Environment Variables.
+  If you wish to to modify your native projects by inserting the **Ionic Prepare** Step before the **Ionic Archive** Step, then make sure you set the **Should `ionic cordova prepare` be executed before `ionic cordova build`?** input to `false` in the **Ionic Archive** Step.
+  The **Build configuration path to describe code signing properties** input is automatically filled out with the output Environment Variable of the **Generate cordova build configuation** Step. You do not need to modify this input.
+
+  ### Troubleshooting
+  Make sure you add the **Ionic Archive** Step AFTER the **Generate cordova build configuration** Step as the latter generates the build config file which the **Ionic Archive** Step uses to successfully build an iOS and/or Android project.
+  Make sure you insert the **Ionic Archive** Step BEFORE any deploy Step.
+  Note that if you’re building for both iOS and Android in one workflow, and either of your apps fails, the whole **Ionic Archive** Step will fail.
+  If you set the **Build configuration** input in the **Generate Cordova Build Configuration** Step to `release`, then you need to use the release configuration in the **Ionic Archive** Step as well.
+
+  ### Useful links
+  - [Getting started with Ionic/Cordova apps on Bitrise](https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-using-bitrise-sign-apk-step/)
+  - [Secret Environment Variables on Bitrise](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/)
+  - [Ionic framework](https://ionicframework.com/)
+
+  ### Related Steps
+  - [Generate Cordova Build Configuration](https://www.bitrise.io/integrations/steps/android-build)
+  - [Run npm command](https://www.bitrise.io/integrations/steps/npm)
+  - [Cordova Archive](https://www.bitrise.io/integrations/steps/cordova-archive)
+website: https://github.com/bitrise-steplib/steps-ionic-archive
+source_code_url: https://github.com/bitrise-steplib/steps-ionic-archive
+support_url: https://github.com/bitrise-steplib/steps-ionic-archive/issues
+published_at: 2021-04-19T11:54:24.914804843Z
+source:
+  git: https://github.com/bitrise-steplib/steps-ionic-archive.git
+  commit: e0929986bdeeb635040e465b9c28f401b9cac58c
+project_type_tags:
+- ionic
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-ionic-archive
+deps:
+  brew:
+  - name: go
+  - name: gradle
+inputs:
+- opts:
+    description: |-
+      Specify this input to apply ionic-cli commands to desired platforms only.
+
+      `ionic cordova build [OTHER_PARAMS] <platform>`
+    is_required: true
+    title: Platform to use in ionic-cli commands
+    value_options:
+    - ios,android
+    - ios
+    - android
+  platform: ios,android
+- configuration: release
+  opts:
+    description: |-
+      Specify build command configuration.
+
+      `ionic cordova build [OTHER_PARAMS] [--release | --debug]`
+    is_required: true
+    title: Build command configuration
+    value_options:
+    - release
+    - debug
+- opts:
+    description: |-
+      Specify build command target.
+
+      `ionic cordova build [OTHER_PARAMS] [--device | --emulator]`
+    is_required: true
+    title: Build command target
+    value_options:
+    - device
+    - emulator
+  target: device
+- build_config: $BITRISE_CORDOVA_BUILD_CONFIGURATION
+  opts:
+    description: Path to the build configuration file (build.json), which describes
+      code signing properties.
+    title: Build configuration path, to describe code signing properties
+- options: null
+  opts:
+    description: |-
+      Use this input to specify custom options, to append to the end of the ionic-cli build command.
+
+      Cordova now supports the new build system made default in XCode 10 (https://github.com/apache/cordova-ios/issues/407).
+      To use the legacy build system add `-- --buildFlag="-UseModernBuildSystem=0"` to the options string.
+
+      Example:
+      - `--browserify`
+
+      `ionic cordova build [OTHER_PARAMS] [options]`
+    title: Options to append to the ionic-cli build command
+- ionic_username: null
+  opts:
+    description: Use `Ionic username` and `Ionic password` to login with ionic-cli.
+    is_sensitive: true
+    title: Ionic username
+- ionic_password: null
+  opts:
+    description: Use `Ionic username` and `Ionic password` to login with ionic-cli.
+    is_sensitive: true
+    title: Ionic password
+- ionic_version: null
+  opts:
+    description: |-
+      The version of ionic you want to use.
+
+      If value is set to `latest`, the step will update to the latest ionic version.
+      Leave this input empty to use the preinstalled ionic version.
+    title: Ionic version
+- opts:
+    description: |-
+      It should be set to false if ionic-prepare step is used.
+
+      - false: `ionic cordova build`
+      - true: `ionic cordova prepare --no-build` followed by `ionic cordova build`
+    title: Should `ionic cordova prepare` be executed before `ionic cordova build`?
+  run_ionic_prepare: "true"
+- cordova_version: null
+  opts:
+    description: |-
+      The version of cordova you want to use.
+
+      If value is set to `latest`, the step will update to the latest cordova version.
+      Leave this input empty to use the preinstalled cordova version.
+    title: Cordova version
+- opts:
+    description: Root directory of your Ionic project, where your Ionic config.xml
+      exists.
+    is_required: true
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- cache_local_deps: "false"
+  opts:
+    category: Cache
+    description: |
+      Select if the contents of node_modules directory should be cached.
+      `true`: Mark local dependencies to be cached.
+      `false`: Do not use cache.
+    is_required: true
+    title: Cache node_modules
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created ios .ipa file's path
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The created ios .app dir's path
+- BITRISE_APP_PATH: null
+  opts:
+    title: The created ios .app.zip file's path
+- BITRISE_DSYM_DIR_PATH: null
+  opts:
+    title: The created ios .dSYM dir's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created ios .dSYM.zip file's path
+- BITRISE_APK_PATH: ""
+  opts:
+    title: The created android .apk file's path
+- BITRISE_APK_PATH_LIST: ""
+  opts:
+    title: The created android .apk file paths (separated via |)
