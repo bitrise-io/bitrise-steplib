@@ -1,0 +1,91 @@
+title: Activate SSH key (RSA private key)
+summary: Setup the SSH Key to use with the current workflow
+description: "This Step makes sure Bitrise has access to your repository and thus
+  able to clone your code to our virtual machines. The Step saves the provided private
+  key of your SSH keypair to a file and then loads it into the user's ssh-agent with
+  `ssh-add`.\n\n### Configuring the Step\n\nBy default, you do not have to change
+  anything about the Step's configuration. All you need to do is make sure that you
+  registered your key pair on Bitrise and the public key at your Git provider. You
+  can generate and register an SSH keypair in two ways.\n\n- Automatically during
+  the [app creation process](https://devcenter.bitrise.io/getting-started/adding-a-new-app/#setting-up-ssh-keys).\n-
+  Manually during the app creation process or at any other time. You [generate your
+  own SSH keys](https://devcenter.bitrise.io/faq/how-to-generate-ssh-keypair/) and
+  register them on Bitrise and at your Git provider. The SSH key should not have a
+  passphrase! \n\nOptionally, you can save the private key on the virtual machine.
+  If a key already exists on the path you specified in the **(Optional) path to save
+  the private key** input, it will be overwritten.\n\n### Troubleshooting\n\nIf the
+  Step fails, check the public key registered to your Git repository and compare it
+  to the public key registered on Bitrise. The most frequent issue is that someone
+  deleted or revoked the key on your Git provider's website.\n\nYou can also set the
+  **Enable verbose logging** input to `true`. This provides additional information
+  in the log.\n\n### Useful links\n\n- [Setting up SSH keys](https://devcenter.bitrise.io/getting-started/adding-a-new-app/#setting-up-ssh-keys)\n-
+  [How can I generate an SSH key pair?](https://devcenter.bitrise.io/faq/how-to-generate-ssh-keypair/)\n\n###
+  Related Steps\n\n- [Git Clone Repository](https://www.bitrise.io/integrations/steps/git-clone)"
+website: https://github.com/bitrise-io/steps-activate-ssh-key
+source_code_url: https://github.com/bitrise-io/steps-activate-ssh-key
+support_url: https://github.com/bitrise-io/steps-activate-ssh-key/issues
+published_at: 2021-05-05T14:19:45.125786875Z
+source:
+  git: https://github.com/bitrise-steplib/steps-activate-ssh-key.git
+  commit: 17c9d33e3da625774824f1ab1942569b59fcd6dd
+host_os_tags:
+- osx-10.9
+type_tags:
+- access-control
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-activate-ssh-key
+deps:
+  apt_get:
+  - name: expect
+  - name: git
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    is_sensitive: true
+    title: SSH private key in RSA format
+  ssh_rsa_private_key: $SSH_RSA_PRIVATE_KEY
+- opts:
+    is_dont_change_value: true
+    is_expand: true
+    title: (Optional) path to save the private key.
+  ssh_key_save_path: $HOME/.ssh/bitrise_step_activate_ssh_key
+- is_remove_other_identities: "true"
+  opts:
+    description: |-
+      (Optional) Remove other or previously loaded keys and restart ssh-agent?
+
+      Options:
+
+      * "true"
+      * "false"
+    is_dont_change_value: true
+    is_expand: false
+    title: Remove other identities?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: Enable verbose log option for better debug
+    is_expand: true
+    is_required: true
+    summary: Enable verbose log option for better debug
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: false
+outputs:
+- SSH_AUTH_SOCK: null
+  opts:
+    description: |-
+      If the `is_should_start_new_agent` option is enabled, and no accessible
+      ssh-agent is found, the step will start a new ssh-agent.
+
+      This output environment variable will contain the path of the
+      SSH Auth Socket, which can be used to access the started ssh-agent.
+    title: SSH Auth Socket info, in case the ssh-agent was started by this step
