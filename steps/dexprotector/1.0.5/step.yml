@@ -1,0 +1,190 @@
+title: DexProtector
+summary: |
+  Protect your Android or iOS app with DexProtector.
+description: |-
+  Protect your Android or iOS app with DexProtector.
+  This Step allows you to integrate DexProtector into your Android or iOS app build as simply as possible using Bitrise.
+  Note: To use this Step, you need a valid DexProtector Enterprise license.
+
+  First, make sure that Bitrise has access to a repository containing all of the following:
+  - your project's source code
+  - DexProtector (dexprotector.jar)
+  - your customized DexProtector configuration file (dexprotector.xml)
+
+  You will also need the Base64 string of your DexProtector license file.
+  This string must be stored in the Secrets tab of the Bitrise Workflow Editor.
+  For this you need to:
+  1. Activate your license to create your `dexprotector.licel` file.
+  2. Generate the Base64 of this file. You can use the command `base64 [PATH TO YOUR LICENSE FILE]`.
+
+  Visit [licelus.com](https://licelus.com/products/dexprotector/docs) for more information on activating your license and customizing your configuration file.
+  For licensing or other queries, please contact us at primary@licelus.com.
+
+  Example of project structure:
+  ```
+  /
+  +-- dexprotector
+  |   +-- dexprotector.jar
+  |   +-- dexprotector.xml
+  [YOUR PROJECT FILES]
+  ```
+website: https://github.com/dexprotector/bitrise-step-dexprotector
+source_code_url: https://github.com/dexprotector/bitrise-step-dexprotector
+support_url: https://github.com/dexprotector/bitrise-step-dexprotector/issues
+published_at: 2021-05-07T00:02:47.121347+08:00
+source:
+  git: https://github.com/dexprotector/bitrise-step-dexprotector.git
+  commit: 9828ac5605286983cdf0ca1a75c0143e7fd211a8
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: java
+  apt_get:
+  - name: java
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- app_file: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: 'Path to the app file to be protected. For example: `$BITRISE_APK_PATH`
+      or `$BITRISE_AAB_PATH` for Android; `$BITRISE_IPA_PATH` for iOS.'
+    title: Path to the app file to be protected
+- jar_file: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Path to DexProtector JAR file. This must be in the same repository as
+      your project.
+    title: Path to DexProtector JAR file
+- config_file: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Path to DexProtector XML configuration file. This must be in the same
+      repository as your project.
+    title: Path to DexProtector XML configuration file
+- license_base64: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: DexProtector license file encoded to Base64. To generate the Base64 string
+      of the license file, you can use the bash command `base64 [PATH TO YOUR LICENSE
+      FILE]`.
+    title: DexProtector license file Base64
+- app_platform: auto
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Specify your app’s platform. If you select the `auto` option, the application’s
+      file extension will be used to determine the platform automatically.
+    title: Your app platform
+    value_options:
+    - auto
+    - Android
+    - iOS
+- opts:
+    category: Android specific options
+    is_expand: true
+    summary: 'APK signing mode. Note: `-` means that this option will not be passed
+      to DexProtector as a command line argument. Therefore, if you select `-`, the
+      signing mode must be specified separately in the configuration file.'
+    title: APK signing mode
+    value_options:
+    - '-'
+    - debug
+    - release
+    - google
+    - amazon
+    - none
+  sign_mode: '-'
+- certificate: null
+  opts:
+    category: Android specific options
+    is_expand: true
+    summary: Certificate location. Specifies the path to the signing certificate file.
+      This is necessary if you intend to re-sign the app after it has been DexProtected;
+      this option is therefore only for when the sign mode == `none`. This option
+      can also be specified via the configuration file.
+    title: Certificate location
+- opts:
+    category: Android specific options
+    is_expand: true
+    is_sensitive: true
+    summary: |
+      For `google` or `amazon` sign mode only.
+      Specifies the target certificate's SHA256 certificate fingerprint.
+      The value of this fingerprint can be found:
+      Amazon: Amazon Developer Console, then go to settings of your application: Application -> Binary Files -> Appstore Certificate Hashes -> SHA-256 -> Hexadecimal.
+      Google: Google Play Console, then go to settings of your application: App Signing -> App signing certificate -> SHA-256 certificate fingerprint
+    title: SHA256 certificate fingerprint of the target certificate
+  sha256_certificate_fingerprint: null
+- keystore: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    category: Android specific options
+    is_expand: true
+    summary: Path to keystore. For `release` sign mode only. Specifies the path to
+      the keystore containing the relevant signing key. This option can also be specified
+      in the configuration file.
+    title: Path to keystore
+- opts:
+    category: Android specific options
+    is_expand: true
+    is_sensitive: true
+    summary: Password for keystore integrity. For `release` sign mode only. Specifies
+      the password to the keystore containing the relevant signing key. This option
+      can also be specified in the configuration file.
+    title: Password for keystore integrity
+  storepass: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+- keyalias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    category: Android specific options
+    is_expand: true
+    summary: Key alias. For `release` sign mode only. Specifies the alias string for
+      the relevant signing key in your keystore. This option can also be specified
+      in the configuration file.
+    title: Key alias
+- keypass: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+  opts:
+    category: Android specific options
+    is_expand: true
+    is_sensitive: true
+    summary: Password for the private key (if different). For `release` sign mode
+      only. Specifies the password for the signing key. This option can also be specified
+      in the configuration file.
+    title: Password for the private key (if different)
+- opts:
+    category: Android specific options
+    is_expand: true
+    summary: ProGuard mapping file path. Specifies the path to ProGuard's ‘mappings.txt’
+      file. If you use ProGuard for name obfuscation, it is necessary to provide the
+      path to ProGuard's map file so that DexProtector can locate classes for encryption.
+      This option can also be specified in the configuration file.
+    title: ProGuard mapping file path
+  proguard_map_file: $BITRISE_MAPPING_PATH
+- opts:
+    category: Debug
+    title: Print the verbose protection build log to stdout. This option can also
+      be specified in the configuration file.
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+outputs:
+- DEXPROTECTOR_PROTECTED_APP_FILE: null
+  opts:
+    title: Path to the protected app file
+- DEXPROTECTOR_LOG_FILE: null
+  opts:
+    summary: Protection build log in .txt file format.
+    title: Path to the protection build log file
