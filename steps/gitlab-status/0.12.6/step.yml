@@ -1,0 +1,134 @@
+title: GitLab Status
+summary: Update commit status for GitLab repositories.
+description: "This Step updates the commit status for a GitLab repository (repo) of
+  your choice with this build's status. Useful anytime you can not or do not want
+  to provide Bitrise write access to your git repo.\n\n### Configuring the Step\n\n1.
+  The **GitLab API base URL** should be `https://gitlab.com/api/v4/` for cloud-hosted
+  GitLabs. \n2. In the **GitLab private token** Step input, you need to provide an
+  access token you generated in your User Settings on GitLab.\n3. The **Repository
+  URL** input is populated automatically with a variable the value of which is taken
+  from the repository field of the Settings of your app.\n4. You can also select a
+  specific branch or tag to post the status to, but it's going to be sent to the default
+  branch unless you change it.\n5. The **Commit hash** input is filled in by default
+  with the variable inherited from the **Git Clone** Step.\n6. The **Target URL**
+  Step input is the URL of the build, which is forwarded to GitHub as the source of
+  the status.\n7. The **Context** Step input, allows you to label the status with
+  a name.\n8. The input **Set Specific Status** input has a default value of `auto`
+  which reflects the status of the build, but this input allows you to update the
+  commit with any given status, regardless of the outcome of the build.\n9. The **Description**
+  input allows you to provide a short description for the status. \n10. Code **Coverage**
+  percent can also be sent from the build to the commit. \n\n\n### Troubleshooting\n\nIf
+  you get a 404 response when running the Step, check your token's scope and validity.\nIf
+  you use GitLab Enterprise, make sure your API base URL is set to `https://gitlab.local.domain/api/v4`.\nIf
+  you do not see your status being reflected, double-check **Repository URL** and
+  **Commit hash** input values. \n\n### Useful links\n\n- [GitLab access tokens](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)\n\n###
+  Related Steps\n\n- [Git-Clone](https://www.bitrise.io/integrations/steps/git-clone)\n-
+  [Build Status Change](https://www.bitrise.io/integrations/steps/build-status-change)"
+website: https://github.com/bitrise-steplib/steps-gitlab-status
+source_code_url: https://github.com/bitrise-steplib/steps-gitlab-status
+support_url: https://github.com/bitrise-steplib/steps-gitlab-status/issues
+published_at: 2021-05-07T10:02:40.082951237Z
+source:
+  git: https://github.com/bitrise-steplib/steps-gitlab-status.git
+  commit: 1ec1596ba44ded3094f92645b52c364a231dc331
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-gitlab-status
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- api_base_url: ""
+  opts:
+    description: |-
+      API URL for GitLab or GitLab Enterprise
+
+      Example: "https://gitlab.example.com/api/v4"
+    is_required: true
+    summary: ""
+    title: GitLab API base url
+- opts:
+    description: |-
+      Authorization token for GitLab applications
+
+      Generating a personal access token:
+      1. Log in to your GitLab instance.
+      2. Go to User Settings > Access Tokens.
+      3. Pick a _name_ and set a _scope_ for the token.
+      4. Click on **Create personal access token** and save your new token.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: GitLab private token
+  private_token: ""
+- opts:
+    description: The URL for the repository we are working with
+    is_required: true
+    summary: ""
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- git_ref: $BITRISE_GIT_BRANCH
+  opts:
+    description: |-
+      The name of a repository branch or tag for which the status needs to be reported
+
+      In case of a same commit hash on multiple branches, _ref_  will be used so the pipeline status is updated on the correct branch.
+    is_required: true
+    summary: ""
+    title: The name of a repository branch or tag or, if not given, the default branch
+- commit_hash: $BITRISE_GIT_COMMIT
+  opts:
+    description: The commit hash for the commit we are working with
+    is_required: true
+    summary: ""
+    title: Commit hash
+- opts:
+    description: |-
+      The target URL to associate with this status.
+      This URL will be linked from the GitLab UI to allow users to easily see the source of the status.
+    summary: ""
+    title: Target URL
+  target_url: $BITRISE_BUILD_URL
+- context: Bitrise
+  opts:
+    description: |-
+      A string label to differentiate this status from the status of other systems.
+
+      If left empty, it will be `default`.
+    summary: The Identifier to be used for this status
+    title: Context
+- opts:
+    description: "If set, this Step will set a specific status instead of reporting
+      the current build status.\n\nCan be one of `auto`, `pending`, `running`, `success`,
+      `failed` or `canceled`.\nIf you select `auto`, the Step will send `success`
+      status if the current build status is `success` \n(no Step failed previously)
+      and `failed` status if the build previously failed."
+    summary: ""
+    title: Set Specific Status
+    value_options:
+    - auto
+    - pending
+    - running
+    - success
+    - failed
+    - canceled
+  preset_status: auto
+- description: null
+  opts:
+    description: |-
+      The short description of the status.
+
+      If left empty, it will be the status of the build.
+    summary: A short description of the status.
+    title: Description
+- coverage: null
+  opts:
+    description: |-
+      The test coverage.
+
+      Must be a floating point number between 0.0 and 100.0.
+    is_required: false
+    summary: Test coverage
+    title: Coverage
