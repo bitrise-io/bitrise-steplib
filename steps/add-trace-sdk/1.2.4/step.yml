@@ -21,7 +21,7 @@ description: "Adds the Trace SDK static library during the Xcode build process i
 website: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk
 support_url: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk/issues
-published_at: 2021-05-12T10:05:00.374908+01:00
+published_at: 2021-05-12T10:07:10.552605+01:00
 source:
   git: https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk.git
   commit: f9da3d25560d7f393dbc1d8c662787e463e86d71
