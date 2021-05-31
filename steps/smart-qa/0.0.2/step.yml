@@ -6,10 +6,10 @@ description: |
 website: https://github.com/Levetty/bitrise-step-smartqa
 source_code_url: https://github.com/Levetty/bitrise-step-smartqa
 support_url: https://github.com/Levetty/bitrise-step-smartqa/issues
-published_at: 2021-05-29T20:27:21.675195+09:00
+published_at: 2021-05-31T14:33:41.32784+09:00
 source:
   git: https://github.com/Levetty/bitrise-step-smartqa.git
-  commit: 43f5c9bfbaba2f19e437578b7d5d14371a6668b5
+  commit: 8696f17256863d09120dcf63c697348870b4a645
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
