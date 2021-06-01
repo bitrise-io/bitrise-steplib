@@ -1,0 +1,104 @@
+title: S3 Cache Pull
+summary: |
+  Download your cache from a S3 bucket using custom keys with fallback.
+website: https://github.com/alephao/bitrise-step-s3-cache-pull
+source_code_url: https://github.com/alephao/bitrise-step-s3-cache-pull
+support_url: https://github.com/alephao/bitrise-step-s3-cache-pull/issues
+published_at: 2021-06-01T13:22:50.350941-03:00
+source:
+  git: https://github.com/alephao/bitrise-step-s3-cache-pull.git
+  commit: 98a2b4001302f3d1e9309f57cdb788fb3b3d19b4
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/alephao/bitrise-step-s3-cache-pull
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- aws_access_key_id: $AWS_ACCESS_KEY_ID
+  opts:
+    category: AWS Access
+    is_expand: true
+    is_required: false
+    title: AWS_ACCESS_KEY_ID
+- aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+  opts:
+    category: AWS Access
+    is_expand: true
+    is_required: false
+    title: AWS_SECRET_ACCESS_KEY
+- aws_region: $AWS_S3_REGION
+  opts:
+    category: AWS Bucket
+    is_expand: true
+    is_required: true
+    summary: 'The region on AWS. E.g.: us-east-1'
+    title: AWS Region
+    value_options:
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    - ca-central-1
+    - eu-north-1
+    - eu-west-3
+    - eu-west-2
+    - eu-west-1
+    - eu-central-1
+    - eu-south-1
+    - ap-south-1
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-northeast-3
+    - ap-southeast-1
+    - ap-southeast-2
+    - ap-east-1
+    - sa-east-1
+    - cn-north-1
+    - cn-northwest-1
+    - us-gov-east-1
+    - us-gov-west-1
+    - us-gov-secret-1
+    - us-gov-topsecret-1
+    - me-south-1
+    - af-south-1
+- bucket_name: $S3_BUCKET_NAME
+  opts:
+    category: AWS Bucket
+    is_expand: true
+    is_required: true
+    summary: The bucket name where you cache is stored
+    title: Bucket Name
+- opts:
+    category: Cache
+    description: "You can use '{{ checksum path/to/file }}' to get the file's sha256
+      checksum.      \nYou can use '{{ branch }}' to get the name of the current branch.\nE.g.:\nrestore_keys:
+      |\n  carthage-{{ branch }}-{{ checksum \"Cartfile.resolved\" }}\n  carthage-\n"
+    is_expand: false
+    is_required: true
+    summary: List of keys with fallbacks to restore the cache, one per line
+    title: Cache restore keys
+  restore_keys: null
+- opts:
+    category: Cache
+    description: |
+      path: ./
+    is_expand: false
+    is_required: true
+    summary: Path to extract the file or directory cached. Relative to the root of
+      the git repo.
+    title: Cache path
+  path: null
