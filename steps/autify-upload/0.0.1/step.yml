@@ -9,15 +9,14 @@ description: |-
 website: https://github.com/autifyhq/bitrise-steps-autify-upload
 source_code_url: https://github.com/autifyhq/bitrise-steps-autify-upload
 support_url: https://github.com/autifyhq/bitrise-steps-autify-upload/issues
-published_at: 2021-06-02T05:10:23.914108+09:00
+published_at: 2021-06-02T19:27:14.276215+09:00
 source:
   git: https://github.com/autifyhq/bitrise-step-autify-upload.git
-  commit: 5d9bc7aba74c96d11c5cd4098b82e1537350f5c9
+  commit: 4e2d9cdd6a278cbb08aaf9b8276438ed6b6e9396
 host_os_tags:
 - osx-10.10
 project_type_tags:
 - ios
-- android
 - xamarin
 - react-native
 - cordova
