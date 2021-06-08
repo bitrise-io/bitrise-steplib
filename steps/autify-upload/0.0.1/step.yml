@@ -6,13 +6,13 @@ description: |-
   Uploads you build `.app` to [Autify](https://autify.com/mobile) using Autify's API. You can upload the iOS build with the Step.
 
   This Step, however, does NOT generate your build: to create a `.app` file, you need the right step. For example, `Xcode build for simulator` Step or any other Step can generate a build. Add task URL
-website: https://github.com/autifyhq/bitrise-steps-autify-upload
-source_code_url: https://github.com/autifyhq/bitrise-steps-autify-upload
-support_url: https://github.com/autifyhq/bitrise-steps-autify-upload/issues
-published_at: 2021-06-02T19:27:14.276215+09:00
+website: https://github.com/autifyhq/bitrise-step-autify-upload
+source_code_url: https://github.com/autifyhq/bitrise-step-autify-upload
+support_url: https://github.com/autifyhq/bitrise-step-autify-upload/issues
+published_at: 2021-06-09T05:12:39.441439+09:00
 source:
   git: https://github.com/autifyhq/bitrise-step-autify-upload.git
-  commit: 4e2d9cdd6a278cbb08aaf9b8276438ed6b6e9396
+  commit: 15809911647ee0fad8527ee92810755b76faec14
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -27,7 +27,6 @@ type_tags:
 toolkit:
   bash:
     entry_file: step.sh
-is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 run_if: ""
