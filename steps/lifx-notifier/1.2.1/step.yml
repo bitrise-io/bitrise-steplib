@@ -1,0 +1,105 @@
+title: LIFX Notifier
+summary: Sends signals to your LIFX bulb during builds.
+description: |-
+  Add this step to your workflow when color change is required.
+
+  This step can be used at the start (notify build start) and at the end (notify success/failure) of your workflow.
+  If there's no need to notify about workflow start than adding step to the end of the workflow will be enough.
+website: https://github.com/ShotSkydiver/steps-lifx-notifier
+source_code_url: https://github.com/ShotSkydiver/steps-lifx-notifier
+support_url: https://github.com/ShotSkydiver/steps-lifx-notifier/issues
+published_at: 2021-05-21T16:03:58.500425-06:00
+source:
+  git: https://github.com/ShotSkydiver/steps-lifx-notifier.git
+  commit: 472646e717257221e3eba2bad03f7f6d5af0a00f
+host_os_tags:
+- osx-10.8
+- osx-10.10
+- ubuntu
+type_tags:
+- utility
+- notification
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+run_if: ""
+inputs:
+- auth_token: null
+  opts:
+    description: |
+      This step uses official LIFX API,
+      which requires OAuth2 Access token (https://api.developer.lifx.com/docs/authentication).
+    is_required: true
+    title: Authentication token
+- opts:
+    description: |
+      By default, all lights associated with your LIFX account will be triggered. You can change this to specify a group name, or a single light name instead.
+    title: Selector type
+    value_options:
+    - all
+    - label
+    - group
+    - location
+  selector_type: all
+- bulb_label: null
+  opts:
+    description: |
+      This is the name of the LIFX light, group (eg. "Bedroom", "Office"), or location (eg. "Home"). This value will be ignored if "all" is chosen as the selector type above.
+    is_required: false
+    title: LIFX light(s) selector label
+- color_build_success: green
+  opts:
+    description: |
+      Choose the color you want the lights to change to upon a successful build.
+    title: Build success color (LIFX default)
+    value_options:
+    - blue
+    - cyan
+    - green
+    - orange
+    - pink
+    - purple
+    - red
+    - yellow
+    - white
+- color_build_success_custom: null
+  opts:
+    description: |
+      If a custom color is provided, it will be used instead of LIFX default.
+      Format RRGGBB, e.g: 00ff00 (green).
+    title: Build success color (custom)
+- color_build_failure: red
+  opts:
+    description: |
+      Choose the color you want the lights to change to upon a failed build.
+    title: Build failure color (LIFX default)
+    value_options:
+    - blue
+    - cyan
+    - green
+    - orange
+    - pink
+    - purple
+    - red
+    - yellow
+    - white
+- color_build_failure_custom: null
+  opts:
+    description: |
+      If a custom color is provided, it will be used instead of LIFX default.
+      Format RRGGBB, e.g: ff0000 (red).
+    title: Build failure color (custom)
+- effect: none
+  opts:
+    description: |
+      Instead of setting a solid color, do you want to e.g. pulse the light?
+    title: Effect
+    value_options:
+    - none
+    - pulse
+    - breathe
+- cycles: null
+  opts:
+    description: |
+      If an effect is chosen, this option will set the number of times the effect is repeated.
+    title: Number of Effect Cycles
