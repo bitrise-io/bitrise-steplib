@@ -1,0 +1,106 @@
+title: Android Build for UI Testing
+summary: Builds your Android project with Gradle with the belonging AndroidTest variant.
+description: "[This Step](https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing)
+  generates all the APKs you need to run instrumentation tests for your Android app:
+  both an APK from your app and the belonging test APK, for example,  `:app:assembleDemoDebug`,
+  `:app:assembleDemoDebugAndroidTest`\n \n ### Configuring the Step\n 1. Add the **Project
+  Location** which is the root directory of your Android project.\n 2. Set the **Module**
+  you want to build. To see your available modules, open your project in Android Studio
+  and go to **Project Structure** and see the list on the left.\n 3. Set the **Variant**
+  you want to build. To see your available variants, open your project in Android
+  Studio and go to **Project Structure** and then the **variants** section.\n Under
+  **Options**:\n 4. Set the **APK location pattern**: Once the build has run, the
+  Step finds the APK files with the given pattern.\n 5. **Set the level of cache**
+  where `all` caches build cache and dependencies, `only_deps` caches dependencies
+  only, `none` does not cache anything.\n 6. If you wish to pass any extra Gradle
+  arguments to the gradle task, you can add those in the **Additional Gradle Arguments**
+  input.\n\n ### Useful links\n- [Testing with Bitrise](https://devcenter.bitrise.io/testing/testing-index/)\n-
+  [Deploying an Android app with Bitrise](https://devcenter.bitrise.io/deploy/android-deploy/android-deployment-index/)\n\n###
+  Related Steps\n- [Android Build](https://www.bitrise.io/integrations/steps/android-build)\n-
+  [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)"
+website: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing/issues
+published_at: 2021-06-24T15:41:07.662994538Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing.git
+  commit: c85ab833f88b39cfa27abd5b84dafc6b879cbaef
+project_type_tags:
+- android
+- react-native
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exist (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exist (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to build. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: true
+    summary: |
+      Set the module that you want to build. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    is_required: true
+    summary: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- apk_path_pattern: '*/build/outputs/apk/*.apk'
+  opts:
+    category: Options
+    description: Will find the APK files with the given pattern.
+    is_required: true
+    summary: Will find the APK files with the given pattern.
+    title: APK location pattern
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK
+      after filtering based on the filter inputs.
+    summary: Path of the generated (and copied) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_TEST_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated test APK
+      after filtering based on the filter inputs.
+    summary: Path of the generated (and copied) test APK - after filtering.
+    title: Path of the generated test APK
