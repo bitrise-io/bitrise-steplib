@@ -23,7 +23,8 @@ is_always_run: false
 is_skippable: false
 run_if: ""
 inputs:
-- opts:
+- upload_path:
+  opts:
     description: |
       The app file you want to upload to Pcloudy, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
     is_expand: true
