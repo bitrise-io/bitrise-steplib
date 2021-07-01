@@ -1,0 +1,77 @@
+title: GitHub Script Runner
+summary: Downloads and Runs a bash script stored on a private GitHub repo.
+description: |
+  Downloads and Runs a bash script stored on a private GitHub repo.
+
+  ### Configuring the Step
+
+  Before using the step, you need to push your bash script into a private GitHub repository and set up a GitHub personal access token with read permission on the same repository.
+
+  1. The "file raw path" param expects the full path of the script file
+  "https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{file}"
+
+  2. The "run script" param indicates that the script should be run after the download
+  "yes" to run the bash script and "no" to just download the raw file
+
+  3. The "github access token" param must be a Bitrise Secret config
+
+  ### Troubleshooting
+
+  If the Step fails, check if the given GitHub Personal Access Token has read permission on the script's repository.
+
+  ### Useful links
+
+  https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+website: https://github.com/AndersonLasak/bitrise-step-github-script-runner
+source_code_url: https://github.com/AndersonLasak/bitrise-step-github-script-runner
+support_url: https://github.com/AndersonLasak/bitrise-step-github-script-runner/issues
+published_at: 2021-06-25T18:56:15.109701-03:00
+source:
+  git: https://github.com/AndersonLasak/bitrise-step-github-script-runner.git
+  commit: a0f3739d2390b52a1e7aefdcad4f1a1db8489ce8
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      The path should contain the owner, repository, branch and filename with its extension, like follow:\n\n
+      "https://raw.githubusercontent.com/{owner}/{repo}/{branch}/{file}"
+    is_expand: true
+    is_required: true
+    title: The file raw path
+    value_options: []
+  raw_file_path: null
+- opts:
+    description: |
+      Indicates if the downloaded file is a bash script that should be run, use "yes" to run the bash script and "no" to just download the raw file.
+    is_expand: true
+    is_required: true
+    title: Field that says if the script should be run
+    value_options:
+    - "no"
+    - "yes"
+  run_script: "yes"
+- github_access_token: null
+  opts:
+    description: |
+      A personal access token is required to download the raw file via GitHub v3 API.\n\n
+      For more information visit the official page:\n
+      https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: The personal access token from your GitHub account
+    value_options: []
