@@ -1,0 +1,43 @@
+title: Mussel
+summary: |
+  A framework for easily testing Push Notifications, Universal Links and Routing in XCUITests.
+description: |
+  As of Xcode 14.4, users are able to test Push Notifications via the simulator. Unfortunately, Apple has yet to introduce the ability to leverage this new method within the XCUITest Framework.
+
+  Testing Universal Links can also be an adventure, potentially accumulating lots of extra unwanted time in UI Tests, especially if your team wants to speed up your app's regression progress. Conventional methods resorted to using iMessage or Contacts to open Universal Links which routed to a specific feature within an application.
+
+  Mussel introduces a quick and simple way to test Push Notifications and Universal Links which route to any specific features within your iOS app.
+
+  How It Works:
+
+  1. An Engineer triggers XCUITests in XCode manually or through your Continuous Integration platform of choice.
+
+  2. Mussel Server boots up along with the iOS Simulator.
+
+  3. A Test Case triggers a Push Notification or Universal Link Test Case
+
+  4. The Test Case sends a payload containing Push Notification or Universal Link data via POST Request.
+
+  5. Server runs respective xcrun simctl command for Push Notifications or Universal Links.
+
+  6. The command presents a Push Notification or launches a Universal Link within the iOS Simulator.
+website: https://github.com/UrbanCompass/bitrise-step-mussel
+source_code_url: https://github.com/UrbanCompass/bitrise-step-mussel
+support_url: https://github.com/UrbanCompass/bitrise-step-mussel/issues
+published_at: 2021-07-14T18:05:18.980793-04:00
+source:
+  git: https://github.com/UrbanCompass/bitrise-step-mussel.git
+  commit: 0c0f0e2ee5e457adc80880e8da0567a4f953e0a7
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- test
+deps:
+  brew:
+  - name: git
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
