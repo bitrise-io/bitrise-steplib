@@ -1,5 +1,5 @@
 format_version: 4
-default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+default_step_lib_source: https://github.com/renatogamboa/bitrise-steplib.git
 
 app:
   envs:
