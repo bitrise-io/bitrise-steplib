@@ -1,0 +1,69 @@
+title: Authenticate with GitHub OAuth
+summary: Adds your GitHub OAuth config to the `.netrc` file.
+description: |-
+  [This Step](https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth) writes GitHub OAuth configs to the `.netrc` file, so every single network call pointing to [github.com](https://github.com/) or [api.github.com](https://api.github.com/) hosts will be accessed with the given Personal Access Token and the GitHub username.
+  Please note that this Step must come before any other git Step in your Workflow, therefore, it can be, for example, the first Step in your Workflow.
+
+  ### Configuring the Step
+
+  1. Add your **GitHub username** in the respective input field.
+  2. Add your GitHub **Personal Access Token** in the respective input field.
+  To get your GitHub Personal Access Token, follow these steps:
+  1. Login to your GitHub account.
+  2. In the upper-right corner of any page, click your profile photo, then click **Settings**.
+  3. In the left sidebar, click **Personal access tokens**.
+  4. Click **Generate new token**.
+  5. Give your token a descriptive name.
+  6. Select the scopes, or permissions you’d like to grant this token with.
+  7. Click **Generate token**.
+
+  ### Useful links
+  - [Connecting your GitHub/GitLab/Bitbucket account to Bitrise](https://devcenter.bitrise.io/getting-started/connecting-to-services/connecting-account-bitrise/)
+
+  ### Related Steps
+  - [Bitrise.io Cache:Pull](https://www.bitrise.io/integrations/steps/cache-pull)
+  - [Git Clone Repository](https://www.bitrise.io/integrations/steps/git-clone)
+website: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth
+source_code_url: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth
+support_url: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth/issues
+published_at: 2021-07-19T14:56:24.775170507Z
+source:
+  git: https://github.com/bitrise-steplib/steps-authenticate-with-github-oauth.git
+  commit: 525a1e8c52506289af02e80b37e13b020959b0fb
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-authenticate-with-github-oauth
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The username used for GitHub to login.
+    title: GitHub username
+  username: null
+- access_token: null
+  opts:
+    description: |-
+      To get your GitHub Personal Access Token, follow the instructions below:
+      1. Login to yout GitHub account.
+      2. In the upper-right corner of any page, click your profile photo, then click **Settings**.
+      3. In the left sidebar, click **Personal access tokens**.
+      4. Click **Generate new token**.
+      5. Give your token a descriptive name.
+      6. Select the scopes or permissions, you'd like to grant this token.
+      7. Click **Generate token**.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Personal Access Token
