@@ -1,0 +1,69 @@
+title: JIRA tickets listing
+summary: |
+  List all JIRA tickets by comparing two branches.
+description: |
+  List all JIRA tickets by comparing two branches. It will output either a list of ticket IDs or links if you add the URL path.
+website: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
+source_code_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
+support_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
+published_at: 2021-07-29T12:52:41.698999-04:00
+source:
+  git: https://amarliac@bitbucket.org/silofit/bitrise-jira-tickets.git
+  commit: e8c4581b452ac2912bc34588549a2040fb3d6035
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      This is the branch you will be listing the JIRA tickets from.
+    is_expand: true
+    is_required: true
+    summary: null
+    title: Selected Git branch
+  selected_branch: null
+- opts:
+    description: |
+      This is the branch you will be comparing your selected branch with to list the JIRA tickets.
+    is_expand: true
+    is_required: true
+    summary: null
+    title: Reference Git branch
+  reference_branch: null
+- opts:
+    description: |
+      Adding the URL path of your JIRA workspace will output the ticket links instead of just a list of IDs.
+    is_expand: true
+    is_required: false
+    summary: null
+    title: JIRA ticket's URL path
+  url_path: null
+- opts:
+    description: |
+      JIRA ticket's Prefix
+    is_expand: true
+    is_required: true
+    summary: null
+    title: JIRA ticket's Prefix
+  prefix: null
+outputs:
+- JIRA_TICKET_IDS: null
+  opts:
+    description: |
+      List of JIRA ticket IDs found on the selected branch.
+    summary: null
+    title: JIRA ticket IDs
