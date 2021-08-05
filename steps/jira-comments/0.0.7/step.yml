@@ -11,7 +11,7 @@ description: |
 website: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment
 source_code_url: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment
 support_url: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment/issues
-published_at: 2021-08-04T14:36:15.700494+02:00
+published_at: 2021-08-05T17:17:28.329002+02:00
 source:
   git: https://github.com/DroidsOnRoids/bitrise_step_build_info_jira_comment.git
   commit: 024cf135b1e9db111ef90e79a8be573e8283c186
