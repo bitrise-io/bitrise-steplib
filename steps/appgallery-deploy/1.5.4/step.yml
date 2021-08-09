@@ -7,7 +7,7 @@ description: |-
 website: https://github.com/ferPrieto/steps-app-gallery-deploy
 source_code_url: https://github.com/ferPrieto/steps-app-gallery-deploy
 support_url: https://github.com/ferPrieto/steps-app-gallery-deploy/issues
-published_at: 2021-08-07T13:50:16.273005+01:00
+published_at: 2021-08-09T15:33:16.946852+01:00
 source:
   git: https://github.com/ferPrieto/steps-app-gallery-deploy.git
   commit: ef7f72862c80b8028c3e8ff50c5365b44cc3b232
