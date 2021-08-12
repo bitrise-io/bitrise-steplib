@@ -1,0 +1,167 @@
+title: Google Play Deploy
+summary: Uploads your Android app to Google Play.
+description: "\nThe Step uploads your Android app to Google Play. It works with both
+  APK and AAB files.\n\nPlease note that in order to successfully use this Step, you
+  must [upload your first APK or AAB file manually](https://support.google.com/googleplay/android-developer/answer/9859152?hl=en&visit_id=637407764704794872-3953166533&rd=1),
+  using Google's own web interface! \nOnce you uploaded one APK or AAB of your app
+  to Google Play manually, you can use our Step for all subsequent versions. \n\n###
+  Configuring the Step\n\nThe Step uses Google's API so before attempting to use the
+  Step, you need to [Set up Google API access](https://devcenter.bitrise.io/deploy/android-deploy/deploying-android-apps/#setting-up-google-play-api-access).
+  This includes:\n- [Linking your Google Developer Console to an API project](https://developers.google.com/android-publisher/getting_started#linking_your_api_project).\n-
+  [Setting up API access using a service account](https://developers.google.com/android-publisher/getting_started#using_a_service_account).\n-
+  Granting the necessary access rights to the service account. \n- Upload the service
+  account JSON key to Bitrise and store it in a [Secret Env Var](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/).
+  \n\nDue to the way the Google Play Publisher API works, you have to grant at least
+  the following permissions to that service account:\n- Edit store listing, pricing
+  & distribution\n- Manage Production APKs\n- Manage Alpha & Beta APKs\n- Manage Alpha
+  & Beta users\n\nRead the full process in our [Deploying Android apps guide](https://devcenter.bitrise.io/deploy/android-deploy/deploying-android-apps/).\n\nTo
+  deploy your app with the Step:\n\n1. In the **Service Account JSON key file path**,
+  add the Secret that stores your service account JSON key. \n1. In the **App file
+  path** input, set the path to your APK and/or AAB files. You can add multiple paths
+  here, separated with a newline. \n   In most cases, the default values work well
+  unless you changed the output variable of the Step that build your APK or AAB.\n1.
+  In the **Package name**  input, set the package name of your app.  \n1. In the **Track**
+  input, add the track to which you want to assign the app. This can be any of the
+  built-in tracks or a custom track of your own.\n\n### Troubleshooting \n\nIf the
+  Step fails, check the following:\n- If it's an authentication error, check that
+  your Secret points to the correct file (and that a file is uploaded at all). \n-
+  Make sure your service account has the necessary access rights.\n- Check that there's
+  no typo in the package name and that you selected an existing track for the app.
+  \n\n### Useful links \n\n- [Google Play Developer API - Getting Started](https://developers.google.com/android-publisher/getting_started)\n-
+  [Deploying Android apps](https://devcenter.bitrise.io/deploy/android-deploy/deploying-android-apps/)\n\n###
+  Related Steps \n\n- [TestFairy Deploy Android](https://www.bitrise.io/integrations/steps/testfairy-deploy-android)\n-
+  [AppCenter Android Deploy](https://www.bitrise.io/integrations/steps/appcenter-deploy-android)\n-
+  [Appetize.io Deploy](https://www.bitrise.io/integrations/steps/appetize-deploy)\n-
+  [Android Sign](https://www.bitrise.io/integrations/steps/sign-apk)"
+website: https://github.com/bitrise-io/steps-google-play-deploy
+source_code_url: https://github.com/bitrise-io/steps-google-play-deploy
+support_url: https://github.com/bitrise-io/steps-google-play-deploy/issues
+published_at: 2021-08-11T15:42:44.574273684Z
+source:
+  git: https://github.com/bitrise-steplib/steps-google-play-deploy.git
+  commit: 342d263c23eae93cc6e01b0a2dd6b7e069930207
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-google-play-deploy
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: Path to the service account's JSON key file. It must be a Secret
+      Environment Variable, pointing to either a file uploaded to Bitrise or to a
+      remote download location.
+    is_required: true
+    is_sensitive: true
+    title: Service Account JSON key file path
+  service_account_json_key_path: null
+- opts:
+    description: Package name of the app.
+    is_required: true
+    title: Package name
+  package_name: null
+- app_path: $BITRISE_APK_PATH\n$BITRISE_AAB_PATH
+  opts:
+    description: |-
+      Path to the app bundle file(s) or APK file(s) to deploy.
+      In the case of [multiple artifacts](https://developer.android.com/google/play/publishing/multiple-apks.html) deploy, you can specify multiple APKs and AABs as a newline `\n` or pipe `|` separated list.
+    is_required: true
+    title: App file path
+- expansionfile_path: ""
+  opts:
+    description: |-
+      Path to the expansion file.
+      Leave empty or provide exactly the same number of paths as in app_path, separated by `|` character and start each path with the expansion file's type
+      separated by a `:`. (main, patch)
+      Format examples:
+      - `main:/path/to/my/app.obb`
+      - `patch:/path/to/my/app1.obb|main:/path/to/my/app2.obb|main:/path/to/my/app3.obb`
+    title: Expansion file Path
+- opts:
+    description: |-
+      The track to which you want to assign the uploaded app.
+
+      Can be one of the built-in tracks: internal, alpha, beta, production.
+
+      Or you can set your custom track name as well.
+
+      For example: `pre-release`, or any of your closed tracks you added in Google Play Developer Console.
+    is_required: true
+    summary: The track in which you want to assign the uploaded app.
+    title: Track
+  track: alpha
+- opts:
+    description: |-
+      Portion of the users who should get the staged version of the app. Accepts values between 0.0 and 1.0 (exclusive-exclusive).
+      Only applies if `Status` is `inProgress` or `halted`.
+
+      To release to all users, this input should not be defined (or should be blank).
+    is_required: false
+    title: User Fraction
+  user_fraction: null
+- opts:
+    description: |-
+      The status of a release.
+      For more information see here: https://developers.google.com/android-publisher/api-ref/rest/v3/edits.tracks#Status
+    is_required: false
+    title: Status
+  status: null
+- opts:
+    description: The name of the release. By default Play Store generates the name
+      from the APK's versionName.
+    is_required: false
+    title: Name of the release
+  release_name: null
+- opts:
+    description: |-
+      This allows your app to decide how strongly to recommend an update to the user.
+      Accepts values between 0 and 5 with 0 being the lowest priority and 5 being the highest priority.
+      By default this value is 0.
+      For more information see here: https://developer.android.com/guide/playcore/in-app-updates#check-priority.
+    is_required: false
+    title: Update Priority
+  update_priority: 0
+- opts:
+    description: |-
+      Use this input to specify localized 'what's new' files directory.
+      This directory should contain 'whatsnew' files postfixed with the locale.
+      what's new file name pattern: `whatsnew-LOCALE`
+      Example:
+
+      ```
+      + - [PATH/TO/WHATSNEW]
+          |
+          + - whatsnew-en-US
+          |
+          + - whatsnew-de-DE
+      ```
+      Format examples:
+      - "./"         # what's new files are in the repo root directory
+      - "./whatsnew" # what's new files are in the whatsnew directory
+    title: Directory of localized what's new files
+  whatsnews_dir: null
+- mapping_file: $BITRISE_MAPPING_PATH
+  opts:
+    description: The `mapping.txt` file provides a translation between the original
+      and obfuscated class, method, and field names.
+    title: Location of your mapping.txt file
+- opts:
+    description: |-
+      If set to `true` and the initial change request fails, the changes will not be reviewed until they are manually sent
+      for review from the Google Play Console UI. If set to `false`, the step fails if the changes can't be automatically
+      sent to review.
+    is_required: true
+    title: Retry changes without sending to review
+    value_options:
+    - "true"
+    - "false"
+  retry_without_sending_to_review: "false"
