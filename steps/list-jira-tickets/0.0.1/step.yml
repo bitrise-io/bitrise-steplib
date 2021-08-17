@@ -1,15 +1,15 @@
 title: JIRA tickets listing
 summary: |
-  List all JIRA tickets by comparing two branches.
+  Lists all JIRA tickets by comparing two branches.
 description: |
-  List all JIRA tickets by comparing two branches. It will output either a list of ticket IDs or links if you add the URL path.
+  Lists all JIRA tickets by comparing two branches. It uses the JIRA ticket prefix to parse the commit messages. It will output either a list of ticket IDs or links if you add the URL path.
 website: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
 source_code_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
 support_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
-published_at: 2021-07-29T12:52:41.698999-04:00
+published_at: 2021-08-17T15:06:23.132933-04:00
 source:
   git: https://amarliac@bitbucket.org/silofit/bitrise-jira-tickets.git
-  commit: e8c4581b452ac2912bc34588549a2040fb3d6035
+  commit: 71564b541d2d52a93e87b06bfe075abd219fdf84
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -54,11 +54,11 @@ inputs:
   url_path: null
 - opts:
     description: |
-      JIRA ticket's Prefix
+      JIRA ticket's prefix is necessary to extract the tickets when parsing the commit messages. It is following the pattern: [prefix]-[ticket number]. Example: "JTS" as a prefix will extract JIRA tickets like "JTS-1234"
     is_expand: true
     is_required: true
     summary: null
-    title: JIRA ticket's Prefix
+    title: JIRA ticket's prefix
   prefix: null
 outputs:
 - JIRA_TICKET_IDS: null
