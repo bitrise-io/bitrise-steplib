@@ -1,0 +1,45 @@
+title: Mussel
+summary: A framework for easily testing Push Notifications, Universal Links and Routing
+  in XCUITests.
+description: "As of Xcode 14.4, users are able to test Push Notifications via the
+  simulator. \nUnfortunately, Apple has yet to introduce the ability to leverage this
+  new method within the XCUITest Framework.\n\nTesting Universal Links can also be
+  an adventure, potentially accumulating lots of extra unwanted time in UI Tests,
+  especially if your team wants to speed up your app's regression progress. \nConventional
+  methods resorted to using iMessage or Contacts to open Universal Links which routed
+  to a specific feature within an application.\n\nMussel introduces a quick and simple
+  way to test Push Notifications and Universal Links which route to any specific features
+  within your iOS app.\n\nHow It Works:\n  1. An Engineer triggers XCUITests in XCode
+  manually or through your Continuous Integration platform of choice.\n  2. Mussel
+  Server boots up along with the iOS Simulator.\n  3. A Test Case triggers a Push
+  Notification or Universal Link Test Case\n  4. The Test Case sends a payload containing
+  Push Notification or Universal Link data via POST Request.\n  5. Server runs respective
+  xcrun simctl command for Push Notifications or Universal Links.\n  6. The command
+  presents a Push Notification or launches a Universal Link within the iOS Simulator."
+website: https://github.com/UrbanCompass/bitrise-step-mussel
+source_code_url: https://github.com/UrbanCompass/bitrise-step-mussel
+support_url: https://github.com/UrbanCompass/bitrise-step-mussel/issues
+published_at: 2021-08-16T13:36:05.300963-04:00
+source:
+  git: https://github.com/UrbanCompass/bitrise-step-mussel.git
+  commit: 12e06201dd0b06452ffa8102843cd2144bd12345
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- mussel_version: 1.0.0
+  opts:
+    description: |
+      The version of Mussel and MusselServer to use.
+      Choose a version from: https://github.com/UrbanCompass/Mussel/releases
+    is_required: true
+    title: Mussel server version
