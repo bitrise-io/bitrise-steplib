@@ -6,10 +6,10 @@ description: |
 website: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
 source_code_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
 support_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
-published_at: 2021-08-18T11:50:16.763155-04:00
+published_at: 2021-08-18T11:54:17.924458-04:00
 source:
   git: https://bitbucket.org/silofit/bitrise-jira-tickets.git
-  commit: dde15e6fac17cceca6fabbe8bcebbd55ce27f043
+  commit: a59e403918adf3355de2b3bc67b81d03cc1531b9
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -61,9 +61,9 @@ inputs:
     title: JIRA ticket's prefix
   prefix: null
 outputs:
-- JIRA_TICKET_IDS: null
+- JIRA_TICKET_ID_LIST: null
   opts:
     description: |
       List of JIRA ticket IDs found on the selected branch.
     summary: null
-    title: JIRA ticket IDs
+    title: List of JIRA ticket IDs
