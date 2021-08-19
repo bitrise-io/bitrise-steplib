@@ -6,10 +6,10 @@ description: |
 website: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
 source_code_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
 support_url: https://bitbucket.org/silofit/bitrise-jira-tickets/src/master/
-published_at: 2021-08-18T11:54:17.924458-04:00
+published_at: 2021-08-19T09:42:54.933566-04:00
 source:
   git: https://bitbucket.org/silofit/bitrise-jira-tickets.git
-  commit: a59e403918adf3355de2b3bc67b81d03cc1531b9
+  commit: d9f82bd4007043bf28640c3e5e7370b4a088d8d3
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
