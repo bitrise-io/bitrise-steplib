@@ -9,7 +9,7 @@ support_url: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2/issu
 published_at: 2021-08-23T11:22:49.406953+03:00
 source:
   git: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2.git
-  commit: a49c479c146cf3e54dec42d3696799dc299734b1
+  commit: aa75400f66b7f21f7199f6fa3ca6f09692b37f0d
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
