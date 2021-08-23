@@ -9,7 +9,7 @@ support_url: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2/issu
 published_at: 2021-08-23T11:22:49.406953+03:00
 source:
   git: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2.git
-  commit: 328cf9a232efcf656bd62fdf3bfd692c733b7f88
+  commit: a49c479c146cf3e54dec42d3696799dc299734b1
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -18,13 +18,6 @@ type_tags:
 toolkit:
   bash:
     entry_file: step.sh
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
@@ -36,6 +29,7 @@ inputs:
       You have to generate a secret access token in [the developer website](https://www.dropbox.com/developers).
       Create an application and go in the setting's application.
     is_required: true
+    is_sensitive: true
     title: The secret access token (OAuth2)
 - dropbox_local_path: null
   opts:
@@ -52,11 +46,11 @@ inputs:
   opts:
     description: |
       The directory to upload file in dropbox
-      * If you specify a directory that does not exist this one is created
+      * If you specify a directory that does not exists this one is created
       **example :** "/delivery/ios" or "/delivery/android"
     is_required: true
     title: Dropbox remote target
 outputs:
-- FILE_SHARED_LINK: null
+- DROPBOX_FILE_SHARED_LINK: null
   opts:
     title: Shareable link for the uploaded file
