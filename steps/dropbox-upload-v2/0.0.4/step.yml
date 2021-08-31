@@ -1,0 +1,56 @@
+title: dropbox-upload-v2
+summary: |
+  upload a file to dropbox and get a shareable link in return
+description: |
+  using this step you can send downloadable links via any platform
+website: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2
+source_code_url: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2
+support_url: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2/issues
+published_at: 2021-08-31T11:43:51.566731+03:00
+source:
+  git: https://github.com/AlexPinhasov/bitrise-step-dropbox-upload-v2.git
+  commit: 3053475db3be3204256f36c0b5932aec0ea3dd97
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- dropbox_secret: null
+  opts:
+    description: |
+      You have to generate a secret access token in [the developer website](https://www.dropbox.com/developers).
+      Create an application and go in the setting's application.
+    is_required: true
+    is_sensitive: true
+    title: The secret access token (OAuth2)
+- dropbox_local_path: null
+  opts:
+    description: |
+      The name of the local file you wish to upload on dropbox.
+      * Only one file !
+      * If a remote file exist with the same name, the file is overitten
+
+
+      **example :** "/tmp/myapp.ipa" or "/tmp/myapp.apk"
+    is_required: true
+    title: Local File
+- dropbox_remote_path: null
+  opts:
+    description: |
+      The directory to upload file in dropbox
+      * If you specify a directory that does not exist this one is created
+      **example :** "/delivery/ios" or "/delivery/android"
+    is_required: true
+    title: Dropbox remote target
+outputs:
+- DROPBOX_FILE_SHARED_LINK: null
+  opts:
+    title: Shareable link for the uploaded file
