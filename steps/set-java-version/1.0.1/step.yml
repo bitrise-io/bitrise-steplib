@@ -1,0 +1,49 @@
+title: Set java version
+summary: This step helps you in setting an already installed java version on the virtual
+  machine.
+description: |
+  This step helps you in setting an already installed java version on the virtual machine. Mind you, that this step can't install any java version, it's only for changing between the already installed versions.
+
+  If you want to install other java version you can do it by [this guide](https://devcenter.bitrise.io/infrastructure/virtual-machines/#switching-to-a-java-version-not-installed-on-our-android-stacks).
+
+  ### Troubleshooting
+
+  If the step fails to set the java version, you can use these [scripts](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions) as a temporary workaround.
+
+  ### Useful links
+
+  [Managing Java versions on Bitrise](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions)
+website: https://github.com/bitrise-steplib/bitrise-step-set-java-version
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version
+support_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version/issues
+published_at: 2021-09-03T12:36:38.394272+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-set-java-version.git
+  commit: cc12fd4eabb43a317d4b261f6d9010f0fe9eef3c
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-set-java-version
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Select the installed java version you want to use during the build run.
+
+      You can check [here](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports) which java versions are installed on each Bitrise stack.
+    is_required: true
+    summary: Select the installed java version you want to use during the build run.
+    title: Java version to be set globally for the build
+    value_options:
+    - "11"
+    - "8"
+  set_java_version: "11"
+outputs:
+- JAVA_HOME: null
+  opts:
+    description: JAVA_HOME is an environment variable points to the file system location
+      where the JDK or JRE was installed.
+    summary: Location where the JDK or JRE was installed.
+    title: Location where the JDK or JRE was installed.
