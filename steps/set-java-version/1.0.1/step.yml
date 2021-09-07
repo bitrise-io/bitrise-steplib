@@ -1,18 +1,21 @@
-title: Set java version
-summary: This step helps you in setting an already installed java version on the virtual
-  machine.
+title: Set Java version
+summary: This Step helps you set an already installed Java version on the virtual machine.
 description: |
-  This step helps you in setting an already installed java version on the virtual machine. Mind you, that this step can't install any java version, it's only for changing between the already installed versions.
-
-  If you want to install other java version you can do it by [this guide](https://devcenter.bitrise.io/infrastructure/virtual-machines/#switching-to-a-java-version-not-installed-on-our-android-stacks).
+  This Step can't install any Java version. You can only pick from the already installed versions.
+  If you want to install other Java versions, check out [Using a Java version not installed on our Android stacks](https://devcenter.bitrise.io/infrastructure/virtual-machines/#using-a-java-version-not-installed-on-our-android-stacks).
+  
+  ### Configuring the Step
+  1. In the **Java version to be set globally for the build** input, select an installed Java version you wish to use during the build run.
 
   ### Troubleshooting
-
-  If the step fails to set the java version, you can use these [scripts](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions) as a temporary workaround.
+  If the Step fails to set the Java version, you can use these [scripts](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions) as a temporary workaround.
 
   ### Useful links
-
-  [Managing Java versions on Bitrise](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions)
+  - [Managing Java versions on Bitrise](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions)
+  
+  ### Related Steps
+  - [Get versionName and versionCode on Android](https://www.bitrise.io/integrations/steps/version-extractor-android)
+  - [Change Android versionCode and versionName](https://www.bitrise.io/integrations/steps/change-android-versioncode-and-versionname)
 website: https://github.com/bitrise-steplib/bitrise-step-set-java-version
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version
 support_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version/issues
@@ -32,9 +35,9 @@ inputs:
     description: |
       Select the installed java version you want to use during the build run.
 
-      You can check [here](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports) which java versions are installed on each Bitrise stack.
+      You can check [in system reports](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports) which java versions are installed on each Bitrise stack.
     is_required: true
-    summary: Select the installed java version you want to use during the build run.
+    summary: Select the installed Java version you want to use during the build run.
     title: Java version to be set globally for the build
     value_options:
     - "11"
