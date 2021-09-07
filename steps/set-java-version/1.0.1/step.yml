@@ -12,10 +12,6 @@ description: |
 
   ### Useful links
   - [Managing Java versions on Bitrise](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions)
-  
-  ### Related Steps
-  - [Get versionName and versionCode on Android](https://www.bitrise.io/integrations/steps/version-extractor-android)
-  - [Change Android versionCode and versionName](https://www.bitrise.io/integrations/steps/change-android-versioncode-and-versionname)
 website: https://github.com/bitrise-steplib/bitrise-step-set-java-version
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version
 support_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version/issues
