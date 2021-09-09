@@ -1,0 +1,43 @@
+title: Wait for Android emulator
+summary: Wait for the emulator to finish boot
+description: |-
+  If your workflow contains the `start-android-emulator` step,
+  and you've set the `wait_for_boot` parameter to `false`, use this step to check
+  if the android emulator is booted or wait for it to finish booting.
+website: https://github.com/bitrise-steplib/steps-wait-for-android-emulator
+source_code_url: https://github.com/bitrise-steplib/steps-wait-for-android-emulator
+support_url: https://github.com/bitrise-steplib/steps-wait-for-android-emulator/issues
+published_at: 2021-06-24T11:53:10.086732008Z
+source:
+  git: https://github.com/bitrise-steplib/steps-wait-for-android-emulator.git
+  commit: 0f5ab61ccfa07a08c46ac5d8685e2b36b4e5af92
+host_os_tags:
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-wait-for-android-emulator
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- emulator_serial: $BITRISE_EMULATOR_SERIAL
+  opts:
+    description: |
+      Emulator with the given serial will be checked if booted, or wait for it to boot.
+    is_required: true
+    summary: Emulator serial to check
+    title: Emulator serial
+- boot_timeout: "300"
+  opts:
+    description: |
+      Maximum time to wait for emulator to boot.
+    is_required: true
+    summary: Maximum time to wait for emulator to boot
+    title: Waiting timeout (secs)
+- android_home: $ANDROID_HOME
+  opts:
+    description: Android sdk path
+    is_required: true
+    title: Android sdk path

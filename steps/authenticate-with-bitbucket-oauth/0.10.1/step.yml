@@ -1,0 +1,68 @@
+title: Authenticate with Bitbucket OAuth
+summary: Adds your Bitbucket OAuth configuration to the `.netrc` file.
+description: |-
+  [This Step](https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth) adds the authentication configuration (Bitbucket username and App password) to the `.netrc` file .
+  Please note that if you already have a `.netrc` file, the Step will create a backup of the original, and appends the configs to the current one.
+
+  ### Configuring the Step
+  1.Add your **Bitbucket username**.
+  2. Add your Bitbucket **App Password**.
+  To get your Bitbucket App Password, follow the instructions below:
+  1. Log into your Bitbucket account.
+  2. In the left sidebar, click **App passwords**.
+  3. Click **Create app password**.
+  4. Give your password a descriptive label.
+  5. Select the permissions you'd like to grant to this token.
+  6. Click **Create**.
+
+  ### Useful links
+  - [Learn more what the .netrc file format comprises of](https://everything.curl.dev/usingcurl/netrc#the-netrc-file-format)
+
+  ### Related Steps
+  - [Activate SSH key (RSA private key)](https://www.bitrise.io/integrations/steps/activate-ssh-key)
+  - [Connect to OpenVPN Server](https://www.bitrise.io/integrations/steps/open-vpn)
+website: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth
+source_code_url: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth
+support_url: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth/issues
+published_at: 2021-07-21T09:57:16.194029839Z
+source:
+  git: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth.git
+  commit: 867c641baa7af3ac4d24b03a834c77dfcbc3106b
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The username used for Bitbucket to login.
+    title: Bitbucket username
+  username: null
+- access_token: null
+  opts:
+    description: |-
+      To get your Bitbucket App Password, follow the instructions below:
+
+      1. Log into your Bitbucket account
+      2. In the upper-right corner of any page, click your profile photo, then click **Bitbucket Settings**.
+      3. In the left sidebar, click **App passwords**.
+      4. Click **Create app password**.
+      5. Give your password a descriptive label.
+      6. Select the permissions you'd like to grant to this token.
+      7. Click **Create**.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: App Password

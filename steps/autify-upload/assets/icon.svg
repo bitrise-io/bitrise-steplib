@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="256px" height="256px" viewBox="0 0 256 256" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Artboard</title>
+    <g id="Artboard" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="bg" fill="#FFFFFF" x="0" y="0" width="256" height="256"></rect>
+        <g id="logo" transform="translate(46.879078, 57.746176)">
+            <polygon id="Fill-2" fill="#00B398" points="149.738445 48.6170624 121.672653 97.2258304 106.096077 70.2459904 81.1130368 70.2459904 121.669581 140.491878 162.226125 70.2459904"></polygon>
+            <polygon id="Fill-3" fill="#000000" points="84.1984 118.861312 53.044736 118.861312 24.976384 70.245888 53.044736 21.630464 109.18144 21.630464 124.757504 48.60928 137.245184 26.978816 121.669632 0 40.556544 0 0 70.245888 40.556544 140.491776 96.686592 140.491776"></polygon>
+        </g>
+    </g>
+</svg>

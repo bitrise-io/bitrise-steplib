@@ -1,0 +1,64 @@
+title: pCloudy App Upload
+summary: |
+  Uploads your APK or IPA to Pcloudy for interactive app testing.
+description: |
+  Uploads your APK or IPA to Pcloudy for interactive app testing. Please signup to get more details https://www.pcloudy.com
+website: https://github.com/shibupanda/bitrise-step-pcloudy-upload-app
+source_code_url: https://github.com/shibupanda/bitrise-step-pcloudy-upload-app
+support_url: https://github.com/shibupanda/bitrise-step-pcloudy-upload-app/issues
+published_at: 2021-06-25T12:43:43.472427114+05:30
+source:
+  git: https://github.com/shibupanda/bitrise-step-pcloudy-upload-app.git
+  commit: 4f5d221ec046e1c9a3a180dc14079cdde404ab74
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- upload_path:
+  opts:
+    description: |
+      The app file you want to upload to Pcloudy, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
+    is_expand: true
+    is_required: true
+    summary: Location of the IPA or APK that you want to upload.
+    title: Location of APK or IPA
+- opts:
+    description: |
+      The cloud URL to upload into specific cloud
+    is_required: true
+    is_sensitive: true
+    summary: Pcloudy cloud url
+    title: Pcloudy cloud url
+  pcloudy_cloudname: $PCLOUDY_CLOUDURL
+- opts:
+    description: |
+      The username you use to log into your Pcloudy account
+    is_required: true
+    is_sensitive: true
+    summary: Your Pcloudy username
+    title: Pcloudy username
+  pcloudy_username: $PCLOUDY_USERNAME
+- opts:
+    description: |
+      The access key you use to log into your Pcloudy account
+    is_required: true
+    is_sensitive: true
+    summary: Your Pcloudy access key
+    title: Pcloudy access key
+  pcloudy_access_key: $PCLOUDY_ACCESS_KEY
+outputs:
+- PCLOUDY_APP_NAME: null
+  opts:
+    description: "The app name returned by Pcloudy \nUse this in your remote device
+      tests, usually through your capabilities configuration\n"
+    summary: The app name used to automate remote device tests
+    title: Pcloudy Application Name

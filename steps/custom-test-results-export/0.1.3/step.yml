@@ -1,0 +1,119 @@
+title: Export test results to Test Reports add-on
+summary: |
+  This Step is used to search for test results and export them for the **Deploy to Bitrise.io** Step which can export the results to the testing add-on.
+description: |
+  Not all testing Steps automatically export their results to the Test Reports add-on. This Step is designed to export the results of those Steps that do not do this automatically. The Step creates the required `test-info.json` file and deploys the test results in the correct directory for export.
+
+  ### Configuring the Step
+
+  To use this Step to export the results of a testing Step - for example, **Flutter Test** -, you need to make sure that:
+
+  - The Step knows which folder to look for your test results.
+  - The Step knows which file to look for.
+  - The Step exports to the correct directory.
+
+  1. In the **The name of the test** input, set the name you want to see in the Test Reports add-on. Each exported results file has a separate tab with the name defined here.
+
+  2. In the **Test result base path** input, set the path where your test results can be found.
+
+     This input determines where Bitrise will look for your test results. We recommend setting a folder here, though you can also set a specific file path.
+
+  3. In the **Test result search pattern** input, set a glob pattern that matches a single test result output file.
+
+     This search pattern is used to search every file and folder of the provided base path which was set in the **Test result base path** input. If there is more than one match, you will receive a warning and the Step will export the first match.
+
+     If you set a specific file path in the previous input, just set `*` here.
+
+  4. In the **Step's test result directory** input, make sure the path points to a valid directory.
+
+     By default, do NOT modify this input’s value. It should be set to the $BITRISE_TEST_RESULT_DIR Env Var.
+
+  5. Make sure you have a Deploy to Bitrise.io Step in your Workflow. This step is responsible for deploying the exported files from the test result directory to the Test Reports add-on.
+
+  ### Troubleshooting
+
+  - You always need a **Deploy to Bitrise.io** Step in your Workflow to export test results to the Test Reports add-on. If you can't see your results in Test Reports, check that you have the Step in your Workflow.
+
+  - If more than one file matches the pattern set in the **Test result search pattern** input, you will receive a warning. It should only match a single file in the base path.
+
+  - If either the **Test result base path** input or the **Test result search pattern** input isn't set correctly or if either is left empty, the Step will fail.
+
+  ### Useful links
+
+  [Test reports](https://devcenter.bitrise.io/testing/test-reports/)
+  [Exporting custom tests to test reports](https://devcenter.bitrise.io/testing/exporting-to-test-reports-from-custom-script-steps/)
+
+  ### Related Steps
+
+  [Android Unit Test](https://www.bitrise.io/integrations/steps/android-unit-test)
+  [Xcode Test for iOS](https://www.bitrise.io/integrations/steps/xcode-test)
+website: https://github.com/bitrise-steplib/step-custom-test-results-export
+source_code_url: https://github.com/bitrise-steplib/step-custom-test-results-export
+support_url: https://github.com/bitrise-steplib/step-custom-test-results-export/issues
+published_at: 2021-04-19T12:27:14.270437228Z
+source:
+  git: https://github.com/bitrise-steplib/step-custom-test-results-export.git
+  commit: dbb4443c557dae5db1315ca25bed24f89924609e
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/step-custom-test-results-export
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Test name displayed on the tab of the Test Reports page.
+    title: The name of the test
+    value_options: []
+  test_name: null
+- base_path: $BITRISE_SOURCE_DIR
+  opts:
+    description: "You can provide a path to a single file or a directory path and
+      filter for files using the **Test result search pattern** input.\n\nThis is
+      the base path where the Step will look for your test results. We recommend using
+      a relative path to the results:\n\n`app/build/test-results/testDemoDebugUnitTest/`\n\nor
+      \n\n`./app/build/test-results/testDemoDebugUnitTest/`\n"
+    is_expand: true
+    is_required: true
+    summary: Path where the Step should look for custom test result files
+    title: Test result base path
+    value_options: []
+- opts:
+    description: |
+      This glob should match a single file within the provided base path.
+      If it matches multiple files, the Step will produce a warning displaying all matches.
+      The matched file should be in a supported format. If you set a specific file path in the **Test result base path** input, set this value to `*`.
+
+      **Examples**:
+
+      Matching all files within the base path: `*`
+
+      Matching all files within a given directory of the base path: `*/build/test-results/testDemoDebugUnitTest/*`
+    is_expand: true
+    is_required: true
+    summary: A glob pattern to match a single test report within the base path.
+    title: Test result search pattern
+    value_options: []
+  search_pattern: null
+- bitrise_test_result_dir: $BITRISE_TEST_RESULT_DIR
+  opts:
+    description: Root directory for all test results created by the Bitrise CLI
+    is_required: true
+    title: Step's test result directory
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"

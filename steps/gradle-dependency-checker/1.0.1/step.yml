@@ -1,0 +1,46 @@
+title: gradle-dependency-check
+summary: |
+  OWASP dependency analysis for Gradle files
+description: |
+  Uses [jeremylong/DependencyCheck](https://jeremylong.github.io/DependencyCheck/dependency-check-gradle/index.html) to search Gradle for CVE vulnerabilites.
+  It must be setup on the project before a first run
+
+  The generated report will be placed into $BITRISE_DEPLOY_DIR by default.
+  Remember to run the "Deploy to bitrise.io" step in order to persist artifacts.
+website: https://github.com/odemolliens/bitrise-step-gradle-dependency-checker
+source_code_url: https://github.com/odemolliens/bitrise-step-gradle-dependency-checker
+support_url: https://github.com/odemolliens/bitrise-step-gradle-dependency-checker/issues
+published_at: 2021-05-26T09:36:21.630899+02:00
+source:
+  git: https://github.com/odemolliens/bitrise-step-gradle-dependency-checker.git
+  commit: e0f1e7fa13cc7e1df7643dbb90cb43b4dd30698c
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- android
+- react-native
+- flutter
+- ionic
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    title: Android Source Code Directory path; For react-native project, please use
+      './android'
+  source_root_path: $BITRISE_SOURCE_DIR
+- android_target_name: app
+  opts:
+    is_required: true
+    title: The module that will be analyzed
+- deploy_dir: $BITRISE_DEPLOY_DIR
+  opts:
+    is_required: true
+    title: Deploy directory to output scan artifacts

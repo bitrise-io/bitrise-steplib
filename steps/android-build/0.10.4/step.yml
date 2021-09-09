@@ -1,0 +1,177 @@
+title: Android Build
+summary: Builds your Android project with Gradle.
+description: "\nThe Step builds your Android project on Bitrise with Gradle commands:
+  it installs all dependences that are listed in the project's `build.gradle` file,
+  and builds and exports either an APK or an AAB. \nOnce the file is exported, it
+  is available for other Steps in your Workflow.\n\nYou can select the module and
+  the variant you want to use for the build.\n\n### Configuring the Step \n\n1. Make
+  sure the **Project Location** input points to the root directory of your Android
+  project.\n1. In the **Module** input, set the module that you want to build.\n   \n
+  \  You can find the available modules in Android Studio.\n\n1. In the **Variant**
+  input, set the variant that you want to build. \n   \n   You can find the available
+  variants in Android Studio.\n   \n1. In the **Build type** input, select the file
+  type you want to build. \n\n   The options are:\n   - `apk`\n   - `aab`\n   \n1.
+  In the **Options** input group, you can set more advanced configuration options
+  for the Step:\n\n   - In the **App artifact (.apk, .aab) location pattern** input,
+  you can tell the Step where to look for the APK or AAB files in your project to
+  export them. \n   For the vast majority of Android projects, the default values
+  do NOT need to be changed.\n   \n   - In the **Additional Gradle Arguments**, you
+  can add additional command line arguments to the Gradle task. Read more about [Gradle's
+  Command Line Interface](https://docs.gradle.org/current/userguide/command_line_interface.html).\n
+  \  \n   - The **Set the level of cache** input allows you to set what will be cached
+  during the build: everything, dependencies only, or nothing.\n   \n### Troubleshooting
+  \n\nBe aware that an APK or AAB built by the Step is still unsigned: code signing
+  is performed either in Gradle itself or by other Steps. To be able to deploy your
+  APK or AAB to an online store, you need code signing. \n\nIf you want to build a
+  custom module or variant, always check that the value you set in the respective
+  input is correct. A typo means your build will fail; if the module or variant does
+  not exist in Android Studio, the build will fail.\n \n### Useful links\n\n- [Getting
+  started with Android apps](https://devcenter.bitrise.io/getting-started/getting-started-with-android-apps/)\n-
+  [Deploying Android apps](https://devcenter.bitrise.io/deploy/android-deploy/deploying-android-apps/)\n-
+  [Generating and deploying Android app bundles](https://devcenter.bitrise.io/deploy/android-deploy/generating-and-deploying-android-app-bundles/)\n-
+  [Gradle's Command Line Interface](https://docs.gradle.org/current/userguide/command_line_interface.html)\n\n###
+  Related Steps \n\n- [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)\n-
+  [Android Sign](https://www.bitrise.io/integrations/steps/sign-apk)\n- [Install missing
+  Android SDK components](https://www.bitrise.io/integrations/steps/install-missing-android-tools)"
+website: https://github.com/bitrise-steplib/bitrise-step-android-build
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-build
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-build/issues
+published_at: 2021-05-28T07:51:31.99332069Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-build.git
+  commit: 84b5cbb44231b20e0490706a98956c6b664bb395
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-build
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root directory of your Android project. For example, where your
+      root build gradle file exist (also gradlew, settings.gradle, and so on)
+    is_required: true
+    summary: The root directory of your Android project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to build. To see your available modules, please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: false
+    summary: |
+      Set the module that you want to build. To see your available modules, please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant(s) that you want to build. To see your available variants, please open your project in Android Studio and go in [Project Structure] -> variants section.
+      You can set multiple variants separated by `\n` character. For instance: `- variant: myvariant1\nmyvariant2`.
+    is_required: false
+    summary: |
+      Set the variant(s) that you want to build. To see your available variants, please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- build_type: apk
+  opts:
+    description: |
+      Set the build type that you want to build.
+    is_required: true
+    summary: |
+      Set the build type that you want to build.
+    title: Build type
+    value_options:
+    - apk
+    - aab
+- app_path_pattern: |-
+    */build/outputs/apk/*.apk
+    */build/outputs/bundle/*.aab
+  opts:
+    category: Options
+    description: |
+      Will find the APK or AAB files - depending on the **Build type** input - with the given pattern.<br/>
+      Separate patterns with a newline.
+      **Note**<br/>
+      The Step will export only the selected artifact type even if the filter would accept other artifact types as well.
+    is_required: true
+    summary: Will find the APK or AAB files - depending on the **Build type** input
+      - with the given pattern.
+    title: App artifact (.apk, .aab) location pattern
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - The Step will cache build cache and the dependencies
+      `only_deps` - The Step will cache dependencies only
+      `none` - The Step will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+- apk_path_pattern: null
+  opts:
+    category: Deprecated
+    description: |
+      This input is **DEPRECATED** - use the App location pattern input instead
+
+      Will find the APK files with the given pattern.
+    summary: This input is **DEPRECATED** - use the App location pattern input instead
+    title: APK location pattern
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK
+      after filtering based on the filter inputs.
+      If the build generates more than one APK which fulfills the
+      filter inputs, this output will contain the last one's path.
+    summary: Path of the generated (and copied) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated APKs
+      after filtering based on the filter inputs.
+      The paths are separated with `|` character, for example, `app-armeabi-v7a-debug.apk|app-mips-debug.apk|app-x86-debug.apk`
+    summary: List of the generated (and copied) APK paths - after filtering.
+    title: List of the generated APK paths
+- BITRISE_AAB_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated AAB
+      after filtering based on the filter inputs.
+      If the build generates more than one AAB which fulfills the
+      filter inputs, this output will contain the last one's path.
+    summary: Path of the generated (and copied) AAB - after filtering.
+    title: Path of the generated AAB
+- BITRISE_AAB_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the paths of the generated AABs
+      after filtering based on the filter inputs.
+      The paths are separated with `|` character, for example, `app--debug.aab|app-mips-debug.aab`
+    summary: List of the generated (and copied) AAB paths - after filtering.
+    title: List of the generated AAB paths
+- BITRISE_MAPPING_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated mapping.txt.
+      If more than one mapping.txt exist in the project, this output will contain the last one's path.
+    summary: Path of the generated (and copied) mapping.txt.
+    title: Path of the generated mapping.txt

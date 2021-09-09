@@ -1,0 +1,72 @@
+title: Install cocoapod keys
+summary: This step allows you to install cocoapo-keys
+description: This step simply install the dependecies of cocoapo-keys, so the plugin
+  can be used by a following cocoapods step.
+website: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key.git
+support_url: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key/issues
+published_at: 2021-04-14T23:56:28.084761+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-cocoapod-key.git
+  commit: e790310c83b68665d3084a08244ab64b99c02e34
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- react-native
+- xamarin
+type_tags:
+- installer
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    description: In case that your workspace has multiple projects, and multiple targets,
+      a `pod key` command may fail because of the conflict in the configuration list.
+      This solves this issue
+    is_expand: true
+    is_required: false
+    summary: The name of the project. It will be used to resolve project conflict,
+      in the case of multiple targets in the workspace
+    title: Project name
+  project_name: ""
+- opts:
+    description: In case where the Podfile is not hosted at the root of the repo,
+      this variable can be used to point to the right place
+    is_expand: true
+    is_required: true
+    summary: Path where the Podfile configuration is hosted
+    title: Podfile path
+  podfile_path: ./
+- keys: ""
+  opts:
+    category: Ignored
+    description: |-
+      Previously, this was used to run `pod keys set $KEY $VALUE`, but, on a CI environment, it is better if this is store in the SECRETS of the application.
+      Cocoapod-keys can fetch values from the environment. So, if you have a key named `MyKey`, you just need to create a secret with the same name: `MeyKey = Value`.
+      This is safer since the value never leaves Bitrise secrets, and avoids having it leaked on logs.
+
+      This variable is still listed in the step to avoid that someone that upgrades looses its info. But, it is no longer used.
+    is_expand: true
+    is_required: false
+    summary: Given that this is not the best approach to cocoapod-keys on CI, the
+      list of keys is no longer used.
+    title: Keys (No longer used)
+- opts:
+    category: Ignored
+    description: |-
+      Previously, this was used to run `pod keys set $KEY $VALUE`, but, on a CI environment, it is better if this is store in the SECRETS of the application.
+      Cocoapod-keys can fetch values from the environment. So, if you have a key named `MyKey`, you just need to create a secret with the same name: `MeyKey = Value`.
+      This is safer since the value never leaves Bitrise secrets, and avoids having it leaked on logs.
+
+      This variable is still listed in the step to avoid that someone that upgrades looses its info. But, it is no longer used.
+    is_expand: true
+    is_required: false
+    summary: Given that this is not the best approach to cocoapod-keys on CI, the
+      list of values is no longer used.
+    title: Values (No longer used)
+  values: ""

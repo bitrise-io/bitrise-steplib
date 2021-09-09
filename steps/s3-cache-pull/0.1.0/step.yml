@@ -1,0 +1,143 @@
+title: S3 Cache Pull
+summary: |
+  A step to retrieve your cache from a S3 bucket using custom keys with fallback.
+
+  This should be used with the s3-cache-push step to store the cache.
+
+  If you want to retrieve multiple items, you'll need run this step multiple times.
+
+  *Bucket Access*
+  For this step to work you'll need an user in aws with programmatic access to a bucket.
+  The user should have permissions to list, get, and put objects in the bucket.
+
+  You can set the credentials using the Bitrise Secrets with the keys specified in the inputs
+  or set them directly in the inputs.
+website: https://github.com/alephao/bitrise-step-s3-cache-pull
+source_code_url: https://github.com/alephao/bitrise-step-s3-cache-pull
+support_url: https://github.com/alephao/bitrise-step-s3-cache-pull/issues
+published_at: 2021-06-24T12:20:12.105573-03:00
+source:
+  git: https://github.com/alephao/bitrise-step-s3-cache-pull.git
+  commit: 5a060fbe7421a60a272ae51a5f668b2e8e05b804
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/alephao/bitrise-step-s3-cache-pull
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- cache_aws_access_key_id: $CACHE_AWS_ACCESS_KEY_ID
+  opts:
+    category: AWS Access
+    description: |
+      The access key id that matches the secret access key.
+
+      The credentials need to be from a user that has at least the following permissions
+      in the bucket specified bellow `s3:ListObjects`, `s3:PutObject`, and `s3:GetObject`.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The AWS_ACCESS_KEY_ID to access the bucket.
+    title: AWS_ACCESS_KEY_ID
+- cache_aws_secret_access_key: $CACHE_AWS_SECRET_ACCESS_KEY
+  opts:
+    category: AWS Access
+    description: |
+      The secret access key that matches the access key id.
+
+      The credentials need to be from a user that has at least the following permissions
+      in the bucket specified bellow `s3:ListObjects`, `s3:PutObject`, and `s3:GetObject`.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The AWS_SECRET_ACCESS_KEY to access the bucket.
+    title: AWS_SECRET_ACCESS_KEY
+- cache_aws_region: $CACHE_AWS_S3_REGION
+  opts:
+    category: AWS Bucket
+    is_expand: true
+    is_required: true
+    summary: The region of the S3 bucket
+    title: AWS Region
+    value_options:
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    - ca-central-1
+    - eu-north-1
+    - eu-west-3
+    - eu-west-2
+    - eu-west-1
+    - eu-central-1
+    - eu-south-1
+    - ap-south-1
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-northeast-3
+    - ap-southeast-1
+    - ap-southeast-2
+    - ap-east-1
+    - sa-east-1
+    - cn-north-1
+    - cn-northwest-1
+    - us-gov-east-1
+    - us-gov-west-1
+    - us-gov-secret-1
+    - us-gov-topsecret-1
+    - me-south-1
+    - af-south-1
+- cache_bucket_name: $CACHE_S3_BUCKET_NAME
+  opts:
+    category: AWS Bucket
+    is_expand: true
+    is_required: true
+    summary: The name of the s3 bucket where you want to store the cache
+    title: Bucket Name
+- cache_restore_keys: null
+  opts:
+    category: Cache
+    description: |
+      The cache key can contain special values for convenience.
+
+      You can use '{{ checksum path/to/file }}' to get the file content's sha256 checksum.
+      You can use '{{ branch }}' to get the name of the current branch.
+      You can use '{{ stackrev }}' to get the machine's stack id.
+
+      This step will loop through the specified keys and retrieve the cache for the first
+      key that matches the prefix of a cache key. For example:
+
+      If you only have a cache stored with the key `carthage-a-b-c` and the following restore Keys:
+
+      cache_restore_keys: |
+        carthage-a-b-123
+        carthage-a-123
+        carthage-
+        car
+
+      It will try looking for a key prefixed with `carthage-a-b-123` and will find nothing. Then
+      it will try the same for `carthage-a-123` and will find nothing. Then it will try the same for
+      `carthage-` and it will find our cache `carthage-a-b-c` and retrieve it.
+
+      If a cache is not found for the key, this step is skipped.
+    is_expand: false
+    is_required: true
+    summary: List of cache key prefixes to find the cached file
+    title: Cache restore keys
+- cache_path: null
+  opts:
+    category: Cache
+    description: |
+      If you stored the cache as `/path/to/my/folder`, the compressed file in the bucket will contain
+      only `folder`, therefore you'll need to set this to `/path/to/my/`
+    is_expand: false
+    is_required: true
+    summary: Path to extract the file or directory cached. Relative to the root of
+      the git repo.
+    title: Cache path

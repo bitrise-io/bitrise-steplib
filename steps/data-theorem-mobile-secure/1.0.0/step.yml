@@ -1,0 +1,62 @@
+title: Data Theorem Mobile Secure
+summary: |
+  Perform automated security analysis on every build.
+description: |
+  Data Theorem's Mobile Secure will scan each pre-production release automatically (up to 7000 releases/day)
+  for security & privacy issues using static, dynamic, and behavioral analysis for both iOS and Android applications.
+  More information can be found here: https://www.datatheorem.com/products/mobile-secure
+
+  Enabling this integration requires a valid Data Theorem API Key.
+  To find your API Key, connect to https://www.securetheorem.com/sdlc using your Data Theorem account.
+website: https://www.datatheorem.com/products/mobile-secure
+source_code_url: https://bitbucket.org/datatheorem/dt-bitrise-integration.git
+support_url: https://bitbucket.org/datatheorem/dt-bitrise-integration.git
+published_at: 2021-08-05T10:39:30.5438758+02:00
+source:
+  git: https://bitbucket.org/datatheorem/dt-bitrise-integration.git
+  commit: 0c1bd932a8d579555ed5067fde1d158e1ef2fa77
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  apt_get:
+  - name: curl
+  - name: jq
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- file_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      This variable can for example be set to:
+
+      $BITRISE\_APK\_PATH after the "Android Build" step
+      $BITRISE\_APK\_PATH or $BITRISE\_SIGNED\_APK\_PATH after the "Android Sign" step
+
+      $BITRISE\_IPA\_PATH after the "Xcode Archive & Export for iOS" step
+    is_expand: true
+    is_required: true
+    summary: File path to the APK or IPA to upload
+    title: File path to the APK or IPA to upload
+    value_options: []
+- dt_upload_api_key: ""
+  opts:
+    description: |
+      Instruction to retreive your upload API key:
+      [https://datatheorem.atlassian.net/servicedesk/customer/portal/1/article/557063]
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Data Theorem Upload API Key
+    title: Data Theorem Upload API Key
+    value_options: []

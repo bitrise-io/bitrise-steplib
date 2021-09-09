@@ -1,0 +1,61 @@
+title: Mobile apps logs
+summary: |
+  Check if your Android app kept any logs in your release build
+description: |
+  Check if an Android application contain any logs in the release app
+  If yes, this step will fail and generate a failure where you can see the count and the location of logs
+
+  ### Troubleshooting
+
+  - Be aware, you have to launch this step after [apps-decompiler](https://github.com/imranMnts/bitrise-step-apps-decompiler) to have informations from your APK
+website: https://github.com/odemolliens/bitrise-step-monitoring-apps-logs
+source_code_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-logs
+support_url: https://github.com/odemolliens/bitrise-step-monitoring-apps-logs/issues
+published_at: 2021-07-01T12:21:58.885017+02:00
+source:
+  git: https://github.com/imranMnts/bitrise-step-monitoring-apps-logs.git
+  commit: 643804ced68f4fcb8fb44d6ba6ec761fae0b932d
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+- flutter
+- ionic
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- check_android: "yes"
+  opts:
+    description: Do you want to check if the Android app contain any logs?
+    is_expand: true
+    is_required: true
+    summary: Do you want to check if the Android app contain any logs?
+    title: Check Android logs
+    value_options:
+    - "yes"
+    - "no"
+- filter_path: null
+  opts:
+    description: Fill this key to not take into account when the report contains this
+      path
+    is_expand: true
+    is_required: false
+    summary: Fill this key to not take into account when the report contains this
+      path
+    title: To filter reported files
+- log_count: null
+  opts:
+    description: If you have some logs in your app and want to keep them, set here
+      the count to not fail the step and be aware when new logs added to project
+    is_expand: true
+    is_required: false
+    summary: If you have some logs in your app and want to keep them
+    title: The count of logs in your app

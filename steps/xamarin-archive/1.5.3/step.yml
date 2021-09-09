@@ -1,0 +1,139 @@
+title: Xamarin Archive
+summary: Generates deployable artifact, for example, an .ipa or an APK file for your
+  Xamarin application.
+description: |-
+  This Step archives your Xamarin application and moves the generated files to the deployment folder. From there, the **Deploy to Bitrise.io** Step picks up the files and moves them to **APPS & ARTIFACTS**. Feel free to check them out. You can deliver the archived files to the respective marketplace by adding a delivery Step to your Workflow.
+
+  ###Configuring the Step
+  1. Set the the location of your Xamarin solution file in the **Path to the Xamarin Solution file** input.
+  1. Set the **Xamarin solution configuration** input to the Xamarin project Configuration you wish to use (for example, `Release`).
+  2. Set the target platform of your solution configuration in the **Xamarin solution platform** input (for example, `iPhone`).
+
+  ###Troubleshooting
+  Make sure you insert the **Xamarin Archive** Step after the relevant code signing Step and before any delivery Step. For example, if you're archiving an .ipa file, make sure you have uploaded the code signing files to Bitrise and have the **Certificate and profile installer** Step in your Workflow. For APK file generation, you will need to upload your keystore file and have the **Android Sign** Step in your Workflow.
+
+  ###Useful links
+  - [Creating a signed .ipa for Xamarin apps](https://devcenter.bitrise.io/code-signing/ios-code-signing/create-signed-ipa-for-xamarin/)
+  - [Xamarin Android code signing](https://devcenter.bitrise.io/code-signing/xamarin-android-code-signing/xamarin-android-code-signing/)
+  - [Deploying your Xamarin app](https://devcenter.bitrise.io/tutorials/xamarin/deploy-your-xamarin-app/#what-if-you-are-already-using-or-want-to-use-another-deployment-service)
+
+  ###Related Steps
+  - [Certificate and profile installer](https://www.bitrise.io/integrations/steps/certificate-and-profile-installer)
+  - [Android Sign](https://www.bitrise.io/integrations/steps/sign-apk)
+  - [NuGet Restore](https://www.bitrise.io/integrations/steps/nuget-restore)
+website: https://github.com/bitrise-steplib/steps-xamarin-archive
+source_code_url: https://github.com/bitrise-steplib/steps-xamarin-archive
+support_url: https://github.com/bitrise-steplib/steps-xamarin-archive/issues
+published_at: 2021-04-20T16:06:21.93464408Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xamarin-archive.git
+  commit: 7c48d570dd19f6a0e2d524ea434ad8d4a531d7b7
+project_type_tags:
+- xamarin
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xamarin-archive
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    category: Config
+    description: The Xamarin Solution file `.sln` path.
+    is_required: true
+    title: Path to the Xamarin Solution file
+  xamarin_solution: $BITRISE_PROJECT_PATH
+- opts:
+    category: Config
+    description: Xamarin solution configuration.
+    is_required: true
+    title: Xamarin solution configuration
+  xamarin_configuration: $BITRISE_XAMARIN_CONFIGURATION
+- opts:
+    category: Config
+    description: Xamarin solution platform.
+    is_required: true
+    title: Xamarin solution platform
+  xamarin_platform: $BITRISE_XAMARIN_PLATFORM
+- opts:
+    category: Config
+    description: |-
+      Comma separated list of project types to build.
+
+      __Empty list means: build all project types.__
+
+      Available platforms:
+
+      - android
+      - ios
+      - macos
+      - tvos
+    title: Specify project types to build
+  project_type_whitelist: android,ios,macos,tvos
+- build_tool: msbuild
+  opts:
+    category: Debug
+    description: Which tool to use for building?
+    title: Which tool to use for building?
+    value_options:
+    - msbuild
+    - xbuild
+- ios_build_command_custom_options: null
+  opts:
+    category: Debug
+    description: These options will be appended to the end of the iOS build command.
+    title: Options to append to the iOS build command
+- android_build_command_custom_options: null
+  opts:
+    category: Debug
+    description: These options will be appended to the end of the Android build command.
+    title: Options to append to the Android build command
+- opts:
+    category: Debug
+    description: These options will be appended to the end of the tvOS build command.
+    title: Options to append to the tvOS build command
+  tvos_build_command_custom_options: null
+- macos_build_command_custom_options: null
+  opts:
+    category: Debug
+    description: These options will be appended to the end of the macOS build command.
+    title: Options to append to the macOS build command
+outputs:
+- BITRISE_APK_PATH: ""
+  opts:
+    title: The created android .apk file's path
+- BITRISE_XCARCHIVE_PATH: ""
+  opts:
+    title: The created iOS .xcarchive file's path
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created iOS .ipa file's path
+- BITRISE_DSYM_PATH: null
+  opts:
+    title: The created iOS .dSYM.zip file's path
+- BITRISE_APP_PATH: null
+  opts:
+    title: The create iOS .app file's path
+- BITRISE_TVOS_XCARCHIVE_PATH: ""
+  opts:
+    title: The created tvOS .xcarchive file's path
+- BITRISE_TVOS_IPA_PATH: null
+  opts:
+    title: The created tvOS .ipa file's path
+- BITRISE_TVOS_DSYM_PATH: null
+  opts:
+    title: The created tvOS .dSYM file's path
+- BITRISE_TVOS_APP_PATH: null
+  opts:
+    title: The create tvOS .app file's path
+- BITRISE_MACOS_XCARCHIVE_PATH: ""
+  opts:
+    title: The created macOS .xcarchive file's path
+- BITRISE_MACOS_APP_PATH: null
+  opts:
+    title: The created macOS .app file's path
+- BITRISE_MACOS_PKG_PATH: null
+  opts:
+    title: The created macOS .pkg file's path

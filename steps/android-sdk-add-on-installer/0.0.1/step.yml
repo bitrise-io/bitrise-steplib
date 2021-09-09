@@ -1,0 +1,77 @@
+title: Android SDK Add-on Installer
+summary: |
+  Step to install an Android SDK Add-on locally
+description: |
+  This step will download a specific version of the Android SDK Add-on into the Bitrise VM, allowing apps to build its code linking against this add-on code
+website: https://github.com/FutureWorkshops/bitrise-step-android-sdk-add-on-installer
+source_code_url: https://github.com/FutureWorkshops/bitrise-step-android-sdk-add-on-installer
+support_url: https://github.com/FutureWorkshops/bitrise-step-android-sdk-add-on-installer
+published_at: 2021-04-20T00:04:44.634593+02:00
+source:
+  git: https://github.com/FutureWorkshops/bitrise-step-android-sdk-add-on-installer.git
+  commit: e57e0115c2e2c2d000ab47d637d1c557429e7ec3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/FutureWorkshops/bitrise-step-android-sdk-add-on-installer
+deps:
+  brew:
+  - name: go
+  - name: unzip
+  apt_get:
+  - name: golang
+    bin_name: go
+  - name: unzip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- android_sdk_path: $ANDROID_HOME
+  opts:
+    is_expand: true
+    is_required: true
+    title: Path to the Android SDK folders in the machine
+- add_on_url: null
+  opts:
+    description: |
+      The Android SDK Manager Add-on definition is a XML file that is responsible to define how an extra is added to the
+      $ANDROID_HOME path.
+    is_expand: true
+    is_required: true
+    summary: URL to the android Add-on XML definition
+    title: Add-on URL
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- opts:
+    category: Debug
+    description: |-
+      If enabled, the step will calculate the checksum of the downloaded file, based in the type specified in the XML. If the local file
+      do not match the XML data, the step will fail.
+    is_required: true
+    title: Validate downloaded file checksum?
+    value_options:
+    - "yes"
+    - "no"
+  validate_checksum: "no"
+outputs:
+- ADD_ON_SDK_PATH: null
+  opts:
+    summary: Path to the installed SDK
+    title: Local Path of Addon

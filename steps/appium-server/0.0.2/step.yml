@@ -1,0 +1,45 @@
+title: Run Appium Server
+summary: |
+  Install and Run Appium Server
+description: |
+  Install and Run Appium Server on Bitrise to be able to run our mobile automated tests
+website: https://github.com/moatazeldebsy/bitrise-step-appium-server
+source_code_url: https://github.com/moatazeldebsy/bitrise-step-appium-server
+support_url: https://github.com/moatazeldebsy/bitrise-step-appium-server/issues
+published_at: 2021-08-18T23:06:40.395281+02:00
+source:
+  git: https://github.com/moatazeldebsy/bitrise-step-appium-server.git
+  commit: a42128594674b52114a883558124aad26af8f38f
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- react-native
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: nodejs
+  apt_get:
+  - name: nodejs
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- appium_version: v1.21.0
+  opts:
+    description: "Specify the Appium version that you want to install for example
+      v1.21.0 \n"
+    is_expand: false
+    is_required: true
+    summary: Specify the Appium version that you want to install
+    title: Appium Version
+    value_options:
+    - v1.21.0
+    - v1.20.2

@@ -1,0 +1,89 @@
+title: Run CocoaPods install
+summary: |-
+  You don't need to keep the installed Pods in your repo. Simply add this Step
+  and Bitrise will do the Pod install for you on the VM!
+description: "\nCocoaPods is a dependency manager for Swift and Objective-C projects.
+  This Step uses CocoaPods' `pod install` or `pod update` command to install your
+  dependencies on the virtual machine where your Bitrise build runs.   \nCocoaPods
+  version is determined based on the Podfile.lock file or on the Gemfile.lock file.
+  If your Gemfile.lock file contains the `cocoapods` gem, then the Step will call
+  the pod `install` command with `bundle exec`. Otherwise, the Cocoapods version in
+  the Podfile.lock will be installed as a global gem.\nIf no Cocoapods version is
+  defined in Podfile.lock or Gemfile.lock, the preinstalled sytem Cocoapods version
+  will be used.\n\n### Configuring the Step\n\n1. Set the **Source Code Directory
+  path** to the path of your app's source code.\n\n1. Optionally, provide a Podfile
+  in the **Podfile path** input.\n\n   Without a specific Podfile, the Step does a
+  recursive search for the Podfile in the root of your app's directory, and uses the
+  first Podfile it finds.\n\n### Troubleshooting\n\nIf the Step fails, check out the
+  Podfile and the Gemfile of your app. Make sure there is no compatibility issue with
+  the different versions of your Pods.  \nCheck that both Podfile.lock and Gemfile.lock
+  is committed and the Cocoapods versions defined in both match.\n\nYou can set the
+  **Execute cocoapods in verbose mode?** input to true to get detailed logs of the
+  Step.\n\n### Useful links\n\n* [Caching Cocoapods](https://devcenter.bitrise.io/builds/caching/caching-cocoapods/)\n*
+  [Include your dependencies in your repository](https://devcenter.bitrise.io/tips-and-tricks/optimize-your-build-times/#include-your-dependencies-in-your-repository)\n\n###
+  Related Steps\n\n* [Run yarn command](https://www.bitrise.io/integrations/steps/yarn)\n*
+  [Carthage](https://www.bitrise.io/integrations/steps/carthage)"
+website: https://github.com/bitrise-io/steps-cocoapods-install
+source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
+support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues
+published_at: 2021-05-12T13:06:14.534918413Z
+source:
+  git: https://github.com/bitrise-steplib/steps-cocoapods-install.git
+  commit: 3fc15ef88c794827fc6fc38e3a5cb52f5a03c339
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-cocoapods-install
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- command: install
+  opts:
+    description: "Use pod `install` to download the explicit version listed in the
+      Podfile.lock without trying to check if a newer version is available.  \nUse
+      pod `update` to update every Pod listed in your Podfile to the latest version
+      possible."
+    is_required: true
+    title: CocoaPods command
+    value_options:
+    - install
+    - update
+- opts:
+    description: "Directory path where the project's Podfile (and optionally Gemfile)
+      is placed.  \nCocoaPods commands will be executed in this directory."
+    is_required: true
+    title: Workdir
+  source_root_path: $BITRISE_SOURCE_DIR
+- opts:
+    description: By specifying this input `Workdir` gets overriden by the provided
+      file's directory path.
+    title: Podfile path
+  podfile_path: ""
+- opts:
+    description: |
+      If enabled the `--verbose` flag will be appended to all CocoaPods commands.
+    title: Execute all CocoaPods commands in verbose mode?
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- is_cache_disabled: "false"
+  opts:
+    description: "By default the Step adds the Pods directory in the `Workdir` to
+      the Bitrise Build Cache.  \nSet this input to disable automatic cache item collection
+      for this Step.\n"
+    title: Disable automatic cache item collection
+    value_options:
+    - "true"
+    - "false"
