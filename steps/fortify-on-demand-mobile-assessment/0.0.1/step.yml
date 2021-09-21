@@ -1,0 +1,100 @@
+title: Fortify on Demand Mobile Assessment
+summary: |
+  Submits a Fortify on Demand Mobile Assessment
+description: |
+  Submits a Fortify on Demand Mobile Assessment
+website: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
+source_code_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
+support_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment/issues
+published_at: 2021-09-21T12:19:21.498094227+08:00
+source:
+  git: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment.git
+  commit: 048ab9970b312fd5a60133c7de019b9b7ed19282
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- client_id: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Client ID for authentication
+    title: Client ID
+- client_secret: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Client secret for authentication
+    title: Client Secret
+- datacenter: AMS
+  opts:
+    is required: true
+    is_expand: true
+    summary: Fortify on Demand Datacenters
+    title: Datacenter
+    value_options:
+    - AMS
+    - APJ
+    - EMEA
+    - FED
+- entitlement_id: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Entitlement ID for this mobile assessment
+    title: Entitlement ID
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Release ID for this mobile assessment
+    title: Release ID
+  release_id: null
+- assessment_type: Mobile Assessment (Single Scan)
+  opts:
+    is required: true
+    is_expand: true
+    summary: Assessment type for this mobile assessment
+    title: Assessment Type
+    value_options:
+    - Mobile Assessment (Single Scan)
+    - Mobile+ Assessment (Single Scan)
+    - Mobile Assessment (Subscription)
+    - Mobile+ Assessment (Subscription)
+- framework_type: Android
+  opts:
+    is required: true
+    is_expand: true
+    summary: Framework type for this mobile assessment
+    title: Framework Type
+    value_options:
+    - Android
+    - iOS
+- opts:
+    is required: true
+    is_expand: true
+    summary: Platform type for this mobile assessment
+    title: Platform Type
+    value_options:
+    - Phone
+    - Tablet
+    - Both
+  platform_type: Phone
+- file_path: null
+  opts:
+    is required: true
+    is_expand: true
+    title: Path to apk/ipa
