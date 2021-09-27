@@ -8,10 +8,10 @@ description: |
 website: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
 source_code_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
 support_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment/issues
-published_at: 2021-09-27T21:20:10.966319213+08:00
+published_at: 2021-09-27T21:28:40.763379508+08:00
 source:
   git: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment.git
-  commit: a6fef5ebe4c4322823fb155926e971c5769d0416
+  commit: 4e501c3ec23f933f81faf0a0ecdfa104d741ad74
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -46,7 +46,7 @@ inputs:
     is_sensitive: true
     summary: Client secret for authentication
     title: Client Secret
-- datacenter: Select Datacenter
+- datacenter: ' '
   opts:
     description: Select the datacenter assigned to you. This is provided once your
       are onboarded with Fortify on Demand.
@@ -55,7 +55,6 @@ inputs:
     summary: Fortify on Demand Datacenters
     title: Datacenter
     value_options:
-    - Select Datacenter
     - AMS
     - APJ
     - EMEA
@@ -76,7 +75,7 @@ inputs:
     summary: Release ID for this mobile assessment
     title: Release ID
   release_id: null
-- assessment_type: Select Assessment Type
+- assessment_type: ' '
   opts:
     description: "Mobile Assessment includes Vulnerability analysis of mobile binary,
       Endpoint reputation analysis and Security expert review of prioritized results.
@@ -88,19 +87,17 @@ inputs:
     summary: Assessment type for this mobile assessment
     title: Assessment Type
     value_options:
-    - Select Assessment Type
     - Mobile Assessment (Single Scan)
     - Mobile+ Assessment (Single Scan)
     - Mobile Assessment (Subscription)
     - Mobile+ Assessment (Subscription)
-- framework_type: Select Framework Type
+- framework_type: ' '
   opts:
     is required: true
     is_expand: true
     summary: Framework type for this mobile assessment
     title: Framework Type
     value_options:
-    - Select Framework Type
     - Android
     - iOS
 - opts:
@@ -109,11 +106,10 @@ inputs:
     summary: Platform type for this mobile assessment
     title: Platform Type
     value_options:
-    - Select Platform Type
     - Phone
     - Tablet
     - Both
-  platform_type: Select Platform Type
+  platform_type: ' '
 - file_path: null
   opts:
     is required: true
