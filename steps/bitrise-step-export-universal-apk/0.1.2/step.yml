@@ -1,0 +1,95 @@
+title: Export Universal APK
+summary: |
+  Exports a universal APK from an Android App Bundle.
+description: |
+  This Step generates a universal APK from an Android App Bundle, and exports it to the `$BITRISE_APK_PATH` Environment Variable so that the next Step or [Ship add-on](https://devcenter.bitrise.io/deploy/ship/) can pick it up. The Step also signs the generated APK with the keystore file you uploaded to the [Code Signing](https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-index/) tab or, if there was no keystore available, it signs the APK with a debug keystore file.
+
+  ### Configuring the Step
+  1. Insert the Step after a build Step in your Workflow.
+  2. The **Android App Bundle path** input field is automatically filled out by the output of the previous build Step.
+  3. The **Keystore URL** is automatically filled out based on the uploaded keystore file on the **Code Signing** tab.
+  4. If the keystore file is uploaded to the **Code Signing** tab, the **Keystore alias**, **Keystore password**, and **Private key password** inputs are automatically populated.
+  5. The latest Bundletool version is set in the respective input. If, for any reason, you wish to use an older version, you can add it here, but make sure you use the [correct version](https://github.com/google/bundletool/releases).
+
+  ### Troubleshooting
+  This Step works with Bundletool's latest version which is automatically set in the respective Step input. If you wish to switch to an older version, you have to add it manually. Make sure you add the [correct version](https://github.com/google/bundletool/releases), otherwise the Step will fail.
+
+  ### Useful links
+  - [Android code signing](https://devcenter.bitrise.io/code-signing/android-code-signing/android-code-signing-index/)
+  - [Deploying and Android app](https://devcenter.bitrise.io/deploy/android-deploy/android-deployment-index/)
+
+  ### Related Steps
+  - [Android Sign](https://www.bitrise.io/integrations/steps/sign-apk)
+  - [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+website: https://github.com/bitrise-steplib/bitrise-step-export-universal-apk
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-export-universal-apk
+support_url: https://github.com/bitrise-steplib/bitrise-step-export-universal-apk/issues
+published_at: 2021-10-05T07:38:36.616905339Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-export-universal-apk.git
+  commit: 51999c4a8dba345a80f4847cd2e7438d3cc07906
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-export-universal-apk
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- aab_path: $BITRISE_AAB_PATH
+  opts:
+    description: |
+      The **Android App Bundle path** input field is automatically filled out by the output of the previous build Step
+    is_expand: true
+    is_required: true
+    summary: Android App Bundle file (`.aab`) path
+    title: Android App Bundle path
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: The keystore file's URL which is generated when you upload the file to
+      the Code Signing tab.
+    title: Keystore URL
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: The password you added to the keystore.
+    title: Keystore password
+- keystore_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    description: ""
+    is_required: true
+    is_sensitive: true
+    summary: Identifier name you added to the keystore.
+    title: Keystore alias
+- opts:
+    description: null
+    is_sensitive: true
+    summary: Password you added to the private key.
+    title: Private key password
+  private_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+- bundletool_version: 1.8.1
+  opts:
+    description: If you wish to set a specific version, add it here based on [Bundletool's
+      official release](https://github.com/google/bundletool/releases) page.
+    is_expand: true
+    summary: You can override this Bundletool version if you need a specific one.
+    title: Bundletool version
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: ""
+    summary: The APK is exported to this output Environment Variable and can be picked
+      up by the next Step or Ship.
+    title: The exported APK's path
