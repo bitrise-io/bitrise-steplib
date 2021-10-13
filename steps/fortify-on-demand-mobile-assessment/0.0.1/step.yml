@@ -8,7 +8,7 @@ description: |
 website: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
 source_code_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
 support_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment/issues
-published_at: 2021-10-13T17:45:07.770143331+08:00
+published_at: 2021-10-13T17:46:21.979237843+08:00
 source:
   git: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment.git
   commit: 4e501c3ec23f933f81faf0a0ecdfa104d741ad74
