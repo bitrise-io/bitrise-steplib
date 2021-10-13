@@ -8,10 +8,10 @@ description: |
 website: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
 source_code_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
 support_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment/issues
-published_at: 2021-10-13T17:51:48.832698378+08:00
+published_at: 2021-10-13T18:06:09.785168314+08:00
 source:
   git: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment.git
-  commit: 2d9446515350abf5bf7aeb925ea8c27f7fff7524
+  commit: 32326a0a4d62942e3eff4d22712efa49cb923d0f
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -56,7 +56,7 @@ inputs:
     title: Datacenter
     value_options:
     - AMS
-    - APJ
+    - APAC
     - EMEA
     - FED
 - entitlement_id: null
