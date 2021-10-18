@@ -3,29 +3,35 @@ title: |-
 summary: |
   Uploads IPA to Testlio
 description: |
-  Uploads IPA to Testlio to perform test case validation
+  Uploads IPA to Testlio for validation to work around 2fa restrictions of
+  app distribution through AppStoreConnect
 website: https://github.com/dmiluski/bitrise-step-testlio-upload
 source_code_url: https://github.com/dmiluski/bitrise-step-testlio-upload
 support_url: https://github.com/dmiluski/bitrise-step-testlio-upload/issues
-published_at: 2021-09-03T20:348:19-07:00
-source:
-  git: https://github.com/dmiluski/bitrise-step-testlio-upload.git
-  commit: 428ca8b0f6f0001181110fbcbd1b4e9f142ebd71
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
+
 project_type_tags:
   - ios
   - macos
+
 type_tags:
   - utility
-toolkit:
-  bash:
-    entry_file: step.sh
+
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: true
 run_if: ""
+
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
 inputs:
   - opts:
       description: |
@@ -61,3 +67,5 @@ inputs:
       is_sensitive: false
       summary: Your Testlio App name
       title: Testlio App name
+
+outputs:
