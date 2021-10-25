@@ -22,9 +22,7 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
-    - name: git
-    - name: wget
-is_requires_admin_user: true
+    - name: node
 is_always_run: true
 is_skippable: true
 run_if: .IsCI
