@@ -6,42 +6,42 @@ description: |
 website: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks
 source_code_url: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks
 support_url: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks/issues
-published_at: 2021-10-25T19:28:02.842174+09:00
+published_at: 2021-10-25T19:38:24.734504+09:00
 source:
   git: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks.git
   commit: 5dfc36f022669c89faf63028cf91b41c005cbfa5
 host_os_tags:
-- osx-10.10
+  - osx-10.10
 project_type_tags:
-- ios
-- macos
+  - ios
+  - macos
 type_tags:
-- test
+  - test
 toolkit:
   bash:
     entry_file: step.sh
 deps:
   brew:
-  - name: git
-  - name: wget
+    - name: git
+    - name: wget
 is_requires_admin_user: true
 is_always_run: true
 is_skippable: true
 run_if: .IsCI
 inputs:
-- opts:
-    description: |
-      Path to the xcresult bundle.
-    is_expand: true
-    is_required: true
-    summary: Path to the xcresult bundle.
-    title: Result bundle path
-  xcresult_path: $BITRISE_XCRESULT_PATH
-- opts:
-    description: |
-      Title for the check results.
-    is_expand: true
-    is_required: false
-    summary: Title for the check results.
-    title: Title
-  title: Xcode test results
+  - opts:
+      description: |
+        Path to the xcresult bundle.
+      is_expand: true
+      is_required: true
+      summary: Path to the xcresult bundle.
+      title: Result bundle path
+    xcresult_path: $BITRISE_XCRESULT_PATH
+  - opts:
+      description: |
+        Title for the check results.
+      is_expand: true
+      is_required: false
+      summary: Title for the check results.
+      title: Title
+    title: Xcode test results
