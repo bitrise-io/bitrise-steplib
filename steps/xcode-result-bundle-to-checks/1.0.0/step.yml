@@ -27,19 +27,20 @@ is_always_run: true
 is_skippable: true
 run_if: .IsCI
 inputs:
-  - opts:
+  - xcresult_path: $BITRISE_XCRESULT_PATH
+    opts:
       description: |
         Path to the xcresult bundle.
       is_expand: true
       is_required: true
       summary: Path to the xcresult bundle.
       title: Result bundle path
-    xcresult_path: $BITRISE_XCRESULT_PATH
-  - opts:
+
+  - title: Xcode test results
+    opts:
       description: |
         Title for the check results.
       is_expand: true
       is_required: false
       summary: Title for the check results.
       title: Title
-    title: Xcode test results
