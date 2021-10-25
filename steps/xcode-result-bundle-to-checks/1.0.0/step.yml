@@ -1,4 +1,4 @@
-title: Xcode Result Bundle to Checks
+title: Xcode Result Bundle to GitHub Checks
 summary: |
   Generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.
 description: |
