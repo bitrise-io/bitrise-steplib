@@ -8,6 +8,11 @@ description: |
 website: https://github.com/dmiluski/bitrise-step-testlio-upload
 source_code_url: https://github.com/dmiluski/bitrise-step-testlio-upload
 support_url: https://github.com/dmiluski/bitrise-step-testlio-upload/issues
+published_at: 2020-10-25T15:00:01.19267+01:00
+source:
+  git: https://github.com/dmiluski/bitrise-step-testlio-upload.git
+  commit: 0acbf3a60dbda73488b745ce14771eb4619b07c9
+
 host_os_tags:
   - osx-10.10
   - ubuntu-16.04
@@ -17,7 +22,7 @@ project_type_tags:
   - macos
 
 type_tags:
-  - utility
+  - deploy
 
 is_requires_admin_user: true
 is_always_run: false
@@ -41,7 +46,7 @@ inputs:
         The app file you want to upload to BrowserStack, usually $BITRISE\_IPA\_PATH
       title: A Bitrise generated IPA path
     upload_path: $BITRISE_IPA_PATH
-  - testlio_api_token: $TESTLIO_API_TOKEN
+  - TESTLIO_API_TOKEN: null
     opts:
       description: |
         Authentication to the API is performed via ​JWT​.
@@ -50,7 +55,7 @@ inputs:
       summary: Your Testlio API token
       title: Testlio API Token
 
-  - testlio_collection_id: $TESTLIO_COLLECTION_ID
+  - TESTLIO_COLLECTION_ID: null
     opts:
       description: |
         Identifier of the collection
@@ -59,7 +64,7 @@ inputs:
       summary: Your Testlio Collection ID
       title: Testlio Collection ID
 
-  - testlio_app_name: $TESTLIO_APP_NAME
+  - TESTLIO_APP_NAME: null
     opts:
       description: |
         Application name used for submission
