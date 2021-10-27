@@ -42,3 +42,21 @@ inputs:
       is_required: false
       summary: Title for the check results.
       title: Title
+
+  - github_owner: $BITRISEIO_GIT_REPOSITORY_OWNER
+    opts:
+      description: |
+        The name of the owner of the GitHub repository.
+      is_expand: true
+      is_required: false
+      summary: The name of the GitHub repository.
+      title: GitHub repository owner
+
+  - github_repo: $BITRISEIO_GIT_REPOSITORY_SLUG
+    opts:
+      description: |
+        The name of the GitHub repository.
+      is_expand: true
+      is_required: false
+      summary: The name of the GitHub repository.
+      title: GitHub repository
