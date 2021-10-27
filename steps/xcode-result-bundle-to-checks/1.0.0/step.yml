@@ -10,8 +10,6 @@ published_at: 2021-10-25T19:38:24.734504+09:00
 source:
   git: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks.git
   commit: 5dfc36f022669c89faf63028cf91b41c005cbfa5
-host_os_tags:
-  - osx-10.10
 project_type_tags:
   - ios
   - macos
