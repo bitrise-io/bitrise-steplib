@@ -60,3 +60,13 @@ inputs:
       is_required: false
       summary: The name of the GitHub repository.
       title: GitHub repository
+
+  - head_sha: $GIT_CLONE_COMMIT_HASH
+    opts:
+      description: |
+        The SHA of the commit to check.
+      is_expand: true
+      is_required: false
+      is_dont_change_value: true
+      summary: The SHA of the commit to check.
+      title: Commit SHA-1 Hash
