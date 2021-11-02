@@ -1,0 +1,72 @@
+title: Xcode Result Bundle to GitHub Checks
+summary: |
+  Generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.
+description: |
+  Generates a human-readable test report from the Xcode result bundle and shows it on GitHub Checks.
+website: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks
+source_code_url: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks
+support_url: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks/issues
+published_at: 2021-10-25T19:38:24.734504+09:00
+source:
+  git: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks.git
+  commit: c74a7a55e73aa00a6468a351deed5648e271bc50
+project_type_tags:
+  - ios
+  - macos
+type_tags:
+  - test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+    - name: node
+is_always_run: true
+is_skippable: true
+run_if: .IsCI
+inputs:
+  - xcresult_path: $BITRISE_XCRESULT_PATH
+    opts:
+      description: |
+        Path to the xcresult bundle.
+      is_expand: true
+      is_required: true
+      summary: Path to the xcresult bundle.
+      title: Result bundle path
+
+  - title: Xcode test results
+    opts:
+      description: |
+        Title for the check results.
+      is_expand: true
+      is_required: false
+      summary: Title for the check results.
+      title: Title
+
+  - github_owner: $BITRISEIO_GIT_REPOSITORY_OWNER
+    opts:
+      description: |
+        The name of the owner of the GitHub repository.
+      is_expand: true
+      is_required: false
+      summary: The name of the GitHub repository.
+      title: GitHub repository owner
+
+  - github_repo: $BITRISEIO_GIT_REPOSITORY_SLUG
+    opts:
+      description: |
+        The name of the GitHub repository.
+      is_expand: true
+      is_required: false
+      summary: The name of the GitHub repository.
+      title: GitHub repository
+
+  - head_sha: $GIT_CLONE_COMMIT_HASH
+    opts:
+      description: |
+        The SHA of the commit to check.
+      is_expand: true
+      is_required: false
+      is_dont_change_value: true
+      summary: The SHA of the commit to check.
+      title: Commit SHA-1 Hash
