@@ -9,7 +9,7 @@ support_url: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundl
 published_at: 2021-10-25T19:38:24.734504+09:00
 source:
   git: https://github.com/kishikawakatsumi/bitrise-step-xcode-result-bundle-to-checks.git
-  commit: 5dfc36f022669c89faf63028cf91b41c005cbfa5
+  commit: c74a7a55e73aa00a6468a351deed5648e271bc50
 project_type_tags:
   - ios
   - macos
