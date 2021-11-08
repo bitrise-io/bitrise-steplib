@@ -1,0 +1,102 @@
+title: Android Lint
+summary: Runs Lint on your Android project source files and detects potential syntax
+  errors to keep your code error free.
+description: |-
+  It highlights the code line where the error is found, explains the type of error and suggests corrections. The Step does not make the build fail if it spots any structural errors in your code. If you have inserted the **Deploy to Bitrise.io** Step in the Workflow, the tes results will be available in a viewable or downloadable Lint Report HTML or XML file which you can access on the Build's APPS & ARTIFACTS page.
+
+  ### Configuring the Step
+
+  1. Set the **Project Location** input which, by default, points to the root directory of your Android project.
+  2. Set the module and variant you wish to lint in the **Module** and **Variant** fields.
+
+  Optionally, you can modify these inputs:
+  1. You can specify where the Lint reports should be found once the Step has run if you overwrite the **Report location pattern** input.
+  2. You can set if the Step should cache build outputs and dependencies, only the dependencies or nothing at all in the **Set level of cache** input.
+  3. You can set any gradle argument to the gradle task in the **Additional Gradle Arguments** input.
+
+  ### Troubleshooting
+  Make sure you insert the Step before a build Step.
+  Make sure you type the correct module and variant names in the respective fields of the Step. If you are unsure about the exact names, you can check them in the **Project Structure** dialog of your project in Android Studio.
+
+  ### Useful links
+  - [Improve your code with lint checks](https://developer.android.com/studio/write/lint)
+
+  ### Related Steps
+  - [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+  - [Android Unit Test](https://www.bitrise.io/integrations/steps/android-unit-test)
+  - [[BETA] Virtual Device Testing for Android](https://www.bitrise.io/integrations/steps/virtual-device-testing-for-android)
+website: https://github.com/bitrise-steplib/bitrise-step-android-lint
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-lint
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-lint/issues
+published_at: 2021-11-08T09:56:34.10549279Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-lint.git
+  commit: de8726d7c43c2d3de51c23b0bcbe76ec42b120b1
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-lint
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exists (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exists (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to lint. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: false
+    summary: |
+      Set the module that you want to lint. To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to lint. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    is_required: false
+    summary: |
+      Set the variant that you want to lint. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- opts:
+    category: Options
+    description: |
+      Will find the report file with the given pattern. If you need the xml file then you can use: "*/build/reports/lint-results*.xml"
+    is_required: true
+    summary: |
+      Will find the report file with the given pattern. If you need the xml file then you can use: "*/build/reports/lint-results*.xml"
+    title: Report location pattern
+  report_path_pattern: '*/build/reports/lint-results*.html'
+- cache_level: only_deps
+  opts:
+    category: Options
+    description: |-
+      `all` - will cache build cache and dependencies
+      `only_deps` - will cache dependencies only
+      `none` - will not cache anything
+    is_required: true
+    title: Set the level of cache
+    value_options:
+    - all
+    - only_deps
+    - none
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
