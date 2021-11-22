@@ -94,7 +94,7 @@ inputs:
       run will happen on a device from the pool.
     is_required: true
     summary: Enter device pool name created on Qyrus
-    title: device_pool_name
+    title: Device pool name
 - enable_debug: "no"
   opts:
     description: |
