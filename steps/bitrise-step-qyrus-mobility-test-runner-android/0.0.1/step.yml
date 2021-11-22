@@ -101,7 +101,7 @@ inputs:
       Step prints additional debug information if this option
       is enabled
     is_required: true
-    title: Debug mode ?
+    title: Debug mode
     value_options:
     - "yes"
     - "no"
