@@ -110,7 +110,7 @@ inputs:
       If you just want to run tests without upload app
       change the option to no.
     is_required: true
-    title: You want to upload app?
+    title: Upload app
     value_options:
     - "yes"
     - "no"
