@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg id="emulator.wtf" viewBox="0 0 256 256" version="1.1" width="256" height="256" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs137">
+    <style id="style135">
+      .cls-1{fill:#212020;}.cls-2{fill:#8fe2aa;}.cls-3{fill:#67cdcc;}
+    </style>
+  </defs>
+  <rect class="cls-1" x="0" y="0" width="256" height="256" rx="22.099592" id="rect139" style="stroke-width:1.0449"/>
+  <path class="cls-2" d="M 181.50923,53.477878 V 178.60441 a 9.2055509,9.205551 0 0 1 -9.19511,9.20555 H 160.09926 V 77.395592 a 9.1846529,9.1846531 0 0 0 -9.1951,-9.184653 H 95.879836 V 53.477878 a 9.195102,9.195102 0 0 1 9.195104,-9.184654 h 67.23918 a 9.1846529,9.1846531 0 0 1 9.19511,9.184654 z" id="path141" style="stroke-width:1.0449"/>
+  <path class="cls-3" d="m 160.09926,187.80996 v 14.71216 a 9.1846529,9.1846531 0 0 1 -9.1951,9.18466 H 83.685877 a 9.1846529,9.1846531 0 0 1 -9.195102,-9.18466 V 77.395592 a 9.1846529,9.1846531 0 0 1 9.195102,-9.184653 H 95.879836 V 178.60441 a 9.2159999,9.216 0 0 0 9.195104,9.20555 z" id="path143" style="stroke-width:1.0449"/>
+</svg>

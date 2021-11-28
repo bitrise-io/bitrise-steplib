@@ -1,0 +1,136 @@
+title: Run instrumentation tests
+summary: |
+  Run your Android UI tests with [emulator.wtf](https://emulator.wtf).
+description: |
+  Run your Android UI tests with [emulator.wtf](https://emulator.wtf).
+
+  Emulator.wtf is an Android cloud emulator laser-focused on performance to deliver quick feedback to your PRs.
+
+  It's like Firebase Test Lab on steroids (2-4x speedup, depending on your specific setup)
+website: https://emulator.wtf
+source_code_url: https://github.com/emulator-wtf/run-tests-bitrise
+support_url: https://github.com/emulator-wtf/run-tests-bitrise/issues
+published_at: 2021-11-28T17:10:15.656951+02:00
+source:
+  git: https://github.com/emulator-wtf/run-tests-bitrise.git
+  commit: b4e5502f25bbec6c9b1db6f7f519b0361b293ad3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: emulator.wtf API Token
+  token: null
+- app: $BITRISE_APK_PATH
+  opts:
+    description: |
+      The path to the APK to test.
+
+      When you run the [android-build](https://www.bitrise.io/integrations/steps/android-build) or [android-build-for-ui-testing](https://bitrise.io/integrations/steps/android-build-for-ui-testing) Step before this Step, then the generated APK path is exported under the `$BITRISE_APK_PATH` environment variable.
+    is_expand: true
+    is_required: true
+    summary: The path to the APK to test.
+    title: APK path
+- opts:
+    description: |
+      The path to the test APK that contains instrumentation tests.
+
+      You can easily generate the test APK by running the [android-build-for-ui-testing](https://bitrise.io/integrations/steps/android-build-for-ui-testing) Step before this Step. In this case, the test APK path is exported under the `$BITRISE_TEST_APK_PATH` environment variable.
+    is_expand: true
+    is_required: true
+    summary: The path to the test APK that contains instrumentation tests.
+    title: Test APK path
+  test: $BITRISE_TEST_APK_PATH
+- num_shards: 1
+  opts:
+    description: |
+      Tests are split evenly by count across shards and run in parallel.
+
+      In general, the more shards you use, the faster your total test run time will be. Make sure not to set this count to be bigger than your actual test count.
+    summary: Tests are split evenly by count across shards and run in parallel.
+    title: Number of test shards
+- device: null
+  opts:
+    description: |
+      Device configuration where to run tests.
+
+      This is only required when you don't want to run tests on the default emulator configuration.
+
+      The value of this parameter must be a list of key=value pairs where supported keys are:
+
+      -  `model`: device model to use, possible values [`Pixel2`, `NexusLowRes`]
+      -  `version`: API version to use
+
+      For example, to test on an low res MDPI device with API 23 specify `model=NexusLowRes,version=23`
+    summary: Device configuration where to run tests
+    title: Device configuration
+- opts:
+    title: Use Android Test Orchestrator
+    value_options:
+    - "yes"
+    - "no"
+  use_orchestrator: "yes"
+- clear_package_data: "yes"
+  opts:
+    summary: Only applicable when using Android Test Orchestrator
+    title: Clear package data between runs
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    title: Collect code coverage data while executing the test
+    value_options:
+    - "yes"
+    - "no"
+  with_coverage: "no"
+- opts:
+    summary: Using $BITRISE_TEST_RESULT_DIR here will make sure that they are also
+      available under the Test Reports view
+    title: Output path where test run outputs (junit XML, logcat, files) will be stored.
+  outputs_dir: $BITRISE_TEST_RESULT_DIR
+- additional_apks: null
+  opts:
+    summary: A comma separated list of additional APKs to install, in addition to
+      those being directly tested.
+    title: Additional APKs to install
+- environment_variables: null
+  opts:
+    description: |
+      Comma separated list of key=value pairs that are passed as extra options to the `am instrument` command.
+
+      Some common examples of supported extras can be found [here](https://developer.android.com/studio/test/command-line#AMOptionsSyntax)
+
+      Example use-cases:
+        * Run second shard out of 3 shards: `numShards=3,shardIndex=1`
+        * Run tests in a specific class: `class=com.example.app.MyTestClass`
+    summary: Extra options are passed as extra options to the `am instrument` command.
+    title: Test extra options
+- directories_to_pull: null
+  opts:
+    description: |
+      Comma separated directories that should be pulled from the emulator and that will be stored in the output path together with tests results.
+    summary: Pull these directories from the emulator into the output path
+    title: Pull additional directories
+outputs:
+- EMULATORWTF_TEST_RESULT_DIR: null
+  opts:
+    title: Output path where test run outputs (junit XML, logcat, files) are stored
