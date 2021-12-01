@@ -1,0 +1,101 @@
+title: Create a new release in JIRA
+summary: |
+  Create a new release in JIRA.
+description: |
+  This Step creates a Release in your JIRA project, with the start date, publication and description you need.
+website: https://github.com/Emalober/bitrise-step-create-a-new-release-in-jira
+source_code_url: https://github.com/Emalober/bitrise-step-create-a-new-release-in-jira
+support_url: https://github.com/Emalober/bitrise-step-create-a-new-release-in-jira/issues
+published_at: 2021-11-25T17:50:16.408957-03:00
+source:
+  git: https://github.com/Emalober/bitrise-step-create-a-new-release-in-jira.git
+  commit: 87abc7c45691d0d6d9cddceb09124d51eb27c9f1
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  apt_get:
+  - name: curl
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Jira project prefix to search for tasks.
+
+      e.g. "PROJ"
+    is_expand: true
+    is_required: true
+    summary: Jira project prefix to search for tasks.
+    title: Jira project prefix
+  project_prefix: null
+- jira_domain: null
+  opts:
+    description: |
+      Jira company domain.
+
+      e.g. "example.atlassian.net"
+    is_expand: true
+    is_required: true
+    summary: Jira company domain
+    title: Jira domain
+- jira_user: null
+  opts:
+    description: |
+      Jira user used to authenticate with Jira API
+
+      e.g. "someone@example.pl"
+    is_required: true
+    is_sensitive: true
+    summary: Jira user used to authenticate with Jira API
+    title: Jira user
+- jira_token: null
+  opts:
+    description: |
+      Jira user token used to authenticate with Jira API
+
+      24 character string
+    is_required: true
+    is_sensitive: true
+    summary: Jira user token used to authenticate with Jira API
+    title: Jira user token
+- opts:
+    description: |
+      Version description.
+
+      e.g. "An excellent version"
+    is_required: true
+    summary: Version description
+    title: Version  description
+  version_description: null
+- opts:
+    description: |
+      Version name.
+
+      e.g. "v1.0.0"
+    is_expand: true
+    is_required: true
+    summary: Version name
+    title: Version  name
+  version_name: null
+- opts:
+    description: |
+      If the version is Released.
+    is_required: true
+    summary: If the version is Released
+    title: If the version is Released?
+    value_options:
+    - "yes"
+    - "no"
+  version_released: "no"
