@@ -6,28 +6,18 @@ description: |
 website: https://kobiton.com
 source_code_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo
 support_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo/issues
-published_at: 2021-12-02T11:32:43.775862+07:00
+published_at: 2021-12-02T21:29:30.928866+07:00
 source:
   git: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo.git
-  commit: 0efcafb12186a942ac4cad573f6e5cbff71e4cfd
+  commit: 6ea2b2ee115463bee6398e693210af081628d012
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
-project_type_tags:
-- ios
-- android
 type_tags:
 - deploy
 toolkit:
   bash:
     entry_file: step.sh
-deps:
-  brew:
-  - name: git
-  - name: wget
-  apt_get:
-  - name: git
-  - name: wget
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
