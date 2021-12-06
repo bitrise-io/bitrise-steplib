@@ -9,7 +9,7 @@ support_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo/is
 published_at: 2021-12-06T11:33:55.037205+07:00
 source:
   git: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo.git
-  commit: 098da4f85303bdc61dfdb36072ec7e14e0e8878f
+  commit: 40b4eb88a03863221445abf852429e0bd024a879
 type_tags:
 - deploy
 toolkit:
@@ -17,6 +17,9 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
+  - name: curl
+  - name: ack
+  apt_get:
   - name: curl
   - name: ack
 is_always_run: false
