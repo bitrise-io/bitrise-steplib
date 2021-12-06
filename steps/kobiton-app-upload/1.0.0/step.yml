@@ -1,4 +1,4 @@
-title: Kobiton App Upload
+title: Upload application to Kobiton
 summary: |
   Uploads an application to Kobiton App Repo
 description: |
@@ -6,19 +6,19 @@ description: |
 website: https://kobiton.com
 source_code_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo
 support_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo/issues
-published_at: 2021-12-02T21:29:30.928866+07:00
+published_at: 2021-12-06T11:33:55.037205+07:00
 source:
   git: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo.git
-  commit: 6ea2b2ee115463bee6398e693210af081628d012
-host_os_tags:
-- osx-10.10
-- ubuntu-16.04
+  commit: 098da4f85303bdc61dfdb36072ec7e14e0e8878f
 type_tags:
 - deploy
 toolkit:
   bash:
     entry_file: step.sh
-is_requires_admin_user: true
+deps:
+  brew:
+  - name: curl
+  - name: ack
 is_always_run: false
 is_skippable: false
 run_if: ""
@@ -27,6 +27,7 @@ inputs:
   opts:
     is_expand: true
     is_required: true
+    summary: Title of the app beign built
     title: App Name
 - kobiton_app_path: $BITRISE_SIGNED_APK_PATH
   opts:
@@ -63,12 +64,14 @@ inputs:
     is_expand: true
     is_required: true
     is_sensitive: true
+    summary: The user to upload to Kobiton
     title: Kobiton Username
 - kobiton_api_key: null
   opts:
     is_expand: true
     is_required: true
     is_sensitive: true
+    summary: API key to access Kobiton API
     title: Kobiton API Key/Secret
 outputs:
 - KOBITON_APP_ID: null
