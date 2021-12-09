@@ -9,7 +9,7 @@ support_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo/is
 published_at: 2021-12-06T11:33:55.037205+07:00
 source:
   git: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo.git
-  commit: 098da4f85303bdc61dfdb36072ec7e14e0e8878f
+  commit: 40b4eb88a03863221445abf852429e0bd024a879
 type_tags:
 - deploy
 toolkit:
@@ -17,6 +17,9 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
+  - name: curl
+  - name: ack
+  apt_get:
   - name: curl
   - name: ack
 is_always_run: false
@@ -35,7 +38,7 @@ inputs:
     is_required: true
     summary: Path to the app .apk or .ipa file
     title: App Path
-- kobiton_app_id: null
+- kobiton_app_id:
   opts:
     is_expand: true
     is_required: false
@@ -49,24 +52,24 @@ inputs:
     summary: Select ipa for iOS app or apk for Android app
     title: App Type
     value_options:
-    - apk
-    - ipa
+    - "apk"
+    - "ipa"
 - kobiton_app_access: public
   opts:
     summary: You can either to make this app private or available for everyone in
       the organization
     title: App Privacy
     value_options:
-    - public
-    - private
-- kobiton_username: null
+    - "public"
+    - "private"
+- kobiton_username:
   opts:
     is_expand: true
     is_required: true
     is_sensitive: true
     summary: The user to upload to Kobiton
     title: Kobiton Username
-- kobiton_api_key: null
+- kobiton_api_key:
   opts:
     is_expand: true
     is_required: true
@@ -74,19 +77,19 @@ inputs:
     summary: API key to access Kobiton API
     title: Kobiton API Key/Secret
 outputs:
-- KOBITON_APP_ID: null
+- KOBITON_APP_ID:
   opts:
     description: |
       The App ID that the app has been uploaded to Kobiton Repo.
     summary: Kobiton App ID
     title: App ID
-- KOBITON_UPLOAD_URL: null
+- KOBITON_UPLOAD_URL:
   opts:
     description: |
       The URL the app has been uploaded to.
     summary: Amazon S3 Upload URL
     title: Upload URL
-- KOBITON_APP_PATH: null
+- KOBITON_APP_PATH:
   opts:
     description: |
       Path to the app binary on Kobiton
