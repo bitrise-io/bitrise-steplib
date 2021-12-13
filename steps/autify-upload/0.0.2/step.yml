@@ -13,8 +13,6 @@ published_at: 2021-12-14T05:27:01.003204+09:00
 source:
   git: https://github.com/autifyhq/bitrise-step-autify-upload.git
   commit: 6ac944710c030a2a0ee09c92fc94310f9ce2a62e
-host_os_tags:
-- osx-10.10
 project_type_tags:
 - ios
 - xamarin
