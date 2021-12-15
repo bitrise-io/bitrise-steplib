@@ -19,7 +19,7 @@ description: |
 website: https://github.com/DroidsOnRoids/bitrise-step-flutter
 source_code_url: https://github.com/DroidsOnRoids/bitrise-step-flutter
 support_url: https://github.com/DroidsOnRoids/bitrise-step-flutter/issues
-published_at: 2021-12-12T18:52:30.662785+01:00
+published_at: 2021-12-15T11:41:54.436378+01:00
 source:
   git: https://github.com/DroidsOnRoids/bitrise-step-flutter.git
   commit: 19d48ec2150e0341a200333ae7a96af2b1b741df
