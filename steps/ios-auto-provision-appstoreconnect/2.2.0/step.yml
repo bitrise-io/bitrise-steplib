@@ -1,0 +1,246 @@
+title: iOS Auto Provision with App Store Connect API
+summary: Automatically manages your iOS Provisioning Profiles for your Xcode project.
+description: |-
+  The Step uses the official [App Store Connect API](https://developer.apple.com/documentation/appstoreconnectapi/generating_tokens_for_api_requests). The Step can obtain the API connection information in 2 ways:
+  It can use either the Bitrise Apple Developer connection selected under the **Team** tab for the application, or you can provide the information to the Step using Step's input variables.
+  The Steps performs the following:
+  - It generates, updates and downloads the provisioning profiles needed for your iOS project.
+  - It verifies if your project is registered with the App Store Connect. If it was not, the Step registers your project.
+  - It registers the iOS devices connected to your Bitrise account with the App Store Connect.
+  - It modifies the iOS project to use manual code signing if the project uses automatically managed signing.
+
+  ### Configuring the Step
+
+  Before you start configuring the Step, make sure you've completed the following requirements:
+  1. You've generated an [API key](https://developer.apple.com/documentation/appstoreconnectapi/creating_api_keys_for_app_store_connect_api) and obtained an **Issuer ID**, **Key ID** and a **Private Key**.
+  2. You've [defined your Apple Developer Account to Bitrise](https://devcenter.bitrise.io/getting-started/configuring-bitrise-steps-that-require-apple-developer-account-data/#defining-your-apple-developer-account-to-bitrise).
+  3. You've [assigned an Apple Developer Account to your app](https://devcenter.bitrise.io/getting-started/configuring-bitrise-steps-that-require-apple-developer-account-data/#assigning-an-apple-developer-account-for-your-app).
+
+  Once these are done, most of the required Step input fields are already populated for you.
+
+  To configure the Step:
+
+  1. Add the **iOS Auto Provision with App Store Connect API** after any dependency installer Step in your Workflow, such as **Run CocoaPods install** or **Carthage**.
+  2. Click the Step to edit its input fields. You can see that the **Build API token**, **Build URL**, and the **Xcode Project (or Workspace) path** inputs are automatically filled out for you.
+      - **Build API token**: Every running build has a temporary API token on a Bitrise virtual machine. This token is only available while the build is running. The Step downloads the connected API key with the help of this API token and Bitrise saves it in a JSON file.
+      - **Build URL**: URL of the current build or local path URL to your `apple_developer_portal_data.json`.
+      - **Xcode Project path**: The path where the `.xcodeproj` / `.xcworkspace` is located.
+  3. **Distribution type** input's value has to match with the value of the **Select method for export** input in the **Xcode Archive & Export for iOS** Step.
+  4. With the **Scheme name** input you can restrict which targets to process.
+
+  ### Troubleshooting
+  Make sure you do not have the **Certificate and Profile Installer** Step in your Workflow.
+  Make sure that you do NOT modify your Xcode project between the **iOS Auto Provision with App Store Connect API** and the **Xcode Archive & Export for iOS** Steps. For example, do not change the **bundle ID** after the **iOS Auto Provision with App Store Connect API** Step.
+
+  ### Useful links
+  - [Managing iOS code signing files - automatic provisioning](https://devcenter.bitrise.io/code-signing/ios-code-signing/ios-auto-provisioning/)
+  - [About iOS Auto Provision with Apple ID](https://devcenter.bitrise.io/getting-started/configuring-bitrise-steps-that-require-apple-developer-account-data/#assigning-an-apple-developer-account-for-your-appv)
+
+  ### Related Steps
+  - [iOS Auto Provision with Apple ID](https://www.bitrise.io/integrations/steps/ios-auto-provision)
+  - [Xcode Archive & Export](https://www.bitrise.io/integrations/steps/xcode-archive)
+website: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect
+source_code_url: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect
+support_url: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect/issues
+published_at: 2021-10-20T07:37:12.132754217Z
+source:
+  git: https://github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect.git
+  commit: 52f54734f0a0468088da85fdfb539a1914aa621b
+project_type_tags:
+- ios
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-ios-auto-provision-appstoreconnect
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- connection: automatic
+  opts:
+    description: |-
+      This input variable allows you to specify how the Step determines the API connection to use.
+      - `automatic`: The Step can use either method: It will attempt to use the Bitrise Apple Developer connection first. If this is not available, it will use the Step input variables.
+      - `api_key`: The Step will only use the Bitrise Apple Developer connection. It will not use the Step input variables.
+      - `off`: The Step will only use the Step input variables. It will not use the Bitrise Apple Developer connection.
+      - `enterprise_with_apple_id`: [Bitrise Apple Service connection with an Apple Developer Enterpsie account.](https://devcenter.bitrise.io/getting-started/connecting-to-services/connecting-to-an-apple-service-with-apple-id/)
+      - `apple_id`: [Bitrise Apple Service connection with Apple ID.](https://devcenter.bitrise.io/getting-started/connecting-to-services/connecting-to-an-apple-service-with-apple-id/)
+    is_required: true
+    summary: The Apple Service authentication method the Step uses. By default, the
+      Bitrise Apple Developer connection based on API key is used and other authentication-related
+      Step inputs are ignored.
+    title: Bitrise Apple Developer Connection
+    value_options:
+    - automatic
+    - api_key
+    - "off"
+    - enterprise_with_apple_id
+    - apple_id
+- api_key_path: ""
+  opts:
+    description: |-
+      Specify the path in an URL format where your API key is stored.
+
+      For example: `https://URL/TO/AuthKey_[KEY_ID].p8` or `file:///PATH/TO/AuthKey_[KEY_ID].p8`.
+      **NOTE:** The Step will only recognize the API key if the filename includes the  `KEY_ID` value as shown on the examples above.
+
+      You can upload your key on the **Generic File Storage** tab in the Workflow Editor and set the Environment Variable for the file here.
+
+      For example: `$BITRISEIO_MYKEY_URL`
+    is_sensitive: true
+    summary: Path to local or remote file
+    title: API Key URL
+- api_issuer: ""
+  opts:
+    description: Issuer ID. Required if **API Key URL** (`api_key_path`) is specified.
+    title: API Key Issuer ID
+- apple_id_team_id: ""
+  opts:
+    category: Apple ID
+    description: Needed if the are multiple Developer Portal teams active when using
+      Bitrise Apple Service connection with Apple ID.
+    title: Team ID
+- distribution_type: development
+  opts:
+    description: Describes how Xcode should sign your project.
+    is_required: true
+    title: Distribution type
+    value_options:
+    - development
+    - app-store
+    - ad-hoc
+    - enterprise
+- opts:
+    description: The path where the `.xcodeproj` / `.xcworkspace` is located.
+    is_required: true
+    title: Xcode Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |-
+      The scheme selects the main Application Target of the project.
+
+      The step will manage the codesign settings of the main Application and related executable (Application and App Extension) targets.
+    is_required: true
+    summary: The scheme name you want to use to archive your project later.
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |-
+      Configuration (for example, Debug, Release) selects the Build Settings describing the managed executable targets' Signing (Code Signing Style, Development Team, Code Signing Identity, Provisioning Profile).
+
+      If not set the step will use the provided Scheme's Archive Action's Build Configuration.
+    title: Configuration name
+- opts:
+    description: |-
+      If set the step will manage the codesign settings of the UITest targets of the main Application.
+      The UITest targets' bundle id will be set to the main Application's bundle id, so that the same Signing can be used for both the main Application and related UITest targets.
+    title: Should the step manage UITest target's codesigning?
+    value_options:
+    - "yes"
+    - "no"
+  sign_uitest_targets: "no"
+- opts:
+    description: |-
+      If set the step will register known test devices from team members with the Apple Developer Portal.
+
+      Note that setting this to "yes" may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+    title: Should the step register test devices with the Apple Developer Portal?
+    value_options:
+    - "yes"
+    - "no"
+  register_test_devices: "no"
+- min_profile_days_valid: 0
+  opts:
+    description: |-
+      Sometimes you want to sign an app with a Provisioning Profile that is valid for at least 'x' days.
+      For example, an enterprise app won't open if your Provisioning Profile is expired. With this parameter, you can have a Provisioning Profile that's at least valid for 'x' days.
+      By default it is set to `0` and renews the Provisioning Profile when expired.
+    is_required: false
+    title: The minimum days the Provisioning Profile should be valid
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- certificate_urls: $BITRISE_CERTIFICATE_URL
+  opts:
+    category: Debug
+    description: |
+      URLs of the certificates to download.
+      Multiple URLs can be specified, separated by a pipe (`|`) character,
+      you can specify a local path as well, using the `file://` scheme.
+      __Provide a development certificate__ URL, to ensure development code signing files for the project and __also provide a distribution certificate__ URL, to ensure distribution code signing files for your project, for example, `file://./development/certificate/path|https://distribution/certificate/url`
+    is_required: true
+    is_sensitive: true
+    title: Certificate URL
+- opts:
+    category: Debug
+    description: |
+      Certificate passphrases.
+      Multiple passphrases can be specified, separated by a pipe (`|`) character.
+      __Specified certificate passphrase count should match the count of the certificate urls__,for example, (1 certificate with empty passphrase, 1 certificate with non-empty passphrase): `|distribution-passphrase`
+    is_required: true
+    is_sensitive: true
+    title: Certificate passphrase
+  passphrases: $BITRISE_CERTIFICATE_PASSPHRASE
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    category: Debug
+    description: The Keychain path.
+    is_required: true
+    title: Keychain path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    category: Debug
+    description: The Keychain's password.
+    is_required: true
+    is_sensitive: true
+    title: Keychain's password
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    description: Every build gets a temporary Bitrise API token to download the connected
+      API key in a JSON file.
+    is_dont_change_value: true
+    title: Build API token
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    description: URL of the current build or local path URL to your apple_developer_portal_data.json.
+    is_dont_change_value: true
+    title: Build URL
+outputs:
+- BITRISE_EXPORT_METHOD: null
+  opts:
+    description: 'Distribution type can be one of the following: `development`, `app-store`,
+      `ad-hoc` or `enterprise`.'
+    title: The selected distribution type
+- BITRISE_DEVELOPER_TEAM: null
+  opts:
+    description: The development team's ID, for example, `1MZX23ABCD4`.
+    title: The development team's ID
+- BITRISE_DEVELOPMENT_CODESIGN_IDENTITY: null
+  opts:
+    description: 'The development codesign identity''s name, for example, `iPhone
+      Developer: Bitrise Bot (VV2J4SV8V4)`.'
+    title: The development codesign identity's name
+- BITRISE_PRODUCTION_CODESIGN_IDENTITY: null
+  opts:
+    description: 'The production codesign identity''s name, for example, `iPhone Distribution:
+      Bitrise Bot (VV2J4SV8V4.'
+    title: The production codesign identity's name
+- BITRISE_DEVELOPMENT_PROFILE: null
+  opts:
+    description: The development provisioning profile's UUID which belongs to the
+      main target, for example, `c5be4123-1234-4f9d-9843-0d9be985a068`.
+    title: The main target's development provisioning profile UUID
+- BITRISE_PRODUCTION_PROFILE: null
+  opts:
+    description: The production provisioning profile's UUID which belongs to the main
+      target, for example, `c5be4123-1234-4f9d-9843-0d9be985a068`.
+    title: The main target's production provisioning profile UUID

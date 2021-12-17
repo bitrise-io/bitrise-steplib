@@ -1,0 +1,42 @@
+title: File Downloader
+summary: Download remote files to the build machine.
+description: "The Step downloads selected files from a URL and places it where you
+  want it to. \n\n### Configuring the Step \n\n1. Add a source to the **Download source
+  URL** input. It can be either an Environment Variable or a URL.\n1. Add a destination
+  to the **Download destination path** input. The path should be relative to the root
+  directory of the repository.\n\n### Useful links\n\n- [Using the File Downloader
+  Step](https://devcenter.bitrise.io/tutorials/download-or-replace-project-resources/#using-the-file-downloader-step)\n-
+  [Managing files on Bitrise](https://devcenter.bitrise.io/getting-started/managing-files-on-bitrise/)\n\n###
+  Related Steps \n\n- [Generate Text File](https://www.bitrise.io/integrations/steps/generate-text-file)"
+website: https://github.com/bitrise-steplib/steps-file-downloader
+source_code_url: https://github.com/bitrise-steplib/steps-file-downloader
+support_url: https://github.com/bitrise-steplib/steps-file-downloader/issues
+published_at: 2021-11-15T09:22:34.872711619Z
+source:
+  git: https://github.com/bitrise-steplib/steps-file-downloader.git
+  commit: b1340142ab5a6e811f7c6e265d76032a7450500c
+type_tags:
+- utility
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Download source URL
+    title: Download source URL
+  source: null
+- destination: null
+  opts:
+    is_required: true
+    summary: Download destination path
+    title: Download destination path
+- file_permission: null
+  opts:
+    description: |
+      Permission bits for the destination file in the format of `644`.
+
+      This option is useful for sensitive files that should have a permission like `600`.
+    summary: Permission bits for the destination file
+    title: Destination file permission
