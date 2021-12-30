@@ -1,0 +1,57 @@
+title: Google Play Rollout Update
+summary: |
+  This step connects to Google Play and check if there is a release in production with an in progress rollout. If found, it increases it to the next rollout percentage [2%, 5%, 10%, 20%, 50%, 100%]
+description: |
+  The step makes use of the python library and Edits Api from Google Play. It downloads the info from the production track, and looks if any release in there has a 'userFraction' property defined. In case it has, and it is between 0 and 1, then it just modifies it to the next step, or completes the release if next is 100%
+website: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update
+source_code_url: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update
+support_url: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update/issues
+published_at: 2021-12-30T14:26:01.867676+01:00
+source:
+  git: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update.git
+  commit: 94a8272d685732e7c1386132c9a8184076e75dc1
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: pipenv
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Path to the service account's JSON key file. It must be a Secret
+      Environment Variable, pointing to either a file uploaded to Bitrise or to a
+      remote download location. Either this or service_account_json_key_content
+    is_required: false
+    is_sensitive: false
+    title: Service Account JSON key file path
+  service_account_json_key_path: null
+- opts:
+    description: Content of a previously donwloaded service account's JSON key file.
+      It must be a Secret Environment Variable, containing the data from the Google
+      key file. Either this or service_account_json_key_path needs to be provided
+    is_required: false
+    is_sensitive: true
+    title: Service Account JSON key content
+  service_account_json_key_content: null
+- opts:
+    description: Package name of the app.
+    is_required: true
+    title: Package name
+  package_name: null
