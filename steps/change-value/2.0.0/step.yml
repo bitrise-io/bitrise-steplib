@@ -1,0 +1,58 @@
+title: Change value in file
+summary: Changes a selected value in a targeted file.
+description: |-
+  This Step changes a selected value in a targeted file, for example, constants.
+
+  ### Configuring the Step
+
+  1. Set the **File path** in which you want to change a value.
+  2. Set the **Current value** which needs to be changed.
+  3. Set the **New value**.
+
+  ### Troubleshooting
+  Please make sure that your targeted file path is correct, existing and relative from the root folder.
+  Please make sure that you set a correct **Current value** which exists in the the targeted file. You must define this value.
+  Please make sure that you define the New value.
+
+  ### Related Steps
+  - [Change Working Directory for subsequent Steps](https://www.bitrise.io/integrations/steps/change-workdir)
+website: https://github.com/bitrise-steplib/steps-change-value
+source_code_url: https://github.com/bitrise-steplib/steps-change-value
+support_url: https://github.com/bitrise-steplib/steps-change-value/issues
+published_at: 2021-09-21T11:28:01.237472945Z
+source:
+  git: https://github.com/bitrise-steplib/steps-change-value.git
+  commit: fd31ec09f72d2264fce82c7f8d65ed40c651830e
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-change-value
+inputs:
+- file: null
+  opts:
+    is_required: true
+    summary: The target file path in which you want to change a value.
+    title: File path
+- old_value: null
+  opts:
+    is_required: true
+    summary: The current value which needs to be changed in the target file.
+    title: Current value
+- new_value: null
+  opts:
+    is_required: true
+    summary: The new value you want to write to the target file.
+    title: New value
+- opts:
+    title: Print file content before and after the value change
+    value_options:
+    - "true"
+    - "false"
+  show_file: "false"
+- notfound_exit: "true"
+  opts:
+    title: Mark the Step as "Failed" if the selected value isn't found
+    value_options:
+    - "true"
+    - "false"

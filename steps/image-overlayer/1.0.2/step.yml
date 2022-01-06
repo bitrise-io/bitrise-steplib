@@ -1,0 +1,86 @@
+title: Image overlayer
+summary: |
+  Add icon to an image
+description: |
+  This step will add icon (on the left and/or right bottom side) on the source image.
+
+  ### Usage
+
+  To give to our step the information about the expected values:
+  - Provide the source image's (or folder's) **path**, where we have the image or list of images on which we will add the icon(s)
+    - You can provide just one image's path, the step will add icons to this one only
+    - You can provide a folder's path where we many images, the step will add icons to them
+  - Left **and/or** right icons which will be added on the source image
+website: https://github.com/odemolliens/bitrise-step-image-overlayer
+source_code_url: https://github.com/odemolliens/bitrise-step-image-overlayer
+support_url: https://github.com/odemolliens/bitrise-step-image-overlayer/issues
+published_at: 2021-12-14T14:11:18.857538+01:00
+source:
+  git: https://github.com/odemolliens/bitrise-step-image-overlayer.git
+  commit: d4a36b68a13248ba93f5eb581fcb61ce5442e676
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Source image's (or folder's) **path**, where we have the image or list of images on which we will add the icon(s)
+        - You can provide just one image's path, the step will add icons to this one only (eg.: `./src/assets/app_icon.png`)
+        - You can provide a folder's path where we many images, the step will add icons to them (eg.: `./src/assets/`)
+    is_expand: true
+    is_required: true
+    summary: Source image or folder path?
+    title: Source image or folder path
+  source_image: ""
+- left_icon: ""
+  opts:
+    description: The path of the icon which will be added on the left side of the
+      source image(s) (eg. `./src/assets/left_icon.png)
+    is_expand: true
+    is_required: false
+    summary: Left icon's path
+    title: Left icon's path
+- opts:
+    description: The path of the icon which will be added on the right side of the
+      source image(s) (eg. `./src/assets/right_icon.png)
+    is_expand: true
+    is_required: false
+    summary: Right icon's path
+    title: Right icon's path
+  right_icon: ""
+- opts:
+    description: Per default, the script will replace the original source image. If
+      this key is provided, it will create a new one at this path. (eg. `./src/assets/result.png)
+    is_expand: true
+    is_required: false
+    summary: Output file's path
+    title: Output file's path
+  output_path: ""
+- opts:
+    description: 'If the left_icon and/or right_icon are not images, it will use this
+      key to set the text color in image which will be generated (default: #FFFFFF)'
+    is_expand: true
+    is_required: false
+    summary: Text color (hexa color)
+    title: Text color (hexa color)
+  text_color: ""
+- center_icon: "False"
+  opts:
+    description: If the value is true, the step will add a mask on full source image
+      and center the left_icon at the middle of source image and the right_icon at
+      the bottom right of the left_icon
+    is_expand: true
+    is_required: false
+    summary: If you want center the icoon in the background image
+    title: If you want center the icon in the background image
+    value_options:
+    - "True"
+    - "False"
