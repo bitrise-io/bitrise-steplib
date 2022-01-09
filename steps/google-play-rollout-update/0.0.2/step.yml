@@ -1,0 +1,60 @@
+title: Update Google Play Rollout
+summary: |
+  This step connects to Google Play and check if there is a release in production with an in progress rollout. If found, it increases it to the next rollout percentage [2%, 5%, 10%, 20%, 50%, 100%]
+description: |
+  The step makes use of the python library and Edits Api from Google Play. It downloads the info from the production track, and looks if any release in there has a 'userFraction' property defined. In case it has, and it is between 0 and 1, then it just modifies it to the next step, or completes the release if next is 100%
+website: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update
+source_code_url: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update
+support_url: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update/issues
+published_at: 2022-01-09T23:07:51.199324+01:00
+source:
+  git: https://github.com/angelolloqui/bitrise-step-google-play-rollout-update.git
+  commit: 23a177cced4cae12ba87ca46f58f57cf69a56dfd
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: pipenv
+  - name: wget
+  apt_get:
+  - name: pipenv
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: false
+    is_sensitive: true
+    summary: Path to the service account's JSON key file. It must be a Secret Environment
+      Variable, pointing to either a file uploaded to Bitrise or to a remote download
+      location. Either this or service_account_json_key_content
+    title: Service Account JSON key file path
+  service_account_json_key_path: null
+- opts:
+    is_required: false
+    is_sensitive: true
+    summary: Content of a previously donwloaded service account's JSON key file. It
+      must be a Secret Environment Variable, containing the data from the Google key
+      file. Either this or service_account_json_key_path needs to be provided
+    title: Service Account JSON key content
+  service_account_json_key_content: null
+- opts:
+    is_required: true
+    summary: Package name of the app.
+    title: Package name
+  package_name: null
