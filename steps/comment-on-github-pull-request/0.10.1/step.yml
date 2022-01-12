@@ -1,0 +1,67 @@
+title: Comment on GitHub Pull Request
+summary: |
+  Comment on [GitHub](https://github.com) Pull Request or Issue
+description: |
+  You can send a new or update an existing comment on [GitHub](https://github.com) Pull Request or Issue.
+
+  To setup a **GitHub personal access token** visit: https://github.com/settings/tokens
+website: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request
+source_code_url: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request
+support_url: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request/issues
+published_at: 2022-01-12T15:48:34.293359+09:00
+source:
+  git: https://github.com/kvvzr/bitrise-step-comment-on-github-pull-request.git
+  commit: b55f8aa3e25aaf5c4831cc8dd793e14ad26badb7
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/kvvzr/bitrise-step-comment-on-github-pull-request
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      To setup a **GitHub personal access token** visit: https://github.com/settings/tokens
+      Add repo(Full control of private repositories) scope to the generated token, to allow to comment on GitHub Pull Request or Issue.
+    is_required: true
+    is_sensitive: true
+    title: GitHub personal access token
+  personal_access_token: null
+- body: null
+  opts:
+    description: |
+      Text of the message to send.
+    is_required: true
+    title: Body
+- opts:
+    description: |
+      The URL for target GitHub Repository.
+    is_required: true
+    title: Repository URL
+  repository_url: $GIT_REPOSITORY_URL
+- issue_number: $BITRISE_PULL_REQUEST
+  opts:
+    description: |
+      Number of GitHub Pull request or Issue.
+    is_required: true
+    title: GitHub PullRequest or Issue number
+- api_base_url: https://api.github.com
+  opts:
+    description: The URL for GitHub or GitHub Enterprise API
+    is_required: true
+    title: GitHub API Base URL
+- opts:
+    description: |
+      If set and a commment with the given tag exists, it updates the comment instead of posting a new one.
+      If no comment with the given tag exists, a new comment is posted.
+
+      The tag should be a unique string that will be added to end of the comment's content. The step automatically extends the tag to be enclosed in square brackets.
+    is_required: false
+    title: Update comment tag
+  update_comment_tag: null
