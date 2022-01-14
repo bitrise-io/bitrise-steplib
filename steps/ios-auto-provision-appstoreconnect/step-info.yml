@@ -1,7 +1,7 @@
 maintainer: bitrise
 removal_date: "2022-07-15"
 deprecate_notes: |
-  This Step has been deprecated in favour of the new automatic code signing options on Bitrise.')
+  This Step has been deprecated in favour of the new automatic code signing options on Bitrise.
 
   Option A)
   The latest versions of the **Xcode Archive & Export for iOS**,
