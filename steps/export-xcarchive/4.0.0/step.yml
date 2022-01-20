@@ -1,0 +1,111 @@
+title: Export iOS and tvOS Xcode archive
+summary: Export iOS and tvOS IPA from an existing Xcode archive
+description: Exports an IPA from an existing iOS and tvOS `.xcarchive` file.
+website: https://github.com/bitrise-steplib/steps-export-xcarchive
+source_code_url: https://github.com/bitrise-steplib/steps-export-xcarchive
+support_url: https://github.com/bitrise-steplib/steps-export-xcarchive/issues
+published_at: 2021-10-04T10:10:51.908667131Z
+source:
+  git: https://github.com/bitrise-steplib/steps-export-xcarchive.git
+  commit: 933de40a9d3886ab0514702c57ac2938b0442d29
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+- xamarin
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-export-xcarchive
+is_always_run: false
+is_skippable: false
+inputs:
+- archive_path: $BITRISE_XCARCHIVE_PATH
+  opts:
+    description: |-
+      Specifies the archive that should be exported.
+
+      The input value sets xcodebuild's `-archivePath` option.
+    is_required: true
+    summary: Specifies the archive that should be exported.
+    title: Archive path
+- opts:
+    is_required: true
+    summary: Describes which product to export.
+    title: Select a product to distribute
+    value_options:
+    - app
+    - app-clip
+  product: app
+- distribution_method: development
+  opts:
+    is_required: true
+    summary: Describes how Xcode should export the archive.
+    title: Distribution method
+    value_options:
+    - development
+    - app-store
+    - ad-hoc
+    - enterprise
+- export_development_team: null
+  opts:
+    category: IPA export configuration
+    description: |-
+      The Developer Portal team to use for this export.
+
+      Defaults to the team used to build the archive.
+    summary: The Developer Portal team to use for this export.
+    title: Developer Portal team
+- compile_bitcode: "yes"
+  opts:
+    category: IPA export configuration
+    is_required: true
+    summary: For __non-App Store__ exports, should Xcode re-compile the app from bitcode?
+    title: Rebuild from bitcode
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: IPA export configuration
+    is_required: true
+    summary: For __App Store__ exports, should the package include bitcode?
+    title: Include bitcode
+    value_options:
+    - "yes"
+    - "no"
+  upload_bitcode: "yes"
+- export_options_plist_content: null
+  opts:
+    category: IPA export configuration
+    description: |-
+      Specifies a plist file content that configures archive exporting.
+
+      If not specified, the Step will auto-generate it.
+    summary: Specifies a plist file content that configures archive exporting.
+    title: Export options plist content
+- opts:
+    category: Debugging
+    is_required: true
+    summary: If this input is set, the Step will print additional logs for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    title: The created iOS or tvOS .ipa file's path.
+- BITRISE_DSYM_PATH: null
+  opts:
+    description: Step will collect every dsym (app dsym and framwork dsyms) in a directory,
+      zip it and export the zipped directory path.
+    title: The created iOS or tvOS .dSYM zip file's path.
+- BITRISE_IDEDISTRIBUTION_LOGS_PATH: null
+  opts:
+    title: Path to the xcdistributionlogs zip

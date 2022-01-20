@@ -1,0 +1,65 @@
+title: |
+  Autify Upload
+summary: |
+  Uploads your build to Autify.
+description: |-
+  Uploads you build `.app` to [Autify](https://autify.com/mobile) using [Autify's API](https://mobile-app.autify.com/api/docs/index.html). You can upload the iOS build with the Step.
+
+  This Step, however, does NOT generate your build: to create a `.app` file, you need the right step. For example, `Xcode build for simulator` Step or any other Step can generate a build
+website: https://github.com/autifyhq/bitrise-step-autify-upload
+source_code_url: https://github.com/autifyhq/bitrise-step-autify-upload
+support_url: https://github.com/autifyhq/bitrise-step-autify-upload/issues
+published_at: 2021-12-14T05:27:01.003204+09:00
+source:
+  git: https://github.com/autifyhq/bitrise-step-autify-upload.git
+  commit: 6ac944710c030a2a0ee09c92fc94310f9ce2a62e
+project_type_tags:
+- ios
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_dir_path: $BITRISE_APP_DIR_PATH
+  opts:
+    description: |-
+      A `.app` path.
+
+      This path is generated in the previous step. For example:
+
+      - The `Xcode build for simulator` Step generate a app directory as `$BITRISE_APP_DIR_PATH`
+    is_required: true
+    summary: null
+    title: App directory path
+- opts:
+    description: |-
+      The Project ID can be found in the Auitify URL. For example:
+
+      - `autify.com/projects/<Project ID>`
+    is_required: true
+    summary: null
+    title: Autify project id
+  project_id: null
+- opts:
+    description: You can generate a Personal Access Token from Autify's Settings page.
+      Note that this value is associated with a specific user, as the name implies.
+    is_required: true
+    is_sensitive: true
+    summary: null
+    title: Autify Personal Access Token
+  upload_token: null
+outputs:
+- AUTIFY_UPLOAD_STEP_RESULT_JSON: null
+  opts:
+    description: This is the response to the API used to upload the build
+    summary: Response when uploading the build
+    title: Autify Upload Step Result JSON

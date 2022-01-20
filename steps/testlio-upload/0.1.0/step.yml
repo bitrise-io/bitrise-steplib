@@ -1,0 +1,67 @@
+title: |-
+  Testlio Upload
+summary: |
+  Uploads IPA to Testlio
+description: |
+  Uploads IPA to Testlio for validation to work around 2fa restrictions of
+  app distribution through AppStoreConnect
+website: https://github.com/dmiluski/bitrise-step-testlio-upload
+source_code_url: https://github.com/dmiluski/bitrise-step-testlio-upload
+support_url: https://github.com/dmiluski/bitrise-step-testlio-upload/issues
+published_at: 2020-10-25T15:00:01.19267+01:00
+source:
+  git: https://github.com/dmiluski/bitrise-step-testlio-upload.git
+  commit: 8af4c8f8d91f623fff8c77ffa2729412015cc296
+
+project_type_tags:
+  - ios
+  - macos
+
+type_tags:
+  - deploy
+  - test
+
+is_always_run: false
+is_skippable: false
+
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+inputs:
+  - ipa_path: $BITRISE_IPA_PATH
+    opts:
+      description: |-
+        Path to your IPA file to be deployed.
+      is_required: true
+      title: IPA path
+  - testlio_api_token:
+    opts:
+      description: |
+        Authentication to the API is performed via ​JWT​.
+      is_required: true
+      is_sensitive: true
+      summary: Your Testlio API token
+      title: Testlio API Token
+
+  - testlio_collection_id:
+    opts:
+      description: |
+        Identifier of the collection
+      is_required: true
+      is_sensitive: false
+      summary: Your Testlio Collection ID
+      title: Testlio Collection ID
+
+  - testlio_app_name:
+    opts:
+      description: |
+        Application name used for submission
+      is_required: true
+      is_sensitive: false
+      summary: Your Testlio App name
+      title: Testlio App name
