@@ -22,10 +22,10 @@ description: |-
 website: https://github.com/gambit66/bitrise-steps-change-android-applicationId
 source_code_url: https://github.com/gambit66/bitrise-steps-change-android-applicationId
 support_url: https://github.com/gambit66/bitrise-steps-change-android-applicationId
-published_at: 2022-01-20T21:03:06.84286+02:00
+published_at: 2022-01-21T09:42:55.419371+02:00
 source:
   git: https://github.com/gambit66/bitrise-steps-change-android-applicationId.git
-  commit: 46c9db5817f873fa13aec04aa21892157b8959ea
+  commit: a3d86e36494cc190a3c38d0a9c06966ff58df9f0
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -50,7 +50,7 @@ inputs:
     is_required: true
     summary: Path to the build.gradle file shows the applicationId setting.
     title: Path to the build.gradle file
-- new_application_id: com.mycompany.myapp
+- new_application_id: null
   opts:
     description: "New applicationId to set.  \nSpecify a string value, such as `com.mycompany.myapp`."
     is_required: true
