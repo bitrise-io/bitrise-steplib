@@ -22,13 +22,10 @@ description: |-
 website: https://github.com/gambit66/bitrise-steps-change-android-applicationId
 source_code_url: https://github.com/gambit66/bitrise-steps-change-android-applicationId
 support_url: https://github.com/gambit66/bitrise-steps-change-android-applicationId
-published_at: 2022-01-21T09:42:55.419371+02:00
+published_at: 2022-01-27T16:09:21.626071+02:00
 source:
   git: https://github.com/gambit66/bitrise-steps-change-android-applicationId.git
-  commit: a3d86e36494cc190a3c38d0a9c06966ff58df9f0
-host_os_tags:
-- osx-10.10
-- ubuntu-16.04
+  commit: 108a5c7494319d12a11f50b34105600ac7fc73d0
 project_type_tags:
 - android
 - react-native
@@ -40,7 +37,6 @@ type_tags:
 toolkit:
   go:
     package_name: github.com/gambit66/bitrise-steps-change-android-applicationId
-is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 run_if: ""
