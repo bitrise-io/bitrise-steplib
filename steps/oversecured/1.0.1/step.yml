@@ -17,6 +17,9 @@ project_type_tags:
 - android
 type_tags:
 - test
+toolkit:
+  go:
+    package_name: github.com/oversecured/oversecured-bitrise-step
 is_always_run: false
 is_skippable: false
 run_if: ""

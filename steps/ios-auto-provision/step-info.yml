@@ -1,1 +1,18 @@
 maintainer: bitrise
+removal_date: "2022-07-15"
+deprecate_notes: |
+  This Step has been deprecated in favour of the new automatic code signing options on Bitrise.
+
+  Option A)
+  The latest versions of the **Xcode Archive & Export for iOS**,
+  **Xcode Build for testing for iOS**,
+  and the **Export iOS and tvOS Xcode archive** Steps
+  have built-in automatic code signing.
+  We recommend removing this Step from your Workflow and using the automatic code signing feature in the Steps mentioned above.
+
+  Option B)
+  If you are not using any of the mentioned Xcode steps, then you can replace this iOS Auto Provision Step with
+  the **Manage iOS Code signing** (https://www.bitrise.io/integrations/steps/manage-ios-code-signing) Step.
+
+  You can read more about these changes in our blog post:
+  https://blog.bitrise.io/post/simplifying-automatic-code-signing-on-bitrise
