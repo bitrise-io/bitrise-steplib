@@ -1,0 +1,58 @@
+title: Change Android applicationId
+summary: Updates the Android applicationId in your project's `build.gradle` file.
+description: |-
+  Modifies the applicationId of your Android app by updating applicationId in your project's `build.gradle` file before you'd publish your app to Google Play Store.
+
+  ### Configuring the Step
+
+  1. Insert the **Change Android applicationId** Step before a build Step such as **Android Build** or **Gradle Runner** in your Workflow.
+  2. Click the Step to modify its input fields.
+  3. Add the file path to the **Path to the build.gradle file** so that the Step knows where to find the file that contains the applicationId attributes.
+  4. Provide a new applicationId in the **New applicationId** input. If you leave this input empty, the previous applicationId will be displayed on Google Play Store. The input's value must be a string in this format.
+
+  ### Troubleshooting
+
+  The **Change Android applicationId** Step must be inserted BEFORE the **Android Build** Step as the former makes sure you  upload the build with the right applicationId to Google Play Store.
+
+  ### Related Steps
+
+  - [Android Sign](https://www.bitrise.io/integrations/steps/sign-apk)
+  - [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+  - [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)
+website: https://github.com/gambit66/bitrise-steps-change-android-applicationId
+source_code_url: https://github.com/gambit66/bitrise-steps-change-android-applicationId
+support_url: https://github.com/gambit66/bitrise-steps-change-android-applicationId
+published_at: 2022-01-27T16:09:21.626071+02:00
+source:
+  git: https://github.com/gambit66/bitrise-steps-change-android-applicationId.git
+  commit: 108a5c7494319d12a11f50b34105600ac7fc73d0
+project_type_tags:
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/gambit66/bitrise-steps-change-android-applicationId
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- build_gradle_path: $BITRISE_SOURCE_DIR/app/build.gradle
+  opts:
+    is_required: true
+    summary: Path to the build.gradle file shows the applicationId setting.
+    title: Path to the build.gradle file
+- new_application_id: null
+  opts:
+    description: "New applicationId to set.  \nSpecify a string value, such as `com.mycompany.myapp`."
+    is_required: true
+    summary: New applicationId to set.
+    title: New applicationId
+outputs:
+- ANDROID_APPLICATION_ID: null
+  opts:
+    title: Final Android applicationId in build.gradle file

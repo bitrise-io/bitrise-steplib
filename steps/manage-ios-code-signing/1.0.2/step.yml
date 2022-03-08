@@ -1,0 +1,237 @@
+title: Manage iOS Code Signing
+summary: Automatically manage code signing assets before a build.
+description: |-
+  The **Manage iOS Code Signing** Step takes care of setting up the required code signing assets before the project is built on Bitrise.
+  The Step:
+  - Downloads and installs certificates uploaded to Bitrise.
+  - Generates, updates and downloads the provisioning profiles needed for your iOS project.
+  - Verifies and registers the project's Bundle IDs on the Apple Developer Site.
+  - Registers the iOS or tvOS devices connected to your Bitrise account with the Apple Developer Site.
+
+  Use the **Manage iOS Code Signing** Step if, for example:
+  - You use Fastlane for your project.
+  - You use the **Ionic Archive** or the **Cordova Archive** build Steps in your project.
+  - You use a **Script** Step because your project has its own build scripts.
+  The **Manage iOS Code Signing** Step takes care of automatically code signing your project before it's built on Bitrise.
+
+  ### Configuring the Step
+  Before you start, make sure:
+  - You've defined your Apple Developer Account to Bitrise.
+  - You've assigned an Apple Developer Account to your app.
+  - Make sure the Step is followed by another Step that needs iOS code signing.
+
+  1. **Apple services connection method**: Select the Apple service connection method you provided earlier on Bitrise; which is either the API Key or the Apple ID.
+  2. **Distribution method**: Select the method Xcode should sign your project: development, app-store, ad-hoc, or enterprise.
+  3. **Project path**: Add the path where the Xcode Project or Workspace is located.
+  4. **Scheme**: Add the scheme name you wish to archive your project later.
+  5. **Build configuration**:Specify Xcode Build Configuration. The Step will use the provided Build Configuration's Build Settings, to understand your project's code signing configuration. If not provided, the Archive action's default Build Configuration will be used.
+
+  Under **Options**:
+  1. **Ensure code signing assets for UITest targets too**: If this input is set, the Step will manage the codesign settings of the UITest targets of the main Application.
+  2. **Register test devices on the Apple Developer Portal**: If this input is set, the Step will register known test devices from team members with the Apple Developer Portal. Note that setting this to `yes` may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+
+  Under **Build environment**:
+  You do not have to change any sensitive Environment Variable if all your certificates are already uploaded to Bitrise. Should you store your code signing files somewhere else (for example, in a private repository), then you can set these inputs in the `bitrise.yml` file.
+
+  Under **Debugging**:
+  1. **Verbose logging***: You can set this input to `yes` to produce more informative logs.
+
+  ### Troubleshooting:
+  - The **Manage iOS Code Signing** Step will fail if the correct Apple Developer Account is not connected to Bitrise or the right connection method is not selected in the **Apple service connection method** input within the Step.
+  - The **Manage iOS Code Signing** Step will also fail if the right code signing certificates are not uploaded to Bitrise. A Development type certificate is needed if the **Distribution method** input is set to `development`, otherwise a Distribution type certificate is needed. We recommend you upload one Development and one Distribution certificate, so that the Step can ensure code signing files for all the distribution methods.
+website: https://github.com/bitrise-steplib/bitrise-step-manage-ios-code-signing
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-manage-ios-code-signing
+support_url: https://github.com/bitrise-steplib/bitrise-step-manage-ios-code-signing/issues
+published_at: 2022-01-06T08:50:37.790235285Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-manage-ios-code-signing.git
+  commit: 269eef956bdef1378125817bfc7ee49767c96fb1
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-manage-ios-code-signing
+run_if: .IsCI
+inputs:
+- apple_service_connection: api-key
+  opts:
+    description: |-
+      This input determines which Bitrise Apple service connection should be used for automatic code signing.
+      Available values:
+      - `api-key`: [Bitrise Apple Service connection with API Key.](https://devcenter.bitrise.io/getting-started/connecting-to-services/setting-up-connection-to-an-apple-service-with-api-key/)
+      - `apple-id`: [Bitrise Apple Service connection with Apple ID.](https://devcenter.bitrise.io/getting-started/connecting-to-services/connecting-to-an-apple-service-with-apple-id/)
+    is_required: true
+    summary: This input determines which Bitrise Apple service connection should be
+      used for automatic code signing.
+    title: Apple service connection method
+    value_options:
+    - api-key
+    - apple-id
+- distribution_method: development
+  opts:
+    is_required: true
+    summary: Describes how Xcode should export the archive.
+    title: Distribution method
+    value_options:
+    - development
+    - app-store
+    - ad-hoc
+    - enterprise
+- opts:
+    is_required: true
+    summary: Xcode Project (.xcodeproj) or Workspace (.xcworkspace) path.
+    title: Project path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    is_required: true
+    summary: Xcode Scheme name.
+    title: Scheme
+  scheme: $BITRISE_SCHEME
+- configuration: null
+  opts:
+    description: |-
+      Xcode Build Configuration.
+
+      If not specified, the default Build Configuration will be used.
+    summary: Xcode Build Configuration.
+    title: Build Configuration
+- opts:
+    category: Options
+    is_required: true
+    summary: If this input is set, the Step will manage the codesign assets of the
+      UITest targets (of the main Application) among with the main Application codesign
+      assets.
+    title: Ensure code signing assets for UITest targets too
+    value_options:
+    - "yes"
+    - "no"
+  sign_uitest_targets: "no"
+- opts:
+    category: Options
+    description: |-
+      If this input is set, the Step will register the known test devices on Bitrise from team members with the Apple Developer Portal.
+
+      Note that setting this to yes may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+    is_required: true
+    summary: If this input is set, the Step will register the known test devices on
+      Bitrise from team members with the Apple Developer Portal.
+    title: Register test devices on the Apple Developer Portal
+    value_options:
+    - "yes"
+    - "no"
+  register_test_devices: "no"
+- min_profile_validity: "0"
+  opts:
+    category: Options
+    description: |-
+      If this input is set to >0, the managed Provisioning Profile will be renewed if it expires within the configured number of days.
+
+      Otherwise the Step renews the managed Provisioning Profile if it is expired.
+    is_required: true
+    summary: If this input is set to >0, the managed Provisioning Profile will be
+      renewed if it expires within the configured number of days.
+    title: The minimum days the Provisioning Profile should be valid
+- apple_team_id: ""
+  opts:
+    category: Options
+    description: |-
+      The Apple Developer Portal team to use for downloading code signing assets.
+
+      Defining this is only required when Apple Service Connection method is set to `apple-id` and the connected account belongs to multiple teams.
+    summary: The Apple Developer Portal team to use for downloading code signing assets.
+    title: Developer Portal team ID
+- certificate_url_list: $BITRISE_CERTIFICATE_URL
+  opts:
+    category: Build environment
+    description: |-
+      URL of the code signing certificate to download.
+
+      Multiple URLs can be specified, separated by a pipe (|) character.
+
+      Local file path can be specified, using the file:// URL scheme.
+    is_required: true
+    is_sensitive: true
+    summary: URL of the code signing certificate to download.
+    title: Code signing certificate URL
+- opts:
+    category: Build environment
+    description: |-
+      Passphrases for the provided code signing certificates.
+
+      Specify as many passphrases as many Code signing certificate URL provided, separated by a pipe (|) character.
+    is_required: true
+    is_sensitive: true
+    summary: Passphrases for the provided code signing certificates.
+    title: Code signing certificate passphrase
+  passphrase_list: $BITRISE_CERTIFICATE_PASSPHRASE
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    category: Build environment
+    is_required: true
+    summary: Path to the Keychain where the code signing certificates will be installed.
+    title: Keychain path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    category: Build environment
+    is_required: true
+    is_sensitive: true
+    summary: Password for the provided Keychain.
+    title: Keychain password
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Build environment
+    is_dont_change_value: true
+    summary: URL of the current Bitrise build.
+    title: Bitrise build URL
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Build environment
+    is_dont_change_value: true
+    is_sensitive: true
+    summary: API token to access Bitrise resources during the current build.
+    title: Bitrise build API token
+- opts:
+    category: Debugging
+    is_required: true
+    summary: If this input is set, the Step will produce verbose level log messages.
+    title: Verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+outputs:
+- BITRISE_EXPORT_METHOD: null
+  opts:
+    summary: 'Distribution type can be one of the following: `development`, `app-store`,
+      `ad-hoc` or `enterprise`.'
+    title: The selected distribution type
+- BITRISE_DEVELOPER_TEAM: null
+  opts:
+    summary: The development team's ID, for example, `1MZX23ABCD4`.
+    title: The development team's ID
+- BITRISE_DEVELOPMENT_CODESIGN_IDENTITY: null
+  opts:
+    summary: 'The development codesign identity''s name, for example, `iPhone Developer:
+      Bitrise Bot (VV2J4SV8V4)`.'
+    title: The development codesign identity's name
+- BITRISE_PRODUCTION_CODESIGN_IDENTITY: null
+  opts:
+    summary: 'The production codesign identity''s name, for example, `iPhone Distribution:
+      Bitrise Bot (VV2J4SV8V4)`.'
+    title: The production codesign identity's name
+- BITRISE_DEVELOPMENT_PROFILE: null
+  opts:
+    summary: The development provisioning profile's UUID which belongs to the main
+      target, for example, `c5be4123-1234-4f9d-9843-0d9be985a068`.
+    title: The main target's development provisioning profile UUID
+- BITRISE_PRODUCTION_PROFILE: null
+  opts:
+    summary: The production provisioning profile's UUID which belongs to the main
+      target, for example, `c5be4123-1234-4f9d-9843-0d9be985a068`.
+    title: The main target's production provisioning profile UUID

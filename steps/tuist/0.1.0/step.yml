@@ -1,0 +1,42 @@
+title: Run Tuist
+summary: |
+  Describe, maintain, and interact with Xcode projects at a large scale.
+description: |
+  Tuist is a CLI tool to scale up modular Xcode projects. It abstracts away the intricacies of .xcodeproj by providing a declarative API to describe the projects, and provides workflows to make developers productive.
+website: https://github.com/tuist/bitrise-step-tuist
+source_code_url: https://github.com/tuist/bitrise-step-tuist
+support_url: https://github.com/tuist/bitrise-step-tuist/issues
+published_at: 2021-12-29T16:56:50.145022+01:00
+source:
+  git: https://github.com/tuist/bitrise-step-tuist.git
+  commit: 90021dace37349f3fd64239b0dd1139ae050965f
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- command: The Tuist command to execute
+  opts:
+    description: |
+      Use this input to set the command that will be executed.
+    is_expand: true
+    is_required: true
+    summary: The command to execute. For example "generate".
+    title: Command
+    value_options: []

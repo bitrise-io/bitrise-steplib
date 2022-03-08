@@ -1,0 +1,132 @@
+title: Bitrise Start Build
+summary: Starts a new build with the specified Workflow(s).
+description: "The Step starts a new build of the same app. In combination with the
+  **Bitrise Wait for Build** Step you can use this Step to start multiple builds that
+  run in parallel at the same time. You can put this Step in a Workflow that is triggered
+  by a code push or pull request and use this Step to trigger multiple other builds
+  at the same time. \n\nTo do that, you need multiple concurrencies - at least two!
+  You also need a Personal Access Token to use the Step: [check out our guide](https://devcenter.bitrise.io/getting-started/account-security/#generating-personal-access-tokens-manually)
+  on how to generate the token.\n\nIf manual build approval is enabled for the project,
+  this step won't be able to start new builds automatically.\n\n### Configuring the
+  Step \n\nBefore you run a build with this Step, make sure you have your Personal
+  Access Token stored in a [Secret Environment Variable](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/#adding-a-secret-env-var).\n\nNote
+  that all builds you trigger using this Step will have the same build number! \n\n
+  \  1. Set up at least two Workflows in the Workflow Editor: one will contain the
+  Step, the other will be triggered by the Step. \n     You can set up as many Workflows
+  as you wish: your number of concurrencies limit the number of Workflows you can
+  run simultaneously.\n  2. Add the **Bitrise Start Build** Step to the part of the
+  Workflow where you want to trigger another build. \n  3. Add the Secret Env Var
+  storing your Personal Access Token to the **Bitrise Access Token** input of the
+  **Bitrise Start Build** Step: click the **Select secret variable** button, and choose
+  the key you created.\n  4. Find the **Workflows** input of the **Bitrise Start Build**
+  Step, and add the Workflow(s) you want to run. \n  5. In the **Environments to share**
+  input, add Environment Variables (Env Vars) that you want to share between the builds
+  triggered by the Step. \n  6. Add the **Bitrise Wait for Build** Step to the end
+  of Workflow that contains the **Bitrise Start Build** Step. \n  7. Add the Secret
+  Env Var storing your Personal Access Token to the **Bitrise Access Token** input
+  of the **Bitrise Wait for Build** Step: click the **Select secret variable** button,
+  and choose the key you created.\n  8. In the **Build slugs** input, define the builds
+  for the Step. \n     The build slugs you need are stored by the **Bitrise Start
+  Build** Step in the `$ROUTER_STARTED_BUILD_SLUGS` Env Var. As long as the builds
+  defined by the slugs are running, the Step will hold the build it is running in.
+  The build will fail if any of the builds included in the Step fail.\n  9. Optionally,
+  you can save the build artifacts from the builds and configure the Step to abort
+  all builds if any of the builds fail:\n     - In **The path of the build artifacts**
+  input, set where you'd like to save the artifacts. \n       The value of the input
+  must be an actual, existing path, ending with `/`.\n     - Set the **Abort all builds
+  if one fails** input to either `yes` or `no`. \n     Please note that the build
+  artifacts of child Workflows - Workflows triggered by this Step - will be only available
+  if the child Workflow contains a **Deploy to Bitrise.io** Step.\n\n### Troubleshooting
+  \n\n- Make sure you have both the **Bitrise Start Build** and the **Bitrise Wait
+  for Build** Steps in the right place in your initial Workflow. \n- Always check
+  all your builds: if your concurrencies are taken up by other builds, this Step cannot
+  start new ones. \n- Your Personal Access Token can expire! Make sure it's still
+  valid - without it, you can't start new builds with this Step.  \n\n### Useful links
+  \n\n- [Starting parallel builds with a single Workflow](https://devcenter.bitrise.io/builds/triggering-builds/trigger-multiple-workflows/)
+  \n\n\n### Related Steps \n\n- [Bitrise Wait for Build](https://www.bitrise.io/integrations/steps/build-router-start)\n-
+  [Bitrise Run](https://www.bitrise.io/integrations/steps/bitrise-run)\n- [Build Status
+  Change](https://www.bitrise.io/integrations/steps/build-status-change)"
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-start/issues
+published_at: 2022-03-01T10:38:55.83004121Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-start.git
+  commit: 18c3e2b28690a1eb958b5968adc89a4affe51d7e
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-start
+is_always_run: false
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your access token\n\nTo acquire a `Personal Access Token` for your
+      user, sign in with that user on [bitrise.io](https://bitrise.io),  \ngo to your
+      `Account Settings` page, and select the [Security tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your access token
+    title: Bitrise Access Token
+- opts:
+    description: The Workflow(s) to start. One Workflow per line.
+    is_required: true
+    summary: The Workflow(s) to start. One Workflow per line.
+    title: Workflows
+  workflows: null
+- environment_key_list: null
+  opts:
+    description: "The keys of the envs which will be shared with the triggered Workflows\n\n\n**FORMAT**
+      Seperate the keys with new line. E.g: \n`ENV_1\nENV_2\nENV_3`"
+    is_expand: false
+    is_required: false
+    summary: The keys of the envs which will be shared with the triggered Workflows.
+    title: Environments to share
+- opts:
+    description: Should the Step wait for the builds to be finished?
+    is_required: false
+    summary: Should the Step wait for the builds to be finished?
+    title: Wait for builds
+    value_options:
+    - "false"
+    - "true"
+  wait_for_builds: "false"
+- build_artifacts_save_path: null
+  opts:
+    description: "The path where build artifacts will be saved to if the **Wait for
+      builds** input is set to `true`. \n\nNote that when this Step triggers a Workflow,
+      the artifacts of the triggered Workflow are only available to the Workflow that
+      contains this Step, and not other Workflows. \nThe triggered Workflow MUST have
+      a **Deploy to Bitrise.io** Step to deploy build artifacts!\n"
+    is_required: false
+    is_sensitive: false
+    summary: The path that the build artifacts will be saved to if the **Wait for
+      builds** input is set to `true`.
+    title: The path of the build artifacts
+- abort_on_fail: "no"
+  opts:
+    description: Abort all started builds if any build fails
+    is_required: true
+    is_sensitive: false
+    title: Abort all builds if any of them
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: You can enable the verbose log for easier debugging.
+    is_required: true
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+outputs:
+- ROUTER_STARTED_BUILD_SLUGS: null
+  opts:
+    description: Newline separated list of started build slugs.
+    summary: Newline separated list of started build slugs.
+    title: Started Build Slugs
