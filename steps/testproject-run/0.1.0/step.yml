@@ -1,0 +1,48 @@
+title: Run a TestProject job
+summary: Run a TestProject job
+description: Run a TestProject job
+website: https://github.com/sca-organization/bitrise-testproject-run
+source_code_url: https://github.com/sca-organization/bitrise-testproject-run
+support_url: https://github.com/sca-organization/bitrise-testproject-run/issues
+published_at: 2022-03-24T15:36:43.961706+11:00
+source:
+  git: https://github.com/sca-organization/bitrise-testproject-run.git
+  commit: b6ff59e00cb7b1ddfae71caa58e6be6638aca38c
+project_type_tags:
+- ios
+- android
+- macos
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Your TestProject job id
+    title: TestProject job id
+  testproject_job_id: null
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestProject access key
+    title: TestProject access key
+  testproject_access_key: $TESTPROJECT_ACCESS_KEY
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Your TestProject access key
+    title: TestProject access key
+  testproject_project_id: $TESTPROJECT_PROJECT_ID
