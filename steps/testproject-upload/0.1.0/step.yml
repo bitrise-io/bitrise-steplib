@@ -4,10 +4,10 @@ description: Upload an IPA/APK file to TestProject
 website: https://github.com/sca-organization/bitrise-testproject-upload
 source_code_url: https://github.com/sca-organization/bitrise-testproject-upload
 support_url: https://github.com/sca-organization/bitrise-testproject-upload/issues
-published_at: 2022-03-24T12:30:45.380847+11:00
+published_at: 2022-03-24T12:45:55.639574+11:00
 source:
   git: https://github.com/sca-organization/bitrise-testproject-upload.git
-  commit: 66759658ae85dd2d64014e81b638688fec834015
+  commit: 4b32da488eebd3a2ef77c3f5c9ac2a0f5e186c5c
 project_type_tags:
 - ios
 - android
