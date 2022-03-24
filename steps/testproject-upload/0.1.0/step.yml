@@ -4,10 +4,10 @@ description: Upload an IPA/APK file to TestProject
 website: https://github.com/sca-organization/bitrise-testproject-upload
 source_code_url: https://github.com/sca-organization/bitrise-testproject-upload
 support_url: https://github.com/sca-organization/bitrise-testproject-upload/issues
-published_at: 2022-03-24T12:45:55.639574+11:00
+published_at: 2022-03-25T09:58:05.470422+11:00
 source:
   git: https://github.com/sca-organization/bitrise-testproject-upload.git
-  commit: 4b32da488eebd3a2ef77c3f5c9ac2a0f5e186c5c
+  commit: 443a186e3b459909615197d8af1fd27b0f21942d
 project_type_tags:
 - ios
 - android
@@ -22,11 +22,54 @@ deps:
   - name: jq
   apt_get:
   - name: jq
-is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
 run_if: ""
 inputs:
+- opts:
+    description: |
+      This can be found in the Integrations tab.
+      You can either create a new one or use an existing one.
+      To create an API Key:
+        -> API
+        -> Create API Key
+      To use an existing Key:
+        -> [API Key]
+        -> Copy
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestProject API key
+    title: TestProject API key
+  testproject_api_key: null
+- opts:
+    description: "This can be found in TestProject's Project tab:\n  -> My Projects\n
+      \ -> [Project] \n  -> ... \n  -> Copy ID\n"
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Your TestProject project id
+    title: TestProject project id
+  testproject_project_id: null
+- opts:
+    description: "This can be found in TestProject's Project tab:\n  -> My Projects
+      \n  -> [Project] \n  -> Applications \n  -> [Application] \n  -> ... \n  ->
+      Copy ID\n"
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Your TestProject app id
+    title: TestProject app id
+  testproject_app_id: null
+- opts:
+    description: "This can be found in TestProject's Project tab:\n   -> My Projects\n
+      \  -> [Project] \n   -> Test & Jobs \n   -> [Job] \n   -> ... \n   -> Copy ID\n"
+    is_expand: true
+    is_required: false
+    is_sensitive: false
+    summary: Your TestProject job id
+    title: TestProject job id
+  testproject_job_id: null
 - apk_ipa_filepath: $BITRISE_IPA_PATH
   opts:
     description: |
@@ -37,38 +80,3 @@ inputs:
     is_sensitive: false
     summary: Path of the IPA or APK that you want to upload.
     title: Path of the IPA or APK
-- opts:
-    description: ""
-    is_expand: true
-    is_required: false
-    is_sensitive: false
-    summary: Your TestProject job id
-    title: TestProject job id
-  testproject_job_id: $TESTPROJECT_JOB_ID
-- opts:
-    description: |
-      The access key you use to log into your TestProject account
-    is_expand: true
-    is_required: true
-    is_sensitive: false
-    summary: Your TestProject access key
-    title: TestProject access key
-  testproject_access_key: $TESTPROJECT_ACCESS_KEY
-- opts:
-    description: |
-      The access key you use to log into your TestProject account
-    is_expand: true
-    is_required: true
-    is_sensitive: false
-    summary: Your TestProject access key
-    title: TestProject access key
-  testproject_project_id: $TESTPROJECT_PROJECT_ID
-- opts:
-    description: |
-      The app id
-    is_expand: true
-    is_required: true
-    is_sensitive: false
-    summary: Your TestProject app id
-    title: TestProject app id
-  testproject_app_id: $TESTPROJECT_APP_ID
