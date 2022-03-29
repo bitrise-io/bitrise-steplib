@@ -4,7 +4,7 @@ description: Run a [TestProject](https://testproject.io/) job
 website: https://github.com/sca-organization/bitrise-testproject-run
 source_code_url: https://github.com/sca-organization/bitrise-testproject-run
 support_url: https://github.com/sca-organization/bitrise-testproject-run/issues
-published_at: 2022-03-29T22:00:54.577891+11:00
+published_at: 2022-03-29T22:08:32.704612+11:00
 source:
   git: https://github.com/sca-organization/bitrise-testproject-run.git
   commit: dc2e54c6113722b7661850e553b260d58d8b05e9
