@@ -9,7 +9,7 @@ support_url: https://github.com/LambdaTest/bitrise-step-lambdatest-upload/issues
 published_at: 2022-04-01T11:46:49.57948+05:30
 source:
   git: https://github.com/LambdaTest/bitrise-step-lambdatest-upload.git
-  commit: 7cd2ff643722f2b89aa12fb2e3bd32a6ff60f56d
+  commit: 150c91cc2a8daaf2741c912e2f70ab29ef4ec21d
 project_type_tags:
 - ios
 - macos
