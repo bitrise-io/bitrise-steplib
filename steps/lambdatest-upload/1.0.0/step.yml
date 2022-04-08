@@ -25,9 +25,11 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
+  - name: curl
   - name: jq
   - name: ack
   apt_get:
+  - name: curl
   - name: jq
   - name: ack
 is_always_run: false
