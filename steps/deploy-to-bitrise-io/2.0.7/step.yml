@@ -73,7 +73,7 @@ description: "The Step accesses artifacts from a directory specified as the `$BI
 website: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io
 source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io
 support_url: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io/issues
-published_at: 2022-04-12T12:33:35.059888067Z
+published_at: 2022-04-12T12:35:20.320963318Z
 source:
   git: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io.git
   commit: addc2a7d545e75f23acf1df72f64dc3faa49ca1a
