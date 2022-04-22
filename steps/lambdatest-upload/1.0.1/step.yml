@@ -9,7 +9,7 @@ support_url: https://github.com/LambdaTest/bitrise-step-lambdatest-upload/issues
 published_at: 2022-04-21T23:40:48.586584+05:30
 source:
   git: https://github.com/LambdaTest/bitrise-step-lambdatest-upload.git
-  commit: 0566aed52e765f808970fd472b4af8af1b26925a
+  commit: c9ac1ea850b3e5ac0817c9180281aabe1816edb3
 project_type_tags:
 - ios
 - macos
@@ -60,7 +60,7 @@ inputs:
     is_sensitive: true
     summary: Your LambdaTest access key
     title: LambdaTest access key
-- app_name: null
+- app_name: "Untitled"
   opts:
     description: |
       The name of your application
