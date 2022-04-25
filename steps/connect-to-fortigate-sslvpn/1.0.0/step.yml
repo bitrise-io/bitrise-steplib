@@ -1,0 +1,82 @@
+title: Connect to Fortigate SSLVPN
+summary: |
+  Connect to Fortigate SSL VPN
+description: |
+  Bitrise step to connect to Fortigate SSL VPN
+website: https://github.com/vielasis/bitrise-step-connect-to-fortigate-sslvpn
+source_code_url: https://github.com/vielasis/bitrise-step-connect-to-fortigate-sslvpn
+support_url: https://github.com/vielasis/bitrise-step-connect-to-fortigate-sslvpn/issues
+published_at: 2022-04-22T17:58:29.568466499+08:00
+source:
+  git: https://github.com/vielasis/bitrise-step-connect-to-fortigate-sslvpn.git
+  commit: 269900157ef7ca8a1cb2808871757ef9d3c5f7e8
+host_os_tags:
+- osx-10.10
+- ubuntu-20.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: openfortivpn
+  apt_get:
+  - name: openfortivpn
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- ftg_host: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Can be an IPv4 address on a FQDN
+    title: Remote Gateway
+- ftg_port: 443
+  opts:
+    is_expand: true
+    is_required: true
+    summary: 'VPN Port (default: 443)'
+    title: Remote Gateway Port
+- ftg_username: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Fortigate username
+    title: Username
+- ftg_password: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Fortigate password
+    title: Password
+- ftg_trusted_certs: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Passed to --trusted-cert option. Split cert entries with a newline `\n.`
+      *DO NOT* end with newline
+    title: Trusted certs
+- ftg_logfile: $BITRISE_DEPLOY_DIR/fortigate.log
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Defaults to `$BITRISE_DEPLOY_DIR/fortigate.log`
+    title: Log file path
+- ip_hosts: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Lits of entries to be appended to /etc/hosts. Separate entries with a
+      newline `\n`
+    title: /etc/hosts
+- ip_routes: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: List of IP Addresses to route to the ppp gateway. Separate entries with
+      a newline `\n.` *DO NOT* end with newline
+    title: IP Addresses to route
