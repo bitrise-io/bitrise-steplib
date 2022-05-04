@@ -1,0 +1,91 @@
+title: Run Swift Test With Code Coverage
+summary: |
+  Step that runs SPM tests on macOS, outputting an XUnit XML file and Code Coverage
+description: |
+  Step that runs "swift test" in the local directory and export the results as a XUnit XML file into Bitrise Test Plugin and provides in the outputs the Code Coverage JSON file
+website: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
+source_code_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
+support_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage/issues
+published_at: 2022-05-04T19:16:04.074345Z
+source:
+  git: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage.git
+  commit: 9733ce3244f93a3591493f12c630cc86637f1582
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- PROJECT_DIR: $BITRISE_SOURCE_DIR
+  opts:
+    description: |
+      Path with the Swift Package Manager code
+    is_expand: true
+    is_required: true
+    summary: Path with the Swift Package Manager code
+    title: Project directory
+- TEST_NAME: SwiftTest
+  opts:
+    description: |
+      Name that will be used in the test information and generated files
+    is_expand: true
+    is_required: true
+    summary: Name that will be used in the test information and generated files
+    title: Test name
+- CONFIGURATION: debug
+  opts:
+    description: |
+      Allows setting either Release or Debug for the build action
+    is_expand: true
+    is_required: true
+    summary: Allows setting either Release or Debug for the build action
+    title: Build Configuration
+    value_options:
+    - release
+    - debug
+- SKIP_BUILD: "NO"
+  opts:
+    description: |
+      Sends a --skip-build flag into the `swift test` command
+    is_expand: true
+    is_required: true
+    summary: Run test without building
+    title: Run test without building
+    value_options:
+    - "YES"
+    - "NO"
+- BUILD_PATH: $BITRISE_SOURCE_DIR/.build
+  opts:
+    description: |
+      Path where the build files will be stored
+    is_expand: true
+    is_required: true
+    summary: Path where the build files will be stored
+    title: Build path
+outputs:
+- TEST_RESULT: null
+  opts:
+    description: |
+      XML file with the result of the tests
+    summary: XML file with the result of the tests
+    title: Test result
+- CODE_COVERAGE_RESULT: null
+  opts:
+    description: |
+      JSON file with the result of the code coverage report
+    summary: JSON file with the result of the code coverage report
+    title: Code Coverage result
