@@ -1,0 +1,137 @@
+title: Run Swift Test With Code Coverage
+summary: |
+  Step that runs SPM tests on macOS, outputting an XML/HTML test result file and Code Coverage JSON file
+description: |
+  This step uses xcodebuild & xcpretty to run the macOS tests for the Swift Package Manager. The final files are
+  output in a structure compatible with the "Test Report" plugin and can be configured to be JUnit or HTML as output,
+  so the generated files are compatible with tools like Danger.
+  The Code coverage is always exported as a JSON file.
+website: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
+source_code_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage
+support_url: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage/issues
+published_at: 2022-05-06T15:59:47.434103Z
+source:
+  git: https://github.com/igorcferreira/bitrise-step-run-spm-test-with-coverage.git
+  commit: 2cbcb1de8f33f510b8f766119755f9eaf5b823d7
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+  check_only:
+  - name: xcode
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- PROJECT_DIR: $BITRISE_SOURCE_DIR
+  opts:
+    description: |
+      Path with the Swift Package Manager code
+    is_expand: true
+    is_required: true
+    summary: Path with the Swift Package Manager code
+    title: Project directory
+- TEST_NAME: SwiftTest
+  opts:
+    description: |
+      Name that will be used in the test information and generated files
+    is_expand: true
+    is_required: true
+    summary: Name that will be used in the test information and generated files
+    title: Test name
+- BUILD_PATH: $BITRISE_SOURCE_DIR/.build
+  opts:
+    description: |
+      Path where the build files will be stored
+    is_expand: true
+    is_required: true
+    summary: Path where the build files will be stored
+    title: Build path
+- SKIP_BUILD: "NO"
+  opts:
+    category: Build configuration
+    description: |
+      Run test without building
+    is_expand: true
+    is_required: true
+    summary: Run test without building
+    title: Run test without building
+    value_options:
+    - "YES"
+    - "NO"
+- REPORTER: junit
+  opts:
+    category: xcpretty
+    description: |
+      Choose between a junit report or a html report
+    is_expand: true
+    is_required: true
+    summary: Choose between a junit report or a html report
+    title: xcpretty reporter
+    value_options:
+    - junit
+    - html
+- SDK: macosx
+  opts:
+    category: Test Platform
+    description: |
+      Select which sdk will be tested
+    is_expand: true
+    is_required: true
+    summary: Select which sdk will be tested
+    title: Build SDK
+    value_options:
+    - macosx
+    - appletvsimulator
+    - iphonesimulator
+    - watchsimulator
+    - driverkit
+- DESTINATION: platform=macOS
+  opts:
+    category: Test Platform
+    description: |
+      Choose which destination will be used to run the tests
+    is_expand: true
+    is_required: true
+    summary: Choose which destination will be used to run the tests
+    title: Run test destination
+- CONFIGURATION: debug
+  opts:
+    category: Deprecated
+    deprecated: true
+    description: |
+      Allows setting either Release or Debug for the build action (Deprecated)
+    is_expand: true
+    is_required: false
+    summary: Allows setting either Release or Debug for the build action (Deprecated)
+    title: Build Configuration (Deprecated)
+    value_options:
+    - release
+    - debug
+outputs:
+- TEST_RESULT: null
+  opts:
+    description: |
+      XML file with the result of the tests
+    is_dont_change_value: true
+    summary: XML file with the result of the tests
+    title: Test result
+- CODE_COVERAGE_RESULT: null
+  opts:
+    description: |
+      JSON file with the result of the code coverage report
+    is_dont_change_value: true
+    summary: JSON file with the result of the code coverage report
+    title: Code Coverage result
