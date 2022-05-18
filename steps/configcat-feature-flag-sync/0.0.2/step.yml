@@ -1,0 +1,68 @@
+title: ConfigCat Feature Flag Sync
+summary: Scans the source code for feature flags and uploads the references to the
+  ConfigCat Dashboard
+description: "This Step helps you get rid of technical debt by scanning the source
+  code and highlighting the feature flag usages for each feature flag on the [ConfigCat
+  Dashboard](https://app.configcat.com/).\n\n## Configuring the Step\n\n1. Log in
+  to [ConfigCat](https://app.configcat.com/)\n1. Create new [ConfigCat Public Management
+  API credentials](https://app.configcat.com/my-account/public-api-credentials/) \n1.
+  Store your credentials in the following Bitrise secret environment variables: `CONFIGCAT_API_USER`,
+  `CONFIGCAT_API_PASS`.\n1. Add your [ConfigCat config ID](https://configcat.com/docs/advanced/code-references/overview#config-id)
+  to the `ConfigCat Config ID` input variable of this step (`configcat_config_id`
+  in bitrise.yml). The config ID tells the step which feature flags it should search
+  for in your source code.\n\nFor more information about code reference scanning,
+  see the [documentation](https://configcat.com/docs/advanced/code-references/overview/).\n\n###
+  Code snippet on the ConfigCat Dashboard\n![Code references](https://configcat.com/docs/assets/cli/scan/scan_report.png)"
+website: https://configcat.com/
+source_code_url: https://github.com/configcat/bitrise-step-configcat-feature-flag-sync/
+support_url: https://configcat.com/support/
+published_at: 2022-05-05T16:54:00.310438+02:00
+source:
+  git: https://github.com/configcat/bitrise-step-configcat-feature-flag-sync.git
+  commit: 836a4f0f44149093946676e2e315c65f0592b021
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- configcat_api_host: api.configcat.com
+  opts:
+    is_required: true
+    summary: Full domain name without protocol e.g. 'api.configcat.com'
+    title: ConfigCat Public Management API host
+- configcat_config_id: null
+  opts:
+    is_required: true
+    summary: The [config ID](https://configcat.com/docs/advanced/code-references/overview#config-id)
+      tells the step which feature flags it should search for in your source code.
+    title: ConfigCat Config ID
+- line_count: 4
+  opts:
+    summary: The ConfigCat Dashboard will display a few lines of your source code
+      around the feature flag reference. You can set here how many lines of code you
+      want to include before and after the reference line.
+    title: 'Code snippet line count before and after the reference line (min: 1, max:
+      10)'
+- opts:
+    summary: e.g. 'subfolder/to/scan'
+    title: Sub-folder to scan, relative to the repository root folder
+  sub_folder: null
+- opts:
+    summary: Turns on or off detailed logging
+    title: Detailed logging
+    value_options:
+    - "false"
+    - "true"
+  verbose: "false"
