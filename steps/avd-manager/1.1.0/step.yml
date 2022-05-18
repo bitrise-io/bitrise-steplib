@@ -26,10 +26,10 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-avd-manager
 source_code_url: https://github.com/bitrise-steplib/steps-avd-manager
 support_url: https://github.com/bitrise-steplib/steps-avd-manager/issues
-published_at: 2022-05-10T12:40:12.226073011Z
+published_at: 2022-05-18T10:12:57.558272713Z
 source:
   git: https://github.com/bitrise-steplib/steps-avd-manager.git
-  commit: 444ecddfe90dcc381c9faf3932cd8987df87643f
+  commit: 0dd41db07c364875216bcba56e9e229251c99046
 type_tags:
 - utility
 toolkit:
@@ -40,11 +40,11 @@ is_always_run: false
 is_skippable: false
 inputs:
 - opts:
-    description: Set the device profile to create the new virtual device. This profile
-      contains all the parameters of the devices. To see the complete list of available
-      profiles use the `avdmanager list device` command locally and use the `id` value
-      for this input.
+    description: This profile contains all the parameters of the devices. To see the
+      complete list of available profiles use the `avdmanager list device` command
+      locally and use the `id` value for this input.
     is_required: true
+    summary: Set the device profile to create the new AVD.
     title: Device Profile
   profile: pixel
 - api_level: 26
