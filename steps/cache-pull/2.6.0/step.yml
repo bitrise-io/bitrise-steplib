@@ -1,0 +1,92 @@
+title: Bitrise.io Cache:Pull
+summary: Download the build cache from bitrise.io.
+description: |-
+  Downloads the build cache from bitrise.io, and moves the files back to
+  their original place. The aim is to speed up your builds as not having to download every single dependency every time can be a serious timesaver.
+
+  ### Configuring the Step
+
+  To be able to pull from a previous build's cache, you need two things.
+
+  1. The **Cache:Push** Step at the end of your Workflow.
+  2. At least one successful build on the same branch in the last seven days.
+
+  If there was no successful build on the branch in question in the last seven days, the cache automatically gets deleted.
+
+  ### Troubleshooting
+
+  If the Step fails, check the time of the latest build. If there was a successful build in the last seven days, check if the Workflow included the **Cache:Push** Step.
+
+  If the **Cache:Push** Step was present, check the inputs of the Step. It's possible, for example, that the provided cache path is incorrect.
+
+  ### Useful links
+
+  - [Caching](https://devcenter.bitrise.io/builds/caching/about-caching-index/)
+
+  ### Related Steps
+
+  - [Cache:Push](https://www.bitrise.io/integrations/steps/cache-push)
+  - [Run CocoaPods install](https://www.bitrise.io/integrations/steps/cocoapods-install)
+  - [Run npm command](https://www.bitrise.io/integrations/steps/npm)
+  - [yarn](https://www.bitrise.io/integrations/steps/yarn)
+website: https://github.com/bitrise-steplib/steps-cache-pull
+source_code_url: https://github.com/bitrise-steplib/steps-cache-pull.git
+support_url: https://github.com/bitrise-steplib/steps-cache-pull/issues
+published_at: 2022-05-25T14:02:03.47052731Z
+source:
+  git: https://github.com/bitrise-steplib/steps-cache-pull.git
+  commit: 27d2d450a2fa7c6ace5ee461e952021f1cabe439
+host_os_tags:
+- osx-10.10
+- ubuntu-14.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-cache-pull
+deps:
+  apt_get:
+  - name: tar
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    description: Working directory path - should be an absolute path.
+    summary: Working directory path
+    title: Working directory path
+  workdir: $BITRISE_SOURCE_DIR
+- cache_api_url: $BITRISE_CACHE_API_URL
+  opts:
+    description: Cache API URL
+    is_dont_change_value: true
+    summary: Cache API URL
+    title: Cache API URL
+- is_debug_mode: "false"
+  opts:
+    is_required: true
+    summary: If enabled, the step will print verbose logs.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+- extract_to_relative_path: "false"
+  opts:
+    category: Debug
+    is_dont_change_value: true
+    is_required: true
+    summary: Should we extract the archive content under current working directory?
+    title: Extract to relative path?
+    value_options:
+    - "true"
+    - "false"
+- allow_fallback: "true"
+  opts:
+    category: Debug
+    is_dont_change_value: true
+    is_required: true
+    title: Allow fallback cache extraction?
+    value_options:
+    - "true"
+    - "false"
