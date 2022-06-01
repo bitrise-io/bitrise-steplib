@@ -5,15 +5,13 @@ description: This step allows you to uninstall the system bundler version, and m
   the one in your Gemfile..
 website: https://github.com/FutureWorkshops/bitrise-step-install-bundler
 source_code_url: https://github.com/FutureWorkshops/bitrise-step-install-bundler
+support_url: https://github.com/FutureWorkshops/bitrise-step-install-bundler/issues
 published_at: 2022-05-12T11:56:47.099737+02:00
 source:
   git: https://github.com/FutureWorkshops/bitrise-step-install-bundler.git
   commit: 2531a1fda45e317d478c6dd3c25c3efd14359010
 host_os_tags:
 - osx-10.14
-project_type_tags:
-- ios
-- xamarin
 type_tags:
 - utility
 deps: {}
