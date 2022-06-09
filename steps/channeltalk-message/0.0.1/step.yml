@@ -1,0 +1,55 @@
+title: ChannelTalk Message
+summary: |
+  send a channelTalk message
+description: |
+  send a channelTalk message
+website: https://github.com/vvvvvoin/bitrise-step-channeltalk-message
+source_code_url: https://github.com/vvvvvoin/bitrise-step-channeltalk-message
+support_url: https://github.com/vvvvvoin/bitrise-step-channeltalk-message/issues
+published_at: 2022-06-09T23:27:13.864783+09:00
+source:
+  git: https://github.com/vvvvvoin/bitrise-step-channeltalk-message.git
+  commit: 8d73ae5b421830a7c8159b5fc5b889e6a5cb65c9
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+run_if: ""
+inputs:
+- channeltalk_access_key: $CHANNELTALK_ACCESS_KEY
+  opts:
+    description: |
+      ChannelTalk Access key
+
+      You can find this, channel settings -> seccurity and developement -> api
+    is_required: true
+    is_sensitive: true
+    title: ChannelTalk Access key
+- channeltalk_access_secret: $CHANNELTALK_ACCESS_SECRET
+  opts:
+    description: |
+      ChannelTalk Access Secret
+
+      You can find this, channel settings -> seccurity and developement -> api
+    is_required: true
+    is_sensitive: true
+    title: ChannelTalk Access Secret
+- channeltalk_chatid: $CHANNELTALK_CHAT_ID
+  opts:
+    description: |
+      ChannelTalk Chat ID
+    is_required: true
+    is_sensitive: true
+    title: ChannelTalk Chat ID
