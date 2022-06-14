@@ -1,0 +1,52 @@
+title: espresso-bitrise-step
+summary: |
+  This step uploads users app to browserstack and trigger the espresso build
+description: |
+  this is my description, please help me
+website: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step
+source_code_url: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step
+support_url: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step/issues
+published_at: 2022-06-14T20:43:10.26388+05:30
+source:
+  git: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step.git
+  commit: cb2bff70ddd9cd1c70b8c593130abf10fade44a6
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
