@@ -6,7 +6,7 @@ description: |
 website: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step
 source_code_url: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step
 support_url: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step/issues
-published_at: 2022-06-15T13:01:05.767922+05:30
+published_at: 2022-06-16T17:06:51.46891+05:30
 source:
   git: https://github.com/rishabh-browserstack/bitrise-step-espresso-bitrise-step.git
   commit: cb2bff70ddd9cd1c70b8c593130abf10fade44a6
