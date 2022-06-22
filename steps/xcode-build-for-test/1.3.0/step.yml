@@ -1,0 +1,290 @@
+title: Xcode Build for testing for iOS
+summary: Performs xcodebuild's build-for-testing action
+description: |-
+  The Step runs Xcode's `xcodebuild` command with the `build-for-testing` option. This builds your app and associated tests so that you can, for example, upload it to a third-party testing service to run your tests on a real device.
+  The Step also creates an `.xctestrun` file.
+  To be able to run your tests on a real device it needs code signing. The **Automatic code signing method** Step input allows you to log you into your Apple Developer account based on the [Apple service connection you provide on Bitrise](https://devcenter.bitrise.io/en/accounts/connecting-to-services/apple-services-connection.html) and download any provisioning profiles needed for your project based on the **Distribution method**.
+  Please note that the **Automatic code signing method** input is by default set to `off`, so if you need code signing, select either the `api-key` or the `apple-id`option of the input.
+
+  ### Configuring the Step
+  Before you start:
+  - Make sure you have connected your [Apple Service account to Bitrise](https://devcenter.bitrise.io/en/accounts/connecting-to-services/apple-services-connection.html).
+  Alternatively, you can upload certificates and profiles to Bitrise manually, then use the **Certificate and Profile Installer** Step before this Step.
+  - Make sure certificates are uploaded to Bitrise's **Code Signing** tab. The right provisioning profiles are automatically downloaded from Apple as part of the automatic code signing process.
+
+  To configure the Step:
+  1. **Project (or Workspace) path**: This is the path where the `.xcodeproj` or `.xcworkspace` files are localed.
+  2. **Scheme**: Add the scheme name you wish to build for testing.
+  3. **Build Configuration**: If not specified, the default Build Configuration will be used. The input value sets xcodebuild's `-configuration` option.
+  4. **Device destination specifier**: Destination specifier describes the device to use as a destination. The input value sets xcodebuild's `-destination` option.
+
+  Under **xcodebuild configuration**
+  5. **Build settings (xcconfig)**:  Build settings to override the project's build settings. The build settings must be separated by newline character (`\n`). For example:
+      ```
+      COMPILER_INDEX_STORE_ENABLE = NO
+      ONLY_ACTIVE_ARCH[config=Debug][sdk=*][arch=*] = YES
+      ```
+  The input value sets xcodebuild's `-xcconfig` option.
+  6. **Additional options for the xcodebuild command**:  Additional options to be added to the executed xcodebuild command.
+
+  Under **Xcode build log formatting**:
+  1. **Log formatter**: Defines how `xcodebuild` command's log is formatted. Available options: `xcpretty`: The xcodebuild command's output will be prettified by xcpretty. `xcodebuild`: Only the last 20 lines of raw xcodebuild output will be visible in the build log. The raw xcodebuild log is exported in both cases.
+
+  Under **Automatic code signing**:
+  1. **Automatic code signing method**: Select the Apple service connection you want to use for code signing. Available options: `off` if you don't do automatic code signing, `api-key` [if you use API key authorization](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-api-key.html), and `apple-id` [if you use Apple ID authorization](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-apple-id.html).
+  2. **Register test devices on the Apple Developer Portal**: If this input is set, the Step will register the known test devices on Bitrise from team members with the Apple Developer Portal. Note that setting this to `yes` may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+  3. **The minimum days the Provisioning Profile should be valid**: If this input is set to >0, the managed Provisioning Profile will be renewed if it expires within the configured number of days. Otherwise the Step renews the managed Provisioning Profile if it is expired.
+  4. The **Code signing certificate URL**, the **Code signing certificate passphrase**, the **Keychain path**, and the **Keychain password** inputs are automatically populated if certificates are uploaded to Bitrise's **Code Signing** tab. If you store your files in a private repo, you can manually edit these fields.
+
+  Under **Step Output configuration**:
+  1. **Output directory path**: This directory contains the generated artifacts.
+
+  Under **Caching**:
+  1. **Enable collecting cache content**: Defines what cache content should be automatically collected. Available options are:
+    - `none`: Disable collecting cache content
+    - `swift_packages`: Collect Swift PM packages added to the Xcode project
+
+  Under Debugging:
+  1. **Verbose logging***: You can set this input to `yes` to produce more informative logs.
+website: https://github.com/bitrise-steplib/steps-xcode-build-for-test
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-build-for-test
+support_url: https://github.com/bitrise-steplib/steps-xcode-build-for-test/issues
+published_at: 2022-02-25T08:54:44.017258515Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-build-for-test.git
+  commit: 9b31a562861717e9f368a37573d5e2ec48b7b958
+project_type_tags:
+- ios
+- react-native
+- cordova
+- ionic
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-build-for-test
+deps:
+  check_only:
+  - name: xcode
+inputs:
+- opts:
+    description: |-
+      Xcode Project (`.xcodeproj`) or Workspace (`.xcworkspace`) path.
+
+      The input value sets xcodebuild's `-project` or `-workspace` option.
+    is_required: true
+    summary: Xcode Project (`.xcodeproj`) or Workspace (`.xcworkspace`) path.
+    title: Project path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |-
+      Xcode Scheme name.
+
+      The input value sets xcodebuild's `-scheme` option.
+    is_required: true
+    summary: Xcode Scheme name.
+    title: Scheme
+  scheme: $BITRISE_SCHEME
+- configuration: Debug
+  opts:
+    description: |-
+      Xcode Build Configuration.
+
+      If not specified, the default Build Configuration will be used.
+
+      The input value sets xcodebuild's `-configuration` option.
+    is_required: true
+    summary: Xcode Build Configuration.
+    title: Build Configuration
+- destination: generic/platform=iOS
+  opts:
+    description: |-
+      Destination specifier describes the device to use as a destination.
+
+      The input value sets xcodebuild's `-destination` option.
+    is_required: true
+    summary: Destination specifier describes the device to use as a destination.
+    title: Device destination specifier
+- opts:
+    category: xcodebuild configuration
+    description: |-
+      Build settings to override the project's build settings.
+
+      Build settings must be separated by newline character (`\n`).
+
+      Example:
+
+      ```
+      COMPILER_INDEX_STORE_ENABLE = NO
+      ONLY_ACTIVE_ARCH[config=Debug][sdk=*][arch=*] = YES
+      ```
+
+      The input value sets xcodebuild's `-xcconfig` option.
+    summary: Build settings to override the project's build settings.
+    title: Build settings (xcconfig)
+  xcconfig_content: COMPILER_INDEX_STORE_ENABLE = NO
+- opts:
+    category: xcodebuild configuration
+    description: Additional options to be added to the executed xcodebuild command.
+    summary: Additional options to be added to the executed xcodebuild command.
+    title: Additional options for the xcodebuild command
+  xcodebuild_options: ""
+- log_formatter: xcpretty
+  opts:
+    category: xcodebuild log formatting
+    description: |-
+      Defines how xcodebuild command's log is formatted.
+
+      Available options:
+      - `xcpretty`: The xcodebuild command’s output will be prettified by xcpretty.
+      - `xcodebuild`: Only the last 20 lines of raw xcodebuild output will be visible in the build log.
+
+      The raw xcodebuild log will be exported in both cases.
+    is_required: true
+    summary: Defines how xcodebuild command's log is formatted.
+    title: Log formatter
+    value_options:
+    - xcpretty
+    - xcodebuild
+- automatic_code_signing: "off"
+  opts:
+    category: Automatic code signing
+    description: |-
+      This input determines which Bitrise Apple service connection should be used for automatic code signing.
+
+      Available values:
+      - `off`: Do not do any auto code signing.
+      - `api-key`: [Bitrise Apple Service connection with API Key](https://devcenter.bitrise.io/getting-started/connecting-to-services/setting-up-connection-to-an-apple-service-with-api-key/).
+      - `apple-id`: [Bitrise Apple Service connection with Apple ID](https://devcenter.bitrise.io/getting-started/connecting-to-services/connecting-to-an-apple-service-with-apple-id/).
+    is_required: true
+    summary: This input determines which Bitrise Apple service connection should be
+      used for automatic code signing.
+    title: Automatic code signing method
+    value_options:
+    - "off"
+    - api-key
+    - apple-id
+- opts:
+    category: Automatic code signing
+    description: |-
+      If this input is set, the Step will register the known test devices on Bitrise from team members with the Apple Developer Portal.
+
+      Note that setting this to yes may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+    is_required: true
+    summary: If this input is set, the Step will register the known test devices on
+      Bitrise from team members with the Apple Developer Portal.
+    title: Register test devices on the Apple Developer Portal
+    value_options:
+    - "yes"
+    - "no"
+  register_test_devices: "no"
+- min_profile_validity: "0"
+  opts:
+    category: Automatic code signing
+    description: |-
+      If this input is set to >0, the managed Provisioning Profile will be renewed if it expires within the configured number of days.
+
+      Otherwise the Step renews the managed Provisioning Profile if it is expired.
+    is_required: true
+    summary: If this input is set to >0, the managed Provisioning Profile will be
+      renewed if it expires within the configured number of days.
+    title: The minimum days the Provisioning Profile should be valid
+- apple_team_id: ""
+  opts:
+    category: Automatic code signing
+    description: |-
+      The Apple Developer Portal team to use for downloading code signing assets.
+
+      Defining this is only required when Automatic Code Signing is set to `apple-id` and the connected account belongs to multiple teams.
+    summary: The Apple Developer Portal team to use for downloading code signing assets.
+    title: Developer Portal team ID
+- certificate_url_list: $BITRISE_CERTIFICATE_URL
+  opts:
+    category: Automatic code signing
+    description: |-
+      URL of the code signing certificate to download.
+
+      Multiple URLs can be specified, separated by a pipe (`|`) character.
+
+      Local file path can be specified, using the `file://` URL scheme.
+    is_required: true
+    is_sensitive: true
+    summary: URL of the code signing certificate to download.
+    title: Code signing certificate URL
+- opts:
+    category: Automatic code signing
+    description: |-
+      Passphrases for the provided code signing certificates.
+
+      Specify as many passphrases as many Code signing certificate URL provided, separated by a pipe (`|`) character.
+    is_required: true
+    is_sensitive: true
+    summary: Passphrases for the provided code signing certificates.
+    title: Code signing certificate passphrase
+  passphrase_list: $BITRISE_CERTIFICATE_PASSPHRASE
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    category: Automatic code signing
+    is_dont_change_value: true
+    is_required: true
+    summary: Path to the Keychain where the code signing certificates will be installed.
+    title: Keychain path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    category: Automatic code signing
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: Password for the provided Keychain.
+    title: Keychain password
+- opts:
+    category: Step output configuration
+    description: This directory will contain the generated artifacts.
+    is_required: true
+    summary: This directory will contain the generated artifacts.
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- cache_level: swift_packages
+  opts:
+    category: Caching
+    description: |-
+      Defines what cache content should be automatically collected.
+
+      Available options:
+      - `none`: Disable collecting cache content.
+      - `swift_packages`: Collect Swift PM packages added to the Xcode project.
+    is_required: true
+    summary: Defines what cache content should be automatically collected.
+    title: Enable collecting cache content
+    value_options:
+    - none
+    - swift_packages
+- opts:
+    category: Debugging
+    description: If this input is set, the Step will print additional logs for debugging.
+    is_required: true
+    summary: If this input is set, the Step will print additional logs for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+outputs:
+- BITRISE_TEST_DIR_PATH: null
+  opts:
+    summary: 'Path to the built test directory (example: `PROJECT_DERIVED_DATA/Build/Products/Debug-iphoneos`)'
+    title: 'Path to the built test directory (example: `PROJECT_DERIVED_DATA/Build/Products/Debug-iphoneos`)'
+- BITRISE_XCTESTRUN_FILE_PATH: null
+  opts:
+    summary: 'Path to the built xctestrun file (example: `PROJECT_DERIVED_DATA/Build/Products/ios-simple-objc_iphoneos12.0-arm64e.xctestrun`)'
+    title: 'Path to the built xctestrun file (example: `PROJECT_DERIVED_DATA/Build/Products/ios-simple-objc_iphoneos12.0-arm64e.xctestrun`)'
+- BITRISE_TEST_BUNDLE_ZIP_PATH: null
+  opts:
+    summary: The built test directory and the built xctestrun file compressed as a
+      single zip
+    title: The built test directory and the built xctestrun file compressed as a single
+      zip
+- BITRISE_XCODE_RAW_RESULT_TEXT_PATH: null
+  opts:
+    description: The file path of the raw `xcodebuild build-for-testing` command log.
+    title: '`xcodebuild build-for-testing` command log file path'

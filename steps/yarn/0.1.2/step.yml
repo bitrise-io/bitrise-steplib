@@ -1,0 +1,98 @@
+title: Run yarn command
+summary: Runs `yarn` with the given command and args.
+description: |2-
+
+  Yarn is a package manager that is compatible with the npm registry. Download your app's dependencies via yarn by using this Step.
+
+  ### Configuring the Step
+
+  To use the Step, you need to configure your dependencies in your `package.json` file.
+
+  1. Set a command in **The yarn command to run** input.
+
+     If you leave the input blank, the Step will simply install your dependencies. You can find the other available command in [yarn's documentation](https://yarnpkg.com/lang/en/docs/cli/).
+
+  1. Set the arguments in the **Arguments for running yarn commands** input.
+
+     You can specify multiple arguments. Check out the available arguments for each command in yarn's documentation.
+
+  You can also cache the contents of the node_modules directory by setting the **Cache node_modules** input to `yes`.
+
+  ### Troubleshooting
+
+  If the Step fails, run it again with verbose logging enabled. To do so, set the **Enable verbose logging** input to `yes`. Doing so allows yarn to output more information about the command you ran.
+
+  Make sure your commands and arguments are correct, and that your packages are correctly defined in the `package.json` file.
+
+  ### Useful links
+
+  [Getting started with React Native apps](https://devcenter.bitrise.io/getting-started/getting-started-with-react-native-apps/)
+  [Running Detox tests on Bitrise](https://devcenter.bitrise.io/testing/running-detox-tests-on-bitrise/)
+
+  ### Related Steps
+
+  [Run Cocoapods install](https://www.bitrise.io/integrations/steps/cocoapods-install)
+  [Run npm command](https://www.bitrise.io/integrations/steps/npm)
+website: https://github.com/bitrise-community/steps-yarn
+source_code_url: https://github.com/bitrise-community/steps-yarn
+support_url: https://github.com/bitrise-community/steps-yarn/issues
+published_at: 2022-02-23T16:02:34.512861806Z
+source:
+  git: https://github.com/bitrise-steplib/steps-yarn.git
+  commit: 19f3fbd7f7f8f2b40a82344aca6475261ed5db29
+host_os_tags:
+- osx-10.11
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-yarn
+deps:
+  brew:
+  - name: node
+  - name: yarn
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: |
+      Specify the command to run with `yarn`. For example `add`.
+      Leave it blank to install dependencies.
+    is_required: false
+    title: The `yarn` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `yarn` command. You can specify multiple arguments, separated
+      by a space character. For example `react` or `-dev`
+    title: Arguments for running `yarn` commands
+- cache_local_deps: "no"
+  opts:
+    description: |-
+      Select if the contents of node_modules directory should be cached.
+
+      `yes`: Mark local dependencies to be cached.
+      `no`: Do not use cache.
+
+      All node_modules folders (recursively) located under the working directory will be cached.
+    is_required: true
+    title: Cache node_modules
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      Choose if debug logging is enabled.
+    is_required: true
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
