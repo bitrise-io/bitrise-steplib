@@ -1,0 +1,70 @@
+title: Android Instrumented Test
+summary: Runs Instrumented tests on an existing APK
+description: Runs Instrumented tests on an existing APK
+website: https://github.com/bitrise-steplib/bitrise-step-android-instrumented-test
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-instrumented-test
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-instrumented-test/issues
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+
+project_type_tags:
+- android
+
+type_tags:
+- test
+
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-instrumented-test
+
+inputs:
+- main_apk_path: $BITRISE_APK_PATH
+  opts:
+    title: Main APK path
+    summary: The path to the app's main APK
+    description: The path to the app's main APK
+    is_required: true
+
+- test_apk_path: $BITRISE_TEST_APK_PATH
+  opts:
+    title: Test APK path
+    summary: The path to the app's test APK
+    description: The path to the app's test APK
+    is_required: true
+
+- test_runner_class: androidx.test.runner.AndroidJUnitRunner
+  opts:
+    title: Test runner class
+    summary: The name of the test runner
+    description: The name of the test runner
+    is_required: true
+
+- additional_testing_options: ""
+  opts:
+    title: Additional testing options
+    summary: A space-delimited list of additional options to pass to the test runner
+    description: |-
+      A space-delimited list of additional options to pass to the test runner
+
+      Example:
+
+      If a value of `KEY1 true KEY2 false` is passed to this input,
+      then it will be passed to the `adb` command like so:
+
+      ```shell
+      adb shell am instrument -e "KEY1" "true" "KEY2" "false" [...]
+      ```
+
+      See the [`adb` documentation](https://developer.android.com/studio/command-line/adb#am) for more info.
