@@ -32,7 +32,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-cache-pull
 source_code_url: https://github.com/bitrise-steplib/steps-cache-pull.git
 support_url: https://github.com/bitrise-steplib/steps-cache-pull/issues
-published_at: 2022-06-28T06:45:44.080869026Z
+published_at: 2022-06-28T06:52:39.57447806Z
 source:
   git: https://github.com/bitrise-steplib/steps-cache-pull.git
   commit: a6b4345d40b7eefad09e4ce14caeed04886ac3f8
