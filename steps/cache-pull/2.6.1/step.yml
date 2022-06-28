@@ -32,10 +32,10 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-cache-pull
 source_code_url: https://github.com/bitrise-steplib/steps-cache-pull.git
 support_url: https://github.com/bitrise-steplib/steps-cache-pull/issues
-published_at: 2022-06-27T14:35:26.242307219Z
+published_at: 2022-06-28T06:45:05.589576112Z
 source:
   git: https://github.com/bitrise-steplib/steps-cache-pull.git
-  commit: 070b97edbaaaaad3320d4b88fd17f492ce45c5cb
+  commit: a6b4345d40b7eefad09e4ce14caeed04886ac3f8
 host_os_tags:
 - osx-10.10
 - ubuntu-14.04
