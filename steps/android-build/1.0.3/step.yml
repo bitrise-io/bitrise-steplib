@@ -54,10 +54,10 @@ description: |2-
 website: https://github.com/bitrise-steplib/bitrise-step-android-build
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-build
 support_url: https://github.com/bitrise-steplib/bitrise-step-android-build/issues
-published_at: 2022-06-28T15:18:16.564507951Z
+published_at: 2022-07-14T11:57:21.450658123Z
 source:
   git: https://github.com/bitrise-steplib/bitrise-step-android-build.git
-  commit: f0eab08a4aca2daa73e737f3391fe52883fdfd56
+  commit: 7e46991accbfc939719e9c77bc41b6a32299990c
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -90,11 +90,13 @@ inputs:
     title: Module
 - opts:
     description: |
-      Set the variant(s) that you want to build. To see your available variants, please open your project in Android Studio and go in [Project Structure] -> variants section.
-      You can set multiple variants separated by `\n` character. For instance: `- variant: myvariant1\nmyvariant2`.
+      Set the variant(s) that you want to build. To see your available variants,  open your project in Android Studio and go in [Project Structure] -> variants section.
+
+      You can set multiple variants separated by a new line (`\n`), such as `myvariant1\nmyvariant2`.
     is_required: false
-    summary: |
-      Set the variant(s) that you want to build. To see your available variants, please open your project in Android Studio and go in [Project Structure] -> variants section.
+    summary: Set the build variant you want to create, such as `debug` or `myflavorRelease`.
+      To see your available variants, open your project in Android Studio and go in
+      [Project Structure] -> variants section.
     title: Variant
   variant: ""
 - build_type: apk
