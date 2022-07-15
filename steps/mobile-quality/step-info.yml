@@ -1,0 +1,4 @@
+maintainer: community
+removal_date: "2021-01-21"
+deprecate_notes: |
+  This step is deprecated. Now it was split to use each feature separately (eg. Mobile apps permissions monitoring [monitoring-apps-permissions step])

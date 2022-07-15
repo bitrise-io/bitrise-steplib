@@ -1,0 +1,158 @@
+title: Execute Automation Test in Kobiton
+summary: |
+  Execute an automation test script
+description: |
+  A Bitrise step to (synchronously) execute an automated test script on Kobiton service
+website: https://kobiton.com
+source_code_url: https://github.com/kobiton/bitrise-step-kobiton-execute-test
+support_url: https://github.com/kobiton/bitrise-step-kobiton-execute-test/issues
+published_at: 2022-03-08T13:35:34.197337+07:00
+source:
+  git: https://github.com/kobiton/bitrise-step-kobiton-execute-test.git
+  commit: f4cd236781a361610745e37cc2ac49291888abe1
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/kobiton/bitrise-step-kobiton-execute-test
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- kobi_username_input:
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Your username in Kobiton.
+    title: Kobiton Username
+- kobi_apikey_input:
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your API key in Kobiton.
+    title: Kobiton API Key
+- executor_url_input:
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Kobiton Automation Test Executor URL.
+    title: Executor Server URL
+- executor_username_input:
+  opts:
+    is_expand: true
+    is_required: true
+    summary: The Username for Kobiton Automation Test Executor.
+    title: Kobiton Executor Username
+- executor_password_input:
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The Password Kobiton Automation Test Executor.
+    title: Kobiton Executor Password
+- git_repo_url_input:
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Link to your Git repository.
+    title: Git repository URL
+- git_repo_branch_input:
+  opts:
+    is_expand: true
+    is_required: true
+    summary: The branch of your Git repository you want to execute automation test
+      with.
+    title: Git repository branch
+- git_repo_ssh_key_input:
+  opts:
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    summary: This is required if your Git Repository is private.
+    title: Git repository SSH key
+- app_id_input:
+  opts:
+    is_expand: true
+    is_required: true
+    summary: The App ID or App URL to use in your test script.
+    title: App ID
+- use_custom_device_input: "false"
+  opts:
+    category: Custom device
+    is_expand: true
+    summary: Check if you want to execute one or some test cases with a specific Kobiton
+      Cloud Device. If you already set your device information in your test script,
+      leave this field unchecked.
+    title: Use Custom Device
+    value_options:
+    - "true"
+    - "false"
+- device_name_input:
+  opts:
+    category: Custom device
+    is_expand: true
+    summary: This value will be consumed by the `KOBITON_DEVICE_NAME` environment
+      variable in your test script.
+    title: Kobiton Cloud Device Name
+- device_platform_version_input:
+  opts:
+    category: Custom device
+    is_expand: true
+    summary: This value will be consumed by the `KOBITON_SESSION_PLATFORM_VERSION`
+      environment variable in your test script.
+    title: Device platform version
+- device_platform_input: android
+  opts:
+    category: Custom device
+    is_expand: true
+    summary: This value will be consumed by the `KOBITON_DEVICE_PLATFORM_NAME` environment
+      variable in your test script.
+    title: Device platform
+    value_options:
+    - "android"
+    - "ios"
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Input the root directory of your Git repository.
+    title: Root directory
+  root_directory_input: /
+- command_input: mvn test
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Command lines to install dependencies and execute your automation test
+      script. These commands will run from the root directory of your Git repository.
+    title: Commands
+- wait_for_execution_input: "true"
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Check if your want the release pipeline to wait until your automation
+      testing is completed or failed, then print out the console log and test result.
+    title: Wait for execution
+    value_options:
+    - "true"
+    - "false"
+  
+- log_type_input: combined
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Your desired log type to be showed. Choose Combined to show logs in chronological
+      order, or Separated for single type of log (Ouput or Error).
+    title: Log type
+    value_options:
+    - "combined"
+    - "output"
+    - "error"
+outputs:
+- JOB_ID:
+  opts:
+    summary: The Job ID that runs the job in Kobiton Executor Server.
+    title: Executor Job ID
+- REPORT_URL:
+  opts:
+    summary: The link to access TestNG Report in Kobiton Executor Server.
+    title: TestNG Report URL

@@ -1,0 +1,90 @@
+title: fastlane
+summary: Runs your fastlane lane on [bitrise.io](https://www.bitrise.io).
+description: |-
+  fastlane is an open-source app automation tool for iOS, Android and for most cross-platform frameworks, for example, React Native, Xamarin and Flutter.
+  **fastlane** Step helps you integrate your lane to your Bitrise Workflow and runs your lane based on the fastlane actions with minimal configuration.
+  If your Apple Developer Portal account is connected to Bitrise, the `FASTLANE_SESSION` Environment Variable will pass on the session data to fastlane.
+
+  ### Configuring the Step
+  1. Add the **fastlane** Step to your Workflow after the **Git Clone Repository** Step or any other dependency Step.
+  1. Based on your project's fastlane setup, you can add your project's default lane or a custom lane in the **fastlane lane** input.
+  2. If your fastlane directory is not available in your repository's root, then you can add the parent directory of fastlane directory in the **Working directory** input.
+  3. If your project doesn't contain a fastlane gem in your project's Gemfile, you can use the **Should update fastlane gem before run** input.
+  Set this input to `true` so that the Step can install the latest fastlane version to your project.
+  If a gem lockfile (Gemfile.lock or gems.locked) includes the fastlane gem in the working directory, that specific fastlane version will be installed.
+  4. Select `yes` in the **Enable verbose logging** input if you wish to run your build in debug mode and print out error additional debug logs.
+  5. Select `yes` in the **Enable collecting files to be included in the build cache** to cache pods, Carthage and Android dependencies.
+
+  ### Troubleshooting
+  If you run your lane on Bitrise and your build fails on the **fastlane** Step, the logs won't reveal too much about the error since it's most likely related to the fastlane file's configuration.
+  We recommend you swap your fastlane actions for Bitrise Steps which will bring out the problem.
+
+  ### Useful links
+  - [About fastlane](https://docs.fastlane.tools)
+  - [Connecting your Apple Developer Account to Bitrise](https://devcenter.bitrise.io/getting-started/connecting-apple-dev-account/)
+  - [Running fastlane on Bitrise](https://devcenter.bitrise.io/tutorials/fastlane/fastlane-index/)
+
+  ### Related Steps
+  - [Deploy to iTunes Connect/Deliver](https://www.bitrise.io/integrations/steps/yarn)
+  - [iOS Auto Provision](https://www.bitrise.io/integrations/steps/bundler)
+  - [Fastlane Match](https://www.bitrise.io/integrations/steps/fastlane-match)
+website: https://github.com/bitrise-io/steps-fastlane
+source_code_url: https://github.com/bitrise-io/steps-fastlane
+support_url: https://github.com/bitrise-io/steps-fastlane/issues
+published_at: 2021-01-12T08:52:37.050104547Z
+source:
+  git: https://github.com/bitrise-steplib/steps-fastlane.git
+  commit: 55549c487352612acfbbae0a6eba3346eed639c2
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-fastlane
+inputs:
+- lane: null
+  opts:
+    description: |
+      fastlane lane to run
+      $ fastlane [lane]
+    is_required: true
+    title: fastlane lane
+- opts:
+    description: |-
+      Use this option if the fastlane directory is not in your repository's root.
+
+      Working directory should be the parent directory of your Fastfile's directory.
+
+      For example:
+
+      * If the Fastfile path is `./here/is/my/fastlane/Fastfile`
+      * Then the Fastfile's directory is `./here/is/my/fastlane`
+      * So the Working Directory should be `./here/is/my`
+    title: Working directory
+  work_dir: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Should update fastlane gem before run?
+      *This option will be skipped if you have a `Gemfile` in the `work_dir` directory.*
+    title: Should update fastlane gem before run?
+    value_options:
+    - "true"
+    - "false"
+  update_fastlane: "true"
+- opts:
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- enable_cache: "yes"
+  opts:
+    description: "If enabled the step will add the following cache items (if they
+      exist):  \n- Pods -> Podfile.lock\n- Carthage -> Cartfile.resolved\n- Android
+      dependencies"
+    is_required: true
+    title: Enable collecting files to be included in the build cache
+    value_options:
+    - "yes"
+    - "no"

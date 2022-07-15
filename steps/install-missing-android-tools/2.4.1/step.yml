@@ -1,0 +1,55 @@
+title: Install missing Android SDK components
+summary: Install Android SDK components that are required for the app.
+description: "\nThis Step makes sure that required Android SDK components (platforms
+  and build-tools) are installed. To do so, the Step runs the `gradlew dependencies`
+  command. \n\nIf the Android Plugin for Gradle version is 2.2.0 or higher, the plugin
+  will download and install the missing components during the Gradle command.  \nOtherwise
+  the command fails and the Step parses the command's output to determine which SDK
+  components are missing and installs them.\n\n### Configuring the Step\n\n1. Set
+  the path of the `gradlew` file.\n\n   The default value is that of the $PROJECT_LOCATION
+  Environment Variable.\n\n1. If you use an Android NDK in your app, set its revision
+  in the **NDK Revision** input.\n\n### Troubleshooting\n\nIf the Step fails, check
+  that your repo actually contains a `gradlew` file. Without the Gradle wrapper, this
+  Step won't work.\n\n### Useful links\n\n[Installing an additional Android SDK package](https://devcenter.bitrise.io/tips-and-tricks/android-tips-and-tricks/#how-to-install-an-additional-android-sdk-package)\n\n###
+  Related Steps\n\n* [Android SDK Update](https://www.bitrise.io/integrations/steps/android-sdk-update)\n*
+  [Install React Native](https://www.bitrise.io/integrations/steps/install-react-native)"
+website: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+source_code_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+support_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools/issues
+published_at: 2021-08-04T09:01:46.28656917Z
+source:
+  git: https://github.com/bitrise-steplib/steps-install-missing-android-tools.git
+  commit: 15f4b8be5626764a9d9068e5ed447b3330c2159a
+project_type_tags:
+- android
+- cordova
+- ionic
+- react-native
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-install-missing-android-tools
+is_always_run: false
+is_skippable: false
+inputs:
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper is what makes sure
+      that the right Gradle version is installed and used for the build.
+      __You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one (if you would not have one already)__
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root, for example: `./gradlew`,
+      or if it's in a sub directory: `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- ndk_revision: null
+  opts:
+    description: 'The step will install the given revision of the Android NDK.(eg.:
+      18) Leave this input empty if you are not using NDK in your project.'
+    summary: 'The step will install the given revision of the Android NDK.(eg.: 18)
+      Leave this input empty if you are not using NDK in your project.'
+    title: NDK Revision

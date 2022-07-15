@@ -1,0 +1,87 @@
+title: Fetch secrets from AWS Secrets Manager
+summary: Fetch secrets from AWS Secrets Manager
+description: |
+  The main intention of this Step is to allow storage of sensitive data on AWS Secrets Manager, and fetching them on-demand during Bitrise workflow execution.
+
+  When a workflow runs, the Step fetches a list of specified secrets from AWS Secrets Manager.
+
+  The fetched secrets are then propagated into subsequent steps in the workflow.
+
+  The Step uses AWS SDK for Go v2 with the default config loader. This means for authenticating with AWS, you may:
+
+    - Use static AWS credentials via environment variable, e.g. `AWS_ACCESS_KEY_ID` and `AWS_SECRET_ACCESS_KEY`.
+    - Use shared configuration files, e.g. `AWS_PROFILE`.
+
+  Checkout the main repository README for more usage guide.
+website: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager
+source_code_url: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager
+support_url: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager/issues
+published_at: 2021-07-21T21:06:31.545432+08:00
+source:
+  git: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager.git
+  commit: 18db9fda4e3bbeb88b47e75f4bb4cde7ca0ba1eb
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: moneylion.com/security/bitrise-step-aws-secrets-manager
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- aws_access_key_id: ""
+  opts:
+    description: The AWS Access Key ID. If you are supplying this input, ensure the
+      variable is named exactly `AWS_ACCESS_KEY_ID`.
+    is_sensitive: true
+    summary: AWS access key ID
+    title: AWS access key ID
+- aws_secret_access_key: ""
+  opts:
+    description: The AWS secret access key. If you are supplying this input, ensure
+      the variable is named exactly `AWS_SECRET_ACCESS_KEY`.
+    is_sensitive: true
+    summary: AWS secret access key
+    title: AWS secret access key
+- aws_region: ""
+  opts:
+    description: The AWS region to operate in. If you are supplying this input, ensure
+      the variable is named exactly `AWS_DEFAULT_REGION` or `AWS_REGION`.
+    summary: AWS region
+    title: AWS region
+- aws_iam_role_arn: ""
+  opts:
+    description: The ARN of AWS IAM role to assume. This role should have the necessary
+      permission to read secrets from AWS Secrets Manager.
+    summary: The ARN of AWS IAM role to assume.
+    title: AWS IAM role ARN
+- opts:
+    description: |
+      A newline separated list of secrets to fetch from AWS Secrets Manager.
+
+      Each line is in the form of:
+
+      ```
+      <Secret ARN> # <JSON object key> # <Environment variable>
+      ```
+
+      For example, given the secret with an ARN `arn:aws:secret-1`, and a secret value:
+
+      ```
+      {
+        "username": "admin",
+        "password": "str0ngpassword"
+      }
+      ```
+
+      Specifying this line in the secret list:
+
+      ```
+      arn:aws:secret-1 # username # USERNAME
+      ```
+
+      Fetches the secret, retrieves the JSON value under the key `username`, and store that value in the `USERNAME` environment variable. `$USERNAME` will now contain the value `admin`.
+    is_required: true
+    summary: A list of secrets to fetch.
+    title: Secret list
+  secret_list: null

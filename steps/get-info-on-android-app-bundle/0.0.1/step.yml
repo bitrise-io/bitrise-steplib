@@ -1,0 +1,56 @@
+title: Get Info on Android App Bundle
+summary: |
+  Extracts the version name and the version code from the Android App Bundle(aab).
+description: |
+  Extracts the version name and the version code from the Android App Bundle(aab). Android Application Package (apk) is not supported.
+website: https://github.com/nosaka/bitrise-step-get-info-on-android-app-bundle
+source_code_url: https://github.com/nosaka/bitrise-step-get-info-on-android-app-bundle
+support_url: https://github.com/nosaka/bitrise-step-get-info-on-android-app-bundle/issues
+published_at: 2021-01-20T12:07:11.555171+09:00
+source:
+  git: https://github.com/nosaka/bitrise-step-get-info-on-android-app-bundle.git
+  commit: 494b7f167884676bca494e5c0df5866898a73ac1
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- artifact-info
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- aab_path: $BITRISE_AAB_PATH
+  opts:
+    description: |-
+      Path(s) to the build artifact file `.aab`. You can build the bundle running `:bundleRelease` gradle task
+      Format examples:
+      - `/path/to/my/app.aab`
+    is_required: true
+    summary: '`Android App Bundle (.aab)`'
+    title: Build artifact path.
+outputs:
+- ANDROID_VERSION_CODE: null
+  opts:
+    summary: versionCode from AndroidManifest.xml
+    title: Version Code
+- ANDROID_VERSION_NAME: null
+  opts:
+    summary: versionName from AndroidManifest.xml
+    title: Version Name
+- ANDROID_PACKAGE_NAME: null
+  opts:
+    summary: package from AndroidManifest.xml
+    title: Package Name
+- ANDROID_MIN_SDK_VERSION: null
+  opts:
+    summary: minSdkVersion from AndroidManifest.xml
+    title: Minimum SDK Version
+- ANDROID_TARGET_SDK_VERSION: null
+  opts:
+    summary: targetSdkVersion from AndroidManifest.xml
+    title: Target SDK Version

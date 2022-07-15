@@ -1,0 +1,117 @@
+title: Fortify on Demand Mobile Assessment
+summary: |
+  Submits a Fortify on Demand Mobile Assessment
+description: |
+  Fortify on Demand delivers comprehensive end-to-end mobile security with real-world mobile application security testing across all three tiers of the mobile ecosystem—client device, network, and web services. Similar to dynamic testing for web applications, mobile assessments utilize the compiled application binary and employ the same techniques hackers utilize to exploit vulnerabilities in mobile applications, whether they are developed internally, outsourced, or acquired. More than just simple reputation or behavioral analysis, Fortify on Demand mobile assessments provide true security testing for companies serious about securing their mobile applications.
+
+  For more information, please refer to the datasheet at https://www.microfocus.com/media/data-sheet/fortify_on_demand_ds.pdf
+website: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
+source_code_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
+support_url: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment/issues
+published_at: 2021-10-21T07:12:55.86652789+08:00
+source:
+  git: https://github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment.git
+  commit: b8279e4ddc19300a0735efd26a32e5d803615dff
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/jeremy-chua/bitrise-step-fortify-on-demand-mobile-assessment
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- client_id: null
+  opts:
+    description: Authenticating with Client Credentials. The client credentials are
+      the API keys generated in the portal.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Client ID for authentication
+    title: Client ID
+- client_secret: null
+  opts:
+    description: Authenticating with Client Credentials. The client credentials are
+      the API keys generated in the portal.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Client secret for authentication
+    title: Client Secret
+- datacenter: AMS
+  opts:
+    description: Select the datacenter assigned to you. This is provided once your
+      are onboarded with Fortify on Demand.
+    is required: true
+    is_expand: true
+    summary: Fortify on Demand Datacenters
+    title: Datacenter
+    value_options:
+    - AMS
+    - APAC
+    - EMEA
+    - FED
+- entitlement_id: null
+  opts:
+    description: The ID assigned to ypur current entitlement. This value can be reterived
+      in Foritfy on Demand portal.
+    is_expand: true
+    is_required: true
+    summary: Entitlement ID for this mobile assessment
+    title: Entitlement ID
+- opts:
+    description: The ID assigned to the created release. This value can be reterived
+      in Foritfy on Demand portal.
+    is_expand: true
+    is_required: true
+    summary: Release ID for this mobile assessment
+    title: Release ID
+  release_id: null
+- assessment_type: Mobile Assessment (Single Scan)
+  opts:
+    description: "Mobile Assessment includes Vulnerability analysis of mobile binary,
+      Endpoint reputation analysis and Security expert review of prioritized results.
+      \nMobile+ Assessment includes Manual testing of binary, network and services,
+      and DAST of backend services\nFor more information, please refer to the datasheet
+      at https://www.microfocus.com/media/data-sheet/fortify_on_demand_ds.pdf\n"
+    is required: true
+    is_expand: true
+    summary: Assessment type for this mobile assessment
+    title: Assessment Type
+    value_options:
+    - Mobile Assessment (Single Scan)
+    - Mobile+ Assessment (Single Scan)
+    - Mobile Assessment (Subscription)
+    - Mobile+ Assessment (Subscription)
+- framework_type: Android
+  opts:
+    is required: true
+    is_expand: true
+    summary: Framework type for this mobile assessment
+    title: Framework Type
+    value_options:
+    - Android
+    - iOS
+- opts:
+    is required: true
+    is_expand: true
+    summary: Platform type for this mobile assessment
+    title: Platform Type
+    value_options:
+    - Phone
+    - Tablet
+    - Both
+  platform_type: Phone
+- file_path: null
+  opts:
+    is required: true
+    is_expand: true
+    title: Path to apk/ipa

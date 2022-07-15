@@ -1,0 +1,83 @@
+title: Add Trace SDK Android
+summary: |
+  Add the Trace SDK before the build process
+
+  Important: Please read the Trace license terms in the SDK. By clicking here to add the Trace SDK, you are agreeing to those license terms.
+description: |
+  # Overview
+
+  Ensures that Trace is added to a given Android application project. Adds the required
+  dependency (trace-sdk) and applies the plugin (trace-gradle-plugin) if the project does not already have them.
+  This step is needed, when you have not added Trace manually to your project. For manual
+  installation see the documentation below.
+
+  **Use this step before your application is built/assembled with Gradle**
+
+  # Documentation
+
+  www.bitrise.io:
+  [https://devcenter.bitrise.io/monitoring/getting-started-with-trace/](https://devcenter.bitrise.io/monitoring/getting-started-with-trace/)
+
+  # About Trace
+
+  **Trace:** [https://trace.bitrise.io](https://trace.bitrise.io)
+
+  **What's Trace?** [https://www.bitrise.io/add-ons/trace-mobile-monitoring](https://www.bitrise.io/add-ons/trace-mobile-monitoring)
+
+  **Getting started guide:** [https://trace.bitrise.io/o/getting-started](https://trace.bitrise.io/o/getting-started)
+
+  # iOS
+
+  **For iOS, please check this step:**
+  [https://www.bitrise.io/integrations/steps/add-trace-sdk](https://www.bitrise.io/integrations/steps/add-trace-sdk)
+
+  **Source for iOS step:**
+  [https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk](https://github.com/bitrise-steplib/bitrise-step-add-trace-sdk)
+website: https://github.com/bitrise-steplib/bitrise-add-trace-sdk-android
+source_code_url: https://github.com/bitrise-steplib/bitrise-add-trace-sdk-android
+support_url: https://github.com/bitrise-steplib/bitrise-add-trace-sdk-android/issues
+published_at: 2021-02-19T16:44:23.206359+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-add-trace-sdk-android.git
+  commit: 55f50b04a189b351cce7bc2d87bf4f359a0542d0
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-add-trace-sdk-android
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      The path for the root project. By default it will be the source directory, but in some cases (for example if you
+      have a monorepo) you may want to specify which directory should be used for this step.
+
+      Example: $BITRISE_SOURCE_DIR/monorepo/myproject1/
+    is_required: true
+    summary: Path of the root project
+    title: Path of the root project
+  project_path: $BITRISE_SOURCE_DIR/
+- gradle_options: null
+  opts:
+    description: |
+      Step uses a Gradle task called "injectTrace" to add the required dependencies to the project. Also uses
+      "verifyTrace" to verify Trace has been applied successfully to the project. For debugging
+      purposes you may want to add additional flags to them, it would display useful information
+      if you have any issue with the step.
+
+      Examples: "--stactrace", "--info" or "--debug" (without the quote marks).
+
+      Note: Multiple entries should be separated with a whitespace character.
+
+      Example: "--stacktrace --info" (without the quote marks).
+    is_required: false
+    summary: Additional task options for "injectTrace" and "verifyTrace" tasks
+    title: Gradle Task Options

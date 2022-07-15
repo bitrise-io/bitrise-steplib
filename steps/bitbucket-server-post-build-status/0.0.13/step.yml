@@ -1,0 +1,85 @@
+title: Bitbucket server post build status
+summary: |
+  Post build status to bitbucket server
+description: |
+  Post build status to bitbucket server
+website: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status
+source_code_url: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status
+support_url: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status/issues
+published_at: 2022-06-14T09:58:53.464212+02:00
+source:
+  git: https://github.com/teameh/bitrise-step-bitbucket-server-post-build-status.git
+  commit: 08702dc3d799b8671b47078e328cb21518a8de4a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- domain: null
+  opts:
+    description: Full domain name without protocol eg 'my-domain.com'
+    is_required: true
+    summary: Full domain name without protocol eg 'my-domain.com'
+    title: Bitbucket Server domain name
+- opts:
+    description: The username used to make REST calls to bitbucket server
+    is_required: true
+    summary: The username used to make REST calls to bitbucket server
+    title: Bitbucket Server username
+  username: null
+- opts:
+    description: The password for the bitbucket server username
+    is_required: true
+    is_sensitive: true
+    summary: The password for the bitbucket server username
+    title: Bitbucket Server password
+  password: null
+- opts:
+    description: |-
+      If not set to `AUTO`, this step will set a specific status instead of reporting the current build status.
+
+      Can be one of `AUTO`, `INPROGRESS`, `SUCCESSFUL`, or `FAILED`.
+
+      If you don't set this option, or select `AUTO`, the step will send `SUCCESSFUL` status if the current build status is `SUCCESSFUL`
+      (no step failed previously) and `FAILED` status if the build previously failed.
+
+      Use this to report `INPROGRESS` for builds that are just started.
+    summary: Override bitrise build status
+    title: Set Specific Status
+    value_options:
+    - AUTO
+    - INPROGRESS
+    - SUCCESSFUL
+    - FAILED
+  preset_status: AUTO
+- git_clone_commit_hash: $GIT_CLONE_COMMIT_HASH
+  opts:
+    is_required: true
+    title: Git commit hash
+- app_title: $BITRISE_APP_TITLE
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    title: Bitrise app title
+- build_number: $BITRISE_BUILD_NUMBER
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    title: Bitrise build number
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    title: Bitrise build url
+- opts:
+    is_dont_change_value: true
+    is_required: true
+    title: Bitrise triggered workflow id
+  triggered_workflow_id: $BITRISE_TRIGGERED_WORKFLOW_ID

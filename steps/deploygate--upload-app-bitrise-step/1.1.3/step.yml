@@ -1,0 +1,97 @@
+title: DeployGate Upload
+summary: |
+  Distribute your in-development iOS/Android apps to your developers or testers
+description: |
+  This is a step to upload your iOS/Android application to DeployGate. DeployGate enable to share in-development apps with others instantly. For more details, please read references in [DeployGate.com](https://deploygate.com/?locale=en)
+website: https://github.com/DeployGate/upload-app-bitrise-step
+source_code_url: https://github.com/DeployGate/upload-app-bitrise-step
+support_url: https://github.com/DeployGate/upload-app-bitrise-step/issues
+published_at: 2022-07-01T16:08:03.005062+09:00
+source:
+  git: https://github.com/DeployGate/upload-app-bitrise-step.git
+  commit: f32a75e4ee2fafde45742d0cc8631826d2bae477
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: The authorization token to be used when uploading app
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: User's API Key or Organization's API Key
+    title: 'DeployGate: API Key'
+- opts:
+    description: |
+      The owner name of this application
+    is_required: true
+    summary: User name or Organization name
+    title: 'DeployGate: Owner Name'
+  owner_name: ""
+- app_path: ""
+  opts:
+    description: |
+      App's binary file (IPA/APK/AAB) to be uploaded.
+      $BITRISE\_APK\_PATH, $BITRISE\_IPA\_PATH, and so on.
+    is_required: true
+    summary: App's binary file (IPA/APK/AAB) to be uploaded
+    title: App file path
+- message: ""
+  opts:
+    description: A short message to explain this version
+    is_required: false
+    summary: A short message to explain this version
+    title: 'DeployGate: Short Message'
+- distribution_key: ""
+  opts:
+    description: |
+      By specifying the distribution page's hash, that distribution page will be updated simultaneously.
+      The "xxxx" portion of the distributed page's URL like https://deploygate.com/distributions/xxxx
+    is_required: false
+    summary: The distribution key to be updated
+    title: 'DeployGate: Distribution Key'
+- distribution_name: ""
+  opts:
+    description: "Specify the name of the updated distribution page. \nIf none exists,
+      a new distribution page will be created. \nPossible uses include creating distribution
+      pages for each Git branch name.\n"
+    is_required: false
+    summary: The distribution name to be created or be updated
+    title: 'DeployGate: Distribution Name'
+- opts:
+    description: Message displayed during distribution page app updates
+    is_required: false
+    summary: Message displayed during distribution page app updates
+    title: 'DeployGate: Release Note'
+  release_note: ""
+- disable_notify: "false"
+  opts:
+    description: (iOS only) A setting of true disables Push notification emails.
+    is_required: false
+    summary: (iOS only) A setting of true disables Push notification emails.
+    title: 'DeployGate: Disable Notify'
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- DEPLOYGATE_UPLOAD_APP_STEP_RESULT_JSON: null
+  opts:
+    description: The raw json which Upload API has returned
+    summary: The raw json which Upload API has returned. Available iff the request
+      has been sent to DeployGate server.
+    title: 'DeployGate: API result json'

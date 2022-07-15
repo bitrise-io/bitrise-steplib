@@ -1,0 +1,103 @@
+title: Fetch secrets from AWS Secrets Manager
+summary: Fetch secrets from AWS Secrets Manager
+description: |
+  This Step fetches secrets on-demand from AWS Secrets Manager, during Bitrise workflow execution.
+
+  The fetched secrets are then propagated into subsequent steps in the workflow.
+
+  Include this Step in your workflow, for example:
+
+  ```yaml
+  workflows:
+    foo:
+      steps:
+      - aws-secrets-manager@x.x.x:
+          inputs:
+          - aws_access_key_id: $AWS_ACCESS_KEY_ID
+          - aws_secret_access_key: $AWS_SECRET_ACCESS_KEY
+          - aws_default_region: a-region-1
+          - secret_list: |
+              arn:aws:secret-1 # username # USERNAME
+              arn:aws:secret-2 # password # PASSWORD
+      - script@1:
+          inputs:
+          - content: |
+              #!/bin/bash
+              #
+              # Access your secrets via $USERNAME and $PASSWORD
+  ```
+
+  Checkout the main repository README for more usage guide.
+website: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager
+source_code_url: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager
+support_url: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager/issues
+published_at: 2021-07-25T05:57:58.17624+08:00
+source:
+  git: https://github.com/MoneyLion/bitrise-step-aws-secrets-manager.git
+  commit: 72b0bb599fa60abad1e423f92c6f4a969771106d
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: moneylion.com/security/bitrise-step-aws-secrets-manager
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- aws_access_key_id: ""
+  opts:
+    description: AWS access key ID.
+    is_sensitive: true
+    summary: AWS access key ID.
+    title: AWS access key ID
+- aws_secret_access_key: ""
+  opts:
+    description: AWS secret access key.
+    is_sensitive: true
+    summary: AWS secret access key.
+    title: AWS secret access key
+- aws_default_region: ""
+  opts:
+    description: AWS region to operate in.
+    summary: AWS region to operate in.
+    title: AWS region
+- aws_profile: ""
+  opts:
+    description: An AWS named profile in shared configuration file.
+    summary: An AWS named profile in shared configuration file.
+    title: AWS named profile
+- aws_iam_role_arn: ""
+  opts:
+    description: The ARN of AWS IAM role to assume.
+    summary: The ARN of AWS IAM role to assume.
+    title: AWS IAM role ARN
+- opts:
+    description: |
+      A newline separated list of secrets to fetch from AWS Secrets Manager.
+
+      Each line is in the form of:
+
+      ```
+      <Secret ARN> # <JSON object key> # <Environment variable>
+      ```
+
+      For example, given the secret with an ARN `arn:aws:secret-1`, and a secret value:
+
+      ```
+      {
+        "username": "admin",
+        "password": "str0ngpassword"
+      }
+      ```
+
+      Specifying this line in the secret list:
+
+      ```
+      arn:aws:secret-1 # username # USERNAME
+      ```
+
+      Fetches the secret, retrieves the JSON value under the key `username`, and store that value in the `USERNAME` environment variable. `$USERNAME` will now contain the value `admin`.
+    is_required: true
+    summary: A list of secrets to fetch.
+    title: Secret list
+  secret_list: null

@@ -1,0 +1,243 @@
+title: Xcode build for simulator
+summary: Runs Xcode Build command for simulators.
+description: "This Step runs the `xcodebuild` command to build and deploy your iOS,
+  tvOS, or watchOS app for a simulator. You can use this to perform quick tests for
+  your app or to show it off in a browser to your clients. \nThe Step generates the
+  following outputs:\n* `BITRISE_APP_DIR_PATH`: the path to the generated `.app` file.\n*
+  `BITRISE_APP_DIR_PATH_LIST`: the path to the generated `.app` file and the paths
+  to every dependent target app. The paths are separated with the `|` character.\n*
+  `BITRISE_XCODE_BUILD_RAW_RESULT_TEXT_PATH`: the path to the log file of the raw
+  build results.\n\nThe Step also creates an `.xctestrun` file which you can use to
+  run tests.\n\nMake sure to include this Step after the Steps that install the necessary
+  dependencies, such as **Run Cocoapods Install** in your Workflow. \n\n### Configuring
+  the Step\n\nTo configure the Step:\n\n1. **Project (or Workspace) path**: The path
+  to your project's `.xcodeproj` or `.xworkspace` file. By default, this is stored
+  in an Environment Variable when you add your app to Bitrise.\n1. **Scheme name**:
+  The Xcode Scheme of your project. This is stored in an Environment Variable by default
+  when you add your app to Bitrise.\n1. **Device model**: The type of device you want
+  to run the app on. Set it exactly as it appears in the device selection menu in
+  Xcode.\n1. **OS version**: The version of device operating system you want to run
+  the app on. Set it exactly as it appears in the device selection menu in Xcode.
+  The default value is latest.\n1. **Platform**: The platform you want to run the
+  app on. The default value is `iOS`. Make sure that the values of the **Device model**
+  input and the **Platform** input are compatible: for example, if you set **Device
+  model** to `Apple TV 1080p`, set **Platform** to `tvOS`.\n1. **Configuration name**:
+  By default, your Scheme's archive action defines which configuration is used, but
+  you can overwrite it with this option. Ensure that the Configuration you specify
+  exists in your Xcode Project; otherwise, this input will be ignored. \n1. **Disable
+  indexing during the build**: By setting this input to `no`, you can disable indexing
+  during the build, which can speed up your build time.\n1. **Enable caching of Swift
+  Package Manager packages**: To disable swift package caching, set this input to
+  `none`.\n\nUnder **Debug**:\n\n1. **Additional options for xcodebuild call**: You
+  can add additional options to the end of the xcodebuild call. For example, `-xcconfig
+  PATH -verbose`.\n1. **Working directory**: If you would like to change the working
+  directory of the Step, you can do so with this input.\n1. **Output directory path**:
+  You can change the output directory, which will contain the generated `.app` artifacts
+  with this input.\n1. **Do a clean Xcode build before the build?**: Set this input
+  to `yes` to do a clean Xcode build before the build. \n1. **Output tool**: You can
+  set this input to `xcpretty` to prettify your output. If you set it to `xcodebuild`,
+  the raw xcodebuild output will be printed. \n1. **Enable verbose logging?**: Set
+  this input to `yes` if you want to enable verbose logs.\n\n### Useful links\n\n*
+  [Deploying an iOS app for simulators](https://devcenter.bitrise.io/en/deploying/ios-deployment/deploying-an-ios-app-for-simulators.html)\n\n###
+  Related Steps\n\n* [Xcode build for testing for iOS](https://www.bitrise.io/integrations/steps/xcode-build-for-test)\n*
+  [Appetize.io deploy](https://www.bitrise.io/integrations/steps/appetize-deploy)\n"
+website: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator
+support_url: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator/issues
+published_at: 2022-03-11T15:51:14.759020505Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-build-for-simulator.git
+  commit: f550cbf0e3f852f7c7611faeb46dc194198e4330
+project_type_tags:
+- ios
+- react-native
+- cordova
+- ionic
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-build-for-simulator
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: go
+  check_only:
+  - name: xcode
+inputs:
+- opts:
+    description: A `.xcodeproj` or `.xcworkspace` path.
+    is_required: "true"
+    summary: A `.xcodeproj` or `.xcworkspace` path.
+    title: Project (or Workspace) path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: The Scheme to use.
+    is_required: "true"
+    summary: The Scheme to use.
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |-
+      Set it exactly as it appears in the device selection menu in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iPhone 8 Plus
+      * iPhone Xs Max
+      * iPad Air (3rd generation)
+      * iPad Pro (12.9-inch) (3rd generation)
+      * Apple TV 4K (don't forget to set the platform to `tvOS Simulator` to use this option!)
+    is_required: "true"
+    title: Device model
+  simulator_device: iPhone 8 Plus
+- opts:
+    description: |-
+      Set it exactly as it appears in
+      Xcode's device selection dropdown UI.
+
+      A couple of format examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * "8.4"
+      * latest
+    is_required: "true"
+    title: OS version
+  simulator_os_version: latest
+- opts:
+    description: |-
+      Set it exactly as it appears in Xcode's device selection dropdown UI.
+
+      A couple of examples (the
+      actual available options depend on which versions
+      are installed):
+
+      * iOS Simulator
+      * tvOS Simulator
+    is_required: "true"
+    title: Platform
+    value_options:
+    - iOS
+    - tvOS
+  simulator_platform: iOS
+- configuration: null
+  opts:
+    description: |-
+      (Optional) The configuration to use. By default your Scheme's archive action
+      defines which configuration (Debug, Release, ...) should be used,
+      but you can overwrite it with this option.
+
+      **Make sure that the Configuration you specify actually exists
+      in your Xcode Project**. If it does not, if you have a typo
+      in the value of this input Xcode will simply use the Configuration
+      specified by the Scheme and will silently ignore this parameter!
+    title: Configuration name
+- disable_index_while_building: "yes"
+  opts:
+    description: |-
+      Could make the build faster by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command which will disable the indexing during the build.
+
+      Indexing is needed for
+
+      * Autocomplete
+      * Ability to quickly jump to definition
+      * Get class and method help by alt clicking.
+
+      Which are not needed in CI environment.
+
+      **Note:** In Xcode you can turn off the `Index-WhileBuilding` feature  by disabling the `Enable Index-WhileBuilding Functionality` in the `Build Settings`.<br/>
+      In CI environment you can disable it by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command.
+    summary: Could make the build faster by disabling the indexing during the build
+      run.
+    title: Disable indexing during the build
+    value_options:
+    - "yes"
+    - "no"
+- cache_level: swift_packages
+  opts:
+    description: |-
+      Available options:
+      - `none` : Disable caching
+      - `swift_packages` : Cache Swift PM packages added to the Xcode project
+    is_required: true
+    title: Enable caching of Swift Package Manager packages
+    value_options:
+    - none
+    - swift_packages
+- opts:
+    category: Debug
+    description: |-
+      Options added to the end of the xcodebuild call.
+
+      You can use multiple options, separated by a space
+      character. Example: `-xcconfig PATH -verbose`
+    title: Additional options for xcodebuild call
+  xcodebuild_options: ""
+- opts:
+    category: Debug
+    description: |-
+      Working directory of the Step.
+      You can leave it empty to don't change it.
+    summary: ""
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- opts:
+    category: Debug
+    description: This directory will contain the generated .app artifacts.
+    is_required: "true"
+    summary: ""
+    title: Output directory path
+  output_dir: $BITRISE_DEPLOY_DIR
+- is_clean_build: "no"
+  opts:
+    category: Debug
+    is_required: "true"
+    title: Do a clean Xcode build before the build?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Debug
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_expand: "false"
+    is_required: "true"
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: "true"
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+outputs:
+- BITRISE_APP_DIR_PATH: null
+  opts:
+    title: The generated (and copied) app directory
+- BITRISE_APP_DIR_PATH_LIST: null
+  opts:
+    description: |-
+      This output will include the main target app's path + every dependent target's app path.
+
+
+      The paths are separated with `|` character, eg: `/deploy109787178/sample-apps-ios-workspace-swift.app|/deploy109787178/bitfall.sample-apps-ios-workspace-swift-watch.app`
+    summary: List of the generated (and copied) app paths
+    title: List of the generated app paths
+- BITRISE_XCODE_BUILD_RAW_RESULT_TEXT_PATH: null
+  opts:
+    description: |-
+      This is the path of the raw build results log file.
+
+      If `output_tool=xcpretty` and the build fails this log will contain the build output.
+    title: The full, raw build output file path
