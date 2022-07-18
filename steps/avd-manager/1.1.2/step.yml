@@ -1,0 +1,130 @@
+title: AVD Manager
+summary: Create and boot an Android emulator used for device testing
+description: |-
+  Run instrumented and UI tests on a virtual Android device. Once some basic inputs are set, the Step checks the requirements, downloads the selected system image before creating and starting the emulator.
+
+  **Warning:** This Step is not yet supported on Apple Silicon (M1) machines. If you cannot find a solution to this error, try running this Workflow on an Intel-based machine type.
+
+  ### Configuring the Step
+  1. Add the **AVD Manager** Step to your Workflow as one of the first Steps in your Workflow.
+  2. Set the **Device Profile** to create a new Android virtual device. To see the complete list of available profiles, use the `avdmanager list device` command and use the `id` value for this input.
+  3. Set the **Android API Level**. The new virtual device will run with the specified Android version.
+  4. Select an **OS Tag** to have the required toolset on the new virtual device.
+
+  Some system images are pre-installed on the virtual machines. In this case the step won't have to spend time downloading the requested image. To check the list of pre-installed images for each stack, visit the [system reports](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports).
+
+  ### Troubleshooting
+  The emulator needs some time to boot up. The earlier you place the Step in your Workflow, the more tasks, such as cloning or caching, you can complete in your Workflow before the emulator starts working.
+  We recommend that you also add **Wait for Android emulator** Step to your Workflow as it acts as a shield preventing the AVD Manager to kick in too early. Make sure you add the **Wait for Android emulator** Step BEFORE the Step with which you want to use the **AVD Manager**.
+
+  ### Useful links
+  - [Getting started with Android apps](https://devcenter.bitrise.io/getting-started/getting-started-with-android-apps/)
+  - [Device testing for Android](https://devcenter.bitrise.io/testing/device-testing-for-android/)
+  - [About Test Reports](https://devcenter.bitrise.io/testing/test-reports/)
+
+  ### Related Steps
+  - [Wait for Android emulator](https://www.bitrise.io/integrations/steps/wait-for-android-emulator)
+  - [Android Build for UI testing](https://www.bitrise.io/integrations/steps/android-build-for-ui-testing)
+website: https://github.com/bitrise-steplib/steps-avd-manager
+source_code_url: https://github.com/bitrise-steplib/steps-avd-manager
+support_url: https://github.com/bitrise-steplib/steps-avd-manager/issues
+published_at: 2022-07-18T14:21:27.935844946Z
+source:
+  git: https://github.com/bitrise-steplib/steps-avd-manager.git
+  commit: f6ddcd9ce0aa9df0519df3e6899e31e9b57451dc
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-avd-manager
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      The profile contains parameters of the device, such as screen size and resolution.
+
+      To see the complete list of available profiles use the `avdmanager list device` command locally and use the `id` value for this input.
+    is_required: true
+    summary: Device profile to use when creating the virtual device.
+    title: Device Profile ID
+  profile: pixel
+- api_level: 26
+  opts:
+    description: The device will run with the specified version of android.
+    is_required: true
+    summary: The device will run with the specified version of android.
+    title: Android API Level
+- opts:
+    description: Select OS tag to have the required toolset on the device.
+    is_expand: true
+    is_required: true
+    summary: Select OS tag to have the required toolset on the device.
+    title: OS Tag
+    value_options:
+    - google_apis
+    - google_apis_playstore
+    - google_atd
+    - aosp_atd
+    - android-wear
+    - android-tv
+    - default
+  tag: google_apis
+- abi: x86
+  opts:
+    category: Debug
+    description: Select which ABI to use running the emulator. Availability depends
+      on API level. Please use `sdkmanager --list` command to see the available ABIs.
+    is_expand: true
+    is_required: true
+    summary: Select which ABI to use running the emulator. Availability depends on
+      API level. Please use `sdkmanager --list` command to see the available ABIs.
+    title: ABI
+    value_options:
+    - x86
+    - x86_64
+    - armeabi-v7a
+    - arm64-v8a
+    - mips
+- emulator_id: emulator
+  opts:
+    category: Debug
+    description: Set the device's ID. (This will be the name under $HOME/.android/avd/)
+    is_required: true
+    summary: Set the device's ID. (This will be the name under $HOME/.android/avd/)
+    title: ID
+- create_command_flags: --sdcard 512M
+  opts:
+    category: Debug
+    description: Flags used when running the command to create the emulator.
+    is_required: false
+    summary: Flags used when running the command to create the emulator.
+    title: Create AVD command flags
+- opts:
+    category: Debug
+    description: Flags used when running the command to start the emulator.
+    is_required: false
+    summary: Flags used when running the command to start the emulator.
+    title: Start AVD command flags
+  start_command_flags: -camera-back none -camera-front none
+- emulator_channel: "0"
+  opts:
+    category: Debug
+    description: Select which channel to use with `sdkmanager` to fetch `emulator`
+      package. Available channels are 0 (Stable), 1 (Beta), 2 (Dev), and 3 (Canary).
+    is_expand: true
+    is_required: true
+    summary: Select which channel to use with `sdkmanager` to fetch `emulator` package.
+      Available channels are 0 (Stable), 1 (Beta), 2 (Dev), and 3 (Canary).
+    title: Emulator channel
+    value_options:
+    - "0"
+    - "1"
+    - "2"
+    - "3"
+outputs:
+- BITRISE_EMULATOR_SERIAL: null
+  opts:
+    description: Booted emulator serial
+    title: Emulator serial
