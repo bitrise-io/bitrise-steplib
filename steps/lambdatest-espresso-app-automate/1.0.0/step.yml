@@ -1,0 +1,156 @@
+title: LambdaTest App Automate - Espresso
+summary: |
+  Upload an app apk and an Espresso test apk to LambdaTest and run tests with App Automate. For more information, please check out this [document](https://www.lambdatest.com/support/docs/getting-started-with-espresso-testing/)
+description: |
+  This step uploads a provided app apk and test apk to LambdaTest. It then will execute the Espresso Tests for the provided apks in LambdaTest's app automate.
+website: https://github.com/LambdaTest/bitrise-step-lambdatest-espresso-app-automate
+source_code_url: https://github.com/LambdaTest/bitrise-step-lambdatest-espresso-app-automate
+support_url: https://github.com/LambdaTest/bitrise-step-lambdatest-espresso-app-automate/issues
+published_at: 2022-07-28T11:31:05.022295+05:30
+source:
+  git: https://github.com/LambdaTest/bitrise-step-lambdatest-espresso-app-automate.git
+  commit: 8c691c312b226e097fee68e40aeab72ab8bec57f
+project_type_tags:
+- android
+- xamarin
+type_tags:
+- test
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  - name: sed
+  apt_get:
+  - name: curl
+  - name: jq
+  - name: sed
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_apk_path: null
+  opts:
+    description: |
+      The .apk file for your app.
+    is_expand: true
+    is_required: true
+    summary: Path to the app .apk file
+    title: App apk path
+- opts:
+    description: |
+      The test .apk file for your app.
+    is_expand: true
+    is_required: true
+    summary: Path to the test .apk file
+    title: Test suite apk path
+  test_apk_path: null
+- lambdatest_username: null
+  opts:
+    description: |
+      The username you use to log into your LambdaTest account.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your LambdaTest username
+    title: LambdaTest username
+- lambdatest_access_key: null
+  opts:
+    description: |
+      The access key you use to run your automation tests. Your access key can be found on the Automation Dashboard by clicking [here](https://appautomation.lambdatest.com/build).
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your LambdaTest access key
+    title: LambdaTest access key
+- lambdatest_device_list: null
+  opts:
+    category: Automated Test Options
+    description: |
+      Provide a comma separated list of Device and OS version you want to run your tests on, with quotes. Acceptable format example: "Galaxy S10-9", "OnePlus 6T-10".
+      A list of available device and OS combinations can be found [here](https://www.lambdatest.com/capabilities-generator/).
+    is_expand: true
+    is_required: true
+    summary: A comma separated list of desired test devices
+    title: Device list
+- lambdatest_build_name: null
+  opts:
+    category: Automated Test Options
+    description: |
+      The name of your build.
+    is_required: false
+    summary: Your build name
+    title: Build Name
+- lambdatest_queue_timeout: 600
+  opts:
+    category: Automated Test Options
+    description: |
+      The time in seconds after which you want your build to timeout from queue. The default value of Queue Timeout is 600 seconds.
+    is_required: false
+    summary: The time in seconds after which you want your build to timeout from queue
+    title: Queue Timeout
+- lambdatest_idle_timeout: 120
+  opts:
+    category: Automated Test Options
+    description: |
+      The maximum time in seconds during which the device will stay idle without any commands being executed. The default value of Idle Timeout is 120 seconds.
+    is_required: false
+    summary: The maximum time in seconds during which the device will stay idle without
+      any commands being executed
+    title: Idle Timeout
+- lambdatest_tunnel: "false"
+  opts:
+    category: Automated Test Options
+    description: Set this parameter if you want to enable local testing. By default
+      it's set to false.
+    is_required: false
+    summary: Set this parameter if you want to enable local testing
+    title: Tunnel
+    value_options:
+    - "true"
+    - "false"
+- lambdatest_tunnel_name: null
+  opts:
+    category: Automated Test Options
+    description: Name of the tunnel .
+    is_required: false
+    summary: Your Tunnel Name
+    title: Tunnel Name
+- lambdatest_device_logs: "false"
+  opts:
+    category: Automated Test Options
+    description: Set this parameter to true if you want to enable the device logs.
+      By default it's set to false.
+    is_required: false
+    summary: Set this parameter to true if you want to enable the device logs
+    title: Device Logs
+    value_options:
+    - "true"
+    - "false"
+- lambdatest_network_logs: "false"
+  opts:
+    category: Automated Test Options
+    description: Set this parameter to true if you want to enable the network logs.
+      By default it's set to false.
+    is_required: false
+    summary: Set this parameter to true if you want to enable the network logs
+    title: Network Logs
+    value_options:
+    - "true"
+    - "false"
+- lambdatest_video: "true"
+  opts:
+    category: Automated Test Options
+    description: Set this parameter to true if you want to enable the video of the
+      test run. By default it's set to true.
+    is_required: false
+    summary: Set this parameter to true if you want to enable the video of the test
+      run
+    title: Video
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- LAMBDATEST_BUILD_ID: null
+  opts:
+    summary: The Build ID for this test run in LambdaTest
+    title: Build ID
