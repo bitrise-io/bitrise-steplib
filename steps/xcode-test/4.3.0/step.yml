@@ -1,0 +1,294 @@
+title: Xcode Test for iOS
+summary: Runs your project's pre-defined Xcode tests on every build.
+description: |-
+  This Steps runs all those Xcode tests that are included in your project.
+  The Step will work out of the box if your project has test targets and your Workflow has the **Deploy to Bitrise.io** Step which exports the test results and (code coverage files if needed) to the Test Reports page.
+  This Step does not need any code signing files since the Step deploys only the test results to [bitrise.io](https://www.bitrise.io).
+
+  ### Configuring the Step
+  If you click into the Step, there are some required input fields whose input must be set in accordance with the Xcode configuration of the project.
+  The **Scheme** input field must be marked as Shared in Xcode.
+
+  ### Troubleshooting
+  If the **Deploy to Bitrise.io** Step is missing from your Workflow, then the **Xcode Test for iOS** Step will not be able to export the test results on the Test Reports page and you won't be able to view them either.
+  The xcpretty output tool does not support parallel tests.
+  If parallel tests are enabled in your project, go to the Step's Debug section and set the **Log formatter** input's value to xcodebuild.
+  If the Xcode test fails with the error `Unable to find a destination matching the provided destination specifier`, then check our [system reports](https://github.com/bitrise-io/bitrise.io/tree/master/system_reports) to see if the requested simulator is on the stack or not.
+  If it is not, then pick a simulator that is on the stack.
+
+  ### Useful links
+  - [About Test Reports](https://devcenter.bitrise.io/testing/test-reports/)
+  - [Running Xcode Tests for iOS](https://devcenter.bitrise.io/testing/running-xcode-tests/)
+
+  ### Related Steps
+  - [Deploy to Bitrise.io](https://www.bitrise.io/integrations/steps/deploy-to-bitrise-io)
+  - [iOS Device Testing](https://www.bitrise.io/integrations/steps/virtual-device-testing-for-ios)
+website: https://github.com/bitrise-steplib/steps-xcode-test
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test
+support_url: https://github.com/bitrise-steplib/steps-xcode-test/issues
+published_at: 2022-07-07T15:32:02.695716389Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test.git
+  commit: eb9eddb4770c2d1f597b549997ce917ae515be59
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-test
+deps:
+  brew:
+  - name: go
+  check_only:
+  - name: xcode
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Xcode Project (`.xcodeproj`) or Workspace (`.xcworkspace`) path.
+      The input value sets xcodebuild's `-project` or `-workspace` option.
+
+      If this is a Swift package, this should be the path to the `Package.swift` file.
+    is_required: true
+    summary: Path of the Xcode Project (`.xcodeproj`), Workspace (`.xcworkspace`)
+      or Swift package (`Package.swift`)
+    title: Project path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |-
+      Xcode Scheme name.
+
+      The input value sets xcodebuild's `-scheme` option.
+    is_required: true
+    summary: Xcode Scheme name.
+    title: Scheme
+  scheme: $BITRISE_SCHEME
+- destination: platform=iOS Simulator,name=iPhone 8 Plus,OS=latest
+  opts:
+    description: |-
+      Destination specifier describes the device to use as a destination.
+
+      The input value sets xcodebuild's `-destination` option.
+    is_required: true
+    summary: Destination specifier describes the device to use as a destination.
+    title: Device destination specifier
+- opts:
+    description: |-
+      Run tests in a specific Test Plan associated with the Scheme.
+
+      Leave this input empty to run the default Test Plan or Test Targets associated with the Scheme.
+
+      The input value sets xcodebuild's `-testPlan` option.
+    summary: Run tests in a specific Test Plan associated with the Scheme.
+    title: Test Plan
+  test_plan: null
+- opts:
+    category: Test Repetition
+    description: |-
+      Determines how the tests will repeat.
+
+      Available options:
+      - `none`: Tests will never repeat.
+      - `until_failure`: Tests will repeat until failure or up to maximum repetitions.
+      - `retry_on_failure`: Only failed tests will repeat up to maximum repetitions.
+      - `up_until_maximum_repetitions`: Tests will repeat up until maximum repetitions.
+
+      The input value together with Maximum Test Repetitions (`maximum_test_repetitions`) input sets xcodebuild's `-run-tests-until-failure` / `-retry-tests-on-failure` or `-test-iterations` option.
+    summary: Determines how the tests will repeat.
+    title: Test Repetition Mode (Available in Xcode 13+)
+    value_options:
+    - none
+    - until_failure
+    - retry_on_failure
+    - up_until_maximum_repetitions
+  test_repetition_mode: none
+- maximum_test_repetitions: 3
+  opts:
+    category: Test Repetition
+    description: |-
+      The maximum number of times a test repeats based on the Test Repetition Mode (`test_repetition_mode`).
+
+      Should be more than 1 if the Test Repetition Mode is other than `none`.
+
+      The input value sets xcodebuild's `-test-iterations` option.
+    is_required: true
+    summary: The maximum number of times a test repeats based on the Test Repetition
+      Mode (`test_repetition_mode`).
+    title: Maximum Test Repetitions (Available in Xcode 13+)
+- opts:
+    category: Test Repetition
+    description: |-
+      If this input is set, tests will launch in a new process for each repetition.
+
+      By default, tests launch in the same process for each repetition.
+
+      The input value sets xcodebuild's `-test-repetition-relaunch-enabled` option.
+    summary: If this input is set, tests will launch in a new process for each repetition.
+    title: Relaunch Tests for Each Repetition (Available in Xcode 13+)
+    value_options:
+    - "yes"
+    - "no"
+  relaunch_tests_for_each_repetition: "no"
+- opts:
+    category: Test Repetition
+    description: |-
+      If this input is set, the Step will rerun the tests in the case of failed tests.
+
+      Note that all the tests will be rerun, not just the ones that failed.
+
+      This input is not available if you are using Xcode 13+. In that case, we recommend using the `retry_on_failure` Test Repetition Mode (`test_repetition_mode`).
+    is_required: true
+    summary: If set, the Step will rerun the tests in the case of failed tests.
+    title: Should retry tests on failure? (Not available in Xcode 13+)
+    value_options:
+    - "yes"
+    - "no"
+  should_retry_test_on_fail: "no"
+- opts:
+    category: xcodebuild configuration
+    description: |-
+      Build settings to override the project's build settings, using xcodebuild's `-xcconfig` option.
+
+      You can't define `-xcconfig` option in `Additional options for the xcodebuild command` if this input is set.
+
+      If empty, no setting is changed. When set it can be either:
+      1.  Existing `.xcconfig` file path.
+
+          Example:
+
+          `./ios-sample/ios-sample/Configurations/Dev.xcconfig`
+
+      2.  The contents of a newly created temporary `.xcconfig` file. (This is the default.)
+
+          Build settings must be separated by newline character (`\n`).
+
+          Example:
+          ```
+          COMPILER_INDEX_STORE_ENABLE = NO
+          ONLY_ACTIVE_ARCH[config=Debug][sdk=*][arch=*] = YES
+          ```
+    summary: Build settings to override the project's build settings, using xcodebuild's
+      `-xcconfig` option.
+    title: Build settings (xcconfig)
+  xcconfig_content: COMPILER_INDEX_STORE_ENABLE = NO
+- opts:
+    category: xcodebuild configuration
+    is_required: true
+    summary: If this input is set, `clean` xcodebuild action will be performed besides
+      the `test` action.
+    title: Perform clean action
+    value_options:
+    - "yes"
+    - "no"
+  perform_clean_action: "no"
+- opts:
+    category: xcodebuild configuration
+    description: |-
+      Additional options to be added to the executed xcodebuild command.
+
+      Prefer using `Build settings (xcconfig)` input for specifying `-xcconfig` option. You can't use both.
+    summary: Additional options to be added to the executed xcodebuild command.
+    title: Additional options for the xcodebuild command
+  xcodebuild_options: ""
+- log_formatter: xcpretty
+  opts:
+    category: xcodebuild log formatting
+    description: |-
+      Defines how xcodebuild command's log is formatted.
+
+      Available options:
+      - `xcpretty`: The xcodebuild command's output will be prettified by xcpretty.
+      - `xcodebuild`: Only the last 20 lines of raw xcodebuild output will be visible in the build log.
+
+      The raw xcodebuild log will be exported in both cases.
+    is_required: true
+    summary: Defines how xcodebuild command's log is formatted.
+    title: Log formatter
+    value_options:
+    - xcpretty
+    - xcodebuild
+- opts:
+    category: xcodebuild log formatting
+    summary: Additional options to be added to the executed xcpretty command.
+    title: Additional options for the xcpretty command
+  xcpretty_options: --color --report html --output "${BITRISE_DEPLOY_DIR}/xcode-test-results-${BITRISE_SCHEME}.html"
+- cache_level: swift_packages
+  opts:
+    category: Caching
+    description: |-
+      Defines what cache content should be automatically collected.
+
+      Available options:
+      - `none`: Disable collecting cache content.
+      - `swift_packages`: Collect Swift PM packages added to the Xcode project.
+    summary: Defines what cache content should be automatically collected.
+    title: Enable collecting cache content
+    value_options:
+    - none
+    - swift_packages
+- opts:
+    category: Debugging
+    summary: If this input is set, the Step will print additional logs for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- collect_simulator_diagnostics: never
+  opts:
+    category: Debugging
+    summary: If this input is set, the simulator verbose logging will be enabled and
+      the simulator diagnostics log will be exported.
+    title: Collect Simulator diagnostics
+    value_options:
+    - always
+    - on_failure
+    - never
+- headless_mode: "yes"
+  opts:
+    category: Debugging
+    description: |-
+      In headless mode the simulator is not launched in the foreground.
+
+      If this input is set, the simulator will not be visible but tests (even the screenshots) will run just like if you run a simulator in foreground.
+    summary: In headless mode the simulator is not launched in the foreground.
+    title: Run the simulator in headless mode
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    description: Result of the tests. 'succeeded' or 'failed'.
+    title: Test result
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_XCRESULT_PATH: null
+  opts:
+    description: The path of the generated `.xcresult`.
+    title: The path of the generated `.xcresult`
+- BITRISE_XCRESULT_ZIP_PATH: null
+  opts:
+    description: The path of the zipped `.xcresult`.
+    title: The path of the zipped `.xcresult`
+- BITRISE_XCODE_TEST_ATTACHMENTS_PATH: null
+  opts:
+    description: This is the path of the test attachments zip.
+    title: The full, test attachments zip path
+- BITRISE_XCODEBUILD_BUILD_LOG_PATH: null
+  opts:
+    description: |-
+      If `single_build` is set to false, the step runs `xcodebuild build` before the test,
+      and exports the raw xcodebuild log.
+    title: xcodebuild build command log file path
+- BITRISE_XCODEBUILD_TEST_LOG_PATH: null
+  opts:
+    description: The step exports the `xcodebuild test` command output log.
+    title: xcodebuild test command log file path

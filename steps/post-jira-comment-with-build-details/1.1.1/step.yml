@@ -1,0 +1,78 @@
+title: Post Jira Comment
+summary: Post comment to a Jira issue.
+description: "The Step adds a comment to a Jira issue. Using this Step, you can attach
+  your build parameters to a Jira issue, or you can add any comment using Markdown.\n\n###
+  Configuring the Step\n\n1. Add your Jira email address as a Secret Env Var to the
+  **Jira user name** input.\n1. Add your Jira API token to the **Jira API token**
+  input. \n   You can generate your API token according to [this guide](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/).\n1.
+  Add your Jira issue key to the **Jira issue keys** input. You can add multiple Jira
+  issues separated with the `|` character. \n1. Add your Jira base URL to the **Jira
+  base URL** input. \n1. Add the comment you would like to attach to your Jira issue
+  in the **Build message** input. You can add any information here using Markdown.
+  By default, this will contain the following Build parameters:\n   * Public download
+  page\n   * Build number\n   * Author\n   * Git branch\n   * Commit hash\n   * Commit
+  message\n\n### Useful links\n\n* [Manage API tokens for your Atlassian account](https://support.atlassian.com/atlassian-account/docs/manage-api-tokens-for-your-atlassian-account/)\n*
+  [What is an issue?](https://support.atlassian.com/jira-software-cloud/docs/what-is-an-issue/)\n*
+  [How to find your site URL to set up the Jira Data Center and Server mobile app](https://confluence.atlassian.com/jirakb/how-to-find-your-site-url-to-set-up-the-jira-data-center-and-server-mobile-app-954244798.html)\n\n###
+  Related Steps\n\n* [Send a Slack message](https://www.bitrise.io/integrations/steps/slack)\n"
+website: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details
+source_code_url: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details.git
+support_url: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details/issues
+published_at: 2022-04-14T11:48:43.724867034Z
+source:
+  git: https://github.com/bitrise-steplib/steps-post-jira-comment-with-build-details.git
+  commit: 4d2d2a0b8a4568546f9dc8a0e6064e26f6083c16
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-post-jira-comment-with-build-details
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- opts:
+    description: User name on Jira (user's email).
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: User name on Jira (user's email).
+    title: Jira user name
+  user_name: null
+- api_token: null
+  opts:
+    description: API token generated on Jira.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: API token generated on Jira.
+    title: Jira API token
+- issue_keys: null
+  opts:
+    description: Jira issue keys separated with `|`
+    is_required: true
+    summary: Jira issue keys separated with `|`
+    title: Jira issue keys
+- base_url: null
+  opts:
+    description: URL of the personal Jira software.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: URL of the personal Jira software.
+    title: Jira base URL
+- build_message: |
+    *$BITRISE_APP_TITLE* build *$BITRISE_BUILD_NUMBER* is now available: [Download|$BITRISE_PUBLIC_INSTALL_PAGE_URL]
+    ||Build number|$BITRISE_BUILD_NUMBER|
+    ||Author|$GIT_CLONE_COMMIT_AUTHOR_NAME|
+    ||Branch|$BITRISE_GIT_BRANCH|
+    ||Commit hash|$GIT_CLONE_COMMIT_HASH|
+    ||Commit message|$GIT_CLONE_COMMIT_MESSAGE_SUBJECT|
+
+    [Show build details|$BITRISE_BUILD_URL]
+  opts:
+    description: The content of the build message that will be posted. You can use
+      markdown. Details [here|https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all]
+    is_required: true
+    summary: The content of the build message that will be posted
+    title: Build message

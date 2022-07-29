@@ -1,0 +1,78 @@
+title: Run npm command
+summary: The Step runs npm with the command and arguments you provide, for example,
+  to install missing packages or run a package's test.
+description: |-
+  You can install missing JS dependencies with this Step if you insert it before any build step and provide the `install` command.
+  You can also test certain packages with the `test` command.
+  You can do both in one Workflow, however, this requires one **Run npm command** Step for installation followed by another **Run npm command** Step for testing purposes.
+
+  ### Configuring the Step
+  1. Add the **Run npm command** Step to your Workflow preceding any build Step.
+  2. Set the **Working directory**.
+  3. Set the command you want npm to execute, for example `install` to run `npm install` in the **The npm command with arguments to run** input.
+  4. If you're looking for a particular npm version, you can set it in the **Version of npm to use** input.
+  5. You can cache the content of the node modules directory if you select `true` in the drop-down.
+  By default this input is set to false.
+
+  ### Troubleshooting
+  Make sure you insert the Step before any build Step so that every dependency is downloaded a build Step starts running.
+
+  ### Useful links
+  - [Getting started Ionic/Cordova apps](https://devcenter.bitrise.io/getting-started/getting-started-with-ionic-cordova-apps/)
+  - [About npm](https://www.npmjs.com/)
+website: https://github.com/bitrise-steplib/steps-npm
+source_code_url: https://github.com/bitrise-steplib/steps-npm
+support_url: https://github.com/bitrise-steplib/steps-npm/issues
+published_at: 2022-02-23T14:15:50.898352579Z
+source:
+  git: https://github.com/bitrise-steplib/steps-npm.git
+  commit: c3e53f604f688adde60499b61db2160aec491f9c
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-npm
+deps:
+  apt_get:
+  - name: nodejs
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: |-
+      Specify the command with arguments to run with `npm`.
+
+      This input value will be append to the end of the `npm` command call.
+
+      For example:
+
+      - `install` -> `npm install`
+      - `install -g cordova` -> `npm install -g cordova`
+    is_required: true
+    title: The `npm` command with arguments to run
+- npm_version: null
+  opts:
+    description: Set this value to the version of npm that is required to run the
+      command. Must be a valid semver string.
+    title: Version of npm to use
+- cache_local_deps: "false"
+  opts:
+    category: Cache
+    description: |
+      Select if the contents of node_modules directory should be cached.
+
+      `true`: Mark local dependencies to be cached.
+
+      `false`: Do not use cache.
+    is_required: true
+    title: Cache node_modules
+    value_options:
+    - "true"
+    - "false"
