@@ -3,7 +3,7 @@ summary: |
   Run your Espresso tests on BrowserStack App Automate
 description: |
   Run your Espresso tests on BrowserStack App Automate. This step collects the built APK from $BITRISE_APK_PATH  and test apk from `$BITRISE_TEST_APK_PATH` Environment Variables
-website: https://github.com/browserstack/browserstack-bitrise-espresso-step
+website: https://www.browserstack.com/app-automate
 source_code_url: https://github.com/browserstack/browserstack-bitrise-espresso-step
 support_url: https://github.com/browserstack/browserstack-bitrise-espresso-step/issues
 published_at: 2022-07-28T14:39:20.868019+05:30
