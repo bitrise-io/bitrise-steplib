@@ -23,10 +23,10 @@ inputs:
     summary: Installs and uses a nightly version of the toolchain
     title: Use Rustup Nightly
     value_options:
-    - true
-    - false
-  use_rustup_nightly: false
-- auto_update_toolchain: false
+    - "true"
+    - "false"
+  use_rustup_nightly: "false"
+- auto_update_toolchain: "false"
   opts:
     description: |
       If `true`, forces the update of the Rust Toolchain.
@@ -34,8 +34,8 @@ inputs:
     summary: Automatically update the Rust Toolchain on every run.
     title: Update the Rust Toolchain
     value_options:
-    - true
-    - false
+    - "true"
+    - "false"
 - cache_level: none
   opts:
     description: |
@@ -53,9 +53,9 @@ inputs:
     summary: Shows the version of the Toolchain components at the end of the step.
     title: Show Toolchain versions
     value_options:
-    - true
-    - false
-  show_exported_envs: false
+    - "true"
+    - "false"
+  show_exported_envs: "false"
 outputs:
 - RUSTUP_VERSION: null
   opts:
