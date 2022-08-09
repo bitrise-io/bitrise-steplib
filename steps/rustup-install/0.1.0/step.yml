@@ -9,7 +9,7 @@ support_url: https://github.com/nick0602/bitrise-step-rustup/issues
 published_at: 2022-08-08T19:03:48.196370409+02:00
 source:
   git: https://github.com/nick0602/bitrise-step-rustup.git
-  commit: 1ff9372e7e36e2d60003e4237709b53df0ef2c97
+  commit: 07a5e3648e169f01e4903ecfbc2b66097e73b598
 type_tags:
 - installer
 toolkit:
