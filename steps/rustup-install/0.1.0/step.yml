@@ -1,0 +1,77 @@
+title: Rust Install
+summary: |
+  Install the Rust Toolchain.
+description: |
+  Install the required components to build and run Rust projects in the current workflow.
+website: https://github.com/nick0602/bitrise-step-rustup/
+source_code_url: https://github.com/nick0602/bitrise-step-rustup/
+support_url: https://github.com/nick0602/bitrise-step-rustup/issues
+published_at: 2022-08-08T19:03:48.196370409+02:00
+source:
+  git: https://github.com/nick0602/bitrise-step-rustup.git
+  commit: 07a5e3648e169f01e4903ecfbc2b66097e73b598
+type_tags:
+- installer
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- opts:
+    description: |
+      If `true`, forces the use of the nightly version of the toolchain.
+    is_expand: true
+    summary: Installs and uses a nightly version of the toolchain
+    title: Use Rustup Nightly
+    value_options:
+    - "true"
+    - "false"
+  use_rustup_nightly: "false"
+- auto_update_toolchain: "false"
+  opts:
+    description: |
+      If `true`, forces the update of the Rust Toolchain.
+    is_expand: true
+    summary: Automatically update the Rust Toolchain on every run.
+    title: Update the Rust Toolchain
+    value_options:
+    - "true"
+    - "false"
+- cache_level: none
+  opts:
+    description: |
+      `all` will cache cargo binaries and rustup root folder, `none` won't cache any of the above.
+    is_expand: true
+    summary: Sets the local folders to be cached.
+    title: Set cache level
+    value_options:
+    - all
+    - none
+- opts:
+    description: |
+      If `true`, prints the exported `$RUSTUP_VERSION`, `$RUSTC_VERSION` and `$CARGO_VERSION` at the end of the step.
+    is_expand: true
+    summary: Shows the version of the Toolchain components at the end of the step.
+    title: Show Toolchain versions
+    value_options:
+    - "true"
+    - "false"
+  show_exported_envs: "false"
+outputs:
+- RUSTUP_VERSION: null
+  opts:
+    description: |
+      The version returned by the `rustup -V` command.
+    summary: The current Rust Toolchain version
+    title: Current `rustup` version
+- RUSTC_VERSION: null
+  opts:
+    description: |
+      The version returned by the `rustc -V` command.
+    summary: The current Rustc version
+    title: Current `rustc` version
+- CARGO_VERSION: null
+  opts:
+    description: |
+      The version returned by the `cargo -V` command.
+    summary: The current Cargo version
+    title: Current `cargo` version
