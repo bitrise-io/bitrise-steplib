@@ -251,6 +251,6 @@ outputs:
 - BROWSERSTACK_BUILD_STATUS: null
   opts:
     description: |
-      Status of the executed build. Check values [here:] (https://www.browserstack.com/docs/app-automate/espresso/view-test-results)
+      Status of the executed build. Check possible values [here](https://www.browserstack.com/docs/app-automate/espresso/view-test-results)
     summary: BrowserStack build status
     title: BrowserStack Build Status
