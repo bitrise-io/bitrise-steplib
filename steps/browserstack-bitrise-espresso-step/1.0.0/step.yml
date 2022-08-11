@@ -146,7 +146,7 @@ inputs:
 
       package com.foo
 
-      Learn more.(https://www.browserstack.com/docs/app-automate/espresso/select-test-cases)
+      [Learn more](https://www.browserstack.com/docs/app-automate/espresso/select-test-cases)
     summary: "Key-value pairs of filters to run tests from supported test filtering
       strategies: class, package, annotation, size.\nExamples: \nFor class filtering
       strategy:\n\n`class com.android.foo.ClassA`, `class com.android.foo.ClassB`,`class
