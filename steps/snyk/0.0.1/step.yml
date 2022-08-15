@@ -10,7 +10,7 @@ description: |
 website: https://github.com/pilvikala/bitrise-step-snyk
 source_code_url: https://github.com/pilvikala/bitrise-step-snyk
 support_url: https://github.com/pilvikala/bitrise-step-snyk/issues
-
+published_at: 2022-08-15T09:51:00+02:00
 project_type_tags:
   - android
   - react-native
