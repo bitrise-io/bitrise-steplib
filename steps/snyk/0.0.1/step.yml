@@ -11,6 +11,9 @@ website: https://github.com/pilvikala/bitrise-step-snyk
 source_code_url: https://github.com/pilvikala/bitrise-step-snyk
 support_url: https://github.com/pilvikala/bitrise-step-snyk/issues
 published_at: 2022-08-15T09:51:00+02:00
+source:
+  git: https://github.com/pilvikala/bitrise-step-snyk.git
+  commit: 85fa203a597d782f9eed2b051731a77ca4a076d0
 project_type_tags:
   - android
   - react-native
