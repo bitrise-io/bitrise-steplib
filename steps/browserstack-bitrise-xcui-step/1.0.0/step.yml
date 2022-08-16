@@ -6,7 +6,7 @@ description: |
 website: https://github.com/browserstack/browserstack-bitrise-xcui-step
 source_code_url: https://github.com/browserstack/browserstack-bitrise-xcui-step
 support_url: https://github.com/browserstack/browserstack-bitrise-xcui-step/issues
-published_at: 2022-08-11T10:42:54.720007+05:30
+published_at: 2022-08-16T19:55:00.494028+05:30
 source:
   git: https://github.com/browserstack/browserstack-bitrise-xcui-step.git
   commit: e317013319d6fd95193b090112b0948872716961
