@@ -213,7 +213,7 @@ outputs:
 - BROWSERSTACK_BUILD_URL: null
   opts:
     description: BrowserStack Dashboard url for the executed build
-    summary: ""
+    summary: BrowserStack Dashboard url for the executed build
     title: BrowserStack Dashboard url
 - BROWSERSTACK_BUILD_STATUS: null
   opts:
