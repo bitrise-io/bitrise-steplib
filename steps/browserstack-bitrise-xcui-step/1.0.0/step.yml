@@ -1,0 +1,222 @@
+title: BrowserStack App Automate - XCUITest
+summary: |
+  Run your XCUITest tests on BrowserStack App Automate
+description: |
+  Run your XCUITest tests on BrowserStack App Automate. This step collects the built IPA from `$BITRISE_IPA_PATH`  and test suite from `$BITRISE_BUNDLE_PATH` Environment Variables
+website: https://github.com/browserstack/browserstack-bitrise-xcui-step
+source_code_url: https://github.com/browserstack/browserstack-bitrise-xcui-step
+support_url: https://github.com/browserstack/browserstack-bitrise-xcui-step/issues
+published_at: 2022-08-16T20:11:30.271023+05:30
+source:
+  git: https://github.com/browserstack/browserstack-bitrise-xcui-step.git
+  commit: cd90e8eafe9e9130ea792e98b76b9e79eedde467
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/browserstack/browserstack-bitrise-xcui-step
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- browserstack_username: null
+  opts:
+    description: Username of the BrowserStack account
+    is_required: true
+    is_sensitive: true
+    summary: Username for the BrowserStack account
+    title: BrowserStack username
+- browserstack_accesskey: null
+  opts:
+    description: Access Key of the BrowserStack account
+    is_required: true
+    is_sensitive: true
+    summary: Accesskey for the BrowserStack account
+    title: BrowserStack accesskey
+- app_ipa_path: $BITRISE_IPA_PATH
+  opts:
+    description: Path of the app (.ipa) file
+    is_expand: true
+    is_required: true
+    summary: Path to the app (.ipa) file
+    title: iOS app under test
+- opts:
+    description: Path of the output bundle (.app) file. Add either the `$BITRISE_TEST_BUNDLE_PATH`
+      (generated from the "Xcode Build for testing for iOS" step) or the absolute
+      path of the output bundle file
+    is_expand: true
+    is_required: true
+    summary: Path of the output bundle file
+    title: XCUI test suite
+  xcui_test_suite: $BITRISE_TEST_BUNDLE_PATH
+- devices_list: null
+  opts:
+    description: "Name of one or more device-OS combination in new line \n For example:\n
+      \n `iPhone 11-13`\n \n `iPhone XS-15`\n \n [View supported device-OS combinations](https://www.browserstack.com/list-of-browsers-and-platforms/app_automate)\n"
+    is_expand: true
+    is_required: true
+    summary: Name of one or more device-OS combination in new line from the [device
+      list](https://www.browserstack.com/list-of-browsers-and-platforms/app_automate).
+    title: Devices
+- instrumentation_logs: "true"
+  opts:
+    category: Debug logs
+    description: Instrumentation logs are a comprehensive record of your XCUITest
+      test executions that helps you identify all the steps executed in the test.
+    summary: Generate instrumentation logs of the test session
+    title: Instrumentation logs
+    value_options:
+    - "true"
+    - "false"
+- network_logs: "false"
+  opts:
+    category: Debug logs
+    description: 'Network logs captures the network traffic, latency, HTTP requests
+      and responses in the HAR (HTTP Archive) format. '
+    summary: Generate network logs of your XCUI test sessions to capture network traffic,
+      latency, etc.
+    title: Network Logs
+    value_options:
+    - "true"
+    - "false"
+- device_logs: "false"
+  opts:
+    category: Debug logs
+    description: Device logs are system logs specific to your application generated
+      by iOS device
+    summary: Generate device logs
+    title: Device Logs
+    value_options:
+    - "true"
+    - "false"
+- debug_screenshots: "false"
+  opts:
+    category: Debug logs
+    description: Screenshots makes it easier to identify the exact step in your test
+      where the failure occurred, especially any layout or design-related issues.
+    summary: Capture the screenshots of the test execution
+    title: Capture Screenshots
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Debug logs
+    description: Video recording helps you view the entire test execution and helps
+      debug any failed test.
+    summary: Record video of the test execution
+    title: Video recording
+    value_options:
+    - "true"
+    - "false"
+  video_recording: "true"
+- opts:
+    category: Test Configuration
+    description: A project name helps you group multiple XCUITest test executions
+      under a single project.
+    summary: Project name of the tests.
+    title: Project name
+  project: null
+- opts:
+    category: Test Configuration
+    description: |
+      A callback URL helps you enable BrowserStack notify you upon the completion of all builds under a given project. You will receive a callback if no new builds triggered for 5 minutes and all existing builds have completed their execution.
+
+      This parameter requires that the **Project name** parameter also be set.
+    summary: A callback URL to enable BrowserStack notify about completion of build
+      under a given project.
+    title: Notify project status
+  project_notify_url: null
+- opts:
+    category: Test Configuration
+    description: Enable local testing to retrieve app data hosted on local/private
+      servers
+    summary: Enable local testing to retrieve app data hosted on local/private servers
+    title: Local testing
+    value_options:
+    - "true"
+    - "false"
+  use_local: "false"
+- opts:
+    category: Test Configuration
+    description: |
+      Enable test sharding to split tests cases into different groups instead of running them sequentially.
+      Add the sharding value json here. Examples:
+      Input for only-testing strategy:
+      `{"numberOfShards": 2, "mapping": [{"name": "Shard 1", "strategy": "only-testing", "values": ["SampleXCUITestsClass/testAlert", "SampleXCUITestsClass/testText"]}, {"name": "Shard 2", "strategy": "only-testing", "values": ["SampleXCUITestsClass/testLogin"]}]}`
+
+      Input for skip-testing strategy:
+      `{"numberOfShards": 2, "mapping": [{"name": "Shard 1", "strategy": "skip-testing", "values": ["SampleXCUITestsClass/testAlert"]}, {"name": "Shard 2", "strategy": "skip-testing", "values": ["SampleXCUITestsClass/testText"]}]}`
+    summary: Test sharding splits and run test cases into different group called shards.
+      This behaviour is helpful when your test-suite has a large number of test cases.
+      [Learn more.](https://www.browserstack.com/docs/app-automate/xcuitest/test-sharding)
+    title: Test sharding
+  use_test_sharding: null
+- filter_test: null
+  opts:
+    category: Test Configuration
+    description: |
+      Provide a comma-separated list of class or test names followed by supported filters: "only-testing" and "skip-testing".
+
+      For example: `only-testing SampleXCUITestsClass/testAlertTest`
+
+      [Learn more](https://www.browserstack.com/docs/app-automate/xcuitest/select-test-cases)
+    summary: Provide a comma-separated list of class or test names followed by supported
+      filtering strategies.
+    title: Filter test cases
+- opts:
+    category: Test Configuration
+    description: Enable to run runtime discoverable tests or dynamic tests. [Learn
+      more](https://www.browserstack.com/docs/app-automate/xcuitest/dynamic-tests)
+    summary: Enable to run runtime discoverable tests or dynamic tests. [Learn more](https://www.browserstack.com/docs/app-automate/xcuitest/dynamic-tests)
+    title: Run dynamic tests
+    value_options:
+    - "true"
+    - "false"
+  use_dynamic_tests: "false"
+- check_build_status: "true"
+  opts:
+    category: Test Configuration
+    description: 'Enable to let the pipeline wait for build results '
+    summary: 'Enable to let the pipeline wait for build results '
+    title: Build Status
+    value_options:
+    - "true"
+    - "false"
+- api_params: null
+  opts:
+    category: Test Configuration
+    description: |
+      New line key-value pairs of capabilities provided by BrowserStack.
+
+      For example:
+      coverage=true
+
+      geoLocation=CN
+
+      [Learn about more capabilities.](https://www.browserstack.com/docs/app-automate/api-reference/xcuitest/builds#execute-a-build)
+    summary: New line key-value pairs of capabilities provided by BrowserStack.
+    title: Test capabilities
+outputs:
+- BROWSERSTACK_BUILD_URL: null
+  opts:
+    description: BrowserStack Dashboard url for the executed build
+    summary: BrowserStack Dashboard url for the executed build
+    title: BrowserStack Dashboard url
+- BROWSERSTACK_BUILD_STATUS: null
+  opts:
+    description: Status of the executed build. Check values [here:] (https://www.browserstack.com/docs/app-automate/xcui/view-test-results)
+    summary: BrowserStack build status
+    title: BrowserStack Build Status
