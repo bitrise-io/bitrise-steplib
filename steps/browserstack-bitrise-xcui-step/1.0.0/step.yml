@@ -54,7 +54,7 @@ inputs:
     summary: Path to the app (.ipa) file
     title: iOS app under test
 - opts:
-    description: Path of the output bundle (.app) file. Add either the $BITRISE_TEST_BUNDLE_PATH
+    description: Path of the output bundle (.app) file. Add either the `$BITRISE_TEST_BUNDLE_PATH`
       (generated from the "Xcode Build for testing for iOS" step) or the absolute
       path of the output bundle file
     is_expand: true
