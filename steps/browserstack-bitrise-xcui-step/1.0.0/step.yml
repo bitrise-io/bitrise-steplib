@@ -2,7 +2,7 @@ title: BrowserStack App Automate - XCUITest
 summary: |
   Run your XCUITest tests on BrowserStack App Automate
 description: |
-  Run your XCUITest tests on BrowserStack App Automate. This step collects the built IPA from $BITRISE_IPA_PATH  and test suite from `$BITRISE_BUNDLE_PATH` Environment Variables
+  Run your XCUITest tests on BrowserStack App Automate. This step collects the built IPA from `$BITRISE_IPA_PATH`  and test suite from `$BITRISE_BUNDLE_PATH` Environment Variables
 website: https://github.com/browserstack/browserstack-bitrise-xcui-step
 source_code_url: https://github.com/browserstack/browserstack-bitrise-xcui-step
 support_url: https://github.com/browserstack/browserstack-bitrise-xcui-step/issues
