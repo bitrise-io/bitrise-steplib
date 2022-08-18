@@ -71,12 +71,7 @@ inputs:
       Galaxy S9 Plus-9.0`\n\n`Google Pixel 3a-9.0`\n"
     is_expand: true
     is_required: true
-    summary: |
-      Name of one or more device-OS combination in new line from the [device list](https://www.browserstack.com/list-of-browsers-and-platforms/app_automate) . For example:
-
-      `Samsung Galaxy S9 Plus-9.0`
-
-      `Google Pixel 3a-9.0`
+    summary: Name of one or more device-OS combination in new line from the [device list](https://www.browserstack.com/list-of-browsers-and-platforms/app_automate). 
     title: Devices
 - instrumentation_logs: "true"
   opts:
