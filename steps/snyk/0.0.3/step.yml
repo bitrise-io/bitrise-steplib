@@ -1,0 +1,100 @@
+title: |-
+  Snyk
+summary: |
+  Bitrise Snyk Step incorporates Snyk into your Bitrise workflows
+description: |
+  Bitrise Snyk Step incorporates Snyk into your Bitrise workflows.
+  By utilizing this step, you will be able to test your project dependencies for vulnerabilities during builds and use Snyk to monitor your projects
+  for new vulnerabilities.
+  This step uses Snyk as an external service and requires your authentication token.
+website: https://github.com/pilvikala/bitrise-step-snyk
+source_code_url: https://github.com/pilvikala/bitrise-step-snyk
+support_url: https://github.com/pilvikala/bitrise-step-snyk/issues
+published_at: 2022-08-15T09:51:00+02:00
+source:
+  git: https://github.com/pilvikala/bitrise-step-snyk.git
+  commit: 9aa0853c295b000240e9789122b55ced593b2979
+project_type_tags:
+  - android
+  - react-native
+
+type_tags:
+  - utility
+  - security
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+inputs:
+  - auth_token: $SNYK_AUTH_TOKEN
+    opts:
+      title: "Auth Token"
+      summary: "Snyk Authentication Token"
+      description: |
+        Your Snyk authentication token (see https://app.snyk.io/account).
+      is_required: true
+      is_sensitive: true
+      is_expand: true
+  - command: test
+    opts:
+      title: "Command"
+      summary: "Snyk CLI command to run"
+      description: |
+        This is the CLI command to run with Snyk.
+        
+        Default value: `test`
+      is_required: false
+  - severity_threshold: low
+    opts:
+      title: "Severity threshold"
+      summary: "Only report vulnerabilities of the provided level or higher."
+      description: |
+         Only report vulnerabilities of the provided level or higher (low/medium/high/critical).
+         
+         Default is low.
+      value_options:
+        - "low"
+        - "medium"
+        - "high"
+        - "critical"
+  - fail_on_issues: "true"
+    opts:
+      title: "Fail on issues"
+      summary: "Specifies whether to fail the build or not based on the results found by Snyk."
+      description: |
+        Specifies whether to fail the build or not based on the results found by Snyk.
+
+        Snyk by default returns an error code from the test command. This may break your Bitrise workflow. By specifying `false`, the build can continue even if vulnerabilities are found.
+      value_options:
+        - "true"
+        - "false"
+  - monitor: "false"
+    opts:
+      title: "Monitor (import to Snyk)"
+      summary: "If enabled, imports the snapshot of dependencies to Snyk for continuous monitoring after a successful test."
+      description: |
+        If enabled, imports the snapshot of dependencies to Snyk for continuous monitoring after a successful test.
+
+        Set this value to `true` to import the snapshot of dependencies to Snyk after a successful test. Snyk will then start monitoring the dependencies for new vulnerabilities and alert when a new vulnerability is discovered.
+      value_options:
+        - "false"
+        - "true"
+  - target_file:
+    opts:
+      title: "Target file"
+      summary: "The path to the manifest file to be used by Snyk. Should be provided if non-standard."
+      description: ""
+  - organization:
+    opts:
+      title: "Organization"
+      summary: "Name of the Snyk organisation name, under which this project should be tested and monitored."
+      description: |
+        Name of the Snyk organisation name, under which this project should be tested and monitored.
+
+        If omitted the default organization will be used.
+  - additional_arguments:
+    opts:
+      title: "Additional arguments"
+      summary: "Refer to the Snyk CLI help page for information on additional arguments."
+      description: "Refer to the Snyk CLI help page for information on additional arguments."
