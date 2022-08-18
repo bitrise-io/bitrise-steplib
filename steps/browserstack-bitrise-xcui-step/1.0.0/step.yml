@@ -218,5 +218,5 @@ outputs:
 - BROWSERSTACK_BUILD_STATUS: null
   opts:
     description: Status of the executed build. Check values [here:] (https://www.browserstack.com/docs/app-automate/xcui/view-test-results)
-    summary: Bs build status
+    summary: BrowserStack build status
     title: BrowserStack Build Status
