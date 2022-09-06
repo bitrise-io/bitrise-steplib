@@ -10,14 +10,13 @@ description: |
 website: https://github.com/autifyhq/bitrise-step-autify-upload
 source_code_url: https://github.com/autifyhq/bitrise-step-autify-upload
 support_url: https://github.com/autifyhq/bitrise-step-autify-upload/issues
-published_at: 2022-08-30T17:45:53.952815-07:00
+published_at: 2022-09-06T08:41:08.550307-07:00
 source:
   git: https://github.com/autifyhq/bitrise-step-autify-upload.git
-  commit: 98793af6906f0d16bfa9ebc853eb10e3b426fa90
+  commit: ab3293c0f2575e19f731032ea191747a90f34a29
 project_type_tags:
 - ios
 - android
-- xamarin
 - react-native
 - cordova
 - ionic
@@ -28,7 +27,7 @@ toolkit:
   bash:
     entry_file: step.sh
 inputs:
-- access_token: $AUTIFY_MOBILE_ACCESS_TOKEN
+- access_token: null
   opts:
     is_expand: true
     is_required: true
