@@ -14,14 +14,13 @@ description: |
 website: https://github.com/autifyhq/bitrise-step-autify-test-run
 source_code_url: https://github.com/autifyhq/bitrise-step-autify-test-run
 support_url: https://github.com/autifyhq/bitrise-step-autify-test-run/issues
-published_at: 2022-08-30T13:53:16.808596-07:00
+published_at: 2022-09-06T08:38:52.032898-07:00
 source:
   git: https://github.com/autifyhq/bitrise-step-autify-test-run.git
-  commit: 65596a469477a82f51980165e76d1891304ff610
+  commit: 81b2de30d3a68cbe5e7a39adf5e00af10fc014a4
 project_type_tags:
 - ios
 - android
-- xamarin
 - react-native
 - cordova
 - ionic
@@ -32,7 +31,7 @@ toolkit:
   bash:
     entry_file: step.sh
 inputs:
-- access_token: $AUTIFY_MOBILE_ACCESS_TOKEN
+- access_token: null
   opts:
     is_expand: true
     is_required: true
