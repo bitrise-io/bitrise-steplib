@@ -1,0 +1,67 @@
+title: Flutter version auto increment
+summary: |
+  Increment current version and build number in pubspec.yaml file.
+description: |
+  Increment Project current version and build number file and rewite new value in pubspec.yaml file.
+website: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment
+source_code_url: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment
+support_url: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment/issues
+published_at: 2022-09-07T23:50:57.142685+03:00
+source:
+  git: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment.git
+  commit: ed46101375385f8cc36e254da03b574814d294da
+project_type_tags:
+- flutter
+type_tags:
+- deploy
+- build
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    title: Path to pubspec.yaml
+  pubspec_path: $BITRISE_SOURCE_DIR/pubspec.yaml
+- opts:
+    description: |
+      patch: X.X.0 -> X.X.1
+      minor: X.0.X -> X.1.0
+      major: 1.X.X -> 2.0.0
+    is_expand: true
+    is_required: true
+    title: Version auto increment mode
+    value_options:
+    - patch
+    - minor
+    - major
+  version_auto_increment_mode: patch
+- increment_build_number: "yes"
+  opts:
+    description: |
+      X.X.X+1 -> X.X.X+2
+    is_expand: true
+    is_required: true
+    title: Increment build number
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- INCREMENTED_VERSION: null
+  opts:
+    description: |
+      The new version and build number after incrementation.
+    summary: The new version and build number after incrementation
+    title: Incremented version
+- INCREMENTED_VERSION_NAME: null
+  opts:
+    description: |
+      The new version name after incrementation.
+    summary: The new version name after incrementation
+    title: Incremented version name
+- INCREMENTED_BUILD_NUMBER: null
+  opts:
+    description: The new build number after incrementation.
+    summary: The new build number after incrementation
+    title: Incremented build number
