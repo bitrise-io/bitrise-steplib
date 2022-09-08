@@ -1,0 +1,48 @@
+title: Repeato CLI
+summary: |
+  Step for executing repeato tests.
+description: |
+  You can execute repeato tests before making your app build.
+website: https://github.com/ahmedmukhtar1133/bitrise-step-repeato-cli
+source_code_url: https://github.com/ahmedmukhtar1133/bitrise-step-repeato-cli
+support_url: https://github.com/ahmedmukhtar1133/bitrise-step-repeato-cli/issues
+published_at: 2022-09-08T23:25:31.536286+05:00
+source:
+  git: https://github.com/repeato-qa/bitrise-repeato-cli-step.git
+  commit: 501a0abc8f707353f34d81f74ae7feb4529e716a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    summary: Repeato CLI need workspace path for setting up the workspace before executing
+      batch.
+    title: Workspace Git Repository URL
+  workspace_repo_url: null
+- batch_id: null
+  opts:
+    is_required: true
+    summary: Provide batch id for the tests execution.
+    title: Repeato Batch ID
+outputs:
+- REPEATO_REPORT: null
+  opts:
+    summary: Repeato batch report path of executed tests.
+    title: Repeato Batch Report Path
