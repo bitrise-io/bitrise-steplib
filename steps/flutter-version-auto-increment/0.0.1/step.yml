@@ -1,8 +1,8 @@
-title: Flutter version auto increment
+title: Auto increment build/version for Flutter
 summary: |
   Increment current version and build number in pubspec.yaml file.
 description: |
-  Increment Project current version and build number file and rewite new value in pubspec.yaml file.
+  Increment Project current version and build number file and write new value in pubspec.yaml file.
 website: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment
 source_code_url: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment
 support_url: https://github.com/IbrahimTabba/bitrise-step-flutter-version-auto-increment/issues
