@@ -1,0 +1,66 @@
+title: Set application version and build number in pubspec.yaml file
+summary: Sets application version and build number in pubspec file and returns the
+  new version info
+description: Sets the application version by the inputs for application version and
+  build number. The application build number is mandatory to provide for this input.
+website: https://github.com/milkinteractive/bitrise-step-set-pubspec-application-version
+source_code_url: https://github.com/milkinteractive/bitrise-step-set-pubspec-application-version
+support_url: https://github.com/milkinteractive/bitrise-step-set-pubspec-application-version/issues
+published_at: 2022-09-01T13:29:24.450903+02:00
+source:
+  git: https://github.com/milkinteractive/bitrise-step-set-pubspec-application-version.git
+  commit: d9a0376bab9f519de8a0017a8ee7de3dcf1eaa98
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: The root dir of your Flutter project that contains *pubspec.yaml*
+      and optionally *pubspec.lock*.
+    is_required: true
+    summary: The root dir of your Flutter project
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- bitrise_buildnumber: $BITRISE_BUILD_NUMBER
+  opts:
+    description: The application build number which could be used from the build on
+      bitrise.io over variable BITRISE_BUILD_NUMBER.
+    is_required: true
+    summary: Application build number could be from the build on bitrise.io from BITRISE_BUILD_NUMBER.
+    title: Application build number
+- application_version: null
+  opts:
+    description: The application version which could be empty, then it is keeped like
+      it is, or set by this input.
+    is_required: false
+    summary: The application version info as a string like 1.2.3
+    title: Application version
+outputs:
+- DART_PUBSPEC_APP_VERSION: null
+  opts:
+    description: The application version which is set in the pubspec.yaml version
+      string at the **project location**.
+    title: Flutter / Dart pubspec application version which was new set or already
+      set as input.
+- DART_PUBSPEC_APP_BUILD_NUMBER: null
+  opts:
+    description: The application build number is set in the pubspec.yaml version string
+      at the **project location**.
+    title: Flutter / Dart pubspec application build number which was set as input.
+- DART_PUBSPEC_APP_VERSION_STRING: null
+  opts:
+    description: The application version string with version+buildnumber like 1.2.3+999
+      which was set in the pubspec.yaml at the **project location**.
+    title: Flutter / Dart pubspec application version string with version+buildnumber
+      which is set in pubspec.yaml.
