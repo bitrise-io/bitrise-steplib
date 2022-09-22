@@ -1,0 +1,199 @@
+title: iOS Device Testing
+summary: Run iOS XCUItests on devices
+description: "Run iOS XCUItests on physical devices with Google's Firebase Test Lab.
+  You do not have to set up and register your own devices and you don't need your
+  own Firebase account.\n\nWe'll go over the most important configuration information
+  for the Step. For more information, check out our [detailed guide](https://devcenter.bitrise.io/en/testing/device-testing-for-ios.html).\n\n###
+  Configuring the Step \n\nTo use the Step, you need to build an IPA file with Xcode's
+  `build-for-testing` action. You can use our dedicated Step:\n\n1. Add the **Xcode
+  Build for testing for iOS** Step to your Workflow. \n\n   The Step exports a .zip
+  file that contains your test directory (by default, it’s `Debug-iphoneos`) and the
+  xctestrun file.\n1. Add the **iOS Device Testing** Step to the Workflow.\n1. In
+  the **Test devices** input field, specify the devices on which you want to test
+  the app.\n1. Optionally, you can set a test timeout and configure file download
+  in the **Debug** input group. The path to the downloaded files will be exported
+  as an Environment Variable and it can be used by subsequent Steps. \n1. Make sure
+  you have the **Deploy to Bitrise.io** Step in your Workflow, with version 1.4.1
+  or newer. With the older versions of the Step, you won’t be able to check your results
+  on the Test Reports page!\n\nPlease note you should not change the value of the
+  **API token** and the **Test API's base URL** input. \n\n### Troubleshooting \n\nIf
+  you get the **Build already exists** error, it is because you have more than one
+  instance of the Step in your Workflow. This doesn't work as Bitrise sends the build
+  slug to Firebase and having the Step more than once in the same Workflow results
+  in sending the same build slug multiple times. \n\n### Useful links \n\n[Device
+  testing for iOS](https://devcenter.bitrise.io/en/testing/device-testing-for-ios.html)\n\n###
+  Related Steps \n\n[Xcode Build for testing for iOS](https://www.bitrise.io/integrations/steps/xcode-build-for-test)\n[Xcode
+  Test for iOS](https://www.bitrise.io/integrations/steps/xcode-test)"
+website: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+source_code_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+support_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios/issues
+published_at: 2022-09-19T18:25:25.773015875Z
+source:
+  git: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios.git
+  commit: 7807a82a8a16b0d1b148ae3fed450e46fb5ed44e
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+meta:
+  bitrise.io:
+    addons_required:
+    - addons-testing
+inputs:
+- opts:
+    description: |
+      Open finder, and navigate to the directory you designated for Derived Data output.
+      Open the folder for your project, then the Build/Products folders inside it.
+      You should see a folder Debug-iphoneos and PROJECT_NAME_iphoneos_DEVELOPMENT_TARGET-arm64.xctestrun. Select them both, then right-click on one of them and select Compress 2 items.
+    is_required: true
+    summary: |
+      The path to the zip file which contains the folder Debug-iphoneos and PROJECT_NAME_iphoneos_DEVELOPMENT_TARGET-arm64.xctestrun.
+    title: Zip path
+  zip_path: $BITRISE_TEST_BUNDLE_ZIP_PATH
+- opts:
+    description: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+      For example:
+      `iphone8,14.7,en,portrait`
+      `iphone8,14.7,en,landscape`
+      Available devices and its versions:
+      ```
+      ┌─────────────┬───────────────────────┬────────────────┬──────────────────────────┐
+      │   MODEL_ID  │          NAME         │ OS_VERSION_IDS │           TAGS           │
+      ├─────────────┼───────────────────────┼────────────────┼──────────────────────────┤
+      │ ipad5       │ iPad (5th generation) │ 15.4           │                          │
+      │ ipadmini4   │ iPad mini 4           │ 15.4           │                          │
+      │ iphone11    │ iPhone 11             │ 13.3,13.6      │                          │
+      │ iphone11pro │ iPhone 11 Pro         │ 13.3,14.7.     │                          │
+      │ iphone13pro │ iPhone 13 Pro         │ 15.2           │                          │
+      │ iphone8     │ iPhone 8              │ 12.4,13.6,14.7 │ deprecated=12.4, default │
+      │ iphone8plus │ iPhone 8 Plus         │ 12.0           │ deprecated=12.0          │
+      │ iphonexr    │ iPhone XR             │ 12.4,13.2      │ deprecated=12.4          │
+      │ iphonexsmax │ iPhone XS Max         │ 12.1           │ deprecated=12.1          │
+      └─────────────┴───────────────────────┴────────────────┴──────────────────────────┘
+      ```
+
+      Device and OS Capacity
+      ```
+      ┌─────────────┬───────────────────────┬───────────────┬─────────────────┐
+      │   MODEL_ID  │       MODEL_NAME      │ OS_VERSION_ID │ DEVICE_CAPACITY │
+      ├─────────────┼───────────────────────┼───────────────┼─────────────────┤
+      │ ipad5       │ iPad (5th generation) │ 15.4          │ Low             │
+      │ ipadmini4   │ iPad mini 4           │ 15.4          │ Medium          │
+      │ iphone11    │ iPhone 11             │ 13.3          │ Medium          │
+      │ iphone11    │ iPhone 11             │ 13.6          │ Medium          │
+      │ iphone11pro │ iPhone 11 Pro         │ 13.3          │ Medium          │
+      │ iphone11pro │ iPhone 11 Pro         │ 14.7          │ Medium          │
+      │ iphone13pro │ iPhone 13 Pro         │ 15.2          │ Medium          │
+      │ iphone8     │ iPhone 8              │ 12.4          │ High            │
+      │ iphone8     │ iPhone 8              │ 13.6          │ Medium          │
+      │ iphone8     │ iPhone 8              │ 14.7          │ Medium          │
+      │ iphone8plus │ iPhone 8 Plus         │ 12.0          │ Medium          │
+      │ iphonexr    │ iPhone XR             │ 12.4          │ Medium          │
+      │ iphonexr    │ iPhone XR             │ 13.2          │ Medium          │
+      │ iphonexsmax │ iPhone XS Max         │ 12.1          │ Low             │
+      └─────────────┴───────────────────────┴───────────────┴─────────────────┘
+      ```
+    is_required: true
+    summary: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+      For example:
+      `iphone8,14.7,en,portrait`
+      `iphone8,14.7,en,landscape`
+      Available devices and its versions:
+      ```
+      ┌─────────────┬───────────────────────┬────────────────┬──────────────────────────┐
+      │   MODEL_ID  │          NAME         │ OS_VERSION_IDS │           TAGS           │
+      ├─────────────┼───────────────────────┼────────────────┼──────────────────────────┤
+      │ ipad5       │ iPad (5th generation) │ 15.4           │                          │
+      │ ipadmini4   │ iPad mini 4           │ 15.4           │                          │
+      │ iphone11    │ iPhone 11             │ 13.3,13.6      │                          │
+      │ iphone11pro │ iPhone 11 Pro         │ 13.3,14.7.     │                          │
+      │ iphone13pro │ iPhone 13 Pro         │ 15.2           │                          │
+      │ iphone8     │ iPhone 8              │ 12.4,13.6,14.7 │ deprecated=12.4, default │
+      │ iphone8plus │ iPhone 8 Plus         │ 12.0           │ deprecated=12.0          │
+      │ iphonexr    │ iPhone XR             │ 12.4,13.2      │ deprecated=12.4          │
+      │ iphonexsmax │ iPhone XS Max         │ 12.1           │ deprecated=12.1          │
+      └─────────────┴───────────────────────┴────────────────┴──────────────────────────┘
+      ```
+
+      Device and OS Capacity
+      ```
+      ┌─────────────┬───────────────────────┬───────────────┬─────────────────┐
+      │   MODEL_ID  │       MODEL_NAME      │ OS_VERSION_ID │ DEVICE_CAPACITY │
+      ├─────────────┼───────────────────────┼───────────────┼─────────────────┤
+      │ ipad5       │ iPad (5th generation) │ 15.4          │ Low             │
+      │ ipadmini4   │ iPad mini 4           │ 15.4          │ Medium          │
+      │ iphone11    │ iPhone 11             │ 13.3          │ Medium          │
+      │ iphone11    │ iPhone 11             │ 13.6          │ Medium          │
+      │ iphone11pro │ iPhone 11 Pro         │ 13.3          │ Medium          │
+      │ iphone11pro │ iPhone 11 Pro         │ 14.7          │ Medium          │
+      │ iphone13pro │ iPhone 13 Pro         │ 15.2          │ Medium          │
+      │ iphone8     │ iPhone 8              │ 12.4          │ High            │
+      │ iphone8     │ iPhone 8              │ 13.6          │ Medium          │
+      │ iphone8     │ iPhone 8              │ 14.7          │ Medium          │
+      │ iphone8plus │ iPhone 8 Plus         │ 12.0          │ Medium          │
+      │ iphonexr    │ iPhone XR             │ 12.4          │ Medium          │
+      │ iphonexr    │ iPhone XR             │ 13.2          │ Medium          │
+      │ iphonexsmax │ iPhone XS Max         │ 12.1          │ Low             │
+      └─────────────┴───────────────────────┴───────────────┴─────────────────┘
+      ```
+    title: Test devices
+  test_devices: iphone8,14.7,en,portrait
+- opts:
+    category: Debug
+    description: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    summary: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    title: Test timeout
+  test_timeout: 900
+- download_test_results: "false"
+  opts:
+    category: Debug
+    description: |
+      If this input is set to `true` all files generated in the test run will be downloaded. Otherwise, no any file will be downloaded.
+    is_required: true
+    summary: |
+      If this input is set to `true` all files generated in the test run will be downloaded. Otherwise, no any file will be downloaded.
+    title: Download files
+    value_options:
+    - "false"
+    - "true"
+- api_base_url: https://vdt.bitrise.io/test
+  opts:
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- api_token: $ADDON_VDTESTING_API_TOKEN
+  opts:
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+outputs:
+- VDTESTING_DOWNLOADED_FILES_DIR: null
+  opts:
+    description: The directory containing the downloaded files if you have set `download_test_results`
+      inputs above.
+    summary: The directory containing the downloaded files if you have set `download_test_results`
+      inputs above.
+    title: Downloaded files directory
