@@ -1,0 +1,83 @@
+title: Autify test run
+summary: |
+  Run a test plan on Autify for Mobile.
+description: |
+  [Autify for Mobile](https://autify.com/mobile) is a test automation platform for your native app.
+  This step allows you to upload your app built in the previous steps to Autify and start a pre-recorded test plan against the build.
+
+  Optionally, this step can wait until the test plan finishes and fail if it doesn't pass.
+
+  Also, you can specify already uploaded build and just start a test plan against it.
+
+  If you want to upload your app to Autify, you need to build your app first by `Android Build`, `Xcode build for simulator`, etc.
+  and refer the target build path (*.apk or *.app) at `Build path to test` input.
+website: https://github.com/autifyhq/bitrise-step-autify-test-run
+source_code_url: https://github.com/autifyhq/bitrise-step-autify-test-run
+support_url: https://github.com/autifyhq/bitrise-step-autify-test-run/issues
+published_at: 2022-09-06T08:38:52.032898-07:00
+source:
+  git: https://github.com/autifyhq/bitrise-step-autify-test-run.git
+  commit: 81b2de30d3a68cbe5e7a39adf5e00af10fc014a4
+project_type_tags:
+- ios
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- access_token: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Personal Access Token of Autify for Mobile
+    title: Access token of Autify for Mobile
+- autify_test_url: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Autify for Mobile URL of your test plan. For example, `https://mobile-app.autify.com/projects/AAA/test_plans/BBB`
+    title: URL of a test plan
+- build_id: null
+  opts:
+    is_expand: true
+    summary: Autify for Mobile build ID you already uploaded before.
+    title: Build ID to test (Either "Build ID to test" or "Build path to test" is
+      required.)
+- build_path: null
+  opts:
+    is_expand: true
+    summary: |-
+      The file location of your build file i.e. /path/to/ios.app or /path/to/android.apk.
+      Typically, it's `$BITRISE_APP_DIR_PATH` for `Xcode build for simulator` step or `$BITRISE_APK_PATH` for `Android build` step.
+    title: Build path to test (Either "Build ID to test" or "Build path to test" is
+      required.)
+- opts:
+    title: Wait for the finish of test
+    value_options:
+    - "true"
+    - "false"
+  wait: "false"
+- opts:
+    title: Timeout seconds while waiting the finish of test
+  timeout: 300
+- autify_path: autify
+  opts:
+    is_expand: true
+    title: A path to Autify CLI
+outputs:
+- AUTIFY_TEST_RESULT_URL: null
+  opts:
+    title: URL to see the test result at Autify for Mobile
+- AUTIFY_BUILD_ID: null
+  opts:
+    title: Used build id on Autify for Mobile
+- AUTIFY_TEST_RUN_EXIT_CODE: null
+  opts:
+    title: Exit code of the step
