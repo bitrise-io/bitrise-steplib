@@ -1,0 +1,66 @@
+title: Firebase dSYM Upload
+summary: |
+  This step uploads the dSYM for your iOS project to Firebase using CocoaPods
+description: |
+  You should have installed Firebase Crashlytics via CocoaPods to use this. This step does not support Swift Package Manager (SPM).
+website: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
+source_code_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload
+support_url: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload/issues
+published_at: 2022-10-12T14:44:08.121976+01:00
+source:
+  git: https://github.com/andrewmarmion/bitrise-step-firebase-dsym-upload.git
+  commit: 3dcd109c3740f1747deec13150d09de82ac46d62
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- fdu_fabric_location: ./Pods/FirebaseCrashlytics/upload-symbols
+  opts:
+    description: |
+      FirebaseCrashlytics it is usually `./Pods/FirebaseCrashlytics/upload-symbols`
+    is_expand: true
+    is_required: true
+    summary: This is the location of where FirebaseCrashlytics is stored.
+    title: Location of FirebaseCrashlytics
+- fdu_google_services_location: null
+  opts:
+    description: |
+      The location is usually in the form ./YOUR-APP-NAME/GoogleService-Info.plist
+    is_expand: true
+    is_required: true
+    summary: This is the location of your GoogleService-Info.plist
+    title: Location of your GoogleService-Info.plist
+- fdu_dsym_location: $BITRISE_DSYM_PATH
+  opts:
+    description: |
+      This is the location of your dSYMs. Usually it is $BITRISE\_DSYM\_PATH
+    is_expand: true
+    is_required: true
+    summary: This is the location of your dSYMs that you want to upload to Firebase.
+    title: Location of the bitrise dSYMs
+- fdu_logging: "no"
+  opts:
+    category: Debug
+    description: Prints the location of the FirebaseCrashlytics or Fabric, the GoogleService-Info.plist
+      and the location of the dSYMs on the server.
+    summary: Shows additional logging output
+    title: Show additional logging
+    value_options:
+    - "yes"
+    - "no"
