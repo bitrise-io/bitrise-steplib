@@ -1,0 +1,65 @@
+title: Autify Upload
+summary: |
+  Upload a build file to Autify for Mobile.
+description: |
+  [Autify for Mobile](https://autify.com/mobile) is a test automation platform for your native app.
+  This step allows you to upload your app built in the previous steps to Autify.
+
+  You need to build your app first by `Android Build`, `Xcode build for simulator`, etc.
+  and refer the target build path (*.apk or *.app) at `Build path to test` input.
+website: https://github.com/autifyhq/bitrise-step-autify-upload
+source_code_url: https://github.com/autifyhq/bitrise-step-autify-upload
+support_url: https://github.com/autifyhq/bitrise-step-autify-upload/issues
+published_at: 2022-09-29T20:47:23.028758865Z
+source:
+  git: https://github.com/autifyhq/bitrise-step-autify-upload.git
+  commit: f209c48fd9db74c92439a06d47d122c715b82da3
+project_type_tags:
+- ios
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- access_token: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Personal Access Token of Autify for Mobile
+    title: Access token of Autify for Mobile
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Your workspace ID of Autify for Mobile to upload the build
+    title: Workspace ID to upload
+  workspace_id: null
+- build_path: null
+  opts:
+    is_expand: true
+    is_required: true
+    summary: |-
+      The file location of your build file i.e. /path/to/ios.app or /path/to/android.apk.
+      Typically, it's `$BITRISE_APP_DIR_PATH` for `Xcode build for simulator` step or `$BITRISE_APK_PATH` for `Android build` step.
+    title: Build path to upload
+- autify_path: autify
+  opts:
+    is_expand: true
+    title: A path to Autify CLI
+- autify_cli_installer_url: https://autify-cli-assets.s3.amazonaws.com/autify-cli/channels/stable/install-cicd.bash
+  opts:
+    is_expand: true
+    title: Autify CLI installer URL
+outputs:
+- AUTIFY_BUILD_ID: null
+  opts:
+    title: Uploaded build id on Autify for Mobile
+- AUTIFY_UPLOAD_EXIT_CODE: null
+  opts:
+    title: Exit code of the step

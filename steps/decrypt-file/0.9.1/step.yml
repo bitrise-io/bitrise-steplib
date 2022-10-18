@@ -1,0 +1,67 @@
+title: Decrypt file
+summary: This Step decrypts a file encrypted with `gpg`, using the default AES128
+  symmetric cypher.
+description: |
+  The Step decrypts a file encrypted with `gpg`. This can be helpful if you would like to store an encrypted file in your repository, like a `google-services.json` file used to authenticate your project. Using this Step, you can decrypt that file and use it in your Workflow.
+
+  To create an encrypted file with `gpg`:
+  1. Create a secure passphrase of at least 32 alphanumeric characters: `pwgen -s 32 1`
+  2. Encrypt the file; in this example, the file is called `my_secret.txt`: `gpg -c my_secret.txt`
+
+  For more information, check out our guide on [Using encrypted files in your builds](https://devcenter.bitrise.io/en/builds/managing-build-files/using-encrypted-files-in-your-builds.html).
+
+  ### Configuring the Step
+
+  1. Add the generated passphrase as a **Secret to the Passphrase for file decryption** input.
+  1. Specify the location of the encrypted file in the **Encrypted file path** input.
+  1. Specify the location where you would like to place the decrypted file in the **Output (decrypted) file path** input.
+
+  ### Useful links
+
+  * [Using encrypted files in your builds](https://devcenter.bitrise.io/en/builds/managing-build-files/using-encrypted-files-in-your-builds.html#ot-lst-cnt)
+  * [Bitrise Blog: New step available - Decrypt file](https://blog.bitrise.io/post/new-step-available-decrypt-file)
+  * [Encrypting and decrypting documents](https://www.gnupg.org/gph/en/manual/x110.html)
+website: https://github.com/bitrise-steplib/bitrise-step-decrypt-file
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-decrypt-file
+support_url: https://github.com/bitrise-steplib/bitrise-step-decrypt-file/issues
+published_at: 2022-08-09T10:21:16.75842151Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-decrypt-file.git
+  commit: 1bd58c09d170d546bcf69682c713d49d46a74be9
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-decrypt-file
+deps:
+  brew:
+  - name: gpg
+  apt_get:
+  - name: gpg
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- decrypt_passphrase: null
+  opts:
+    description: |
+      The passphrase is used as a parameter for gpg.
+    is_required: true
+    is_sensitive: true
+    title: Passphrase for file decryption
+- encrypted_file_path: null
+  opts:
+    description: |
+      File path to encrypted (input) file, to be decrypted.
+    is_required: true
+    title: Path to the encrypted input file
+- opts:
+    description: "The decrypted file will be placed at this path. If there already
+      exists a file at this location, it will be removed first. \n"
+    is_required: true
+    title: Output (decrypted) file path
+  output_file_path: null
