@@ -9,7 +9,7 @@ support_url: https://github.com/repeato-qa/bitrise-repeato-cli-step/issues
 published_at: 2022-10-19T02:04:13.435289+05:00
 source:
   git: https://github.com/repeato-qa/bitrise-repeato-cli-step.git
-  commit: 55f89802bbaf216d0b911256deb586a8931523a3
+  commit: 57a7c0bf5a8cd933c2a005ede9a5d1172592f57c
 type_tags:
 - test
 toolkit:
