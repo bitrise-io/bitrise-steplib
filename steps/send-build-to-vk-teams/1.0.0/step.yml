@@ -1,0 +1,69 @@
+title: Send build to Vk Teams
+summary: |
+  Send a [VK Teams](https://myteam.mail.ru/) message to a channel or group.
+description: "Send a [VK Teams](https://myteam.mail.ru/) message to a channel or group.
+  You can:\n\n- Set a different text for failed and successful builds.\n- Linkify
+  channel names and usernames.\n\n### Configuring the Step\n\nTo use this Step, you
+  need to create an VK Teams bot and get his [API token](https://myteam.mail.ru/botapi/tutorial/)\n\nOnce
+  you're ready with those, come back to Bitrise and configure the Step itself.\n\n
+  \ 1. Create a [Secret Env Var](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/)
+  for your VK Teams API token.\n  2. Add the Secret to the **VK Teams API token**
+  input.\n  3. Toggle the **Run if previous Step failed** option on - you should see
+  a white checkmark on green background next to it. This allows VK Teams messages
+  to be sent for failed builds, too.\n  4. In the **Target VK Teams channel, group
+  or username**, set where the VK Teams message should be sent. \n  5. Customize your
+  messages as you'd like. For the details, see the respective inputs."
+website: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams
+source_code_url: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams
+support_url: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams/issues
+published_at: 2022-10-31T01:07:33.571336925+04:00
+source:
+  git: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams.git
+  commit: bb1b750428f32a942b88bb197bfbfca404612d9f
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: github.com/dzemmarat/bitrise-step-send-build-to-vk-teams
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+inputs:
+- bot_token: $BOT_TOKEN
+  opts:
+    description: |
+      Token for your bot
+    is_required: true
+    is_sensitive: true
+    title: Bot Token
+- chat_id: $CHAT_ID
+  opts:
+    description: |
+      Id of your chat
+    is_required: true
+    is_sensitive: true
+    title: Chat id
+- commit_message: Commit message
+  opts:
+    description: |
+      Commit message
+    is_required: true
+    title: Commit message
+- commit_author: Commit author
+  opts:
+    description: |
+      Commit author
+    is_required: true
+    title: Commit author
+- app_version: 1.0.0
+  opts:
+    description: |
+      App version
+    is_required: true
+    title: Version of App
+- file_url: File url
+  opts:
+    description: |
+      File url
+    is_required: true
+    title: File url
