@@ -1,0 +1,57 @@
+title: Repeato Test Runner
+summary: |
+  Step for executing repeato tests.
+description: |
+  You can execute repeato tests before deploying your app build.
+website: https://github.com/repeato-qa/bitrise-repeato-cli-step.git
+source_code_url: https://github.com/repeato-qa/bitrise-repeato-cli-step.git
+support_url: https://github.com/repeato-qa/bitrise-repeato-cli-step/issues
+published_at: 2022-10-19T02:04:13.435289+05:00
+source:
+  git: https://github.com/repeato-qa/bitrise-repeato-cli-step.git
+  commit: 57a7c0bf5a8cd933c2a005ede9a5d1172592f57c
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: wget
+  apt_get:
+  - name: wget
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    summary: Set the repeato CLI version compatible to your workspace tests.
+    title: Repeato CLI Version
+  repeato_cli_version: latest
+- opts:
+    is_required: true
+    summary: Repeato test runner need workspace path for setting up the workspace
+      before executing batch.
+    title: Workspace Path
+  workspace_path: $BITRISE_SOURCE_DIR
+- batch_id: null
+  opts:
+    is_required: true
+    summary: Provide batch id for the tests execution.
+    title: Repeato Batch ID
+- license_key: null
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: Provide licensse key for the tests execution.
+    title: Repeato License Key
+outputs:
+- REPEATO_REPORT: null
+  opts:
+    summary: Repeato batch report of executed tests.
+    title: Repeato Batch Report Zip File
+- REPEATO_JUNIT_REPORT: null
+  opts:
+    summary: Repeato executed tests report in JUnit XML format.
+    title: Repeato JUnit XML File
