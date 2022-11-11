@@ -6,7 +6,7 @@ description: |
 website: https://github.com/moatazeldebsy/bitrise-step-appium-server
 source_code_url: https://github.com/moatazeldebsy/bitrise-step-appium-server
 support_url: https://github.com/moatazeldebsy/bitrise-step-appium-server/issues
-published_at: 2022-11-11T15:34:25.214057+01:00
+published_at: 2022-11-11T15:37:52.793685+01:00
 source:
   git: https://github.com/moatazeldebsy/bitrise-step-appium-server.git
   commit: 06cee7a3276a99d324c17c092ff04a1c1a0a099b
