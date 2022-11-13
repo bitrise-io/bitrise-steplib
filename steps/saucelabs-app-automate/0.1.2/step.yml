@@ -1,0 +1,49 @@
+title: SauceLabs Mobile App Automate
+summary: |
+  Upload your app and test app to SauceLabs and run Espresso or XCUITest tests with SauceLabs App Automate.
+description: |
+  This step uploads a provided app and test app to SauceLabs and run Espresso or XCUITest tests with SauceLabs App Automate based on your configuration file.
+website: https://github.com/moatazeldebsy/bitrise-step-saucelabs-app-automate
+source_code_url: https://github.com/moatazeldebsy/bitrise-step-saucelabs-app-automate
+support_url: https://github.com/moatazeldebsy/bitrise-step-saucelabs-app-automate/issues
+published_at: 2022-11-13T22:45:28.105558+01:00
+source:
+  git: https://github.com/moatazeldebsy/bitrise-step-saucelabs-app-automate.git
+  commit: 6502ba350fa5ef6e57024a08ac12af841efa89f6
+host_os_tags:
+- ubuntu-16.04
+- osx-10.10
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your username for saucelabs
+    title: SauceLabs username
+  saucelabs_username: null
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your access key for saucelabs
+    title: SauceLabs access key
+  saucelabs_access_key: null
+- opts:
+    description: Specify the SauceLabs YAML config file that you want run ./path/to/{config-file}.yml.
+      Please check https://docs.saucelabs.com/mobile-apps/automated-testing/espresso-xcuitest/
+      , If there is a file the default config file will be .sauce/config.yml
+    is_required: false
+    summary: SauceLabs YAML config file path. The default config file is .sauce/config.yml
+    title: SauceLabs YAML Config Path
+  saucelabs_config_path: .sauce/config.yml
