@@ -1,0 +1,154 @@
+title: Dependency Check
+summary: A wrapper for the OWASP dependency check tool
+description: Statically analyses a codebase and its dependencies for potential security
+  vulnerabilities
+website: https://github.com/alpheroltd/bitrise-step-dependency-check
+source_code_url: https://github.com/alpheroltd/bitrise-step-dependency-check
+support_url: https://github.com/alpheroltd/bitrise-step-dependency-check/issues
+published_at: 2022-11-24T10:16:51.375141+13:00
+source:
+  git: https://github.com/alpheroltd/bitrise-step-dependency-check.git
+  commit: 24c466c0e62c363b2cf6bd2378b5b4656adb51f3
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/alpheroltd/bitrise-step-dependency-check
+deps:
+  brew:
+  - name: dependency-check
+inputs:
+- opts:
+    summary: The name of the project being scanned
+    title: Project Name
+  project_name: null
+- opts:
+    description: Supports [ANT](https://ant.apache.org/manual/dirtasks.html) styled
+      path patterns, eg `/src/**/*.java`
+    is_required: true
+    summary: A path pattern to scan for vulnerabilities
+    title: Scan Path
+  scan_path: .
+- exclude_path: null
+  opts:
+    description: Supports [ANT](https://ant.apache.org/manual/dirtasks.html) styled
+      path patterns, eg `/src/**/*.java`
+    summary: A path pattern to exclude from the scan
+    title: Exclude path
+- opts:
+    summary: A path to any suppression file
+    title: Suppression File
+  suppression_file: null
+- fail_on_cvss: null
+  opts:
+    description: |-
+      Fail if any vulnerability has a CVSS score equal or greater. Value must be between 0 and 10 (inclusively). If empty this behaviour is ignored
+
+      After the analysis completes every identified vulnerabilty will likely have a [CVSS score](https://nvd.nist.gov/vuln-metrics/cvss)
+      This value is a threshold for analysis failure. If a vulnerability is found and is at least the specified then this step will fail.
+
+      Leave this empty if you do not want the step to ever fail.
+    summary: Fail if any vulnerability has a CVSS score equal or greater. Value must
+      be between 0 and 10 (inclusively). If empty this behaviour is ignored
+    title: CVSS score threshold
+- enable_experimetnal_analyzers: "yes"
+  opts:
+    category: Config
+    is_required: true
+    summary: If `yes` the analysis will also use some [experimental analyzers](https://jeremylong.github.io/DependencyCheck/analyzers/index.html)
+    title: Enable Experimental Analyzers
+    value_options:
+    - "yes"
+    - "no"
+- data_path: /tmp/dependancy-check-cache
+  opts:
+    category: Config
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_dont_change_value: true
+    is_expand: true
+    is_required: false
+    summary: A path to where all the downloaded vulnerability databases are stored
+    title: Database path
+- opts:
+    category: Output
+    is_required: true
+    title: A path to write the reports
+  output_path: $BITRISE_DEPLOY_DIR
+- fail_step_if_vulnerability_found: "yes"
+  opts:
+    category: Output
+    summary: If `yes`, this step will fail if the dependency check scan found a vulnerability
+      that is at least the CVSS score threshold. If `no`, this step will pass unless
+      a runtime error occurred.
+    title: Fail step if vulnerabilities are found
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: Output
+    is_required: true
+    summary: A `|` separated list of valid dependancy check report formats. Only accepts
+      `HTML`, `XML`, `CSV`, `JSON`, `JUNIT`, `SARIF` values
+    title: Report formats
+  report_formats: HTML
+- cache_database: "yes"
+  opts:
+    category: Output
+    summary: If `yes`, then the downloaded vulnerability databases will be added to
+      the bitrise cache. Highly recommended to have on
+    title: Cache vulnerabilty databases?
+    value_options:
+    - "yes"
+    - "no"
+- debug: "no"
+  opts:
+    category: Debug
+    summary: If this input is set, the Step will print additional logs for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+- extra_args: null
+  opts:
+    category: Debug
+    description: |-
+      Add any more command line arguments you want to run the tool with from [this list](https://jeremylong.github.io/DependencyCheck/dependency-check-cli/arguments.html).
+      These args are appended to the end but cannot guarantee overriding any behaviour.
+    title: Extra command arguments
+outputs:
+- DEPENDENCY_CHECK_RESULT: null
+  opts:
+    description: "Represents either the pass or fail result of the dependency check
+      tool. \nThe value will be `PASS` if the tool found no vulnerabilities, `FAIL`
+      if one or more were found, or empty if something went wrong. \nThis value can
+      be `FAIL` even if `fail_step_if_vulnerability_found` is set to `no`."
+    summary: A string representing the result of the dependency analysis. Either `PASS`
+      or `FAIL`
+    title: Dependency check result
+- DEPENDENCY_CHECK_HTML_REPORT_PATH: null
+  opts:
+    summary: Path to the generated HTML report
+    title: HTML report
+- DEPENDENCY_CHECK_XML_REPORT_PATH: null
+  opts:
+    summary: Path to the generated XML report
+    title: XML report
+- DEPENDENCY_CHECK_CSV_REPORT_PATH: null
+  opts:
+    summary: Path to the generated CSV report
+    title: CSV report
+- DEPENDENCY_CHECK_JSON_REPORT_PATH: null
+  opts:
+    summary: Path to the generated JSON report
+    title: JSON report
+- DEPENDENCY_CHECK_JUNIT_REPORT_PATH: null
+  opts:
+    summary: Path to the generated JUnit report
+    title: JUnit report
+- DEPENDENCY_CHECK_SARIF_REPORT_PATH: null
+  opts:
+    summary: Path to the generated SARIF report
+    title: SARIF report
