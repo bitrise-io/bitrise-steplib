@@ -1,0 +1,57 @@
+title: google-drive-uploader
+summary: |
+  Uploads apks generated to google drive
+description: |
+  Using the google drive api we can upload apks to a specified google drive folder
+website: https://github.com/FriendlyUser/bitrise-step-google-drive-uploader
+source_code_url: https://github.com/FriendlyUser/bitrise-step-google-drive-uploader
+support_url: https://github.com/FriendlyUser/bitrise-step-google-drive-uploader/issues
+published_at: 2022-11-25T20:30:21.169363-08:00
+source:
+  git: https://github.com/FriendlyUser/bitrise-step-google-drive-uploader.git
+  commit: 4e64883e28d432fc1c1829f3c8ae5e7fe88e4381
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/FriendlyUser/bitrise-step-google-drive-uploader
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+- opts:
+    description: |
+      Path to service account in bitrise, recommended you use generic file storage
+    is_expand: true
+    is_required: true
+    summary: Path to service account in bitrise, recommended you use generic file
+      storage, and download to a specific location, alternatively you can use the
+      env var $BITRISE_GOOGLE_SERVICE_JSON that should know where the service account
+      file is.
+    title: service key to google drive with share access to folder id
+    value_options: []
+  service_key_path: $BITRISE_GOOGLE_SERVICE_JSON
+- folder_id: Folder ID to upload to
+  opts:
+    description: |
+      Folder that is shared with google drive service account
+    is_required: true
+    summary: Folder ID to upload to from google drive
+    title: google drive folder id (can view from the appended url)
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
