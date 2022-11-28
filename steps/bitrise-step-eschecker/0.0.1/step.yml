@@ -61,5 +61,5 @@ inputs:
         Campaign ID in esChecker
       is_required: true
       is_sensitive: false
-      summary: Unique ID of the campaign you want to run in esChecker
+      summary: Unique ID of the campaign you want to run in esChecker, get it from thr web interface
       title: Campaign ID
