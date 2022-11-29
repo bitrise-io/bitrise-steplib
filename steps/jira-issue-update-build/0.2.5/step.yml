@@ -1,0 +1,86 @@
+title: Update JIRA issues with build number
+summary: Update fields of JIRA issues with build number.
+description: "Update fields of JIRA issues associated with current MR/PR, with the
+  current build number.\n\n### How does it work?\n\nFirst, the step needs to know
+  tasks associated with the build, so it examines Git history of the merge that it
+  was triggered by. \nEach merge request can have multiple tasks related to it. So
+  step extracts all the messages of commits involved from the merge commit, \nand
+  it looks for task keys using a predefined format (for example, [ABCD-1234]). Then
+  using JIRA API, it updates custom fields of these tasks with current build number.
+  \n\nAdditionally step can keep ticket history from failed/aborted builds. It uses
+  Bitrise API to gather information about the commits \nfrom all aborted or failed
+  builds preceding the current one.\n\nThe step does not clone git repository by itself,
+  instead it is using the one located at `$BITRISE_SOURCE_DIR`. \nMake sure repository
+  is cloned before using it ([guide](https://devcenter.bitrise.io/en/steps-and-workflows/generic-workflow-recipes/cloning-a-git-repository.html)).\n\n###
+  Useful links\n- [About this step](https://www.holdapp.com/blog/bitrise-tests-made-easier-with-jira-build-step)"
+website: https://github.com/Holdapp/bitrise-step-jira-build
+source_code_url: https://github.com/Holdapp/bitrise-step-jira-build
+support_url: https://github.com/Holdapp/bitrise-step-jira-build/issues
+published_at: 2022-11-29T11:33:52.04197+01:00
+source:
+  git: https://github.com/Holdapp/bitrise-step-jira-build.git
+  commit: a35a437e687635007493e37892eee6f72d1083dc
+type_tags:
+- notification
+deps:
+  brew:
+  - name: pkg-config
+  apt_get:
+  - name: pkg-config
+is_always_run: false
+is_skippable: true
+inputs:
+- app_version: null
+  opts:
+    description: "If you develop an iOS project, you can extract the version number
+      from Info.plist of the main target. It’s called `CFBundleShortVersionString`.
+      \nAlternatively, you may use a custom step that can do it for you: [bitrise-step-xcode-build-version](https://github.com/nodes-ios/bitrise-step-xcode-build-version)"
+    is_required: true
+    summary: App version (for example 1.0.0)
+    title: App version
+- jira_host: null
+  opts:
+    is_required: true
+    summary: Your JIRA instance URL (e.g. https://company.atlassian.net)
+    title: JIRA host
+- jira_custom_field_id: null
+  opts:
+    description: "You can read how to find it [here](https://confluence.atlassian.com/jirakb/how-to-find-id-for-custom-field-s-744522503.html).
+      \nAnd if you don’t have a custom field yet, check out this [guide](https://confluence.atlassian.com/adminjiraserver/adding-a-custom-field-938847222.html)
+      that explains how to create it."
+    is_required: true
+    summary: Custom field id for the build number (integer)
+    title: JIRA Custom Field ID
+- jira_username: null
+  opts:
+    is_required: true
+    summary: User (or bot) username
+    title: JIRA username
+- jira_access_token: null
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: User (or bot) password or API token (you can generate it [here](https://confluence.atlassian.com/cloud/api-tokens-938839638.html)).
+    title: JIRA access token
+- jira_issue_pattern: ([A-Z]{1,10}-[0-9]+)
+  opts:
+    is_required: true
+    summary: A regular expression for matching issue keys in commit messages. For
+      example, ([A-Z]{1,10}-[0-9]+)
+    title: Regex pattern used to identify issue keys from commit messages
+- bitrise_api_token: null
+  opts:
+    is_required: false
+    is_sensitive: true
+    summary: Access token for bitrise.io API, you can find your API token [here](https://discuss.bitrise.io/t/personal-access-tokens-beta/1383)
+    title: Token for bitrise.io API
+- opts:
+    is_expand: true
+    is_required: true
+    summary: If true, existing field content will be overridden. If false, a new version
+      will try to replace the old version in the currently set field content
+    title: Should overwrite content of custom field
+    value_options:
+    - "true"
+    - "false"
+  overwrite_field: "true"
