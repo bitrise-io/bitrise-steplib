@@ -1,4 +1,4 @@
-title: bitrise-snyk-scan
+title: Bitrise Snyk scan
 summary: |
   This is a step to run snyk SAST and dependencies scanning for mobile apps
 description: |
