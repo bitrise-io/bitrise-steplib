@@ -16,7 +16,7 @@ description: "Send a [VK Teams](https://myteam.mail.ru/) message to a channel or
 website: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams
 source_code_url: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams
 support_url: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams/issues
-published_at: 2022-10-31T01:07:33.571336925+04:00
+published_at: 2022-12-08T15:43:33.102534895+04:00
 source:
   git: https://github.com/dzemmarat/bitrise-step-send-build-to-vk-teams.git
   commit: bb1b750428f32a942b88bb197bfbfca404612d9f
