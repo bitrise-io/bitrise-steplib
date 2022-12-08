@@ -21,8 +21,8 @@ inputs:
     is_required: true
     title: Project's OS
     value_options:
-    - ios
-    - android
+    - "ios"
+    - "android"
   os_list: ios
 - opts:
     is_expand: false
@@ -31,9 +31,9 @@ inputs:
       code'
     title: Severity threshold
     value_options:
-    - low
-    - medium
-    - high
+    - "low"
+    - "medium"
+    - "high"
   severity_threshold: low
 - opts:
     is_expand: false
@@ -54,5 +54,5 @@ inputs:
     is_required: false
     title: Project is using javascript
     value_options:
-    - true
-    - false
+    - "true"
+    - "false"
