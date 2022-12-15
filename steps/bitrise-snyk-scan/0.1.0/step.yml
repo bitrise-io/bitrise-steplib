@@ -9,7 +9,7 @@ support_url: https://github.com/Zegocover/bitrise-snyk-scan/issues
 published_at: 2022-11-15T12:27:15.382324Z
 source:
   git: https://github.com/Zegocover/bitrise-snyk-scan.git
-  commit: 8179d54e4a0008effcdde2cae4156dc0b0620d84
+  commit: de3b281aea40136b79b0b04260d4d5b0f66ca8b3
 type_tags:
 - test
 is_always_run: true
