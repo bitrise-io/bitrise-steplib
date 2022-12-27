@@ -6,10 +6,10 @@ description: |
 website: https://github.com/tuist/bitrise-step-tuist
 source_code_url: https://github.com/tuist/bitrise-step-tuist
 support_url: https://github.com/tuist/bitrise-step-tuist/issues
-published_at: 2022-12-24T11:20:38.920791+01:00
+published_at: 2022-12-27T09:28:59.073185+01:00
 source:
   git: https://github.com/tuist/bitrise-step-tuist.git
-  commit: 70c07d42370ea9ec6c19a0c1aa5a5f3cb9c1c4a5
+  commit: d5f672b0870dfaa7ee4cf4d5625b809262e6f6cd
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -23,11 +23,9 @@ toolkit:
     entry_file: step.sh
 deps:
   brew:
-  - name: git
-  - name: wget
+  - name: curl
   apt_get:
-  - name: git
-  - name: wget
+  - name: curl
 is_requires_admin_user: true
 is_always_run: false
 is_skippable: false
