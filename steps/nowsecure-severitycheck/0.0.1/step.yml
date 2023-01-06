@@ -1,0 +1,43 @@
+title: |
+  NowSecure_SeverityCheck
+summary: |
+  Checking Severity of Critical/High/Medium issues in app bundle
+description: |
+  Step Checking the Critical/High/Medium Severity issues in app bundle and stop the build if any severity occurs.
+website: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck
+source_code_url: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck
+support_url: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck
+published_at: 2023-01-06T18:12:39.82797696+05:30
+source:
+  git: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck.git
+  commit: 850e0040dfc4310b1aeb04d0233ebd66017f1b0d
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- nowsecure_api_token: null
+  opts:
+    description: |
+      NowSecure token generated from NowSecure Platform console
+    is_required: true
+    is_sensitive: true
+    summary: Your NowSecure Platform API token
+    title: NowSecure Platform API token
+- opts:
+    description: |
+      The platform associated with application. Allowed values- "ios", "android"
+    is_required: true
+    is_sensitive: true
+    summary: The platform associated with application. Allowed values- "ios", "android"
+    title: Application Platform
+  platform: null
+- opts:
+    description: |
+      The package/bundle identifier for the application. Start with "com.cargill.******"
+    is_required: true
+    is_sensitive: true
+    summary: The package identifier for application
+    title: Application Package/Bundle Identifier
+  package: null
