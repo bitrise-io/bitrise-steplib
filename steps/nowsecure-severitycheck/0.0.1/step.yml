@@ -7,7 +7,7 @@ description: |
 website: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck
 source_code_url: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck
 support_url: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck
-published_at: 2023-01-06T18:12:39.82797696+05:30
+published_at: 2023-01-06T18:43:58.580239862+05:30
 source:
   git: https://github.com/mhidaya90/bitrise-step-nowsecure-severitycheck.git
   commit: 850e0040dfc4310b1aeb04d0233ebd66017f1b0d
