@@ -9,7 +9,7 @@ support_url: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload
 published_at: 2023-01-25T22:06:55.504814+04:00
 source:
   git: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload.git
-  commit: e418f3fa9c658168265c971e3064d95bea7e6cff
+  commit: 89ca79c54c7bf8c4ea52eb4474175cdf3c6842bc
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
@@ -115,7 +115,7 @@ inputs:
     summary: Exclude flows from running with the specified tags (comma separated)
       i.e pull-request,experimental
     title: Exclude tags
-- export_format: "false"
+- export_test_report: "false"
   opts:
     description: ""
     is_required: false
