@@ -4,10 +4,10 @@ At the moment contributors do not have access to the CI workflow triggered by St
 
 ### New Pull Request Checklist
 
-_Please mark the points which you did / accept._
+*Please mark the points which you did / accept.*
 
-- [x] **I will not move an already shared step version's tag to another commit**
-- [x] I read the [Step Development Guideline](https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md)
-- [x] I have a test for my Step, which can be run with `bitrise run test` (in the step's repository)
-- [x] I did run `bitrise run audit-this-step` (in the step's repository - note, if you don't have this workflow in your `bitrise.yml`, [you can copy it from the step template](https://github.com/bitrise-steplib/step-template/blob/master/bitrise.yml).)
-- [x] I read and accept the [Abandoned Step policy](https://github.com/bitrise-io/bitrise-steplib#abandoned-step-policy)
+- [ ] __I will not move an already shared step version's tag to another commit__
+- [ ] I read the [Step Development Guideline](https://github.com/bitrise-io/bitrise/blob/master/_docs/step-development-guideline.md)
+- [ ] I have a test for my Step, which can be run with `bitrise run test` (in the step's repository)
+- [ ] I did run `bitrise run audit-this-step` (in the step's repository - note, if you don't have this workflow in your `bitrise.yml`, [you can copy it from the step template](https://github.com/bitrise-steplib/step-template/blob/master/bitrise.yml).)
+- [ ] I read and accept the [Abandoned Step policy](https://github.com/bitrise-io/bitrise-steplib#abandoned-step-policy)
