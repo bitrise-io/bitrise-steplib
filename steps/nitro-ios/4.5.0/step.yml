@@ -1,0 +1,308 @@
+title: Nitro for iOS
+summary: |
+  Build your React Native app faster than ever with Nitro
+description: |
+  This step builds your React Native app for iOS using [Nitro](https://nitro.build). Get your **API key** on our [website](https://nitro.build).
+website: https://github.com/nitro-build/bitrise-step-nitro-ios
+source_code_url: https://github.com/nitro-build/bitrise-step-nitro-ios
+support_url: https://github.com/nitro-build/bitrise-step-nitro-ios/issues
+published_at: 2023-01-31T15:54:07.13303-03:00
+source:
+  git: https://github.com/nitro-build/bitrise-step-nitro-ios.git
+  commit: ff2c610dd47e61c1a0ff56ea22c7ba879ef00e44
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- react-native
+type_tags:
+- build
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: wget
+  - name: pigz
+  - name: gnu-sed
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    summary: The directory within your project, in which your code is located. Leave
+      this field empty if your code is not located in a subdirectory
+    title: Root directory
+  root_directory: ./
+- opts:
+    is_expand: true
+    summary: The name of the iOS scheme
+    title: The name of the iOS scheme
+  scheme: null
+- opts:
+    is_expand: true
+    summary: The path relative to project root directory where the custom `.xcconfig`
+      file is located
+    title: Path to a custom xcconfig file
+  xcconfig_path: null
+- opts:
+    category: App Versioning
+    is_expand: true
+    summary: The version name for the app
+    title: Version name
+  version_name: null
+- opts:
+    category: App Versioning
+    is_expand: true
+    summary: The version code for the app
+    title: Version code
+  version_code: null
+- disable_version_name_from_package_json: "no"
+  opts:
+    category: App Versioning
+    is_expand: true
+    summary: By default will get the 'version' field from package.json and set the
+      version name
+    title: Disable automatic version name configuration
+    value_options:
+    - "yes"
+    - "no"
+- disable_version_code_auto_generation: "no"
+  opts:
+    category: App Versioning
+    is_expand: true
+    summary: By default will generate a timestamp based number and set the version
+      code
+    title: Disable automatic version code generation
+    value_options:
+    - "yes"
+    - "no"
+- certificate_url: null
+  opts:
+    category: App Signing
+    is_expand: true
+    summary: The url to download and install the certificate
+    title: Certificate url
+- certificate_passphrase: null
+  opts:
+    category: App Signing
+    is_expand: true
+    is_sensitive: true
+    summary: Certificate passphrase
+    title: Certificate passphrase
+- codesigning_identity: null
+  opts:
+    category: App Signing
+    is_expand: true
+    summary: Codesigning identity
+    title: Codesigning identity
+- opts:
+    category: App Signing
+    is_expand: true
+    summary: A string containing a '|' separated values where provisioning profiles
+      are located e.g. url1|url2|url3
+    title: Provisioning profile urls
+  provisioning_profile_urls: null
+- opts:
+    category: App Signing
+    is_expand: true
+    summary: The name of the provisioning profile when using a single one
+    title: Provisioning profile specifier
+  provisioning_profile_specifier: null
+- opts:
+    category: App Signing
+    is_expand: true
+    summary: Specify the Team ID you want to use for the Apple Developer Portal
+    title: Team ID
+  team_id: null
+- export_method: ad-hoc
+  opts:
+    category: App Signing
+    is_expand: true
+    summary: The export method used to generate the IPA
+    title: Export Method
+    value_options:
+    - ad-hoc
+    - app-store
+- cache_provider: s3
+  opts:
+    category: Caching
+    description: |-
+      Choose the provider where cache artifacts will be persisted:
+      - `fs`: File system
+      - `s3`: Amazon - Simple Storage Service
+    is_expand: true
+    summary: Choose the provider where cache artifacts will be persisted
+    title: Cache provider
+    value_options:
+    - fs
+    - s3
+- disable_cache: $NITRO_DISABLE_CACHE
+  opts:
+    category: Caching
+    is_expand: true
+    summary: When setting this option to `yes` build cache optimizations won't be
+      performed
+    title: Disable builds caching
+    value_options:
+    - "yes"
+    - "no"
+- cache_env_var_lookup_keys: null
+  opts:
+    category: Caching
+    description: A list of `|` separated values with env variable keys to lookup to
+      determine whether the build should be cached or not
+    is_expand: true
+    summary: A list of `|` separated values with env variable keys to lookup to determine
+      whether the build should be cached or not
+    title: List of env var keys for lookup to determine cache fingerprint
+- cache_file_lookup_paths: null
+  opts:
+    category: Caching
+    description: A list of `|` separated value paths (relative to the root of the
+      repo or absolute) to lookup in order to determine whether the build should be
+      cached or not
+    is_expand: true
+    summary: A list of `|` separated value paths (relative to the root of the repo
+      or absolute) to lookup in order to determine whether the build should be cached
+      or not
+    title: List of files for lookup to determine cache fingerprint
+- disable_metro_cache: $NITRO_DISABLE_METRO_CACHE
+  opts:
+    category: Caching
+    description: Setting this field to yes will disable the React Native Metro cache
+      feature
+    is_expand: true
+    summary: Setting this field to `yes` will disable the React Native Metro cache
+      feature
+    title: Disable Metro bundler cache
+- aws_s3_access_key_id: $NITRO_AWS_S3_ACCESS_KEY_ID
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS access key ID for S3 bucket build caching
+    title: AWS S3 access key ID
+- aws_s3_secret_access_key: $NITRO_AWS_S3_SECRET_ACCESS_KEY
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS secret access key for S3 bucket build caching
+    title: AWS S3 secret access key
+- aws_s3_region: $NITRO_AWS_S3_REGION
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS region where S3 bucket for build caching is located
+    title: AWS S3 region
+- aws_s3_bucket: $NITRO_AWS_S3_BUCKET
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS bucket name for S3 bucket build caching
+    title: AWS S3 bucket name
+- opts:
+    category: Hooks
+    description: Run command prior to install project dependencies (e.g. `rm -rf ./some-folder`)
+    is_expand: true
+    summary: Run command prior to install project dependencies (e.g. `rm -rf ./some-folder`)
+    title: Pre install command
+  pre_install_command: null
+- opts:
+    category: Hooks
+    description: Run command prior to start building the app (e.g. `yarn tsc && yarn
+      test`)
+    is_expand: true
+    summary: Run command prior to start building the app (e.g. `yarn tsc && yarn test`)
+    title: Pre build command
+  pre_build_command: null
+- opts:
+    category: Hooks
+    description: Run command once build successfully finished (e.g. `yarn publish`)
+    is_expand: true
+    summary: Run command once build successfully finished (e.g. `yarn publish`)
+    title: Post build command
+  post_build_command: null
+- detox_configuration: null
+  opts:
+    category: Advanced
+    is_expand: true
+    summary: Select a device configuration from your defined configurations.
+    title: Detox configuration
+- opts:
+    category: Advanced
+    is_expand: true
+    summary: The path to the directory where to place all of Nitro's output files
+    title: Output directory
+  output_directory: $BITRISE_DEPLOY_DIR
+- entry_file: $ENTRY_FILE
+  opts:
+    category: Advanced
+    is_expand: true
+    summary: The entry file for bundle generation
+    title: The entry file for bundle generation
+- opts:
+    category: Advanced
+    description: Enable verbose logs
+    summary: Enable verbose logs
+    title: Verbose logs
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+- debug: "no"
+  opts:
+    category: Advanced
+    description: Enable step debugging
+    summary: Enable step debugging
+    title: Debug step
+    value_options:
+    - "yes"
+    - "no"
+- fail_safe: $NITRO_FAIL_SAFE
+  opts:
+    category: Advanced
+    is_expand: true
+    summary: Runing the app in this mode allows you to prevent the build to fail but
+      you can check the status in further steps
+    title: Fail-safe mode
+- api_key: $NITRO_API_KEY
+  opts:
+    is_expand: true
+    is_sensitive: true
+    summary: The API key provided by Nitro. It should be defined by setting NITRO_API_KEY
+      secret.
+    title: Nitro API key
+outputs:
+- NITRO_BUILD_STATUS: null
+  opts:
+    description: The status of the latest build (success / failure)
+    summary: The status of the latest build (success / failure)
+    title: Build status
+- NITRO_OUTPUT_DIR: null
+  opts:
+    description: The path to the directory where to place all of Nitro's output files
+    summary: The path to the directory where to place all of Nitro's output files
+    title: Output directory
+- NITRO_LOGS_PATH: null
+  opts:
+    description: The full path to access the build log
+    summary: The full path to access the build log
+    title: Build log location
+- NITRO_SUMMARY_PATH: null
+  opts:
+    description: The full path to access the build summary report
+    summary: The full path to access the build summary report
+    title: Summary location
+- NITRO_APP_PATH: null
+  opts:
+    description: The full path to access the iOS package (.app or .ipa)
+    summary: The full path to access the iOS package (.app or .ipa)
+    title: Build application package location
+- NITRO_DEPLOY_PATH: null
+  opts:
+    description: The full path to access the iOS package (.app or .ipa)
+    summary: The full path to access the iOS package (.app or .ipa)
+    title: Build application package location
