@@ -15,7 +15,6 @@ host_os_tags:
 - ubuntu-16.04
 project_type_tags:
 - android
-- xamarin
 - react-native
 - cordova
 - ionic
