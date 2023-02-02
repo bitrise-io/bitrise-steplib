@@ -1,6 +1,6 @@
 title: Genymotion SaaS install gmsaas cli
 summary: |
-  Install gmsaas,  command line interface to rule all your virtual devices hosted in Genymotion SaaS solution.
+  Install gmsaas, a command line interface to rule all your virtual devices hosted in Genymotion SaaS solution.
 description: |
   This step installs gmsaas cli, it allaows user to rule all your virtual devices hosted in Genymotion SaaS solution without opening an Internet browser.
 website: https://github.com/thomascarpentier/bitrise-step-genymotion-saas-install-gmsaas-cli
