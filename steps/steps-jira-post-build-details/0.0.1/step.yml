@@ -1,0 +1,57 @@
+title: Post Jira Comment
+summary: Post comment to a Jira issue using specific api version.
+description: |
+  The Step adds a comment to a Jira issue. Using this Step, you can attach your build parameters to a Jira issue, or you can add any comment using Markdown.
+website: https://gitlab.com/rudnicst/steps-post-jira-comment-with-build-detail
+source_code_url: https://gitlab.com/rudnicst/steps-post-jira-comment-with-build-detail.git
+support_url: https://gitlab.com/rudnicst/steps-post-jira-comment-with-build-detail/issues
+published_at: 2023-03-09T16:58:41.632107+01:00
+source:
+  git: https://gitlab.com/rudnicst/steps-post-jira-comment-with-build-detail.git
+  commit: 43876f2fd347c1640a4772fc571efd249e1e6ca5
+type_tags:
+- notification
+toolkit:
+  go:
+    package_name: gitlab.com/rudnicst/steps-post-jira-comment-with-build-detail
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- api_token: null
+  opts:
+    description: API token generated on Jira.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: API token generated on Jira.
+    title: Jira API token
+- issue_keys: null
+  opts:
+    description: Jira issue keys separated with `|`
+    is_required: true
+    summary: Jira issue keys separated with `|`
+    title: Jira issue keys
+- base_url: null
+  opts:
+    description: URL of the personal Jira software.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: URL of the personal Jira software.
+    title: Jira base URL
+- build_message: |
+    *$BITRISE_APP_TITLE* build *$BITRISE_BUILD_NUMBER* is now available: [Download|$BITRISE_PUBLIC_INSTALL_PAGE_URL]
+    ||Build number|$BITRISE_BUILD_NUMBER|
+    ||Author|$GIT_CLONE_COMMIT_AUTHOR_NAME|
+    ||Branch|$BITRISE_GIT_BRANCH|
+    ||Commit hash|$GIT_CLONE_COMMIT_HASH|
+    ||Commit message|$GIT_CLONE_COMMIT_MESSAGE_SUBJECT|
+
+    [Show build details|$BITRISE_BUILD_URL]
+  opts:
+    description: The content of the build message that will be posted. You can use
+      markdown. Details [here|https://jira.atlassian.com/secure/WikiRendererHelpAction.jspa?section=all]
+    is_required: true
+    summary: The content of the build message that will be posted
+    title: Build message
