@@ -1,0 +1,48 @@
+title: Appdome Build
+summary: |
+  Builds a mobile app using Appdome's platform
+description: |
+  Integration that allows activating security and app protection features, bulding and signing mobile apps using Appdome's API.
+website: https://github.com/Appdome/bitrise_build-2secure-android
+source_code_url: https://github.com/Appdome/bitrise_build-2secure-android
+support_url: https://github.com/Appdome/bitrise_build-2secure-ios/issues
+published_at: 2023-03-30T16:12:33.787476+03:00
+source:
+  git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android.git
+  commit: 279af4be545d98796961ae0760a0353f2e395aba
+project_type_tags:
+- android
+type_tags:
+- build
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- app_location: $APP_LOCATION
+  opts:
+    is_required: true
+    summary: URL to app file
+    title: App file URL
+- fusion_set_id: null
+  opts:
+    is_required: true
+    title: Fusion set ID
+- opts:
+    is_required: false
+    title: Team ID
+  team_id: null
+- opts:
+    description: App signing method
+    is_required: true
+    title: Signing Method
+    value_options:
+    - On-Appdome
+    - Private-Signing
+    - Auto-Dev-Signing
+  sign_method: On-Appdome
+- app_signing_cert: null
+  opts:
+    description: Google Play signing SHA-1/SHA256 fingerprint (will be used if provided)
+    is_required: false
+    title: GooglePlay Signing Fingerprint
