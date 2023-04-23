@@ -1,0 +1,52 @@
+title: Appdome-Build-2Secure step for Android
+summary: |
+  Builds a mobile app using Appdome's platform
+description: |
+  Integration that allows activating security and app protection features, bulding and signing mobile apps using Appdome's API. For detailes see: https://www.appdome.com/how-to/appsec-release-orchestration/mobile-appsec-cicd/use-appdome-build-2secure-step-for-bitrise
+website: https://github.com/Appdome/bitrise_build-2secure-android
+source_code_url: https://github.com/Appdome/bitrise_build-2secure-android
+support_url: https://github.com/Appdome/bitrise_build-2secure-android/issues
+published_at: 2023-04-23T11:02:49.138915+03:00
+source:
+  git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android.git
+  commit: 09b86c4ddacf9efe6200e2b46fccd34d9ec9d058
+project_type_tags:
+- android
+type_tags:
+- build
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- app_location: null
+  opts:
+    is_required: true
+    summary: URL to app file
+    title: App file URL
+- fusion_set_id: null
+  opts:
+    is_required: true
+    title: Fusion set ID
+- opts:
+    is_required: false
+    title: Team ID
+  team_id: null
+- opts:
+    description: App signing method
+    is_required: true
+    title: Signing Method
+    value_options:
+    - On-Appdome
+    - Private-Signing
+    - Auto-Dev-Signing
+  sign_method: On-Appdome
+- gp_signing: "true"
+  opts:
+    description: Sign the app for Google Play? If 'true', requires $SIGN_FINGERPRINT
+      in the Secrets tab.
+    is_required: true
+    title: Google Play Signing?
+    value_options:
+    - "true"
+    - "false"
