@@ -1,0 +1,59 @@
+title: Authenticate host with netrc
+summary: Adds your authentication configuration to the `.netrc` file.
+description: |-
+  [This Step](https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc) adds the authentication configuration (host name, login name and password string) to the `.netrc` file .
+  The Step lets you store your remote credentials on the build VM once so that later steps can use the credentials for authentication instead of requiring manual input. Examples include HTTPS git clone URLs with OAuth token-based authentication (instead of authenticating with SSH key).
+  Please note that if you already have a `.netrc` file, the Step will create a backup of the original, and appends the configs to the current one.
+
+  ### Configuring the Step
+  1.Add the **Host** name, where the username and password will be used, for example, github.com.
+  2.Add the **Username**.
+  3.Add the password or the authentication token/ access token in the respective field which will be used by the host to authenticate you.
+
+  ### Useful links
+  - [Learn more what the .netrc file format comprises of](https://everything.curl.dev/usingcurl/netrc#the-netrc-file-format)
+
+  ### Related Steps
+  - [Activate SSH key (RSA private key)](https://www.bitrise.io/integrations/steps/activate-ssh-key)
+  - [Connect to OpenVPN Server](https://www.bitrise.io/integrations/steps/flutter-installer)
+website: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc
+source_code_url: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc
+support_url: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc/issues
+published_at: 2023-02-16T10:56:27.535947167Z
+source:
+  git: https://github.com/bitrise-steplib/steps-authenticate-host-with-netrc.git
+  commit: 8cb845d52e28737766ca0fdf9e7d512ac1d25812
+type_tags:
+- access-control
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-authenticate-host-with-netrc
+deps:
+  brew:
+  - name: go
+  apt_get:
+  - name: golang
+    bin_name: go
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- host: null
+  opts:
+    description: |-
+      The host where the username and password will be used.
+      For example: github.com
+    is_required: true
+    title: Host
+- opts:
+    description: The username used for the host to authenticate.
+    is_required: true
+    is_sensitive: true
+    title: Username
+  username: null
+- opts:
+    description: The password (or Auth Token/Access Token) used for the host to authenticate.
+    is_required: true
+    is_sensitive: true
+    title: Password/Auth Token/Access Token
+  password: null
