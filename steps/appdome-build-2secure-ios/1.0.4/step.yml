@@ -1,0 +1,48 @@
+title: Appdome-Build-2Secure for iOS
+summary: |
+  Builds an iOS mobile app using Appdome's platform
+description: |
+  Integration that allows activating security and app protection features, building and signing mobile apps using Appdome's API. For details see: https://www.appdome.com/how-to/appsec-release-orchestration/mobile-appsec-cicd/use-appdome-build-2secure-step-for-bitrise
+website: https://github.com/Appdome/bitrise_build-2secure-ios
+source_code_url: https://github.com/Appdome/bitrise_build-2secure-ios
+support_url: https://github.com/Appdome/bitrise_build-2secure-ios/issues
+published_at: 2023-05-08T16:10:15.534648+03:00
+source:
+  git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios.git
+  commit: 1c38e639044694065f0ddc96f6177a9dfd0a66ed
+project_type_tags:
+- ios
+type_tags:
+- build
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- app_location: $BITRISE_IPA_PATH
+  opts:
+    is_required: true
+    summary: URL to app file
+    title: App file URL
+- fusion_set_id: null
+  opts:
+    is_required: true
+    title: Fusion set ID
+- opts:
+    is_required: false
+    title: Team ID
+  team_id: null
+- opts:
+    description: App signing method
+    is_required: true
+    title: Signing Method
+    value_options:
+    - On-Appdome
+    - Private-Signing
+    - Auto-Dev-Signing
+  sign_method: On-Appdome
+- entitlements: null
+  opts:
+    description: iOS Entitlement EnvVar/s (separated by space)
+    is_required: true
+    title: iOS Entitlement EnvVar/s
