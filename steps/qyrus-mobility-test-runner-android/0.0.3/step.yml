@@ -5,13 +5,13 @@ description: "This step uploads a provided app apk/ipa to Qyrus. It then will ex
   designed to test Web, Mobile and APIs for all digital enterprises. With its codeless
   approach to testing Web, Mobile & APIs, Qyrus is the fastest way to start the journey
   of automated testing for your enterprise.\n"
-website: https://github.com/qyrusai/bitrise-step-qyrus-mobility-test-runner-android
-source_code_url: https://github.com/qyrusai/bitrise-step-qyrus-mobility-test-runner-android
-support_url: https://github.com/qyrusai/bitrise-step-qyrus-mobility-test-runner-android/issues
-published_at: 2023-06-22T15:14:46.747259+05:30
+website: https://github.com/QQyrus/bitrise-step-qyrus-mobility-test-runner-android
+source_code_url: https://github.com/QQyrus/bitrise-step-qyrus-mobility-test-runner-android
+support_url: https://github.com/QQyrus/bitrise-step-qyrus-mobility-test-runner-android/issues
+published_at: 2023-06-22T15:22:06.954122+05:30
 source:
   git: https://github.com/QQyrus/bitrise-step-qyrus-mobility-test-runner-android.git
-  commit: dcb5ac5fa79fbe2a86cae67a13f535b883e8d49d
+  commit: 5e0c190ecef66ba67be8c12f3392cb499771e3cd
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
