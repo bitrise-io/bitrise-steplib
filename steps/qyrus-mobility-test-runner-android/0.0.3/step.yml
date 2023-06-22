@@ -8,7 +8,7 @@ description: "This step uploads a provided app apk/ipa to Qyrus. It then will ex
 website: https://github.com/qyrusai/bitrise-step-qyrus-mobility-test-runner-android
 source_code_url: https://github.com/qyrusai/bitrise-step-qyrus-mobility-test-runner-android
 support_url: https://github.com/qyrusai/bitrise-step-qyrus-mobility-test-runner-android/issues
-published_at: 2023-06-22T15:07:41.530691+05:30
+published_at: 2023-06-22T15:14:46.747259+05:30
 source:
   git: https://github.com/QQyrus/bitrise-step-qyrus-mobility-test-runner-android.git
   commit: dcb5ac5fa79fbe2a86cae67a13f535b883e8d49d
