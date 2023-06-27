@@ -1,0 +1,61 @@
+title: Run tests using Marathon Cloud
+summary: |
+  Run all your automated tests in just 15 minutes, no matter how many tests you have
+description: |
+  With this action you can easily run your Android instrumentation or iOS tests. Marathon Cloud is designed to run all your automated tests in just 15 minutes, no matter how many tests you have.
+website: https://marathonlabs.io
+source_code_url: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud
+support_url: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud/issues
+published_at: 2023-06-27T12:45:44+04:00
+source:
+  git: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud.git
+  commit: ed0dd7a013f0b4bd3f51e0e4bfe64148c344b96b
+project_type_tags:
+  - android
+  - ios
+type_tags:
+  - test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: malinskiy/tap/marathon-cloud
+inputs:
+  - application: ""
+    opts:
+      title: App File
+      summary: Application binary path, e.g. apk file for Android or zip file of iOS Application
+      description: |
+        **Android**: `application` should point to the APK file. **iOS**: `application` should point to an ARM compatible Simulator build packaged in an ipa format or a zip archive.
+      is_expand: true
+      is_required: true
+  - test_application: ""
+    opts:
+      title: Test App File
+      summary: Test application binary path, e.g. apk file for Android or zip file of iOS Test Runner app
+      description: |
+        **Android**: `test_application` should point to the test .apk file for your app. **iOS**: `test_application` should point to an ARM compatible iOS Test Runner app packaged in an ipa format or a zip archive.
+      is_expand: true
+      is_required: true
+  - platform: ""
+    opts:
+      title: Testing platform
+      summary: Testing platform. Android or iOS only
+      description: ""
+      is_expand: true
+      is_required: true
+  - api_key:
+    opts:
+      title: Marathon Cloud API key
+      summary: API key for authenticating with Marathon Cloud
+      description: ""
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - docker_image: marathonlabs/marathon-cloud:latest
+    opts:
+      title: Docker image to use for running marathon-cloud cli on Linux hosts
+      summary: You can specify your own custom image with a Docker Registry proxy here
+      description: ""
+      is_required: false
