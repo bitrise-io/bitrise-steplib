@@ -6,10 +6,10 @@ description: |
 website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
 source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
 support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios/issues
-published_at: 2023-07-03T16:12:39.416677+03:00
+published_at: 2023-07-03T16:23:22.879842+03:00
 source:
   git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios.git
-  commit: 7363fae4635a1a46434d1bc1f5a1683f8a53415c
+  commit: 57be09e81f55963bae0557e1af42512a34374b2b
 project_type_tags:
 - ios
 type_tags:
@@ -46,12 +46,23 @@ inputs:
     - Private-Signing
     - Auto-Dev-Signing
   sign_method: On-Appdome
-- opts:
-    description: Which provisioning profile file name/s from the uploaded provisioning
-      profiles to use. If not provided, all provisioning profiles uploaded to 'Code
-      Signing & Files' section will be used.
+- certificate_file: null
+  opts:
+    description: Code signing cetificate file name (from the uploaded code signing
+      certificates) to use. If not provided, the LAST certificate among the uploaded
+      files to 'Code Signing & Files' section will be used. If you don't know the
+      file name of the certificate you want to use, download the certificate from
+      the Code Signing & Files section to your computer and type here its file name
+      and extension as was downloaded. Only ONE certificate file is supported.
     is_required: false
-    title: List of provisioning profile files (separated by spaces) to be used
+    title: Code signing cetificates (p.12) file name
+- opts:
+    description: List of provisioning profile file name/s (with no file extension,
+      separated by commas) from the uploaded provisioning profiles to use. If not
+      provided, all provisioning profiles uploaded to 'Code Signing & Files' section
+      will be used.
+    is_required: false
+    title: Provisioning profile file name/s
   provisioning_profiles: null
 - entitlements: null
   opts:
