@@ -6,10 +6,10 @@ description: |
 website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
 source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
 support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios/issues
-published_at: 2023-07-04T10:09:59.058884+03:00
+published_at: 2023-07-04T10:19:33.79057+03:00
 source:
   git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios.git
-  commit: 57be09e81f55963bae0557e1af42512a34374b2b
+  commit: b1fec9cd1149a0a2d984acbd64e665744237283d
 project_type_tags:
 - ios
 type_tags:
@@ -55,7 +55,7 @@ inputs:
       the Code Signing & Files section to your computer and type here its file name
       and extension as was downloaded. Only ONE certificate file is supported.
     is_required: false
-    title: Code signing cetificates (p.12) file name
+    title: Code signing cetificates (.p12) file name
 - opts:
     description: List of provisioning profile file name/s (with no file extension,
       separated by commas) from the uploaded provisioning profiles to use. If not
