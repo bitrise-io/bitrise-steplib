@@ -6,7 +6,7 @@ description: |
 website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
 source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
 support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios/issues
-published_at: 2023-08-09T10:01:34.719946+03:00
+published_at: 2023-08-09T10:04:58.156727+03:00
 source:
   git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios.git
   commit: 190b9423ce050b63756367cede65e066fe49a3ef
