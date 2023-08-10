@@ -26,10 +26,10 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-xcode-test
 source_code_url: https://github.com/bitrise-steplib/steps-xcode-test
 support_url: https://github.com/bitrise-steplib/steps-xcode-test/issues
-published_at: 2023-07-06T07:56:00.663049391Z
+published_at: 2023-08-10T11:20:05.405813187Z
 source:
   git: https://github.com/bitrise-steplib/steps-xcode-test.git
-  commit: cb043bf749648cb80e7201299bc6e09d3cfdf653
+  commit: 92d41f39d5b4e6a58f56b77977103c8af0da281d
 project_type_tags:
 - ios
 - cordova
@@ -64,12 +64,17 @@ inputs:
     summary: Xcode Scheme name.
     title: Scheme
   scheme: $BITRISE_SCHEME
-- destination: platform=iOS Simulator,name=iPhone 11,OS=latest
+- destination: platform=iOS Simulator,name=Bitrise iOS default,OS=latest
   opts:
     description: |-
       Destination specifier describes the device to use as a destination.
 
       The input value sets xcodebuild's `-destination` option.
+
+      In a CI environment, a Simulator device called `Bitrise iOS default` is already created.
+      It is a compatible device with the selected Simulator runtime, pre-warmed for better performance.
+
+      If a device with this name is not found (e.g. in a local dev environment), the first matching device will be selected.
     is_required: true
     summary: Destination specifier describes the device to use as a destination.
     title: Device destination specifier
@@ -191,7 +196,7 @@ inputs:
     summary: Additional options to be added to the executed xcodebuild command.
     title: Additional options for the xcodebuild command
   xcodebuild_options: ""
-- log_formatter: xcpretty
+- log_formatter: xcbeautify
   opts:
     category: xcodebuild log formatting
     description: |-
@@ -220,16 +225,20 @@ inputs:
     summary: Additional options to be added to the executed xcpretty command.
     title: Additional options for the xcpretty command
   xcpretty_options: --color --report html --output "${BITRISE_DEPLOY_DIR}/xcode-test-results-${BITRISE_SCHEME}.html"
-- cache_level: swift_packages
+- cache_level: none
   opts:
-    category: Caching
+    category: Branch-based (legacy) caching
     description: |-
-      Defines what cache content should be automatically collected.
+      Defines what cache content should be automatically collected. Use key-based caching instead for better performance.
 
       Available options:
       - `none`: Disable collecting cache content.
       - `swift_packages`: Collect Swift PM packages added to the Xcode project.
-    summary: Defines what cache content should be automatically collected.
+
+      With key-based caching, you only need the Restore SPM cache and the Save SPM cache Steps to cache your Swift packages.
+      [See devcenter for more information.](https://devcenter.bitrise.io/en/dependencies-and-caching/managing-dependencies-for-ios-apps/managing-dependencies-with-spm.html#caching-swift-packages)
+    summary: Defines what cache content should be automatically collected. Use key-based
+      caching instead for better performance.
     title: Enable collecting cache content
     value_options:
     - none
