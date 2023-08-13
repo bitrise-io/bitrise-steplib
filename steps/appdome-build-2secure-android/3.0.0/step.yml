@@ -6,10 +6,10 @@ description: |
 website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android
 source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android
 support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android/issues
-published_at: 2023-08-11T09:35:14.743082+03:00
+published_at: 2023-08-13T12:15:36.722066+03:00
 source:
   git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android.git
-  commit: 9666660f66789185612ea5b3e3c16e094bce89f2
+  commit: 6933e473dcd17ae5274068c9a9ac8241c8897ee2
 project_type_tags:
 - android
 type_tags:
@@ -120,6 +120,12 @@ outputs:
       Local path of the secured .aab file. Available when 'Signing Method' set to 'On-Appdome' or 'Private-Signing'
     summary: Local path of the secured .aab file
     title: Secured .aab file path
+- APPDOME_SECURED_SO_PATH: null
+  opts:
+    description: |
+      Local path of the secured secondary output file (universal apk). Available if Secondary Output is set to 'true' and the original app is .aab type
+    summary: Local path of the secured secondary output file
+    title: Secured secondary output file path (universal apk)
 - APPDOME_PRIVATE_SIGN_SCRIPT_PATH: null
   opts:
     description: |
