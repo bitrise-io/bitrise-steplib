@@ -1,0 +1,61 @@
+title: Plandek - deployment
+summary: |
+  Enables you to track and visualize build and deployment events within Plandek's metrics and dashboards.
+description: |
+  Wrapper implementing the Plandek /deployment POST API. Used to complete a deployment within Plandek for a given release cycle.
+  More details can be found here: https://api.plandek.com/deployments/v1/ui/
+website: https://github.com/secretescapes/bitrise-step-plandek-deployment
+source_code_url: https://github.com/secretescapes/bitrise-step-plandek-deployment
+support_url: https://github.com/secretescapes/bitrise-step-plandek-deployment/issues
+published_at: 2023-08-17T20:33:43.844566+02:00
+source:
+  git: https://github.com/secretescapes/bitrise-step-plandek-deployment.git
+  commit: 36162daa4df25ae888d66964fe47eb43f91395e8
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: true
+is_skippable: true
+inputs:
+- api_token: null
+  opts:
+    description: |
+      Plandek API token.
+    is_required: true
+    is_sensitive: true
+    title: API token
+- client_key: null
+  opts:
+    description: |
+      Unique identifier for your instance.
+    is_required: true
+    title: Client key
+- opts:
+    description: "Typically corresponds to the name of your pipeline, workflow, repo,
+      or service under which builds are compiled.\nIf you use the same name pipelines
+      across your organization, we recommend appending additional information to\nyour
+      pipeline name (e.g. repo name) to make it easier to understand your data. \n"
+    is_expand: true
+    is_required: true
+    title: Pipeline
+  pipeline: $BITRISE_APP_TITLE
+- build: null
+  opts:
+    description: |
+      Build identifier in your build tool. Typically the version being deployed (e.g. Svc B 10.2.1).
+    is_required: true
+    title: Build
+- commits: $BITRISE_GIT_COMMIT
+  opts:
+    description: |
+      The full commit hash(s) of the release being deployed
+    is_required: true
+    title: Commits
+- branch_name: $BITRISE_GIT_BRANCH
+  opts:
+    description: |
+      Name of the branch being deployed.
+    is_expand: true
+    title: Branch name
