@@ -1,0 +1,94 @@
+title: Plandek - deployment
+summary: |
+  Enables you to track and visualize build and deployment events within Plandek's metrics and dashboards.
+description: |
+  Wrapper implementing the Plandek /deployment POST API. Used to complete a deployment within Plandek for a given release cycle.
+  More details can be found here: https://api.plandek.com/deployments/v1/ui/
+website: https://github.com/secretescapes/bitrise-step-plandek-deployment
+source_code_url: https://github.com/secretescapes/bitrise-step-plandek-deployment
+support_url: https://github.com/secretescapes/bitrise-step-plandek-deployment/issues
+published_at: 2023-08-22T16:45:19.424596+02:00
+source:
+  git: https://github.com/secretescapes/bitrise-step-plandek-deployment.git
+  commit: 4c7bb7f9ca9c09433228fb9f32f4231b82dc1ed6
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: curl
+  apt_get:
+  - name: jq
+  - name: curl
+is_always_run: true
+is_skippable: true
+inputs:
+- api_token: null
+  opts:
+    description: |
+      Plandek API token.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: |
+      Plandek API token.
+    title: API token
+- client_key: null
+  opts:
+    description: |
+      Unique identifier of your instance.
+    is_required: true
+    summary: |
+      Unique identifier of your instance.
+    title: Client key
+- opts:
+    description: |
+      Typically corresponds to the name of your pipeline, workflow, repo, or service under which builds are compiled.
+      If you use the same name pipelines across your organization, we recommend appending additional information to
+      your pipeline name (e.g. repo name) to make it easier to understand your data.
+    is_expand: true
+    is_required: true
+    summary: |
+      Typically corresponds to the name of your pipeline, workflow, repo, or service under which builds are compiled.
+    title: Pipeline
+  pipeline: $BITRISE_APP_TITLE
+- build: null
+  opts:
+    description: |
+      Build identifier in your build tool. Typically the version being deployed (e.g. Svc B 10.2.1).
+    is_required: true
+    summary: |
+      Build identifier in your build tool. Typically the version being deployed (e.g. Svc B 10.2.1).
+    title: Build
+- commits: $BITRISE_GIT_COMMIT
+  opts:
+    description: |
+      The full commit hash(es) of the release being deployed.
+    is_required: true
+    summary: |
+      The full commit hash(es) of the release being deployed.
+    title: Commits
+- calculate_commits_in_build: "false"
+  opts:
+    description: |
+      If true, Plandek will use the information in your deployment to work out what commits were included in the release
+      (see below for explanation). If false, you must specify the commits in the commits field.
+    is_required: true
+    summary: |
+      If true, Plandek will use the information in your deployment to work out what commits were included in the release
+      (see below for explanation). If false, you must specify the commits in the commits field.
+    title: Network Logs
+    value_options:
+    - "true"
+    - "false"
+- branch_name: $BITRISE_GIT_BRANCH
+  opts:
+    description: |
+      Name of the branch being deployed.
+    is_expand: true
+    summary: |
+      Name of the branch being deployed.
+    title: Branch name
