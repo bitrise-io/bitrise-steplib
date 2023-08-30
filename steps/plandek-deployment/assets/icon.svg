@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 256 256" width="256" height="256" xmlns="http://www.w3.org/2000/svg">
+  <rect width="256" height="256" style="fill: rgb(255, 255, 255);"/>
+  <g id="Group-2" transform="matrix(4.424778938293457, 0, 0, 4.405287742614746, 25.839464187622042, 23.84552764892578)">
+    <g id="motif">
+      <g id="Group-3" transform="translate(0.488281, 0.743064)">
+        <path id="Combined-Shape" fill="#FF6100" d="M33.2,34.2H4.4v11.3H0V34.2v-34h33.2c0,0-0.3,7.2,0,7h-4.4V4.8H4.4v24.9h24.4v-9.4 l4.4,0"/>
+        <path fill="#FF6100" d="M12,11.6h28.8V0.3h4.4v11.3v34H12l0-7.5h4.4v3h24.4V16.1H16.5v9.6H12"/>
+      </g>
+    </g>
+  </g>
+</svg>
