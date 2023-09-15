@@ -7,10 +7,10 @@ description: |-
 website: https://codecov.io
 source_code_url: https://github.com/codecov/codecov-bitrise
 support_url: https://community.codecov.io
-published_at: 2023-09-13T13:34:35.15676-07:00
+published_at: 2023-09-15T09:34:57.29313-07:00
 source:
   git: https://github.com/codecov/codecov-bitrise.git
-  commit: 950bb1deea449a83cf4ae3412f7f333e85a1cc21
+  commit: e8d493c4251ae0d9032d54f17b97ff9351982bf3
 type_tags:
 - test
 is_requires_admin_user: false
