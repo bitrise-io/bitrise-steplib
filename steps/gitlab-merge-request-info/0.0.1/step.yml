@@ -1,0 +1,71 @@
+title: gitlab-merge-request-info
+summary: |
+  Get single MR
+description: |
+  Get single MR
+website: https://github.com/sger/bitrise-step-gitlab-merge-request-info
+source_code_url: https://github.com/sger/bitrise-step-gitlab-merge-request-info
+support_url: https://github.com/sger/bitrise-step-gitlab-merge-request-info/issues
+published_at: 2023-09-25T16:50:43.288712+03:00
+source:
+  git: https://github.com/sger/bitrise-step-gitlab-merge-request-info.git
+  commit: 56f5563e78da3aa20f914a9bd226cfcd06db3d82
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- gitlab_bot_token: null
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Gitlab bot token
+    title: Gitlab bot token
+    value_options: []
+- gitlab_api_url: null
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Gitlab API URL
+    title: Gitlab API URL
+    value_options: []
+- opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Project ID
+    title: Project ID
+    value_options: []
+  project_id: null
+- bitrise_pull_request: null
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Pull Request ID
+    title: Pull Request ID
+    value_options: []
+outputs:
+- IS_MR_DRAFT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Merge request draft
+    title: Merge request draft
