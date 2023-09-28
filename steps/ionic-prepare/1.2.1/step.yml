@@ -9,10 +9,10 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-ionic-prepare
 source_code_url: https://github.com/bitrise-steplib/steps-ionic-prepare
 support_url: https://github.com/bitrise-steplib/steps-ionic-prepare/issues
-published_at: 2020-11-11T09:03:37.612969345Z
+published_at: 2023-09-28T13:57:01.732454494Z
 source:
   git: https://github.com/bitrise-steplib/steps-ionic-prepare.git
-  commit: 9b052841f20befb15fa9344043e37fae703c3d17
+  commit: 60c0fe279161292dfe3d22285d870418f9196130
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
