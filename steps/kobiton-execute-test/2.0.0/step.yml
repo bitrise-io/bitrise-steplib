@@ -1,15 +1,15 @@
-title: Execute Automation Test in Kobiton
+title: Execute Automation Test on Kobiton
 summary: |
-  Execute an automation test script
+  Executes automation tests on the Kobiton Platform and seamlessly triggers Scriptless Automation across multiple devices, harnessing the power of AI without the need for additional scripting
 description: |
   A Bitrise step to (synchronously) execute an automated test script on Kobiton service
 website: https://kobiton.com
 source_code_url: https://github.com/kobiton/bitrise-step-kobiton-execute-test
 support_url: https://github.com/kobiton/bitrise-step-kobiton-execute-test/issues
-published_at: 2023-09-26T10:47:05.058655+07:00
+published_at: 2023-10-02T15:43:45.238325+07:00
 source:
   git: https://github.com/kobiton/bitrise-step-kobiton-execute-test.git
-  commit: 6b976b54e370e936f0516cae4f291277e65bbac4
+  commit: e8efdd6d9abb4b5976baca2f4287b366416d47cc
 type_tags:
 - test
 toolkit:
