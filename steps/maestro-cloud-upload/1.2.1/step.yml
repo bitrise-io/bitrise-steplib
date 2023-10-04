@@ -6,7 +6,7 @@ description: |
 website: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload
 source_code_url: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload
 support_url: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload/issues
-published_at: 2023-10-04T18:40:11.500092+04:00
+published_at: 2023-10-04T18:58:03.24722+04:00
 source:
   git: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload.git
   commit: 2da05de808adcf6803702a0669cb6970d7ff07a2
