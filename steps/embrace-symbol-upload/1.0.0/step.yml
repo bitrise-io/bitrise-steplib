@@ -8,9 +8,9 @@ description: |
   ---------
   EMBRACE_APP: Your Embrace app idenifier
   EMBRACE_API_TOKEN: Your Embrace upload API token
-website: https://github.com/embrace-io/bitrise-step-embrace-symbol-upload
-source_code_url: https://github.com/embrace-io/bitrise-step-embrace-symbol-upload
-support_url: https://github.com/embrace-io/bitrise-step-embrace-symbol-upload/issues
+website: https://github.com/embrace-io/bitrise-symbol-upload
+source_code_url: https://github.com/embrace-io/bitrise-symbol-upload
+support_url: https://github.com/embrace-io/bitrise-symbol-upload
 published_at: 2023-10-05T14:49:30.418918-04:00
 source:
   git: https://github.com/embrace-io/bitrise-symbol-upload.git
