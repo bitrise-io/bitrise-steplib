@@ -1,0 +1,51 @@
+title: Download bitrise generic file
+summary: |
+  Download bitrise generic file
+description: |
+  Download bitrise generic file
+website: https://github.com/yumemi-inc/bitrise-step-download-bitrise-generic-file
+source_code_url: https://github.com/yumemi-inc/bitrise-step-download-bitrise-generic-file
+support_url: https://github.com/yumemi-inc/bitrise-step-download-bitrise-generic-file/issues
+published_at: 2023-10-19T22:39:58.319287+09:00
+source:
+  git: https://github.com/yumemi-inc/bitrise-step-download-bitrise-generic-file.git
+  commit: 2e101f3049c5e7ccdc377f1c415837da1f07d301
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- BITRISE_API_TOKEN: null
+  opts:
+    is_required: true
+    is_sensitive: true
+    title: Bitrise API Token
+- BITRISE_APP_SLUG: ${BITRISE_APP_SLUG}
+  opts:
+    is_expand: true
+    is_required: true
+    title: Target Bitrise APP Slug
+- TARGET_BITRISE_FILE_KEY: null
+  opts:
+    category: Target file
+    title: Target Bitrise File Key
+- TARGET_BITRISE_FILE_SLUG: null
+  opts:
+    category: Target file
+    title: Target Bitrise File Slug
+- OUTPUT_FILE_NAME: output_file_name
+  opts:
+    is_required: true
+    title: Output file name
+- VERBOSE: "false"
+  opts:
+    category: Debug
+    title: Verbose
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- OUTPUT_FILE_NAME: null
+  opts:
+    title: Download file path
