@@ -1,0 +1,4 @@
+maintainer: community
+removal_date: "2023-06-11"
+deprecate_notes: |
+  This step is deprecated as it was replaced by appdome-build-2secure-ios, and it is no longer maintained.
