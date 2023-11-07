@@ -1,0 +1,113 @@
+title: Run CocoaPods install
+summary: This Step uses CocoaPods' `pod install` or `pod update` command to install
+  your dependencies.
+description: |2-
+
+  CocoaPods is a dependency manager for Swift and Objective-C projects. This Step uses CocoaPods' `pod install` or `pod update` command to install your dependencies on the virtual machine where your Bitrise build runs.
+
+  CocoaPods version is determined based on the Podfile.lock file or on the Gemfile.lock file. If your Gemfile.lock file contains the `cocoapods` gem, then the Step will call the pod `install` command with `bundle exec`. Otherwise, the Cocoapods version in the Podfile.lock will be installed as a global gem.
+  If no Cocoapods version is defined in Podfile.lock or Gemfile.lock, the preinstalled sytem Cocoapods version will be used.
+
+  ### Configuring the Step
+
+  1. Set the **Source Code Directory path** to the path of your app's source code.
+
+  1. Optionally, provide a Podfile in the **Podfile path** input.
+
+     Without a specific Podfile, the Step does a recursive search for the Podfile in the root of your app's directory, and uses the first Podfile it finds.
+
+  ### Troubleshooting
+
+  If the Step fails, check out the Podfile and the Gemfile of your app. Make sure there is no compatibility issue with the different versions of your Pods.
+
+  Check that both Podfile.lock and Gemfile.lock is committed and the Cocoapods versions defined in both match.
+
+  You can set the **Execute cocoapods in verbose mode?** input to true to get detailed logs of the Step.
+
+  ### Useful links
+
+  * [Caching Cocoapods](https://devcenter.bitrise.io/builds/caching/caching-cocoapods/)
+  * [Include your dependencies in your repository](https://devcenter.bitrise.io/tips-and-tricks/optimize-your-build-times/#include-your-dependencies-in-your-repository)
+
+  ### Related Steps
+
+  * [Run yarn command](https://www.bitrise.io/integrations/steps/yarn)
+  * [Carthage](https://www.bitrise.io/integrations/steps/carthage)
+website: https://github.com/bitrise-io/steps-cocoapods-install
+source_code_url: https://github.com/bitrise-io/steps-cocoapods-install
+support_url: https://github.com/bitrise-io/steps-cocoapods-install/issues
+published_at: 2023-03-29T07:50:14.341128984Z
+source:
+  git: https://github.com/bitrise-steplib/steps-cocoapods-install.git
+  commit: 53dc1dd5ce7cb9da27c8ca7631735be374e05bc5
+project_type_tags:
+- ios
+- macos
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-cocoapods-install
+is_always_run: false
+is_skippable: false
+inputs:
+- command: install
+  opts:
+    description: |
+      CocoaPods command to use for installing dependencies.
+
+      Available options:
+      - `install`: Use `pod install` to download the explicit version listed in the Podfile.lock without trying to check if a newer version is available.
+      - `update`: Use `pod update` to update every Pod listed in your Podfile to the latest version possible.
+    is_required: true
+    summary: CocoaPods command to use for installing dependencies.
+    title: CocoaPods command
+    value_options:
+    - install
+    - update
+- opts:
+    description: |
+      Directory path where the project's Podfile (and optionally Gemfile) is placed.
+
+      CocoaPods commands will be executed in this directory.
+    is_required: true
+    summary: Directory path where the project's Podfile (and optionally Gemfile) is
+      placed.
+    title: Workdir
+  source_root_path: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Path of the project's Podfile.
+
+      By specifying this input `Workdir` gets overriden by the provided file's directory path.
+    summary: Path of the project's Podfile.
+    title: Podfile path
+  podfile_path: ""
+- opts:
+    description: |
+      Execute all CocoaPods commands in verbose mode.
+
+      If enabled the `--verbose` flag will be appended to all CocoaPods commands.
+    summary: Execute all CocoaPods commands in verbose mode.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- is_cache_disabled: "false"
+  opts:
+    description: |
+      Disables automatic cache content collection.
+
+      By default the Step adds the Pods directory in the `Workdir` to the Bitrise Build Cache.
+
+      Set this input to disable automatic cache item collection for this Step.
+    summary: Disables automatic cache content collection.
+    title: Disable collecting cache content
+    value_options:
+    - "true"
+    - "false"
