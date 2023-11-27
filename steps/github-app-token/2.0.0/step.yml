@@ -1,0 +1,54 @@
+title: github_app_token
+summary: |
+  get GitHub Apps access token
+description: |
+  get GitHub Apps access token
+website: https://github.com/yumemi-inc/bitrise-step-github-app-token
+source_code_url: https://github.com/yumemi-inc/bitrise-step-github-app-token
+support_url: https://github.com/yumemi-inc/bitrise-step-github-app-token/issues
+published_at: 2023-11-27T17:09:10.247283+09:00
+source:
+  git: https://github.com/yumemi-inc/bitrise-step-github-app-token.git
+  commit: f26e454e53f75af2e3e5ac0ba3941adce52fd194
+type_tags:
+- access-control
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- github_app_token: $GITHUB_APP_TOKEN
+  opts:
+    is_dont_change_value: true
+    is_sensitive: true
+    title: GitHub App Token
+- github_app_id: null
+  opts:
+    is_required: true
+    title: GitHub App Id
+- github_app_installation: null
+  opts:
+    category: GitHub App installation
+    is_sensitive: true
+    title: GitHub App installation
+- github_app_key: null
+  opts:
+    category: GitHub App key
+    is_sensitive: true
+    title: GitHub App key
+- github_app_key_path: private-key.pem
+  opts:
+    category: GitHub App key
+    is_expand: true
+    is_required: true
+    title: GitHub App key path
+- opts:
+    category: Debug
+    title: Verbose
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- GITHUB_APP_TOKEN: null
+  opts:
+    title: GitHub App installation token
