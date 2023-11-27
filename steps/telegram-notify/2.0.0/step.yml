@@ -1,0 +1,68 @@
+title: Send Telegram Message
+summary: |
+  Notify telegram group or chat on builds status.
+description: |
+  This step will send a message to the provided [telegram](https://core.telegram.org/bots) chat.
+  Includes the build status and download URL. You can also add a custom message to be sent with the notification.
+  This step always runs, no matter if build succeded or failed.
+website: https://github.com/mcaldas/bitrise-step-telegram-notify
+source_code_url: https://github.com/mcaldas/bitrise-step-telegram-notify
+support_url: https://github.com/mcaldas/bitrise-step-telegram-notify/issues
+published_at: 2023-06-21T02:14:41.127136+03:00
+source:
+  git: https://github.com/mcaldas/bitrise-step-telegram-notify.git
+  commit: 005b37095c54b49ca57aea339b7a831fb845ed3d
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: false
+is_always_run: true
+is_skippable: true
+run_if: ""
+inputs:
+- link_previews_enabled: "no"
+  opts:
+    title: Enable Link Previews
+    value_options:
+    - "no"
+    - "yes"
+- opts:
+    description: |
+      The bot token.
+      Can also be taken from env var `TELEGRAM_BOT_TOKEN`
+    is_required: true
+    is_sensitive: true
+    title: Telegram Bot Token
+  telegram_bot_token: $TELEGRAM_BOT_TOKEN
+- opts:
+    description: |
+      The id of the chat notifications will be sent to.
+      Can also be taken from env var `TELEGRAM_CHAT_ID`
+    is_required: true
+    is_sensitive: true
+    title: Telegram Chat ID
+  telegram_chat_id: $TELEGRAM_CHAT_ID
+- download_url: $DOWNLOAD_URL
+  opts:
+    description: |
+      The url where artifacts can be downloaded.
+    is_required: true
+    title: Download URL
+- custom_message: $CUSTOM_MESSAGE
+  opts:
+    description: "Any info you would like to append to the message. \nIt is sent both
+      on succeeded and failed builds.\nYou can also include newlines in the message
+      by using \\\\n.\n"
+    is_expand: true
+    is_required: false
+    title: Custom message

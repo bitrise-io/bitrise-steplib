@@ -1,0 +1,87 @@
+title: Run tests using Marathon Cloud
+summary: |
+  Run all your automated tests in just 15 minutes, no matter how many tests you have
+description: |
+  With this step you can easily run your Android instrumentation and iOS tests. Marathon Cloud is designed to run all your automated tests in just 15 minutes, no matter how many tests you have.
+website: https://marathonlabs.io
+source_code_url: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud
+support_url: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud/issues
+published_at: 2023-08-31T21:17:04.213318151+03:00
+source:
+  git: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud.git
+  commit: ddbcf9063a07342938fb626f86a659b15105404d
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: malinskiy/tap/marathon-cloud
+inputs:
+- application: ""
+  opts:
+    description: "Application binary path.  \nFor an Android project: app APK file
+      path.  \nFor an iOS project: an ARM compatible Simulator build packaged in a
+      ZIP archive.  \n"
+    is_expand: true
+    is_required: true
+    summary: The application binary path refers to the APK file for Android or the
+      ZIP file for the iOS application.
+    title: App File
+- opts:
+    description: "Test application binary path.  \nFor an Android project: test app
+      APK file path.  \nFor an iOS project: an ARM compatible Simulator iOS Test Runner
+      app packaged in a ZIP archive.  \n"
+    is_expand: true
+    is_required: true
+    summary: The test application binary path refers to the APK file for Android or
+      the ZIP file for the iOS Test Runner app.
+    title: Test App File
+  test_application: ""
+- opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    summary: Testing platform. `Android` or `iOS` only
+    title: Testing platform
+  platform: ""
+- api_key: null
+  opts:
+    description: "Have a look at [the tokens page](https://cloud.marathonlabs.io/tokens)
+      in the dashboard to obtain your token.      \n"
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: API key for authenticating with Marathon Cloud
+    title: Marathon Cloud API key
+- docker_image: marathonlabs/marathon-cloud:latest
+  opts:
+    description: ""
+    is_required: false
+    summary: You can specify your own custom image with a Docker Registry proxy here
+    title: Docker image to use for running marathon-cloud cli on Linux hosts
+- os_version: ""
+  opts:
+    title: OS version
+    summary: Android or iOS OS version
+    description: ""
+    is_expand: true
+    is_required: false
+- run_name: ""
+  opts:
+    title: Name for run
+    summary: Name for run, for example it could be description of commit
+    description: ""
+    is_expand: true
+    is_required: false
+- link: ""
+  opts:
+    title: Link to commit
+    summary: Link to commit
+    description: ""
+    is_expand: true
+    is_required: false
