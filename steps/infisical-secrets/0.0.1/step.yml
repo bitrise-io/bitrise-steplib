@@ -6,7 +6,7 @@ description: |
 website: https://github.com/CodeFishStudio/bitrise-step-infisical-secrets
 source_code_url: https://github.com/CodeFishStudio/bitrise-step-infisical-secrets
 support_url: https://github.com/CodeFishStudio/bitrise-step-infisical-secrets/issues
-published_at: 2023-12-07T16:19:12.177607+10:30
+published_at: 2023-12-07T16:26:25.234271+10:30
 source:
   git: https://github.com/CodeFishStudio/infisical-bitrise-step.git
   commit: 56ef874186f156d4dbde3d9c6524a557f7a9ed69
