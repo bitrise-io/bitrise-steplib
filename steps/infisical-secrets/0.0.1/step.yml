@@ -1,0 +1,49 @@
+title: Infisical-secrets
+summary: |
+  Pull secrets from an Infisical secrets repository
+description: |
+  Use this step to access your cloud or self hosted Infisical secrets and inject them into your build pipeline.
+website: https://github.com/CodeFishStudio/bitrise-step-infisical-secrets
+source_code_url: https://github.com/CodeFishStudio/bitrise-step-infisical-secrets
+support_url: https://github.com/CodeFishStudio/bitrise-step-infisical-secrets/issues
+published_at: 2023-12-07T16:17:43.333486+10:30
+source:
+  git: https://github.com/CodeFishStudio/infisical-bitrise-step.git
+  commit: 56ef874186f156d4dbde3d9c6524a557f7a9ed69
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/CodeFishStudio/bitrise-step-infisical-secrets
+inputs:
+- infisical_token: null
+  opts:
+    description: The token is required to access the Infisical project via the API
+    is_expand: true
+    is_required: true
+    summary: The project specific access token from Infisical
+    title: Infisical Token
+- infisical_env: null
+  opts:
+    description: The env is required to match the env specified in the token above
+      to provide access to the required secrets
+    is_expanded: true
+    is_required: true
+    summary: The slug for your project environment
+    title: Infisical Env
+- infisical_url: https://app.infisical.com
+  opts:
+    description: The fully qualified URL to access your Infisical secrets. The trailing
+      slash or /api is not required and should only consists of the hostname and TLD
+    is_expanded: true
+    is_required: true
+    summary: The url of the API to access your Infisical secrets
+    title: Infisical URL
+- infisical_path: null
+  opts:
+    description: The path or folder structure required to access your secrets within
+      Infisical
+    is_expanded: true
+    is_required: false
+    summary: The path to the required secrets
+    title: Infisical Path
