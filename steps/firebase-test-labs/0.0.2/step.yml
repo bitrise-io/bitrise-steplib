@@ -1,0 +1,234 @@
+title: '[Beta] Firebase Test Labs'
+summary: "[Beta] Automatic deployment of iOS and Android Flutter Integration tests
+  through Firebase Test Labs \n"
+description: "[Beta] Automatic deployment of iOS and Android Flutter Integration tests
+  to Firebase Test Labs \n\nThis step allows you to automate the process of deploying
+  tests to be run on **physical devices** on Firebase Test Labs.\n\n- Before using
+  this step, ensure to go through the setup required to [test your app on virtual
+  devices](https://github.com/flutter/flutter/tree/main/packages/integration_test#android-device-testing)\n\n-
+  **NOTE**: To run your project's tests on an iOS device on Firebase Test Labs you
+  must properly \ncodesign your app in the workflow before this step is run. [The
+  documentation can be found here](https://devcenter.bitrise.io/en/code-signing/ios-code-signing/managing-ios-code-signing-files---automatic-provisioning.html)\n\n-
+  If you would not like to follow the documentation's guidance on using automatic
+  code signing, you could also choose\nto upload a proper provisioning profile for
+  your iOS application to the Code Signing & Files tab in the workflow editor\non
+  Bitrise. Then, add the \"Certificate and profile installer\" step (without editing
+  the configuration) to your \nworkflow before this step is run.\n\n- To save build
+  credits and time, this step runs the firebase test command with the --async flag,
+  so the command can \nbe run without waiting for test results to come back. This
+  is not to be confused with the timeout input below."
+website: https://github.com/AnthonyDadeWT/bitrise-step-firebase-test-labs
+source_code_url: https://github.com/AnthonyDadeWT/bitrise-step-firebase-test-labs
+support_url: https://github.com/AnthonyDadeWT/bitrise-step-firebase-test-labs/issues
+published_at: 2024-01-09T15:45:44.626338-05:00
+source:
+  git: https://github.com/AnthonyDadeWT/bitrise-step-firebase-test-labs.git
+  commit: ce99f1f9d1c8eb88c216957c6da13be14155a308
+project_type_tags:
+- flutter
+- ios
+- android
+type_tags:
+- test
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: google-cloud-sdk
+  - name: flutter
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Follow the [documentation](https://firebase.google.com/docs/app-distribution/android/distribute-gradle#authenticate_using_a_service_account) to setup a service account.
+
+      You can avoid pushing this JSON file to your repository by storing the JSON contents as a secret, then in a custom script,
+      create a new file, and echo the contents of that secret into the file, and then set this input to that file path.
+    is_required: true
+    is_sensitive: true
+    summary: |
+      The path or HTTP URL to your [service account](https://firebase.google.com/docs/app-distribution/android/distribute-gradle#authenticate_using_a_service_account) private key JSON file.
+    title: Service Account Credentials File
+  service_account_credentials_file: null
+- opts:
+    description: |
+      Note: this is NOT an App ID. There should only be one Project ID for your entire Firebase project, even if it includes multiple "apps".
+    is_required: true
+    is_sensitive: true
+    summary: |
+      Firebase Project ID. Can be found in the Firebase console, under the project name in Project settings.
+    title: Firebase Project ID
+  project_id: null
+- integration_test_path: null
+  opts:
+    is_required: true
+    summary: |
+      Path to all of the Flutter integration tests you'd like to deploy to Firebase Test Labs
+      example: intgeration_test/foo.dart
+    title: Path to Integration Tests
+- locale: en_US
+  opts:
+    is_required: true
+    summary: |
+      Specify the Locale to test on, set to English by default
+      [List of locales](https://help.sap.com/docs/SAP_BUSINESSOBJECTS_BUSINESS_INTELLIGENCE_PLATFORM/09382741061c40a989fae01e61d54202/46758c5e6e041014910aba7db0e91070.html)
+    title: Locale / Language
+- opts:
+    is_required: true
+    summary: Specify the device orientation
+    title: Orientation
+  orientation: portrait
+- opts:
+    description: "The max time this test execution can run before it is cancelled
+      (default: 15m). \nIt does not include any time necessary to prepare and clean
+      up the target device. \nThe maximum possible testing time is 45m on physical
+      devices and 60m on virtual devices\nThe timeout units can be h, m, or s. If
+      no unit is given, seconds are assumed. \nExamples: 1h is 1 hour, 200s is 200
+      seconds, 15m is 15 minutes\n"
+    is_required: true
+    summary: Set a maximum time limit on how long your tests run for
+    title: Timeout
+  timeout: 15m
+- opts:
+    summary: |
+      If you'd like to run your tests on an iOS device, set this to true. Otherwise set it to false
+    title: Run Tests on iOS Device?
+    value_options:
+    - "true"
+    - "false"
+  test_ios: "false"
+- opts:
+    summary: |
+      If you'd like to run your tests on an Android device, set this to true. Otherwise set it to false
+    title: Run Tests on Android Device?
+    value_options:
+    - "true"
+    - "false"
+  test_android: "true"
+- build_flavor: null
+  opts:
+    description: |
+      This should only be used on projects that have already setup flavors, and you use --flavor <flavor> to build or run your project.
+      https://docs.flutter.dev/deployment/flavors
+    is_required: false
+    summary: |
+      Specify a specific build flavor you'd like to use to build your project.
+    title: Build Flavor
+- firebase_additional_flags: null
+  opts:
+    description: |
+      Make sure to include the -- when adding in additional flags to this input i.e. --flag value --flag value ...
+    is_required: false
+    summary: |
+      Additional flags to be appended to the Firebase command: gcloud firebase test (platform) run
+    title: Additional Firebase Flags
+- opts:
+    category: iOS Configuration
+    description: |
+      NOTE: This input is dependent on the available devices Test Labs has available for you to use
+      with the operating system you'll select below. [Documentation](https://firebase.google.com/docs/test-lab/android/available-testing-devices)
+    is_required: true
+    summary: Specify the simulator Test Labs uses to run your tests
+    title: Simulator
+  simulator_model: iphone11pro
+- deployment_target: "16.6"
+  opts:
+    category: iOS Configuration
+    description: |
+      NOTE: This input is dependent on the available operating system Test Labs has available for you to use
+      with the device you've selected above. [Documentation](https://firebase.google.com/docs/test-lab/android/available-testing-devices)
+    is_required: true
+    summary: Specify the iOS version of the device
+    title: iOS Deployment Target
+- ios_configuration: Release
+  opts:
+    category: iOS Configuration
+    description: |
+      If not specified, the default Build Configuration will be used.
+      Use xcodebuild -list to see available configurations for your project.
+      The input value sets xcodebuild's `-configuration` option.
+    is_required: true
+    summary: Xcode Build Configuration.
+    title: Xcode Build Configuration
+- opts:
+    category: iOS Configuration
+    description: "Specify an Xcode Schema you'd like to use for iOS \nRun xcodebuild
+      -list in the iOS directory to list available schemes for your project\nBy default,
+      this is set to Runner\n\nexample: Runner, dev, release, etc\n"
+    is_required: true
+    summary: Specify an Xcode Schema you'd like to use for iOS
+    title: Schema
+  scheme: Runner
+- opts:
+    category: iOS Configuration
+    is_required: true
+    summary: The path to the folder where the iOS integration executable will output
+    title: Output Path
+  output_path: ../build/ios_integ
+- opts:
+    category: iOS Configuration
+    is_required: true
+    summary: The path to the zip folder containing a .xctestrun and a folder containing
+      the .app to be deployed
+    title: Product Path
+  product_path: build/ios_integ/Build/Products
+- opts:
+    category: iOS Configuration
+    is_required: true
+    summary: Specify the iOS workspace
+    title: xcworkspace File
+  workspace: Runner.xcworkspace
+- config_file_path: Flutter/Release.xcconfig
+  opts:
+    category: iOS Configuration
+    is_required: true
+    summary: The path that points to the .xcconfig you'd like to use
+    title: Path to .xcconfig
+- opts:
+    category: iOS Configuration
+    is_required: true
+    summary: Specify a version of Xcode
+    title: Xcode Version
+  xcode_version: "15.0"
+- opts:
+    category: iOS Configuration
+    description: |
+      Make sure to include the -- when adding in additional flags to this input i.e. --flag value --flag value ...
+    is_required: false
+    summary: |
+      Additional flags to be appended to the xcodebuild command
+    title: Additional xcodebuild Flags
+  xcodebuild_additional_flags: null
+- android_device_model_id: redfin
+  opts:
+    category: Android Configuration
+    description: "NOTE: This input is dependent on the available devices Test Labs
+      has available for you to use\nwith the operating system you'll select below.
+      [Documentation](https://firebase.google.com/docs/test-lab/android/available-testing-devices)\n\nRun
+      gcloud firebase test android models list to see all available devices.\n**NOTE:
+      For physical devices, you must use the MODEL_ID** \n"
+    is_required: true
+    summary: Specify the Model ID of the Firebase Test Labs Device
+    title: Device Model ID
+- android_version: 30
+  opts:
+    category: Android Configuration
+    description: |
+      NOTE: This input is dependent on the available operating system Test Labs has available for you to use
+      with the device you've selected above. [Documentation](https://firebase.google.com/docs/test-lab/android/available-testing-devices)
+    is_required: true
+    summary: Specify the Android API version for the device above
+    title: Android API Version
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
