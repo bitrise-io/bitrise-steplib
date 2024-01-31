@@ -1,1 +1,5 @@
 maintainer: bitrise
+removal_date: "2023-04-13"
+deprecate_notes: |
+  This Step is deprecated, please use the [Pull Intermediate Files](https://github.com/bitrise-steplib/bitrise-step-pull-intermediate-files) Step instead.
+  More info and a migration guide can be found [here](https://github.com/bitrise-steplib/bitrise-step-pull-intermediate-files/releases/tag/1.0.0).

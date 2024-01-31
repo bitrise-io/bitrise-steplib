@@ -1,0 +1,60 @@
+title: Restore Carthage Cache
+summary: Restores cached Carthage dependencies. This Step needs to be used in combination
+  with **Save Carthage Cache**.
+description: |
+  Restores cached Carthage prebuilt frameworks. This Step needs to be used in combination with **Save Carthage Cache**.
+
+  This Step is based on [key-based caching](https://devcenter.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for Carthage dependencies. If you'd like to change the cache keys, you might want to use the generic [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache) Step instead.
+
+  #### Related steps
+
+  [Save Carthage cache](https://github.com/bitrise-steplib/bitrise-step-save-carthage-cache/)
+
+  [Save Cocoapods cache](https://github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache/)
+
+  [Save SPM cache](https://github.com/bitrise-steplib/bitrise-step-save-spm-cache/)
+
+  [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-carthage-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-carthage-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-carthage-cache/issues
+published_at: 2023-11-29T18:05:12.727608966Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-carthage-cache.git
+  commit: 73fd2bf5b8bc5b827915312e81eb3e3debaff280
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-carthage-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit
