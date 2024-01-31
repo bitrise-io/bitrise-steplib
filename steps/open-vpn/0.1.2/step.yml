@@ -1,0 +1,102 @@
+title: Connect to OpenVPN Server
+summary: |
+  Establish a VPN connection with the specified OpenVPN server.
+description: |
+  The Step establishes a VPN connection with the specified OpenVPN server.
+
+  ### Configuring the Step
+
+  Before you start:
+  1. Build an OpenVPN server. You can read [this article](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-18-04) on how to construct an OpenVPN server.
+  1. Register the contents of CA certificate, client certificate, client private key, base64 encoded as Bitrise Secrets.
+     You can easily retrieve the contents of Base64 using command: `$ base64 <certificate or private key file path>`
+
+  To configure the Step:
+
+  1. Add the OpenVPN server IP or hostname to the **Host** input.
+  1. Add the OpenVPN server port number to the **Port** input. The port number is `1194` by default.
+  1. Specify the OpenVPN server protocol in the **Protocol** input.
+  1. Add the CA certificate, client certificate, and client private key Secrets to their respective inputs.
+
+  ### Useful links
+
+  * [Using the Connect to OpenVPN Server Step](https://devcenter.bitrise.io/en/builds/connecting-to-a-vpn-during-a-build.html#using-the-connect-to-openvpn-server-step)
+  * [How To Set Up an OpenVPN Server](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-openvpn-server-on-ubuntu-18-04)
+  * [Configuring network access for Bitrise build machines](https://devcenter.bitrise.io/en/infrastructure/build-machines/configuring-your-network-to-access-our-build-machines.html)
+
+  ### Related Steps
+
+  * [Cisco VPN connect](https://www.bitrise.io/integrations/steps/vpnc-connect)
+website: https://github.com/bitrise-steplib/bitrise-step-open-vpn
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-open-vpn
+support_url: https://github.com/bitrise-steplib/bitrise-step-open-vpn/issues
+published_at: 2023-06-08T08:44:56.833538149Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-open-vpn.git
+  commit: fc67cb48de21ecece075d04a071969f701b2b289
+type_tags:
+- access-control
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: openvpn
+  apt_get:
+  - name: openvpn
+  - name: net-tools
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- host: null
+  opts:
+    description: |
+      Open VPN Server IP or Hostname.
+      ex1. 111.111.111.111
+      ex2. hoge.com
+    is_expand: true
+    is_required: true
+    summary: Open VPN Server IP or Hostname
+    title: Host
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Open VPN Server Port number
+    title: Port
+  port: 1194
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Open VPN Server Protocol
+    title: Protocol
+    value_options:
+    - udp
+    - tcp
+  proto: udp
+- ca_crt: $VPN_CA_CRT_BASE64
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Base64 encoded CA Certificate
+    title: Base64 encoded CA Certificate
+- client_crt: $VPN_CLIENT_CRT_BASE64
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Base64 encoded Client Certificate
+    title: Base64 encoded Client Certificate
+- client_key: $VPN_CLIENT_KEY_BASE64
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Base64 encoded Client Private Key
+    title: Base64 encoded Client Private Key
+outputs:
+- OPENVPN_LOG_PATH: null
+  opts:
+    title: Output log file path

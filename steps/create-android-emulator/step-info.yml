@@ -1,4 +1,4 @@
 deprecate_notes: |
-  This step is deprecated, use avd-manager step instead.
+  This step is deprecated, use [AVD Manager](https://github.com/bitrise-steplib/steps-avd-manager) Step instead.
 maintainer: bitrise
 removal_date: "2019-08-25"
