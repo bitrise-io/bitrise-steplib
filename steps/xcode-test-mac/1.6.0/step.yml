@@ -1,0 +1,144 @@
+title: Xcode Test for Mac
+summary: Runs Xcode's `test` action for macOS app projects.
+description: |-
+  This Step runs your pre-defined tests, and the **Deploy to Bitrise.io** Step deploys your test results to Bitrise.
+  You don't have to upload code signing files for this.
+  However, if you set a team for your project locally, in Xcode, then Xcode will ask for that team’s Developer certificate before running the test.
+
+  ### Configuring the Step
+  This Step has a default configuration that does not need to be modified, which means that if pre-defined tests are written correctly, they will work.
+  Here is a rundown of the inputs should you wish to modify them.
+  1. Add the path of your project in the **Project (or Workspace) path** input.
+  2. Add the scheme name in the **Scheme name** input. Please note the scheme has to be marked as shared in Xcode.
+  3. Add the device or simulator on which the app will run in the **Destination** input, for example, `platform=OS X,arch=x86_64`.
+  4. Set the **Should a clean Xcode build run before testing?** input to `yes` to run a clean build without cache.
+  5. Select `yes` in **Generate code coverage files?** input if you wish to get code coverage analysis of your tests.
+  6. If you wish to use xcpretty formatter for your xcodebuild as an output tool, select `xcpretty` in the **Output tool** input.
+  If this input is set to `xcodebuild`, the raw xcodebuild output gets printed.
+  7. Add extra options to the end of the `xcodebuild` call in the **Additional options for xcodebuild call** input.
+  Use multiple options separated by a space character, for example, `-xcconfig PATH -verboseAdditional`.
+  9. Set the **Disable indexing during the build** input to `yes` to speed up your build.
+
+  ### Troubleshooting
+
+  If your app does not have test targets defined, the primary workflow will be the only automatically created workflow and it will NOT include the **Xcode Test for Mac** Step.
+
+  ### Useful links
+  - [Getting started with MacOS apps](https://devcenter.bitrise.io/getting-started/getting-started-with-macos-apps/)
+  - [About code signing](https://devcenter.bitrise.io/code-signing/code-signing-index/)
+
+  ### Related Steps
+  - [Xcode Archive for Mac](https://www.bitrise.io/integrations/steps/xcode-archive-mac)
+  - [Deploy to iTunes Connect - Application Loader ](https://www.bitrise.io/integrations/steps/deploy-to-itunesconnect-application-loader)
+website: https://github.com/bitrise-steplib/steps-xcode-test-mac
+source_code_url: https://github.com/bitrise-steplib/steps-xcode-test-mac
+support_url: https://github.com/bitrise-steplib/steps-xcode-test-mac/issues
+published_at: 2023-07-12T09:22:46.638263696Z
+source:
+  git: https://github.com/bitrise-steplib/steps-xcode-test-mac.git
+  commit: 4893843c7f288d598d25bee4f5544a9f43ddaa81
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- macos
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-xcode-test-mac
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      A `.xcodeproj`, `.xcworkspace` or `Package.swift` path, relative to
+      the Working directory (if specified).
+    is_required: true
+    title: Project, Workspace or Package path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: |
+      The Scheme to use.
+      **IMPORTANT**: The Scheme have to be marked as __shared__ in Xcode!
+    is_required: true
+    title: Scheme name
+  scheme: $BITRISE_SCHEME
+- destination: null
+  opts:
+    description: |
+      The Destination to use.
+
+      Read more in [Xcodebuild Destination Cheatsheet](http://www.mokacoding.com/blog/xcodebuild-destination-options/).
+
+      Example value: `platform=OS X,arch=x86_64`
+    is_required: false
+    title: Destination name
+- is_clean_build: "yes"
+  opts:
+    is_required: true
+    title: Should a clean Xcode build run before testing?
+    value_options:
+    - "yes"
+    - "no"
+- generate_code_coverage_files: "no"
+  opts:
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |-
+      If output_tool is set to xcpretty, the xcodebuild output will be prettified by xcpretty.
+      If output_tool is set to xcodebuild, the raw xcodebuild output will be printed.
+    is_required: true
+    title: Output tool
+    value_options:
+    - xcpretty
+    - xcodebuild
+  output_tool: xcpretty
+- opts:
+    description: |-
+      Options added to the end of the xcodebuild call.
+
+      You can use multiple options, separated by a space
+      character. Example: `-xcconfig PATH -verbose`
+    is_required: false
+    title: Additional options for xcodebuild call
+  xcodebuild_options: CODE_SIGNING_ALLOWED='NO'
+- disable_index_while_building: "yes"
+  opts:
+    description: |-
+      Could make the build faster by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command which will disable the indexing during the build.
+
+      Indexing is needed for
+
+      * Autocomplete
+      * Ability to quickly jump to definition
+      * Get class and method help by alt clicking.
+
+      Which are not needed in CI environment.
+
+      **Note:** In Xcode you can turn off the `Index-WhileBuilding` feature  by disabling the `Enable Index-WhileBuilding Functionality` in the `Build Settings`.<br/>
+      In CI environment you can disable it by adding `COMPILER_INDEX_STORE_ENABLE=NO` flag to the `xcodebuild` command.
+    summary: Could make the build faster by disabling the indexing during the build
+      run.
+    title: Disable indexing during the build
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      This input is __deprecated__, please __use change-workdir step__ instead.
+      Working directory of the step.
+      You can leave it empty to don't change it.
+    title: '[Deprecated] Working directory'
+  workdir: $BITRISE_SOURCE_DIR
+outputs:
+- BITRISE_XCODE_TEST_RESULT: null
+  opts:
+    title: Result of the tests. 'succeeded' or 'failed'.
+    value_options:
+    - succeeded
+    - failed
