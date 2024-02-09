@@ -1,0 +1,40 @@
+title: Instabug iOS Symbol Upload
+summary: This step uploads iOS debug symbols to Instabug through Bitrise CI integration.
+description: |-
+  Upload iOS debug symbols to Instabug through Bitrise CI.
+
+  ### Configuring the Step
+  1. Add the **Instabug iOS Symbol Upload** Step to your Workflow after any build Step.
+  2. Set the **Working directory**.
+  3. Set the **Instabug App Token**. It's highly recommended to have this value in an env var and reference that.
+
+  ### Troubleshooting
+  Make sure you insert the Step before any build Step so that every dependency is downloaded a build Step starts running.
+website: https://github.com/mendozammatias/bitrise-step-instabug-ios-symbol-upload
+source_code_url: https://github.com/mendozammatias/bitrise-step-instabug-ios-symbol-upload
+support_url: https://github.com/mendozammatias/bitrise-step-instabug-ios-symbol-upload/issues
+published_at: 2024-02-09T11:41:16.318889-03:00
+source:
+  git: https://github.com/mendozammatias/bitrise-step-instabug-ios-symbol-upload.git
+  commit: 1dd4260047cbbcbddf12678ff5cb3b9679cd48ec
+project_type_tags:
+- ios
+- xamarin
+- react-native
+- cordova
+- flutter
+type_tags:
+- artifact-info
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- instabug_app_token: $INSTABUG_APP_TOKEN
+  opts:
+    is_required: true
+    summary: Instabug App Token for the given environment.
+    title: Instabug App Token
+- opts:
+    summary: Working directory of the step. You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
