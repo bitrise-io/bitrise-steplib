@@ -1,4 +1,4 @@
 deprecate_notes: |
-  This step is deprecated, please use App Center upload and schedule tests instead
+  This step is deprecated, please use [App Center upload and schedule tests](https://github.com/bitrise-steplib/steps-appcenter-test) Step instead.
 maintainer: bitrise
 removal_date: "2018-10-26"

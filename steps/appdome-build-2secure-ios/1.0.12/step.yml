@@ -1,0 +1,79 @@
+title: Appdome-Build-2Secure for iOS
+summary: |
+  Builds an iOS mobile app using Appdome's platform
+description: |
+  Integration that allows activating security and app protection features, building and signing mobile apps using Appdome's API. For details see: https://www.appdome.com/how-to/appsec-release-orchestration/mobile-appsec-cicd/use-appdome-build-2secure-step-for-bitrise
+website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
+source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
+support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios/issues
+published_at: 2023-06-27T16:05:25.418104+03:00
+source:
+  git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios.git
+  commit: 33bc74d294a4e22295f826987e959bc6ba0adf80
+project_type_tags:
+- ios
+type_tags:
+- build
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+inputs:
+- app_location: $BITRISE_IPA_PATH
+  opts:
+    is_required: true
+    summary: URL to app file (ipa) or an EnvVar representing its path (i.e. $BITRISE_IPA_PATH)
+    title: App file URL or EnvVar
+- fusion_set_id: null
+  opts:
+    is_required: true
+    title: Fusion set ID
+- opts:
+    is_required: false
+    title: Team ID
+  team_id: null
+- opts:
+    description: App signing method
+    is_required: true
+    title: Signing Method
+    value_options:
+    - On-Appdome
+    - Private-Signing
+    - Auto-Dev-Signing
+  sign_method: On-Appdome
+- entitlements: null
+  opts:
+    description: iOS Entitlement EnvVar/s (separated by space), required for Auto-Dev-Singing
+      and On-Appdome Signing.
+    is_required: false
+    title: iOS Entitlement EnvVar/s
+- build_logs: "false"
+  opts:
+    description: Build the app with Appdome's Diagnostic Logs
+    is_required: true
+    title: Build With Diagnostic Logs
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- APPDOME_SECURED_IPA_PATH: null
+  opts:
+    description: |
+      Local path of the secured .ipa file. Available when 'Signing Method' set to 'On-Appdome' or 'Private-Signing'
+    summary: Local path of the secured .ipa file
+    title: Secured .ipa file path
+- APPDOME_PRIVATE_SIGN_SCRIPT_PATH: null
+  opts:
+    description: |
+      Local path of the .sh sign script file. Available when 'Signing Method' set to 'Auto-Dev-Signing'
+    summary: Local path of the .sh sign script file
+    title: .sh sign script file path
+- APPDOME_CERTIFICATE_PATH: null
+  opts:
+    summary: Local path of the Certified Secure Certificate .pdf file
+    title: Certified Secure Certificate .pdf file path
