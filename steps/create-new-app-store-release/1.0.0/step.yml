@@ -1,0 +1,182 @@
+title: Prepare App Store Release
+summary: The Step creates an App Store release with the Release Management feature.
+description: |-
+  The "Prepare App Store Release" Step allows you to streamline the process of preparing a new release for your iOS app in the Release Management. This Step leverages the Bitrise Public API to facilitate the creation and configuration of an App Store release in the Release Management.
+
+  By utilizing this Step, you can automate the initial stages of the release process and ensure a consistent and efficient deployment experience. Instead of manually navigating through the Release Management interface to create a release, the Step empowers you to initiate the release setup programmatically, saving valuable time and effort.
+
+  It's important to note that this Step doesn't create a release directly in the App Store Connect. Instead, it streamlines the process by generating a release in the [Release Management](https://devcenter.bitrise.io/en/release-management.html).
+website: https://github.com/bitrise-steplib/bitrise-step-create-new-app-store-release
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-create-new-app-store-release
+support_url: https://github.com/bitrise-steplib/bitrise-step-create-new-app-store-release/issues
+published_at: 2023-07-10T16:13:11.947188+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-create-new-app-store-release.git
+  commit: 099b671ea84514380f9f00672da41c7b354a5a9f
+project_type_tags:
+- ios
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/tmp-bitrise-step-create-new-app-store-release
+inputs:
+- bundle_id: null
+  opts:
+    description: |-
+      The bundle ID of the app to be released.
+
+      Release Management requires the bundle ID of the iOS application being released to the App Store Connect.
+    is_required: true
+    summary: The bundle ID of the app to be released.
+    title: Bundle identifier
+- opts:
+    description: |-
+      The version number of the app you are releasing.
+
+      Numbering should follow software versioning conventions (1.0, 1.0.0).
+    is_required: true
+    summary: The version number of the app you are releasing.
+    title: Release version number
+  release_version_number: null
+- automatic_testflight_upload: "false"
+  opts:
+    category: Release configuration
+    description: |-
+      Indicates whether or not to upload every release candidate build automatically to TestFlight.
+
+      Release Management will deploy each release candidate to TestFlight automatically if this setting is enabled.
+      Note: This feature requires the release branch and Workflow to be set.
+    is_required: true
+    summary: Indicates whether or not to upload every release candidate build automatically
+      to TestFlight.
+    title: Automatic Testflight upload
+    value_options:
+    - "true"
+    - "false"
+- description: null
+  opts:
+    category: Release configuration
+    description: |-
+      An internal description of the release, it won't be propagated to the App Store.
+
+      This description will not be visible on the App Store Connect or available for the end user.
+    summary: An internal description of the release, it won't be propagated to the
+      App Store.
+    title: Release description
+- opts:
+    category: Release configuration
+    description: |-
+      The branch you created for this version of your app.
+
+      This branch is called mostly: release-1.0, release-october, main, etc.
+    summary: The branch you created for this version of your app.
+    title: Release branch
+  release_branch: null
+- opts:
+    category: Release configuration
+    description: |-
+      The workflow that generates your an .xcarchive or an App Store signed .ipa artifact.
+
+      Make sure that the Workflow generates the artifact for the same Bundle Identifier you provided for this Step as a step input. Release Management will ignore any other .xcarchive App Store signed .ipa with different bundle ID.
+    summary: The workflow that generates your an .xcarchive or an App Store signed
+      .ipa artifact.
+    title: Release Workflow
+  workflow: null
+- opts:
+    category: Notification
+    description: |-
+      The Slack webhook URL to use for sending Slack notifications.
+
+      By providing a Slack webhook URL, Release Management will send automatic messages for the following events:
+      ```
+      ┌─────────────────────┬───────────────────────────────────────┐
+      │ Stage               │ Event                                 │
+      ├─────────────────────┼───────────────────────────────────────┤
+      │ Release candidate   │ Release candidate changed             │
+      │ TestFlight upload   │ Upload and processing finished        │
+      │ Approvals           │ Release approved                      │
+      │ App Store review    │ Release sent for review               │
+      │                     │ Status of review submission changed   │
+      │ Release             │ Release started                       │
+      │                     │ Release finished                      │
+      └─────────────────────┴───────────────────────────────────────┘
+      ```
+      For more information go to our [devcenter notification page.](https://devcenter.bitrise.io/en/release-management/enabling-slack-notifications-for-release-management-events.html)
+    summary: The Slack webhook URL to use for sending Slack notifications.
+    title: Slack webhook URL
+  slack_webhook_url: null
+- opts:
+    category: Notification
+    description: |-
+      The Teams webhook URL to use for sending Teams notifications.
+
+      By providing a Teams webhook URL, Release Management will send automatic messages for the following events:
+      ```
+      ┌─────────────────────┬───────────────────────────────────────┐
+      │ Stage               │ Event                                 │
+      ├─────────────────────┼───────────────────────────────────────┤
+      │ Release candidate   │ Release candidate changed             │
+      │ TestFlight upload   │ Upload and processing finished        │
+      │ Approvals           │ Release approved                      │
+      │ App Store review    │ Release sent for review               │
+      │                     │ Status of review submission changed   │
+      │ Release             │ Release started                       │
+      │                     │ Release finished                      │
+      └─────────────────────┴───────────────────────────────────────┘
+      ```
+      For more information go to our [devcenter notification page.](https://devcenter.bitrise.io/en/release-management/enabling-slack-notifications-for-release-management-events.html)
+    summary: The Teams webhook URL to use for sending Teams notifications.
+    title: Teams webhook URL
+  teams_webhook_url: null
+- bitrise_api_access_token: null
+  opts:
+    description: |-
+      Your access token.
+
+      To acquire a `Personal Access Token` for your user, sign in with that user on [bitrise.io](https://bitrise.io),
+      go to your `Account Settings` page, and select the [Security tab](https://www.bitrise.io/me/profile#/security) on the left side.
+    is_required: true
+    is_sensitive: true
+    summary: Your access token.
+    title: Bitrise Access Token
+- bitrise_api_base_url: https://api.bitrise.io
+  opts:
+    category: API settings
+    description: |-
+      The base URL of the Bitrise API used to process the download requests.
+
+      By default the step will use the official Bitrise Public API, you don’t need to change this setting.
+    is_dont_change_value: true
+    is_required: true
+    summary: The base URL of the Bitrise API used to process the download requests.
+    title: Bitrise API base URL
+- app_slug: $BITRISE_APP_SLUG
+  opts:
+    category: API settings
+    description: |-
+      The identifier of the Bitrise app for which to create a new release.
+
+      By default, the Step will create a new release for the same Bitrise App.
+    is_dont_change_value: true
+    is_required: true
+    summary: The identifier of the Bitrise app for which to create a new release.
+    title: Bitrise app identifier
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- BITRISE_RELEASE_SLUG: null
+  opts:
+    summary: Unique identifier of the newly created release.
+    title: Release slug

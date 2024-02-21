@@ -1,4 +1,4 @@
-deprecate_notes: This step is deprecated, [The Component Store has been discontinued](https://docs.microsoft.com/en-us/xamarin/cross-platform/troubleshooting/component-nuget?tabs=vswin)
+deprecate_notes: This step is deprecated, [The Component Store](https://docs.microsoft.com/en-us/xamarin/cross-platform/troubleshooting/component-nuget?tabs=vswin) has been discontinued
   as of May 15, 2018.
 maintainer: bitrise
 removal_date: "2019-01-06"

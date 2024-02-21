@@ -1,0 +1,115 @@
+title: Appdome-Build-2Secure for iOS
+summary: |
+  Builds an iOS mobile app using Appdome's platform
+description: |
+  Integration that allows activating security and app protection features, building and signing mobile apps using Appdome's API. For details see: https://www.appdome.com/how-to/appsec-release-orchestration/mobile-appsec-cicd/use-appdome-build-2secure-step-for-bitrise
+website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
+source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios
+support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios/issues
+published_at: 2023-08-11T09:36:54.586355+03:00
+source:
+  git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-ios.git
+  commit: 634a0ddd6abfb9361940824f901e8d1a8be21b8b
+project_type_tags:
+- ios
+type_tags:
+- build
+- code-sign
+toolkit:
+  bash:
+    entry_file: step_init.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+inputs:
+- app_location: $BITRISE_IPA_PATH
+  opts:
+    is_required: true
+    summary: URL to app file (ipa) or an EnvVar representing its path (i.e. $BITRISE_IPA_PATH)
+    title: App file URL or EnvVar
+- opts:
+    is_required: false
+    summary: Output app file name (without extension). If not populated, the default
+      output file name will be the same as the original app but with Appdome_ prefix.
+    title: Output file name (without extension)
+  output_filename: null
+- fusion_set_id: null
+  opts:
+    is_required: true
+    title: Fusion set ID
+- opts:
+    is_required: false
+    title: Team ID
+  team_id: null
+- opts:
+    description: App signing method
+    is_required: true
+    title: Signing Method
+    value_options:
+    - On-Appdome
+    - Private-Signing
+    - Auto-Dev-Signing
+  sign_method: On-Appdome
+- certificate_file: null
+  opts:
+    description: Code signing cetificate file name (from the uploaded code signing
+      certificates) to use. If not provided, the LAST certificate among the uploaded
+      files to 'Code Signing & Files' section will be used. If you don't know the
+      file name of the certificate you want to use, download the certificate from
+      the Code Signing & Files section to your computer and type here its file name
+      and extension as was downloaded. Only ONE certificate file is supported.
+    is_required: false
+    title: Code signing cetificates (.p12) file name
+- opts:
+    description: List of provisioning profile file name/s (with no file extension,
+      separated by commas) from the uploaded provisioning profiles to use. If not
+      provided, all provisioning profiles uploaded to 'Code Signing & Files' section
+      will be used.
+    is_required: false
+    title: Provisioning profile file name/s
+  provisioning_profiles: null
+- entitlements: null
+  opts:
+    description: iOS Entitlement EnvVar/s (separated by space), required for Auto-Dev-Singing
+      and On-Appdome Signing.
+    is_required: false
+    title: iOS Entitlement EnvVar/s
+- build_logs: "false"
+  opts:
+    description: Build the app with Appdome's Diagnostic Logs
+    is_required: true
+    title: Build With Diagnostic Logs
+    value_options:
+    - "true"
+    - "false"
+- build_to_test: None
+  opts:
+    description: Select a device cloud vendor this build will be ready for testing
+      on. Select None for a production build or for a vendor not in the list.
+    is_required: true
+    title: Build to test Vendor
+    value_options:
+    - None
+    - Bitbar
+    - Browserstack
+    - Saucelabs
+    - Lambdatest
+outputs:
+- APPDOME_SECURED_IPA_PATH: null
+  opts:
+    description: |
+      Local path of the secured .ipa file. Available when 'Signing Method' set to 'On-Appdome' or 'Private-Signing'
+    summary: Local path of the secured .ipa file
+    title: Secured .ipa file path
+- APPDOME_PRIVATE_SIGN_SCRIPT_PATH: null
+  opts:
+    description: |
+      Local path of the .sh sign script file. Available when 'Signing Method' set to 'Auto-Dev-Signing'
+    summary: Local path of the .sh sign script file
+    title: .sh sign script file path
+- APPDOME_CERTIFICATE_PATH: null
+  opts:
+    summary: Local path of the Certified Secure Certificate .pdf file
+    title: Certified Secure Certificate .pdf file path

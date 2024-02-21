@@ -1,0 +1,81 @@
+title: Appdome-Build-2Secure for Android
+summary: |
+  Builds a mobile app using Appdome's platform
+description: |
+  Integration that allows activating security and app protection features, building and signing mobile apps using Appdome's API. For details see: https://www.appdome.com/how-to/appsec-release-orchestration/mobile-appsec-cicd/use-appdome-build-2secure-step-for-bitrise
+website: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android
+source_code_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android
+support_url: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android/issues
+published_at: 2023-05-21T18:14:24.326262+03:00
+source:
+  git: https://github.com/Appdome/bitrise-step-appdome-build-2secure-android.git
+  commit: 5f67a7a9eb2c5eadee63c0267f5f5e4b3cdeeb1e
+project_type_tags:
+- android
+type_tags:
+- build
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+inputs:
+- app_location: null
+  opts:
+    is_required: true
+    summary: URL to app file (apk/aab) or an EnvVar representing its path (i.e. $BITRISE_APK_PATH
+      or $BITRISE_AAB_PATH)
+    title: App file URL or EnvVar
+- fusion_set_id: null
+  opts:
+    is_required: true
+    title: Fusion set ID
+- opts:
+    is_required: false
+    title: Team ID
+  team_id: null
+- opts:
+    description: App signing method
+    is_required: true
+    title: Signing Method
+    value_options:
+    - On-Appdome
+    - Private-Signing
+    - Auto-Dev-Signing
+  sign_method: On-Appdome
+- gp_signing: "false"
+  opts:
+    description: Sign the app for Google Play? If 'true', requires $SIGN_FINGERPRINT
+      in the Secrets tab.
+    is_required: true
+    title: Google Play Signing?
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- APPDOME_SECURED_APK_PATH: null
+  opts:
+    description: |
+      Local path of the secured .apk file. Available when 'Signing Method' set to 'On-Appdome' or 'Private-Signing'
+    summary: Local path of the secured .apk file
+    title: Secured .apk file path
+- APPDOME_SECURED_AAB_PATH: null
+  opts:
+    description: |
+      Local path of the secured .aab file. Available when 'Signing Method' set to 'On-Appdome' or 'Private-Signing'
+    summary: Local path of the secured .aab file
+    title: Secured .aab file path
+- APPDOME_PRIVATE_SIGN_SCRIPT_PATH: null
+  opts:
+    description: |
+      Local path of the .sh sign script file. Available when 'Signing Method' set to 'Auto-Dev-Signing'
+    summary: Local path of the .sh sign script file
+    title: .sh sign script file path
+- APPDOME_CERTIFICATE_PATH: null
+  opts:
+    summary: Local path of the Certified Secure Certificate .pdf file
+    title: Certified Secure Certificate .pdf file path
