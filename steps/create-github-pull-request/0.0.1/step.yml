@@ -7,7 +7,7 @@ description: |
 website: https://github.com/Ahmadalsofi/bitrise-step-create-github-pull-request
 source_code_url: https://github.com/Ahmadalsofi/bitrise-step-create-github-pull-request
 support_url: https://github.com/Ahmadalsofi/bitrise-step-create-github-pull-request/issues
-published_at: 2024-02-23T14:08:20.843727+03:00
+published_at: 2024-02-27T23:05:43.711467+03:00
 source:
   git: https://github.com/Ahmadalsofi/bitrise-step-create-github-pull-request.git
   commit: 4c7cbb34f6ca718e9e158760df7dd0225128ec82
