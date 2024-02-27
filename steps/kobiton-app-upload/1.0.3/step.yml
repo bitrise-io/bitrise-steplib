@@ -1,0 +1,97 @@
+title: Upload application to Kobiton
+summary: |
+  Uploads your application to the Kobiton Platform for seamless interactive app testing
+description: |
+  This step will take an .apk or .ipa file and upload it to the Kobiton App Repository. You can find your API key at [Kobiton](https://portal.kobiton.com/settings/keys)
+website: https://kobiton.com
+source_code_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo
+support_url: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo/issues
+published_at: 2023-10-02T15:46:42.395256+07:00
+source:
+  git: https://github.com/kobiton/bitrise-step-kobiton-upload-apps-repo.git
+  commit: f5dc9fcd4520c95a834e5081abf40a20d24c161d
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  - name: ack
+  apt_get:
+  - name: curl
+  - name: ack
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- kobiton_app_name: $BITRISE_APP_TITLE
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Title of the app being built
+    title: App Name
+- kobiton_app_path: $BITRISE_SIGNED_APK_PATH
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Path to the app .apk or .ipa file
+    title: App Path
+- kobiton_app_id: null
+  opts:
+    is_expand: true
+    is_required: false
+    summary: App ID in Kobiton - use this in case you want to upload new version of
+      an existing app in Kobiton
+    title: App ID
+- kobiton_app_type: apk
+  opts:
+    is_expand: true
+    is_required: true
+    summary: Select ipa for iOS app or apk for Android app
+    title: App Type
+    value_options:
+    - apk
+    - ipa
+- kobiton_app_access: public
+  opts:
+    summary: You can either to make this app private or available for everyone in
+      the organization
+    title: App Privacy
+    value_options:
+    - public
+    - private
+- kobiton_username: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The user to upload to Kobiton
+    title: Kobiton Username
+- kobiton_api_key: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: API key to access Kobiton API
+    title: Kobiton API Key/Secret
+outputs:
+- KOBITON_APP_ID: null
+  opts:
+    description: |
+      The App ID that the app has been uploaded to Kobiton Repo.
+    summary: Kobiton App ID
+    title: App ID
+- KOBITON_UPLOAD_URL: null
+  opts:
+    description: |
+      The URL the app has been uploaded to.
+    summary: Amazon S3 Upload URL
+    title: Upload URL
+- KOBITON_APP_PATH: null
+  opts:
+    description: |
+      Path to the app binary on Kobiton
+    summary: Path to the app binary on Kobiton
+    title: App Path
