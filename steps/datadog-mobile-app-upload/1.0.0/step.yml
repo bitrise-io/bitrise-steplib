@@ -1,0 +1,56 @@
+title: datadog-mobile-app-upload
+summary: |
+  Step to upload a new version of you application to Datadog for Synthetics tests
+description: |
+  With the `synthetics-test-automation-bitrise-step-upload-application` step you can upload a new version of your application to Datadog to run Synthetics tests against during your Bitrise CI and ensure all your teams using Bitrise can benefit from Synthetic tests at every stage of the software lifecycle.
+website: https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application
+source_code_url: https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application
+support_url: https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application/issues
+published_at: 2024-03-01T11:49:05.282524+01:00
+source:
+  git: https://github.com/DataDog/synthetics-test-automation-bitrise-step-upload-application.git
+  commit: a2814456ca39b76defbc21eaf1256ce19c261690
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: ./upload-application.sh
+inputs:
+- api_key: $DATADOG_API_KEY
+  opts:
+    description: The API key used to query the Datadog API.
+    is_expand: true
+    is_required: true
+    title: Datadog API Key
+- app_key: $DATADOG_APP_KEY
+  opts:
+    description: The application key used to query the Datadog API.
+    is_expand: true
+    is_required: true
+    title: Datadog APP Key
+- config_path: ""
+  opts:
+    description: The global JSON configuration used when launching tests.
+    title: Global JSON configuration
+- latest: false
+  opts:
+    description: Marks the application as `latest`. Any tests that run on the latest
+      version will use this version on their next run.
+    title: Latest
+- mobile_application_id: ""
+  opts:
+    description: ID of the application you want to upload the new version to.
+    title: Mobile Application ID
+- mobile_application_version_file_path: ""
+  opts:
+    description: Override the mobile application with a local or recently built application.
+    title: Mobile Application Version File Path
+- opts:
+    description: The Datadog site to send data to. If the `DD_SITE` environment variable
+      is set, it takes preference.
+    title: Datadog Site
+  site: datadoghq.com
+- opts:
+    description: Name of the new version. It has to be unique.
+    title: Version Name
+  version_name: ""
