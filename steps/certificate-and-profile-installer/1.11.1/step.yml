@@ -1,0 +1,141 @@
+title: Certificate and profile installer
+summary: Downloads and installs the Apple code signing certificates and provisioning
+  profiles.
+description: |-
+  The Step installs those .p12 certificate files and provisioning profiles that you uploaded to your app's **Code Signing** tab. You can upload multiple versions of any code signing file.
+
+  ### Configuring the Step
+
+  By default, the Step requires no configuration. To be able to use it, you only need to upload a .p12 certificate and a matching provisioning profile to the **Code signing** tab.
+
+  However, if your certificates have passphrases, you need to make sure that passphrase is available for the Step.
+
+  1. Create a [Secret Env Var](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/) that contains the passphrase.
+  1. Insert that Secret to the **Certificate passphrase** input.
+
+  Similarly, you can set the path to the Keychain that should be used in the **Keychain path** input, and set a password for the Keychain in the **Keychain's password** input.
+
+  ### Troubleshooting
+
+  In the case of most code signing issues, it's the **Xcode Archive & Export for iOS** Step that fails, not this one. If this Step fails, there's a couple of things you can do first.
+
+  - Check the certificate passphrase, the Keychain path and the Keychain password.
+  - Make sure you uploaded the required code signing files.
+
+  ### Useful links
+  - [iOS code signing](https://devcenter.bitrise.io/code-signing/ios-code-signing/code-signing-index/)
+  - [iOS deployment](https://devcenter.bitrise.io/deploy/ios-deploy/ios-deploy-index/)
+
+  ### Related Steps
+  - [iOS Auto Provision](https://www.bitrise.io/integrations/steps/ios-auto-provision)
+  - [Xcode Archive & Export for iOS](https://www.bitrise.io/integrations/steps/xcode-archive)
+  - [Deploy to iTunesConnect](https://www.bitrise.io/integrations/steps/deploy-to-itunesconnect-deliver)
+website: https://github.com/bitrise-steplib/steps-certificate-and-profile-installer
+source_code_url: https://github.com/bitrise-steplib/steps-certificate-and-profile-installer
+support_url: https://github.com/bitrise-steplib/steps-certificate-and-profile-installer/issues
+published_at: 2024-01-29T19:03:49.983090072Z
+source:
+  git: https://github.com/bitrise-steplib/steps-certificate-and-profile-installer.git
+  commit: b4a283a10b90e6e591856b0d70656df0b75fc923
+project_type_tags:
+- ios
+- macos
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- code-sign
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-certificate-and-profile-installer
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- certificate_url: $BITRISE_CERTIFICATE_URL
+  opts:
+    description: |
+      URL of the certificate to download. Multiple URLs can be
+      specified, separated by a pipe (`|`) character.
+
+      You can specify a local path as well, using the `file://` scheme.
+      For example `file://./Cert.p12`
+    is_sensitive: true
+    title: Certificate URL
+- certificate_passphrase: $BITRISE_CERTIFICATE_PASSPHRASE
+  opts:
+    description: |
+      Certificate passphrase. Multiple passphrases can be
+      specified, separated by a pipe character (`|`).
+
+      Specified Certificate passphrase count should match the count of the certificate urls.
+      Pipe characters in passphrases are not supported.
+
+      Format example:
+
+      - 1 certificate provided with passphrase: `PASS`
+      - 1 certificate provided without passphrase: ``
+      - 3 certificates provided, none of them has passphrase: `||`
+      - 3 certificates provided, only the 2. one has passphrase: `|PASS|`
+    is_sensitive: true
+    title: Certificate passphrase
+- opts:
+    description: |
+      URL of the provisioning profile to download. Multiple URLs can be
+      specified, separated by a pipe (`|`) character.
+
+      You can specify a local path as well, using the `file://` scheme.
+      For example `file://./BuildAnything.mobileprovision`
+    is_sensitive: true
+    title: Provisioning profile URL
+  provisioning_profile_url: $BITRISE_PROVISION_URL
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    is_required: true
+    summary: Path to the Keychain where the code signing certificates will be installed.
+    title: Keychain Path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: Password for the provided Keychain.
+    title: Keychain password
+- install_defaults: "yes"
+  opts:
+    category: Default Codesign Files
+    description: Installs default (Bitrise) Wildcard Provisioning Profile and Codesign
+      Certificate for testing.
+    summary: Installs default (Bitrise) Wildcard Codesign Files.
+    title: Installs default Codesign Files
+    value_options:
+    - "no"
+    - "yes"
+- default_certificate_url: $BITRISE_DEFAULT_CERTIFICATE_URL
+  opts:
+    category: Default Codesign Files
+    description: |
+      URL of the default certificate.
+
+      You can specify a local path as well, using the `file://` scheme.
+      For example `file://./Cert.p12`
+    is_sensitive: true
+    title: Default Certificate URL
+- default_certificate_passphrase: $BITRISE_DEFAULT_CERTIFICATE_PASSPHRASE
+  opts:
+    category: Default Codesign Files
+    description: |
+      Passphrase of the default Certificate.
+    is_sensitive: true
+    title: Default Certificate passphrase
+- default_provisioning_profile_url: $BITRISE_DEFAULT_PROVISION_URL
+  opts:
+    category: Default Codesign Files
+    description: |
+      URL of the default provisioning profile to download.
+
+      You can specify a local path as well, using the `file://` scheme.
+      For example `file://./BuildAnything.mobileprovision`
+    is_sensitive: true
+    title: Default Provisioning profile URL

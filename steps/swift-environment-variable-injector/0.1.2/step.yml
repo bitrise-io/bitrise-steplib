@@ -1,0 +1,73 @@
+title: Swift Environment Variable Injector
+summary: |
+  Step to inject static values from environment variables into Swift code files before compilation and Continuous deployment allowing us to not expose our production keys and values in statically in our code and store sensitive values safe.
+description: "This step allows us to inject CI pipelines environment variables values
+  into Swift code static values before compilation and Continuous deployment to a
+  specific environment(Development, Testing or Production) where we can define the
+  values injected for each build and deployment e.g. a API url that the App uses and
+  is different for each environment. \nAlso it allows us to not expose our production
+  keys and values in statically in our code.\nFor more info, check out the Swift [Variable
+  Injector Project](https://github.com/LucianoPAlmeida/variable-injector) on github.\n"
+website: https://github.com/LucianoPAlmeida/bitrise-step-swift-environment-variable-injector
+source_code_url: https://github.com/LucianoPAlmeida/bitrise-step-swift-environment-variable-injector
+support_url: https://github.com/LucianoPAlmeida/bitrise-step-swift-environment-variable-injector/issues
+published_at: 2022-10-11T23:56:23.567900249-03:00
+source:
+  git: https://github.com/LucianoPAlmeida/bitrise-step-swift-environment-variable-injector.git
+  commit: 6bbf82860e7373e3706ba5c722e0f3111892327f
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: wget
+  - name: unzip
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: Variable Injector version to be used. Step will fail if invalid or
+      non-existent is specified.
+    is_required: true
+    title: Swift Variable Injector Version
+  variable_injector_version: 0.2.1
+- files: null
+  opts:
+    description: |
+      All the file paths separated by a white space.
+      The files will be visited by the [variable-injector](https://github.com/LucianoPAlmeida/variable-injector).
+      If there are literals matching the ENV_VAR pattern and the environment variable name is defined on the current workflow it will replace with it value.
+    is_expand: true
+    is_required: true
+    summary: The paths for the files which you be checked and have the values replaced
+      if it's applicable.
+    title: Paths of the Swift files
+- opts:
+    description: "All the names paths separated by a white space.\nIf a string literal
+      on this files matches the environment variable pattern $(ENV_VAR) but is not
+      a ENV var to be replaced we can just ignore it. \n"
+    is_expand: true
+    is_required: false
+    summary: The variable names that will be ignored by the variable injector.
+    title: Environment Variable Names to ignore
+  vars_to_ignore: null
+- opts:
+    description: |
+      All injections variables and values logged. Also the output files content.
+    is_expand: true
+    is_required: false
+    summary: Indicates if the injection should print logs.
+    title: Verbose mode
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

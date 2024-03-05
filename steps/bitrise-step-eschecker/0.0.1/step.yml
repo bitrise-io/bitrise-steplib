@@ -1,0 +1,55 @@
+title: esChecker, by eShard
+summary: |
+  Run Mobile Application Security Testing using esChecker
+description: |
+  Run esChecker analyses on new application builds directly from Bitrise.
+website: https://github.com/eshard/bitrise-step-eschecker
+source_code_url: https://github.com/eshard/bitrise-step-eschecker
+support_url: https://github.com/eshard/bitrise-step-eschecker/issues
+published_at: 2022-12-07T17:37:01.44587+01:00
+source:
+  git: https://github.com/eshard/bitrise-step-eschecker.git
+  commit: cfa105125ac67168579a86f39b013e1bd195110b
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- opts:
+    description: |
+      Path to the binary file to be tested
+    is_required: true
+    summary: The app file you want to test.
+    title: A Bitrise generated APK or IPA path
+  upload_path: null
+- eschecker_token: null
+  opts:
+    description: |
+      esChecker token generated from esChecker UI.
+    is_required: true
+    is_sensitive: true
+    summary: Your esChecker API token, get it from https://eschecker.eshard.com/rest-api
+    title: esChecker API token
+- eschecker_app_id: null
+  opts:
+    description: |
+      Application ID in esChecker
+    is_required: true
+    summary: Unique ID of your application in esChecker, get it from the `App Information`
+      tab of the app
+    title: Application ID
+- eschecker_campaign_id: null
+  opts:
+    description: |
+      Campaign ID in esChecker
+    is_required: true
+    summary: Unique ID of the campaign you can to run in esChecker
+    title: Campaign ID
+outputs:
+- eschecker_pdf_report: null
+  opts:
+    description: |
+      PDF export of the esChecker report.
+    summary: Contains all relevant information oo an esChecker Campaign.
+    title: esChecker report PDF

@@ -1,0 +1,110 @@
+title: Bitrise Wait for Build
+summary: The Step pauses the current build until another running build is finished.
+description: "The Step pauses the current build until another running build or builds
+  are finished. The Step checks statuses of the builds defined in the Step. The builds
+  are defined in the **Build slugs** input: you can add these slugs manually but the
+  typical use case is to use the Environment Variable exported by the **Bitrise Start
+  Build** Step. \n\nAs long as the builds defined by the slugs are running, the Step
+  will hold the build it is running in. The build will fail if any of the builds included
+  in the Step fail.\n\n### Configuring the Step \n\nBefore you run a build with this
+  Step, make sure you have your Personal Access Token stored in a [Secret Environment
+  Variable](https://devcenter.bitrise.io/builds/env-vars-secret-env-vars/#adding-a-secret-env-var).\n\nThis
+  Step is generally used in combination with the **Bitrise Start Build** Step which
+  starts other builds in parallel with the current one. The build that triggered the
+  parallel builds needs to wait for those builds to finish in order to report a successful
+  or a failed build: this Step ensures the build is on hold until the other builds
+  are finished.\n\n 1. Set up at least two Workflows in the Workflow Editor: one will
+  contain the Step, the other will be triggered by the Step. \n    You can set up
+  as many Workflows as you wish: your number of concurrencies limit the number of
+  Workflows you can run simultaneously.\n 2. Add the **Bitrise Start Build** Step
+  to the part of the Workflow where you want to trigger another build. \n 3. Add the
+  Secret Env Var storing your Personal Access Token to the **Bitrise Access Token**
+  input of the **Bitrise Start Build** Step: click the **Select secret variable**
+  button, and choose the key you created.\n 4. Find the **Workflows** input of the
+  **Bitrise Start Build** Step, and add the Workflow(s) you want to run. \n 5. In
+  the **Environments to share** input, add Environment Variables (Env Vars) that you
+  want to share between the builds triggered by the Step.\n 6. Optionally, you can
+  add any Step you would like to run in parallel while the triggered Workflow(s) are
+  running in the parent Workflow.\n 7. Add the **Bitrise Wait for Build** Step to
+  the end of Workflow that contains the **Bitrise Start Build** Step. \n 8. Add the
+  Secret Env Var storing your Personal Access Token to the **Bitrise Access Token**
+  input of the **Bitrise Wait for Build** Step: click the **Select secret variable**
+  button, and choose the key you created.\n 9. In the **Build slugs** input, define
+  the builds for the Step. \n    The build slugs you need are stored by the **Bitrise
+  Start Build** Step in the `$ROUTER_STARTED_BUILD_SLUGS` Env Var. As long as the
+  builds defined by the slugs are running, the Step will hold the build it is running
+  in. The build will fail if any of the builds included in the Step fail.\n 10. Optionally,
+  you can save the build artifacts from the builds and configure the Step to abort
+  all builds if any of the builds fail:\n    - In **The path of the build artifacts**
+  input, set where you'd like to save the artifacts. \n    - Set the **Abort all builds
+  if one fails** input to either `yes` or `no`.\n \n ### Troubleshooting \n\n - Make
+  sure you have both the **Bitrise Start Build** and the **Bitrise Wait for Build**
+  Steps in the right place in your initial Workflow. \n - Your Personal Access Token
+  can expire! Make sure it's still valid - without it, you can't start new builds
+  with this Step. \n\n ### Useful links \n\n - [Starting parallel builds with a single
+  Workflow](https://devcenter.bitrise.io/builds/triggering-builds/trigger-multiple-workflows/)\n
+  - [Start builds from a parent Workflow](https://devcenter.bitrise.io/en/steps-and-workflows/generic-workflow-recipes/start--parallel--builds-from-the-workflow.html)\n\n
+  ### Related Steps \n\n - [Bitrise Start Build](https://www.bitrise.io/integrations/steps/build-router-start)\n
+  - [Bitrise Run](https://www.bitrise.io/integrations/steps/bitrise-run)\n - [Build
+  Status Change](https://www.bitrise.io/integrations/steps/build-status-change)"
+website: https://github.com/bitrise-steplib/bitrise-step-build-router-wait
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-build-router-wait
+support_url: https://github.com/bitrise-steplib/bitrise-step-build-router-wait/issues
+published_at: 2022-08-01T17:23:46.121677247Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-build-router-wait.git
+  commit: 7c158823042454c60dd0bb3e5360d4d72c82ef5e
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-build-router-wait
+is_always_run: true
+is_skippable: false
+inputs:
+- access_token: null
+  opts:
+    description: "Your Personal Access Token\n\nTo acquire a Personal Access Token
+      for your user, sign in with that user on [bitrise.io](https://bitrise.io),  \ngo
+      to your **Account settings** page, and select the [**Security** tab](https://www.bitrise.io/me/profile#/security)
+      on the left side.\n"
+    is_required: true
+    is_sensitive: true
+    summary: Your Personal Access Token
+    title: Bitrise Access Token
+- buildslugs: $ROUTER_STARTED_BUILD_SLUGS
+  opts:
+    description: The build slug(s) to check. One build slug per line. We recommend
+      using the $ROUTER_STARTED_BUILD_SLUGS Env Var exported by the **Bitrise Start
+      Build** Step.
+    is_required: true
+    summary: The build slug(s) to check. One build slug per line.
+    title: Build slugs
+- build_artifacts_save_path: null
+  opts:
+    description: |
+      The provided path is where Bitrise will save your build artifacts so you can access them in the Workflow. Leave it empty if you don't want to save artifacts.
+    is_required: false
+    is_sensitive: false
+    summary: The provided path is where Bitrise will save your build artifacts.
+    title: The path of the build artifacts
+- abort_on_fail: "no"
+  opts:
+    description: Abort all started builds if any of the builds fails.
+    is_required: true
+    is_sensitive: false
+    title: Abort all builds if one fails
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: You can enable the verbose log for easier debugging.
+    is_required: true
+    title: Enable verbose log?
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"

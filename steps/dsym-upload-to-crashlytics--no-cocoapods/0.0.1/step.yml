@@ -1,0 +1,35 @@
+title: Firebase dSym Upload (SPM installation)
+summary: |
+  Upload of dSym to Firebase Crashlytics with SPM installation
+description: |
+  This step will help you to upload dSym of your build to Firebase Crashlytics with SPM installation.
+website: https://github.com/hughmaurer/bitrise-step-dsym-upload-to-crashlytics--no-cocoapods
+source_code_url: https://github.com/hughmaurer/bitrise-step-dsym-upload-to-crashlytics--no-cocoapods
+support_url: https://github.com/hughmaurer/bitrise-step-dsym-upload-to-crashlytics--no-cocoapods/issues
+published_at: 2023-12-20T12:22:50.911776+01:00
+source:
+  git: https://github.com/hughmaurer/bitrise-step-dsym-upload-to-crashlytics--no-cocoapods.git
+  commit: 5613b9ade23a2f1472fe11eaa9e59da904d537d2
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- google_plist_path: null
+  opts:
+    description: |
+      The location is usually in the form ./YOUR-APP-NAME/GoogleService-Info.plist
+    is_required: true
+    title: Location of your GoogleService info plist
+- dsym_location: $BITRISE_DSYM_PATH
+  opts:
+    description: |
+      This is the location of your dSYMs. Usually it is $BITRISE\_DSYM\_PATH
+    is_expand: true
+    is_required: true
+    summary: This is the location of your dSYMs that you want to upload to Firebase.
+    title: Location of the bitrise dSYMs
