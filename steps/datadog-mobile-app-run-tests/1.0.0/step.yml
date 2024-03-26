@@ -1,0 +1,151 @@
+title: Datadog Mobile App Run Tests
+summary: |
+  Step to run Datadog Synthetic tests on your CI
+description: |
+  Step to run Datadog Synthetic tests on your CI
+
+  With this Step you can run Synthetic tests during your Bitrise CI and ensure all your teams using Bitrise can benefit from Synthetic tests at every stage of the software lifecycle.
+
+  To use this Step:
+  - Create Synthetic tests in Datadog. See [Synthetic Monitoring documentation](https://docs.datadoghq.com/synthetics/) for a detailed explanation.
+  - Upload and build your app in the CI.
+  - Configure and run this Step in your Bitrise workflow.
+
+  This Step will:
+  - Run the Synthetic tests that have been configured through the inputs.
+  - Fail your CI if there are any issues.
+  - Upload the results to Datadog.
+
+  For examples of how the inputs of this Step can be configured check the [README for this step](https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests)
+website: https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests
+source_code_url: https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests
+support_url: https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests/issues
+published_at: 2024-03-11T18:24:24.180051+01:00
+source:
+  git: https://github.com/DataDog/synthetics-test-automation-bitrise-step-run-tests.git
+  commit: 9a7e5d1bb1b57ca806798dee80d2982a830529cf
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: run-tests.sh
+inputs:
+- api_key: $DATADOG_API_KEY
+  opts:
+    category: Required Inputs
+    description: The API key used to query the Datadog API.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Datadog API Key
+- app_key: $DATADOG_APP_KEY
+  opts:
+    category: Required Inputs
+    description: The application key used to query the Datadog API.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    title: Datadog APP Key
+- config_path: ""
+  opts:
+    category: Optional Inputs
+    description: The global JSON configuration used when launching tests.
+    title: Global JSON configuration
+- device_ids: ""
+  opts:
+    category: Optional Inputs
+    description: Override the mobile device(s) to run your mobile test.
+    title: Device IDs
+- fail_on_critical_errors: false
+  opts:
+    category: Optional Inputs
+    description: A boolean flag that fails the CI job if no tests were triggered,
+      or results could not be fetched from Datadog.
+    title: Fail on critical errors
+- fail_on_missing_tests: false
+  opts:
+    category: Optional Inputs
+    description: Fail if at least one specified test with a public ID (using `public_ids`
+      or listed in a test file) is missing in a run (for example, if it has been deleted
+      programmatically or on the Datadog site).
+    title: Fail on missing tests
+- fail_on_timeout: true
+  opts:
+    category: Optional Inputs
+    description: A boolean flag that fails the CI job if at least one test exceeds
+      the default test timeout.
+    title: Fail on timeout
+- files: ""
+  opts:
+    category: Optional Inputs
+    description: Glob pattern to detect Synthetic test configuration files.
+    title: Synthetic test config files
+- junit_report: ""
+  opts:
+    category: Optional Inputs
+    description: The filename for a JUnit report if you want to generate one.
+    title: JUnit Report
+- locations: ""
+  opts:
+    category: Optional Inputs
+    description: String of locations separated by semicolons to override the locations
+      where your tests run.
+    title: Locations
+- mobile_application_version: ""
+  opts:
+    category: Optional Inputs
+    description: Override the default mobile application version to test a different
+      version within Datadog.
+    title: Mobile Application Version
+- mobile_application_version_file_path: ""
+  opts:
+    category: Optional Inputs
+    description: Override the mobile application with a local or recently built application.
+      You may use $BITRISE_IPA_PATH or $BITRISE_APK_PATH from your previous build
+      steps.
+    title: Mobile Application Version File Path
+- opts:
+    category: Optional Inputs
+    description: The duration (in milliseconds) after which `datadog-ci` stops polling
+      for test results. The default is 30 minutes. At the CI level, test results completed
+      after this duration are considered failed.'
+    title: Polling Timeout
+  polling_timeout: 1800000
+- opts:
+    category: Optional Inputs
+    description: String of test IDs separated by commas for Synthetic tests you want
+      to trigger.
+    title: Synthetic test IDs
+  public_ids: ""
+- opts:
+    category: Optional Inputs
+    description: The Datadog site to send data to. If the `DD_SITE` environment variable
+      is set, it takes preference.
+    title: Datadog Site
+  site: datadoghq.com
+- opts:
+    category: Optional Inputs
+    description: The name of the custom subdomain set to access your Datadog application.
+      If the URL used to access Datadog is `myorg.datadoghq.com`, the `subdomain`
+      value needs to be set to `myorg`.
+    title: Custom subdomain
+  subdomain: app
+- opts:
+    category: Optional Inputs
+    description: Pass a query to select which Synthetic tests to run.
+    title: Test Search Query
+  test_search_query: ""
+- opts:
+    category: Optional Inputs
+    description: Use the Continuous Testing Tunnel to execute your test batch.
+    title: Tunnel
+  tunnel: false
+- opts:
+    category: Optional Inputs
+    description: Key-value pairs for injecting variables into tests. Must be formatted
+      using `KEY=VALUE`.
+    title: Variables
+  variables: ""
