@@ -30,7 +30,7 @@ support_url: https://github.com/camseda/bitrise-step-upload-to-sauce-labs/issues
 published_at: 2024-03-26T12:38:22.13670071+02:00
 source:
   git: https://github.com/camseda/bitrise-step-upload-to-sauce-labs.git
-  commit: 5717f2875625b7162db2f99b16027d37c1253bbb
+  commit: 291be42de92c3c1fe0ed1823969690640d19ae37
 project_type_tags:
   - ios
   - android
