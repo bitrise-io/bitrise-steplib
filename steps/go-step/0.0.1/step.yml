@@ -22,9 +22,9 @@ source:
   git: https://github.com/tothszabi/go-step.git
   commit: 1658484983e1a68c2ae20688d3df1fe1c2d56290
   urls:
-  - https://github.com/tothszabi/bitrise/go-step/download/0.0.1/go-step-darwin-arm64
-  - https://github.com/tothszabi/bitrise/go-step/download/0.0.1/go-step-darwin-amd64
-  - https://github.com/tothszabi/bitrise/go-step/download/0.0.1/go-step-linux-amd64
+  - https://github.com/tothszabi/go-step/releases/download/0.0.1/go-step-darwin-arm64
+  - https://github.com/tothszabi/go-step/releases/download/0.0.1/go-step-darwin-amd64
+  - https://github.com/tothszabi/go-step/releases/download/0.0.1/go-step-linux-amd64
 
 toolkit:
   go:
