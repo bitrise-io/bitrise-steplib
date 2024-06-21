@@ -1,0 +1,38 @@
+title: bitrise-test
+summary: |
+  foo
+description: |
+  bar
+website: https://github.com/Datadog/bitrise-step-bitrise-test
+source_code_url: https://github.com/Datadog/bitrise-step-bitrise-test
+support_url: https://github.com/Datadog/bitrise-step-bitrise-test/issues
+published_at: 2024-06-21T15:02:20.383667+02:00
+source:
+  git: https://github.com/DataDog/bitrise-test.git
+  commit: 1adc19dbf83ff4d47b11e5ae7e53c1b8fb8a1e24
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- example_step_input: Default Value - you can leave this empty if you want to
+  opts:
+    description: |
+      Description of this input.
+
+      Can be Markdown formatted text.
+    is_expand: true
+    is_required: true
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Input
+    value_options: []
+outputs:
+- EXAMPLE_STEP_OUTPUT: null
+  opts:
+    description: |
+      Description of this output.
+
+      Can be Markdown formatted text.
+    summary: Summary. No more than 2-3 sentences.
+    title: Example Step Output
