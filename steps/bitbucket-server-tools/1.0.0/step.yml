@@ -1,0 +1,93 @@
+title: '[Beta] Bitbucket And Bitrise Tools'
+summary: |
+  This step will check if the PR Title contains "[SV]" tag, it will stop the build on bit rise and add the commit status "FAILED" on the head commit of the PR.
+description: |
+  Checkout details for available functions and how they work:
+  https://github.com/KageRiyuu/bitrise-step-bitbucket-server-tools/blob/main/README.md
+website: https://github.com/KageRiyuu/bitrise-step-bitbucket-server-tools/tree/main
+source_code_url: https://github.com/KageRiyuu/bitrise-step-bitbucket-server-tools/tree/main
+support_url: https://github.com/KageRiyuu/bitrise-step-bitbucket-server-tools/tree/main
+published_at: 2024-06-29T08:21:26.376752+09:00
+source:
+  git: https://github.com/KageRiyuu/bitrise-step-bitbucket-server-tools.git
+  commit: 651c251231b76a3f4d5c7a068a048e0c58995ebc
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: bitbucket-tools
+is_always_run: true
+is_skippable: true
+run_if: ""
+inputs:
+- bitbucket_api_access_token: null
+  opts:
+    category: Bitbucket
+    is_required: true
+    is_sensitive: true
+    summary: Token to access you bitbucket account
+    title: Bitbucket Access Token
+- bitbucket_domain: null
+  opts:
+    category: Bitbucket
+    is_required: true
+    is_sensitive: false
+    summary: Your Bitbucket server url
+    title: Bitbucket Server Domain Name
+- bitbucket_project_key: null
+  opts:
+    category: Bitbucket
+    is_required: true
+    is_sensitive: false
+    summary: Key of your Project in Bitbucket
+    title: Bitbucket Project Key
+- bitbucket_repo_slug: null
+  opts:
+    category: Bitbucket
+    is_required: true
+    is_sensitive: false
+    summary: Id of the repository in Bitbucket
+    title: Bitbucket Repo Slug
+- bitrise_api_access_token: null
+  opts:
+    category: Bitrise
+    is_required: true
+    is_sensitive: true
+    summary: Auth token needed to call Bitrise Apis
+    title: Bitrise Access Token
+- bitrise_app_slug: $BITRISE_APP_SLUG
+  opts:
+    category: Bitrise
+    is_required: true
+    is_sensitive: false
+    summary: Id of the app in Bitrise
+    title: Bitrise App Slug
+- function: Skip Verification
+  opts:
+    category: Function
+    is_required: true
+    is_sensitive: false
+    summary: Function you want to perform
+    title: Function
+    value_options:
+    - Skip Verification
+    - Clean PR (Not Available)
+- opts:
+    category: Function
+    is_required: false
+    is_sensitive: false
+    summary: Id of the Pull Request
+    title: Pull Request Id
+  pr_id: $BITRISE_PULL_REQUEST
+- bitrise_build_slug: $BITRISE_BUILD_SLUG
+  opts:
+    category: Function
+    is_required: false
+    is_sensitive: false
+    summary: Id of the Build in Bitbucket
+    title: Bitrise Build Slug
+outputs:
+- SKIPPED_VERIFICATION: null
+  opts:
+    summary: True or False, telling is verfication skipped or not
+    title: Skipped Verification
