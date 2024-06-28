@@ -1,0 +1,63 @@
+title: Genymotion SaaS install gmsaas cli
+summary: |
+  Install gmsaas,  command line interface to rule all your virtual devices hosted in Genymotion SaaS solution.
+description: |
+  This step installs gmsaas cli, it allaows user to rule all your virtual devices hosted in Genymotion SaaS solution without opening an Internet browser.
+website: https://github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli
+source_code_url: https://github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli
+support_url: https://github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli/issues
+published_at: 2024-06-28T14:43:25.184948733+02:00
+source:
+  git: https://github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli.git
+  commit: 4a3926f4a09256e40157512202a72a725e83bd66
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli
+deps:
+  brew:
+  - name: python3
+  - bin_name: pip3
+  apt_get:
+  - name: python3-pip
+  - bin_name: pip3
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_token: ""
+  opts:
+    description: API Token to authenticate to your Genymotion Cloud SaaS account.
+      If you don't have an account please register on [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)
+      and create an [API Token](https://cloud.geny.io/api)
+    summary: ""
+    title: Genymotion Cloud SaaS API Token
+- email: ""
+  opts:
+    description: 'DEPRECATED : Email of your Genymotion Cloud SaaS account, if you
+      don''t have an account please create it first on [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)'
+    summary: ""
+    title: Genymotion Cloud SaaS email
+- opts:
+    description: 'DEPRECATED: Password of your Genymotion Cloud SaaS account.'
+    is_sensitive: true
+    summary: ""
+    title: Genymotion Cloud SaaS password
+  password: ""
+- gmsaas_version: 1.11.0
+  opts:
+    description: 'Install a specific version of gmsaas, per default it will install
+      the latest gmsaas compatible : 1.11.0'
+    summary: ""
+    title: gmsaas version
