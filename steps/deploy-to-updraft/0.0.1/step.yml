@@ -6,7 +6,7 @@ description: |
 website: https://github.com/appswithlove/bitrise-step-deploy-to-updraft-android
 source_code_url: https://github.com/appswithlove/bitrise-step-deploy-to-updraft-android
 support_url: https://github.com/appswithlove/bitrise-step-deploy-to-updraft-android/issues
-published_at: 2024-08-26T16:46:34.2564+04:00
+published_at: 2024-08-26T16:52:45.812549+04:00
 source:
   git: https://github.com/appswithlove/bitrise-step-deploy-to-updraft.git
   commit: 43ee5b523b520942b6a764e7bbd4c194dd79f860
