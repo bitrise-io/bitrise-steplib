@@ -1,0 +1,91 @@
+title: Deploy to Updraft
+summary: |
+  Distribute your app's builds (ipa/apk/aab) to your team and testers
+description: "This step will help you to upload your app versions to [Updraft](https://getupdraft.com)
+  for further app distribution. \nUpdraft is a comprehensive platform for app distribution
+  and beta testing, especially for iOS and Android applications. It supports developers
+  in managing app deployments, handling app beta releases, and facilitating feedback
+  collection from testers. \n\nKey features include:\n- App Management: Users can
+  manage all app settings from a centralized dashboard, including adding applications
+  to a project, adding deployment environment, upload app versions, manage settings\n-
+  App Distribution: The platform allows easy distribution of apps through various
+  channels like email notifications, QR code installations, or public link installation.
+  Testers and Groups can be added to each app release. It also supports auto-updates
+  via an in-app notification system if the Updraft SDK is integrated.\n- Build Management:
+  Updraft simplifies the process of uploading, resigning, and managing different iOS
+  and Android app versions, helping ensure that the right versions reach the right
+  testers and members.\n- Resigning: Updraft allows you to resign iOS apps with new
+  distribution certificates and provisioning profiles. For Android you can add your
+  keystore and resign your uploaded .aab files with your keystore to ensure your play
+  store release will get accepeted.\n- Integration Support: The platform integrates
+  with multiple CI/CD tools and third-party services like Slack, Microsoft Teams,
+  Gitlab, Teamcity and Jenkins, making it easier to incorporate into existing workflows.
+  Updraft also has available Plugins for Fastlane and Gradle.\n\nThese features make
+  GetUpdraft a robust solution for teams looking to streamline their internal app
+  testing and app distribution processes.\n\nUseful links:\n- [Updraft](https://getupdraft.com)\n-
+  [Updraft Documentation](https://docs.getupdraft.com)\n"
+website: https://github.com/appswithlove/bitrise-step-deploy-to-updraft
+source_code_url: https://github.com/appswithlove/bitrise-step-deploy-to-updraft
+support_url: https://github.com/appswithlove/bitrise-step-deploy-to-updraft/issues
+published_at: 2024-09-03T13:33:50.831795+04:00
+source:
+  git: https://github.com/appswithlove/bitrise-step-deploy-to-updraft.git
+  commit: b017aacf8ea97b9e2ecae61669f23e95630a2b2f
+project_type_tags:
+- ios
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your API Key you will find in your Profile.
+    title: Updraft API_KEY
+- app_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The App Key you will find on the application overview. The App key differs
+      for each environment.
+    title: Updraft APP_KEY
+- app_path: ""
+  opts:
+    description: |
+      Path to app's binary file (IPA/APK/AAB) to upload.
+      $BITRISE\_APK\_PATH, $BITRISE\_IPA\_PATH, and so on.
+    is_required: true
+    summary: Path to app's binary file (IPA/APK/AAB) to upload
+    title: App file path
+- opts:
+    description: |
+      Message to show on build download page
+    is_required: false
+    summary: Release notes
+    title: Release notes
+  release_notes: ""
+outputs:
+- UPDRAFT_DEPLOY_STEP_OUTPUT: null
+  opts:
+    description: "JSON reponse of Updraft backend \n"
+    summary: Deploy Updraft step output json
+    title: Deploy Updraft step output
