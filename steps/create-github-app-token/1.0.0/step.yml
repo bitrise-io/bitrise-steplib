@@ -1,0 +1,47 @@
+title: Create GitHub app token
+summary: |
+  Create GitHub app token
+description: |
+  Create GitHub app token
+website: https://github.com/tdrk18/bitrise-step-create-github-app-token
+source_code_url: https://github.com/tdrk18/bitrise-step-create-github-app-token
+support_url: https://github.com/tdrk18/bitrise-step-create-github-app-token/issues
+published_at: 2024-06-21T13:00:15.853079+09:00
+source:
+  git: https://github.com/tdrk18/bitrise-step-create-github-app-token.git
+  commit: 763547761aaf4b2fc86c915b3efd6251b4134707
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- github_repository: null
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: ""
+    title: GitHub repository name
+- client_id: null
+  opts:
+    description: ""
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Client ID of GitHub App
+    title: Client ID
+- opts:
+    description: Please download the private key before running this step
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: The local path for the private key of GitHub App
+    title: Private key path
+  private_key_path: null
+outputs:
+- GITHUB_APP_TOKEN: null
+  opts:
+    summary: Token for a GitHub App
+    title: Token
