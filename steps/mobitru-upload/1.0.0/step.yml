@@ -1,0 +1,104 @@
+title: Mobitru Upload
+summary: |
+  Upload an APK or IPA file to Mobitru platform
+description: |
+  Upload your application to [Mobitru](https://mobitru.com) and get back the app's artifact ID.
+  It can be used to install the app on Mobitru remote device for manual or automated testing.
+website: https://github.com/Mobitru/bitrise-step-mobitru-upload
+source_code_url: https://github.com/Mobitru/bitrise-step-mobitru-upload
+support_url: https://github.com/Mobitru/bitrise-step-mobitru-upload/issues
+published_at: 2024-05-27T11:42:06.933734+03:00
+source:
+  git: https://github.com/Mobitru/bitrise-step-mobitru-upload.git
+  commit: 78cd8386c8f729185bdb97359b9c0df377f14518
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  apt_get:
+  - name: curl
+  - name: jq
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      The app file you want to upload to Mobitru, usually $BITRISE\_APK\_PATH or $BITRISE\_IPA\_PATH.
+    is_expand: true
+    is_required: true
+    summary: Location of the APK or IPA file to upload.
+    title: Location of the APK or IPA file
+  upload_filepath: null
+- mobitru_access_key: null
+  opts:
+    description: |
+      See [Mobitru documentation](https://mobitru.com/docs/access-key/) to learn more about access key.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Mobitru access key used to authorize requests to Mobitru platform.
+    title: Mobitru access key
+- mobitru_billing_unit_slug: personal
+  opts:
+    description: |
+      Specify your billing unit slug if you are using Mobitru team account.
+      Otherwise specify `personal` for personal account.
+
+      See [Mobitru documentation](https://mobitru.com/docs/accounts/) to learn more about account types.
+    is_expand: true
+    is_required: true
+    summary: Mobitru billing unit slug used to identify team space to upload an application
+      to.
+    title: Mobitru billing unit slug
+- mobitru_address: https://app.mobitru.com/
+  opts:
+    description: |
+      Override your target Mobitru instance address if requited.
+    is_expand: true
+    is_required: true
+    summary: HTTP address of the Mobitru instance.
+    title: Mobitru address
+- opts:
+    description: |
+      See [Mobitru documentation](https://mobitru.com/docs/team-apps/) to learn more about shared apps.
+    is_expand: true
+    is_required: true
+    summary: Share uploaded file with the team or allow access to the uploader user
+      only.
+    title: Share with the team
+    value_options:
+    - "yes"
+    - "no"
+  share_with_team: "yes"
+- artifact_alias: null
+  opts:
+    description: |
+      Specify arbitrary text alias for the uploaded artifact, e.g. `v1.2.3`, `2024-05-12`, `stage`, etc.
+      It could be useful to distinguish your artifact in list of previously uploaded apps.
+    is_expand: true
+    is_required: false
+    summary: Alias for the uploaded artifact.
+    title: Artifact alias
+outputs:
+- MOBITRU_ARTIFACT_ID: null
+  opts:
+    description: |
+      Use artifact ID to install uploaded app to Mobitru remote device in your tests.
+
+      See [Mobitru API documentation](https://app.mobitru.com/wiki/apidoc/#api-InstallApp) for more information.
+    summary: Mobitru artifact ID of the uploaded app.
+    title: Mobitru artifact ID
