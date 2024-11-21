@@ -1,0 +1,62 @@
+title: Save Gradle Cache
+summary: Saves Gradle caches. This Step needs to be used in combination with **Restore
+  Gradle Cache**.
+description: |
+  Saves Gradle dependency caches. This Step needs to be used in combination with **Restore Gradle Cache**.
+
+  This Step is based on [key-based caching](https://devcenter.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for Gradle. If you'd like to change the cache key (or paths to cache), you might want to use the generic [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache) Step instead.
+
+  #### Related steps
+
+  [Restore Gradle cache](https://github.com/bitrise-steplib/bitrise-step-restore-gradle-cache/)
+
+  [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-save-gradle-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-save-gradle-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-save-gradle-cache/issues
+published_at: 2024-11-08T09:32:18.291974157Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-save-gradle-cache.git
+  commit: a7b8640c0223d3d26b298482bc3d5247894130d0
+project_type_tags:
+- android
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-save-gradle-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- compression_level: 3
+  opts:
+    is_required: false
+    summary: Zstd compression level to control speed / archive size. Set to 1 for
+      fastest option. Valid values are between 1 and 19. Defaults to 3.
+    title: Compression level
+- opts:
+    is_required: true
+    summary: Save transformed classes and resources under `$HOME/.gradle/caches/**/transforms`
+    title: Save transforms
+    value_options:
+    - "true"
+    - "false"
+  save_transforms: "false"
