@@ -1,0 +1,163 @@
+title: Upload Gradle Dependencies
+summary: |
+  Uploads gradle dependencies to Github Dependency Graph
+description: |
+  This step uses the Github Dependency Graph Gradle plugin in order to generate a comprehensive dependency
+  graph for this project, and uploads it to Github using the Github Dependency Submission REST API.
+website: https://github.com/esteluk/bitrise-step-upload-gradle-github-dependencies
+source_code_url: https://github.com/esteluk/bitrise-step-upload-gradle-github-dependencies
+support_url: https://github.com/esteluk/bitrise-step-upload-gradle-github-dependencies/issues
+published_at: 2024-08-13T22:28:28.760366+01:00
+source:
+  git: https://github.com/esteluk/bitrise-step-upload-gradle-github-dependencies.git
+  commit: 22b0325f719cab801ec4abbfcd68e98fb72de845
+project_type_tags:
+- android
+type_tags:
+- artifact-info
+toolkit:
+  go:
+    package_name: github.com/esteluk/bitrise-step-upload-gradle-github-dependencies
+inputs:
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    category: Config
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper ensures
+      that the right Gradle version is installed and used for the build.
+      You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+      The path should be relative to the repository root. For example, `./gradlew`,
+      or if it is in a sub directory, `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- github_token: null
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Access token used to authenticate with the Github API
+    title: Github Access Token
+- included_projects: null
+  opts:
+    category: Filtering dependencies
+    is_expand: true
+    summary: A regex of projects whose dependencies should be included in the dependency
+      graph. Defaults to include all projects.
+    title: Included projects
+- excluded_projects: null
+  opts:
+    category: Filtering dependencies
+    is_expand: true
+    summary: A regex of projects whose dependencies should be excluded in the dependency
+      graph. Defaults to exclude no projects.
+    title: Excluded projects
+- included_configurations: null
+  opts:
+    category: Filtering dependencies
+    is_expand: true
+    summary: A regex of configurations whose dependencies should be included in the
+      dependency graph. Defaults to include all configurations.
+    title: Included configurations
+- excluded_configurations: null
+  opts:
+    category: Filtering dependencies
+    is_expand: true
+    summary: A regex of configurations whose dependencies should be excluded in the
+      dependency graph. Defaults to exclude no configurations.
+    title: Excluded configurations
+- opts:
+    category: Controlling dependency scope
+    description: "Dependencies in Github's dependency graph can be identified as having
+      either a Runtime or a Development scope,\nthis helps us to identify those dependencies
+      that are only used within eg. a project's test harness. \n"
+    is_expand: true
+    is_required: false
+    summary: A regex of projects whose dependencies should be given a runtime scope
+      in the dependency graph. Defaults to include all projects.
+    title: Runtime included projects
+  runtime_included_projects: null
+- opts:
+    category: Controlling dependency scope
+    is_expand: true
+    summary: A regex of projects whose dependencies that do not provide runtime scoped
+      dependencies. Defaults to exclude no projects.
+    title: Runtime excluded projects
+  runtime_excluded_projects: null
+- opts:
+    category: Controlling dependency scope
+    is_expand: true
+    summary: A regex of configurations whose dependencies should be given a runtime
+      scope in the dependency graph. Defaults to include all configurations.
+    title: Runtime included configurations
+  runtime_included_configurations: null
+- opts:
+    category: Controlling dependency scope
+    is_expand: true
+    summary: A regex of configurations whose dependencies that do not provide runtime
+      scoped dependencies. Defaults to exclude no configurations.
+    title: Runtime excluded configurations
+  runtime_excluded_configurations: null
+- github_job_correlator: $BITRISE_TRIGGERED_WORKFLOW_ID
+  opts:
+    category: Github
+    is_expand: true
+    is_required: true
+    summary: Populates the `job.correlator` property in the Submission API. Can be
+      used to associate a number of submissions together.
+    title: Github Dependency Graph Job Correlator
+- github_job_id: $BITRISE_BUILD_SLUG
+  opts:
+    category: Github
+    is_expand: true
+    is_required: true
+    summary: The ID of the job that creates this dependency graph
+    title: Github Dependency Graph Job ID
+- github_graph_ref: refs/heads/$BITRISE_GIT_BRANCH
+  opts:
+    category: Github
+    is_expand: true
+    is_required: true
+    summary: Reference to the repository branch that triggered this snapshot.
+    title: Github Dependency Graph Ref
+- github_graph_sha: $GIT_CLONE_COMMIT_HASH
+  opts:
+    category: Github
+    description: |
+      The SHA of the commit to check.
+    is_dont_change_value: true
+    is_expand: true
+    is_required: false
+    summary: The SHA of the commit to check.
+    title: Github Commit SHA-1 Hash
+- github_graph_workspace: $BITRISE_SOURCE_DIR
+  opts:
+    category: Github
+    is_expand: true
+    is_required: true
+    summary: The root directory of the repository
+    title: Github Dependency Graph Workspace
+- github_owner: $BITRISEIO_GIT_REPOSITORY_OWNER
+  opts:
+    category: Github repo
+    description: |
+      The name of the owner of the GitHub repository.
+    is_expand: true
+    is_required: false
+    summary: The name of the GitHub repository.
+    title: GitHub repository owner
+- github_repo: $BITRISEIO_GIT_REPOSITORY_SLUG
+  opts:
+    category: Github repo
+    description: |
+      The name of the GitHub repository.
+    is_expand: true
+    is_required: false
+    summary: The name of the GitHub repository.
+    title: GitHub repository
+outputs:
+- GITHUB_DEPENDENCY_GRAPH: null
+  opts:
+    summary: The dependency graph that is submitted to Github
+    title: Path to Github dependency graph
