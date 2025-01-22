@@ -10,6 +10,7 @@ published_at: 2025-01-22T22:35:35.518579+01:00
 source:
   git: https://github.com/HUK-COBURG/bitrise-step-microsoft-teams-adaptive-card.git
   commit: e80eb3ba4bb10e498e61f754935a71abb83d124f
+
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
