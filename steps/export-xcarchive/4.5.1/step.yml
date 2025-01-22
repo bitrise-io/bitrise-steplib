@@ -1,0 +1,293 @@
+title: Export iOS and tvOS Xcode archive
+summary: Export iOS and tvOS IPA from an existing Xcode archive
+description: |-
+  Exports an IPA from an existing iOS and tvOS `.xcarchive` file. You can add multiple **Export iOS and tvOS Xcode archive** Steps to your Workflows to create multiple different signed .ipa files.
+  The Step also logs you into your Apple Developer account based on the [Apple service connection you provide on Bitrise](https://devcenter.bitrise.io/en/accounts/connecting-to-services/apple-services-connection.html) and downloads any provisioning profiles needed for your project based on the **Distribution method**.
+
+  ### Configuring the Step
+  Before you start:
+  - Make sure you have connected your [Apple Service account to Bitrise](https://devcenter.bitrise.io/en/accounts/connecting-to-services/apple-services-connection.html).
+  Alternatively, you can upload certificates and profiles to Bitrise manually, then use the Certificate and Profile installer step before Xcode Archive
+  - Make sure certificates are uploaded to Bitrise's **Code Signing** tab. The right provisioning profiles are automatically downloaded from Apple as part of the automatic code signing process.
+
+  To configure the Step:
+  1. **Archive Path**: Specifies the archive that should be exported. The input value sets xcodebuild's `-archivePath` option.
+  2. **Select a product to distribute**: Decide if an App or an App Clip IPA should be exported.
+  3. **Distribution method**: Describes how Xcode should export the archive: development, app-store, ad-hoc, or enterprise.
+
+  Under **Automatic code signing**:
+  1. **Automatic code signing method**: Select the Apple service connection you want to use for code signing. Available options: `off` if you don't do automatic code signing, `api-key` [if you use API key authorization](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-api-key.html), and `apple-id` [if you use Apple ID authorization](https://devcenter.bitrise.io/en/accounts/connecting-to-services/connecting-to-an-apple-service-with-apple-id.html).
+  2. **Register test devices on the Apple Developer Portal**: If this input is set, the Step will register the known test devices on Bitrise from team members with the Apple Developer Portal. Note that setting this to `yes` may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+  3. **The minimum days the Provisioning Profile should be valid**: If this input is set to >0, the managed Provisioning Profile will be renewed if it expires within the configured number of days. Otherwise the Step renews the managed Provisioning Profile if it is expired.
+  4. The **Code signing certificate URL**, the **Code signing certificate passphrase**, the **Keychain path**, and the **Keychain password** inputs are automatically populated if certificates are uploaded to Bitrise's **Code Signing** tab. If you store your files in a private repo, you can manually edit these fields.
+
+  If you want to set the Apple service connection credentials on the step-level (instead of using the one configured in the App Settings), use the Step inputs in the **App Store Connect connection override** category. Note that this only works if **Automatic code signing method** is set to `api-key`.
+
+  Under **IPA export configuration**:
+  1. **Developer Portal team**: Add the Developer Portal team's name to use for this export. This input defaults to the team used to build the archive.
+  2. **Rebuild from bitcode**: For non-App Store exports, should Xcode re-compile the app from bitcode?
+  3. **Include bitcode**: For App Store exports, should the package include bitcode?
+  4. **iCloud container environment**: If the app is using CloudKit, this input configures the `com.apple.developer.icloud-container-environment` entitlement. Available options vary depending on the type of provisioning profile used, but may include: `Development` and `Production`.
+  5. **Export options plist content**: Specifies a `plist` file content that configures archive exporting. If not specified, the Step will auto-generate it.
+
+  Under Debugging:
+  1. **Verbose logging***: You can set this input to `yes` to produce more informative logs.
+website: https://github.com/bitrise-steplib/steps-export-xcarchive
+source_code_url: https://github.com/bitrise-steplib/steps-export-xcarchive
+support_url: https://github.com/bitrise-steplib/steps-export-xcarchive/issues
+published_at: 2024-04-16T14:29:48.780774145Z
+source:
+  git: https://github.com/bitrise-steplib/steps-export-xcarchive.git
+  commit: 52cb93a1cab6426622c85f1f2c6f26f538baec17
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+- xamarin
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-export-xcarchive
+is_always_run: false
+is_skippable: false
+inputs:
+- archive_path: $BITRISE_XCARCHIVE_PATH
+  opts:
+    description: |-
+      Specifies the archive that should be exported.
+
+      The input value sets xcodebuild's `-archivePath` option.
+    is_required: true
+    summary: Specifies the archive that should be exported.
+    title: Archive path
+- opts:
+    is_required: true
+    summary: Describes which product to export.
+    title: Select a product to distribute
+    value_options:
+    - app
+    - app-clip
+  product: app
+- distribution_method: development
+  opts:
+    is_required: true
+    summary: Describes how Xcode should export the archive.
+    title: Distribution method
+    value_options:
+    - development
+    - app-store
+    - ad-hoc
+    - enterprise
+- automatic_code_signing: "off"
+  opts:
+    category: Automatic code signing
+    description: |-
+      This input determines which Bitrise Apple service connection should be used for automatic code signing.
+
+      Available values:
+      - `off`: Do not do any auto code signing.
+      - `api-key`: [Bitrise Apple Service connection with API Key](https://devcenter.bitrise.io/getting-started/connecting-to-services/setting-up-connection-to-an-apple-service-with-api-key/).
+      - `apple-id`: [Bitrise Apple Service connection with Apple ID](https://devcenter.bitrise.io/getting-started/connecting-to-services/connecting-to-an-apple-service-with-apple-id/).
+    is_required: true
+    summary: This input determines which Bitrise Apple service connection should be
+      used for automatic code signing.
+    title: Automatic code signing method
+    value_options:
+    - "off"
+    - api-key
+    - apple-id
+- opts:
+    category: Automatic code signing
+    description: |-
+      If this input is set, the Step will register the known test devices on Bitrise from team members with the Apple Developer Portal.
+
+      Note that setting this to yes may cause devices to be registered against your limited quantity of test devices in the Apple Developer Portal, which can only be removed once annually during your renewal window.
+    is_required: true
+    summary: If this input is set, the Step will register the known test devices on
+      Bitrise from team members with the Apple Developer Portal.
+    title: Register test devices on the Apple Developer Portal
+    value_options:
+    - "yes"
+    - "no"
+  register_test_devices: "no"
+- opts:
+    category: Automatic code signing
+    description: |-
+      If this input is set, the Step will register the listed devices from this file with the Apple Developer Portal.
+
+      The format of the file is a comma separated list of the identifiers. For example:
+      `00000000–0000000000000001,00000000–0000000000000002,00000000–0000000000000003`
+
+      And in the above example the registered devices appear with the name of `Device 1`, `Device 2` and `Device 3` in the Apple Developer Portal.
+
+      Note that setting this will have a higher priority than the Bitrise provided devices list.
+    summary: If this input is set, the Step will register the listed devices from
+      this file with the Apple Developer Portal.
+    title: Path of file containing the devices to be registered
+  test_device_list_path: null
+- min_profile_validity: "0"
+  opts:
+    category: Automatic code signing
+    description: |-
+      If this input is set to >0, the managed Provisioning Profile will be renewed if it expires within the configured number of days.
+
+      Otherwise the Step renews the managed Provisioning Profile if it is expired.
+    is_required: true
+    summary: If this input is set to >0, the managed Provisioning Profile will be
+      renewed if it expires within the configured number of days.
+    title: The minimum days the Provisioning Profile should be valid
+- certificate_url_list: $BITRISE_CERTIFICATE_URL
+  opts:
+    category: Automatic code signing
+    description: |-
+      URL of the code signing certificate to download.
+
+      Multiple URLs can be specified, separated by a pipe (`|`) character.
+
+      Local file path can be specified, using the `file://` URL scheme.
+    is_required: true
+    is_sensitive: true
+    summary: URL of the code signing certificate to download.
+    title: Code signing certificate URL
+- opts:
+    category: Automatic code signing
+    description: |-
+      Passphrases for the provided code signing certificates.
+
+      Specify as many passphrases as many Code signing certificate URL provided, separated by a pipe (`|`) character.
+
+      Certificates without a passphrase: for using a single certificate, leave this step input empty. For multiple certificates, use the separator as if there was a passphrase (examples: `pass|`, `|pass|`, `|`)
+    is_required: false
+    is_sensitive: true
+    summary: Passphrases for the provided code signing certificates.
+    title: Code signing certificate passphrase
+  passphrase_list: $BITRISE_CERTIFICATE_PASSPHRASE
+- keychain_path: $HOME/Library/Keychains/login.keychain
+  opts:
+    category: Automatic code signing
+    is_dont_change_value: true
+    is_required: true
+    summary: Path to the Keychain where the code signing certificates will be installed.
+    title: Keychain path
+- keychain_password: $BITRISE_KEYCHAIN_PASSWORD
+  opts:
+    category: Automatic code signing
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: Password for the provided Keychain.
+    title: Keychain password
+- export_development_team: null
+  opts:
+    category: IPA export configuration
+    description: |-
+      The Developer Portal team to use for this export.
+
+      Defaults to the team used to build the archive.
+
+      Defining this is also required when Automatic Code Signing is set to `apple-id` and the connected account belongs to multiple teams.
+    summary: The Developer Portal team to use for this export.
+    title: Developer Portal team
+- compile_bitcode: "yes"
+  opts:
+    category: IPA export configuration
+    is_required: true
+    summary: For __non-App Store__ exports, should Xcode re-compile the app from bitcode?
+    title: Rebuild from bitcode
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    category: IPA export configuration
+    is_required: true
+    summary: For __App Store__ exports, should the package include bitcode?
+    title: Include bitcode
+    value_options:
+    - "yes"
+    - "no"
+  upload_bitcode: "yes"
+- manage_version_and_build_number: "no"
+  opts:
+    category: IPA export configuration
+    is_required: true
+    summary: Should Xcode manage the app's build number when uploading to App Store
+      Connect. This will change the version and build numbers of all content in your
+      app only if the is an invalid number (like one that was used previously or precedes
+      your current build number). The input will not work if `export options plist
+      content` input has been set. Default set to No.
+    title: Xcode manage version and build number (App Store Connect)
+    value_options:
+    - "yes"
+    - "no"
+- export_options_plist_content: null
+  opts:
+    category: IPA export configuration
+    description: |-
+      Specifies a plist file content that configures archive exporting.
+
+      If not specified, the Step will auto-generate it.
+    summary: Specifies a plist file content that configures archive exporting.
+    title: Export options plist content
+- api_key_path: null
+  opts:
+    category: App Store Connect connection override
+    description: |-
+      Local path or remote URL to the private key (p8 file) for App Store Connect API.
+      This overrides the Bitrise-managed API connection, only set this input if you want to control the API connection
+      on a step-level. Most of the time it's easier to set up the connection on the App Settings page on Bitrise.
+      The input value can be a file path (eg. `$TMPDIR/private_key.p8`) or an HTTPS URL.
+      This input only takes effect if the other two connection override inputs are set too (`api_key_id`, `api_key_issuer_id`).
+    is_required: false
+    summary: Local path or remote URL to the private key (p8 file). This overrides
+      the Bitrise-managed API connection.
+    title: App Store Connect API private key
+- api_key_id: null
+  opts:
+    category: App Store Connect connection override
+    description: |-
+      Private key ID used for App Store Connect authentication.
+      This overrides the Bitrise-managed API connection, only set this input if you want to control the API connection
+      on a step-level. Most of the time it's easier to set up the connection on the App Settings page on Bitrise.
+      This input only takes effect if the other two connection override inputs are set too (`api_key_path`, `api_key_issuer_id`).
+    is_required: false
+    summary: Private key ID used for App Store Connect authentication. This overrides
+      the Bitrise-managed API connection.
+    title: App Store Connect API key ID
+- api_key_issuer_id: null
+  opts:
+    category: App Store Connect connection override
+    description: |-
+      Private key issuer ID used for App Store Connect authentication.
+      This overrides the Bitrise-managed API connection, only set this input if you want to control the API connection
+      on a step-level. Most of the time it's easier to set up the connection on the App Settings page on Bitrise.
+      This input only takes effect if the other two connection override inputs are set too (`api_key_path`, `api_key_id`).
+    is_required: false
+    summary: Private key issuer ID used for App Store Connect authentication. This
+      overrides the Bitrise-managed API connection.
+    title: App Store Connect API issuer ID
+- opts:
+    category: Debugging
+    is_required: true
+    summary: If this input is set, the Step will print additional logs for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+outputs:
+- BITRISE_IPA_PATH: null
+  opts:
+    summary: The created iOS or tvOS .ipa file's path.
+    title: iOS or tvOS IPA
+- BITRISE_DSYM_PATH: null
+  opts:
+    summary: Step will collect every dsym (app dsym and framwork dsyms) in a directory,
+      zip it and export the zipped directory path.
+    title: The created iOS or tvOS .dSYM zip file's path.
+- BITRISE_IDEDISTRIBUTION_LOGS_PATH: null
+  opts:
+    summary: Path to the xcdistributionlogs zip
+    title: xcdistributionlogs
