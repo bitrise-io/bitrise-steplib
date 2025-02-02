@@ -6,10 +6,10 @@ description: |
 website: https://github.com/j796160836/bitrise-step-code-signing-setting-patch
 source_code_url: https://github.com/j796160836/bitrise-step-code-signing-setting-patch
 support_url: https://github.com/j796160836/bitrise-step-code-signing-setting-patch/issues
-published_at: 2019-12-05T14:56:04.819635+08:00
+published_at: 2025-02-02T22:42:26.764028+08:00
 source:
   git: https://github.com/j796160836/bitrise-step-code-signing-setting-patch.git
-  commit: 99a14f5751560cd6fb1737907a1bc698a62394a1
+  commit: b3310ccb1c8bbc2eeddd7337441220b4ef9a0574
 host_os_tags:
 - osx-10.10
 project_type_tags:
@@ -54,10 +54,21 @@ inputs:
     value_options:
     - Automatic
     - Manual
+- debug_development_configuration: null
+  opts:
+    description: |
+      The **debug configuration** value will be replaced.
+      Please set your value, or by default you have to use `Debug`.
+    is_expand: true
+    is_required: true
+    summary: The **debug configuration** value will be replaced.
+    title: Development Configuration (Debug)
+    value_options: []
 - debug_development_team: null
   opts:
-    description: "The **debug configurations** of **DEVELOPMENT_TEAM** value will
-      be replaced.  \nLeft blank means `None`.\n"
+    description: |
+      The **debug configurations** of **DEVELOPMENT_TEAM** value will be replaced.
+      Left blank means `None`.
     is_expand: true
     is_required: false
     summary: The **debug configurations** of **DEVELOPMENT_TEAM** value will be replaced.
@@ -86,6 +97,16 @@ inputs:
       value will be replaced.
     title: Provisioning Profile Specifier (Debug)
     value_options: []
+- opts:
+    description: |
+      The **release configuration** value will be replaced.
+      Please set your value, or by default you have to use `Release`.
+    is_expand: true
+    is_required: true
+    summary: The **release configuration** value will be replaced.
+    title: Release Configuration (Release)
+    value_options: []
+  release_configuration: null
 - opts:
     description: "The **release configurations** of **DEVELOPMENT_TEAM** value will
       be replaced.  \nLeft blank means `None`.\n"
