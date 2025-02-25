@@ -13,7 +13,7 @@ description: "You can run any commands available for Revopush cli in your workfl
 website: https://github.com/revopush/bitrise-step-revopush-command-line-interface
 source_code_url: https://github.com/revopush/bitrise-step-revopush-command-line-interface
 support_url: https://github.com/revopush/bitrise-step-revopush-command-line-interface/issues
-published_at: 2025-02-25T19:42:04.354518+04:00
+published_at: 2025-02-25T19:56:00.922264+04:00
 source:
   git: https://github.com/revopush/revopush-bitrise-step.git
   commit: fc6733a88782766869818dac0d0e0d8bb2f1a7de
