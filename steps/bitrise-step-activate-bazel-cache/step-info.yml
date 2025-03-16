@@ -1,0 +1,4 @@
+maintainer: bitrise
+removal_date: "2024-04-01"
+deprecate_notes: |
+  This Step is deprecated as it is replaced by the activate-build-cache-for-bazel Step.

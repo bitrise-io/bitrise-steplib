@@ -1,0 +1,118 @@
+title: Save Cache
+summary: Saves build cache using a cache key. This Step needs to be used in combination
+  with **Restore Cache**.
+description: |
+  Saves build cache using a cache key. This Step needs to be used in combination with **Restore Cache**.
+
+  #### About key-based caching
+
+  Key-based caching is a concept where cache archives are saved and restored using a unique cache key. One Bitrise project can have multiple cache archives stored simultaneously, and the **Restore Cache Step** downloads a cache archive associated with the key provided as a Step input. The **Save Cache** Step is responsible for uploading the cache archive with an exact key.
+
+  Caches can become outdated across builds when something changes in the project (for example, a dependency gets upgraded to a new version). In this case, a new (unique) cache key is needed to save the new cache contents. This is possible if the cache key is dynamic and changes based on the project state (for example, a checksum of the dependency lockfile is part of the cache key). If you use the same dynamic cache key when restoring the cache, the Step will download the most relevant cache archive available.
+
+  Key-based caching is platform-agnostic and can be used to cache anything by carefully selecting the cache key and the files/folders to include in the cache.
+
+  #### Templates
+
+  The Step requires a string key to use when uploading a cache archive. In order to always download the most relevant cache archive for each build, the cache key input can contain template elements. The **Restore cache Step** evaluates the key template at runtime and the final key value can change based on the build environment or files in the repo. Similarly, the **Save cache** Step also uses templates to compute a unique cache key when uploading a cache archive.
+
+  The following variables are supported in the **Cache key** input:
+
+  - `cache-key-{{ .Branch }}`: Current git branch the build runs on
+  - `cache-key-{{ .CommitHash }}`: SHA-256 hash of the git commit the build runs on
+  - `cache-key-{{ .Workflow }}`: Current Bitrise workflow name (eg. `primary`)
+  - `{{ .Arch }}-cache-key`: Current CPU architecture (`amd64` or `arm64`)
+  - `{{ .OS }}-cache-key`: Current operating system (`linux` or `darwin`)
+
+  Functions available in a template:
+
+  `checksum`: This function takes one or more file paths and computes the SHA256 [checksum](https://en.wikipedia.org/wiki/Checksum) of the file contents. This is useful for creating unique cache keys based on files that describe content to cache.
+
+  Examples of using `checksum`:
+  - `cache-key-{{ checksum "package-lock.json" }}`
+  - `cache-key-{{ checksum "**/Package.resolved" }}`
+  - `cache-key-{{ checksum "**/*.gradle*" "gradle.properties" }}`
+
+  `getenv`: This function returns the value of an environment variable or an empty string if the variable is not defined.
+
+  Examples of `getenv`:
+  - `cache-key-{{ getenv "PR" }}`
+  - `cache-key-{{ getenv "BITRISEIO_PIPELINE_ID" }}`
+
+  #### Key matching
+
+  The most straightforward use case is when both the **Save cache** and **Restore cache** Steps use the same exact key to transfer cache between builds. Stored cache archives are scoped to the Bitrise project. Builds can restore caches saved by any previous Workflow run on any Bitrise Stack.
+
+  Unlike this Step, the **Restore cache** Step can define multiple keys as fallbacks when there is no match for the first cache key. See the docs of the **Restore cache** Step for more details.
+
+  #### Skip saving the cache
+
+  The Step can decide to skip saving a new cache entry to avoid unnecessary work. This happens when there is a previously restored cache in the same workflow and the new cache would have the same contents as the one restored. Make sure to use unique cache keys with a checksum, and enable the **Unique cache key** input for the most optimal execution.
+
+  #### Related steps
+
+  [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-save-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-save-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-save-cache/issues
+published_at: 2024-02-05T08:51:20.683806071Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-save-cache.git
+  commit: 9b3bd9ef55a6440b980a01911a1afdd81ad8961d
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-save-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- key: null
+  opts:
+    description: |-
+      Key used for saving a cache archive.
+
+      The key supports template elements for creating dynamic cache keys. These dynamic keys change the final key value based on the build environment or files in the repo in order to create new cache archives. See the Step description for more details and examples.
+
+      The maximum length of a key is 512 characters (longer keys get truncated). Commas (`,`) are not allowed in keys.
+    is_required: true
+    summary: Key used for saving a cache archive. This can contain template elements.
+    title: Cache key
+- opts:
+    description: |-
+      List of files and folders to include in the cache.
+
+      Add one path per line. Each path can contain wildcards (`*` and `**`) that are evaluated at runtime.
+    is_required: true
+    summary: List of files and folders to include in the cache.
+    title: Paths to cache
+  paths: null
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- is_key_unique: "false"
+  opts:
+    description: |-
+      Enabling this allows the Step to skip creating a new cache archive when the workflow previously restored the cache with the same key.
+
+      This requires the cache key to be unique, so that the key changes whenever the files in the cache change. In practice, this means adding a `checksum` part to the key template with a file that describes the cache content (such as a lockfile).
+
+      Example of a cache key where this can be safely turned on: `npm-cache-{{ checksum "package-lock.json" }}`. On the other hand, `my-cache-{{ .OS }}-{{ .Arch }}` is not unique (even though it uses templates).
+
+      Note: the Step can still skip uploading a cache when this input is `false`, it just needs to create the archive first to compute its checksum (which takes time).
+    summary: This allows the Step to skip creating a new cache in certain conditions.
+      Only set to `true` if the key is unique to the cached content!
+    title: Unique cache key
+    value_options:
+    - "true"
+    - "false"

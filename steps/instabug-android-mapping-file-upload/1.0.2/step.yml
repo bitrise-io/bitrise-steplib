@@ -1,0 +1,52 @@
+title: Instabug Android Mapping File Upload
+summary: |
+  This step uploads Android mapping file to Instabug through Bitrise CI integration.
+description: |
+  Upload Android mapping file to Instabug through Bitrise CI.
+
+  ### Configuring the Step
+  1. Add the **Instabug Android Mapping File Upload** step to your Workflow after any build Step.
+  2. Set the **build.gradle Path**. In general, it should work with the default value.
+  3. Set the **Instabug App Token**. It's highly recommended to have this value in a secret env var and reference that.
+
+
+  ### Troubleshooting
+  Make sure you insert the Step after any build Step so that every dependency and env var is already setted.
+website: https://github.com/mendozammatias/bitrise-step-instabug-android-mapping-file-upload
+source_code_url: https://github.com/mendozammatias/bitrise-step-instabug-android-mapping-file-upload
+support_url: https://github.com/mendozammatias/bitrise-step-instabug-android-mapping-file-upload/issues
+published_at: 2024-02-28T00:40:15.39657-03:00
+source:
+  git: https://github.com/mendozammatias/bitrise-step-instabug-android-mapping-file-upload.git
+  commit: fceb74d3bb1a4c806784196148675606a48a55ee
+project_type_tags:
+- ios
+- react-native
+- cordova
+- flutter
+type_tags:
+- artifact-info
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- instabug_app_token: $INSTABUG_APP_TOKEN
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: Instabug App Token for the given environment.
+    title: Instabug App Token
+- build_gradle_path: $BITRISE_SOURCE_DIR/android/app/build.gradle
+  opts:
+    is_required: true
+    summary: build.gradle file path. In general, it should work with the default value.
+    title: build.gradle Path.
+outputs:
+- VERSION_CODE: null
+  opts:
+    summary: Version Code extracted from build.gradle file.
+    title: Version Code
+- VERSION_NAME: null
+  opts:
+    summary: Version Name extracted from build.gradle file.
+    title: Version Name

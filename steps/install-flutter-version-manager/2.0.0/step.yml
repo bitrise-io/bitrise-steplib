@@ -1,0 +1,30 @@
+title: Extract FVM Flutter version
+summary: |
+  Extracts Flutter version from FVM configuration file.
+description: |
+  Extracts Flutter version from FVM configuration file (`.fvmrc`).
+website: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise
+source_code_url: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise.git
+support_url: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise/issues
+published_at: 2024-02-16T10:50:23.576595+01:00
+source:
+  git: https://github.com/infinum/Install-Flutter-Version-Manager-Bitrise.git
+  commit: ae74f2ebc9609903d908b0002e6d228a93d667c0
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+outputs:
+- FVM_FLUTTER_VERSION: null
+  opts:
+    summary: Flutter version extracted from FVM configuration file.
+    title: Flutter version

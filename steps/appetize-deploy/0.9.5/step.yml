@@ -1,0 +1,84 @@
+title: Appetize.io deploy
+summary: Deploy your app to Appetize.io
+description: |-
+  The Step deploys your app to [Appetize.io](https://appetize.io/). This way you can run your app in your browser for app demos, training, customer support, development, testing, etc.
+
+  ### Configuring the Step
+
+  1. Specify the path of the application in the **Application path** input.
+     **NOTE:** For iOS, provide the `.app` bundle or `.zip` or a `.tar.gz` file containing your compressed .app bundle. For Android, provide the `.apk` containing your app.
+  1. Add your Appetize.io API token to the **Appetize.io token** input.
+     You can read about the Appetize.io API here: [Appetize.io API Overview](https://docs.appetize.io/api/overview)
+  1. (Optional) Add the public key of an existing app to the **Public key** input if you want to deploy this build to an existing app.
+  1. Set the **Enable verbose logging** to `true` to enable extended logs for debugging.
+
+  ### Troubleshooting
+
+  ### Useful links
+
+  * [Appetize.io API Overview](https://docs.appetize.io/api/overview)
+
+  ### Related Steps
+
+  * [Xcode Archive & Export for iOS](https://www.bitrise.io/integrations/steps/xcode-archive)
+  * [Xcode Archive for Mac](https://github.com/bitrise-steplib/steps-xcode-archive-mac)
+  * [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)
+  * [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
+published_at: 2023-10-03T11:50:22.92638014Z
+source:
+  git: https://github.com/bitrise-steplib/steps-appetize-io-deploy.git
+  commit: 34ad14f7e15bde89b5ffcb40b7e6ae301d549d65
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appetize-io-deploy
+inputs:
+- app_path: null
+  opts:
+    description: |-
+      The full path to the application file (.app, .zip, .tar.gz, or .apk)
+
+      **NOTE:** For iOS, provide the `.app` bundle or `.zip` or a `.tar.gz` file containing your compressed .app bundle. For Android, provide the `.apk` containing your app.
+    is_required: true
+    summary: The full path to the application file (.app, .zip, .tar.gz, or .apk)
+    title: Application path
+- appetize_token: null
+  opts:
+    description: |-
+      The token provided by Appetize.io
+
+      **NOTE:** You can request an API token for Appetize.io here:
+      [Appetize.io/request-api-token](https://appetize.io/docs#request-api-token)
+    is_required: true
+    is_sensitive: true
+    summary: The token provided by Appetize.io
+    title: Appetize.io token
+- opts:
+    description: The public key in case you want to deploy this build to an existing
+      app
+    is_required: false
+    summary: The public key in case you want to deploy this build to an existing app
+    title: Public key
+  public_key: null
+- opts:
+    description: Enable verbose log option for better debugging
+    is_expand: true
+    is_required: true
+    summary: Enable verbose log option for better debugging
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- APPETIZE_APP_URL: null
+  opts:
+    description: The public URL to use the app
+    is_expand: false
+    is_required: true
+    summary: The public URL to use the app
+    title: Public URL for the app
