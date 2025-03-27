@@ -6,7 +6,7 @@ description: |
 website: https://github.com/guness/bitrise-step-firebase-app-distribution
 source_code_url: https://github.com/guness/bitrise-step-firebase-app-distribution
 support_url: https://github.com/guness/bitrise-step-firebase-app-distribution/issues
-published_at: 2025-03-27T13:13:36.234786+03:00
+published_at: 2025-03-27T13:15:49.42628+03:00
 source:
   git: https://github.com/guness/bitrise-step-firebase-app-distribution.git
   commit: 47b6e7f47dcde29891fdaf8646b6edf9ab26c809
