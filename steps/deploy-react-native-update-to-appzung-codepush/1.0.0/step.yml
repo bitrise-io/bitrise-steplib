@@ -1,0 +1,88 @@
+title: Deploy React Native updates to AppZung CodePush
+summary: |
+  This step uses AppZung CLI to deploy your React Native update to AppZung CodePush
+description: |
+  This installs the AppZung CLI and use it to deploy your React Native update to AppZung CodePush. This way, your new features or bug fixes will become available to your users much earlier than if you were going through the app store reviews. Sign up first at https://appzung.com
+website: https://appzung.com
+source_code_url: https://github.com/appzung/bitrise-step-deploy-react-native-update-to-appzung-codepush
+support_url: https://github.com/appzung/bitrise-step-deploy-react-native-update-to-appzung-codepush
+published_at: 2025-02-24T20:03:56.678348+01:00
+source:
+  git: https://github.com/appzung/bitrise-step-deploy-react-native-update-to-appzung-codepush.git
+  commit: fc84c53adcbe494ec674f875bdb8337171184e04
+project_type_tags:
+- react-native
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: node
+  apt_get:
+  - name: node
+inputs:
+- api_key: null
+  opts:
+    description: |
+      An API key that has access to this project.
+    is_required: true
+    is_sensitive: true
+    summary: AppZung API key for authentication
+    title: API Key
+- opts:
+    description: |
+      Release channel (eg. "myReleaseChannelDescription/c95d7950-228c-4f47-8abb-4e275050ca8e")
+    is_required: true
+    summary: The release channel ID to deploy to
+    title: Release channel
+  release_channel: null
+- mandatory: "no"
+  opts:
+    description: |
+      Specifies whether this release should be considered mandatory
+    summary: Whether this release should be considered mandatory
+    title: Mandatory update
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    description: |
+      Percentage points of users this release should be available to (eg. 95 for 95%)
+    is_required: false
+    summary: Percentage of users who should receive this update
+    title: Rollout percentage
+  rollout: null
+- opts:
+    description: |
+      Semver version that specifies the binary app version this release is compatible with. If left unspecified, it will try to find the correct version.
+    is_required: false
+    summary: App version this release is compatible with
+    title: Target binary version
+  target_binary_version: null
+- opts:
+    description: |
+      Specifies the location of a private key to sign the release with.
+      This should be a path relative to your project root.
+    is_required: false
+    summary: Path to the private key file for code signing
+    title: Code signing private key path
+  private_key_path: null
+- description_from_git: "no"
+  opts:
+    description: |
+      Use the current git commit message as the release description
+    summary: Use the current git commit message as release description
+    title: Use Git Commit Message
+    value_options:
+    - "yes"
+    - "no"
+- extra_flags: ""
+  opts:
+    description: |
+      Any additional command line flags you want to pass to the deploy command.
+      Example: "--disable-duplicate-release-error --use-hermes"
+    is_required: false
+    summary: Additional command line flags
+    title: Additional Flags
