@@ -1,0 +1,52 @@
+title: Restore Gradle configuration cache
+summary: Restores the Gradle configuration cache folder used by Gradle. Uses the Bitrise
+  Build Cache infrastructure.
+description: |
+  This step restores the Gradle configuration cache folder from the Bitrise Build Cache to speed up future builds.
+
+  For more information on how configuration caching works, refer to the [Gradle user guide](https://docs.gradle.org/current/userguide/configuration_cache.html).
+
+  **IMPORTANT NOTES:**
+  - You must have an active Bitrise Build Cache Trial or Subscription for your workspace to use this step.
+  - You also need to set up the encryption key `GRADLE_ENCRYPTION_KEY` in Bitrise Secrets by using the result from running `openssl rand -base64 16`.
+  - Setting the encryption key is supported only from Gradle version 8.6 onwards, so your project must be using Gradle 8.6 or higher.
+website: https://github.com/bitrise-steplib/bitrise-step-restore-gradle-configuration-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-gradle-configuration-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-gradle-configuration-cache
+published_at: 2024-10-21T16:36:06.559025+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-gradle-configuration-cache.git
+  commit: 4dfd56fe23a88963d55ab4e33a1aba1c21bd22ed
+project_type_tags:
+- android
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- key_override: null
+  opts:
+    description: |-
+      Custom override key used to restore the cache from a previously saved entry (by the `Save Gradle configuration cache` step).
+
+      If not specified, by default a key is generated from the app slug and the current branch. If not specified, the contents can also be restored from a fallback key consisting only of the app slug. This helps reduce cache misses on new feature branches.
+    is_required: false
+    summary: Override key used for restoring from the cache. By default the app slug
+      and branch is used
+    title: Cache key override
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

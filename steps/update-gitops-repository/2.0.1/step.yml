@@ -1,0 +1,122 @@
+title: Update GitOps repository
+summary: |
+  Updates files of a GitOps repository either by pushing changes directly to a
+  given folder of a given branch or by opening a pull request to it.
+description: |
+  Updates files of a GitOps repository either by pushing changes directly to a
+  given folder of a given branch or by opening a pull request to it.
+  URL of the pull request is exposed as an output in the latter case.
+  Updated files are go templates rendered by substituting given values.
+  A Github username and Personal Access Token must be provided with access to the repository.
+website: https://github.com/bitrise-io/bitrise-step-update-gitops-repository
+source_code_url: https://github.com/bitrise-io/bitrise-step-update-gitops-repository
+support_url: https://github.com/bitrise-io/bitrise-step-update-gitops-repository/issues
+published_at: 2024-09-16T15:53:35.016529+02:00
+source:
+  git: https://github.com/bitrise-io/bitrise-step-update-gitops-repository.git
+  commit: a88c5a56a5ba24588b61769619564ad03fd3e832
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-step-update-gitops-repository
+deps:
+  brew:
+  - name: git
+  apt_get:
+  - name: git
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- deploy_repository_url: ""
+  opts:
+    is_required: true
+    title: Github HTTPS URL of the repository to deploy to
+- deploy_path: ""
+  opts:
+    is_required: true
+    title: Path to place rendered templates inside the repository
+- deploy_token: $DEPLOY_TOKEN
+  opts:
+    is_required: true
+    is_sensitive: true
+    title: Personal Access Token to interact with Github API
+- deploy_user: ""
+  opts:
+    is_required: true
+    title: Github username associated with the Personal Access Token
+- deploy_branch: master
+  opts:
+    title: Branch of the repository to deploy to
+- commit_message: bitrise ci integration
+  opts:
+    title: Commit message of pushed changes
+- opts:
+    category: Templates
+    title: Path to Go templates folder
+  templates_folder_path: deployments/helm
+- opts:
+    category: Templates
+    description: |-
+      Input values for the Go template files as key-value pairs in YAML format.
+
+      For example:
+
+      ```
+      my-key1: my value 1
+      my-key2: my value 2
+      ```
+    title: Input values for the Go template files in YAML format
+  values: null
+- opts:
+    category: Pull Request
+    description: |
+      Open a pull request instead of pushing
+      changes directly to the given branch.
+    title: Open a pull request
+    value_options:
+    - "true"
+    - "false"
+  pull_request: false
+- opts:
+    category: Pull Request
+    title: Title of the opened pull request
+  pull_request_title: ""
+- opts:
+    category: Pull Request
+    title: Body of the opened pull request
+  pull_request_body: 'Source commit: https://github.com/$BITRISEIO_GIT_REPOSITORY_OWNER/$BITRISEIO_GIT_REPOSITORY_SLUG/commit/$BITRISE_GIT_COMMIT'
+- opts:
+    category: Replacer mode
+    description: "There are situations when simple templating is not sufficient. \nReplacer
+      mode enables matching & replacing values based on a key+delimiter combination,\nacross
+      multiple files.\n"
+    title: Key-value matching mode
+    value_options:
+    - "true"
+    - "false"
+  replacer_mode: false
+- delimiter: =
+  opts:
+    category: Replacer mode
+    description: "Indicates the delimiter between key and value.\nFor example in \"key=value\",
+      \"=\" is the delimiter. \nRequired when \"Replacer mode\" is enabled.\n"
+    title: Delimiter
+- files: null
+  opts:
+    category: Replacer mode
+    description: |
+      List of files to scan for matching key-value pairs.
+      Required when "Replacer mode" is enabled.
+    title: Files
+outputs:
+- PR_URL: null
+  opts:
+    description: |
+      URL of opened pull request. Will be emitted in pull request mode.
+    title: URL of opened pull request

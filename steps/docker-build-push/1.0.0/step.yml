@@ -1,0 +1,132 @@
+title: Docker Build & Push
+summary: |
+  Building and pushing docker images with built-in cache support
+description: |
+  Enables you to build and optionally push docker images with built-in Bitrise key-value cache support.
+  It is possible to customize the docker build command to utilize other cache mechanisms, such as registry-cache.
+website: https://github.com/bitrise-steplib/bitrise-step-docker-build-push
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-docker-build-push
+support_url: https://github.com/bitrise-steplib/bitrise-step-docker-build-push/issues
+published_at: 2024-01-31T15:32:12.531287+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-docker-build-push.git
+  commit: 36d5e2e40f42ec926ab4982669c3830fa26e8836
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-docker-build-push
+inputs:
+- opts:
+    description: |-
+      List of tags (full image names) to be applied to the built image
+
+      Add one tag per line. Example: `myregistry.com/myimage:latest`
+    is_required: true
+    summary: List of tags (full image names) to be applied to the built image
+    title: Image tags
+  tags: null
+- context: .
+  opts:
+    description: |-
+      Path to the build context to be used for the docker build
+
+      The path is relative to the working directory.
+    is_required: true
+    summary: Path to the build context to be used for the docker build
+    title: Build context path
+- file: ./Dockerfile
+  opts:
+    description: |-
+      Path to the Dockerfile to be built
+
+      The path is relative to the working directory.
+    is_required: true
+    summary: Path to the Dockerfile to be built
+    title: Dockerfile path
+- opts:
+    description: When set to 'true', the docker image will be pushed.
+    is_required: true
+    summary: When set to 'true', the docker image will be pushed
+    title: Push docker image
+    value_options:
+    - "true"
+    - "false"
+  push: "false"
+- opts:
+    description: |-
+      When set to 'true', the docker image will automatically be cached using Bitrise key-value cache.
+
+      The following cache keys will be used:
+      - docker-imagename-{{ .OS }}-{{ .Arch }}-{{ .Branch }}-{{ .CommitHash }}
+      - docker-imagename-{{ .OS }}-{{ .Arch }}-{{ .Branch }}
+      - docker-imagename-{{ .OS }}-{{ .Arch }}
+
+      Warning: Do not specify the cache-to and cache-from parameters when using this option.
+    is_required: true
+    summary: When set to 'true', image will be cached automatically with Bitrise key-value
+      cache
+    title: Use Bitrise key-value cache
+    value_options:
+    - "true"
+    - "false"
+  use_bitrise_cache: "false"
+- build_arg: null
+  opts:
+    description: |-
+      List of build arguments to be passed to the docker build
+
+      Add one build argument per line. Example: `MY_BUILD_ARG=myvalue`
+    is_required: false
+    summary: List of [build arguments](https://docs.docker.com/build/guide/build-args/)
+      to be passed to the docker build
+    title: Build arguments
+- cache_from: null
+  opts:
+    description: |-
+      List of arguments to be passed to the docker build for cache-from
+
+      Add one cache-from argument per line. Example: `type=registry,ref=myregistry.dev/myrepository/my-image:latest`
+    is_required: false
+    summary: List of arguments to be passed to the docker build for cache-from
+    title: Cache from arguments
+- cache_to: null
+  opts:
+    description: |-
+      List of arguments to be passed to the docker build for cache-to
+
+      Add one cache-to argument per line. Example: `type=registry,ref=myregistry.dev/myrepository/my-image:latest,mode=max,compression=zstd`
+    is_required: false
+    summary: List of arguments to be passed to the docker build for cache-to
+    title: Cache to arguments
+- extra_options: null
+  opts:
+    description: |-
+      List of extra options to be passed to the docker build
+
+      Extra options must be in the format of `--option value` or `--option=value`.
+
+      Warning:
+        When using values with quotes in them (for example when they contain spaces) do not use the equal sign.
+        Separate it with spaces instead. Example: `--option "value with spaces"`
+
+      Add one extra option per line.
+    is_required: false
+    summary: List of extra options to be passed to the docker build
+    title: Extra options
+- buildx_host_network: "false"
+  opts:
+    is_required: true
+    summary: Enables to use the host network with the buildkit build container
+    title: Enables to use the host network with the buildkit build container
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

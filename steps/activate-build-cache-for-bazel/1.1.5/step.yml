@@ -1,0 +1,32 @@
+title: Build Cache for Bazel
+summary: |
+  Activates Bitrise Remote Build Cache for subsequent Bazel builds in the workflows.
+description: |
+  This Step activates Bitrise's remote build cache add-on for subsequent Bazel executions in the workflow.
+
+  After this Step executes, Bazel builds will automatically read from the remote cache and push new entries if it's enabled.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel/issues
+published_at: 2025-04-15T08:47:39.308757923Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel.git
+  commit: 709710f2ef136c769d92a1b62c58198ea41acd95
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_skippable: true
+run_if: .IsCI
+inputs:
+- enable_rbe: "false"
+  opts:
+    description: When enabled, this sets up Bazel to use Bitrise's Remote Build Execution
+      (RBE) service to execute builds.
+    is_required: true
+    summary: Enable Bazel Remote Build Execution (RBE)
+    title: Enable Bazel RBE
+    value_options:
+    - "true"
+    - "false"

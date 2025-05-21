@@ -1,0 +1,51 @@
+title: Save Cocoapods Cache
+summary: Caches the Pods folder. This Step needs to be used in combination with **Restore
+  Cocoapods Cache**.
+description: |
+  Caches dependencies in the Pods folder. This Step needs to be used in combination with **Restore Cocoapods Cache**.
+
+  This Step is based on [key-based caching](https://devcenter.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for Cocoapods dependencies. If you'd like to change the cache key (or paths to cache), you might want to use the generic [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache) Step instead.
+
+  #### Related steps
+
+  [Restore Cocoapods cache](https://github.com/bitrise-steplib/bitrise-step-restore-cocoapods-cache/)
+
+  [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache/issues
+published_at: 2024-05-27T13:37:38.831883646Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache.git
+  commit: cd97201cbb91863de8f34f98db48be72f1c3d12c
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache
+deps:
+  brew:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- compression_level: 3
+  opts:
+    is_required: false
+    summary: Zstd compression level to control speed / archive size. Set to 1 for
+      fastest option. Valid values are between 1 and 19. Defaults to 3.
+    title: Compression level

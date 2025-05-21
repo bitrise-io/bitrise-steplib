@@ -1,1 +1,3 @@
 maintainer: community
+deprecate_notes: This step is a duplicate of "bitrise-step-stamp-appicon-with-version-number". Please use that step ID instead.
+removal_date: 2025-09-31

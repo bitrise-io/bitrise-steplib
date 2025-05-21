@@ -1,0 +1,117 @@
+title: Set Xcode Project Build Number
+summary: Set the value of your iOS app's build number to the specified version number.
+description: |-
+  Set the value of your iOS app's build number to the specified version number. A great way to keep track of versions
+  when submitting bug reports.
+
+  If your IPA contains multiple build targets, they need to have the same version number as your app's main target has.
+  In that case, you need to add this Step to your Workflow for each build target: if you have, say, three targets, you need to have three instances of this Step in your Workflow.
+  If there are targets with different version numbers the app cannot be submitted for App Review or Beta App Review.
+
+  ### Configuring the Step
+
+  The step can handle if versions numbers are specified in the project file (default configuration since Xcode 13) and the old style
+  where the version numbers appear in the **Info.plist** file. It can automatically detect which style is used and act accordingly.
+
+  For the simple projects you do not need to do anything because the step uses the previously defined $BITRISE_PROJECT_PATH
+  and $BITRISE_SCHEME env vars to detect the target settings.
+
+  For better customisation the step can be also instructed to look for a specific target and even for specific target configurations
+  to update the version numbers.
+
+  ### Useful links
+
+  - [Build numbering and app versioning](https://devcenter.bitrise.io/builds/build-numbering-and-app-versioning/#setting-the-cfbundleversion-and-cfbundleshortversionstring-of-an-ios-app)
+  - [Current Project Version in Apple documentation](https://developer.apple.com/documentation/xcode/build-settings-reference#Current-Project-Version)
+  - [Marketing Version in Apple documentation](https://developer.apple.com/documentation/xcode/build-settings-reference#Marketing-Version)
+  - [CFBundleversion in Apple documentation](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleversion)
+
+  ### Related Steps
+
+  - [Xcode Archive & Export for iOS](https://www.bitrise.io/integrations/steps/xcode-archive)
+  - [Set Android Manifest Version Code and Name](https://www.bitrise.io/integrations/steps/set-android-manifest-versions)
+website: https://github.com/bitrise-steplib/steps-set-xcode-build-number
+source_code_url: https://github.com/bitrise-steplib/steps-set-xcode-build-number
+support_url: https://github.com/bitrise-steplib/steps-set-xcode-build-number/issues
+published_at: 2024-05-08T08:23:39.703204852Z
+source:
+  git: https://github.com/bitrise-steplib/steps-set-xcode-build-number.git
+  commit: 2fbcb5125a77a68595255850dbf9e008028fc733
+project_type_tags:
+- ios
+- macos
+- react-native
+- flutter
+- cordova
+- ionic
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-set-xcode-build-number
+run_if: .IsCI
+inputs:
+- opts:
+    description: Xcode Project (`.xcodeproj`) or Workspace (`.xcworkspace`) path.
+    is_required: true
+    summary: Xcode Project (`.xcodeproj`) or Workspace (`.xcworkspace`) path
+    title: Project path
+  project_path: $BITRISE_PROJECT_PATH
+- opts:
+    description: Xcode Scheme name.
+    is_required: true
+    summary: Xcode Scheme name.
+    title: Scheme
+  scheme: $BITRISE_SCHEME
+- opts:
+    description: |-
+      Xcode Target name.
+
+      It is optional and if specified then the step will find the given target and update the version numbers for it.
+
+      If it is left empty then the step will use the scheme's default target to update the version numbers.
+    summary: Xcode Target name.
+    title: Target
+  target: null
+- configuration: null
+  opts:
+    description: |-
+      Xcode Configuration name.
+
+      It is optional and if specified then the step will only update the configuration with the given name.
+
+      If it is left empty then the step will update all of the target's configurations with the build and version number.
+    summary: Xcode Configuration name.
+    title: Configuration
+- build_version: $BITRISE_BUILD_NUMBER
+  opts:
+    description: This will be either the CFBundleVersion in the Info.plist file or
+      the CURRENT_PROJECT_VERSION in the project file.
+    is_required: true
+    title: Build Number
+- build_version_offset: null
+  opts:
+    description: This offset will be added to `build_version` input's value. It must
+      be a positive number.
+    title: Build Number Offset
+- build_short_version_string: null
+  opts:
+    description: |-
+      This will be either the CFBundleShortVersionString in the Info.plist file or the MARKETING_VERSION in the project file.
+
+      If it is empty then the step will not modify the existing value.
+    title: Version Number
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- XCODE_BUNDLE_VERSION: null
+  opts:
+    description: The bundle version used in either in Info.plist or project file
+    title: Xcode Bundle Version

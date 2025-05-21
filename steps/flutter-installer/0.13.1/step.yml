@@ -1,0 +1,101 @@
+title: Flutter Install
+summary: Install Flutter SDK.
+description: |-
+  This Step git clones the selected branch or tag of the official Flutter repository and runs the initial setup of the Flutter SDK.
+  Use this step *before* the cache-pull step to make sure caching works correctly.
+
+  ### Configuring the Step
+  1. In the **Flutter SDK git repository version** input set the tag or branch of the Flutter. The default value is `stable` which clones and installs the latest stable Flutter branch.
+  2. In the **Update to the latest version** input select `false` to use a preinstalled Flutter version or `true` to update Flutter SDK to the latest version released in the [build release channel](https://github.com/flutter/flutter/wiki/Flutter-build-release-channels). By default, this input is set to `true`.
+  4. Enable **Print debug information** to run `flutter doctor` to see if there are any missing platform dependencies for setting up Flutter.
+
+  ### Troubleshooting
+  If you prefer to install Flutter from an installation bundle instead of the git repository, use the **Flutter SDK installation bundle URL** input. Insert the URL of the preferred [bundle](https://flutter.dev/docs/development/tools/sdk/releases), for example, `https://storage.googleapis.com/flutter_infra/releases/dev/windows/flutter_windows_v1.14.5-dev.zip`. If the input is filled out correctly, it overrides the value set in the **Flutter SDK git repository version** input.
+
+  ### Useful links
+  - [About Flutter build release channels](https://github.com/flutter/flutter/wiki/Flutter-build-release-channels)
+  - [Available version tags](https://github.com/flutter/flutter/releases)
+  - [Available branches](https://github.com/flutter/flutter/branches)
+
+  ### Related Steps
+  - [Flutter Test](https://www.bitrise.io/integrations/steps/flutter-test)
+  - [Flutter Build](https://www.bitrise.io/integrations/steps/flutter-build)
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-installer
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-installer
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-installer/issues
+published_at: 2023-10-30T08:49:19.573238111Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-installer.git
+  commit: 0ae472846c88cb5970104836928e2767933d780c
+project_type_tags:
+- flutter
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-installer
+deps:
+  brew:
+  - name: git
+  - name: tar
+  apt_get:
+  - name: git
+  - name: tar
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+inputs:
+- opts:
+    description: |-
+      Use this input to install from the git repository by specifying a tag or branch.
+
+      Use this input for the stable channel, as the stable channel can be preinstalled.
+
+      If the input Flutter SDK installation bundle URL is specified, this input is ignored.
+
+      To find the available version tags see this list: [https://github.com/flutter/flutter/releases](https://github.com/flutter/flutter/releases)
+
+      To see the the avilable branches visit: [https://github.com/flutter/flutter/branches](https://github.com/flutter/flutter/branches)
+    is_required: false
+    summary: Install from git. The tag or branch of the Flutter SDK's git repository.
+    title: Flutter SDK git repository version
+  version: stable
+- is_update: "true"
+  opts:
+    description: |-
+      If the version selected is `stable` and a preinstalled Flutter version from the `stable` channel with version 1.2.1 exists:
+      * Setting to `false` will not update, even if a later release exists.
+      * Setting to `true` will update Flutter to the latest version released in the channel.
+    summary: Set to true to update, if Flutter from a matching channel is preinstalled.
+    title: Update to the latest version
+    value_options:
+    - "false"
+    - "true"
+- installation_bundle_url: ""
+  opts:
+    description: |-
+      Installation bundle URL. If specified, Flutter will be installed from here and git repository version is ignored.
+
+      For a channel other than stable (e.g. beta), it is recommended to use this input. It is faster than cloning from git.
+
+      Official list of Flutter installation bundles: [https://flutter.dev/docs/development/tools/sdk/releases](https://flutter.dev/docs/development/tools/sdk/releases)
+
+      The URL is expected to begin with: `https://storage.googleapis.com/flutter_infra`
+
+      Example value (beta channel, version 1.6.3, macOS): `https://storage.googleapis.com/flutter_infra/releases/beta/macos/flutter_macos_v1.6.3-beta.zip`
+    is_required: false
+    summary: Install from bundle. Prefer this input (for other than stable channel),
+      as it is faster than cloning from git.
+    title: Flutter SDK installation bundle URL
+- is_debug: "false"
+  opts:
+    category: Debug
+    description: If enabled will run flutter doctor and print value of PATH eniroment
+      variable.
+    summary: If enabled will run flutter doctor and print value of PATH eniroment
+      variable.
+    title: Print debug information
+    value_options:
+    - "false"
+    - "true"

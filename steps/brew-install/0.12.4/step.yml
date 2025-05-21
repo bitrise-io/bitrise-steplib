@@ -1,0 +1,112 @@
+title: Brew install
+summary: Install or upgrade dependencies with Homebrew.
+description: |-
+  Install or upgrade dependencies using Homebrew, a package manager for MacOS.
+
+  ### Configuring the Step
+
+  Homebrew defines the available packages as formulae. Our Step needs the name of the Homebrew formulae you want to use, either specified as a step input, or from a Brewfile in the project's source.
+
+  To specify formulae in the step configuration
+
+  1. In the **Formula name** input, put the name of the formula you want to download.
+  1. In the **Upgrade formula?** input, set the default behavior for previously installed packages. If the input is set to `yes`, the Step will call `brew reinstall` to upgrade them to the latest version.
+  1. In the **Brew install/reinstall options** input, you can set additional flags for the `brew install` or `brew reinstall` commands.
+
+  For the possible options, see [Homebrew's documentation](https://docs.brew.sh/Manpage#install-options-formulacask).
+
+  Alternatively you can install formulae using a Brewfile
+
+  1. Add a `Brewfile` to the root of the project's source. For the format of the Brewfile, see the [Homebrew Bundle documentation](https://github.com/Homebrew/homebrew-bundle#usage)
+  1. Set the **Use a Brewfile to install packages?** input to "yes".
+  1. (optional) Set the **Path to the Brewfile** input if it is not in the root of the project's source
+
+  ### Useful links
+
+  - [Homebrew documentation](https://docs.brew.sh/Manpage)
+  - [Caching Homebrew installers](https://devcenter.bitrise.io/builds/caching/caching-homebrew-installers/)
+
+  ### Related Steps
+
+  - [Run yarn command](https://www.bitrise.io/integrations/steps/yarn)
+  - [Run npm command](https://www.bitrise.io/integrations/steps/npm)
+website: https://github.com/bitrise-steplib/steps-brew-install
+source_code_url: https://github.com/bitrise-steplib/steps-brew-install
+support_url: https://github.com/bitrise-steplib/steps-brew-install/issues
+published_at: 2024-04-25T13:10:22.067116681Z
+source:
+  git: https://github.com/bitrise-steplib/steps-brew-install.git
+  commit: f03437263660f7e9ec6fe626cdc6e4519e2eebe3
+project_type_tags:
+- ios
+- macos
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-brew-install
+inputs:
+- opts:
+    description: |-
+      Name of the formulas to install. Multiple formulas can be specified by separating them with a space, e.g. `git-lfs sqlite pipx`
+
+      This input must be specified when `use_brewfile` is `no`
+    is_required: false
+    title: Formulas to install
+  packages: null
+- opts:
+    description: |
+      If set to `"yes"`, the step will upgrade the defined packages by calling `brew reinstall [options] [packages]` command.
+      Otherwise the step calls `brew install [options] [packages]`.
+    summary: Upgrade formula if previously installed?
+    title: Upgrade formula?
+    value_options:
+    - "yes"
+    - "no"
+  upgrade: "yes"
+- opts:
+    description: |
+      If set to `"yes"`, the step will install packages in the Brewfile by running `brew bundle`. If no Brewfile path is set, it assumes a Brewfile exists in the current directory.
+    is_required: false
+    summary: Installs packages using a Brewfile
+    title: Use a Brewfile to install packages?
+    value_options:
+    - "yes"
+    - "no"
+  use_brewfile: "no"
+- brewfile_path: null
+  opts:
+    description: |
+      If set, `use_brewfile` must be set to `yes`. Path must end with `Brewfile`
+    is_required: false
+    summary: Installs packages from a Brewfile at the specified path
+    title: Path to the Brewfile
+- options: null
+  opts:
+    description: |
+      Flags to pass to the brew install/reinstall command.
+      `brew install/reinstall [options] [packages]`
+    summary: Flags to pass to the brew install/reinstall command.
+    title: Brew install/reinstall options
+- cache_enabled: "no"
+  opts:
+    description: |
+      If set to `"yes"` the contents of `~/Library/Caches/Homebrew` directory will be cached.
+    is_required: true
+    summary: Should the step collect files to be cached?
+    title: Enable cache?
+    value_options:
+    - "yes"
+    - "no"
+- opts:
+    is_required: true
+    summary: Should the step print more detailed log?
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
