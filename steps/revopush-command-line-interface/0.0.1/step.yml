@@ -10,9 +10,9 @@ description: "You can run any commands available for Revopush cli in your workfl
   deployment\n4. If you're looking for a particular revopush cli version, you can
   set it in the **Version of revopush cli to use** input.\n5. Set the **Revopush Access
   Key**.\n"
-website: https://github.com/revopush/bitrise-step-revopush-command-line-interface
-source_code_url: https://github.com/revopush/bitrise-step-revopush-command-line-interface
-support_url: https://github.com/revopush/bitrise-step-revopush-command-line-interface/issues
+website: https://github.com/revopush/revopush-bitrise-step
+source_code_url: https://github.com/revopush/revopush-bitrise-step
+support_url: https://github.com/revopush/revopush-bitrise-step/issues
 published_at: 2025-02-25T19:56:00.922264+04:00
 source:
   git: https://github.com/revopush/revopush-bitrise-step.git
