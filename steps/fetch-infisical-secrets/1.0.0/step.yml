@@ -6,10 +6,10 @@ description: |
 website: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets
 source_code_url: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets
 support_url: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets/issues
-published_at: 2025-07-14T20:20:17.478584+09:30
+published_at: 2025-07-22T10:27:49.502578+09:30
 source:
   git: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets.git
-  commit: 5c6f3f41b8c5ce859a0841230de8de4e61d58368
+  commit: 596146fd517668b19b5f065204a743b249e6d8ed
 type_tags:
 - utility
 toolkit:
@@ -29,6 +29,7 @@ inputs:
       from Infisical
     is_expand: true
     is_required: true
+    is_sensitive: true
     summary: The client secret from infisical.
     title: Infisical Client Secret
 - infisical_project_id: null
@@ -46,7 +47,7 @@ inputs:
     is_required: true
     summary: The slug for your project environment
     title: Infisical Env
-- infisical_url: null
+- infisical_url: https://app.infisical.com
   opts:
     description: The fully qualified URL to access your Infisical secrets. The trailing
       slash or /api is not required and should only consist of the hostname and TLD.
