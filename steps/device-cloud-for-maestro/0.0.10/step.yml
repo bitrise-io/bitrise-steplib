@@ -1,0 +1,250 @@
+title: Device Cloud for Maestro
+summary: Uses devicecloud.dev to execute Maestro mobile tests
+description: Executes Maestro mobile tests on devicecloud.dev with configurable parameters
+website: https://devicecloud.dev
+source_code_url: https://github.com/devicecloud-dev/bitrise-integration
+published_at: 2025-04-08T16:43:49.443528+01:00
+source:
+  git: https://github.com/devicecloud-dev/bitrise-integration.git
+  commit: 532d225935181acb489533e6cfc8f0f748c14950
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: node
+  apt_get:
+  - name: git
+  - name: node
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: devicecloud.dev API Key from your app settings
+    title: Device Cloud API Key
+- app_file: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Path to the build artifact to upload
+    title: App File Path
+- app_binary_id: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: The app binary already uploaded to devicecloud.dev
+    title: App Binary ID
+- android_device: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Android device to run your flow against
+    title: Android Device
+- ios_device: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: iOS device to run your flow against
+    title: iOS Device
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Path to the workspace folder containing Maestro flows
+    title: Workspace Folder
+  workspace: ""
+- env_list: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: List of environment variables to pass to the test seperated by newlines
+      (e.g. MY_VAR=my_value <newline> MY_OTHER_VAR=other_value)
+    title: Environment Variables
+- async: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Run tests asynchronously
+    title: Async Execution
+    value_options:
+    - "true"
+    - "false"
+- android_api_level: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Android API level to use for testing
+    title: Android API Level
+- ios_version: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: iOS version to use for testing
+    title: iOS Version
+- include_tags: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Comma-separated list of tags to include in test execution
+    title: Include Tags
+- exclude_tags: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Comma-separated list of tags to exclude from test execution
+    title: Exclude Tags
+- exclude_flows: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Flows to exclude from test execution
+    title: Exclude Flows
+- google_play: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Whether to use Google Play services
+    title: Google Play
+    value_options:
+    - "true"
+    - "false"
+- name: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Custom name for the test run
+    title: Test Run Name
+- additional_app_binary_ids: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Comma-separated list of additional app binary IDs
+    title: Additional App Binary IDs
+- additional_app_files: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Comma-separated list of additional app file paths
+    title: Additional App Files
+- device_locale: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Locale to use on the device
+    title: Device Locale
+- download_artifacts: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Which artifacts to download (ALL or FAILED)
+    title: Download Artifacts
+- maestro_version: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Specific version of Maestro to use
+    title: Maestro Version
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Device orientation in degrees
+    title: Device Orientation
+  orientation: ""
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Number of times to retry failed tests
+    title: Retry Count
+  retry: ""
+- opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Whether to use x86 architecture for Android emulation
+    title: x86 Architecture
+    value_options:
+    - "true"
+    - "false"
+  x86_arch: "false"
+- opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: '[Android only] Skip Chrome browser onboarding screens when running tests'
+    title: Skip Chrome Onboarding
+    value_options:
+    - "true"
+    - "false"
+  skip_chrome_onboarding: "false"
+- opts:
+    is_expand: true
+    is_required: false
+    summary: '[experimental] The type of runner to use - note: anything other than
+      default will incur premium pricing tiers'
+    title: Runner Type
+  runner_type: ""
+- opts:
+    default_value: junit
+    is_expand: true
+    is_required: false
+    summary: Generate a report in the specified format
+    title: Report Format
+    value_options:
+    - junit
+    - html
+  report: junit
+- ignore_sha_check: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Ignore the SHA hash check and upload the binary regardless of whether
+      it already exists (not recommended)
+    title: Ignore SHA Check
+    value_options:
+    - "true"
+    - "false"
+- api_url: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Custom API URL for devicecloud.dev (optional)
+    title: API URL
+outputs:
+- DEVICE_CLOUD_CONSOLE_URL: null
+  opts:
+    summary: URL to view the test results in the Device Cloud console
+    title: Device Cloud Console URL
+- DEVICE_CLOUD_FLOW_RESULTS: null
+  opts:
+    summary: JSON array containing results for each flow, including name, status,
+      and any errors
+    title: Flow Results
+- DEVICE_CLOUD_UPLOAD_STATUS: null
+  opts:
+    summary: Status of the test run (PENDING, RUNNING, PASSED, FAILED, CANCELLED)
+    title: Test Run Status
+- DEVICE_CLOUD_APP_BINARY_ID: null
+  opts:
+    summary: ID of the uploaded app binary in Device Cloud
+    title: App Binary ID
