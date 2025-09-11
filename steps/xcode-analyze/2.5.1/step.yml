@@ -31,7 +31,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-xcode-analyze
 source_code_url: https://github.com/bitrise-steplib/steps-xcode-analyze
 support_url: https://github.com/bitrise-steplib/steps-xcode-analyze/issues
-published_at: 2025-09-11T14:55:26.861304431Z
+published_at: 2025-09-11T15:10:48.963085222Z
 source:
   git: https://github.com/bitrise-steplib/steps-xcode-analyze.git
   commit: b0ecbeb34a7c286b5a6cf47528dc5d3b4747d66f
