@@ -59,7 +59,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-xcode-archive
 source_code_url: https://github.com/bitrise-steplib/steps-xcode-archive
 support_url: https://github.com/bitrise-steplib/steps-xcode-archive/issues
-published_at: 2025-09-18T09:50:52.184460738Z
+published_at: 2025-09-19T09:13:21.31498826Z
 source:
   git: https://github.com/bitrise-steplib/steps-xcode-archive.git
   commit: 9b936e35093af51e8a29640c41d021d60360dc8f
