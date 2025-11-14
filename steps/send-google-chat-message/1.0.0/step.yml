@@ -1,0 +1,54 @@
+title: Send to Google Chat
+summary: |
+  Sends a custom card message to a Google Chat webhook.
+description: |
+  Sends a simple, emoji-based card message to Google Chat to report build success or failure.
+
+  This step is designed to be run as the last step in a workflow and should be set to 'is_always_run: true'.
+website: https://github.com/https://github.com/Blue-Marble-Geographics/bitrise-step-google-chat
+source_code_url: https://github.com/https://github.com/Blue-Marble-Geographics/bitrise-step-google-chat
+support_url: https://github.com/https://github.com/Blue-Marble-Geographics/bitrise-step-google-chat/issues
+published_at: 2025-11-14T12:13:29.00147-05:00
+source:
+  git: https://github.com/Blue-Marble-Geographics/bitrise-step-google-chat.git
+  commit: 037b8bd0cab467c7e5d8ac8ba2ca94f5088a075f
+type_tags:
+- notification
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: true
+inputs:
+- google_chat_webhook_url: null
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: The incoming webhook URL from your Google Chat space.
+    title: Google Chat Webhook URL
+- notify_on_success: "false"
+  opts:
+    description: If set to 'false', notifications will only be sent for failed builds.
+    is_required: true
+    title: Notify on Success
+    value_options:
+    - "true"
+    - "false"
+- build_status: $BITRISE_BUILD_STATUS
+  opts:
+    description: The status of the current build (0 for success).
+    is_required: true
+    title: Build Status
+- app_title: $BITRISE_APP_TITLE
+  opts:
+    title: App Title
+- build_number: $BITRISE_BUILD_NUMBER
+  opts:
+    title: Build Number
+- opts:
+    title: Workflow ID
+  workflow_id: $BITRISE_TRIGGERED_WORKFLOW_ID
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    description: The status of the build. Defaults to $BITRISE_BUILD_STATUS.
+    is_required: true
+    title: Build Status
