@@ -11,7 +11,7 @@ support_url: https://github.com/https://github.com/Blue-Marble-Geographics/bitri
 published_at: 2025-11-14T12:13:29.00147-05:00
 source:
   git: https://github.com/Blue-Marble-Geographics/bitrise-step-google-chat.git
-  commit: 037b8bd0cab467c7e5d8ac8ba2ca94f5088a075f
+  commit: 46aea6644e9c96d31aef70392a77b14bce4e5ea7
 type_tags:
 - notification
 toolkit:
