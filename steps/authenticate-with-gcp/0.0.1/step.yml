@@ -6,9 +6,9 @@ description: |-
   It generates a Google auth token and sets the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 
   The step can also log in to Docker to the supplied Artifact Registry locations.
-website: https://github.com/bitrise-steplib/bitrise-step-authenticate-wth-gcp
-source_code_url: https://github.com/bitrise-steplib/bitrise-step-authenticate-wth-gcp
-support_url: https://github.com/bitrise-steplib/bitrise-step-authenticate-wth-gcp/issues
+website: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
+support_url: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp/issues
 published_at: 2025-07-24T11:09:18.001509+02:00
 source:
   git: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp.git
@@ -17,7 +17,7 @@ type_tags:
 - utility
 toolkit:
   go:
-    package_name: github.com/bitrise-steplib/bitrise-step-authenticate-wth-gcp
+    package_name: github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
 inputs:
 - opts:
     description: |-
