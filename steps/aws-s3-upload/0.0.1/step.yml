@@ -1,0 +1,102 @@
+title: Amazon Web Services (AWS) S3 Upload
+summary: The Step uploads a file to an Amazon S3 bucket.
+description: |-
+  The Step uploads a file to an Amazon S3 bucket.
+
+  It can handle both files and directories, uploading the contents to the specified S3 bucket with the desired access control settings.
+
+  Using the Authenticate with AWS Step beforehand is recommended to securely provide short lived AWS credentials.
+website: https://github.com/bitrise-steplib/bitrise-step-aws-s3-upload
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-aws-s3-upload
+support_url: https://github.com/bitrise-steplib/bitrise-step-aws-s3-upload/issues
+published_at: 2025-10-31T14:07:40.715424+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-aws-s3-upload.git
+  commit: 30bc2a24c71ddac5fb2ad427186efce3b0637511
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-aws-s3-upload
+inputs:
+- opts:
+    description: |-
+      Path to a file or folder to be uploaded.
+
+      You can use absolute or relative paths.
+    is_required: true
+    summary: Path to a file or folder to be uploaded.
+    title: Path
+  path: null
+- bucket_name: null
+  opts:
+    description: Name of the S3 bucket to upload the file to.
+    is_required: true
+    summary: Name of the S3 bucket to upload the file to.
+    title: Bucket Name
+- bucket_prefix: null
+  opts:
+    description: |-
+      Path in the S3 bucket where the file will be uploaded.
+
+      If not provided, the file will be uploaded to the root of the bucket with its original filename.
+    is_required: false
+    summary: Path in the S3 bucket where the file will be uploaded.
+    title: Bucket Prefix
+- acl_control: private
+  opts:
+    description: The access control level for the uploaded file.
+    is_required: true
+    summary: The access control level for the uploaded file.
+    title: Access Control
+    value_options:
+    - private
+    - public-read
+- opts:
+    description: The AWS region to use.
+    is_required: true
+    summary: The AWS region to use.
+    title: Region
+  region: us-east-1
+- access_key_id: $AWS_ACCESS_KEY_ID
+  opts:
+    category: AWS Credentials
+    description: |-
+      The AWS Access Key ID.
+
+      You can provide it directly or use the Authenticate with AWS Step.
+    is_dont_change_value: true
+    is_required: true
+    summary: The AWS Access Key ID.
+    title: AWS Access Key ID
+- opts:
+    category: AWS Credentials
+    description: |-
+      The AWS Secret Access Key.
+
+      You can provide it directly or use the Authenticate with AWS Step.
+    is_dont_change_value: true
+    is_required: true
+    summary: The AWS Secret Access Key.
+    title: AWS Secret Access Key
+  secret_access_key: $AWS_SECRET_ACCESS_KEY
+- opts:
+    category: AWS Credentials
+    description: |-
+      The AWS Session Token.
+
+      You can provide it directly or use the Authenticate with AWS Step.
+    is_dont_change_value: true
+    is_required: false
+    summary: The AWS Session Token.
+    title: AWS Session Token
+  session_token: $AWS_SESSION_TOKEN
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
