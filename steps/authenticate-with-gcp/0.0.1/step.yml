@@ -17,7 +17,7 @@ type_tags:
 - utility
 toolkit:
   go:
-    package_name: github.com/bitrise-steplib/bitrise-step-authenticate-wth-gcp
+    package_name: github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
 inputs:
 - opts:
     description: |-
