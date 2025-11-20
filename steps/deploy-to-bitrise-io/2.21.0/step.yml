@@ -72,7 +72,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io
 source_code_url: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io
 support_url: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io/issues
-published_at: 2025-11-20T15:40:51.432045307Z
+published_at: 2025-11-20T16:02:50.524948804Z
 source:
   git: https://github.com/bitrise-steplib/steps-deploy-to-bitrise-io.git
   commit: e5fa275bac50be8d29959c5b4796d5adb3854665
