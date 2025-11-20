@@ -9,10 +9,10 @@ description: |-
 website: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
 support_url: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp/issues
-published_at: 2025-07-24T11:09:18.001509+02:00
+published_at: 2025-11-19T13:07:07.260955266Z
 source:
   git: https://github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp.git
-  commit: f24aff6380913575e2fda8a36b611b5057ff88c2
+  commit: b147cc0fc20ae38739dad8d90803e56490146f74
 type_tags:
 - utility
 toolkit:
@@ -20,17 +20,36 @@ toolkit:
     package_name: github.com/bitrise-steplib/bitrise-step-authenticate-with-gcp
 inputs:
 - opts:
+    category: Service account
     description: |-
       The service account key in JSON format.
 
       You can generate a service account key in the Google Cloud Console. Make sure to grant the necessary permissions to the service account.
 
       The step will use this key to authenticate with GCP and generate a Google auth token.
-    is_required: true
     is_sensitive: true
     summary: The service account key in JSON format.
     title: Service account key
   service_account_key: null
+- client_config: null
+  opts:
+    category: Identity token
+    description: |-
+      Client config in JSON format.
+
+      You can generate a client config in the Google Cloud Console. Make sure to grant the necessary permissions to the client.
+    is_sensitive: true
+    summary: Client config in JSON format.
+    title: Client config
+- audience: null
+  opts:
+    category: Identity token
+    description: |-
+      The audience for the identity token.
+
+      This could be the URL of the service you want to access with the token or a specific identifier provided by the service.
+    summary: The audience for the identity token.
+    title: Token audience
 - docker_login: "false"
   opts:
     category: Docker
@@ -58,6 +77,28 @@ inputs:
     summary: A newline (`\n`) separated list of Artifact Registry locations to log
       in to.
     title: Artifact Registry locations
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: |-
+      Unique build URL of this build on Bitrise.io.
+
+      By default the step will use the Bitrise API.
+    is_dont_change_value: true
+    is_required: true
+    summary: Unique build URL of this build on Bitrise.io.
+    title: Bitrise build url
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: |-
+      The build's API Token for the build on Bitrise.io
+
+      This will be used to communicate with the Bitrise API
+    is_required: true
+    is_sensitive: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise build token
 - opts:
     category: Debugging
     is_required: true
