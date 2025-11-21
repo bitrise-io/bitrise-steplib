@@ -33,10 +33,23 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-set-xcode-build-number
 source_code_url: https://github.com/bitrise-steplib/steps-set-xcode-build-number
 support_url: https://github.com/bitrise-steplib/steps-set-xcode-build-number/issues
-published_at: 2025-11-21T14:09:32.201668644Z
+published_at: 2025-11-21T14:18:02.875437569Z
 source:
   git: https://github.com/bitrise-steplib/steps-set-xcode-build-number.git
   commit: 025f0d151fcef4478efbcbcfa0d2257bb4287746
+executables:
+  darwin-amd64:
+    storage_uri: steps/set-xcode-build-number/2.2.0/bin/set-xcode-build-number-darwin-amd64
+    hash: sha256-d07914c1e0a509d5be6cd7c128f4c7d495c7be8731c38300e1f33ab5d934f4cc
+  darwin-arm64:
+    storage_uri: steps/set-xcode-build-number/2.2.0/bin/set-xcode-build-number-darwin-arm64
+    hash: sha256-e6f1ae65981679a3fe0af16022f547ead0bd7b6ad1511a75fa77c3707a0d857f
+  linux-amd64:
+    storage_uri: steps/set-xcode-build-number/2.2.0/bin/set-xcode-build-number-linux-amd64
+    hash: sha256-efc930dd863a40bbec711e83da577d57bf2c9a01361687ef2d4d11864e9957d6
+  linux-arm64:
+    storage_uri: steps/set-xcode-build-number/2.2.0/bin/set-xcode-build-number-linux-arm64
+    hash: sha256-87b42af508a7fd046c67d6d8aadb33ecc5d78130cdcd2d8075780c1899c6d26a
 project_type_tags:
 - cordova
 - flutter
