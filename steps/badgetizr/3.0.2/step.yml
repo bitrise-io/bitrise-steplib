@@ -1,6 +1,6 @@
 source:
   git: https://github.com/aiKrice/homebrew-badgetizr.git
-  commit: 3b4bb6b8c903f64cb3a4a74249c2847d8bc5cae7
+  commit: 28a73be5e5ed54f551f14decd40c59f3ea58d745
 
 title: Badgetizr
 summary: Automatically add custom badges to pull/merge requests - boost productivity and streamline code reviews
