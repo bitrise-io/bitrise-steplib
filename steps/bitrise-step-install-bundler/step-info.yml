@@ -1,7 +1,0 @@
-maintainer: community
-removal_date: "2022-05-10"
-depreacted_notes: |
-  This step is a duplicated of install-bundler: https://github.com/bitrise-io/bitrise-steplib/tree/master/steps/install-bundler
-
-  It's recommended to update your step configuration to use the right step:
-  - install_bundler@1: {}

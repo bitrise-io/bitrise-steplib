@@ -1,1 +1,6 @@
+deprecate_notes: |
+  This step is no longer supported. You can get similar results with one of our new features: create release bash script
+  in Release Management API recipes. It can be used from a terminal or copied into a script step in Bitrise CI.
+  [More info](https://github.com/bitrise-io/release-management-recipes)
 maintainer: bitrise
+removal_date: "2025-03-07"
