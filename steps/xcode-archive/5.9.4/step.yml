@@ -59,20 +59,23 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-xcode-archive
 source_code_url: https://github.com/bitrise-steplib/steps-xcode-archive
 support_url: https://github.com/bitrise-steplib/steps-xcode-archive/issues
-published_at: 2026-01-13T13:59:45.872830238Z
+published_at: 2026-01-13T14:59:00.566607015Z
 source:
   git: https://github.com/bitrise-steplib/steps-xcode-archive.git
   commit: 3f995438296d59dafc15cc1d9e295b6cc7678b0a
 executables:
   darwin-amd64:
     storage_uri: steps/xcode-archive/5.9.4/bin/xcode-archive-darwin-amd64
-    hash: sha256-a9d70fab6c209f16a84ad44077265cf4f68f6933694dd2857a09ca16d15324e1
+    hash: sha256-ea2a7a737d423808355cbbf3cd8180f459a0a939474511d38c0dcf5284770f66
   darwin-arm64:
     storage_uri: steps/xcode-archive/5.9.4/bin/xcode-archive-darwin-arm64
-    hash: sha256-6cec7711c2026deca64c8c4afd48b845b67b80ddb0e470afeeeabdbee4732925
+    hash: sha256-043069da2b02138ffb498c88a9f5b32dde70302e9096315357f985237ca00dfd
+  linux-amd64:
+    storage_uri: steps/xcode-archive/5.9.4/bin/xcode-archive-linux-amd64
+    hash: sha256-04d9beabb1c303942a70505644429d9f5289842ca42d2e4d9677501b90150a7d
   linux-arm64:
     storage_uri: steps/xcode-archive/5.9.4/bin/xcode-archive-linux-arm64
-    hash: sha256-2242ae1ba8f41896786ac2e1878b4c0f081d0ad9fe89d185f7d9842fbd588ecc
+    hash: sha256-ecb85a7fff4ec0f3ec6c28144f0dc7a35750319a64c512797e506f6a18cc1e43
 project_type_tags:
 - cordova
 - flutter
