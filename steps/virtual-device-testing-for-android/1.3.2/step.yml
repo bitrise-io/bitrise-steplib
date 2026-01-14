@@ -1,0 +1,465 @@
+title: Virtual Device Testing for Android
+summary: Run Android UI tests on virtual devices
+description: |-
+  Run Android UI tests on virtual devices. This Step collects the built APK/AAB file from the `$BITRISE_APK_PATH` and in case of instrumentation tests, the `$BITRISE_TEST_APK_PATH` Environment Variables and uses Firebase Test Lab to run UI tests on them.
+
+  The available test types are instrumentation, robo, gameloop.
+
+  ### Configuring the Step
+
+  You can read [our detailed guide about using the Step](https://devcenter.bitrise.io/en/testing/device-testing-for-android.html) with other Bitrise Steps. Here we'll go over the configuration options of the Step.
+
+  1. Make sure the **App path** input points to the path of the APK or AAB file of your app. If you use our **Android Build** or **Android Build for UI Testing** Steps, you don't need to change the default value.
+  1. Add the devices you want the tests to run on in the **Test devices** input.
+
+     You need to set the device ID, the version, the orientation, and the language. Read the input description for more information and available devices.
+  1. Choose a test type.
+
+     The available options are:
+     - instrumentation
+     - robo
+     - gameloop
+
+  For detailed configuration options related to the different test types, please check out the [full guide](https://devcenter.bitrise.io/en/testing/device-testing-for-android.html).
+
+  You can also export the results of the Step to the Test reports add-on. All you need to do is to add a **Deploy to Bitrise.io** Step to the end of your Workflow.
+
+  ### Troubleshooting
+
+  If you get the **Build already exists** error, it is because you have more than one instance of the Step in your Workflow. This doesn't work as Bitrise sends the build slug to Firebase and having the Step more than once in the same Workflow results in sending the same build slug multiple times.
+
+  ### Useful links
+
+  - [Device testing for Android](https://devcenter.bitrise.io/en/testing/device-testing-for-android.html)
+  - [Test reports](https://devcenter.bitrise.io/en/testing/test-reports.html)
+
+  ### Related Steps
+
+  - [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+  - [Android Build for UI Testing](https://www.bitrise.io/integrations/steps/android-build-for-ui-testing)
+  - [Deploy to Bitrise.io](https://www.bitrise.io/integrations/steps/deploy-to-bitrise-io)
+website: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android
+source_code_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android
+support_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android/issues
+published_at: 2026-01-13T15:02:21.698362999Z
+source:
+  git: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-android.git
+  commit: adfe1b04beeb61750d97fa369f4ca98f24dd5377
+executables:
+  darwin-amd64:
+    storage_uri: steps/virtual-device-testing-for-android/1.3.2/bin/virtual-device-testing-for-android-darwin-amd64
+    hash: sha256-5f06bac9aba03103ffdcaffb978bd50f4e357b0482ac98287bf01bae1926378e
+  darwin-arm64:
+    storage_uri: steps/virtual-device-testing-for-android/1.3.2/bin/virtual-device-testing-for-android-darwin-arm64
+    hash: sha256-86ccdbb6af87ee36cc25093ca90075d4f4596de17ae8c044831bf58b592331bb
+  linux-amd64:
+    storage_uri: steps/virtual-device-testing-for-android/1.3.2/bin/virtual-device-testing-for-android-linux-amd64
+    hash: sha256-a7d62f587db8cace8bd6aec877438c592e21ad63066da548abada3c0b532e63a
+  linux-arm64:
+    storage_uri: steps/virtual-device-testing-for-android/1.3.2/bin/virtual-device-testing-for-android-linux-arm64
+    hash: sha256-c3e5e9e9ebc3ab0347e0df7dc295ac2c2106b077c7a331a462549dedbd40626a
+project_type_tags:
+- android
+- cordova
+- flutter
+- ionic
+- kotlin-multiplatform
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-virtual-device-testing-for-android
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+meta:
+  bitrise.io:
+    addons_required:
+    - addons-testing
+inputs:
+- app_path: $BITRISE_APK_PATH
+  opts:
+    description: |
+      The path to the app to test (APK or AAB). By default `android-build` and `android-build-for-ui-testing` Steps export the `BITRISE_APK_PATH` Env Var, so you won't need to change this input.
+      Can specify an APK (`$BITRISE_APK_PATH`) or AAB (Android App Bundle) as input (`$BITRISE_AAB_PATH`).
+
+      If nothing is specified then the Step will use a default empty Application APK. This will help the library instrumentation tests as it can be used as a shell where the tests will be running.
+    summary: |
+      The path to the app to test (APK or AAB).
+    title: App path
+- opts:
+    description: |
+      The type of your test you want to run on the devices. Find more properties below in the selected test type's group.
+    is_required: true
+    summary: |
+      The type of your test you want to run on the devices. Find more properties below in the selected test type's group.
+    title: Test type
+    value_options:
+    - instrumentation
+    - robo
+    - gameloop
+  test_type: robo
+- opts:
+    description: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+
+      For example:
+      `MediumPhone.arm,33,en,portrait`
+
+      `MediumTablet.arm,23,en,landscape`
+
+      Available devices and its versions:
+      ```
+      ┌─────────────────────────┬─────────┬────────────────────────────────────────────────┬─────────┬─────────────┬──────────────────────────────────┬────────────────────────┐
+      │         MODEL_ID        │   MAKE  │                   MODEL_NAME                   │   FORM  │  RESOLUTION │          OS_VERSION_IDS          │          TAGS          │
+      ├─────────────────────────┼─────────┼────────────────────────────────────────────────┼─────────┼─────────────┼──────────────────────────────────┼────────────────────────┤
+      │ AmatiTvEmulator         │ Google  │ Google TV Amati                                │ VIRTUAL │ 1080 x 1920 │ 29                               │ beta=29, deprecated=29 │
+      │ AndroidTablet270dpi.arm │ Generic │ Generic 720x1600 Android tablet @ 270dpi (Arm) │ VIRTUAL │ 1600 x 720  │ 30                               │                        │
+      │ GoogleTvEmulator        │ Google  │ Google TV                                      │ VIRTUAL │  720 x 1280 │ 30                               │ beta=30, deprecated=30 │
+      │ MediumPhone.arm         │ Generic │ Medium Phone, 6.4in/16cm (Arm)                 │ VIRTUAL │ 2400 x 1080 │ 26,27,28,29,30,31,32,33,35,36,34 │                        │
+      │ MediumTablet.arm        │ Generic │ Medium Tablet, 10.05in/25cm (Arm)              │ VIRTUAL │ 2560 x 1600 │ 26,27,28,29,30,31,32,33,34,35    │                        │
+      │ Pixel2.arm              │ Google  │ Pixel 2 (Arm)                                  │ VIRTUAL │ 1920 x 1080 │ 26,27,28,29,30,31,32,33          │                        │
+      │ SmallPhone.arm          │ Generic │ Small Phone, 4.65in/12cm (Arm)                 │ VIRTUAL │ 1280 x 720  │ 26,27,28,29,30,31,32,33,34,35    │                        │
+      └─────────────────────────┴─────────┴────────────────────────────────────────────────┴─────────┴─────────────┴──────────────────────────────────┴────────────────────────┘
+      ```
+    is_required: true
+    summary: |
+      Format:
+      One device configuration per line and the parameters are separated with `,` in the order of: `deviceID,version,language,orientation`
+
+      For example:
+      `MediumPhone.arm,33,en,portrait`
+
+      `MediumTablet.arm,23,en,landscape`
+
+      Available devices and its versions:
+      ```
+      ┌─────────────────────────┬─────────┬────────────────────────────────────────────────┬─────────┬─────────────┬──────────────────────────────────┬────────────────────────┐
+      │         MODEL_ID        │   MAKE  │                   MODEL_NAME                   │   FORM  │  RESOLUTION │          OS_VERSION_IDS          │          TAGS          │
+      ├─────────────────────────┼─────────┼────────────────────────────────────────────────┼─────────┼─────────────┼──────────────────────────────────┼────────────────────────┤
+      │ AmatiTvEmulator         │ Google  │ Google TV Amati                                │ VIRTUAL │ 1080 x 1920 │ 29                               │ beta=29, deprecated=29 │
+      │ AndroidTablet270dpi.arm │ Generic │ Generic 720x1600 Android tablet @ 270dpi (Arm) │ VIRTUAL │ 1600 x 720  │ 30                               │                        │
+      │ GoogleTvEmulator        │ Google  │ Google TV                                      │ VIRTUAL │  720 x 1280 │ 30                               │ beta=30, deprecated=30 │
+      │ MediumPhone.arm         │ Generic │ Medium Phone, 6.4in/16cm (Arm)                 │ VIRTUAL │ 2400 x 1080 │ 26,27,28,29,30,31,32,33,35,36,34 │                        │
+      │ MediumTablet.arm        │ Generic │ Medium Tablet, 10.05in/25cm (Arm)              │ VIRTUAL │ 2560 x 1600 │ 26,27,28,29,30,31,32,33,34,35    │                        │
+      │ Pixel2.arm              │ Google  │ Pixel 2 (Arm)                                  │ VIRTUAL │ 1920 x 1080 │ 26,27,28,29,30,31,32,33          │                        │
+      │ SmallPhone.arm          │ Generic │ Small Phone, 4.65in/12cm (Arm)                 │ VIRTUAL │ 1280 x 720  │ 26,27,28,29,30,31,32,33,34,35    │                        │
+      └─────────────────────────┴─────────┴────────────────────────────────────────────────┴─────────┴─────────────┴──────────────────────────────────┴────────────────────────┘
+      ```
+    title: Test devices
+  test_devices: MediumPhone.arm,33,en,portrait
+- num_flaky_test_attempts: "0"
+  opts:
+    description: |-
+      Specifies the number of times a test execution should be reattempted if one or more of its test cases fail for any reason.
+
+      An execution that initially fails but succeeds on any reattempt is reported as FLAKY.
+      The maximum number of reruns allowed is 10. (Default: 0, which implies no reruns.)
+    is_required: true
+    summary: Specifies the number of times a test execution should be reattempted
+      if one or more of its test cases fail for any reason.
+    title: Number of times a test execution is reattempted
+- opts:
+    category: Instrumentation Test
+    description: The path to the APK that contains instrumentation tests. To build
+      this, you can run the [Build for UI testing](https://bitrise.io/integrations/steps/android-build-for-ui-testing)
+      Step (before this Step).
+    summary: The path to the APK that contains instrumentation tests
+    title: Test APK path
+  test_apk_path: $BITRISE_TEST_APK_PATH
+- inst_test_runner_class: null
+  opts:
+    category: Instrumentation Test
+    description: The fully-qualified Java class name of the instrumentation test runner
+      (leave empty to use the last name extracted from the APK manifest).
+    summary: The fully-qualified Java class name of the instrumentation test runner
+      (leave empty to use the last name extracted from the APK manifest).
+    title: Test runner class
+- inst_test_targets: null
+  opts:
+    category: Instrumentation Test
+    description: |
+      A list of one or more instrumentation test targets to be run (default: all targets). Each target must be fully qualified with the package name or class name, in one of these formats:
+      - `package package_name`
+      - `class package_name.class_name`
+      - `class package_name.class_name#method_name`
+      For example:
+      `class com.my.company.app.MyTargetClass,class com.my.company.app.MyOtherTargetClass`
+    summary: |
+      A list of one or more instrumentation test targets to be run (default: all targets). Each target must be fully qualified with the package name or class name, in one of these formats:
+      - `package package_name`
+      - `class package_name.class_name`
+      - `class package_name.class_name#method_name`
+      For example:
+      `class com.my.company.app.MyTargetClass,class com.my.company.app.MyOtherTargetClass`
+    title: |
+      Test targets, seperated with the "," character.
+- inst_use_orchestrator: "false"
+  opts:
+    category: Instrumentation Test
+    description: |
+      The option of whether running each test within its own invocation of instrumentation with Android Test Orchestrator or not.
+    is_required: true
+    summary: |
+      The option of whether running each test within its own invocation of instrumentation with Android Test Orchestrator or not.
+    title: Use Orchestrator
+    value_options:
+    - "false"
+    - "true"
+- opts:
+    category: Robo Test
+    description: The initial activity used to start the app during a robo test. (leave
+      empty to get it extracted from the APK manifest)
+    summary: The initial activity used to start the app during a robo test. (leave
+      empty to get it extracted from the APK manifest)
+    title: Initial activity
+  robo_initial_activity: null
+- opts:
+    category: Robo Test
+    description: |
+      The maximum depth of the traversal stack a robo test can explore. Needs to be at least 2 to make Robo explore the app beyond the first activity(leave empty to use the default value: `50`)
+    summary: |
+      The maximum depth of the traversal stack a robo test can explore. Needs to be at least 2 to make Robo explore the app beyond the first activity(leave empty to use the default value: `50`)
+    title: Max depth
+  robo_max_depth: null
+- opts:
+    category: Robo Test
+    description: |
+      The maximum number of steps/actions a robo test can execute(leave empty to use the default value: `no limit`).
+    summary: |
+      The maximum number of steps/actions a robo test can execute(leave empty to use the default value: `no limit`).
+    title: Max steps
+  robo_max_steps: null
+- opts:
+    category: Robo Test
+    description: |
+      To complete text fields in your app, use robo-directives and provide a comma-separated list of key-value pairs, where the key is the Android resource name of the target UI element, and the value is the text string. EditText fields are supported but not text fields in WebView UI elements.
+      For example, you could use the following parameter for custom login:
+      ```
+      username_resource,username,ENTER_TEXT
+      password_resource,password,ENTER_TEXT
+      loginbtn_resource,,SINGLE_CLICK
+      ```
+      One directive per line, the parameters are separated with `,` character. For example: `ResourceName,InputText,ActionType`
+    summary: |
+      To complete text fields in your app, use robo-directives and provide a comma-separated list of key-value pairs, where the key is the Android resource name of the target UI element, and the value is the text string. EditText fields are supported but not text fields in WebView UI elements.
+      For example, you could use the following parameter for custom login:
+      ```
+      username_resource,username,ENTER_TEXT
+      password_resource,password,ENTER_TEXT
+      loginbtn_resource,,SINGLE_CLICK
+      ```
+      One directive per line, the parameters are separated with `,` character. For example: `ResourceName,InputText,ActionType`
+    title: Robo directives
+  robo_directives: null
+- opts:
+    category: Robo Test
+    summary: A path to a JSON file with a sequence of recorded actions Robo should
+      perform before the Robo crawl.
+    title: Robo scenario file path
+  robo_scenario_file: null
+- loop_scenarios: null
+  opts:
+    category: Game Loop Test
+    description: |
+      A list of game-loop scenario numbers which will be run as part of the test (default: all scenarios).
+      A maximum of 1024 scenarios may be specified in one test matrix.
+      Format: int,[int,...]
+      For example:
+      ```
+      1,2
+      ```
+    summary: 'A list of game-loop scenario numbers which will be run as part of the
+      test (default: all scenarios).'
+    title: Loop scenarios
+- loop_scenario_labels: null
+  opts:
+    category: Game Loop Test
+    description: |
+      A list of game-loop scenario labels (default: None).
+      Each game-loop scenario may be labeled in the APK manifest file with one or more arbitrary strings, creating logical groupings (e.g. GPU_COMPATIBILITY_TESTS).
+    summary: 'A list of game-loop scenario labels (default: None).'
+    title: Loop scenario labels
+- opts:
+    category: Debug
+    description: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min), the maximum is 3600 (60 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    is_required: true
+    summary: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min), the maximum is 3600 (60 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    title: Test timeout
+  test_timeout: "900"
+- obb_files_list: null
+  opts:
+    category: Test setup
+    description: |
+      A list of one or two Android OBB file names which will be copied to each test device before the tests will run (default: None).
+      Each OBB file name must conform to the format as specified by Android (e.g. [main|patch].0300110.com.example.android.obb) and will be installed into `[shared-storage]/Android/obb/[package-name]/` on the test device.
+      Files should be seperated by newline.
+      For example:
+      ```
+      main.0300110.com.example.android.obb
+      patch.0300110.com.example.android.obb
+      ```
+    summary: Upload OBB files before tests will run
+    title: OBB files
+- auto_google_login: "false"
+  opts:
+    category: Test setup
+    description: |-
+      Automatically log into the test device using a preconfigured Google
+      account before beginning the test.
+    is_required: true
+    summary: Add preconfigured Google account before tests will run
+    title: Add preconfigured Google account
+    value_options:
+    - "false"
+    - "true"
+- environment_variables: null
+  opts:
+    category: Test setup
+    description: |
+      One variable per line, key and value seperated by `=`
+      For example:
+      ```
+      coverage=true
+      coverageFile=/sdcard/tempDir/coverage.ec
+      ```
+    summary: |
+      One variable per line, key and value seperated by `=`
+      For example:
+      ```
+      coverage=true
+      coverageFile=/sdcard/tempDir/coverage.ec
+      ```
+    title: Environment Variables
+- directories_to_pull: null
+  opts:
+    category: Debug
+    description: |
+      A list of paths that will be downloaded from the device's storage after the test is complete.
+
+      For example
+
+      ```
+      /sdcard/tempDir1
+      /data/tempDir2
+      ```
+
+      If `download_test_results` input is set to `false` then these files will be available on the dashboard only. To have them downloaded set that input to `true` as well.
+    summary: |
+      A list of paths that will be downloaded from the device's storage after the test is complete.
+
+      For example
+
+      ```
+      /sdcard/tempDir1
+      /data/tempDir2
+      ```
+
+      If `download_test_results` input is set to `false` then these files will be downloaded to the dashboard only. To have them downloaded set that input to `true` as well.
+    title: Directories to pull
+- download_test_results: "false"
+  opts:
+    category: Debug
+    description: |
+      If this input is set to `true` all files generated in the test run and the files you downloaded from the device (if you have set `directories_to_pull` input as well) will be downloaded. Otherwise, no any file will be downloaded.
+    is_required: true
+    summary: |
+      If this input is set to `true` all files generated in the test run and the files you downloaded from the device (if you have set `directories_to_pull` input as well) will be downloaded. Otherwise, no any file will be downloaded.
+    title: Download files
+    value_options:
+    - "false"
+    - "true"
+- opts:
+    category: Debug
+    is_required: true
+    summary: |
+      If set to `true` will enable verbose level logging.
+    title: Verbose log
+    value_options:
+    - "false"
+    - "true"
+  use_verbose_log: "false"
+- apk_path: null
+  opts:
+    category: Deprecated
+    description: |
+      Deprecated. Use 'App path' input instead of this one.
+      The path to the APK you want the tests run with. By default `gradle-runner` step exports `BITRISE_APK_PATH` env, so you won't need to change this input.
+    is_required: false
+    summary: |
+      Deprecated. Use 'App path' input instead of this one.
+      The path to the APK you want the tests run with. By default `gradle-runner` step exports `BITRISE_APK_PATH` env, so you won't need to change this input.
+    title: APK path
+- app_package_id: null
+  opts:
+    category: Deprecated
+    description: |
+      Deprecated: If not specified will be automatically extracted from the App manifest.
+      The Java package of the application under test.
+    summary: |
+      Deprecated: If not specified will be automatically extracted from the App manifest.
+      The Java package of the application under test.
+    title: App package ID
+- inst_test_package_id: null
+  opts:
+    category: Deprecated
+    description: |
+      Deprecated: If not specified will be automatically extracted from the Test App manifest.
+      The Java package name of the instrumentation test.
+    summary: |
+      Deprecated: If not specified will be automatically extracted from the Test App manifest.
+      The Java package name of the instrumentation test.
+    title: Test package ID
+- api_base_url: https://vdt.bitrise.io/test
+  opts:
+    category: Debug
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- api_token: $ADDON_VDTESTING_API_TOKEN
+  opts:
+    category: Debug
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+- opts:
+    category: Debug
+    summary: JSON list of tests added to quarantine on Bitrise.io, quarantined tests
+      are excluded from test runs.
+    title: Quarantined tests
+  quarantined_tests: $BITRISE_QUARANTINED_TESTS_JSON
+outputs:
+- VDTESTING_DOWNLOADED_FILES_DIR: ""
+  opts:
+    summary: The directory containing the downloaded files if you have set `directories_to_pull`
+      and `download_test_results` inputs above.
+    title: Downloaded files directory
+- BITRISE_FLAKY_TEST_CASES: null
+  opts:
+    description: |-
+      A list of flaky test cases. A test case is considered flaky if it has failed at least once, but passed at least once as well.
+
+      The list contains the test cases in the following format:
+      ```
+      - TestSuit_1.TestClass_1.TestName_1
+      - TestSuit_1.TestClass_1.TestName_2
+      - TestSuit_1.TestClass_2.TestName_1
+      - TestSuit_2.TestClass_1.TestName_1
+      ...
+      ```
+
+      To export `BITRISE_FLAKY_TEST_CASES` Step Output `download_test_results` Step Input should be set to `true`.
+    summary: A list of flaky test cases. A test case is considered flaky if it has
+      failed at least once, but passed at least once as well.
+    title: List of flaky test cases
