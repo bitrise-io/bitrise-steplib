@@ -1,0 +1,339 @@
+title: Device Cloud for Maestro
+summary: Uses devicecloud.dev to execute Maestro mobile tests
+description: Executes Maestro mobile tests on devicecloud.dev with configurable parameters
+website: https://devicecloud.dev
+source_code_url: https://github.com/devicecloud-dev/bitrise-integration
+published_at: 2026-01-06T09:46:43.325525Z
+source:
+  git: https://github.com/devicecloud-dev/bitrise-integration.git
+  commit: 81841bfb66a67e82236a22684342216a17f3dd7b
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: node
+  apt_get:
+  - name: git
+  - name: node
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: devicecloud.dev API Key from your app settings
+    title: Device Cloud API Key
+- app_file: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Path to the build artifact to upload
+    title: App File Path
+- app_binary_id: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: The app binary already uploaded to devicecloud.dev
+    title: App Binary ID
+- android_device: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Android device to run your flow against
+    title: Android Device
+- ios_device: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: iOS device to run your flow against
+    title: iOS Device
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Path to the workspace folder containing Maestro flows
+    title: Workspace Folder
+  workspace: ""
+- env_list: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: List of environment variables to pass to the test separated by newlines
+      (e.g. MY_VAR=my_value <newline> MY_OTHER_VAR=other_value)
+    title: Environment Variables
+- metadata: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: 'Arbitrary key-value metadata to include with your test run, separated
+      by newlines (format: key=value)'
+    title: Metadata
+- async: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Run tests asynchronously (exit immediately without waiting for results)
+    title: Async Execution
+    value_options:
+    - "true"
+    - "false"
+- dry_run: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Simulate the run without actually triggering the upload/test, useful
+      for debugging workflow issues
+    title: Dry Run
+    value_options:
+    - "true"
+    - "false"
+- android_api_level: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Android API level to use for testing
+    title: Android API Level
+- android_no_snapshot: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: '[Android only] Force cold boot instead of using snapshot boot. Automatically
+      enabled for API 35+ but can be used to force cold boot on older API levels.'
+    title: Android No Snapshot
+    value_options:
+    - "true"
+    - "false"
+- ios_version: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: iOS version to use for testing
+    title: iOS Version
+- include_tags: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Comma-separated list of tags to include in test execution
+    title: Include Tags
+- exclude_tags: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Comma-separated list of tags to exclude from test execution
+    title: Exclude Tags
+- exclude_flows: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Flows to exclude from test execution
+    title: Exclude Flows
+- google_play: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Whether to use Google Play services
+    title: Google Play
+    value_options:
+    - "true"
+    - "false"
+- name: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Custom name for the test run
+    title: Test Run Name
+- device_locale: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Locale to use on the device
+    title: Device Locale
+- download_artifacts: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Which artifacts to download (ALL or FAILED)
+    title: Download Artifacts
+- maestro_version: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Specific version of Maestro to use
+    title: Maestro Version
+- opts:
+    is_expand: true
+    is_required: false
+    summary: '[Android only] Device orientation (0 = portrait, 90 = landscape)'
+    title: Device Orientation
+  orientation: ""
+- opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: '[Android only] Display crosshairs for screen interactions during test
+      execution'
+    title: Show Crosshairs
+    value_options:
+    - "true"
+    - "false"
+  show_crosshairs: "false"
+- maestro_chrome_onboarding: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: '[Android only] Force Maestro-based Chrome onboarding - note: this will
+      slow your tests but can fix browser related crashes'
+    title: Maestro Chrome Onboarding
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Number of times to retry failed tests
+    title: Retry Count
+  retry: ""
+- opts:
+    is_expand: true
+    is_required: false
+    summary: '[experimental] The type of runner to use - note: anything other than
+      default will incur premium pricing tiers'
+    title: Runner Type
+  runner_type: ""
+- opts:
+    is_expand: true
+    is_required: false
+    summary: Generate and download test reports in the specified format (allure, junit,
+      or html)
+    title: Report Format
+  report: ""
+- junit_path: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: 'Custom file path for downloaded JUnit report (requires report=junit,
+      default: ./report.xml)'
+    title: JUnit Report Path
+- allure_path: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: 'Custom file path for downloaded Allure report (requires report=allure,
+      default: ./report.html)'
+    title: Allure Report Path
+- html_path: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: 'Custom file path for downloaded HTML report (requires report=html, default:
+      ./report.html)'
+    title: HTML Report Path
+- ignore_sha_check: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Ignore the SHA hash check and upload the binary regardless of whether
+      it already exists (not recommended)
+    title: Ignore SHA Check
+    value_options:
+    - "true"
+    - "false"
+- api_url: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Custom API URL for devicecloud.dev (optional)
+    title: API URL
+- debug: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Enable detailed debug logging for troubleshooting issues
+    title: Debug Mode
+    value_options:
+    - "true"
+    - "false"
+- json: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: 'Output results in JSON format - note: will always provide exit code
+      0'
+    title: JSON Output
+    value_options:
+    - "true"
+    - "false"
+- json_file: "false"
+  opts:
+    default_value: "false"
+    is_expand: true
+    is_required: false
+    summary: Write JSON output to a file with name <run_name>_dcd.json or <upload_id>_dcd.json
+      if no name is provided
+    title: JSON File Output
+    value_options:
+    - "true"
+    - "false"
+- json_file_name: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Custom name for the JSON file (can also include relative path). Requires
+      json_file to be true.
+    title: JSON File Name
+- config: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: Path to custom config.yaml file. If not provided, defaults to config.yaml
+      in root flows folders.
+    title: Config File
+- artifacts_path: ""
+  opts:
+    is_expand: true
+    is_required: false
+    summary: 'Custom file path for downloaded artifacts (default: ./artifacts.zip)'
+    title: Artifacts Path
+outputs:
+- DEVICE_CLOUD_CONSOLE_URL: null
+  opts:
+    summary: URL to view the test results in the Device Cloud console
+    title: Device Cloud Console URL
+- DEVICE_CLOUD_FLOW_RESULTS: null
+  opts:
+    summary: JSON array containing results for each flow, including name, status,
+      and any errors
+    title: Flow Results
+- DEVICE_CLOUD_UPLOAD_STATUS: null
+  opts:
+    summary: Status of the test run (PENDING, RUNNING, PASSED, FAILED, CANCELLED)
+    title: Test Run Status
+- DEVICE_CLOUD_APP_BINARY_ID: null
+  opts:
+    summary: ID of the uploaded app binary in Device Cloud
+    title: App Binary ID
