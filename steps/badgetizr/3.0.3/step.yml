@@ -1,0 +1,192 @@
+source:
+  git: https://github.com/aiKrice/homebrew-badgetizr.git
+  commit: 18db6c368edc4f16628a12ad43602ceac6603727
+
+title: Badgetizr
+summary: Automatically add custom badges to pull/merge requests - boost productivity and streamline code reviews
+description: |
+  Badgetizr automatically adds customizable badges to your GitHub and GitLab pull/merge requests to boost team productivity.
+
+  Features:
+  - Track ticket references automatically from PR titles
+  - Identify work-in-progress pull requests clearly
+  - Monitor CI/CD status without clicking through pipelines
+  - Visualize completion status of checklists and tasks
+  - Highlight target branches for better merge awareness
+
+  This step works on both macOS and Linux stacks by cloning the repository and running the badgetizr script.
+maintainer: community
+website: https://github.com/aiKrice/homebrew-badgetizr
+source_code_url: https://github.com/aiKrice/homebrew-badgetizr
+support_url: https://github.com/aiKrice/homebrew-badgetizr/issues
+published_at: 2025-12-17T00:00:00Z
+
+type_tags:
+  - notification
+
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+
+toolkit:
+  bash:
+    entry_file: step.sh
+
+deps:
+  brew:
+    - name: gh
+    - name: glab
+  apt_get:
+    - name: wget
+
+inputs:
+  - pr_id: "$BITRISE_PULL_REQUEST"
+    opts:
+        title: "Pull/Merge Request ID"
+        summary: "The ID of the pull request or merge request"
+        description: |
+          The ID number of the pull/merge request where badges will be added.
+
+          For GitHub: Use `$BITRISE_PULL_REQUEST` or `$PR_NUMBER`
+          For GitLab: Use `$BITRISE_PULL_REQUEST` or your custom variable
+        is_required: true
+
+  - configuration: ".badgetizr.yml"
+    opts:
+      title: "Configuration file path"
+      summary: "Path to the badgetizr configuration file"
+      description: |
+        Path to the YAML configuration file that defines which badges to display.
+        Default: `.badgetizr.yml`
+      is_required: true
+
+  - pr_destination_branch:
+    opts:
+        title: "PR destination branch"
+        summary: "Target branch for the pull/merge request"
+        description: |
+          The branch that the PR/MR is targeting. Required when branch badge is enabled.
+
+          For GitHub: Use `$BITRISEIO_GIT_BRANCH_DEST`
+          For GitLab: Use your target branch variable
+        is_required: false
+
+  - pr_build_number:
+    opts:
+        title: "Build number"
+        summary: "Current build number"
+        description: |
+          The build number to display in the CI badge. Use `$BITRISE_BUILD_NUMBER`.
+          Required when CI badge is enabled without ci_status.
+        is_required: false
+
+  - pr_build_url:
+    opts:
+        title: "Build URL"
+        summary: "URL to the current build"
+        description: |
+          The URL to the build page. Use `$BITRISE_BUILD_URL`.
+          Required when CI badge is enabled.
+        is_required: false
+
+  - ci_status:
+    opts:
+        title: "CI Status"
+        summary: "Current CI/CD pipeline status"
+        description: |
+          Controls the CI badge color and behavior.
+
+          **Modes:**
+          - **automatic** (recommended for final status): Auto-detect from Bitrise environment
+            - Uses $BITRISE_BUILD_STATUS and $BITRISE_PIPELINE_BUILD_STATUS
+            - Returns "passed" (green) or "failed" (red) at build end
+
+            **⚠️ IMPORTANT - Timing:**
+            - MUST be used as the FINAL step in your workflow
+            - Place AFTER all build, test, and deploy steps complete
+            - Only then will $BITRISE_BUILD_STATUS reflect the true final status
+
+            **Example workflow:**
+            ```yaml
+            workflows:
+              primary:
+                steps:
+                  - git-clone: {}
+                  - script: { title: "Build" }
+                  - script: { title: "Test" }
+                  - script: { title: "Deploy" }
+                  - badgetizr: { ci_status: "automatic" }  # ← Final step
+            ```
+
+          - **Manual status** (for intermediate steps or custom control):
+            - started = yellow (use for running/in-progress builds at workflow START)
+            - passed = green
+            - warning = orange
+            - failed = red
+
+            **Use cases:**
+            - Show "started" at beginning of workflow
+            - Update to "passed"/"failed" at specific checkpoints
+            - Custom statuses for complex multi-stage pipelines
+
+          - **Empty**: Build number mode - static badge with build number (requires --pr-build-number)
+
+        is_required: false
+        value_options:
+          - "automatic"
+          - "started"
+          - "passed"
+          - "warning"
+          - "failed"
+
+  - ci_text:
+    opts:
+        title: "CI Badge Text"
+        summary: "Custom text for the CI badge"
+        description: |
+          Custom text to display in the CI badge.
+          If not provided, defaults to the status or build number.
+        is_required: false
+
+  - provider: "github"
+    opts:
+      title: "Provider"
+      summary: "Force specific provider (github or gitlab)"
+      description: |
+        Force a specific provider. If not set, auto-detection will be used.
+        Valid values: github, gitlab
+      is_required: false
+      value_options:
+        - "github"
+        - "gitlab"
+
+  - github_token:
+    opts:
+        title: "GitHub Token"
+        summary: "GitHub authentication token"
+        description: |
+          GitHub personal access token or `$GITHUB_TOKEN` for authentication.
+          Required when using GitHub provider.
+        is_required: false
+        is_sensitive: true
+        is_expand: true
+
+  - gitlab_token:
+    opts:
+        title: "GitLab Token"
+        summary: "GitLab authentication token"
+        description: |
+          GitLab personal access token for authentication.
+          Required when using GitLab provider.
+        is_required: false
+        is_sensitive: true
+        is_expand: true
+
+  - gitlab_host:
+    opts:
+        title: "GitLab Host"
+        summary: "GitLab instance hostname"
+        description: |
+          GitLab instance hostname (e.g., gitlab.example.com).
+          Only needed for self-managed GitLab instances. Defaults to gitlab.com.
+        is_required: false
