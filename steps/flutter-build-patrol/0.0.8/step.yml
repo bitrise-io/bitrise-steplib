@@ -8,10 +8,10 @@ description: |-
 website: https://github.com/Gpac-LLC/patrol_build_flutter
 source_code_url: https://github.com/Gpac-LLC/patrol_build_flutter
 support_url: https://github.com/Gpac-LLC/patrol_build_flutter/issues
-published_at: 2025-12-30T17:44:39.426235+01:00
+published_at: 2026-01-29T15:28:13.987946+01:00
 source:
   git: https://github.com/Gpac-LLC/patrol_build_flutter.git
-  commit: f25e350cc909c17de40a5b656847d1607211a94e
+  commit: 947762fbf0bb6a3806ce9618ca13cafaab1eb05c
 project_type_tags:
 - flutter
 type_tags:
@@ -22,7 +22,7 @@ toolkit:
   go:
     package_name: github.com/Gpac-LLC/patrol_build_flutter
 inputs:
-- CUSTOM_PATROL_CLI_VERSION: ""
+- custom_patrol_cli_version: ""
   opts:
     description: |-
       If you want to use a specific version of Patrol, you can specify it here.
@@ -34,16 +34,15 @@ inputs:
     is_required: false
     summary: Custom Patrol CLI Version
     title: Custom Patrol CLI Version
-- TEST_TARGET_DIRECTORY: null
-  opts:
-    description: |-
-      The directory that will be built by the step.
-      If you leave this input empty, the step will use the default directory.
+- opts:
+    description: "The directory that will be built by the step.\nIf you leave this
+      input empty, the step will use the entrypoint test_bundle.dart \nfrom integration_test
+      or patrol_test folder, depending on your Patrol Version."
     is_required: true
     summary: The directory that will be built by the step
     title: Test Target Directory
-- PLATFORM: both
-  opts:
+  test_target_directory: null
+- opts:
     description: The selected platform will be built, or both iOs and Android if you
       select both
     is_required: true
@@ -54,8 +53,8 @@ inputs:
     - both
     - ios
     - android
-- TEST_BUILD_TYPE: release
-  opts:
+  platform: both
+- opts:
     description: |-
       The build type to use for the selected Platform.
       If you leave this input empty, the step will use the default build type, which is `release`.
@@ -66,8 +65,8 @@ inputs:
     value_options:
     - release
     - debug
-- TAGS: ""
-  opts:
+  test_build_type: release
+- opts:
     description: |-
       Tags to filter the tests to run.
       You can specify multiple tags separated by commas.
@@ -75,7 +74,8 @@ inputs:
     is_required: false
     summary: Tags to filter the tests to run
     title: Tags
-- EXCLUDED_TAGS: ""
+  tags: ""
+- excluded_tags: ""
   opts:
     description: |-
       Tags to exclude from the tests to run.
@@ -84,14 +84,14 @@ inputs:
     is_required: false
     summary: Tags to exclude from the tests to run
     title: Excluded Tags
-- IS_VERBOSE_MODE: "false"
+- is_verbose_mode: "false"
   opts:
     description: |-
       If you want to disable verbose output for the step, you can set this input to `false`.
       If you leave this input empty, the step will enable verbose output.
       Verbose output can help you debug issues with the step.
       It will print additional information about the step's execution.
-    is_required: false
+    is_required: true
     summary: If debug mode is enabled, the step will print verbose logs
     title: Print Verbose Output?
     value_options:
