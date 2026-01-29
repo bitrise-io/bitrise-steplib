@@ -8,10 +8,10 @@ description: |-
 website: https://github.com/Gpac-LLC/patrol_build_flutter
 source_code_url: https://github.com/Gpac-LLC/patrol_build_flutter
 support_url: https://github.com/Gpac-LLC/patrol_build_flutter/issues
-published_at: 2026-01-29T15:28:13.987946+01:00
+published_at: 2026-01-29T15:53:26.571798+01:00
 source:
   git: https://github.com/Gpac-LLC/patrol_build_flutter.git
-  commit: 947762fbf0bb6a3806ce9618ca13cafaab1eb05c
+  commit: 916c80cd638c3150360acc46fd449bc8430e0eec
 project_type_tags:
 - flutter
 type_tags:
@@ -38,7 +38,7 @@ inputs:
     description: "The directory that will be built by the step.\nIf you leave this
       input empty, the step will use the entrypoint test_bundle.dart \nfrom integration_test
       or patrol_test folder, depending on your Patrol Version."
-    is_required: true
+    is_required: false
     summary: The directory that will be built by the step
     title: Test Target Directory
   test_target_directory: null
