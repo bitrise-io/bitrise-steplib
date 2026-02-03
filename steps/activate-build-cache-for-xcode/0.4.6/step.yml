@@ -1,0 +1,83 @@
+title: Build Cache for Xcode
+summary: Activates Bitrise Remote Build Cache add-on for subsequent Xcode builds in
+  the workflow
+description: |
+  This Step enables Bitrise's Build Cache Add‑On for Xcode by configuring the environment with the Build Cache CLI.
+
+  After this Step runs, Xcode builds invoked via xcodebuild in subsequent workflow steps will automatically read from the remote cache and push new entries when applicable.
+
+  The Step adds an alias to ~/.zshrc and ~/.bashrc so the wrapper is available in all following steps; from that point all xcodebuild calls are wrapped to enable compilation caching.
+  Analytical data (command, duration, cache information, environment) is collected and sent to Bitrise and is available on the Build cache page: https://app.bitrise.io/build-cache
+website: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-xcode
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-xcode
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-xcode
+published_at: 2026-02-03T15:55:26.290266147Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-xcode.git
+  commit: 9eacee8582cddef7dc79a6e11e73cde5e68611d3
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- cache: "true"
+  opts:
+    is_required: true
+    summary: Whether the build uses the remote cache
+    title: Use cache
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_required: true
+    summary: Whether the build can not only read, but write new entries to the remote
+      cache
+    title: Push new cache entries
+    value_options:
+    - "true"
+    - "false"
+  push: "true"
+- opts:
+    is_required: true
+    summary: |-
+      Whether Bitrise components should not log anything except the underlying xcodebuild output.
+      Takes precedence over the 'Verbose logging' and 'Add timestamps' options.
+    title: Silence all extra Bitrise logging
+    value_options:
+    - "true"
+    - "false"
+  silent: "false"
+- opts:
+    description: When enabled, the analytics wrapper adds timestamps to xcodebuild
+      output log messages during the build.
+    is_required: true
+    summary: Add timestamps to xcodebuild messages
+    title: Add timestamps to xcodebuild messages
+    value_options:
+    - "true"
+    - "false"
+  timestamps: "false"
+- cache_skip_flags: "false"
+  opts:
+    description: |-
+      Skip passing cache flags to xcodebuild except the COMPILATION_CACHE_REMOTE_SERVICE_PATH.
+
+      Cache will have to be enabled manually in the Xcode project settings. More information can be found at the FAQ
+      document: https://docs.bitrise.io/en/bitrise-build-cache/build-cache-for-xcode/xcode-compilation-cache-faq.html
+    is_required: true
+    summary: Skip passing cache flags to xcodebuild
+    title: Skip passing cache flags to xcodebuild
+    value_options:
+    - "true"
+    - "false"
