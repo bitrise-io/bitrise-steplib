@@ -1,0 +1,65 @@
+title: Get OIDC Identity Token
+summary: The Step fetches an OIDC identity token.
+description: |-
+  The Step fetches an OIDC identity token.
+
+  The token can be used to authenticate with services that support OIDC tokens, such as Google Cloud, AWS, Azure or others.
+  This allows secure, token-based authentication without the need to manage long-lived credentials.
+website: https://github.com/bitrise-steplib/bitrise-step-get-identity-token
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-get-identity-token
+support_url: https://github.com/bitrise-steplib/bitrise-step-get-identity-token/issues
+published_at: 2026-02-04T12:16:36.99277633Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-get-identity-token.git
+  commit: 9c671da88bda23b999076b4071bd5ce01bcf61ff
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-get-identity-token
+inputs:
+- audience: null
+  opts:
+    description: |-
+      The audience for the identity token.
+
+      This could be the URL of the service you want to access with the token or a specific identifier provided by the service.
+    is_required: true
+    summary: The audience for the identity token.
+    title: Token audience
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: API settings
+    description: |-
+      Unique build URL of this build on Bitrise.io.
+
+      By default the step will use the Bitrise API.
+    is_dont_change_value: true
+    is_required: true
+    summary: Unique build URL of this build on Bitrise.io.
+    title: Bitrise build url
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: API settings
+    description: |-
+      The build's API Token for the build on Bitrise.io
+
+      This will be used to communicate with the Bitrise API
+    is_required: true
+    is_sensitive: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise build token
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- BITRISE_IDENTITY_TOKEN: null
+  opts:
+    summary: The newly generated identity token.
+    title: Identity token
