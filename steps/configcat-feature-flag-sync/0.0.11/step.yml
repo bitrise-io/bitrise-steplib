@@ -18,7 +18,7 @@ description: "This Step helps you get rid of technical debt by scanning the sour
 website: https://configcat.com/
 source_code_url: https://github.com/configcat/bitrise-step-configcat-feature-flag-sync/
 support_url: https://configcat.com/support/
-published_at: 2026-02-05T22:17:13.936968+01:00
+published_at: 2026-02-05T22:19:15.566555+01:00
 source:
   git: https://github.com/configcat/bitrise-step-configcat-feature-flag-sync.git
   commit: 7d899575f69da8f7fe7863aecd1006d5c85285e7
