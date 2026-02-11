@@ -1,0 +1,67 @@
+title: Dependency Installer
+summary: Installs dependencies from tool version files in your repo.
+description: |
+  This wrapper for the bitrise CLI tool installs dependencies
+  defined in the tool version file(s) in your repo.
+
+  To learn more about defining tool versions as code, read our
+  [documentation](https://bitrise.io/stacks/tips/tool-versions).
+
+  Tool version files supported by this step include:
+  * .tool-versions
+  * .ruby-version
+  * .node-version
+  * .python-version
+  * .java-version
+  * .go-version
+  * .terraform-version
+  * .kubectl-version
+  * bitrise.yml (with a `tools:` section)
+website: https://github.com/bitrise-io/bitrise-step-dependency-installer
+source_code_url: https://github.com/bitrise-io/bitrise-step-dependency-installer
+support_url: https://github.com/bitrise-io/bitrise-step-dependency-installer/issues
+published_at: 2026-02-11T10:05:15.708697-06:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-dependency-installer.git
+  commit: ea779aa9a279f2d23ebe76e4f1b4d42deb96f18e
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/bitrise-step-dependency-installer
+inputs:
+- opts:
+    description: |
+      The tool version file contains the version(s) of the tool(s)
+      for the step to install. See the step description for the
+      list of supported tool version files.
+    is_expand: false
+    is_required: true
+    summary: The tool version file path.
+    title: Tool Version File Path
+  tool_version_file: .tool-versions
+- opts:
+    description: |
+      If enabled, the step will output additional debug
+      information during execution.
+    is_expand: false
+    is_required: false
+    summary: Enable verbose output for debugging.
+    title: Verbose Output
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- bitrise_workflow_id: ""
+  opts:
+    description: |
+      This input is only used when passing a bitrise.yml file as a
+      tool version file and rather than using the global `tools:`
+      block, you want to use the `tools:` block defined under
+      specific workflows. The step accepts a workflow ID and
+      installs the tools defined under that workflow's `tools:`
+      block.
+    is_expand: false
+    is_required: false
+    summary: The Bitrise Workflow ID to use for installing tools. Optional.
+    title: Bitrise Workflow ID
