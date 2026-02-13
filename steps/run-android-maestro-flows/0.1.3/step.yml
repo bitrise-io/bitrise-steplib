@@ -1,0 +1,70 @@
+title: Run Android Maestro Flows
+summary: |
+  Runs Android Maestro Flow on an Android emulator
+description: |
+  This step runs your Maestro flows on an Android emulator and exports a test report and a video recording. This step does not give any output but puts tests results in deploy folder if requested.
+website: https://github.com/chloe-vilain/bitrise-step-run-android-maestro-flows
+source_code_url: https://github.com/chloe-vilain/bitrise-step-run-android-maestro-flows
+support_url: https://github.com/chloe-vilain/bitrise-step-run-android-maestro-flows/issues
+published_at: 2025-01-13T17:20:45.524243-05:00
+source:
+  git: https://github.com/chloe-vilain/bitrise-step-run-android-maestro-flows.git
+  commit: 34fa43e08c4d9a76a4b900e87060e8a71153e58c
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: ffmpeg
+  apt_get:
+  - name: ffmpeg
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_file: ""
+  opts:
+    description: "`app_file` should point to an emulator build.\n**Hint:** Output
+      Varaible `$BITRISE_APK_PATH` from **Android Build for UI Testing** step can
+      be used. \n"
+    is_expand: true
+    is_required: true
+    summary: Main Android APK file to run your flows against
+    title: APK File
+- opts:
+    description: |
+      A single maestro flow file or directroy that includes Maestro Flows.
+    is_expand: true
+    is_required: true
+    summary: Flow file or directory
+    title: Flow workspace
+  workspace: .maestro
+- additional_params: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: Additional parameters of Maestro CLI command i.e --include-tags=dev,pull-request
+    title: Additional Maestro Parameters
+- export_test_result_format: junit
+  opts:
+    description: 'Format for the test report. Options: junit (default), html, noop'
+    is_expand: true
+    is_required: false
+    summary: 'Export test result format (Default: junit)'
+    title: Export test result format
+    value_options:
+    - junit
+    - html
+    - noop
+- maestro_cli_version: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Maestro CLI version to be downloaded in your CI (Default: latest)'
+    title: Maestro CLI version
