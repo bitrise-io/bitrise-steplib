@@ -1,0 +1,94 @@
+title: AppCenter CodePush Release React Native
+summary: |
+  Release a React Native update to AppCenter CodePush
+description: |
+  Utilise appcenter-cli command appcenter codepush release-react to release an update
+website: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native
+source_code_url: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native
+support_url: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native/issues
+published_at: 2025-02-19T16:48:13.627253-05:00
+source:
+  git: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native.git
+  commit: c3e68f7f3287a54c9da0ab1bbf63bc34b04d270f
+host_os_tags:
+- osx-10.11
+- ubuntu-16.04
+project_type_tags:
+- react-native
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: node
+  apt_get:
+  - name: node
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    description: |
+      Path where the React Native project is located.
+    is_required: true
+    title: React Native Project Root
+  react_native_project_root: $REACT_NATIVE_PROJECT_ROOT
+- app_id: $APP_ID
+  opts:
+    description: |
+      The name of the app as it appears in the DeployPulse dashboard. You will need a valid api token to authenticate with DeployPulse.
+    is_required: true
+    summary: DeployPulse application identifier (App Name).
+    title: Your App ID
+- api_token: $API_TOKEN
+  opts:
+    description: |
+      API Tokens can be obtained from following steps [here](https://docs.deploypulse.io/quickstart#registering-and-login).
+    is_required: true
+    is_sensitive: true
+    title: API Token
+- deployment: Staging
+  opts:
+    description: |
+      This specifies which deployment you want to release the update to. This defaults to Staging, but when you're ready to deploy to Production, or one of your own custom deployments, just explicitly set this argument. See [here](https://docs.microsoft.com/en-us/appcenter/distribution/codepush/cli#deployment-name-parameter) for details.
+    is_required: true
+    title: Deployment
+- opts:
+    description: |
+      The platform you want to release the update to. This defaults to ios, but you can specify android if you want to release to the Android platform.
+    is_required: true
+    title: Platform
+  platform: ios
+- opts:
+    description: |
+      The binary version of the app you are releasing the update for. This is required when releasing an update for a specific binary version of your app, and it is recommended that you always specify this argument.
+    is_required: false
+    title: Target Binary Version
+  target_binary_version: null
+- description: null
+  opts:
+    description: |
+      Specify an optional "change log" for the deployment.
+    is_required: false
+    title: Description
+- opts:
+    description: |
+      It is the distribution percentage (0 - 100) of your new update in codepush, by default it is 100% of the users
+    is_required: true
+    title: Rollout Percentage
+  percentage: 100
+- opts:
+    description: |
+      To sign your new update in codepush, '$SIGN_PRIVATE_KEY' must be the one who stores your private key to sign
+    is_required: false
+    title: Signed update
+  private_key: -k $SIGN_PRIVATE_KEY
+- options: null
+  opts:
+    description: |
+      Any extra options that you would like to concat to the release-react command. Eg. "-m --disable-duplicate-release-error"
+    is_required: false
+    title: Extra Options
