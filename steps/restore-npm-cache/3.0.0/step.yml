@@ -1,0 +1,81 @@
+title: Restore NPM Cache
+summary: Restores cached node_modules dependencies, used by NPM and Yarn. This Step
+  needs to be used in combination with **Save NPM Cache**.
+description: |
+  Restores cached node_modules dependencies. This Step needs to be used in combination with **Save NPM Cache**.
+
+  This Step is based on [key-based caching](https://docs.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for NPM dependencies. If you'd like to change the cache keys, you might want to use the generic [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache) Step instead.
+
+  Note: NPM and Yarn package managers are both supported.
+
+  #### Related steps
+
+  [Save NPM cache](https://github.com/bitrise-steplib/bitrise-step-save-npm-cache/)
+
+  [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache/issues
+published_at: 2026-03-03T15:43:22.345911882Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache.git
+  commit: 341f8b2117b789799bdf9703552aa6150125bb11
+executables:
+  darwin-amd64:
+    storage_uri: steps/restore-npm-cache/3.0.0/bin/restore-npm-cache-darwin-amd64
+    hash: sha256-b28b39f67849709c4bb47f97a5f58950cf09d846fe107856d6b0f62462d09507
+  darwin-arm64:
+    storage_uri: steps/restore-npm-cache/3.0.0/bin/restore-npm-cache-darwin-arm64
+    hash: sha256-2bbf87ed7a81b7d7d493db6dbb709aa544ac852b4cd39c354c51a5452bcca757
+  linux-amd64:
+    storage_uri: steps/restore-npm-cache/3.0.0/bin/restore-npm-cache-linux-amd64
+    hash: sha256-d1d15537cd0f4bfbc3242e2c37d1c303ab461b3ba9888186ca45cac8460e22b2
+  linux-arm64:
+    storage_uri: steps/restore-npm-cache/3.0.0/bin/restore-npm-cache-linux-arm64
+    hash: sha256-933f32545dc7f59142a6edca769bd235009972311d469fd0ab140a0ffd2b69c2
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-npm-cache
+deps:
+  brew:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- opts:
+    category: Debugging
+    description: Timeout in seconds
+    is_required: true
+    summary: Timeout in seconds
+    title: Timeout
+  timeout: 600
+- opts:
+    category: Debugging
+    description: |-
+      Number of retries to attempt when downloading a cache archive fails.
+
+      The value 0 means no retries are attempted.
+    is_required: true
+    summary: Number of retries to attempt when downloading a cache archive fails.
+    title: Number of retries
+  retries: 3
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit
