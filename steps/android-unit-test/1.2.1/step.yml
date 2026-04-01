@@ -1,0 +1,144 @@
+title: Android Unit Test
+summary: This step runs your Android project's unit tests.
+description: This step runs your Android project's unit tests.
+website: https://github.com/bitrise-steplib/bitrise-step-android-unit-test
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-unit-test
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-unit-test/issues
+published_at: 2025-11-10T13:52:40.678714154Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-unit-test.git
+  commit: 612d8564242be44d7b4c886129f8f97bdc86034a
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- cordova
+- flutter
+- ionic
+- kotlin-multiplatform
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-unit-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root directory of your android project, for example, where your
+      root build gradle file exists (also gradlew, settings.gradle, etc...)
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exists (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module that you want to test.
+      To see your available modules, please open your project in Android Studio, go to **Project Structure** and see the list on the left.
+      Leave this input blank to test all modules.
+    is_required: false
+    summary: |
+      Set the module that you want to test.
+    title: Module
+- opts:
+    description: |
+      Set the variant that you want to test.
+      To see your available variants, please open your project in Android Studio, go to **Project Structure**, then to the **variants** section.
+      Leave this input blank to test all variants.
+    is_required: false
+    summary: |
+      Set the variant that you want to test.
+    title: Variant
+  variant: ""
+- arguments: null
+  opts:
+    category: Options
+    description: Extra arguments passed to the gradle task
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+- opts:
+    category: Options
+    description: |-
+      The step will use this pattern to export __Local unit test HTML results__.
+      The whole HTML results directory will be zipped and moved to the `$BITRISE_DEPLOY_DIR`.
+
+      You need to override this input if you have custom output dir set for Local unit test HTML results.
+      The pattern needs to be relative to the selected module's directory.
+
+      Example 1: app module and debug variant is selected and the HTML report is generated at:
+
+      - `<path_to_your_project>/app/build/reports/tests/testDebugUnitTest`
+
+      this case use: `*build/reports/tests/testDebugUnitTest` pattern.
+
+      Example 2: app module and NO variant is selected and the HTML reports are generated at:
+
+      - `<path_to_your_project>/app/build/reports/tests/testDebugUnitTest`
+      - `<path_to_your_project>/app/build/reports/tests/testReleaseUnitTest`
+
+      to export every variant's reports use: `*build/reports/tests` pattern.
+    is_required: true
+    title: Local unit test HTML result directory pattern
+  report_path_pattern: '*build/reports/tests'
+- opts:
+    category: Options
+    description: |-
+      The step will use this pattern to export __Local unit test XML results__.
+      The whole XML results directory will be zipped and moved to the `$BITRISE_DEPLOY_DIR`
+      and the result files will be deployed to the Ship Addon.
+
+      You need to override this input if you have custom output dir set for Local unit test XML results.
+      The pattern needs to be relative to the selected module's directory.
+
+      Example 1: app module and debug variant is selected and the XML report is generated at:
+
+      - `<path_to_your_project>/app/build/test-results/testDebugUnitTest`
+
+      this case use: `*build/test-results/testDebugUnitTest` pattern.
+
+      Example 2: app module and NO variant is selected and the XML reports are generated at:
+
+      - `<path_to_your_project>/app/build/test-results/testDebugUnitTest`
+      - `<path_to_your_project>/app/build/test-results/testReleaseUnitTest`
+
+      to export every variant's reports use: `*build/test-results` pattern.
+    is_required: true
+    title: Local unit test XML result directory pattern
+  result_path_pattern: '*build/test-results'
+- is_debug: "false"
+  opts:
+    category: Debug
+    description: The step will print more verbose logs if enabled.
+    is_required: true
+    summary: The step will print more verbose logs if enabled.
+    title: Enable Debug Mode
+    value_options:
+    - "false"
+    - "true"
+- opts:
+    category: Debug
+    summary: JSON list of tests added to quarantine on Bitrise.io, quarantined tests
+      are excluded from test runs.
+    title: Quarantined tests
+  quarantined_tests: $BITRISE_QUARANTINED_TESTS_JSON
+outputs:
+- BITRISE_FLAKY_TEST_CASES: null
+  opts:
+    description: |-
+      A test case is considered flaky if it has failed at least once, but passed at least once as well.
+
+      The list contains the test cases in the following format:
+      ```
+      - TestSuit_1.TestClass_1.TestName_1
+      - TestSuit_1.TestClass_1.TestName_2
+      - TestSuit_1.TestClass_2.TestName_1
+      - TestSuit_2.TestClass_1.TestName_1
+      ...
+      ```
+    title: List of flaky test cases

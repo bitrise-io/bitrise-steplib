@@ -1,0 +1,50 @@
+title: Build Cache for Bazel
+summary: |
+  Activates Bitrise Remote Build Cache for subsequent Bazel builds in the workflows.
+description: |
+  This Step activates Bitrise's remote build cache add-on for subsequent Bazel executions in the workflow.
+
+  After this Step executes, Bazel builds will automatically read from the remote cache and push new entries if it's enabled.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel/issues
+published_at: 2025-07-10T13:09:19.671854113Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-bazel.git
+  commit: 1f7f5fc10e48420c43135bdaa521386d8ea6f8d8
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_skippable: true
+run_if: .IsCI
+inputs:
+- enable_rbe: "false"
+  opts:
+    description: When enabled, this sets up Bazel to use Bitrise's Remote Build Execution
+      (RBE) service to execute builds.
+    is_required: true
+    summary: Enable Bazel Remote Build Execution (RBE)
+    title: Enable Bazel RBE
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: When enabled, this sets up Bazel to add timestamps to log messages
+      during the build.
+    is_required: true
+    summary: Add timestamps to build messages
+    title: Add timestamps to build messages
+    value_options:
+    - "true"
+    - "false"
+  timestamps: "true"
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

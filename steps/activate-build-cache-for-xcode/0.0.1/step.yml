@@ -1,0 +1,33 @@
+title: Build Cache for Xcode
+summary: Activates Bitrise Remote Build Cache add-on for subsequent Xcode builds in
+  the workflow
+description: |
+  This Step enables Bitrise's Build Cache Add‑On for Xcode by configuring the environment with the Build Cache CLI.
+
+  After this Step runs, Xcode builds invoked via xcodebuild in subsequent workflow steps will automatically read from the remote cache and push new entries when applicable.
+
+  The Step adds an alias to ~/.zshrc and ~/.bashrc so the wrapper is available in all following steps; from that point all xcodebuild calls are wrapped to enable compilation caching.
+  Analytical data (command, duration, cache information, environment) is collected and sent to Bitrise and is available on the Build cache page: https://app.bitrise.io/build-cache
+website: https://github.com/bitrise-steplib/bitrise-step-activate-xcode-remote-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-xcode-remote-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-xcode-remote-cache
+published_at: 2025-09-12T14:41:09.542658+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-build-cache-for-xcode.git
+  commit: eee2ff0639cf8d9b135cc96881b01fb783bfac8a
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
