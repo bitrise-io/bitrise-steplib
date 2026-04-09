@@ -11,6 +11,10 @@ description: |
 website: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
 source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
 support_url: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+published_at: 2026-04-09T12:00:00.000000000Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features.git
+  commit: e96ada56a66bb11c74d923afa2ac662a5235758c
 
 project_type_tags:
 - react-native
