@@ -305,13 +305,7 @@ inputs:
     value_options:
     - "true"
     - "false"
-- moropo_v1_api_key: ""
-  opts:
-    is_expand: true
-    is_required: false
-    is_sensitive: true
-    summary: API key for Moropo v1 integration
-    title: Moropo v1 API Key
+
 - use_beta: "false"
   opts:
     default_value: "false"
