@@ -6,7 +6,7 @@ source_code_url: https://github.com/devicecloud-dev/bitrise-integration
 published_at: 2026-04-09T00:00:00.000000Z
 source:
   git: https://github.com/devicecloud-dev/bitrise-integration.git
-  commit: 91f47c5d8627374f0bd72e50c649b8dbdbe07ec1
+  commit: b736452765777d27f4a42471154b4c64f3aaccb0
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
