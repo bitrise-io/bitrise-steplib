@@ -1,0 +1,84 @@
+title: Create Simulator Device Pair
+summary: Creates an iPhone and Apple Watch simulator device pair
+description: |
+  Creates or finds an existing active simulator device pair between an iPhone and an Apple Watch.
+
+  The step looks up simulator devices by name and OS version, checks if an active pair already
+  exists between them, and creates one if needed.
+website: https://github.com/bitrise-steplib/bitrise-step-create-device-pair
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-create-device-pair
+support_url: https://github.com/bitrise-steplib/bitrise-step-create-device-pair/issues
+published_at: 2026-04-10T09:31:47.384725-05:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-create-device-pair.git
+  commit: 9f3b97bcaa1a949d77a69c4bdcfefb731ebbefc9
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-create-device-pair
+run_if: .IsCI
+inputs:
+- iphone_device: Bitrise iOS default
+  opts:
+    description: |
+      The simulator device name as shown in `xcrun simctl list devices` and listed on bitrise.io/stacks.
+    is_required: true
+    summary: The name of the iPhone simulator device (e.g. "iPhone 17 Pro")
+    title: iPhone device name
+- ios_version: null
+  opts:
+    description: |
+      The iOS runtime version. Use dot notation (e.g. "18.4", "17.5").
+    is_required: true
+    summary: The iOS version for the iPhone simulator (e.g. "18.4")
+    title: iOS version
+- opts:
+    description: |
+      The simulator device name as shown in `xcrun simctl list devices` and listed on bitrise.io/stacks.
+    is_required: true
+    summary: The name of the Apple Watch simulator device (e.g. "Apple Watch Series
+      11 (46mm)")
+    title: Watch device name
+  watch_device: Apple Watch Series 11 (46mm)
+- opts:
+    description: |
+      The watchOS runtime version. Use dot notation (e.g. "11.5", "26.0").
+    is_required: true
+    summary: The watchOS version for the Watch simulator (e.g. "11.5")
+    title: watchOS version
+  watchos_version: null
+- delete_blocking_pairs: "true"
+  opts:
+    description: |
+      When true and pairing fails because a device has reached its maximum number of
+      allowed pairs, the step deletes the conflicting pair(s) and retries.
+      When false, the step fails immediately on a capacity error.
+    is_required: true
+    summary: Delete existing pairs blocking creation of the new pair
+    title: Delete blocking pairs on capacity error
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- BITRISE_DEVICE_PAIR_UDID: null
+  opts:
+    description: |
+      The UUID identifier of the active device pair between the specified iPhone and Apple Watch simulators.
+    summary: The UUID of the created or existing device pair
+    title: Device Pair UDID
+- BITRISE_IPHONE_UDID: null
+  opts:
+    description: |
+      The UDID of the iPhone simulator device that was matched by the given device name and iOS version.
+    summary: The UDID of the resolved iPhone simulator device
+    title: iPhone Simulator UDID
+- BITRISE_WATCH_UDID: null
+  opts:
+    description: |
+      The UDID of the Apple Watch simulator device that was matched by the given device name and watchOS version.
+    summary: The UDID of the resolved Apple Watch simulator device
+    title: Watch Simulator UDID
