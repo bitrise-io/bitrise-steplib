@@ -1,0 +1,38 @@
+title: Activate Gradle Mirrors
+summary: Activates Bitrise repository mirrors for subsequent Gradle builds in the
+  workflow
+description: |
+  This step installs a Gradle init script that redirects repository requests to
+  Bitrise-hosted mirrors for faster, more reliable dependency resolution in
+  subsequent Gradle invocations.
+
+  The step is gated by the `BITRISE_MAVENCENTRAL_PROXY_ENABLED` environment
+  variable and only activates when run in a Bitrise datacenter that has a
+  mirror deployment. In every other case it logs an info message and exits
+  successfully.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+published_at: 2026-04-29T15:26:38.700397+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors.git
+  commit: 365f296d6df30cfef52ab593fea3ca83d4dfb588
+project_type_tags:
+- android
+- kotlin-multiplatform
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
