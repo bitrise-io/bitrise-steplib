@@ -1,1 +1,6 @@
 maintainer: community
+removal_date: "2026-08-08"
+deprecate_notes: |
+  App Center is deprecated.
+
+  We recommend to use [Bitrise Release Management](https://docs.bitrise.io/en/release-management.html) and [Bitrise CodePush](https://docs.bitrise.io/en/release-management/codepush/about-codepush.html).
