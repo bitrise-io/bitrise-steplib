@@ -1,0 +1,121 @@
+title: HexSign — Fetch Signing Material
+summary: Download Apple signing certificates and provisioning profiles from HexSign.
+description: |-
+  Downloads Apple signing certificates (`.p12` + password) and/or provisioning profiles
+  (`.mobileprovision`) from your [HexSign](https://hexsign.io) account, ready for
+  consumption by `certificate-and-profile-installer`, `xcode-archive`, or `fastlane`.
+
+  At least one of `certificate_id` or `profile_id` must be provided — both are optional
+  individually, so this single step covers fetch-cert-only, fetch-profile-only, and
+  fetch-both flows.
+
+  The `hexsign` CLI binary is downloaded from the official GitHub releases on first run
+  and verified against the release's `checksums.txt`. Set `cli_version` to pin a specific
+  CLI release; the default (`latest`) tracks the most recent stable.
+
+  Service credentials are provisioned per-organization in the HexSign dashboard under
+  Settings → CLI Tokens. Pass them via Bitrise secrets, not in the workflow YAML.
+website: https://github.com/hexsign/bitrise-step-hexsign
+source_code_url: https://github.com/hexsign/bitrise-step-hexsign
+support_url: https://github.com/hexsign/bitrise-step-hexsign/issues
+published_at: 2026-05-12T18:38:35.654629+10:00
+source:
+  git: https://github.com/hexsign/bitrise-step-hexsign.git
+  commit: 12253749282444d1f57699e4777014d53ec1025c
+project_type_tags:
+- ios
+- macos
+- flutter
+- react-native
+- cordova
+- ionic
+type_tags:
+- installer
+- code-sign
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  - name: jq
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- certificate_id: ""
+  opts:
+    description: |
+      The HexSign certificate ID to download. Leave empty to skip certificate download.
+      At least one of `certificate_id` or `profile_id` must be provided.
+    is_required: false
+    summary: HexSign certificate ID to download (optional).
+    title: Certificate ID
+- opts:
+    description: |
+      The HexSign provisioning profile ID to download. Leave empty to skip profile download.
+      At least one of `certificate_id` or `profile_id` must be provided.
+    is_required: false
+    summary: HexSign provisioning profile ID to download (optional).
+    title: Provisioning Profile ID
+  profile_id: ""
+- client_id: $HEXSIGN_CLIENT_ID
+  opts:
+    description: |
+      OAuth2 client ID for a service credential. Create one in the HexSign dashboard
+      under Settings → CLI Tokens.
+    is_required: true
+    is_sensitive: true
+    summary: Service credential client ID.
+    title: HexSign Client ID
+- client_secret: $HEXSIGN_CLIENT_SECRET
+  opts:
+    description: |
+      OAuth2 client secret for a service credential. Pair with `client_id` from the
+      same dashboard-issued token. Always pass via a Bitrise secret env var.
+    is_required: true
+    is_sensitive: true
+    summary: Service credential client secret.
+    title: HexSign Client Secret
+- opts:
+    description: |
+      Override the default scopes (`hexsign-api/read hexsign-api/write`). Leave empty
+      for the default. Read-only operations need only `hexsign-api/read`.
+    is_required: false
+    summary: Space-separated OAuth scopes (optional).
+    title: OAuth Scopes
+  scopes: ""
+- opts:
+    description: |
+      Where to write the `.p12`, `.password`, and `.mobileprovision` files.
+      Defaults to `$BITRISE_DEPLOY_DIR` so artifacts are picked up by the
+      Deploy to Bitrise.io step.
+    is_required: true
+    summary: Directory to write downloaded files into.
+    title: Output Directory
+  output_dir: $BITRISE_DEPLOY_DIR
+- cli_version: latest
+  opts:
+    description: |
+      Pin a specific [hexsign-cli release](https://github.com/hexsign/hexsign-cli/releases),
+      or leave as `latest` to always pull the most recent.
+    is_required: true
+    summary: CLI release tag to use (e.g. v0.2.1) or `latest`.
+    title: HexSign CLI Version
+outputs:
+- HEXSIGN_CERTIFICATE_PATH: null
+  opts:
+    summary: Absolute path to the downloaded certificate, or empty if no certificate
+      was fetched.
+    title: Path to the downloaded .p12 file
+- HEXSIGN_CERTIFICATE_PASSWORD_PATH: null
+  opts:
+    summary: Absolute path to the certificate's password file (the file's contents
+      are the password).
+    title: Path to the .password file
+- HEXSIGN_PROFILE_PATH: null
+  opts:
+    summary: Absolute path to the downloaded provisioning profile, or empty if no
+      profile was fetched.
+    title: Path to the downloaded .mobileprovision file
