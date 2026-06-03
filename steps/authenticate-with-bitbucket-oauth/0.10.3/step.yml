@@ -1,22 +1,21 @@
 title: Authenticate with Bitbucket OAuth
-summary: Adds your Bitbucket OAuth configuration to the `.netrc` file.
+summary: Adds your Bitbucket credentials to the `.netrc` file. Bitbucket Cloud is removing app passwords — use a Bitbucket API token instead.
 description: |-
-  [This Step](https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth) adds the authentication configuration (Bitbucket username and App password) to the `.netrc` file .
+  [This Step](https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth) adds your Bitbucket authentication configuration (username and secret) to the `.netrc` file, so that HTTPS Git operations (clone and push) and REST calls to Bitbucket are authenticated.
   Please note that if you already have a `.netrc` file, the Step will create a backup of the original, and appends the configs to the current one.
+
+  ### Deprecation notice: Bitbucket Cloud app passwords
+
+  Bitbucket Cloud is removing app passwords. Creating new app passwords is already disabled, and existing app passwords stop working during the brownouts that begin on 2026-06-09, with full removal on 2026-07-28 (see [Atlassian's announcement](https://www.atlassian.com/blog/bitbucket/bitbucket-cloud-transitions-to-api-tokens-enhancing-security-with-app-password-deprecation)). Because this Step writes the credential into `.netrc`, and that credential is used for HTTPS Git operations — including **push** and other write access — and for REST calls, any setup that relies on an app password will stop working once they are removed.
+
+  **Use a Bitbucket API token instead.** Create one by following the [Bitbucket API token instructions](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api-token/) and enter it in the **App Password** input below. Git over HTTPS accepts your Bitbucket username together with an API token, so the resulting `.netrc` entry works exactly as it did with an app password. As an alternative that is unaffected by this change, you can authenticate over SSH with the [Activate SSH key Step](https://www.bitrise.io/integrations/steps/activate-ssh-key).
 
   ### Configuring the Step
   1. Add your **Bitbucket username**.
-  2. Add your Bitbucket **App Password**.
-
-  To get your Bitbucket App Password, follow the instructions below:
-  1. Log into your Bitbucket account.
-  2. In the left sidebar, click **App passwords**.
-  3. Click **Create app password**.
-  4. Give your password a descriptive label.
-  5. Select the permissions you'd like to grant to this token.
-  6. Click **Create**.
+  2. In the **App Password** field, add a **Bitbucket API token** (app passwords are being removed — see the deprecation notice above).
 
   ### Useful links
+  - [Create a Bitbucket API token](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api-token/)
   - [Learn more what the .netrc file format comprises of](https://everything.curl.dev/usingcurl/netrc#the-netrc-file-format)
 
   ### Related Steps
@@ -48,16 +47,10 @@ inputs:
 - access_token: null
   opts:
     description: |-
-      To get your Bitbucket App Password, follow the instructions below:
+      Add a **Bitbucket API token** here. The value is stored in `.netrc` and is used to authenticate HTTPS Git operations (clone and push) and REST calls to Bitbucket.
 
-      1. Log into your Bitbucket account
-      2. In the upper-right corner of any page, click your profile photo, then click **Bitbucket Settings**.
-      3. In the left sidebar, click **App passwords**.
-      4. Click **Create app password**.
-      5. Give your password a descriptive label.
-      6. Select the permissions you'd like to grant to this token.
-      7. Click **Create**.
+      Bitbucket Cloud is removing app passwords: creating new ones is already disabled, and existing ones stop working during the brownouts starting 2026-06-09, with full removal on 2026-07-28. Create an API token by following the [Bitbucket API token instructions](https://support.atlassian.com/bitbucket-cloud/docs/create-an-api-token/) and use it in this field — Git over HTTPS accepts your Bitbucket username together with an API token.
     is_expand: true
     is_required: true
     is_sensitive: true
-    title: App Password
+    title: App password or API token
