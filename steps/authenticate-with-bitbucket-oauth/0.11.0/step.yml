@@ -34,10 +34,10 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth
 source_code_url: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth
 support_url: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth/issues
-published_at: 2026-06-03T14:30:07Z
+published_at: 2026-06-03T18:46:37Z
 source:
   git: https://github.com/bitrise-steplib/steps-authenticate-with-bitbucket-oauth.git
-  commit: 805da45d15c8c29fd277878bfd9ff8df734236ee
+  commit: d3d1782a126b2302a5cc588e9a6c6339d7f0fd21
 type_tags:
 - utility
 toolkit:
@@ -70,5 +70,5 @@ inputs:
       Your Atlassian account email address. Required for REST API calls to api.bitbucket.org when using a Bitbucket API token. With app passwords the Bitbucket username worked for both hosts; with API tokens the REST host requires the Atlassian email instead. Leave empty if this step is used for Git operations only.
     is_expand: true
     is_required: false
-    is_sensitive: false
+    is_sensitive: true
     title: Atlassian account email
