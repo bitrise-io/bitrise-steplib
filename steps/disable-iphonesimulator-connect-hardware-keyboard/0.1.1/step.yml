@@ -1,0 +1,38 @@
+title: Disable iphonesimulator ConnectHardwareKeyboard preference
+summary: |
+  This Step disables ConnectHardwareKeyboard preference for all iphonesimulator devices.
+website: https://github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard
+source_code_url: https://github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard
+support_url: https://github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard/issues
+published_at: 2025-11-12T08:37:20.809518914Z
+source:
+  git: https://github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard.git
+  commit: b46fc61f80fc084161dc1f8f02dc9362f05c1c28
+project_type_tags:
+- cordova
+- flutter
+- ionic
+- ios
+- kotlin-multiplatform
+- macos
+- react-native
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-disable-iphonesimulator-connect-hardware-keyboard
+inputs:
+- iphonesimulator_preferences_pth: ~/Library/Preferences/com.apple.iphonesimulator.plist
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    summary: The path of the iphonesimulator preferences file.
+    title: iphonesimulator preferences path
+- opts:
+    is_required: true
+    summary: Print verbose information.
+    title: Verbose
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"

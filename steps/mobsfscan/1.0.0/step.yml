@@ -1,0 +1,79 @@
+title: MobSFScan
+summary: |
+  mobsfscan is a static analysis tool (SAST) that can find insecure code patterns in your Android and iOS source code. Supports Java, Kotlin, Android XML, Swift and Objective C Code. mobsfscan uses MobSF static analysis rules and is powered by semgrep and libsast pattern matcher.
+description: |
+  Configuration information and troubleshooting information are available on the mobsfscan repository at https://github.com/MobSF/mobsfscan
+website: https://github.com/OhMyApp/bitrise-step-mobsfscan
+source_code_url: https://github.com/OhMyApp/bitrise-step-mobsfscan
+support_url: https://github.com/OhMyApp/bitrise-step-mobsfscan/issues
+published_at: 2026-01-07T00:52:30.587134+01:00
+source:
+  git: https://github.com/OhMyApp/bitrise-step-mobsfscan.git
+  commit: 7065e6052017e74b7ad0743ca1b54330f56c5485
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_skippable: true
+inputs:
+- opts:
+    is_required: true
+    title: Path to the project
+  project_path: .
+- opts:
+    is_required: false
+    title: Path to save the report
+  report_file_path: $BITRISE_DEPLOY_DIR/mobsfscan-report.txt
+- opts:
+    is_required: false
+    title: Output format
+    value_options:
+    - txt
+    - json
+    - sarif
+    - sonarqube
+    - html
+  output_format: txt
+- opts:
+    is_required: false
+    summary: Force Android or iOS rules explicitly
+    title: Project type
+    value_options:
+    - auto
+    - android
+    - ios
+  project_type: auto
+- config_file: ""
+  opts:
+    is_required: false
+    summary: Location to .mobsf config file
+    title: Configuration file
+- multiprocessing: default
+  opts:
+    is_required: false
+    summary: Specify multiprocessing strategy
+    title: Multiprocessing
+    value_options:
+    - default
+    - billiard
+    - thread
+- fail_on_warning: "no"
+  opts:
+    is_required: false
+    summary: non zero exit code on warning
+    title: Fail on warning
+    value_options:
+    - "yes"
+    - "no"
+- no_fail: "yes"
+  opts:
+    is_required: false
+    summary: Force zero exit code, takes precedence over fail_on_warning option
+    title: Step never fails
+    value_options:
+    - "yes"
+    - "no"

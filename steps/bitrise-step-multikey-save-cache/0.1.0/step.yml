@@ -1,0 +1,136 @@
+title: Multikey Save Cache
+summary: Saves items to the cache based on key-value pairs. This Step needs to be
+  used in combination with **Multikey Restore Cache** or **Restore Cache**.
+description: |
+  Saves items to the cache based on an input in the form of:
+  ```
+  OPTIONAL_UNIQUNESS_PREFIX KEY1 = PATH1, PATH2, ...
+  OPTIONAL_UNIQUNESS_PREFIX KEY2 = PATH3, ...
+  ```
+  where `OPTIONAL_UNIQUNESS_PREFIX` is `[u]` and means that the key in the given line is unique (see **Restore Cache**).
+  The number of keys and paths for each are limited to a number of 10. The maximum length of a key is 512 characters (longer keys get truncated). Commas (`,`) and equal signs (`=`) are not allowed in keys neither in paths.
+  See templates that can be used in the keys below. The path list is a list of files and folders to include in the cache, separated by a comma (`,`). Each path can contain wildcards (`*` and `**`) that are evaluated at runtime.
+
+  Example (somewhat artificial):
+  ```
+  [u] multikey_0 = e2e/tmp/multikey_0.txt
+  [u] multikey_1 = e2e/tmp/multikey_1_0.txt, e2e/tmp/multikey_1_1.txt
+  [u]multikey_2=e2e/tmp/multikey_2_0.txt,e2e/tmp/multikey_2_1.txt
+  multikey_3 = e2e/tmp/multikey_3.txt
+  multikey_4 = e2e/tmp/multikey_4_0.txt, e2e/tmp/multikey_4_1.txt
+  multikey_5=e2e/tmp/multikey_5_0.txt,e2e/tmp/multikey_5_1.txt
+  ```
+
+  This Step needs to be used in combination with **Multikey Restore Cache** or **Restore Cache**.
+
+  #### About key-based caching
+
+  Key-based caching is a concept where cache archives are saved and restored using a unique cache key. One Bitrise project can have multiple cache archives stored simultaneously, and the **Restore Cache Step** downloads a cache archive associated with the key provided as a Step input. The **Save Cache** Step is responsible for uploading the cache archive with an exact key.
+
+  Caches can become outdated across builds when something changes in the project (for example, a dependency gets upgraded to a new version). In this case, a new (unique) cache key is needed to save the new cache contents. This is possible if the cache key is dynamic and changes based on the project state (for example, a checksum of the dependency lockfile is part of the cache key). If you use the same dynamic cache key when restoring the cache, the Step will download the most relevant cache archive available.
+
+  Key-based caching is platform-agnostic and can be used to cache anything by carefully selecting the cache key and the files/folders to include in the cache.
+
+  #### Templates
+
+  The Step requires a string key to use when uploading a cache archive. In order to always download the most relevant cache archive for each build, the cache key input can contain template elements. The **Restore cache Step** evaluates the key template at runtime and the final key value can change based on the build environment or files in the repo. Similarly, the **Save cache** Step also uses templates to compute a unique cache key when uploading a cache archive.
+
+  The following variables are supported in the **Cache key** input:
+
+  - `cache-key-{{ .Branch }}`: Current git branch the build runs on
+  - `cache-key-{{ .CommitHash }}`: SHA-256 hash of the git commit the build runs on
+  - `cache-key-{{ .Workflow }}`: Current Bitrise workflow name (eg. `primary`)
+  - `{{ .Arch }}-cache-key`: Current CPU architecture (`amd64` or `arm64`)
+  - `{{ .OS }}-cache-key`: Current operating system (`linux` or `darwin`)
+
+  Functions available in a template:
+
+  `checksum`: This function takes one or more file paths and computes the SHA256 [checksum](https://en.wikipedia.org/wiki/Checksum) of the file contents. This is useful for creating unique cache keys based on files that describe content to cache.
+
+  Examples of using `checksum`:
+  - `cache-key-{{ checksum "package-lock.json" }}`
+  - `cache-key-{{ checksum "**/Package.resolved" }}`
+  - `cache-key-{{ checksum "**/*.gradle*" "gradle.properties" }}`
+
+  `getenv`: This function returns the value of an environment variable or an empty string if the variable is not defined.
+
+  Examples of `getenv`:
+  - `cache-key-{{ getenv "PR" }}`
+  - `cache-key-{{ getenv "BITRISEIO_PIPELINE_ID" }}`
+
+  #### Key matching
+
+  The most straightforward use case is when both the **Multikey save cache** and **Multikey restore cache** steps  use the same exact key to transfer cache between builds. Stored cache archives are scoped to the Bitrise project. Builds can restore caches saved by any previous Workflow run on any Bitrise Stack.
+
+  Unlike this Step, the **Multikey restore cache** Step can define multiple keys as fallbacks when there is no match for the first cache key. See the docs of the [**Multikey restore cache** step](https://github.com/bitrise-steplib/bitrise-step-multikey-restore-cache/) for more details.
+
+  #### Skip saving the cache
+
+  The Step can decide to skip saving a new cache entry to avoid unnecessary work. This happens when there is a previously restored cache in the same workflow and the new cache would have the same contents as the one restored. Make sure to use unique cache keys with a checksum, and enable the **Unique cache key** input for the most optimal execution.
+
+  #### Related steps
+
+  [Multikey Restore Cache](https://github.com/bitrise-steplib/bitrise-step-multikey-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-multikey-save-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-multikey-save-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-multikey-save-cache/issues
+published_at: 2025-07-29T15:15:28.858711+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-multikey-save-cache.git
+  commit: bd30e324ae227fb5d4b6321e1de397a2dc9f52ad
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-multikey-save-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- key_path_pairs: null
+  opts:
+    description: |-
+      A mapping used to define the cache keys and the paths to include in the cache archive. The format is:
+      ```
+      OPTIONAL_UNIQUNESS_PREFIX KEY1 = PATH1, PATH2, ...
+      OPTIONAL_UNIQUNESS_PREFIX KEY2 = PATH3, ...
+      ```
+      where `OPTIONAL_UNIQUNESS_PREFIX` is `[u]` and means that the key in the given line is unique (see **Restore Cache**). The number of keys and paths for each are limited to a number of 10
+
+      The maximum length of a key is 512 characters (longer keys get truncated). Commas (`,`) and equal signs (`=`) are not allowed in keys neither in paths.
+
+      The key supports template elements for creating dynamic cache keys. These dynamic keys change the final key value based on the build environment or files in the repo in order to create new cache archives. See the Step description for more details and examples.
+    is_required: true
+    summary: A key -> path list mapping. This can contain template elements.
+    title: Cache key -> path list pairs
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- compression_level: 3
+  opts:
+    is_required: false
+    summary: Zstd compression level to control speed / archive size. Set to 1 for
+      fastest option. Valid values are between 1 and 19. Defaults to 3.
+    title: Compression level
+- custom_tar_args: null
+  opts:
+    description: |-
+      Additional arguments to pass to the tar command when creating the cache archive.
+
+      The arguments are passed directly to the `tar` command. Use this input to customize the behavior of the tar command when creating the cache archive
+      (these are appended to the default arguments used by the step).
+
+      Example: `--format posix`
+    is_required: false
+    summary: Additional arguments to pass to the tar command when creating the cache
+      archive.
+    title: Custom tar arguments

@@ -1,0 +1,88 @@
+title: Restore SPM Cache
+summary: Restores cached Swift Package Manager dependencies. This Step needs to be
+  used in combination with **Save SPM Cache**.
+description: |
+  Restores cached Swift Package Manager dependencies. This Step needs to be used in combination with **Save SPM Cache**.
+
+  This Step is based on [key-based caching](https://docs.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for SPM dependencies. If you'd like to change the cache keys, you might want to use the generic [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache) Step instead.
+
+  #### Related steps
+
+  [Save SPM cache](https://github.com/bitrise-steplib/bitrise-step-save-spm-cache/)
+
+  [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache/issues
+published_at: 2026-03-03T15:41:25.874970569Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache.git
+  commit: ec587e8e3326a854b6814415e0ea942a3dbfc6b5
+executables:
+  darwin-amd64:
+    storage_uri: steps/restore-spm-cache/3.0.0/bin/restore-spm-cache-darwin-amd64
+    hash: sha256-eb71763794259bd34f0ae1d9fd4ae17648e5188242245bf17000ae6b0ac305cc
+  darwin-arm64:
+    storage_uri: steps/restore-spm-cache/3.0.0/bin/restore-spm-cache-darwin-arm64
+    hash: sha256-8de7e9c5ae92cb94f6507f2495d552061b1055d5172457cb8354f60f32e66556
+  linux-amd64:
+    storage_uri: steps/restore-spm-cache/3.0.0/bin/restore-spm-cache-linux-amd64
+    hash: sha256-5fa22724419f8bd96e9aa15c0bff90f7dcbeaccce0fc98830d2987a008a68d33
+  linux-arm64:
+    storage_uri: steps/restore-spm-cache/3.0.0/bin/restore-spm-cache-linux-arm64
+    hash: sha256-68c048d582454e7b34327ba0e08a08a95ab9a899afa1192e14d3fe1fe2833ad1
+project_type_tags:
+- cordova
+- flutter
+- ionic
+- ios
+- kotlin-multiplatform
+- macos
+- react-native
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-spm-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- opts:
+    category: Debugging
+    description: Timeout in seconds
+    is_required: true
+    summary: Timeout in seconds
+    title: Timeout
+  timeout: 600
+- opts:
+    category: Debugging
+    description: |-
+      Number of retries to attempt when downloading a cache archive fails.
+
+      The value 0 means no retries are attempted.
+    is_required: true
+    summary: Number of retries to attempt when downloading a cache archive fails.
+    title: Number of retries
+  retries: 3
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit

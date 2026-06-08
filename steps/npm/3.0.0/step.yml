@@ -1,0 +1,90 @@
+title: Run npm command
+summary: The Step runs npm with the command and arguments you provide, for example,
+  to install missing packages or run a package's test.
+description: |-
+  You can install missing JS dependencies with this Step if you insert it before any build step and provide the `install` command.
+  You can also test certain packages with the `test` command.
+  You can do both in one Workflow, however, this requires one **Run npm command** Step for installation followed by another **Run npm command** Step for testing purposes.
+
+  ### npm version pinning
+  The Step uses [corepack](https://nodejs.org/api/corepack.html) to manage the npm version. There are two ways to pin the version:
+
+  1. **Recommended: `packageManager` field in `package.json`**: Add `"packageManager": "npm@10.2.0"` to your `package.json`. The Step will enable corepack, which automatically enforces this version when `npm` is called.
+  2. **`npm_version` input**: Set the **Version of npm to use** input to an exact version number (e.g. `10.2.0`). This takes priority over the `packageManager` field and installs that specific version via `corepack prepare`.
+
+  If neither is set, the Step runs npm as-is without changing the version.
+
+  ### Configuring the Step
+  1. Add the **Run npm command** Step to your Workflow preceding any build Step.
+  2. Set the **Working directory**.
+  3. Set the command you want npm to execute, for example `install` to run `npm install` in the **The npm command with arguments to run** input.
+  4. Optionally pin the npm version via the `packageManager` field in `package.json` or the **Version of npm to use** input.
+
+  ### Troubleshooting
+  Make sure you insert the Step before any build Step so that every dependency is downloaded a build Step starts running.
+
+  ### Useful links
+  - [Getting started Ionic/Cordova apps](https://devcenter.bitrise.io/getting-started/getting-started-with-ionic-cordova-apps/)
+  - NPM cache [save](https://github.com/bitrise-steplib/bitrise-step-save-npm-cache) and [restore](https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache) Steps
+  - [About npm](https://www.npmjs.com/)
+  - [Corepack documentation](https://nodejs.org/api/corepack.html)
+website: https://github.com/bitrise-steplib/steps-npm
+source_code_url: https://github.com/bitrise-steplib/steps-npm
+support_url: https://github.com/bitrise-steplib/steps-npm/issues
+published_at: 2026-02-20T12:11:54.312940199Z
+source:
+  git: https://github.com/bitrise-steplib/steps-npm.git
+  commit: 01ee959e2ab4f5d25ce8c84edd3b28bf983f339a
+executables:
+  darwin-amd64:
+    storage_uri: steps/npm/3.0.0/bin/npm-darwin-amd64
+    hash: sha256-bc2525cd8ef87b725b6ef35f6371af1066002886c81a4564f187c5001e1d9b33
+  darwin-arm64:
+    storage_uri: steps/npm/3.0.0/bin/npm-darwin-arm64
+    hash: sha256-d007107a01098eca6bee4cbd330289db8318376e6110b2b406ea0fa96f500f19
+  linux-amd64:
+    storage_uri: steps/npm/3.0.0/bin/npm-linux-amd64
+    hash: sha256-db0968415f55e340bbd3291e75f2951fc8c1d4799d538d4426cc3d71925db7d2
+  linux-arm64:
+    storage_uri: steps/npm/3.0.0/bin/npm-linux-arm64
+    hash: sha256-1a537e1d16189a63ee1f91492b536dacab9e1d24eccf2fdd2a842bba9d3269c5
+host_os_tags:
+- osx-10.10
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-npm
+deps:
+  apt_get:
+  - name: nodejs
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: |-
+      Specify the command with arguments to run with `npm`.
+
+      This input value will be append to the end of the `npm` command call.
+
+      For example:
+
+      - `install` -> `npm install`
+      - `install -g cordova` -> `npm install -g cordova`
+    is_required: true
+    title: The `npm` command with arguments to run
+- npm_version: null
+  opts:
+    description: |-
+      Set this to an exact npm version to install (e.g. `10.2.0`).
+
+      This input takes priority over the `packageManager` field in `package.json`.
+      The Step uses corepack (`corepack prepare npm@<version> --activate`) to download and activate the specified version.
+
+      Leave empty to let the Step auto-detect the version from the `packageManager` field in `package.json`.
+    title: Version of npm to use

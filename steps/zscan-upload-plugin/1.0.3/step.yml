@@ -1,0 +1,98 @@
+title: zScan Upload Plugin
+summary: |
+  Bitrise plugin to upload to Zimperium zScan
+description: |
+  This plugin can be used to upload mobile applications to Zimperium (zScan) to be scanned for vulnerabilities. Using a plugin simplifies integrating mobile application security testing into CI/CD process and enables detection and remediation of vulnerabilities earlier in the application SDLC.
+website: https://github.com/Zimperium/zscan-plugin-bitrise
+source_code_url: https://github.com/Zimperium/zscan-plugin-bitrise
+support_url: https://github.com/Zimperium/zscan-plugin-bitrise/issues
+published_at: 2025-04-01T11:32:49.636012-05:00
+source:
+  git: https://github.com/Zimperium/zscan-plugin-bitrise.git
+  commit: d9d2aa6c5b3ff7f5a3e71eb77089d6a3a38f4012
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: jq
+  - name: curl
+  apt_get:
+  - name: jq
+  - name: curl
+is_skippable: true
+inputs:
+- endpoint: https://ziap.zimperium.com
+  opts:
+    description: "This is the base URL of your Zimperium console, e.g., `https://ziap.zimperium.com`.
+      \nSee [Documentation](https://github.com/Zimperium/zscan-plugin-bitrise) for
+      more detail.\n"
+    is_expand: true
+    is_required: true
+    summary: Zimperium Console base URL.
+    title: Endpoint
+- client_id: null
+  opts:
+    description: |
+      Client ID part of the API Key created through the Authorization tab of your console.
+    is_expand: true
+    is_required: true
+    summary: Client ID part of the API Key.
+    title: Client ID
+- client_secret: null
+  opts:
+    description: "Client Secret part of the API Key created through the Authorization
+      tab of your console. This input is marked as 'sensitive'.\nAs such, only [Secrets](https://devcenter.bitrise.io/bitrise-cli/secrets/)
+      are accepted as values. \n"
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Client Secret part of the API Key.
+    title: Client Secret
+- file_path: null
+  opts:
+    description: |
+      The path to the binary to be uploaded for analysis. This must point to a valid mobile application, e.g., .ipa or .apk file.
+    is_expand: true
+    is_required: true
+    summary: The path to the binary
+    title: File Path
+- opts:
+    description: |
+      If set to true, the step will wait for an assessment report. Otherwise, the step will finish and the report can be obtained from the console.
+    is_expand: true
+    is_required: false
+    summary: Set to true to wait for an assessment report
+    title: Wait for Report
+    value_options:
+    - "true"
+    - "false"
+  wait_for_report: "true"
+- opts:
+    description: "Specifies the format for the assessment report. For more information
+      on SARIF, \nplease see [OASIS Open](https://docs.oasis-open.org/sarif/sarif/v2.1.0/sarif-v2.1.0.html).\n"
+    is_expand: true
+    is_required: false
+    summary: Format for the assessment report.
+    title: Report Format
+    value_options:
+    - json
+    - sarif
+  report_format: json
+- opts:
+    description: "If the application is uploaded for the first time, it will be assigned
+      to the specified team.  This setting \nhas no effect if the application is already
+      assigned to a team. To change team assignment, please use the Console.\n"
+    is_expand: true
+    is_required: false
+    summary: Team that the application should be assigned to.
+    title: Team Name
+  team_name: Default
+outputs:
+- ZSCAN_REPORT_PATH: null
+  opts:
+    description: "Assessment report will be provided in the specified format. \n"
+    summary: Local path to the downloaded assessment report.
+    title: Path to the assessment report

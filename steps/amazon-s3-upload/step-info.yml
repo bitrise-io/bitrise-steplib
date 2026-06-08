@@ -1,1 +1,4 @@
 maintainer: bitrise
+deprecate_notes: |
+  This step is deprecated. Please use the new official Amazon S3 step: https://bitrise.io/integrations/steps/aws-s3-upload
+removal_date: "2026-05-31"

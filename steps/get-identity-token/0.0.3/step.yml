@@ -1,0 +1,79 @@
+title: Get OIDC Identity Token
+summary: The Step fetches an OIDC identity token.
+description: |-
+  The Step fetches an OIDC identity token.
+
+  The token can be used to authenticate with services that support OIDC tokens, such as Google Cloud, AWS, Azure or others.
+  This allows secure, token-based authentication without the need to manage long-lived credentials.
+website: https://github.com/bitrise-steplib/bitrise-step-get-identity-token
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-get-identity-token
+support_url: https://github.com/bitrise-steplib/bitrise-step-get-identity-token/issues
+published_at: 2026-06-04T15:00:18.358840225Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-get-identity-token.git
+  commit: af25ddaefa97075fb4c3fcf5e6f88711ddec17be
+executables:
+  darwin-amd64:
+    storage_uri: steps/get-identity-token/0.0.3/bin/get-identity-token-darwin-amd64
+    hash: sha256-f88267b9b2f10444312942452d14f65aa9ff3b6c7742cc707c699b2995b3109e
+  darwin-arm64:
+    storage_uri: steps/get-identity-token/0.0.3/bin/get-identity-token-darwin-arm64
+    hash: sha256-099ed6c0ec665579d5dc06132376c712c6e2cc4d46cd56679a62d12ecea4d2c9
+  linux-amd64:
+    storage_uri: steps/get-identity-token/0.0.3/bin/get-identity-token-linux-amd64
+    hash: sha256-223032ffc81368ae6e1d1db7c40ef09e8deec87a1058a729eb2340e8fc8ef673
+  linux-arm64:
+    storage_uri: steps/get-identity-token/0.0.3/bin/get-identity-token-linux-arm64
+    hash: sha256-2cfe1a6892af6fa9dea0afb038a31b2cc800a8d33bb973f7f07fccda491550b7
+type_tags:
+- security
+- access-control
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-get-identity-token
+inputs:
+- audience: null
+  opts:
+    description: |-
+      The audience for the identity token.
+
+      This could be the URL of the service you want to access with the token or a specific identifier provided by the service.
+    is_required: true
+    summary: The audience for the identity token.
+    title: Token audience
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: API settings
+    description: |-
+      Unique build URL of this build on Bitrise.io.
+
+      By default the step will use the Bitrise API.
+    is_dont_change_value: true
+    is_required: true
+    summary: Unique build URL of this build on Bitrise.io.
+    title: Bitrise build url
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: API settings
+    description: |-
+      The build's API Token for the build on Bitrise.io
+
+      This will be used to communicate with the Bitrise API
+    is_required: true
+    is_sensitive: true
+    summary: The build's API Token for the build on Bitrise.io
+    title: Bitrise build token
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- BITRISE_IDENTITY_TOKEN: null
+  opts:
+    summary: The newly generated identity token.
+    title: Identity token

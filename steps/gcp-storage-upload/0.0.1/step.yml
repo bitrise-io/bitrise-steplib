@@ -1,0 +1,66 @@
+title: Google Cloud Storage Upload
+summary: The Step uploads files to a Google Cloud Storage bucket.
+description: |-
+  The Step uploads files to a Google Cloud Storage bucket.
+
+  It can handle both files and directories, uploading the contents to the specified GCS bucket with the desired access control settings.
+
+  Using the Authenticate with GCP Step beforehand is recommended to securely provide short lived GCP credentials.
+website: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload
+support_url: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload/issues
+published_at: 2025-11-19T08:29:08.166806+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload.git
+  commit: 81e677b75697864707929c9412360a7a870fa97a
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-gcp-storage-upload
+inputs:
+- opts:
+    description: |-
+      Path to a file or folder to be uploaded.
+
+      You can use absolute or relative paths.
+    is_required: true
+    summary: Path to a file or folder to be uploaded.
+    title: Path
+  path: null
+- bucket_name: null
+  opts:
+    description: Name of the GCS bucket to upload the file to.
+    is_required: true
+    summary: Name of the GCS bucket to upload the file to.
+    title: Bucket Name
+- bucket_prefix: null
+  opts:
+    description: |-
+      Path in the GCS bucket where the file will be uploaded.
+
+      If not provided, the file will be uploaded to the root of the bucket with its original filename.
+    is_required: false
+    summary: Path in the GCS bucket where the file will be uploaded.
+    title: Bucket Prefix
+- access_token: $GOOGLE_AUTH_TOKEN
+  opts:
+    category: GCP Credentials
+    description: |-
+      The GCP Access Token.
+
+      You can provide it directly or use the Authenticate with GCP Step.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The GCP Access Token.
+    title: GCP Access Token
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
