@@ -1,0 +1,119 @@
+title: Swiftlint
+summary: |
+  Runs Swiftlint on the project
+description: |
+  Runs Swiftlint on the project to provide clean code
+  For more information about Swiftlint please visit: https://github.com/realm/SwiftLint/
+website: https://github.com/kimdv/bitrise-step-swiftlint
+source_code_url: https://github.com/kimdv/bitrise-step-swiftlint
+support_url: https://github.com/kimdv/bitrise-step-swiftlint/issues
+published_at: 2020-07-27T10:06:56.623354+02:00
+source:
+  git: https://github.com/kimdv/bitrise-step-swiftlint.git
+  commit: fb36f6fb3a5d51f73369c088b88ac9023d365af3
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: swiftlint
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- linting_path: null
+  opts:
+    category: Config
+    description: ""
+    is_required: true
+    summary: ""
+    title: Select the path where Swiftlint should lint
+- lint_range: all
+  opts:
+    category: Config
+    description: Take the git diff and only lint those files
+    is_required: true
+    summary: ""
+    title: Select option for range of Swiftlint
+    value_options:
+    - all
+    - changed
+- lint_config_file: $BITRISE_SOURCE_DIR/.swiftlint.yml
+  opts:
+    category: Config
+    description: If you use a custom linting configuration for Bitrise, you can specify
+      the path here.
+    is_required: false
+    summary: ""
+    title: Linting configuration file
+- opts:
+    category: Config
+    description: Sets the reporter style when printing violations or errors.
+    summary: ""
+    title: Select method for export
+    value_options:
+    - csv
+    - checkstyle
+    - emoji
+    - github-actions-logging
+    - html
+    - json
+    - junit
+    - markdown
+    - sonarqube
+    - xcode
+  reporter: xcode
+- opts:
+    category: Config
+    description: Use strict mode when linting (i.e. warnings become errors)
+    is_required: false
+    summary: ""
+    title: Use strict mode
+    value_options:
+    - "yes"
+    - "no"
+  strict: "no"
+- opts:
+    category: Config
+    description: Don't print status logs like 'Linting ' & 'Done linting'
+    is_required: false
+    summary: ""
+    title: Use quiet mode
+    value_options:
+    - "yes"
+    - "no"
+  quiet: "no"
+outputs:
+- SWIFTLINT_REPORT: null
+  opts:
+    category: Output
+    description: The generated Swiftlint report. May be empty if the Swiftlint succeeded
+      with 0 errors or warnings. This is useful when you want to pass it somewhere
+      else, for example on a Slack channel.
+    is_dont_change_value: true
+    summary: The generated Swiftlint report. May be empty if the Swiftlint succeeded
+      with 0 errors or warnings.
+    title: A Swiftlint report
+- SWIFTLINT_REPORT_PATH: null
+  opts:
+    category: Output
+    description: The path to the generated Swiftlint report (by default, it is created
+      by concatenating the `$BITRISE_DEPLOY_DIR` with the generated report file name.
+      The file name depends on the reporter that was selected, for example for the
+      `junit` reporter, the generated file name will be `swiftlint_report.xml`, and
+      for the `html` reporter it will be `swiftlint_report.html`). This is useful
+      if you want to have this report in a separate file and do something with it,
+      for example upload to S3.
+    is_dont_change_value: true
+    summary: The path to the generated Swiftlint report (by default, it is created
+      by concatenating the $BITRISE_DEPLOY_DIR with the generated report file name.
+    title: A Swiftlint report path

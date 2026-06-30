@@ -1,0 +1,87 @@
+title: AppSweep Mobile Security Testing
+summary: Scan your app using Guardsquare's mobile application security testing tool
+  AppSweep
+description: "The build of your app is automatically uploaded to [AppSweep](https://appsweep.guardsquare.com)
+  for scanning. \n\nAppSweep is Guardsquare's free tool enabling developers to put
+  mobile security at the forefront of app development. AppSweep helps you identify
+  and fix security issues in your code and dependencies with actionable recommendations
+  and insights that will help you build more secure mobile apps."
+website: https://www.guardsquare.com/appsweep-mobile-application-security-testing
+source_code_url: https://github.com/Guardsquare/bitrise-step-scan-with-appsweep
+support_url: https://github.com/Guardsquare/bitrise-step-scan-with-appsweep/issues
+published_at: 2024-02-16T13:44:39.510838434+01:00
+source:
+  git: https://github.com/Guardsquare/bitrise-step-scan-with-appsweep.git
+  commit: ec957a0853dc8ee70d9e383645e40f4ec27b41d7
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- ios
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- appsweep_api_key: $APPSWEEP_API_KEY
+  opts:
+    description: |
+      An `APPSWEEP_API_KEY` must be set to allow scanning of the app inside an AppSweep project. You can generate it in the API Keys section of your project settings.
+    is_required: true
+    is_sensitive: true
+    title: AppSweep API key
+- ios_archive_path: $BITRISE_XCARCHIVE_PATH
+  opts:
+    category: iOS
+    description: |
+      AppSweep works with both, an IPA file or an xcarchive directory. This has to be set if you want to analyze iOS builds.
+    is_required: false
+    title: The path of the iOS archive (IPA file or xcarchive directory)
+- ios_dsyms_dir_path: $BITRISE_DSYM_DIR_PATH
+  opts:
+    category: iOS
+    description: |
+      Should the archive not include debug symbols, it is possible to pass in the path to the dSYM directory explicitly. Lacking debug symbols prevents AppSweep from performing an in-depth analysis.
+    is_required: false
+    title: The path of the dSYM directory.
+- build_variant: release
+  opts:
+    category: Android
+    description: |
+      Set to `debug` to upload the debug version of your app, or to `release` to upload the release version.
+    is_required: false
+    title: Select the build variant which should be uploaded
+    value_options:
+    - debug
+    - release
+- opts:
+    category: Android
+    description: |
+      Set this to the location of your project inside your repository. Inside this directory, the build file should be `./app/build.gradle` and `gradlew` should be directly in the `project_location`.
+    is_required: false
+    title: Project file path
+  project_location: $PROJECT_LOCATION
+- gradle_plugin_version: 1.0.0
+  opts:
+    category: Android
+    description: |
+      The version of AppSweep gradle plugin. Can be set to particular numerical value or to `latest.release`, which requires at least Gradle 7.
+    is_required: true
+    title: AppSweep gradle plugin version
+outputs:
+- APPSWEEP_UPLOAD_URL: null
+  opts:
+    description: |
+      This URL of a particular scan is generated during the execution of this step, the results of the scan can be accessed in AppSweep directly via this URL.
+    summary: Direct link to the scan results on AppSweep website
+    title: AppSweep upload URL

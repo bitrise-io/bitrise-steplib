@@ -1,0 +1,71 @@
+title: Activate React Native Features
+summary: Activates Bitrise Build Cache features for React Native projects
+description: |
+  This Step activates Bitrise Build Cache for all build systems used in a React Native project.
+
+  After this Step executes,
+  - enabling Xcode cache will result in: iOS builds will use the Bitrise Build Cache for Xcode via Xcelerate, with a background proxy started automatically.
+  - enabling Gradle cache will result in: Android Gradle builds will automatically read from and push entries to the remote cache. C++ native modules will also be compiled using ccache, with a background storage helper started automatically.
+
+website: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+published_at: 2026-04-09T12:00:00.000000000Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features.git
+  commit: e96ada56a66bb11c74d923afa2ac662a5235758c
+
+project_type_tags:
+- react-native
+- ios
+- android
+type_tags:
+- utility
+
+run_if: .IsCI
+is_skippable: true
+
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+
+inputs:
+# -------------------------------------------------------------------------------
+# Xcode cache
+# -------------------------------------------------------------------------------
+- xcode_cache_enabled: "true"
+  opts:
+    title: Enable Xcode cache
+    summary: Enables Bitrise Build Cache for Xcode using Xcelerate
+    is_required: true
+    value_options:
+    - "true"
+    - "false"
+    description: |-
+      Enables Bitrise Build Cache for Xcode. When enabled, activates Xcelerate and starts the Xcelerate proxy in the background.
+
+# -------------------------------------------------------------------------------
+# Gradle cache
+# -------------------------------------------------------------------------------
+- gradle_cache_enabled: "true"
+  opts:
+    title: Enable Gradle cache
+    summary: Enables Bitrise Build Cache for Gradle
+    is_required: true
+    value_options:
+    - "true"
+    - "false"
+    description: |-
+      Enables Bitrise Build Cache for Gradle. When enabled, activates Gradle cache with analytics and remote cache plugins.
+
+# -------------------------------------------------------------------------------
+# Debugging
+# -------------------------------------------------------------------------------
+- verbose: "false"
+  opts:
+    title: Verbose logging
+    summary: Enable logging additional information for troubleshooting
+    is_required: true
+    value_options:
+    - "true"
+    - "false"

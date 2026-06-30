@@ -1,0 +1,70 @@
+title: Deploy to Updraft
+summary: |
+  Distribute your app's builds to your team and testers
+description: |
+  This step will help you to upload your app's builds to Updraft. For more information please reach [Updraft](https://getupdraft.com) site.
+website: https://github.com/appswithlove/bitrise-step-deploy-to-updraft
+source_code_url: https://github.com/appswithlove/bitrise-step-deploy-to-updraft
+support_url: https://github.com/appswithlove/bitrise-step-deploy-to-updraft/issues
+published_at: 2024-08-27T15:48:04.087667+04:00
+source:
+  git: https://github.com/appswithlove/bitrise-step-deploy-to-updraft.git
+  commit: 8cfaf8f93f32beaf5de690fb1124650cc33968c1
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your API Key you will find in your Profile.
+    title: Updraft API_KEY
+- app_key: ""
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The App Key you will find on the application overview. The App key differs
+      for each environment.
+    title: Updraft APP_KEY
+- app_path: ""
+  opts:
+    description: |
+      Path to app's binary file (IPA/APK/AAB) to upload.
+      $BITRISE\_APK\_PATH, $BITRISE\_IPA\_PATH, and so on.
+    is_required: true
+    summary: Path to app's binary file (IPA/APK/AAB) to upload
+    title: App file path
+- opts:
+    description: |
+      Message to show on build download page
+    is_required: false
+    summary: Release notes
+    title: Release notes
+  release_notes: ""
+outputs:
+- UPDRAFT_DEPLOY_STEP_OUTPUT: null
+  opts:
+    description: "JSON reponse of Updraft backend \n"
+    summary: Deploy Updraft step output json
+    title: Deploy Updraft step output

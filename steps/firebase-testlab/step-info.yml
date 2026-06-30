@@ -1,4 +1,0 @@
-deprecate_notes: |
-  This step is deprecated, please use Virtual Device Testing for Android instead
-maintainer: bitrise
-removal_date: "2018-09-20"

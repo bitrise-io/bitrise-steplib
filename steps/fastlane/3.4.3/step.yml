@@ -1,0 +1,159 @@
+title: fastlane
+summary: Runs your fastlane lane on [bitrise.io](https://www.bitrise.io).
+description: |-
+  fastlane is an open-source app automation tool for iOS, Android and for most cross-platform frameworks, for example, React Native, Xamarin and Flutter.
+  **fastlane** Step helps you integrate your lane to your Bitrise Workflow and runs your lane based on the fastlane actions with minimal configuration.
+  If your Apple Developer Portal account is [connected to Bitrise](https://devcenter.bitrise.io/getting-started/connecting-to-services/configuring-bitrise-steps-that-require-apple-developer-account-data/), the `FASTLANE_SESSION` Environment Variable will pass on the session data to fastlane.
+
+  ### Configuring the Step
+
+  Before you start configuring the Step, make sure you've [connected to Apple services either by API key, Apple ID or through Fastlane Step's input fields](https://devcenter.bitrise.io/getting-started/connecting-to-services/bitrise-steps-and-their-authentication-methods/#fastlane-step).
+  1. Add the **fastlane** Step to your Workflow after the **Git Clone Repository** Step or any other dependency Step.
+  1. Based on your project's fastlane setup, you can add your project's default lane or a custom lane in the **fastlane lane** input.
+  2. If your fastlane directory is not available in your repository's root, then you can add the parent directory of fastlane directory in the **Working directory** input.
+  3. If your project doesn't contain a fastlane gem in your project's Gemfile, you can use the **Should update fastlane gem before run** input.
+  Set this input to `true` so that the Step can install the latest fastlane version to your project.
+  If a gem lockfile (Gemfile.lock or gems.locked) includes the fastlane gem in the working directory, that specific fastlane version will be installed.
+  4. Select `yes` in the **Enable verbose logging** input if you wish to run your build in debug mode and print out error additional debug logs.
+  5. Select `yes` in the **Enable collecting files to be included in the build cache** to cache pods, Carthage and Android dependencies.
+
+  ### Troubleshooting
+  If you run your lane on Bitrise and your build fails on the **fastlane** Step, the logs won't reveal too much about the error since it's most likely related to the fastlane file's configuration.
+  We recommend you swap your fastlane actions for Bitrise Steps which will bring out the problem.
+
+  ### Useful links
+  - [About fastlane](https://docs.fastlane.tools)
+  - [Connecting your Apple Developer Account to Bitrise](https://devcenter.bitrise.io/getting-started/connecting-to-services/configuring-bitrise-steps-that-require-apple-developer-account-data/)
+  - [Running fastlane on Bitrise](https://devcenter.bitrise.io/tutorials/fastlane/fastlane-index/)
+
+  ### Related Steps
+  - [Deploy to iTunes Connect/Deliver](https://www.bitrise.io/integrations/steps/deploy-to-itunesconnect-deliver)
+  - [iOS Auto Provision](https://www.bitrise.io/integrations/steps/ios-auto-provision)
+  - [Fastlane Match](https://www.bitrise.io/integrations/steps/fastlane-match)
+website: https://github.com/bitrise-io/steps-fastlane
+source_code_url: https://github.com/bitrise-io/steps-fastlane
+support_url: https://github.com/bitrise-io/steps-fastlane/issues
+published_at: 2023-04-20T14:15:02.966345651Z
+source:
+  git: https://github.com/bitrise-steplib/steps-fastlane.git
+  commit: 8f61f0832ec3c5fbacc6f06773245a5b9fc36772
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-fastlane
+inputs:
+- lane: null
+  opts:
+    description: |
+      fastlane lane to run
+      $ fastlane [lane]
+    is_required: true
+    summary: The lane to execute.
+    title: fastlane lane
+- opts:
+    description: |-
+      Use this option if the fastlane directory is not in your repository's root.
+
+      Working directory should be the parent directory of your Fastfile's directory.
+
+      For example:
+
+      * If the Fastfile path is `./here/is/my/fastlane/Fastfile`
+      * Then the Fastfile's directory is `./here/is/my/fastlane`
+      * So the Working Directory should be `./here/is/my`
+    summary: The working directory to execute the fastlane command in.
+    title: Working directory
+  work_dir: $BITRISE_SOURCE_DIR
+- connection: automatic
+  opts:
+    description: |-
+      The input determines the method used for Apple Service authentication. By default, any enabled Bitrise Apple Developer connection is used and other authentication-related Step inputs are ignored.
+
+      There are two types of Apple Developer connection you can enable on Bitrise: one is based on an API key of the App Store Connect API, the other is the session-based authentication with an Apple ID. You can choose which type of Bitrise Apple Developer connection to use or you can tell the Step to only use the Step inputs for authentication:
+      - `automatic`: Use any enabled Apple Developer connection, either based on Apple ID authentication or API key authentication.  Step inputs are only used as a fallback. API key authentication has priority over Apple ID authentication in both cases.
+      - `api_key`: Use the Apple Developer connection based on API key authentication. Authentication-related Step inputs are ignored.
+      - `apple_id`: Use the Apple Developer connection based on Apple ID authentication and the **Application-specific password** Step input. Other authentication-related Step inputs are ignored.
+      - `off`: Do not use any already configured Apple Developer Connection. Only authentication-related Step inputs are considered.
+    is_required: true
+    summary: The Apple Service authentication method the Step uses. By default, any
+      enabled Bitrise Apple Developer connection is used and other authentication-related
+      Step inputs are ignored.
+    title: Bitrise Apple Developer Connection
+    value_options:
+    - automatic
+    - api_key
+    - apple_id
+    - "off"
+- api_key_path: ""
+  opts:
+    description: |-
+      Specify the path in an URL format where your API key is stored.
+      For example: `https://URL/TO/AuthKey_[KEY_ID].p8` or `file:///PATH/TO/AuthKey_[KEY_ID].p8`.
+      **NOTE:** The Step will only recognize the API key if the filename includes the  `KEY_ID` value as shown on the examples above.
+
+      You can upload your key on the **Generic File Storage** tab in the Workflow Editor and set the Environment Variable for the file here.
+
+      For example: `$BITRISEIO_MYKEY_URL`
+    summary: Path to local or remote file.
+    title: 'API Key: URL'
+- api_issuer: ""
+  opts:
+    description: 'Issuer ID. Required if **API Key: URL** (`api_key_path`) is specified.'
+    summary: Your issuer ID from the API Keys page in App Store Connect.
+    title: 'API Key: Issuer ID'
+- apple_id: ""
+  opts:
+    description: Email for Apple ID login.
+    is_sensitive: true
+    summary: Email for Apple ID login.
+    title: 'Apple ID: Email'
+- opts:
+    description: Password for the specified Apple ID.
+    is_sensitive: true
+    summary: Password for the specified Apple ID.
+    title: 'Apple ID: Password'
+  password: ""
+- app_password: ""
+  opts:
+    description: |-
+      Use this input if TFA is enabled on the Apple ID but no app-specific password has been added to the used Bitrise Apple ID connection.
+
+      **NOTE:** Application-specific passwords can be created on the
+      [AppleID Website](https://appleid.apple.com). It can be used to
+      bypass two-factor authentication.
+    is_sensitive: true
+    summary: Optional if using two-factor enabled Apple ID.
+    title: 'Apple ID: Application-specific password'
+- opts:
+    description: |-
+      Should update fastlane gem before run?
+      *This option will be skipped if you have a `Gemfile` in the `work_dir` directory.*
+    summary: Will cause the fastlane gem to be updated before running the lane.
+    title: Should update fastlane gem before run?
+    value_options:
+    - "true"
+    - "false"
+  update_fastlane: "true"
+- opts:
+    description: Enable/disable verbose logging.
+    is_required: true
+    summary: Enable/disable verbose logging.
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"
+- enable_cache: "yes"
+  opts:
+    description: |-
+      If enabled the step will add the following cache items (if they exist):
+      - Pods -> Podfile.lock
+      - Carthage -> Cartfile.resolved
+      - Android dependencies
+    is_required: true
+    summary: Enable/disable collecting files to be included in the build cache.
+    title: Enable collecting files to be included in the build cache
+    value_options:
+    - "yes"
+    - "no"

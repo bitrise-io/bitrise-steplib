@@ -1,0 +1,66 @@
+title: Codecov
+summary: Upload your code coverage files to Codecov.io
+description: |-
+  Reduce technical debt with visualized test performance,
+  faster code reviews and workflow enhancements.
+  Now you can upload your code coverage files to Codecov every time you kick off a build!
+website: https://codecov.io
+source_code_url: https://github.com/codecov/codecov-bitrise
+support_url: https://community.codecov.io
+published_at: 2023-09-15T09:34:57.29313-07:00
+source:
+  git: https://github.com/codecov/codecov-bitrise.git
+  commit: e8d493c4251ae0d9032d54f17b97ff9351982bf3
+type_tags:
+- test
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+inputs:
+- CODECOV_TOKEN: null
+  opts:
+    description: |
+      Codecov.io repository upload token
+    is_required: true
+    is_sensitive: true
+    title: Codecov.io token
+- OS: null
+  opts:
+    description: |
+      Name of the OS being used (options are "alpine" | "linux" | "macos")
+    is_required: true
+    is_sensitive: false
+    title: OS Name
+- VERSION: latest
+  opts:
+    description: |
+      Version of the Codecov Uploader to use (e.g. `v0.6.1`)
+    is_required: false
+    is_sensitive: false
+    title: Uploader Version
+- XCODE_ARCHIVE_PATH: null
+  opts:
+    description: |
+      --Deprecating-- Specify the xcode archive path. Likely specified as the -resultBundlePath and should end in .xcresult. Only needed if running with xcode support
+    title: '[Deprecating] Xcode archive path'
+- ENABLE_SWIFT_CONVERSION: null
+  opts:
+    description: |
+      Enable swift coverage conversation by setting to 'true'.
+    is_required: false
+    is_sensitive: false
+    title: Enable swift coverage
+- SWIFT_PROJECT: null
+  opts:
+    description: |
+      Specify the swift project. Will only work properly if ENABLE_SWIFT_CONVERSION is set to `true`
+    is_required: false
+    is_sensitive: false
+    title: Swift project name
+- opts:
+    description: |-
+      Options to pass along to the Codecov uploader.
+      You can use multiple options, separated by a space.
+      Review all options at https://github.com/codecov/uploader
+    title: Additional options for Codecov call
+  other_options: -C $GIT_CLONE_COMMIT_HASH

@@ -1,0 +1,100 @@
+title: Run Gradle Tests
+summary: Runs tests with `gradlew`.
+description: |-
+  This Step runs tests with `gradlew`.
+  You can specify the test tasks to run and set flags to the executed `gradlew` command.
+
+  ### Configuring the Step
+
+  To use this Step, you need at least two things:
+  * [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+  * A Gradle task that is correctly configured in your Gradle project.
+
+  To configure the Step:
+  1. Set the Gradle project root directory in the **Project root directory** input.
+  1. Add the task you want to run in the **Test task** input.
+  1. (Optional) Add any flags you want to pass to the executed gradlew command in the **Additional flags** input. For example, you can use `--tests='*.MyTestClass'` to run a specific test class.
+  1. (Optional) You can set the file path to a `build.gradle` file for the Step in the **Path to the Gradle build script to use** input.
+
+  ### Troubleshooting
+
+  If you receive an error that Gradle Wrapper (gradlew) is required, make sure to generate one if you don't have one already. You can read
+  more about it in the [official Gradle guide](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+  ### Useful links
+
+  * [Gradle Wrapper](https://docs.gradle.org/current/userguide/gradle_wrapper.html)
+  * [Caching Gradle](https://devcenter.bitrise.io/builds/caching/caching-gradle/)
+  * [Running a unit test](https://devcenter.bitrise.io/en/testing/android-unit-tests.html#running-a-unit-test)
+
+  ### Related Steps
+
+  * [Generate Gradle Wrapper](https://www.bitrise.io/integrations/steps/generate-gradle-wrapper)
+  * [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)
+  * [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+website: https://github.com/bitrise-io/steps-gradle-unit-test
+source_code_url: https://github.com/bitrise-io/steps-gradle-unit-test
+support_url: https://github.com/bitrise-io/steps-gradle-unit-test/issues
+published_at: 2025-09-05T12:41:08.910862482Z
+source:
+  git: https://github.com/bitrise-steplib/steps-gradle-unit-test.git
+  commit: f41f73b38aa14885ab049427d6761102d5930162
+project_type_tags:
+- android
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-io/steps-gradle-unit-test
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      The root directory of the Gradle project.
+      This is the directory which contains all source files from your project, as well as Gradle files, including the `gradlew` file.
+    is_required: true
+    summary: The root directory of the Gradle project.
+    title: Project root directory
+  project_root_dir: $BITRISE_SOURCE_DIR
+- opts:
+    description: The test task to be executed.
+    is_required: true
+    summary: The test task to be executed.
+    title: Test task
+  test_task: test
+- gradlew_command_flags: --continue
+  opts:
+    description: |
+      Flags to pass to the executed gradlew command.
+      For example, you can use `--tests='*.MyTestClass'` to run a specific test class.
+    summary: Flags to pass to the executed gradlew command.
+    title: Additional flags
+- gradle_build_script_path: null
+  opts:
+    description: |-
+      Path to the Gradle build script to use.
+      The path should be relative to the **Project root directory**.
+    summary: Path to the Gradle build script to use.
+    title: Path to the Gradle build script to use.
+outputs:
+- BITRISE_GRADLE_TEST_RESULT: null
+  opts:
+    title: Result of the tests (`succeeded` or `failed`).
+    value_options:
+    - succeeded
+    - failed
+- BITRISE_FLAKY_TEST_CASES: null
+  opts:
+    description: |-
+      A test case is considered flaky if it has failed at least once, but passed at least once as well.
+
+      The list contains the test cases in the following format:
+      ```
+      - TestSuit_1.TestClass_1.TestName_1
+      - TestSuit_1.TestClass_1.TestName_2
+      - TestSuit_1.TestClass_2.TestName_1
+      - TestSuit_2.TestClass_1.TestName_1
+      ...
+      ```
+    title: List of flaky test cases

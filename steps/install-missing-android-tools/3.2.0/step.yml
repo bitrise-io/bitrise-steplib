@@ -1,0 +1,83 @@
+title: Install missing Android SDK components
+summary: Install Android SDK components that are required for the app.
+description: |2-
+
+  This Step makes sure that required Android SDK components (platforms and build-tools) are installed. To do so, the Step runs the `gradlew dependencies` command.
+
+  If the Android Plugin for Gradle version is 2.2.0 or higher, the plugin will download and install the missing components during the Gradle command.
+  Otherwise the command fails and the Step parses the command's output to determine which SDK components are missing and installs them.
+
+  ### Configuring the Step
+
+  1. Set the path of the `gradlew` file.
+
+     The default value is that of the $PROJECT_LOCATION Environment Variable.
+
+  1. If you use an Android NDK in your app, set its revision in the **NDK Revision** input.
+
+  ### Troubleshooting
+
+  If the Step fails, check that your repo actually contains a `gradlew` file. Without the Gradle wrapper, this Step won't work.
+
+  ### Useful links
+
+  [Installing an additional Android SDK package](https://devcenter.bitrise.io/tips-and-tricks/android-tips-and-tricks/#how-to-install-an-additional-android-sdk-package)
+
+  ### Related Steps
+
+  * [Android SDK Update](https://www.bitrise.io/integrations/steps/android-sdk-update)
+  * [Install React Native](https://www.bitrise.io/integrations/steps/install-react-native)
+website: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+source_code_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools
+support_url: https://github.com/bitrise-steplib/steps-install-missing-android-tools/issues
+published_at: 2023-07-04T08:40:38.580668611Z
+source:
+  git: https://github.com/bitrise-steplib/steps-install-missing-android-tools.git
+  commit: 2d89aef238597ebd5ca0fa478dab15c47a3b804f
+project_type_tags:
+- android
+- cordova
+- ionic
+- react-native
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-install-missing-android-tools
+is_always_run: false
+is_skippable: false
+inputs:
+- gradlew_path: $GRADLEW_PATH
+  opts:
+    description: |
+      Using a Gradle Wrapper (gradlew) is required, as the wrapper is what makes sure
+      that the right Gradle version is installed and used for the build.
+      __You can find more information about the Gradle Wrapper (gradlew),
+      and about how you can generate one (if you would not have one already)__
+      in the official guide at: [https://docs.gradle.org/current/userguide/gradle_wrapper.html](https://docs.gradle.org/current/userguide/gradle_wrapper.html).
+
+      **The path should be relative** to the repository root, for example: `./gradlew`,
+      or if it's in a sub directory: `./sub/dir/gradlew`.
+    is_required: true
+    title: gradlew file path
+- ndk_version: null
+  opts:
+    description: NDK version to install, for example `23.0.7599858`. Run `sdkmanager
+      --list` on your machine to see all available versions. Leave this input empty
+      if you are not using the Native Development Kit in your project.
+    summary: NDK version to install. Leave this input empty if you are not using the
+      Native Development Kit in your project.
+    title: NDK version
+- gradlew_dependencies_options: null
+  opts:
+    description: |-
+      Additional options to be added to the executed `gradlew dependencies` command.
+
+      The step runs `gradlew dependencies --stacktrace` to list and install the missing project dependencies.
+
+      Additional options will be appended to the end of this command.
+
+      Example: `--configuration-cache-problems=warn`.
+    summary: Additional options to be added to the executed `gradlew dependencies`
+      command.
+    title: Additional options for the `gradlew dependencies` command

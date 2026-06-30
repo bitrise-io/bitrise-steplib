@@ -1,0 +1,66 @@
+title: Restore SPM Cache
+summary: Restores cached Swift Package Manager dependencies. This Step needs to be
+  used in combination with **Save SPM Cache**.
+description: |
+  Restores cached Swift Package Manager dependencies. This Step needs to be used in combination with **Save SPM Cache**.
+
+  This Step is based on [key-based caching](https://devcenter.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for SPM dependencies. If you'd like to change the cache keys, you might want to use the generic [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache) Step instead.
+
+  #### Related steps
+
+  [Save SPM cache](https://github.com/bitrise-steplib/bitrise-step-save-spm-cache/)
+
+  [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache/issues
+published_at: 2024-09-10T14:28:04.796167942Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-spm-cache.git
+  commit: 20296845ec190d8798d353b7561497d8087a6c4e
+project_type_tags:
+- ios
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-spm-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- opts:
+    category: Debugging
+    description: |-
+      Number of retries to attempt when downloading a cache archive fails.
+
+      The value 0 means no retries are attempted.
+    is_required: true
+    summary: Number of retries to attempt when downloading a cache archive fails.
+    title: Number of retries
+  retries: 3
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit

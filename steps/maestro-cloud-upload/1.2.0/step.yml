@@ -1,0 +1,184 @@
+title: Upload to Maestro Cloud
+summary: |
+  Upload your app binary to Maestro Cloud and run your flows
+description: |
+  This steps uploads both your app binary and flows to Maestro Cloud.
+website: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload
+source_code_url: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload
+support_url: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload/issues
+published_at: 2023-06-23T13:54:22.832257+04:00
+source:
+  git: https://github.com/mobile-dev-inc/bitrise-step-maestro-cloud-upload.git
+  commit: 0254bf84c0820a4fa1bd959cdc24b64bcc919ba6
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- android
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- api_key: ""
+  opts:
+    description: |
+      Maestro Cloud API key
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Maestro Cloud API key
+    title: API Key
+- app_file: ""
+  opts:
+    description: |
+      **Android**: `app_file` should point to an x86 compatible APK file. **iOS**: `app_file` should point to an x86 compatible Simulator build packaged in a zip archive.
+    is_expand: true
+    is_required: true
+    summary: App binary to run your Flows against
+    title: App File
+- opts:
+    description: |
+      By default, the action is looking for a .maestro folder with Maestro flows in the root directory of the project.
+       If you would like to customize this behaviour, you can override it with a workspace argument"
+    is_expand: true
+    is_required: false
+    summary: Flow file or directory
+    title: Flow workspace
+  workspace: .maestro
+- opts:
+    description: |
+      "A name will automatically be provided according to the following order:
+        - If it is a Pull Request, use Pull Request title as name
+        - If it is a normal push, use commit message as name
+        - If for some reason the commit message is not available, use the commit SHA as name
+        - If you want to override this behaviour and specify your own name, you can do so by setting the name argument
+    is_expand: true
+    is_required: false
+    summary: Custom upload name
+    title: Upload Name
+  upload_name: $BITRISE_GIT_MESSAGE
+- async: false
+  opts:
+    description: |
+      If you don't want the action to wait until the Upload has been completed as is the default behaviour, set the async argument to true
+    is_expand: true
+    is_required: false
+    summary: Run in async mode
+    title: Async Mode
+- env: ""
+  opts:
+    description: |
+      If you want to pass environment variables along with your upload, add variables separated by a new line or **\n**.
+      i.e VAR1=1\nVAR2=2 ...
+    is_expand: true
+    is_required: false
+    summary: Pass environment variables to your flows
+    title: Environment variables
+- android_api_level: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Set the Android api level the devices should run on (Default: 30)'
+    title: Android api level
+- ios_version: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Set the iOS version the devices should run on (Default: 15)'
+    title: iOS version
+- include_tags: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: Run only flows that contain the specified tags (comma separated) i.e
+      dev,pull-request
+    title: Include tags
+- exclude_tags: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: Exclude flows from running with the specified tags (comma separated)
+      i.e pull-request,experimental
+    title: Exclude tags
+- export_test_report: "false"
+  opts:
+    description: ""
+    is_required: false
+    summary: Generate test suite report (JUnit)
+    title: Export test report (JUnit)
+    value_options:
+    - "true"
+    - "false"
+- export_output: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Export test file output (Default: report.xml)'
+    title: Export test output
+- mapping_file: ""
+  opts:
+    description: |
+      **Android**: Include the Proguard mapping file to deobfuscate Android performance traces.
+      **iOS**: Include the generated .dSYM file (unique per build)
+    is_expand: true
+    is_required: false
+    summary: dSYM file (iOS) or Proguard mapping file (Android)
+    title: Mapping File
+- branch: $BITRISE_GIT_BRANCH
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: The branch this upload originated from
+    title: Build branch
+- opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Repository name (ie: GitHub repo slug)'
+    title: Repository name
+  repo_name: $BITRISEIO_GIT_REPOSITORY_SLUG
+- opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Repository owner (ie: GitHub organization or user slug)'
+    title: Repository owner
+  repo_owner: $BITRISEIO_GIT_REPOSITORY_OWNER
+- opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: The ID of the pull request this upload originated from
+    title: Pull request id
+  pull_request_id: $BITRISE_PULL_REQUEST
+- maestro_cli_version: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Maestro CLI version to be downloaded in your CI (Default: latest)'
+    title: Maestro CLI version

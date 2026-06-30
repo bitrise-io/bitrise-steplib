@@ -1,4 +1,4 @@
 deprecate_notes: |
-  This step is deprecated, use deploy-to-itunesconnect-application-loader step instead.
+  This step is deprecated, use [Deploy to App Store Connect - Application Loader](https://github.com/bitrise-steplib/steps-deploy-to-itunesconnect-application-loader) step instead.
 maintainer: bitrise
 removal_date: "2018-09-20"

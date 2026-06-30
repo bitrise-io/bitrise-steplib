@@ -1,0 +1,56 @@
+title: Share Pipeline variables
+summary: Share environment variables between Pipeline Stages.
+description: |-
+  Share environment variables between Pipeline Stages.
+
+  Variables shared by the Step will be available in subsequent stages workflow's as [one-off env vars](https://devcenter.bitrise.io/en/builds/environment-variables.html#setting-a-custom-env-var-when-starting-a-build) as if provided manually on the website.
+website: https://github.com/bitrise-steplib/bitrise-step-share-pipeline-variable
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-share-pipeline-variable
+support_url: https://github.com/bitrise-steplib/bitrise-step-share-pipeline-variable/issues
+published_at: 2023-09-08T07:50:30.035376313Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-share-pipeline-variable.git
+  commit: c966900cd0c23a3f2aec1b814fc4c55cca197fad
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-share-pipeline-variable
+is_always_run: false
+inputs:
+- opts:
+    description: |-
+      A newline (`\n`) separated list of key - value pairs (`{key}={value}`).
+
+      The input uses a `{key}={value}` syntax.
+      The first equals sign (`=`) is the delimiter between the key and value of the environment variable.
+      A shorthand syntax of `ENV_KEY` can be used for `ENV_KEY=$ENV_KEY` when sharing an existing environment variable (ENV_KEY).
+
+      Examples:
+      ```
+      MY_ENV_KEY=my value
+      EXISTING_ENV_KEY
+      ```
+    is_required: true
+    summary: A newline (`\n`) separated list of key - value pairs (`{key}={value}`).
+    title: Variables to share between Pipeline Stages
+  variables: null
+- app_url: $BITRISE_APP_URL
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    summary: The app's URL on Bitrise.io.
+    title: Bitrise App URL
+- build_slug: $BITRISE_BUILD_SLUG
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    summary: The build's slug on Bitrise.io.
+    title: Bitrise Build Slug
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: API Token for the build on Bitrise.io.
+    title: Bitrise Build API Token

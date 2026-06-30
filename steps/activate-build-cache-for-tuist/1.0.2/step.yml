@@ -1,0 +1,18 @@
+title: Activate Bitrise Build Cache for Tuist
+summary: Activates Bitrise Remote Build Cache add-on for subsequent Tuist builds in
+  the workflow
+description: |
+  This Step activates Bitrise's remote build cache add-on for subsequent Tuist executions in the workflow.
+
+  After this Step executes, Tuist builds will automatically read from the remote cache and push new entries.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-tuist-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-tuist-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-tuist-cache
+published_at: 2023-06-30T20:36:14.699365+02:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-tuist-cache.git
+  commit: 1ec62acc47d6aa64960797fc2cb7e4c41c70ce70
+type_tags:
+- utility
+is_skippable: true
+run_if: .IsCI

@@ -1,0 +1,43 @@
+title: Save NPM Cache
+summary: Saves node_modules dependencies, used by NPM and Yarn. This Step needs to
+  be used in combination with **Restore NPM Cache**.
+description: |
+  Saves node_modules dependencies. This Step needs to be used in combination with **Restore NPM Cache**.
+
+  This Step is based on [key-based caching](https://devcenter.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for NPM dependencies. If you'd like to change the cache key (or paths to cache), you might want to use the generic [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache) Step instead.
+
+  Note: NPM and Yarn package managers are both supported.
+
+  #### Related steps
+
+  [Restore NPM cache](https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache/)
+
+  [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache/issues
+published_at: 2023-04-13T14:04:58.641456547Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache.git
+  commit: 8133c8ae0d27b354709c29c146678355739c5ae6
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-save-npm-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

@@ -1,0 +1,87 @@
+title: Set Xcode Project Build Number
+summary: Set the value of your iOS app's bundle version in the `Info.plist` file to
+  the specified version number.
+description: "Set the value of your iOS app's bundle version in the `Info.plist` file
+  to the specified version number. A great\nway to keep track of versions when submitting
+  bug reports.\n\nIf your IPA contains multiple build targets, they need to have the
+  same version number as your app's main target has.\nIn that case, you need to add
+  this Step to your Workflow for each build target: if you have, say, three targets,
+  you need to have three instances of this Step in your Workflow.\nIf there are targets
+  with different version numbers the app cannot be submitted for App Review or Beta
+  App Review.\n\n### Configuring the Step \n\n1. In your Xcode project, set the Generate
+  Info.plist File to No, under PROJECT and TARGETS on the Build Settings tab.\n1.
+  Manually create the `Info.plist` file and check it into source control. Make sure
+  you have all the necessary keys defined in the file.\n1. Configure this step by
+  pointing the **Info.plist file path** input to the `Info.plist` file in the source
+  repo.\n1. Add a value in the Build Number input. \n   This sets the CFBundleVersion
+  key to the specified value in the `Info.plist` file. The default value is the `$BITRISE_BUILD_NUMBER`
+  Environment Variable.\n1. Optionally, add a value in the Version Number input. This
+  will set the `CFBundleShortVersionString` key to the specified value in the `Info.plist`
+  file. This input is not required.\n\n### Useful links \n\n- [Build numbering and
+  app versioning](https://devcenter.bitrise.io/builds/build-numbering-and-app-versioning/#setting-the-cfbundleversion-and-cfbundleshortversionstring-of-an-ios-app)\n-
+  [CFBundleversion in Apple documentation](https://developer.apple.com/documentation/bundleresources/information_property_list/cfbundleversion)\n\n###
+  Related Steps \n\n- [Xcode Archive & Export for iOS](https://www.bitrise.io/integrations/steps/xcode-archive)\n-
+  [Set Android Manifest Version Code and Name](https://www.bitrise.io/integrations/steps/set-android-manifest-versions)"
+website: https://github.com/bitrise-io/set-xcode-build-number
+source_code_url: https://github.com/bitrise-io/set-xcode-build-number
+support_url: https://github.com/bitrise-io/set-xcode-build-number/issues
+published_at: 2023-11-21T09:21:10.413646824Z
+source:
+  git: https://github.com/bitrise-steplib/steps-set-xcode-build-number.git
+  commit: f0272f2f509fd80160677d6469703e7f87df05eb
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- macos
+- xamarin
+- cordova
+- ionic
+- react-native
+- flutter
+type_tags:
+- utility
+run_if: .IsCI
+inputs:
+- opts:
+    description: |
+      Path to the given target's Info.plist file. You need to use this Step for each archivable target of your project.
+
+      **NOTE:**<br/>
+      If your IPA contains multiple build targets, they would need to have the same version number as your app's main target has.<br/>
+      You need to add this Step to your Workflow for each build target: if you have, say, three targets, you need to have three instances of this Step in your Workflow.
+      If there are targets with different version numbers the app cannot be submitted for App Review or Beta App Review.
+    is_required: true
+    summary: Path to the given target's Info.plist file. You need to use this Step
+      for each archivable target of your project.
+    title: Info.plist file path
+  plist_path: null
+- build_version: $BITRISE_BUILD_NUMBER
+  opts:
+    description: |
+      Set the CFBundleVersion to this value.
+      You can find this in Xcode:
+      - Select your project in the **Project navigator**
+      - Go to the **General** tab and then the **Identity** section
+      - **Build field**
+    is_required: true
+    title: Build Number
+- build_version_offset: null
+  opts:
+    description: |
+      This offset will be added to `build_version` input's value.
+    title: Build Number Offset
+- build_short_version_string: null
+  opts:
+    description: |
+      Set the CFBundleShortVersionString to this value.
+      You can find this in Xcode:
+      - Select your project in the **Project navigator**
+      - Go to the **General** tab and then the **Identity** section
+      - **Version field**
+    title: Version Number
+outputs:
+- XCODE_BUNDLE_VERSION: null
+  opts:
+    description: The bundle version used in the Info.plist file
+    title: Xcode Bundle Version

@@ -1,0 +1,106 @@
+title: Run yarn command
+summary: Runs `yarn` with the given command and args.
+description: |-
+  Yarn is a package manager that is compatible with the npm registry. Download your app's dependencies via yarn by using this Step.
+
+  This Step uses Corepack to automatically manage the Yarn version. The Yarn version is determined by the `packageManager` field in your `package.json` file or the `.yarnrc`/`.yarnrc.yml` configuration file.
+
+  ### Configuring the Step
+
+  To use the Step, you need to configure your dependencies in your `package.json` file.
+
+  1. (Recommended) Specify the Yarn version in your `package.json`:
+     ```json
+     {
+       "packageManager": "yarn@4.1.0"
+     }
+     ```
+     If not specified, Corepack will use its default Yarn version.
+
+  1. Set a command in **The yarn command to run** input.
+
+     If you leave the input blank, the Step will simply install your dependencies. You can find the other available command in [yarn's documentation](https://yarnpkg.com/lang/en/docs/cli/).
+
+  1. Set the arguments in the **Arguments for running yarn commands** input.
+
+     You can specify multiple arguments. Check out the available arguments for each command in yarn's documentation.
+
+  ### Troubleshooting
+
+  If the Step fails, run it again with verbose logging enabled. To do so, set the **Enable verbose logging** input to `yes`. Doing so allows yarn to output more information about the command you ran.
+
+  Make sure your commands and arguments are correct, and that your packages are correctly defined in the `package.json` file.
+
+  Note: This Step requires Corepack to manage Yarn versions. Corepack is bundled with Node.js from 14.19.0 and 16.9.0 until 24.x. For Node.js 25+, Corepack will be automatically installed via npm if not already present.
+
+  ### Useful links
+
+  [Corepack documentation](https://github.com/nodejs/corepack#readme)
+  [Getting started with React Native apps](https://devcenter.bitrise.io/getting-started/getting-started-with-react-native-apps/)
+  [Running Detox tests on Bitrise](https://devcenter.bitrise.io/testing/running-detox-tests-on-bitrise/)
+
+  ### Related Steps
+
+  [Run Cocoapods install](https://www.bitrise.io/integrations/steps/cocoapods-install)
+  [Run npm command](https://www.bitrise.io/integrations/steps/npm)
+website: https://github.com/bitrise-community/steps-yarn
+source_code_url: https://github.com/bitrise-community/steps-yarn
+support_url: https://github.com/bitrise-community/steps-yarn/issues
+published_at: 2026-02-20T12:46:01.454612582Z
+source:
+  git: https://github.com/bitrise-steplib/steps-yarn.git
+  commit: a88abac0ee3356ab4aec4a043d11eaaf7074defa
+executables:
+  darwin-amd64:
+    storage_uri: steps/yarn/2.0.0/bin/yarn-darwin-amd64
+    hash: sha256-a074a727d8694526fcf4f30cdf236d387307f47743389604fbdab20fd9010f93
+  darwin-arm64:
+    storage_uri: steps/yarn/2.0.0/bin/yarn-darwin-arm64
+    hash: sha256-1767a895c69fdc8bfac725d12689aee612fba6915a97f9d1bb652411013645f1
+  linux-amd64:
+    storage_uri: steps/yarn/2.0.0/bin/yarn-linux-amd64
+    hash: sha256-b57d5e51a786fec1714c6ae4c5a71f5320d2ae95a735b7401b18c5a1c7692723
+  linux-arm64:
+    storage_uri: steps/yarn/2.0.0/bin/yarn-linux-arm64
+    hash: sha256-862ac42c4e0755088f00d33636bade98599e6c88cac1ca205a4408ab562334d2
+host_os_tags:
+- osx-10.11
+type_tags:
+- dependency
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-yarn
+deps:
+  brew:
+  - name: node
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  workdir: $BITRISE_SOURCE_DIR
+- command: null
+  opts:
+    description: |
+      Specify the command to run with `yarn`. For example `add`.
+      Leave it blank to install dependencies.
+    is_required: false
+    title: The `yarn` command to run
+- args: null
+  opts:
+    description: |-
+      Arguments are added to the `yarn` command. You can specify multiple arguments, separated
+      by a space character. For example `react` or `-dev`
+    title: Arguments for running `yarn` commands
+- opts:
+    description: |
+      Choose if debug logging is enabled.
+    is_required: true
+    title: Enable verbose logging
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"

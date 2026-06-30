@@ -1,0 +1,78 @@
+title: React Native bundle
+summary: Bundles your React Native app.
+description: Bundles your React Native app.
+website: https://github.com/bitrise-steplib/steps-react-native-bundle
+source_code_url: https://github.com/bitrise-steplib/steps-react-native-bundle
+support_url: https://github.com/bitrise-steplib/steps-react-native-bundle/issues
+published_at: 2022-12-09T15:01:30.675867421Z
+source:
+  git: https://github.com/bitrise-steplib/steps-react-native-bundle.git
+  commit: 7d2c6458ac45f58fdf1b49b82c6aa7c640c0b499
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- react-native
+- android
+- ios
+type_tags:
+- build
+deps:
+  brew:
+  - name: node
+inputs:
+- binary_path: null
+  opts:
+    description: |-
+      Location of a custom `react-native` binary, either absolute or relative. The path should not contain the `react-native` part itself.
+      Useful when configuring distinct package managers, installing globally,
+      or in a relative path like `./node_modules/.bin`
+    summary: Location of a custom React Native binary to use
+    title: Custom React Native binary location
+- opts:
+    description: Specify either `ios`, or `android` as platform for the bundler.
+    is_required: true
+    title: Bundle platform
+    value_options:
+    - ios
+    - android
+  platform: ios
+- entry_file: index.${platform}.js
+  opts:
+    description: Path to the root JS file, either absolute or relative to JS root.
+    is_required: true
+    title: Entry file
+- opts:
+    description: File name where to store the resulting bundle, ex. /tmp/groups.bundle.
+    title: Bundle output
+  out: ${platform}/main.jsbundle
+- dev: "true"
+  opts:
+    description: If false, warnings are disabled and the bundle is minified.
+    title: DEV flag
+    value_options:
+    - "true"
+    - "false"
+- assetRoots: null
+  opts:
+    description: Directory name where to store assets referenced in the bundle.
+    title: Assets Destination
+- options: null
+  opts:
+    description: |-
+      Options are added to `react-native bundle`. You can use multiple options, separated
+      by a space character.
+    title: Additional options for running `react-native bundle`
+- opts:
+    description: |-
+      __DEPRECATED__, removed from react-native tool.
+
+      Specify the bundle file URL.
+    title: '[DEPRECATED] Bundle file URL'
+  url: null
+- opts:
+    description: |-
+      __DEPRECATED__, removed from react-native tool.
+
+      Add another root(s) to be used in bundling in this project.
+    title: '[DEPRECATED] Root'
+  root: null

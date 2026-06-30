@@ -1,0 +1,285 @@
+title: Nitro for Android
+summary: |
+  Build your React Native app faster than ever with Nitro
+description: |
+  This step builds your React Native app for Android using [Nitro](https://nitro.build). Get your **API key** on our [website](https://nitro.build).
+website: https://github.com/nitro-build/bitrise-step-nitro-android
+source_code_url: https://github.com/nitro-build/bitrise-step-nitro-android
+support_url: https://github.com/nitro-build/bitrise-step-nitro-android/issues
+published_at: 2023-01-31T09:21:22.086062-03:00
+source:
+  git: https://github.com/nitro-build/bitrise-step-nitro-android.git
+  commit: 74c8e034270873ea9849db1de6bdcb8c146220d7
+host_os_tags:
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+type_tags:
+- build
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: wget
+  - name: pigz
+  - name: gnu-sed
+  - name: jq
+  apt_get:
+  - name: pigz
+  - name: file
+  - name: jq
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    summary: The directory within your project, in which your code is located. Leave
+      this field empty if your code is not located in a subdirectory
+    title: Root directory
+  root_directory: ./
+- flavor: null
+  opts:
+    is_expand: true
+    summary: Set product flavor for Gradle build variant
+    title: Flavor
+- opts:
+    category: App Versioning
+    is_expand: true
+    summary: The version name for the app
+    title: Version name
+  version_name: null
+- opts:
+    category: App Versioning
+    is_expand: true
+    summary: The version code for the app
+    title: Version code
+  version_code: null
+- disable_version_name_from_package_json: "no"
+  opts:
+    category: App Versioning
+    is_expand: true
+    summary: By default will get the 'version' field from package.json and set the
+      version name
+    title: Disable automatic version name configuration
+    value_options:
+    - "yes"
+    - "no"
+- disable_version_code_auto_generation: "no"
+  opts:
+    category: App Versioning
+    is_expand: true
+    summary: By default will generate a timestamp based number and set the version
+      code
+    title: Disable automatic version code generation
+    value_options:
+    - "yes"
+    - "no"
+- keystore_url: $BITRISEIO_ANDROID_KEYSTORE_URL
+  opts:
+    category: App Signing
+    is_expand: true
+    summary: Keystore url
+    title: Keystore url
+- keystore_password: $BITRISEIO_ANDROID_KEYSTORE_PASSWORD
+  opts:
+    category: App Signing
+    is_expand: true
+    is_sensitive: true
+    summary: Keystore password
+    title: Keystore password
+- keystore_key_alias: $BITRISEIO_ANDROID_KEYSTORE_ALIAS
+  opts:
+    category: App Signing
+    is_expand: true
+    summary: Keystore alias
+    title: Keystore alias
+- keystore_key_password: $BITRISEIO_ANDROID_KEYSTORE_PRIVATE_KEY_PASSWORD
+  opts:
+    category: App Signing
+    is_expand: true
+    is_sensitive: true
+    summary: Keystore key password
+    title: Keystore key password
+- cache_provider: s3
+  opts:
+    category: Caching
+    description: |-
+      Choose the provider where cache artifacts will be persisted:
+      - `fs`: File system
+      - `s3`: Amazon - Simple Storage Service
+    is_expand: true
+    summary: Choose the provider where cache artifacts will be persisted
+    title: Cache provider
+    value_options:
+    - fs
+    - s3
+- disable_cache: $NITRO_DISABLE_CACHE
+  opts:
+    category: Caching
+    is_expand: true
+    summary: When setting this option to `yes` build cache optimizations won't be
+      performed
+    title: Disable builds caching
+    value_options:
+    - "yes"
+    - "no"
+- cache_env_var_lookup_keys: null
+  opts:
+    category: Caching
+    description: A list of `|` separated values with env variable keys to lookup to
+      determine whether the build should be cached or not
+    is_expand: true
+    summary: A list of `|` separated values with env variable keys to lookup to determine
+      whether the build should be cached or not
+    title: List of env var keys for lookup to determine cache fingerprint
+- cache_file_lookup_paths: null
+  opts:
+    category: Caching
+    description: A list of `|` separated value paths (relative to the root of the
+      repo or absolute) to lookup in order to determine whether the build should be
+      cached or not
+    is_expand: true
+    summary: A list of `|` separated value paths (relative to the root of the repo
+      or absolute) to lookup in order to determine whether the build should be cached
+      or not
+    title: List of files for lookup to determine cache fingerprint
+- disable_metro_cache: $NITRO_DISABLE_METRO_CACHE
+  opts:
+    category: Caching
+    description: Setting this field to yes will disable the React Native Metro cache
+      feature
+    is_expand: true
+    summary: Setting this field to `yes` will disable the React Native Metro cache
+      feature
+    title: Disable Metro bundler cache
+- aws_s3_access_key_id: $NITRO_AWS_S3_ACCESS_KEY_ID
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS access key ID for S3 bucket build caching
+    title: AWS S3 access key ID
+- aws_s3_secret_access_key: $NITRO_AWS_S3_SECRET_ACCESS_KEY
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS secret access key for S3 bucket build caching
+    title: AWS S3 secret access key
+- aws_s3_region: $NITRO_AWS_S3_REGION
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS region where S3 bucket for build caching is located
+    title: AWS S3 region
+- aws_s3_bucket: $NITRO_AWS_S3_BUCKET
+  opts:
+    category: Caching
+    is_expand: true
+    summary: AWS bucket name for S3 bucket build caching
+    title: AWS S3 bucket name
+- opts:
+    category: Hooks
+    description: Run command prior to install project dependencies (e.g. `rm -rf ./some-folder`)
+    is_expand: true
+    summary: Run command prior to install project dependencies (e.g. `rm -rf ./some-folder`)
+    title: Pre install command
+  pre_install_command: null
+- opts:
+    category: Hooks
+    description: Run command prior to start building the app (e.g. `yarn tsc && yarn
+      test`)
+    is_expand: true
+    summary: Run command prior to start building the app (e.g. `yarn tsc && yarn test`)
+    title: Pre build command
+  pre_build_command: null
+- opts:
+    category: Hooks
+    description: Run command once build successfully finished (e.g. `yarn publish`)
+    is_expand: true
+    summary: Run command once build successfully finished (e.g. `yarn publish`)
+    title: Post build command
+  post_build_command: null
+- detox_configuration: null
+  opts:
+    category: Advanced
+    is_expand: true
+    summary: Select a device configuration from your defined configurations.
+    title: Detox configuration
+- opts:
+    category: Advanced
+    is_expand: true
+    summary: The path to the directory where to place all of Nitro's output files
+    title: Output directory
+  output_directory: $BITRISE_DEPLOY_DIR
+- entry_file: $ENTRY_FILE
+  opts:
+    category: Advanced
+    is_expand: true
+    summary: The entry file for bundle generation
+    title: The entry file for bundle generation
+- opts:
+    category: Advanced
+    description: Enable verbose logs
+    summary: Enable verbose logs
+    title: Verbose logs
+    value_options:
+    - "yes"
+    - "no"
+  verbose: "no"
+- debug: "no"
+  opts:
+    category: Advanced
+    description: Enable step debugging
+    summary: Enable step debugging
+    title: Debug step
+    value_options:
+    - "yes"
+    - "no"
+- fail_safe: $NITRO_FAIL_SAFE
+  opts:
+    category: Advanced
+    is_expand: true
+    summary: Runing the app in this mode allows you to prevent the build to fail but
+      you can check the status in further steps
+    title: Fail-safe mode
+- api_key: $NITRO_API_KEY
+  opts:
+    is_expand: true
+    is_sensitive: true
+    summary: The API key provided by Nitro. It should be defined by setting NITRO_API_KEY
+      secret.
+    title: Nitro API key
+outputs:
+- NITRO_BUILD_STATUS: null
+  opts:
+    description: The status of the latest build (success / failed)
+    summary: The status of the latest build (success / failed)
+    title: Build status
+- NITRO_OUTPUT_DIR: null
+  opts:
+    description: The path to the directory where to place all of Nitro's output files
+    summary: The path to the directory where to place all of Nitro's output files
+    title: Output directory
+- NITRO_LOGS_PATH: null
+  opts:
+    description: The full path to access the build log
+    summary: The full path to access the build log
+    title: Build log location
+- NITRO_SUMMARY_PATH: null
+  opts:
+    description: The full path to access the build summary report
+    summary: The full path to access the build summary report
+    title: Summary location
+- NITRO_APP_PATH: null
+  opts:
+    description: The full path to access the Android package (.apk)
+    summary: The full path to access the Android package (.apk)
+    title: Build application package location
+- NITRO_DEPLOY_PATH: null
+  opts:
+    description: The full path to access the Android package (.apk)
+    summary: The full path to access the Android package (.apk)
+    title: Build application package location

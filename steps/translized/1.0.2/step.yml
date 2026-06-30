@@ -1,0 +1,17 @@
+title: Translized
+summary: |
+  Download your localization files from Translized directly from your pipeline.
+description: |
+  Download your localization files from Translized directly from your pipeline. Configuration file .translized.yml should exist in a root directory. More details about file and how to create it can be found here: https://docs.translized.com/docs/cli/configuration/
+website: https://github.com/translized/bitrise-step-translized
+source_code_url: https://github.com/translized/bitrise-step-translized
+support_url: https://github.com/translized/bitrise-step-translized/issues
+published_at: 2024-01-31T16:34:58.622688+01:00
+source:
+  git: https://github.com/translized/bitrise-step-translized.git
+  commit: 5fb63670a2b63e8a5bf17a613bcb9a5c375ca9c5
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh

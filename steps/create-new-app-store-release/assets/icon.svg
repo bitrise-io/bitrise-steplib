@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 256 256">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: url(#linear-gradient);
+      }
+
+      .cls-2 {
+        fill: url(#linear-gradient-2);
+      }
+    </style>
+    <linearGradient id="linear-gradient" x1="-551.34" y1="512" x2="-551.34" y2="511" gradientTransform="translate(141270 131073) scale(256 -256)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#54c3fa"/>
+      <stop offset="1" stop-color="#1586f5"/>
+    </linearGradient>
+    <linearGradient id="linear-gradient-2" x1="128" y1="-8.63" x2="128" y2="215.6" gradientUnits="userSpaceOnUse">
+      <stop offset=".13" stop-color="#fff"/>
+      <stop offset=".32" stop-color="#fff" stop-opacity=".91"/>
+      <stop offset=".71" stop-color="#fff" stop-opacity=".69"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".5"/>
+    </linearGradient>
+  </defs>
+  <g id="Rectangle">
+    <rect id="path-2" class="cls-1" width="256" height="256"/>
+  </g>
+  <path class="cls-2" d="m174.04,35.93h-92.07c-10.13,0-18.41,8.29-18.41,18.41v147.31c0,10.13,8.29,18.41,18.41,18.41h92.07c10.13,0,18.41-8.29,18.41-18.41V54.34c0-10.13-8.29-18.41-18.41-18.41Zm0,165.73h-36.83v-47.62l14.6,14.6,13.02-13.02-36.83-36.83-36.83,36.83,13.02,13.02,14.6-14.6v47.62h-36.83V54.34h92.07v147.31Zm-36.83-138.11h-18.41v18.41h18.41v-18.41Z"/>
+</svg>

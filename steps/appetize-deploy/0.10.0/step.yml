@@ -1,0 +1,97 @@
+title: Appetize.io deploy
+summary: Deploy your app to Appetize.io
+description: |-
+  The Step deploys your app to [Appetize.io](https://appetize.io/). This way you can run your app in your browser for app demos, training, customer support, development, testing, etc.
+
+  ### Configuring the Step
+
+  1. Specify the path of the application in the **Application path** input.
+     **NOTE:** For iOS, provide the `.app` bundle or `.zip` or a `.tar.gz` file containing your compressed .app bundle. For Android, provide the `.apk` containing your app.
+  2. Add your Appetize API token to the **Appetize.io API Token** input.
+     You can read about the Appetize REST API here: [Appetize REST API Overview](https://docs.appetize.io/rest-api/overview)
+  3. (Optional) Add the public key of an existing app to the **Public key** input if you want to deploy this build to an existing app.
+  4. Set the **Enable verbose logging** to `true` to enable extended logs for debugging.
+
+  ### Troubleshooting
+
+  * [Android Troubleshooting](https://docs.appetize.io/platform/uploading-apps/android#troubleshooting)
+  * [iOS Troubleshooting](https://docs.appetize.io/platform/uploading-apps/ios#troubleshooting)
+
+  ### Useful links
+
+  * [Appetize REST API Overview](https://docs.appetize.io/rest-api/overview)
+
+  ### Related Steps
+
+  * [Xcode Build for Simulator](https://bitrise.io/integrations/steps/xcode-build-for-simulator)
+  * [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+  * [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)
+website: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+source_code_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy
+support_url: https://github.com/bitrise-steplib/steps-appetize-io-deploy/issues
+published_at: 2023-10-03T11:51:36.895004952Z
+source:
+  git: https://github.com/bitrise-steplib/steps-appetize-io-deploy.git
+  commit: 8364b2ff12db5e0bafccce83b7b677baa9a9f8c2
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-appetize-io-deploy
+inputs:
+- app_path: null
+  opts:
+    description: |-
+      The full path to the application file (.app, .zip, .tar.gz, or .apk)
+
+      **NOTE:** For iOS, provide the `.app` bundle or `.zip` or a `.tar.gz` file containing your compressed .app bundle. For Android, provide the `.apk` containing your app.
+    is_required: true
+    summary: The full path to the application file (.app, .zip, .tar.gz, or .apk)
+    title: Application path
+- appetize_token: null
+  opts:
+    description: |-
+      The token provided by Appetize.io
+
+      **NOTE:** All users with admin or developer roles may request an API token after logging in and navigating to your [Account Dashboard](https://appetize.io/account).
+    is_required: true
+    is_sensitive: true
+    summary: The API token provided by Appetize.io
+    title: Appetize.io API Token
+- opts:
+    description: The public key in case you want to deploy this build to an existing
+      app
+    is_required: false
+    summary: The public key in case you want to deploy this build to an existing app
+    title: Public key
+  public_key: null
+- appetize_api: '@api.appetize.io/v1/apps'
+  opts:
+    description: Allows for customized Appetize.io api endpoints, default is @api.appetize.io/v1/apps
+    is_required: true
+    summary: Allows for customized Appetize.io api endpoints, default is @api.appetize.io/v1/apps
+    title: Appetize.io api endpoint
+- appetize_host: appetize.io
+  opts:
+    description: Allows for customized Appetize.io hosts, default is appetize.io
+    is_required: true
+    summary: Allows for customized Appetize.io hosts, default is appetize.io
+    title: Appetize.io host
+- opts:
+    description: Enable verbose log option for better debugging
+    is_expand: true
+    is_required: true
+    summary: Enable verbose log option for better debugging
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- APPETIZE_APP_URL: null
+  opts:
+    description: The public URL to use the app
+    is_expand: false
+    is_required: true
+    summary: The public URL to use the app
+    title: Public URL for the app

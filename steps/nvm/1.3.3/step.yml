@@ -1,0 +1,60 @@
+title: Node Version Manager (NVM)
+summary: Install NVM and select Node version
+description: |
+  This step will install a specific node.js version using NVM, and will make it available for all your other steps.
+
+  NVM (Node Version Manager) is a simple bash script to manage multiple active node.js versions.
+  See [here](https://github.com/nvm-sh/nvm) for more details.
+website: https://github.com/almouro/bitrise-nvm-step
+source_code_url: https://github.com/almouro/bitrise-nvm-step
+support_url: https://github.com/almouro/bitrise-nvm-step/issues
+published_at: 2023-05-16T16:14:52.457506+02:00
+source:
+  git: https://github.com/Almouro/bitrise-nvm-step.git
+  commit: ea7f95241364c42c38a7bc02f795bf551b072c7c
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Working directory of the step.
+      You can leave it empty to not change it.
+    title: Working directory
+  working_dir: $BITRISE_SOURCE_DIR
+- nvm_version: 0.39.1
+  opts:
+    description: |
+      NVM version to be installed
+    is_expand: true
+    is_required: true
+    title: NVM Version
+- node_version: null
+  opts:
+    description: |
+      node.js version that NVM will install.
+
+      You can use a version pointer like:
+
+      - `6`
+      - `6.3`
+      - `6.3.1`
+
+      You can also use the NVM version aliases like:
+
+      - `node`: this installs the latest version of [`node`](https://nodejs.org/en/)
+
+      If no version is specified:
+
+      - if a `.nvmrc` is present, the version it specifies will be installed
+      - otherwise, the latest node version will be installed
+
+      More info on NVM aliases [here](https://github.com/nvm-sh/nvm#usage)
+    is_expand: true
+    is_required: false
+    title: Node version

@@ -1,0 +1,66 @@
+title: Activate Bitrise Build Cache Add-On for Gradle
+summary: Activates Bitrise Remote Build Cache add-on for subsequent Gradle builds
+  in the workflow
+description: |
+  This Step activates Bitrise's remote build cache add-on for subsequent Gradle executions in the workflow.
+
+  After this Step executes, Gradle builds will automatically read from the remote cache and push new entries if it's enabled.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-remote-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-remote-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-remote-cache
+published_at: 2024-05-14T08:54:06.286353106Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-remote-cache.git
+  commit: fc1308fdc697651077655b6419f59173d6791211
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Whether the build can not only read, but write new entries to the remote
+      cache
+    title: Push new cache entries
+    value_options:
+    - "true"
+    - "false"
+  push: "true"
+- opts:
+    description: |-
+      Level of cache entry validation for both uploads and downloads.
+
+      Levels:
+      - `none`: no validation.
+      - `warning`: print a warning about invalid cache entries, but don't interrupt the build
+      - `error`: print an error about invalid cache entries and interrupt the build
+    is_required: true
+    summary: Level of cache entry validation for both uploads and downloads.
+    title: Validation level
+    value_options:
+    - none
+    - warning
+    - error
+  validation_level: warning
+- collect_metrics: "true"
+  opts:
+    description: When enabled, this sets up Gradle build metrics collection for the
+      subsequent Gradle invocations in the workflow. Metrics are sent to [Bitrise
+      Insights](https://app.bitrise.io/insights).
+    is_required: true
+    summary: Collect build metrics in subsequent Gradle executions
+    title: Collect Gradle build metrics
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

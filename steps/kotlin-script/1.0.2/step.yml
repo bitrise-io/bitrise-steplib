@@ -1,0 +1,36 @@
+title: Kotlin Script
+summary: |
+  Step to execute a kotlin script
+description: |
+  Step to execute a kotlin script
+website: https://github.com/jakob-grabner/bitrise-step-kotlin-script
+source_code_url: https://github.com/jakob-grabner/bitrise-step-kotlin-script
+support_url: https://github.com/jakob-grabner/bitrise-step-kotlin-script/issues
+published_at: 2023-12-19T10:48:46.074443+01:00
+source:
+  git: https://github.com/jakob-grabner/bitrise-step-kotlin-script.git
+  commit: c01edc21378f029dcd2e11fa98c604b74397dd44
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- kotlin_content: |
+    println("Hello World!")
+  opts:
+    description: The Kotlin script to run
+    is_expand: false
+    is_required: true
+    summary: The Kotlin script to run
+    title: The Kotlin script
+- opts:
+    description: |
+      Specify a directory - this will be set as the
+      current working directory for the script
+    is_required: false
+    summary: |
+      Specify a directory - this will be set as the
+      current working directory for the script
+    title: Run in directory
+  working_dir: $BITRISE_SOURCE_DIR

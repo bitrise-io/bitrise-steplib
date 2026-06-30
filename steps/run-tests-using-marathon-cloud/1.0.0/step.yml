@@ -1,0 +1,120 @@
+title: Run tests using Marathon Cloud
+summary: |
+  Run all your automated tests in just 15 minutes, no matter how many tests you have
+description: |
+  With this step you can easily run your Android instrumentation and iOS tests. Marathon Cloud is designed to run all your automated tests in just 15 minutes, no matter how many tests you have.
+website: https://marathonlabs.io
+source_code_url: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud
+support_url: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud/issues
+published_at: 2024-02-20T18:55:21+10:00
+source:
+  git: https://github.com/MarathonLabs/bitrise-step-run-tests-using-marathon-cloud.git
+  commit: 8d51d5102314a4f28097574e61f0376e4df91c17
+project_type_tags:
+- ios
+- android
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: malinskiy/tap/marathon-cloud
+inputs:
+  - application: ""
+    opts:
+      title: App File
+      summary: The application binary path refers to the APK file for Android or the ZIP file for the iOS application.
+      description: |
+        Application binary path.  
+        For an Android project: app APK file path.  
+        For an iOS project: an ARM compatible Simulator build packaged in a ZIP archive.
+      is_expand: true
+      is_required: true
+  - test_application: ""
+    opts:
+      title: Test App File
+      summary: The test application binary path refers to the APK file for Android or the ZIP file for the iOS Test Runner app.
+      description: |
+        Test application binary path.  
+        For an Android project: test app APK file path.  
+        For an iOS project: an ARM compatible Simulator iOS Test Runner app packaged in a ZIP archive.
+      is_expand: true
+      is_required: true
+  - platform: ""
+    opts:
+      title: Testing platform
+      summary: Testing platform. `Android` or `iOS` only
+      description: ""
+      value_options:
+        - "Android"
+        - "iOS"
+      is_expand: true
+      is_required: true
+  - api_key:
+    opts:
+      title: Marathon Cloud API key
+      summary: API key for authenticating with Marathon Cloud
+      description: |
+        Have a look at [the tokens page](https://cloud.marathonlabs.io/tokens) in the dashboard to obtain your token.
+      is_expand: true
+      is_required: true
+      is_sensitive: true
+  - docker_image: marathonlabs/marathon-cloud:latest
+    opts:
+      title: Docker image to use for running marathon-cloud cli on Linux hosts
+      summary: You can specify your own custom image with a Docker Registry proxy here
+      description: ""
+      is_required: false
+  - os_version: ""
+    opts:
+      title: OS version
+      summary: Android or iOS OS version
+      description: ""
+      is_expand: true
+      is_required: false
+  - run_name: ""
+    opts:
+      title: Name for run
+      summary: Name for run, for example it could be description of commit
+      description: ""
+      is_expand: true
+      is_required: false
+  - link: ""
+    opts:
+      title: Optional link, for example it could be a link to source control commit or CI run
+      summary: Optional link, for example it could be a link to source control commit or CI run
+      description: ""
+      is_expand: true
+      is_required: false
+  - system_image: default
+    opts:
+      title: OS-specific system image
+      summary: OS-specific system image. For Android one of `default` ,`google_apis`. For iOS only `default`
+      description: ""
+      value_options:
+        - "default"
+        - "google_apis"
+      is_expand: true
+      is_required: false
+  - isolated: false
+    opts:
+      title: Run each test using isolated execution
+      summary: Run each test using isolated execution. Default is false
+      description: ""
+      value_options:
+        - "true"
+        - "false"
+      is_expand: true
+      is_required: false
+  - ignore_test_failures: false
+    opts:
+      title: Ignore test failures
+      summary: When tests fail and this option is true then cli will exit with code 0. By default, cli will exit with code 1 in case of test failures and 0 for passing tests
+      description: ""
+      value_options:
+        - "true"
+        - "false"
+      is_expand: true
+      is_required: false

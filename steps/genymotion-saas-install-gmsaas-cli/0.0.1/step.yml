@@ -1,0 +1,51 @@
+title: Genymotion SaaS install gmsaas cli
+summary: |
+  Install gmsaas, a command line interface to rule all your virtual devices hosted in Genymotion SaaS solution.
+description: |
+  This step installs gmsaas cli, it allows you to rule all your virtual devices hosted in Genymotion SaaS solution without opening an internet browser.
+website: https://github.com/thomascarpentier/bitrise-step-genymotion-saas-install-gmsaas-cli
+source_code_url: https://github.com/thomascarpentier/bitrise-step-genymotion-saas-install-gmsaas-cli
+support_url: https://github.com/thomascarpentier/bitrise-step-genymotion-saas-install-gmsaas-cli/issues
+published_at: 2023-01-25T11:57:35.878313175+01:00
+source:
+  git: https://github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli.git
+  commit: 2ca25eaf9c778cfe35d3a31bc072b24820ead71c
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- android
+- react-native
+- cordova
+- ionic
+type_tags:
+- installer
+toolkit:
+  go:
+    package_name: github.com/genymobile/bitrise-step-genymotion-saas-install-gmsaas-cli
+deps:
+  brew:
+  - name: python3
+  - bin_name: pip3
+  apt_get:
+  - name: python3-pip
+  - bin_name: pip3
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- email: ""
+  opts:
+    description: Email of your Genymotion Cloud SaaS account, if you don't have an
+      account please create it first on [https://cloud.geny.io](https://cloud.geny.io/?&utm_source=web-referral&utm_medium=docs&utm_campaign=bitrise&utm_content=signup)
+    is_required: true
+    summary: ""
+    title: Genymotion Cloud SaaS email
+- opts:
+    description: Password of your Genymotion Cloud SaaS account.
+    is_required: true
+    is_sensitive: true
+    summary: ""
+    title: Genymotion Cloud SaaS password
+  password: ""

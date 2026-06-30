@@ -1,0 +1,42 @@
+title: tuist
+summary: |
+  Run Tuist from Bitrise's CI environment
+description: |
+  Run Tuist from Bitrise's CI environment
+website: https://github.com/tuist/bitrise-step-tuist
+source_code_url: https://github.com/tuist/bitrise-step-tuist
+support_url: https://github.com/tuist/bitrise-step-tuist/issues
+published_at: 2022-12-27T09:28:59.073185+01:00
+source:
+  git: https://github.com/tuist/bitrise-step-tuist.git
+  commit: d5f672b0870dfaa7ee4cf4d5625b809262e6f6cd
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- command: The Tuist command to execute
+  opts:
+    description: |
+      Use this input to set the command that will be executed.
+    is_expand: true
+    is_required: true
+    summary: The command to execute. For example "generate".
+    title: Command
+    value_options: []

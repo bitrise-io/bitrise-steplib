@@ -1,1 +1,4 @@
 maintainer: bitrise
+deprecate_notes: |
+  This step is deprecated. Please use the build distribution feature: https://docs.bitrise.io/en/release-management/build-distribution/distributing-builds-to-testers.html
+removal_date: "2026-05-31"

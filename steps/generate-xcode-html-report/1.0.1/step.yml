@@ -1,0 +1,67 @@
+title: Generate Xcode test report html
+summary: The Step converts xcresult summaries to html reports.
+description: |-
+  This step will generate html report summaries from your xcresult files. It will also include all of the attachments from your tests.
+
+  The step works seamlessly with the official Xcode testing steps. If you use those then you do not need to configure this step in any way because it will automatically discover all of the generated xcresult files.
+
+  If you use Fastlane or have script step for your building process then you need to tell this step where to find your xcresult files.
+website: https://github.com/bitrise-steplib/bitrise-step-generate-xcode-html-report
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-generate-xcode-html-report
+support_url: https://github.com/bitrise-steplib/bitrise-step-generate-xcode-html-report/issues
+published_at: 2023-11-01T09:11:31.761043014Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-generate-xcode-html-report.git
+  commit: 96b339f4611fabe43ca8dcb5b5ceb0b472d78e8d
+project_type_tags:
+- ios
+- macos
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-generate-xcode-html-report
+inputs:
+- opts:
+    description: |-
+      A newline (`\n`) separated list of all of the xcresult files
+
+      You do not need to specify the xcresult if your are using the official Xcode test steps. This is only needed if you use Fastlane or script based setup.
+
+      This input supports glob patterns. This means you can use exact paths or wildcards. Here are a few examples:
+      ```
+      /path/to/MyApp.xcresult
+      /path/to/output/folder/*.xcresult
+      /path/to/parent/folder/**/*.xcresult
+      ```
+
+      The only requirements are that every pattern must only find xcresult files and they have to be absolute paths.
+    is_required: false
+    summary: A newline (`\n`) separated list of all of the xcresult files
+    title: Xcresult file paths
+  xcresult_patterns: null
+- opts:
+    category: Debugging
+    is_dont_change_value: true
+    is_required: true
+    summary: This is directory where the official Xcode testing steps save their output
+    title: Bitrise test result directory
+  test_result_dir: $BITRISE_TEST_DEPLOY_DIR
+- opts:
+    category: Debugging
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+outputs:
+- BITRISE_HTML_REPORT_DIR: null
+  opts:
+    summary: This folder contains the generated html test reports and their assets.
+    title: Html test report location

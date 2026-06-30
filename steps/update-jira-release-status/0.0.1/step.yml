@@ -1,0 +1,89 @@
+title: Jira Release Status Update
+summary: Updates the release status in Jira, marking it for release. The step includes
+  the option to set the release as a draft.
+description: This step automates Jira release management by updating the release status.
+  It allows seamless marking of a release for deployment, with an optional draft setting.
+  Ensure your Jira instance details, release ID, authentication token, and other necessary
+  inputs are correctly configured for smooth integration with your CI/CD workflows.
+website: https://github.com/Ahmadalsofi/bitrise-step-update-jira-release
+source_code_url: https://github.com/Ahmadalsofi/bitrise-step-update-jira-release
+support_url: https://github.com/Ahmadalsofi/bitrise-step-update-jira-release/issues
+published_at: 2024-02-01T23:08:09.006209+03:00
+source:
+  git: https://github.com/Ahmadalsofi/bitrise-step-update-jira-release-status.git
+  commit: 9a4d87219533557f02246f5b68025d81f64bfcba
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: true
+run_if: ""
+inputs:
+- jira_username: ""
+  opts:
+    description: |
+      Your Jira username is required for authenticating Jira API requests. Ensure that you provide the correct username associated with your Jira account.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Provide your Jira username for authentication.
+    title: Jira Username
+- jira_token: ""
+  opts:
+    description: |
+      The API token is used to authenticate and authorize the Jira API requests. You can generate a token in your Jira account settings.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Provide the API token for authenticating with Jira.
+    title: Jira API Token
+- jira_url: ""
+  opts:
+    description: |
+      The Jira URL is the base URL of your Jira instance, excluding any specific paths. Make sure to include the protocol (e.g., https://) and any necessary port information.
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Provide the base URL of your Jira instance.
+    title: Jira URL
+- jira_release_id: ""
+  opts:
+    description: |
+      The Jira Release ID is a required input that specifies the unique identifier associated with the Jira release.
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Provide the unique identifier for the Jira release.
+    title: Jira Release ID
+- opts:
+    description: |
+      Set this input to 'true' if you want to mark the Jira release as completed, or 'false' otherwise.
+    is_expand: true
+    is_required: true
+    is_sensitive: false
+    summary: Specify whether to mark the Jira release as completed.
+    title: Mark Release as Completed
+    value_options:
+    - "true"
+    - "false"
+  release_status: "true"
+- opts:
+    description: |
+      The Release Date is an optional input that allows you to specify the date associated with the Jira release. This field can be left empty if not applicable.
+    is_expand: true
+    is_required: false
+    is_sensitive: false
+    summary: Provide the release date for the Jira release.
+    title: Release Date (Optional)
+  release_date: ""
+outputs:
+- JIRA_RELEASE_UPDATE_SUCCESS: null
+  opts:
+    summary: Indicates whether the Jira release update was successful or failed.
+    title: Jira Release Update Status

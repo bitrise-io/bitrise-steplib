@@ -1,0 +1,79 @@
+title: Run iOS Maestro Flows
+summary: |
+  Runs Maestro Flows on iOS Simulator
+description: |
+  This steps runs your Maestro Flows on iOS Simulator and exports a test report and a video recording.
+    This step does not give any output but puts test results in deploy folder if requested.
+website: https://github.com/fepersembe/bitrise-step-maestro-ios-test-run.git
+source_code_url: https://github.com/fepersembe/bitrise-step-maestro-ios-test-run.git
+support_url: https://github.com/fepersembe/bitrise-step-maestro-ios-test-run.git/issues
+published_at: 2023-02-28T09:14:44.333686+03:00
+source:
+  git: https://github.com/fepersembe/bitrise-step-maestro-ios-test-run.git
+  commit: 108f1f012ff913206206c6282c3e60a93604cd39
+host_os_tags:
+- osx-10.10
+project_type_tags:
+- ios
+- xamarin
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: git
+  - name: wget
+  apt_get:
+  - name: git
+  - name: wget
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- app_file: ""
+  opts:
+    description: "**iOS**: `app_file` should point to an x86 compatible Simulator
+      build packaged as an **.app**. \n  **Hint:** Output Varaible `$BITRISE_APP_DIR_PATH`
+      from **Xcode Build for Simulator** step can be used. \n"
+    is_expand: true
+    is_required: true
+    summary: App binary to run your Flows against
+    title: App File
+- opts:
+    description: |
+      A single maestro flow file or directroy that includes Maestro Flows.
+    is_expand: true
+    is_required: true
+    summary: Flow file or directory
+    title: Flow workspace
+  workspace: .maestro
+- additional_params: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: Additional parameters of Maestro CLI command i.e --include-tags=dev,pull-request
+    title: Additional Maestro Parameters
+- export_test_report: "true"
+  opts:
+    description: Exports Test Report to Bitrise Test Result Page and Deploy Dir. Report
+      and video will be available for download as artifacts.
+    is_required: false
+    summary: Generate test suite report (JUnit) and video(mp4)
+    title: Export test report (JUnit) and Video(mp4) to Deploy Directory
+    value_options:
+    - "true"
+    - "false"
+- maestro_cli_version: ""
+  opts:
+    description: ""
+    is_expand: true
+    is_required: false
+    summary: 'Maestro CLI version to be downloaded in your CI (Default: latest)'
+    title: Maestro CLI version

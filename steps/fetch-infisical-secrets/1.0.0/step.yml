@@ -1,0 +1,66 @@
+title: Fetch Infisical Secrets
+summary: |
+  Allows the collection of secrets from your Infisical account.
+description: |
+  Allow the collection of secrets from your Infisical account and injects them into your workflow in a secure manner.
+website: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets
+source_code_url: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets
+support_url: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets/issues
+published_at: 2025-07-22T10:42:34.348659+09:30
+source:
+  git: https://github.com/Willt123/bitrise-step-fetch-infisical-secrets.git
+  commit: 596146fd517668b19b5f065204a743b249e6d8ed
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/Willt123/bitrise-step-fetch-infisical-secrets
+inputs:
+- infisical_client: null
+  opts:
+    description: The client ID is required to identify the machine identity from Infisical
+    is_expand: true
+    is_required: true
+    summary: The client ID from infisical.
+    title: Infisical Client ID
+- infisical_client_secret: null
+  opts:
+    description: The client secret is required to authenticate the machine identity
+      from Infisical
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: The client secret from infisical.
+    title: Infisical Client Secret
+- infisical_project_id: null
+  opts:
+    description: The project ID is required to access the correct project from Infisical
+    is_expand: true
+    is_required: true
+    summary: The project ID from infisical.
+    title: Infisical Project ID
+- infisical_env: null
+  opts:
+    description: The env is required to match the env specified in the token above
+      to provide access to the required secrets
+    is_expanded: true
+    is_required: true
+    summary: The slug for your project environment
+    title: Infisical Env
+- infisical_url: https://app.infisical.com
+  opts:
+    description: The fully qualified URL to access your Infisical secrets. The trailing
+      slash or /api is not required and should only consist of the hostname and TLD.
+      Defaults to the cloud API url.
+    is_expanded: true
+    is_required: false
+    summary: The url of the API to access your Infisical secrets
+    title: Infisical URL
+- infisical_path: null
+  opts:
+    description: The path or folder structure required to access your secrets within
+      Infisical
+    is_expanded: true
+    is_required: false
+    summary: The path to the required secrets
+    title: Infisical Path

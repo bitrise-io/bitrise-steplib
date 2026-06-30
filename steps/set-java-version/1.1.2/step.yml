@@ -1,0 +1,49 @@
+title: Set Java version
+summary: This Step helps you activate pre-installed Java (JDK) version on the build
+  virtual machine.
+description: |
+  This Step is not supposed to install any Java version on the fly. You can only pick from the already installed versions.
+  If you want to install other Java versions, check out [Using a Java version not installed on our Android stacks](https://devcenter.bitrise.io/infrastructure/virtual-machines/#using-a-java-version-not-installed-on-our-android-stacks).
+
+  ### Configuring the Step
+  1. In the **Java version to be set globally for the build** input, select an installed Java version you wish to use during the build run.
+
+  ### Troubleshooting
+  If the Step fails to set the Java version, you can use these [scripts](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions) as a temporary workaround.
+
+  ### Useful links
+  - [Managing Java versions on Bitrise](https://devcenter.bitrise.io/infrastructure/virtual-machines/#managing-java-versions)
+website: https://github.com/bitrise-steplib/bitrise-step-set-java-version
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version
+support_url: https://github.com/bitrise-steplib/bitrise-step-set-java-version/issues
+published_at: 2023-09-18T13:26:39.342752831Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-set-java-version.git
+  commit: 6f6864513774643e95615f846466ddce2c86c07e
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-set-java-version
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |
+      Select the installed Java version you want to use during the build run.
+
+      You can check [in system reports](https://stacks.bitrise.io) which Java versions are installed on each Bitrise stack.
+    is_required: true
+    summary: Select which pre-installed Java version you want to use during the build.
+    title: Java version
+    value_options:
+    - "17"
+    - "11"
+    - "8"
+  set_java_version: "11"
+outputs:
+- JAVA_HOME: null
+  opts:
+    description: JAVA_HOME is an environment variable that points to the path where
+      the JDK (Java Development Kit) is installed.
+    title: Location of the active Java installation.

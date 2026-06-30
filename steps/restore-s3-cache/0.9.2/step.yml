@@ -1,0 +1,204 @@
+title: Restore S3 Cache
+summary: Restores build cache using a cache key. This Step needs to be used in combination
+  with **Save S3 Cache**.
+description: |
+  Restores build cache using a cache key. This Step needs to be used in combination with **Save S3 Cache**.
+
+  #### About key-based caching
+
+  Key-based caching is a concept where cache archives are saved and restored using a unique cache key. One Bitrise project can have multiple cache archives stored simultaneously, and the **Restore S3 Cache Step** downloads a cache archive associated with the key provided as a Step input.
+
+  Caches can become outdated across builds when something changes in the project (for example, a dependency gets upgraded to a new version). In this case, a new (unique) cache key is needed to save the new cache contents. This is possible if the cache key is dynamic and changes based on the project state (for example, a checksum of the dependency lockfile is part of the cache key). If you use the same dynamic cache key when restoring the cache, the Step will download the most relevant cache archive available.
+
+  Key-based caching is platform-agnostic and can be used to cache anything by carefully selecting the cache key and the files/folders to include in the cache.
+
+  #### Templates
+
+  The Step requires a string key to use when downloading a cache archive. In order to always download the most relevant cache archive for each build, the cache key input can contain template elements. The Step evaluates the key template at runtime and the final key value can change based on the build environment or files in the repo.
+
+  The following variables are supported in cache keys input:
+
+  - `cache-key-{{ .Branch }}`: Current git branch the build runs on
+  - `cache-key-{{ .CommitHash }}`: SHA-256 hash of the git commit the build runs on
+  - `cache-key-{{ .Workflow }}`: Current Bitrise workflow name (eg. `primary`)
+  - `{{ .Arch }}-cache-key`: Current CPU architecture (`amd64` or `arm64`)
+  - `{{ .OS }}-cache-key`: Current operating system (`linux` or `darwin`)
+
+  Functions available in a template:
+
+  `checksum`: This function takes one or more file paths and computes the SHA256 [checksum](https://en.wikipedia.org/wiki/Checksum) of the file contents. This is useful for creating unique cache keys based on files that describe content to cache.
+
+  Examples of using `checksum`:
+  - `cache-key-{{ checksum "package-lock.json" }}`
+  - `cache-key-{{ checksum "**/Package.resolved" }}`
+  - `cache-key-{{ checksum "**/*.gradle*" "gradle.properties" }}`
+
+  `getenv`: This function returns the value of an environment variable or an empty string if the variable is not defined.
+
+  Examples of `getenv`:
+  - `cache-key-{{ getenv "PR" }}`
+  - `cache-key-{{ getenv "BITRISEIO_PIPELINE_ID" }}`
+
+  #### Key matching and fallback keys
+
+  The most straightforward use case is that a cache archive is downloaded and restored if the provided key matches a cache archive uploaded previously using the Save Cache Step. Stored cache archives are scoped to the Bitrise project. Builds can restore caches saved by any previous Workflow run on any Bitrise Stack.
+
+  It's possible to define more than one key in the cache keys input. You can specify additional keys by listing one key per line. The list is in priority order, so the Step will first try to find a match for the first key you provided, and if there is no cache stored for the key, it will move on to find a match for the second key (and so on).
+
+  In addition to listing multiple keys, each key can be a prefix of a saved cache key and still get a matching cache archive. For example, the key `my-cache-` can match an existing archive saved with the key `my-cache-a6a102ff`.
+
+  We recommend configuring the keys in a way that the first key is an exact match to a checksum key, and to use a more generic prefix key as a fallback:
+
+  ```
+  inputs:
+    key: |
+      npm-cache-{{ checksum "package-lock.json" }}
+      npm-cache-
+  ```
+
+  #### Related steps
+
+  [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-s3-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-s3-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-s3-cache/issues
+published_at: 2024-06-04T07:56:15.776602184Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-s3-cache.git
+  commit: a470232557c090633b950d880e62060d5c9cc33c
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-s3-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- key: null
+  opts:
+    description: |-
+      Keys used for restoring a cache archive. One cache key per line in priority order.
+
+      The key supports template elements for creating dynamic cache keys. These dynamic keys change the final key value based on the build environment or files in the repo in order to create new cache archives. See the Step description for more details and examples.
+
+      The maximum length of a key is 512 characters (longer keys get truncated) and you can list at most 8 keys using this input. Commas (`,`) are not allowed in keys.
+    is_required: true
+    summary: Keys used for restoring a cache archive. The key can contain template
+      elements.
+    title: Cache keys
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting.
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- opts:
+    category: Debugging
+    description: |-
+      Number of retries to attempt when downloading a cache archive fails.
+
+      The value 0 means no retries are attempted.
+    is_required: true
+    summary: Number of retries to attempt when downloading a cache archive fails.
+    title: Number of retries
+  retries: 3
+- aws_bucket: null
+  opts:
+    category: AWS
+    description: |-
+      Bring your own bucket: exercise full control over the cache location.
+
+      The provided AWS bucket acts as cache backend for the Restore Cache step.
+
+      The step expects either:
+      - CACHE_AWS_ACCESS_KEY_ID, CACHE_AWS_SECRET_ACCESS_KEY secrets to be setup for the workflow
+      - The build is running on an EC2 instance. In this case, the steps expects the instance to have access to the bucket.
+    is_required: true
+    summary: Provide an AWS bucket name to be used as cache backend.
+    title: AWS Bucket name
+- aws_region: us-east-1
+  opts:
+    category: AWS
+    description: AWS Region specifies the region where the bucket belongs.
+    is_required: true
+    summary: Region of the S3 bucket.
+    title: AWS Region
+    value_options:
+    - us-east-1
+    - us-east-2
+    - us-west-1
+    - us-west-2
+    - ca-central-1
+    - ca-west-1
+    - eu-north-1
+    - eu-west-3
+    - eu-west-2
+    - eu-west-1
+    - eu-central-1
+    - eu-central-2
+    - eu-south-1
+    - eu-south-2
+    - ap-south-1
+    - ap-south-2
+    - ap-northeast-1
+    - ap-northeast-2
+    - ap-northeast-3
+    - ap-southeast-1
+    - ap-southeast-2
+    - ap-southeast-3
+    - ap-southeast-4
+    - ap-east-1
+    - sa-east-1
+    - cn-north-1
+    - cn-northwest-1
+    - us-gov-east-1
+    - us-gov-west-1
+    - me-south-1
+    - me-central-1
+    - af-south-1
+    - il-central-1
+- aws_access_key_id: $CACHE_AWS_ACCESS_KEY_ID
+  opts:
+    category: AWS
+    description: |
+      The access key id that matches the secret access key.
+
+      The credentials need to be from a user that has at least the following permissions
+      in the bucket specified bellow `s3:ListObjects`, `s3:PutObject`, `s3:GetObjectAttributes` and `s3:GetObject`.
+
+      If the build instance has S3 access via IAM Instance role, this variable can be left empty.
+    is_required: false
+    is_sensitive: true
+    summary: The AWS_ACCESS_KEY_ID with access to the bucket.
+    title: AWS_ACCESS_KEY_ID
+- aws_secret_access_key: $CACHE_AWS_SECRET_ACCESS_KEY
+  opts:
+    category: AWS
+    description: |
+      The secret access key that matches the secret key ID.
+
+      The credentials need to be from a user that has at least the following permissions
+      in the bucket specified bellow `s3:ListObjects`, `s3:PutObject`, `s3:GetObjectAttributes` and `s3:GetObject`.
+
+      If the build instance has S3 access via IAM Instance role, this variable can be left empty.
+    is_required: false
+    is_sensitive: true
+    summary: The AWS_SECRET_ACCESS_KEY with access to the bucket.
+    title: AWS_SECRET_ACCESS_KEY
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit
