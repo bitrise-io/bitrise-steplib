@@ -1,0 +1,117 @@
+title: Connect to OpenVPN Server
+summary: Establish a VPN connection with the specified OpenVPN server.
+description: |
+  The Step establishes a VPN connection with the specified OpenVPN server.
+
+  ### Configuring the Step
+
+  Before you start:
+  1. Start an OpenVPN server.
+  1. Register the contents of CA certificate, client certificate, client private key, base64 encoded as Bitrise Secrets.
+     You can easily retrieve the contents of Base64 using command: `$ base64 <certificate or private key file path>`
+
+  To configure the Step:
+
+  1. Add the OpenVPN server IP or hostname to the **Host** input.
+  1. Add the OpenVPN server port number to the **Port** input. The port number is `1194` by default.
+  1. Specify the OpenVPN server protocol in the **Protocol** input.
+  1. Add the CA certificate, client certificate, and client private key Secrets to their respective inputs.
+
+  ### Useful links
+
+  * [Using the Connect to OpenVPN Server Step](https://docs.bitrise.io/en/bitrise-platform/integrations/connecting-to-a-vpn-during-a-build#using-the-connect-to-openvpn-server-step)
+  * [Configuring network access for Bitrise build machines](https://docs.bitrise.io/en/infrastructure/build-machines/configuring-your-network-to-access-our-build-machines.html)
+
+  ### Related Steps
+
+  * [Cisco VPN connect](https://www.bitrise.io/integrations/steps/vpnc-connect)
+website: https://github.com/bitrise-steplib/bitrise-step-open-vpn
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-open-vpn
+support_url: https://github.com/bitrise-steplib/bitrise-step-open-vpn/issues
+published_at: 2026-07-02T13:09:13.816576815Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-open-vpn.git
+  commit: 8babd2e5c963e5e7cd3a96fac4f3bf3417a7d1ec
+executables:
+  darwin-amd64:
+    storage_uri: steps/open-vpn/1.0.1/bin/open-vpn-darwin-amd64
+    hash: sha256-a6298663313ddbcc916c85edbc6459d9f78991ac7f04ba40d64172c9e2bf7d5f
+  darwin-arm64:
+    storage_uri: steps/open-vpn/1.0.1/bin/open-vpn-darwin-arm64
+    hash: sha256-f0720bbb630aa1614a042a4b81c2d13a4609138a1636bd165f7e3348baab2d02
+  linux-amd64:
+    storage_uri: steps/open-vpn/1.0.1/bin/open-vpn-linux-amd64
+    hash: sha256-9298797503895c2b11d4046d344f1e901043f49f5267c7fc0a9fd5f5cc5fa387
+  linux-arm64:
+    storage_uri: steps/open-vpn/1.0.1/bin/open-vpn-linux-arm64
+    hash: sha256-53951b218a52be1877c9a09e9f5b1972b22323682d84a287ea3fc7a6aaf7dc43
+type_tags:
+- access-control
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-open-vpn
+deps:
+  brew:
+  - name: openvpn
+  apt_get:
+  - name: openvpn
+  - name: net-tools
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- host: null
+  opts:
+    description: |
+      Open VPN Server IP or Hostname.
+      ex1. 111.111.111.111
+      ex2. hoge.com
+    is_expand: true
+    is_required: true
+    summary: Open VPN Server IP or Hostname
+    title: Host
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Open VPN Server Port number
+    title: Port
+  port: "1194"
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Open VPN Server Protocol
+    title: Protocol
+    value_options:
+    - udp
+    - tcp
+  proto: udp
+- ca_crt: $VPN_CA_CRT_BASE64
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Base64 encoded CA Certificate
+    title: Base64 encoded CA Certificate
+- client_crt: $VPN_CLIENT_CRT_BASE64
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Base64 encoded Client Certificate
+    title: Base64 encoded Client Certificate
+- client_key: $VPN_CLIENT_KEY_BASE64
+  opts:
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Base64 encoded Client Private Key
+    title: Base64 encoded Client Private Key
+outputs:
+- OPENVPN_LOG_PATH: null
+  opts:
+    description: |
+      Path to the file containing the output (stdout and stderr) of the
+      OpenVPN process. Useful for debugging connection issues.
+    summary: Path to the file containing the OpenVPN process log.
+    title: Output log file path

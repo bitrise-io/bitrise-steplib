@@ -1,0 +1,88 @@
+title: File Downloader
+summary: Download remote files to the build machine.
+description: |-
+  The Step downloads selected files from a URL and places it where you want it to.
+
+  ### Configuring the Step
+
+  1. Add a source to the **Download source URL** input. It can be either an Environment Variable or a URL.
+  1. Add a destination to the **Download destination path** input. The path should be relative to the root directory of the repository.
+
+  ### Useful links
+
+  - [Using the File Downloader Step](https://devcenter.bitrise.io/tutorials/download-or-replace-project-resources/#using-the-file-downloader-step)
+  - [Managing files on Bitrise](https://devcenter.bitrise.io/getting-started/managing-files-on-bitrise/)
+
+  ### Related Steps
+
+  - [Generate Text File](https://www.bitrise.io/integrations/steps/generate-text-file)
+website: https://github.com/bitrise-steplib/steps-file-downloader
+source_code_url: https://github.com/bitrise-steplib/steps-file-downloader
+support_url: https://github.com/bitrise-steplib/steps-file-downloader/issues
+published_at: 2026-07-01T17:41:24.829512447Z
+source:
+  git: https://github.com/bitrise-steplib/steps-file-downloader.git
+  commit: d779520a05aaf6d19de13295743ace158c855706
+executables:
+  darwin-amd64:
+    storage_uri: steps/file-downloader/2.0.0/bin/file-downloader-darwin-amd64
+    hash: sha256-b720ef7564add34688a412878669d927a99e0ba392c199303a49f39785b70734
+  darwin-arm64:
+    storage_uri: steps/file-downloader/2.0.0/bin/file-downloader-darwin-arm64
+    hash: sha256-4d00b50c694ea30670946873947fc69ff3d13963a11c4120b5d2f4c6a00db320
+  linux-amd64:
+    storage_uri: steps/file-downloader/2.0.0/bin/file-downloader-linux-amd64
+    hash: sha256-b10a4c7cabfe2820bf2bca1334776c11a740f2a2d67bb4a6a2250c36b01daa05
+  linux-arm64:
+    storage_uri: steps/file-downloader/2.0.0/bin/file-downloader-linux-arm64
+    hash: sha256-cb589a4a8665e1afab755d24a7fe35f5952fc5fcc83d2ade46d892afec4aa237
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-file-downloader
+run_if: .IsCI
+inputs:
+- opts:
+    description: |-
+      The URL to download the file from. It can be either a direct URL or an
+      Environment Variable that holds the URL.
+    is_required: true
+    summary: Download source URL.
+    title: Download source URL
+  source: null
+- destination: null
+  opts:
+    description: |-
+      The path where the downloaded file will be saved. The path should be
+      relative to the root directory of the repository. Any missing parent
+      directories are created automatically, and a leading `~` is expanded to
+      the home directory.
+    is_required: true
+    summary: Download destination path.
+    title: Download destination path
+- file_permission: null
+  opts:
+    description: |-
+      Permission bits for the destination file in the format of `644`.
+
+      This option is useful for sensitive files that should have a permission like `600`.
+    summary: Permission bits for the destination file.
+    title: Destination file permission
+- opts:
+    description: |-
+      When enabled, if writing the downloaded file to the destination fails
+      because of a permission error, the Step retries the operation using
+      `sudo`.
+
+      The download itself is never run as root — only the destination directory
+      creation, the file placement, and the permission change are retried with
+      `sudo`. This requires passwordless (`sudo -n`) access on the machine.
+
+      Disable this if you do not want the Step to ever escalate privileges.
+    summary: Retry the file placement with sudo if it fails due to insufficient permissions.
+    title: Use sudo as a fallback for protected destinations
+    value_options:
+    - "true"
+    - "false"
+  use_sudo: "true"
