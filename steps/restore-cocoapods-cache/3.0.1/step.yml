@@ -1,0 +1,88 @@
+title: Restore Cocoapods Cache
+summary: Restores cached Cocoapods dependencies. This Step needs to be used in combination
+  with **Save Cocoapods Cache**.
+description: |
+  Restores cached Cocoapods dependencies. This Step needs to be used in combination with **Save Cocoapods Cache**.
+
+  This Step is based on [key-based caching](https://docs.bitrise.io/en/bitrise-ci/dependencies-and-caching/key-based-caching.html) and sets up the cache key and path automatically for Cocoapods dependencies. If you'd like to change the cache keys, you might want to use the generic [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache) Step instead.
+
+  #### Related steps
+
+  [Save Cocoapods cache](https://github.com/bitrise-steplib/bitrise-step-save-cocoapods-cache/)
+
+  [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-cocoapods-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-cocoapods-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-cocoapods-cache/issues
+published_at: 2026-07-17T10:13:34.393901493Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-cocoapods-cache.git
+  commit: 763d4c2822c22facb31020de18daab83823fd595
+executables:
+  darwin-amd64:
+    storage_uri: steps/restore-cocoapods-cache/3.0.1/bin/restore-cocoapods-cache-darwin-amd64
+    hash: sha256-40e4d25148705c1e3728d9ca338ed551b191f8bc18767c1c800809aa5c1c9485
+  darwin-arm64:
+    storage_uri: steps/restore-cocoapods-cache/3.0.1/bin/restore-cocoapods-cache-darwin-arm64
+    hash: sha256-642473cf4762c5ff5c77846f9768c9c0932a159faf91bbd9eda90af6bd113f59
+  linux-amd64:
+    storage_uri: steps/restore-cocoapods-cache/3.0.1/bin/restore-cocoapods-cache-linux-amd64
+    hash: sha256-1424d4d121fa56e727b951ba92613ca3ee5e5b92bdd90bb95a81e2ba2c4beaad
+  linux-arm64:
+    storage_uri: steps/restore-cocoapods-cache/3.0.1/bin/restore-cocoapods-cache-linux-arm64
+    hash: sha256-4bf39de4a6af8202dc92e231309ee89a1cb25a551b5f04431acff13a1920d30e
+project_type_tags:
+- cordova
+- flutter
+- ionic
+- ios
+- kotlin-multiplatform
+- macos
+- react-native
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-cocoapods-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- opts:
+    category: Debugging
+    description: |-
+      Number of retries to attempt when downloading a cache archive fails.
+
+      The value 0 means no retries are attempted.
+    is_required: true
+    summary: Number of retries to attempt when downloading a cache archive fails.
+    title: Number of retries
+  retries: 3
+- opts:
+    category: Debugging
+    description: Timeout in seconds
+    is_required: true
+    summary: Timeout in seconds
+    title: Timeout
+  timeout: 600
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit
