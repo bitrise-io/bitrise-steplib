@@ -1,0 +1,106 @@
+title: Flutter Test
+summary: Performs any test in a Flutter project.
+description: |2-
+
+  If you have tests in your repository, and selected `yes` when prompted during app creation, the primary Workflow will include the **Flutter Test** Step by default.
+  If you add tests to your app later, add the **Flutter Test** Step to your Workflow manually. The Step runs the `flutter test` command with the specified flags. To check the available flags, open a command line interface on your own machine and run `flutter test --help`.
+
+  ### Configuring the Step
+  1. Provide your project's root directory in the **Project Location** field.
+  2. The **Step's test result directory** is the root directory for all test results created by the Bitrise CLI. This input gets filled out automatically.
+  3. You can append additional flags to the default `flutter test` command in the **Additional parameters** field.
+  4. Select 'yes' in the **Generate code coverage files** input to get detailed analysis of your code.
+
+  ### Test output in the build log
+  On Flutter 3.10 and newer the Step prints the normal, human-readable `flutter test` output to the build log, and you can control its verbosity with a `--reporter` flag (for example `--reporter expanded`) in the **Additional parameters** field. On older Flutter versions the log falls back to the raw machine JSON stream. The machine-readable JSON needed for the JUnit test report and the `BITRISE_FLUTTER_TESTRESULT_PATH` output is collected separately, so it does not affect what you see in the log. Do not pass `--file-reporter` in **Additional parameters** — the Step manages it internally.
+
+  ### Troubleshooting
+  Make sure the **Project Location** input of the Flutter Test Step is correct.
+  The default value is the Environment Variable (Env Var) created for your Flutter project’s location.
+
+  ### Useful links
+  - [Getting started with Flutter](https://devcenter.bitrise.io/getting-started/getting-started-with-flutter-apps/)
+  - [About testing](https://devcenter.bitrise.io/testing/testing-index/)
+
+  ### Related Steps
+  - [Flutter Build](https://www.bitrise.io/integrations/steps/flutter-build)
+  - [Flutter Analyze](https://www.bitrise.io/integrations/steps/flutter-analyze)
+website: https://github.com/bitrise-steplib/bitrise-step-flutter-test
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-flutter-test
+support_url: https://github.com/bitrise-steplib/bitrise-step-flutter-test/issues
+published_at: 2026-07-23T17:25:39.220621013Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-flutter-test.git
+  commit: 63005f8d8f4ddb971219070d5c55d4db92aa3f7d
+executables:
+  darwin-amd64:
+    storage_uri: steps/flutter-test/1.1.0/bin/flutter-test-darwin-amd64
+    hash: sha256-30a34dd0695c1675e0f52f369619477911eef413674126f2711039872853ff94
+  darwin-arm64:
+    storage_uri: steps/flutter-test/1.1.0/bin/flutter-test-darwin-arm64
+    hash: sha256-178373dfeca5fa5e876654541a9d976aa20c2bf2dbe29c44368da7d31db52658
+  linux-amd64:
+    storage_uri: steps/flutter-test/1.1.0/bin/flutter-test-linux-amd64
+    hash: sha256-5518ef54e269be85b4c9fda48aab5b5cecfc37e4031a05e02fc219f4be822fc5
+  linux-arm64:
+    storage_uri: steps/flutter-test/1.1.0/bin/flutter-test-linux-arm64
+    hash: sha256-46d282430a7b332f98257029398fc4a1e04848f78ad8bc93456bb0530bd5f374
+project_type_tags:
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-flutter-test
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The root dir of your Flutter project.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- bitrise_test_result_dir: $BITRISE_TEST_RESULT_DIR
+  opts:
+    description: Root directory for all test results created by the Bitrise CLI
+    is_dont_change_value: true
+    is_required: true
+    title: Step's test result directory
+- generate_code_coverage_files: "no"
+  opts:
+    description: |-
+      In case of `generate_code_coverage_files: "yes"`
+      `flutter test` gets `--coverage` passed
+    is_required: true
+    title: Generate code coverage files?
+    value_options:
+    - "yes"
+    - "no"
+- additional_params: null
+  opts:
+    description: |-
+      The flags from this input field are appended to the `flutter test` command.
+
+      For example, pass `--reporter expanded` to get more detailed, human-readable test output in the build log (Flutter 3.10+). Do not pass `--file-reporter`; the Step sets it up internally.
+    summary: The flags from this input field are appended to the `flutter test` command.
+    title: Additional parameters
+- opts:
+    description: |-
+      The pattern from this input field is expanded and fed to the `flutter test` command.
+      Both * and ** glob patterns are supported. For example, `lib/**/*_test.dart`.
+    summary: This pattern is used as the last argument appended to the `flutter test`
+      command.
+    title: Test files pattern
+  tests_path_pattern: null
+outputs:
+- BITRISE_FLUTTER_COVERAGE_PATH: null
+  opts:
+    description: The path of the generated code coverage `lcov.info` file.
+    title: The path of the generated `lcov.info`
+- BITRISE_FLUTTER_TESTRESULT_PATH: null
+  opts:
+    description: The path of the json file that was generated by the `flutter test`
+      command.
+    title: The path of the generated json test report
