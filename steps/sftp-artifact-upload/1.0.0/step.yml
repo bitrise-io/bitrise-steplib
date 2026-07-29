@@ -18,10 +18,10 @@ description: |-
 website: https://github.com/followloop/bitrise-step-sftp-artifact-upload
 source_code_url: https://github.com/followloop/bitrise-step-sftp-artifact-upload
 support_url: https://github.com/followloop/bitrise-step-sftp-artifact-upload/issues
-published_at: 2026-07-29T11:07:20.350446+02:00
+published_at: 2026-07-29T12:55:41.787249+02:00
 source:
   git: https://github.com/followloop/bitrise-step-sftp-artifact-upload.git
-  commit: 0126eb6f67b399315dfc7f36021ba6399af62071
+  commit: cbd6c5beac4777090b3f33d1458c22996fef6a28
 host_os_tags:
 - osx-10.10
 - ubuntu-16.04
