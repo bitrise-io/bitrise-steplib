@@ -1,0 +1,68 @@
+title: Build Cache for React Native
+summary: Activates Bitrise Build Cache features for React Native projects
+description: |
+  This Step activates Bitrise Build Cache for all build systems used in a React Native project.
+
+  After this Step executes,
+  - enabling Xcode cache will result in: iOS builds will use the Bitrise Build Cache for Xcode via Xcelerate, with a background proxy started automatically.
+  - enabling Gradle cache will result in: Android Gradle builds will automatically read from and push entries to the remote cache. C++ native modules will also be compiled using ccache, with a background storage helper started automatically.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+published_at: 2026-05-13T11:00:05.153750399Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-react-native-features.git
+  commit: 6fbe8792c0c9aff572fb3b6c8f835aaae0276867
+executables:
+  darwin-amd64:
+    storage_uri: steps/activate-build-cache-for-react-native/0.7.3/bin/activate-build-cache-for-react-native-darwin-amd64
+    hash: sha256-cd14334428623de11792216a304697ec42a09fdbd2d2e8c594ebb72fb6a596d7
+  darwin-arm64:
+    storage_uri: steps/activate-build-cache-for-react-native/0.7.3/bin/activate-build-cache-for-react-native-darwin-arm64
+    hash: sha256-b587315fa3100be01b2e5d96e407e2ffb41c9ced2fff7a677137556ccd2df618
+  linux-amd64:
+    storage_uri: steps/activate-build-cache-for-react-native/0.7.3/bin/activate-build-cache-for-react-native-linux-amd64
+    hash: sha256-0874a6ce4e2a7670d9a3ce390c9fea16db45e7ce60ae445a3eeedc125ec86616
+  linux-arm64:
+    storage_uri: steps/activate-build-cache-for-react-native/0.7.3/bin/activate-build-cache-for-react-native-linux-arm64
+    hash: sha256-1642e1ebe9d106cda1bf4bec0fedcf0b9c9d50db3408827f1ec246fc1c1052a4
+project_type_tags:
+- react-native
+- ios
+- android
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-activate-react-native-features
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    description: Enables Bitrise Build Cache for Xcode. When enabled, activates Xcelerate
+      and starts the Xcelerate proxy in the background.
+    is_required: true
+    summary: Enables Bitrise Build Cache for Xcode using Xcelerate
+    title: Enable Xcode cache
+    value_options:
+    - "true"
+    - "false"
+  xcode_cache_enabled: "true"
+- gradle_cache_enabled: "true"
+  opts:
+    description: Enables Bitrise Build Cache for Gradle. When enabled, activates Gradle
+      cache with analytics and remote cache plugins.
+    is_required: true
+    summary: Enables Bitrise Build Cache for Gradle
+    title: Enable Gradle cache
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

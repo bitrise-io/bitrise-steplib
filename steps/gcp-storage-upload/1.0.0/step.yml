@@ -1,0 +1,80 @@
+title: Google Cloud Storage Upload
+summary: The Step uploads files to a Google Cloud Storage bucket.
+description: |-
+  The Step uploads files to a Google Cloud Storage bucket.
+
+  It can handle both files and directories, uploading the contents to the specified GCS bucket with the desired access control settings.
+  There's no retry logic implemented in this step at this point. A failed object upload halts the whole upload process.
+
+  Using the Authenticate with GCP Step beforehand is recommended to securely provide short lived GCP credentials.
+website: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload
+support_url: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload/issues
+published_at: 2026-07-03T10:58:41.056983308Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-gcp-storage-upload.git
+  commit: 80b520f996d95e9cc0867210e6aef2f9fae21761
+executables:
+  darwin-amd64:
+    storage_uri: steps/gcp-storage-upload/1.0.0/bin/gcp-storage-upload-darwin-amd64
+    hash: sha256-b719c55e10ed6195edac20e661438ed204b094b7695a8b214f70a3583fd14fae
+  darwin-arm64:
+    storage_uri: steps/gcp-storage-upload/1.0.0/bin/gcp-storage-upload-darwin-arm64
+    hash: sha256-43f1096e171aaf8848045197c9d28d9699475329dcddc91a3eae8d8e79a18025
+  linux-amd64:
+    storage_uri: steps/gcp-storage-upload/1.0.0/bin/gcp-storage-upload-linux-amd64
+    hash: sha256-5fc19b902989425294518ad58157d0a021295e4a2bf468d033969e16b05dafc6
+  linux-arm64:
+    storage_uri: steps/gcp-storage-upload/1.0.0/bin/gcp-storage-upload-linux-arm64
+    hash: sha256-2141ada1aaf0039b966fc41855cede16a93273682cf04894c7d4b65f5e08e2e1
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-gcp-storage-upload
+inputs:
+- opts:
+    description: |-
+      Path to a file or folder to be uploaded.
+
+      You can use absolute or relative paths.
+    is_required: true
+    summary: Path to a file or folder to be uploaded.
+    title: Path
+  path: null
+- bucket_name: null
+  opts:
+    description: Name of the GCS bucket to upload the file to.
+    is_required: true
+    summary: Name of the GCS bucket to upload the file to.
+    title: Bucket Name
+- bucket_prefix: null
+  opts:
+    description: |-
+      Path in the GCS bucket where the file will be uploaded.
+
+      If not provided, the file will be uploaded to the root of the bucket with its original filename.
+    is_required: false
+    summary: Path in the GCS bucket where the file will be uploaded.
+    title: Bucket Prefix
+- access_token: $GOOGLE_AUTH_TOKEN
+  opts:
+    category: GCP Credentials
+    description: |-
+      The GCP Access Token.
+
+      You can provide it directly or use the Authenticate with GCP Step.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The GCP Access Token.
+    title: GCP Access Token
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable logging additional information for debugging.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
