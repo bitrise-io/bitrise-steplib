@@ -1,8 +1,0 @@
-maintainer: community
-removal_date: "2022-11-06"
-deprecate_notes: |
-  This step is no longer maintained by its author.
-  
-  It's recommended to use the new AppCenter steps created and maintained by Bitrise:
-  - For iOS, use the [AppCenter iOS Deploy](https://github.com/bitrise-steplib/steps-appcenter-deploy-ios) Step instead
-  - For Android, use the [AppCenter Android Deploy](https://github.com/bitrise-steplib/steps-appcenter-deploy-android) Step instead
