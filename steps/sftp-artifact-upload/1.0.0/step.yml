@@ -1,0 +1,146 @@
+title: SFTP Artifact Upload
+summary: Uploads build artifacts to a remote server via SFTP.
+description: |-
+  Uploads one or more files or directories to a remote server via SFTP.
+
+  Features:
+
+  - SSH private key authentication (recommended) or password authentication
+  - Multiple artifacts per run (newline-separated paths, glob patterns supported)
+  - Recursive directory upload
+  - Creates the remote target directory (including parents) if it does not exist
+
+  For password authentication the step uses `sshpass`. On Linux stacks it is
+  installed automatically via apt-get; on macOS stacks the step installs it
+  from a Homebrew tap at runtime. SSH key authentication needs no extra tools
+  and is the recommended setup — store the key in a Secret and reference it
+  in the `ssh_private_key` input.
+website: https://github.com/followloop/bitrise-step-sftp-artifact-upload
+source_code_url: https://github.com/followloop/bitrise-step-sftp-artifact-upload
+support_url: https://github.com/followloop/bitrise-step-sftp-artifact-upload/issues
+published_at: 2026-07-29T12:55:41.787249+02:00
+source:
+  git: https://github.com/followloop/bitrise-step-sftp-artifact-upload.git
+  commit: cbd6c5beac4777090b3f33d1458c22996fef6a28
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  apt_get:
+  - name: openssh-client
+  - name: sshpass
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- hostname: null
+  opts:
+    description: |-
+      Hostname or IP address of the SFTP server, without protocol prefix.
+      Example: `sftp.example.com`
+    is_required: true
+    summary: Hostname or IP address of the SFTP server.
+    title: SFTP server hostname
+- opts:
+    is_required: true
+    summary: Port of the SFTP server.
+    title: SFTP server port
+  port: "22"
+- opts:
+    is_required: true
+    is_sensitive: true
+    summary: Username used to authenticate on the SFTP server.
+    title: Username
+  username: null
+- opts:
+    description: |-
+      The SSH private key used to authenticate, either as the key content
+      itself or as a path to a key file on the build machine.
+
+      Store the key content in a [Secret](https://devcenter.bitrise.io/en/builds/secrets.html)
+      and reference it here, for example `$SFTP_SSH_KEY`.
+
+      Either this input or `password` is required. If both are provided,
+      the SSH key is used.
+    is_sensitive: true
+    summary: SSH private key used for authentication (recommended).
+    title: SSH private key
+  ssh_private_key: null
+- opts:
+    description: |-
+      SSH user certificate (`*-cert.pub`) used together with `ssh_private_key`,
+      for servers that use SSH certificate authentication (a CA-signed
+      certificate instead of plain public keys in `authorized_keys`).
+
+      Provide either the certificate content or a path to a certificate
+      file on the build machine. Requires `ssh_private_key` to be set.
+    is_sensitive: true
+    summary: SSH user certificate used together with the private key.
+    title: SSH certificate
+  ssh_certificate: null
+- opts:
+    description: |-
+      Password used to authenticate on the SFTP server.
+
+      Store it in a [Secret](https://devcenter.bitrise.io/en/builds/secrets.html)
+      and reference it here, for example `$SFTP_PASSWORD`.
+
+      Either this input or `ssh_private_key` is required.
+    is_sensitive: true
+    summary: Password used for authentication (used only if no SSH key is provided).
+    title: Password
+  password: null
+- artifact_path: $BITRISE_DEPLOY_DIR
+  opts:
+    description: |-
+      One or more paths to upload, separated by newlines.
+      Glob patterns (`*.ipa`, `build/**/*.apk`) are supported.
+      Directories are uploaded recursively.
+
+      Examples:
+
+      - `$BITRISE_IPA_PATH`
+      - `$BITRISE_APK_PATH`
+      - `$BITRISE_DEPLOY_DIR/*.ipa`
+    is_required: true
+    summary: Path(s) of the file(s) or directory(ies) to upload.
+    title: Artifact path(s)
+- opts:
+    description: |-
+      Directory on the SFTP server to upload the artifacts into,
+      for example `/uploads/builds`. The directory (including parents)
+      is created if it does not exist.
+    is_required: true
+    summary: Directory on the SFTP server to upload the artifacts into.
+    title: Remote directory path
+  remote_path: null
+- opts:
+    description: |-
+      If set to `yes`, the server's host key is verified against the
+      build machine's `known_hosts` file and the connection fails on
+      mismatch or unknown host. If set to `no`, host key checking is
+      disabled (`StrictHostKeyChecking=no`).
+    summary: Whether to verify the server's host key against known_hosts.
+    title: Verify host key
+    value_options:
+    - "yes"
+    - "no"
+  verify_host_key: "no"
+- debug_mode: "no"
+  opts:
+    summary: Enables verbose logging.
+    title: Debug mode
+    value_options:
+    - "yes"
+    - "no"
+outputs:
+- SFTP_UPLOAD_REMOTE_PATH: null
+  opts:
+    summary: The remote directory the artifacts were uploaded into.
+    title: Remote upload directory
