@@ -1,0 +1,235 @@
+title: Bitrise CodePush Publish
+summary: Bundle React Native or Expo JavaScript and push it as an OTA update to Bitrise
+  CodePush.
+description: |-
+  Bundles the JavaScript code (and assets) of a React Native project and publishes it as an
+  over-the-air (OTA) update to a Bitrise CodePush deployment.
+
+  ### Configuring the Step
+
+  1. Add the Step to a Workflow after your JS dependencies are installed (or leave
+     **Skip dependency install** unchecked and let the Step run the install for you).
+  2. Set **Target platform** to `ios` or `android`. Each run only bundles and publishes for one
+     platform; to update both iOS and Android, add the Step twice, once per platform.
+  3. Set **CodePush app ID** and **Deployment** (name, e.g. `Staging`, or UUID) for the app you're
+     publishing to.
+  4. Set **Target app version** to the native app version this update targets (e.g. `1.2.0`).
+  5. Set **Bitrise API token** as a [Secret](https://devcenter.bitrise.io/en/builds/env-vars-and-secrets/adding-and-managing-secrets.html).
+  6. Optionally set **Rollout percentage**, **Mandatory update**, and **Disable after upload** to
+     control how the update is rolled out.
+
+  The Step auto-detects your project's entry file and Hermes bytecode configuration; overrides
+  are available under **Bundling options** if auto-detection doesn't fit your project layout.
+  Expo projects are supported too — the Step detects Expo vs. bare React Native automatically
+  from your project's `package.json`.
+
+  The built package is exported under `$BITRISE_DEPLOY_DIR`, so a subsequent
+  **Deploy to Bitrise.io** Step picks it up automatically and it shows up on the build's Artifacts
+  tab, with no extra wiring needed.
+
+  ### Useful links
+
+  - [About CodePush](https://github.com/bitrise-io/bitrise-plugins-codepush-cli)
+  - [Using the Hermes engine, Expo Documentation](https://docs.expo.dev/guides/using-hermes/)
+website: https://github.com/bitrise-steplib/steps-bitrise-codepush
+source_code_url: https://github.com/bitrise-steplib/steps-bitrise-codepush
+support_url: https://github.com/bitrise-steplib/steps-bitrise-codepush/issues
+published_at: 2026-08-24T15:50:43.598368+02:00
+source:
+  git: https://github.com/bitrise-steplib/steps-bitrise-codepush.git
+  commit: 34bd2a606cc9e96f301e9d65f55a7dc822d51fcd
+project_type_tags:
+- react-native
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-bitrise-codepush
+inputs:
+- opts:
+    description: |-
+      The platform the JavaScript bundle and update target.
+
+      Each run of the Step bundles for a single platform (the bundle filename and entry file
+      differ between iOS and Android).
+    is_required: true
+    summary: The platform the update targets.
+    title: Target platform
+    value_options:
+    - ios
+    - android
+  platform: ios
+- app_id: $CODEPUSH_APP_ID
+  opts:
+    description: |-
+      The UUID of the Bitrise CodePush app this update targets.
+
+      Find this on your app's CodePush page, or via `CODEPUSH_APP_ID` if you already export it
+      as a Workflow env var.
+    is_required: true
+    summary: The Bitrise CodePush app UUID to work with.
+    title: CodePush app ID
+- deployment: null
+  opts:
+    description: The name (e.g. `Staging`, `Production`) or UUID of the deployment
+      to work with.
+    is_required: true
+    summary: The deployment name (e.g. Staging, Production) or UUID to work with.
+    title: Deployment
+- api_token: null
+  opts:
+    description: |-
+      A Bitrise API access token with access to the app above.
+
+      Prefer a **Workspace API token**: unlike a personal access token, it isn't tied to any one
+      team member's account, so it keeps working if that person leaves or their access changes.
+      A **Personal Access Token** (generated under **Account Settings > Security** on
+      [bitrise.io](https://app.bitrise.io/me/account/security)) also works, but ties this Step's
+      ability to publish updates to that individual's account.
+    is_required: true
+    is_sensitive: true
+    summary: Workspace or Personal API access token used to authenticate with Bitrise
+      CodePush.
+    title: Bitrise API token
+- app_version: null
+  opts:
+    description: |-
+      The target native binary version(s) this update applies to. This is usually your app's
+      marketing/short version string, not the build number.
+
+      Accepts an exact version or a range expression:
+
+      - Exact version: `1.2.3` — only devices on that exact binary version.
+      - Wildcard: `*` — any device, regardless of binary version.
+      - Partial version: `1.2.x` or `1.2` — any patch version within that major.minor (`1.2` is
+        equivalent to `>=1.2.0 <1.3.0`).
+      - Range: `1.2.3 - 1.2.7` (inclusive-inclusive) or `>=1.2.3 <1.2.7` (inclusive-exclusive).
+      - Semver operators: `~1.2.3` (equivalent to `>=1.2.3 <1.3.0`), `^1.2.3` (equivalent to
+        `>=1.2.3 <2.0.0`).
+
+      See [Target versions](https://docs.bitrise.io/en/release-management/codepush/creating-and-releasing-codepush-updates#target-versions)
+      for the full reference.
+    is_required: true
+    summary: The native app version(s) this update targets (e.g. 1.2.0, or a range
+      like ~1.2.0).
+    title: Target app version
+- opts:
+    description: |-
+      Percentage of devices, between 0 and 100, that receive this update immediately. Accepts
+      fractional values (e.g. `33.3`).
+
+      Leave at 100 to roll the update out to all devices right away, or set a lower value to
+      ramp up a staged rollout over time (adjustable later on the details page of the CodePush
+      update in the Release Management app).
+    summary: Percentage of devices (0-100) that receive the update immediately.
+    title: Rollout percentage
+  rollout_percentage: "100"
+- mandatory: "false"
+  opts:
+    description: |-
+      When enabled, devices are forced to install this update (a "mandatory" or "forced" update)
+      instead of being able to defer it.
+    summary: Force devices to install this update before continuing.
+    title: Mandatory update
+    value_options:
+    - "true"
+    - "false"
+- disabled_after_upload: "false"
+  opts:
+    description: |-
+      When enabled, the update is uploaded but not served to any device until manually enabled
+      later on the details page of the CodePush update in the Release Management app. Useful for
+      a "dark push" you plan to enable after separate verification.
+    summary: Upload the update without activating it for devices yet.
+    title: Disable after upload
+    value_options:
+    - "true"
+    - "false"
+- description: null
+  opts:
+    description: Optional release notes / description for this update. Plain text
+      only.
+    summary: Release notes shown for this update.
+    title: Update description
+- opts:
+    category: Bundling options
+    description: |-
+      The root directory of the React Native or Expo project to bundle, containing its
+      `package.json`.
+    summary: Root directory of the React Native or Expo project.
+    title: Project directory
+  project_dir: $BITRISE_SOURCE_DIR
+- entry_file: null
+  opts:
+    category: Bundling options
+    description: |-
+      Path to the JavaScript entry file, relative to **Project directory**.
+
+      Leave empty to auto-detect (`index.<platform>.js`, then `index.js`, then the `main` field
+      in `package.json`).
+    summary: Path to the JS entry file, relative to Project directory.
+    title: Entry file
+- hermes: auto
+  opts:
+    category: Bundling options
+    description: |-
+      Controls whether the JavaScript bundle is compiled to Hermes bytecode after bundling.
+
+      - `auto`: detect from the project's `android/app/build.gradle` / `ios/Podfile`, falling
+        back to "enabled" for React Native >= 0.70 (where Hermes is the default engine) if no
+        explicit setting is found.
+      - `on`: always compile to Hermes bytecode.
+      - `off`: never compile to Hermes bytecode.
+
+      The compiled bundle must match the Hermes/JSC engine the native app was built with, or the
+      update will fail to load on-device.
+    summary: Whether to compile the bundle to Hermes bytecode.
+    title: Hermes bytecode compilation
+    value_options:
+    - auto
+    - "on"
+    - "off"
+- bundle_name: null
+  opts:
+    category: Bundling options
+    description: |-
+      Overrides the output filename of the generated JS bundle.
+
+      Leave empty to use the platform default (`main.jsbundle` for iOS, `index.android.bundle`
+      for Android), or the filename auto-detected from your native project files (Expo only).
+    summary: Custom output filename for the JS bundle.
+    title: Bundle filename
+- opts:
+    category: Bundling options
+    description: |-
+      When enabled, skips running `npm install` / `yarn install` / `pnpm install` / `bun install`
+      before bundling. Enable this if a previous Step in the Workflow already installed the
+      project's JS dependencies.
+    summary: Skip running the package manager install before bundling.
+    title: Skip dependency install
+    value_options:
+    - "true"
+    - "false"
+  skip_dependency_install: "false"
+- opts:
+    category: Advanced
+    description: Enable this to print additional information useful for debugging.
+    summary: Print additional debug information.
+    title: Enable verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose_log: "false"
+outputs:
+- BITRISE_CODEPUSH_UPDATE_ID: null
+  opts:
+    summary: The package/update ID assigned to the pushed release.
+    title: CodePush update ID
+- BITRISE_CODEPUSH_PACKAGE_PATH: null
+  opts:
+    description: |-
+      Local path to the built update package (a `.zip`). The Step copies it under
+      `$BITRISE_DEPLOY_DIR`, so a subsequent **Deploy to Bitrise.io** Step picks it up
+      automatically and it appears on the build's Artifacts tab.
+    summary: Path to the built update package, copied under $BITRISE_DEPLOY_DIR.
+    title: Package path
