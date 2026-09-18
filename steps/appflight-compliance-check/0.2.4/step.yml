@@ -1,0 +1,188 @@
+title: Check App Store Compliance with Appflight
+summary: Scans iOS projects for App Store compliance risks and exports a build-gating JSON report.
+description: |-
+  Runs the [Appflight CLI](https://www.npmjs.com/package/appflight) against an
+  iOS project and gates the build on App Store review risks.
+
+  The step installs a **pinned** version of the `appflight` npm package onto the
+  build machine, runs the deterministic check, and writes a machine-readable
+  JSON report to `$BITRISE_DEPLOY_DIR` so it is exported as a build artifact.
+
+  ### What the checks cover
+
+  Privacy manifests (`PrivacyInfo.xcprivacy`), Required Reason APIs,
+  `NSUsageDescription` permission-string quality, ATT, App Transport Security,
+  background modes, third-party SDK risk, in-app purchase restore requirements,
+  hardcoded secrets, private API usage, and other App Store review rules.
+
+  ### Data boundary
+
+  The default (free) deterministic scan runs entirely on the build machine and
+  sends **no source code or project data**. Setting `deep: true` enables the
+  paid AI tier, which **does** send allowlisted findings, a facts digest, and
+  redacted code excerpts to the Appflight API, and requires an API token.
+
+  See the repository README for the full field list and the security review
+  notes.
+
+  ### Exit behaviour
+
+  - `0` — no findings at or above the `fail_on` threshold; build passes.
+  - `1` — findings at or above the threshold; **build fails** (the gate working).
+  - `2` — tool or usage error; **build fails** with a distinct message so a
+    broken invocation is never silently read as "clean".
+website: https://github.com/Azura2025/bitrise-step-appflight
+source_code_url: https://github.com/Azura2025/bitrise-step-appflight
+support_url: https://github.com/Azura2025/bitrise-step-appflight/issues
+published_at: 2026-08-17T19:53:50.902106014Z
+source:
+  git: https://github.com/Azura2025/bitrise-step-appflight.git
+  commit: 07101e6daf7abfb0cf89d1d57e233f96672cf0af
+project_type_tags:
+- ios
+- react-native
+- flutter
+- cordova
+- ionic
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      The app directory to scan, relative to the build's working directory or
+      absolute.
+
+      Point this at a **single app root**. Scanning a parent directory that
+      contains multiple independent app roots is a tool error (exit `2`) —
+      add one step instance per app instead.
+    is_required: true
+    summary: Directory to scan.
+    title: Project path
+  project_path: .
+- appflight_version: 0.9.1
+  opts:
+    description: |-
+      The exact version of the `appflight` npm package to install on every
+      run. Fetching the pinned release per run avoids relying on a stale
+      preinstalled or cached compliance ruleset while keeping verdicts
+      reproducible for a reviewed version.
+
+      **Pinning is deliberate.** This input intentionally does not accept or
+      default to `latest`. A compliance gate must be reproducible: the same
+      commit scanned on two different days has to produce the same verdict,
+      and a rule added upstream must never turn a green nightly build red
+      without a reviewed change in your repository.
+
+      Bump this value as an explicit, reviewable commit when you want new
+      rules. Check the changelog before upgrading — new rules can introduce
+      new findings, which is the point, but should land on your schedule.
+    is_required: true
+    summary: Exact npm version of the appflight CLI to install.
+    title: Appflight CLI version
+- fail_on: critical
+  opts:
+    description: |-
+      Maps directly to the CLI's `--fail-on` flag. A finding fails the build
+      when its severity ranks at or above this level
+      (`critical` > `warning` > `suggestion`).
+
+      - `critical` — only CRITICAL findings fail the build. **Step default**,
+        chosen so the gate can be adopted on an existing pipeline without an
+        immediate red build.
+      - `warning` — CRITICAL or WARNING findings fail the build. This is the
+        CLI's own default and the recommended steady state.
+      - `suggestion` — any finding fails the build. Strictest.
+      - `none` — never fail on findings. Report-only; the JSON artifact is
+        still written. Useful for a first observation period.
+
+      Findings below the threshold still appear in the log and in the JSON
+      artifact; they just do not fail the build.
+    is_required: true
+    summary: Lowest severity that fails the build.
+    title: Fail on severity
+    value_options:
+    - critical
+    - warning
+    - suggestion
+    - none
+- deep: "false"
+  opts:
+    description: |-
+      When `true`, adds the CLI's `--deep` flag, which runs paid AI reasoning
+      over the deterministic findings.
+
+      **This changes the data boundary.** With `deep: false` (the default),
+      the scan is fully local and no source code or project data leaves the
+      build machine. With `deep: true`, the CLI sends allowlisted
+      deterministic findings, a facts digest, and a small set of **redacted**
+      code excerpts to the Appflight API.
+
+      Requires `api_token`. If `deep` is `true` and no token is provided the
+      step fails immediately with a clear message rather than silently
+      running a deterministic-only scan.
+
+      Leave this off unless your security review has explicitly approved
+      sending code excerpts to a third-party service.
+    is_required: true
+    summary: Paid AI reasoning. Sends redacted code excerpts off the machine.
+    title: Enable AI analysis (--deep)
+    value_options:
+    - "false"
+    - "true"
+- api_token: ""
+  opts:
+    description: |-
+      The Appflight access token used to authenticate the paid `--deep` tier.
+      Exported to the CLI as `APPFLIGHT_TOKEN`.
+
+      Generate a named, revocable CI token on a trusted workstation:
+
+      `appflight login`
+
+      `appflight token create --name "Bitrise nightly" --print-token`
+
+      Store the printed token as a **Bitrise secret environment variable**,
+      then reference the secret here (for example `$APPFLIGHT_API_TOKEN`).
+      Never commit the token to `bitrise.yml`.
+
+      In the Bitrise Secret settings, enable **Replace variables in inputs**
+      so the token value reaches this input instead of the literal variable
+      name. Pass the raw token only, without quotes or a `Bearer` prefix.
+
+      The CI token is scoped to deep analysis and does not expire on a
+      calendar. It remains subject to the account's live paid entitlement
+      and quota, and can be revoked with `appflight token revoke <token-id>`.
+
+      Ignored when `deep` is `false`.
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    summary: Required only when deep is true. Provide via a Bitrise secret.
+    title: Appflight API token
+outputs:
+- APPFLIGHT_FINDING_COUNT: null
+  opts:
+    description: |-
+      The total number of findings in the report, across every severity —
+      including findings below the `fail_on` threshold. Set to `0` on a clean
+      scan, and to `unknown` if the scan errored before producing a report.
+
+      Exported whether the step passes or fails, so a later step (a Slack
+      notification, for example) can read it on a failed build.
+    summary: Total number of findings reported by the scan.
+    title: Total finding count
+- APPFLIGHT_REPORT_PATH: null
+  opts:
+    description: |-
+      Absolute path to the written JSON report, normally
+      `$BITRISE_DEPLOY_DIR/appflight-report.json`. The file is placed in the
+      deploy directory so the Deploy to Bitrise.io step exports it as a build
+      artifact.
+    summary: Absolute path to the JSON report artifact.
+    title: JSON report path
