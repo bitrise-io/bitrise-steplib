@@ -1,0 +1,148 @@
+title: Xcode Test without building
+summary: Tests compiled bundles.
+description: Tests compiled bundles by running `xcodebuild test-without-building`
+  command.
+website: https://github.com/bitrise-steplib/bitrise-step-xcode-test-without-building
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-xcode-test-without-building
+support_url: https://github.com/bitrise-steplib/bitrise-step-xcode-test-without-building/issues
+published_at: 2026-09-24T09:23:33.521507406Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-xcode-test-without-building.git
+  commit: d9072475899cb76f3b701f90e7113d953094e479
+executables:
+  darwin-amd64:
+    storage_uri: steps/xcode-test-without-building/1.0.0/bin/xcode-test-without-building-darwin-amd64
+    hash: sha256-ebaff8fd3ad2819541820db48bf508fddc57a855ae2ac1745672cd66977ac91c
+  darwin-arm64:
+    storage_uri: steps/xcode-test-without-building/1.0.0/bin/xcode-test-without-building-darwin-arm64
+    hash: sha256-83adb1e02c70e8067c4b816cd52800e65fe8d0383c2cdd6444b52e7cc64a95d5
+  linux-amd64:
+    storage_uri: steps/xcode-test-without-building/1.0.0/bin/xcode-test-without-building-linux-amd64
+    hash: sha256-25047df2ae959a35fd8174e3575b5e66654840af2470e3fda01f704dd58e3c52
+  linux-arm64:
+    storage_uri: steps/xcode-test-without-building/1.0.0/bin/xcode-test-without-building-linux-arm64
+    hash: sha256-58f36513c82b403b9cb780b15ed0460b55e12c4ad1b7b70c5300d630530d0c4c
+project_type_tags:
+- cordova
+- flutter
+- ionic
+- ios
+- kotlin-multiplatform
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-xcode-test-without-building
+inputs:
+- opts:
+    is_required: true
+    summary: Test run parameters file, generated during the build-for-testing action.
+    title: xctestrun file path
+  xctestrun: $BITRISE_XCTESTRUN_FILE_PATH
+- destination: platform=iOS Simulator,name=iPhone 8 Plus,OS=latest
+  opts:
+    description: |-
+      Destination specifier describes the device to use as a destination.
+
+      The input value sets xcodebuild's `-destination` option.
+    is_required: true
+    summary: Destination specifier describes the device to use as a destination.
+    title: Device destination specifier
+- only_testing: null
+  opts:
+    category: Test Selection
+    description: |-
+      The step will execute only the listed tests.
+
+      The input value sets xcodebuild's `-only-testing` option and you can enter multiple test identifiers separated by a newline.
+      The input field supports the same options as xcodebuild:
+      - Test target name only: `MyAppTests`
+      - Test target and test class name: `MyAppTests/MyAppTests`
+      - Test target, class and function name: `MyAppTests/MyAppTests/testExample`
+
+      The input value can be a filepath as well which contains the list of tests separated by a newline character.
+    summary: The step will execute only the listed tests.
+    title: Test identifier list to execute
+- opts:
+    category: Test Selection
+    description: |-
+      The step will skip the listed tests during execution.
+
+      The input value sets xcodebuild's `-skip-testing` option and you can enter multiple test identifiers separated by a newline.
+      The input field supports the same options as xcodebuild:
+      - Test target name only: `MyAppTests`
+      - Test target and test class name: `MyAppTests/MyAppTests`
+      - Test target, class and function name: `MyAppTests/MyAppTests/testExample`
+
+      The input value can be a filepath as well which contains the list of tests separated by a newline character.
+    summary: The step will skip the listed tests during execution.
+    title: Test identifier list to skip
+  skip_testing: null
+- opts:
+    category: Test Repetition
+    description: |-
+      Determines how the tests will repeat.
+
+      Available options:
+      - `none`: Tests will never repeat.
+      - `until_failure`: Tests will repeat until failure or up to maximum repetitions.
+      - `retry_on_failure`: Only failed tests will repeat up to maximum repetitions.
+      - `up_until_maximum_repetitions`: Tests will repeat up until maximum repetitions.
+
+      The input value together with Maximum Test Repetitions (`maximum_test_repetitions`) input sets xcodebuild's `-run-tests-until-failure` / `-retry-tests-on-failure` or `-test-iterations` option.
+    summary: Determines how the tests will repeat.
+    title: Test Repetition Mode (Available in Xcode 13+)
+    value_options:
+    - none
+    - until_failure
+    - retry_on_failure
+    - up_until_maximum_repetitions
+  test_repetition_mode: none
+- maximum_test_repetitions: "3"
+  opts:
+    category: Test Repetition
+    description: |-
+      The maximum number of times a test repeats based on the Test Repetition Mode (`test_repetition_mode`).
+
+      Should be more than 1 if the Test Repetition Mode is other than `none`.
+
+      The input value sets xcodebuild's `-test-iterations` option.
+    is_required: true
+    summary: The maximum number of times a test repeats based on the Test Repetition
+      Mode (`test_repetition_mode`).
+    title: Maximum Test Repetitions (Available in Xcode 13+)
+- opts:
+    category: Test Repetition
+    description: |-
+      If this input is set, tests will launch in a new process for each repetition.
+
+      By default, tests launch in the same process for each repetition.
+
+      The input value sets xcodebuild's `-test-repetition-relaunch-enabled` option.
+    summary: If this input is set, tests will launch in a new process for each repetition.
+    title: Relaunch Tests for Each Repetition (Available in Xcode 13+)
+    value_options:
+    - "yes"
+    - "no"
+  relaunch_tests_for_each_repetition: "no"
+- opts:
+    category: xcodebuild configuration
+    summary: Additional options to be added to the executed xcodebuild command.
+    title: Additional options for the xcodebuild command
+  xcodebuild_options: ""
+- opts:
+    category: Debugging
+    summary: JSON list of tests added to quarantine on Bitrise.io, quarantined tests
+      are excluded from test runs.
+    title: Quarantined tests
+  quarantined_tests: $BITRISE_QUARANTINED_TESTS_JSON
+outputs:
+- BITRISE_XCRESULT_PATH: null
+  opts:
+    summary: The result bundle path generated by `xcodebuild test-without-building`.
+    title: Test result bundle path
+- BITRISE_XCRESULT_ZIP_PATH: null
+  opts:
+    summary: The zipped result bundle path generated by `xcodebuild test-without-building`.
+    title: Zipped test result bundle path
