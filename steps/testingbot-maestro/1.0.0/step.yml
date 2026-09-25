@@ -1,0 +1,422 @@
+title: TestingBot App Automate - Maestro
+summary: Runs your Maestro flows on real Android and iOS devices at TestingBot.
+description: |
+  Uploads your app and [Maestro](https://maestro.mobile.dev) flows to
+  [TestingBot](https://testingbot.com), runs them on the devices you pick,
+  streams progress into the build log, and **fails the Bitrise build when a flow
+  fails**.
+
+  The JUnit report is downloaded and exported to Bitrise's own **Test Reports**
+  tab, and screenshots, logs and video can be pulled down as build artifacts.
+
+  Works for both Android and iOS — the platform follows from the app you give it.
+
+  ### Configuring the Step
+
+  1. Add your TestingBot **key** and **secret** as Bitrise Secrets, and reference
+     them from the `testingbot_key` / `testingbot_secret` inputs. Both are in the
+     [TestingBot member area](https://testingbot.com/members/user/api).
+  2. Point `flows` at your flow files — a directory, individual `.yaml` files,
+     globs, or a `.zip`. One entry per line.
+  3. Set `device` to the device you want. Wildcards and regular expressions work:
+     `Pixel 9`, `iPhone.*`, or `*` for any available device.
+  4. Add `Deploy to Bitrise.io` after this Step to publish the test report.
+
+  ### Flows and subflows
+
+  Every top-level flow you pass runs as its own test. A **subflow** — one that
+  another flow pulls in with `runFlow` — should not be passed as a top-level
+  flow, or it runs twice. Keep subflows in their own directory and point `flows`
+  at the parent directory only; `runFlow` targets are bundled automatically.
+
+  ### Requirements
+
+  This Step drives the [TestingBot CLI](https://github.com/testingbot/testingbotctl),
+  which needs **Node.js 20 or newer**. Every current Bitrise Stack ships one; if
+  yours doesn't, add an `Install Node.js` Step before this one.
+
+  ### Troubleshooting
+
+  - **A flow ran twice** — it is both a top-level flow and a `runFlow` target.
+    See "Flows and subflows" above.
+  - **No results on the Test Reports tab** — add the `Deploy to Bitrise.io` Step
+    after this one. It is what actually publishes what this Step exports.
+
+  ### Useful links
+
+  - [Maestro testing on TestingBot](https://testingbot.com/support/app-automate/maestro)
+  - [Maestro API reference](https://testingbot.com/support/app-automate/maestro/api)
+  - [TestingBot CLI](https://github.com/testingbot/testingbotctl)
+  - [Available devices](https://testingbot.com/devices)
+website: https://github.com/testingbot/bitrise-step-testingbot-maestro
+source_code_url: https://github.com/testingbot/bitrise-step-testingbot-maestro
+support_url: https://github.com/testingbot/bitrise-step-testingbot-maestro/issues
+published_at: 2026-08-12T11:28:08.986623+02:00
+source:
+  git: https://github.com/testingbot/bitrise-step-testingbot-maestro.git
+  commit: bf40277495e56ab534a3fb45c8b850d907199fcf
+project_type_tags:
+- android
+- ios
+- react-native
+- flutter
+- cordova
+- ionic
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Your TestingBot API key, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API key.
+    title: TestingBot API key
+  testingbot_key: $TESTINGBOT_KEY
+- opts:
+    description: |-
+      Your TestingBot API secret, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API secret.
+    title: TestingBot API secret
+  testingbot_secret: $TESTINGBOT_SECRET
+- flows: .maestro
+  opts:
+    description: |-
+      Flow files, directories, `.zip` archives or glob patterns. Put one entry
+      per line (a pipe-separated list works too):
+
+      ```
+      .maestro/smoke
+      .maestro/checkout
+      ```
+
+      Pass the directory holding your **top-level** flows. Subflows pulled in
+      with `runFlow` are bundled automatically and should not be listed, or
+      they run twice.
+    is_expand: true
+    is_required: true
+    summary: Paths to your Maestro flows. One per line.
+    title: Flows
+- device: '*'
+  opts:
+    description: |-
+      The device to run the flows on.
+
+      Exact names work (`Pixel 9`, `iPhone 16`), and so do wildcards and
+      regular expressions, which is usually what you want in CI so a busy
+      device doesn't block the build:
+
+      - `Pixel.*` — any Pixel
+      - `iPhone 1[56]` — an iPhone 15 or 16
+      - `*` — any available device
+
+      See the [device list](https://testingbot.com/devices).
+    is_expand: true
+    is_required: true
+    summary: Which device to run on. Wildcards and regular expressions are supported.
+    title: Device
+- app_path: null
+  opts:
+    description: |-
+      Path to the app (`.apk`, `.ipa`, `.app` or `.zip`).
+
+      Leave empty to use the artifact of the preceding build Step —
+      `$BITRISE_APK_PATH`, `$BITRISE_AAB_PATH`, `$BITRISE_IPA_PATH` or
+      `$BITRISE_APP_DIR_PATH`, in that order.
+    is_expand: true
+    summary: Path to the app under test. Auto-detected when left empty.
+    title: App path
+- opts:
+    category: Device
+    summary: '`Android` or `iOS`. Inferred from the app when left empty.'
+    title: Platform
+  platform: null
+- opts:
+    category: Device
+    is_expand: true
+    summary: OS version, for example `14` or `17.2`.
+    title: OS version
+  platform_version: null
+- opts:
+    category: Device
+    summary: Run on a physical device rather than an emulator or simulator.
+    title: Use a real device
+    value_options:
+    - "true"
+    - "false"
+  real_device: "false"
+- opts:
+    category: Device
+    summary: 'Screen orientation: PORTRAIT or LANDSCAPE. Device default when empty.'
+    title: Orientation
+  orientation: null
+- locale: null
+  opts:
+    category: Localization
+    is_expand: true
+    summary: Device locale, for example `en_US` or `de_DE`.
+    title: Locale
+- opts:
+    category: Localization
+    is_expand: true
+    summary: Device time zone, for example `Europe/Brussels`.
+    title: Time zone
+  timezone: null
+- groups: null
+  opts:
+    category: Test configuration
+    description: |-
+      Groups appear on the test in the TestingBot dashboard and are the way to
+      label a run — for example `nightly` or `pr-checks`.
+
+      Note the Maestro command has no build identifier of its own, unlike the
+      Espresso and XCUITest Steps.
+    is_expand: true
+    summary: Tag the sessions with one or more groups. Comma-separated.
+    title: Groups
+- opts:
+    category: Test configuration
+    description: |-
+      Shown in the TestingBot dashboard, and used as the tab name on Bitrise's
+      Test Reports page. Give parallel Steps distinct names so their reports
+      don't collide.
+    is_expand: true
+    is_required: true
+    summary: Name for this run, also used as the Test Reports tab title.
+    title: Test name
+  test_name: Maestro
+- include_tags: null
+  opts:
+    category: Test configuration
+    is_expand: true
+    summary: Only run flows carrying these tags. Comma-separated.
+    title: Include tags
+- exclude_tags: null
+  opts:
+    category: Test configuration
+    is_expand: true
+    summary: Skip flows carrying these tags. Comma-separated.
+    title: Exclude tags
+- flow_env: null
+  opts:
+    category: Test configuration
+    description: |-
+      Environment variables made available to your flows, one `KEY=VALUE` per
+      line:
+
+      ```
+      API_URL=https://staging.example.com
+      USER=demo
+      ```
+
+      Don't put secrets here unless the value comes from a Bitrise Secret.
+    is_expand: true
+    summary: '`KEY=VALUE` pairs passed to the flows. One per line.'
+    title: Flow environment variables
+- fail_on_test_failure: "true"
+  opts:
+    category: Test configuration
+    description: |-
+      When enabled (the default) a failing flow fails the Step, and so the
+      build.
+
+      Turn it off for a report-only run — the Step then succeeds regardless,
+      and you can branch on the exported `$TESTINGBOT_TEST_STATUS`.
+    is_required: true
+    summary: Mark the Bitrise build failed if any flow fails.
+    title: Fail the build when flows fail
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Parallelism
+    description: |-
+      Splits the flows over N parallel device sessions, which is the quickest
+      way to cut wall-clock time on a large suite. `0` disables sharding.
+    is_required: true
+    summary: Split the flows across this many parallel sessions.
+    title: Shards
+  shard_split: "0"
+- opts:
+    category: Parallelism
+    description: |-
+      Re-runs only the flows that failed, as soon as they fail. The last
+      attempt decides the result, consistently across the exit code, the
+      TestingBot dashboard and the downloaded report.
+
+      Useful for genuinely flaky flows; it will also mask a real regression,
+      so prefer fixing the flow.
+    is_required: true
+    summary: Retry each failed flow up to this many times (0-2).
+    title: Retry failed flows
+    value_options:
+    - "0"
+    - "1"
+    - "2"
+  retry: "0"
+- opts:
+    category: Parallelism
+    description: |-
+      Start the run and return without waiting for it to finish.
+
+      Nothing is polled, no report is downloaded, and the Step cannot fail on
+      a flow failure — check the TestingBot dashboard instead. Cannot be
+      combined with `tunnel` or `retry`.
+    summary: Start the flows and finish the Step immediately.
+    title: Don't wait for results
+    value_options:
+    - "true"
+    - "false"
+  run_async: "false"
+- opts:
+    category: Network and location
+    summary: 'Simulate a slower network: `4G`, `3G`, `Edge` or `airplane`.'
+    title: Network throttling
+  throttle_network: null
+- geo_country_code: null
+  opts:
+    category: Network and location
+    is_expand: true
+    summary: Route device traffic through a country, as an ISO code such as `US` or
+      `DE`.
+    title: Geolocation country
+- opts:
+    category: Network and location
+    description: |-
+      Starts a TestingBot Tunnel for the duration of the run, so the app can
+      reach a staging environment that isn't publicly routable.
+
+      Cannot be combined with `run_async`.
+    summary: Open a TestingBot Tunnel for this run.
+    title: Start a tunnel
+    value_options:
+    - "true"
+    - "false"
+  tunnel: "false"
+- opts:
+    category: Network and location
+    description: |-
+      Identifier of the tunnel to use.
+
+      Defaults to the tunnel opened by the `TestingBot Tunnel` Step earlier in
+      the Workflow, which exports `$TESTINGBOT_TUNNEL_IDENTIFIER`. Set it
+      explicitly only when you run several tunnels in parallel.
+    is_expand: true
+    summary: Name of the tunnel to route through.
+    title: Tunnel identifier
+  tunnel_identifier: $TESTINGBOT_TUNNEL_IDENTIFIER
+- export_to_test_reports: "true"
+  opts:
+    category: Reports
+    description: |-
+      Downloads the JUnit report and lays it out for Bitrise's Test Reports
+      add-on.
+
+      You still need the `Deploy to Bitrise.io` Step afterwards — that Step is
+      what uploads what this one exports.
+    summary: Publish the JUnit report to Bitrise's Test Reports tab.
+    title: Export to Test Reports
+    value_options:
+    - "true"
+    - "false"
+- download_artifacts: none
+  opts:
+    category: Reports
+    description: |-
+      Downloads test artifacts as a zip:
+
+      - `none` — don't download anything
+      - `failed` — only artifacts of failed flows
+      - `all` — everything
+
+      The zip lands in `$BITRISE_DEPLOY_DIR`, so `Deploy to Bitrise.io`
+      attaches it to the build.
+    is_required: true
+    summary: Pull down logs, screenshots and video after the run.
+    title: Download artifacts
+    value_options:
+    - none
+    - failed
+    - all
+- opts:
+    category: Reports
+    description: |-
+      Directory the JUnit report is downloaded into. Defaults to a temporary
+      directory. The path is exported as `$TESTINGBOT_JUNIT_REPORT_PATH`.
+    is_expand: true
+    summary: Where to write the downloaded JUnit report.
+    title: Report output directory
+  report_output_dir: null
+- maestro_version: null
+  opts:
+    category: Debug
+    description: Pin the Maestro version used on the device. Leave empty for the default.
+    is_expand: true
+    summary: Maestro version to run the flows with.
+    title: Maestro version
+- maestro_config: null
+  opts:
+    category: Debug
+    is_expand: true
+    summary: Path to a Maestro `config.yaml`.
+    title: Maestro config file
+- cli_version: 1.1.1
+  opts:
+    category: Debug
+    description: |-
+      The [TestingBot CLI](https://github.com/testingbot/testingbotctl) version
+      this Step runs. Pinned so builds stay reproducible; set `latest` to
+      always take the newest release.
+    is_required: true
+    summary: Version of `@testingbot/cli` to run.
+    title: TestingBot CLI version
+- additional_args: null
+  opts:
+    category: Debug
+    description: |-
+      Appended verbatim to the `testingbot maestro` command, so you can use a
+      CLI option this Step doesn't expose yet without waiting for a release.
+
+      See `npx @testingbot/cli maestro --help`.
+    is_expand: true
+    summary: Extra flags passed straight to the TestingBot CLI.
+    title: Additional CLI arguments
+- opts:
+    category: Debug
+    summary: Suppress the CLI's live progress output.
+    title: Quiet output
+    value_options:
+    - "true"
+    - "false"
+  quiet: "false"
+outputs:
+- TESTINGBOT_TEST_STATUS: null
+  opts:
+    description: |-
+      `passed` or `failed`. Useful when `fail_on_test_failure` is off and you
+      want to branch on the result yourself.
+    summary: '`passed` or `failed`.'
+    title: Test status
+- TESTINGBOT_JUNIT_REPORT_PATH: null
+  opts:
+    summary: Path to the downloaded JUnit XML report.
+    title: JUnit report path
+- TESTINGBOT_ARTIFACTS_PATH: null
+  opts:
+    summary: Directory holding the downloaded artifacts zip, when enabled.
+    title: Artifacts directory
