@@ -1,0 +1,69 @@
+title: TestingBot Tunnel Stop
+summary: Stops a TestingBot Tunnel started earlier in the Workflow.
+description: |
+  Shuts down the tunnel that the **TestingBot Tunnel** Step started.
+
+  This Step is configured with `is_always_run`, so it also runs when an earlier
+  Step failed — otherwise a failing test Step would leave the tunnel running for
+  the rest of the build. It is also skippable, so a problem shutting the tunnel
+  down never turns a green build red.
+
+  Bitrise has no post-build hook, which is why stopping the tunnel is its own
+  Step rather than something the start Step could arrange.
+
+  ### Configuring the Step
+
+  Add it as the **last** Step of the Workflow. With the defaults it picks up
+  `$TESTINGBOT_TUNNEL_PID` from the start Step, so there is normally nothing to
+  configure.
+
+  ### Useful links
+
+  - [TestingBot Tunnel](https://testingbot.com/support/other/tunnel)
+website: https://github.com/testingbot/bitrise-step-testingbot-tunnel-stop
+source_code_url: https://github.com/testingbot/bitrise-step-testingbot-tunnel-stop
+support_url: https://github.com/testingbot/bitrise-step-testingbot-tunnel-stop/issues
+published_at: 2026-08-12T11:28:37.865373+02:00
+source:
+  git: https://github.com/testingbot/bitrise-step-testingbot-tunnel-stop.git
+  commit: b6ca4e241c9556300874e9e4603e122a31f6c5cd
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: true
+is_skippable: true
+inputs:
+- opts:
+    description: |-
+      Exported by the **TestingBot Tunnel** Step. Leave the default unless you
+      started the tunnel some other way.
+    is_expand: true
+    summary: PID of the tunnel to stop.
+    title: Tunnel process ID
+  tunnel_pid: $TESTINGBOT_TUNNEL_PID
+- opts:
+    is_expand: true
+    summary: Log file to print when the tunnel didn't shut down cleanly.
+    title: Tunnel log path
+  tunnel_log_path: $TESTINGBOT_TUNNEL_LOG_PATH
+- opts:
+    description: |-
+      The log is printed automatically when something goes wrong. Turn this on
+      to always see it, which is useful when diagnosing a connection problem
+      that didn't stop the tunnel outright.
+    summary: Print the tunnel log even on a clean shutdown.
+    title: Always print the tunnel log
+    value_options:
+    - "true"
+    - "false"
+  print_log: "false"
+- opts:
+    description: |-
+      The Step asks the tunnel to stop, waits this long for it to exit, then
+      sends `SIGKILL`.
+    is_required: true
+    summary: How long to wait for a graceful exit before forcing it.
+    title: Shutdown timeout (seconds)
+  shutdown_timeout: "30"
