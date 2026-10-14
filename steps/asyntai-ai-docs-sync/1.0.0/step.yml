@@ -1,0 +1,109 @@
+title: Asyntai AI Docs Sync
+summary: Send the documentation in your repository to the Asyntai AI chatbot knowledge
+  base on every build.
+description: |-
+  [Asyntai](https://asyntai.com) is an AI chatbot for websites and apps. It answers visitor questions from a knowledge base that you fill with your own content.
+
+  This Step reads the documentation files in your repository (Markdown, MDX and plain text by default) and sends them to that knowledge base. Your chatbot then answers from the docs that you just shipped, with no manual copy and paste.
+
+  Every file becomes one knowledge base entry, and the title comes from the file path. On the next build, the Step replaces the old entry with the new text, so a build that runs on every commit does not make duplicates. A file whose text did not change is skipped and costs nothing.
+
+  ### Configuring the Step
+
+  1. Sign in to [Asyntai](https://asyntai.com), open **Settings**, then **API**, and copy your API key.
+  2. Add it to your Bitrise app as a Secret named `ASYNTAI_API_KEY`.
+  3. Add this Step after **Git Clone** and set **Documentation path** to your docs folder, for example `docs`.
+
+  To keep the knowledge base exactly in step with the folder, set a **Title prefix** and turn on **Remove deleted files**. The Step then also removes entries whose file is gone. It only removes entries that carry your prefix, so it never touches content that you added in the dashboard.
+
+  Turn on **Dry run** to see which files the Step would send. A dry run sends nothing and does not need the API key.
+
+  ### Troubleshooting
+
+  * `the environment variable ASYNTAI_API_KEY is empty`: add the Secret, or set **Asyntai API key**. Secrets are not available in builds of pull requests from forks.
+  * `no file under ... matches ...`: check **Documentation path** and **File patterns**. A relative path is read from the source directory (`$BITRISE_SOURCE_DIR`).
+  * `HTTP 401`: the API key is wrong or was deleted. Make a new key in the dashboard.
+
+  ### Useful links
+
+  * [Setup guide](https://asyntai.com/documentation/integrations/bitrise/)
+  * [Asyntai API documentation](https://asyntai.com/documentation/api/)
+website: https://asyntai.com/documentation/integrations/bitrise/
+source_code_url: https://github.com/asyntai/bitrise-step-asyntai-ai-docs-sync
+support_url: https://github.com/asyntai/bitrise-step-asyntai-ai-docs-sync/issues
+published_at: 2026-10-14T07:39:27.193118387+02:00
+source:
+  git: https://github.com/asyntai/bitrise-step-asyntai-ai-docs-sync.git
+  commit: ca4d72621de44252aa4c1ddf3f4c939ae8e37046
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- docs_path: docs
+  opts:
+    is_required: true
+    summary: The folder (or single file) to send. A relative path is read from the
+      source directory.
+    title: Documentation path
+- asyntai_api_key: $ASYNTAI_API_KEY
+  opts:
+    description: |-
+      An API key from your Asyntai dashboard (**Settings**, then **API**).
+
+      Store it as a Bitrise Secret named `ASYNTAI_API_KEY`. The default value reads that Secret. A dry run does not need it.
+    is_sensitive: true
+    summary: An API key from your Asyntai dashboard. Store it as a Bitrise Secret.
+    title: Asyntai API key
+- file_patterns: '*.md,*.mdx,*.txt'
+  opts:
+    is_required: true
+    summary: Comma separated file name patterns to send.
+    title: File patterns
+- exclude: ""
+  opts:
+    summary: Comma separated patterns to skip, for example `drafts/*,CHANGELOG.md`.
+    title: Exclude
+- opts:
+    summary: Text put in front of every entry title, for example `docs/`. Needed for
+      Remove deleted files.
+    title: Title prefix
+  title_prefix: ""
+- opts:
+    summary: The website whose knowledge base gets the files. Empty means the first
+      website on the account.
+    title: Website ID
+  website_id: ""
+- opts:
+    summary: Remove entries that carry the title prefix and whose file is gone. Needs
+      a title prefix.
+    title: Remove deleted files
+    value_options:
+    - "yes"
+    - "no"
+  prune: "no"
+- dry_run: "no"
+  opts:
+    summary: List the files that the Step would send, and send nothing.
+    title: Dry run
+    value_options:
+    - "yes"
+    - "no"
+- base_url: https://asyntai.com
+  opts:
+    summary: Change this only when Asyntai support asks you to.
+    title: API base URL
+outputs:
+- ASYNTAI_DOCS_SYNC_SUMMARY: null
+  opts:
+    summary: The last line of the sync, for example `Done. 2 added, 1 updated, 5 unchanged,
+      0 deleted, 0 skipped.`
+    title: Sync summary
