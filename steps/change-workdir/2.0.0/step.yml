@@ -1,0 +1,95 @@
+title: Change Working Directory for subsequent Steps
+summary: Changes the Working Directory for all subsequent Steps to a specified path.
+description: |-
+  This Step changes the base Working Directory for every subsequent Step in the Workflow to the specified path.
+
+  Useful, for example, for projects like monorepos where the Bitrise workflow primarily takes place in an `iOS` or `android` subdirectory.
+
+  ### Configuring the Step
+
+  1. Set the **Directory path** to the path you want subsequent Steps to use as their Working Directory.
+  2. Use the **Create path if doesn't exist?** input to control whether the path is created when it is missing.
+
+  ### Troubleshooting
+  If the Step fails with a "does not exist" error, either set **Create path if doesn't exist?** to `true`, or make sure an earlier Step creates the directory.
+  The provided path is resolved to an absolute path before it is applied, so relative paths are resolved against the current Working Directory.
+
+  ### Related Steps
+  - [Change value in file](https://www.bitrise.io/integrations/steps/change-value)
+website: https://github.com/bitrise-steplib/steps-change-workdir
+source_code_url: https://github.com/bitrise-steplib/steps-change-workdir
+support_url: https://github.com/bitrise-steplib/steps-change-workdir/issues
+published_at: 2026-06-29T17:54:38.500476109Z
+source:
+  git: https://github.com/bitrise-steplib/steps-change-workdir.git
+  commit: bab12af01cbd07e25d8e9a34c17596cbe4d9ebff
+executables:
+  darwin-amd64:
+    storage_uri: steps/change-workdir/2.0.0/bin/change-workdir-darwin-amd64
+    hash: sha256-6c1fa159c2b49216dfe730bbaf34f5fc2df4754664c90fc55511a4de869c907c
+  darwin-arm64:
+    storage_uri: steps/change-workdir/2.0.0/bin/change-workdir-darwin-arm64
+    hash: sha256-7e26db0a4c1087be1cabcf10930cdabf78ec5abd154ef9e22d444419fe06d8b8
+  linux-amd64:
+    storage_uri: steps/change-workdir/2.0.0/bin/change-workdir-linux-amd64
+    hash: sha256-3b4965021388524cc7ca37298a9c238bd6bd1fe6d3db6e707f1750d3d5b633d2
+  linux-arm64:
+    storage_uri: steps/change-workdir/2.0.0/bin/change-workdir-linux-arm64
+    hash: sha256-2b892720be541bb66903a9937a9bb120478a3fa680cf0fafbad2cadac1bc0631
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-change-workdir
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: The path to set as the base Working Directory for every subsequent
+      Step. It is resolved to an absolute path before being applied.
+    is_expand: true
+    is_required: true
+    summary: New working directory path.
+    title: Directory path
+  path: null
+- is_create_path: "true"
+  opts:
+    description: When set to `true`, the Step creates the directory (including parent
+      directories) if it does not exist yet. When set to `false`, the Step fails if
+      the directory is missing.
+    is_required: true
+    summary: Enable/disable the creation of the directory path in case it doesn't
+      exist yet.
+    title: Create path if doesn't exist?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: |-
+      When enabled, the Step retries creating the directory with `sudo` if it hits a permission error.
+
+      This is required on stacks where the Step runs as the non-root user and the directory must be created inside a `root`-owned parent directory. Disable this if `sudo` is unavailable in your environment or you want permission errors to fail the Step directly.
+    is_required: true
+    summary: Retry creating the directory with `sudo` if a permission error occurs.
+    title: Use sudo when elevated permissions are required
+    value_options:
+    - "true"
+    - "false"
+  use_sudo: "true"
+outputs:
+- BITRISE_SOURCE_DIR: null
+  opts:
+    description: |-
+      The expanded absolute path that the Step set as the base Working Directory.
+
+      Bitrise uses `BITRISE_SOURCE_DIR` as the Working Directory for every subsequent Step, so changing it is how this Step takes effect.
+    summary: The expanded absolute path applied as the base Working Directory for
+      every subsequent Step.
+    title: New base Working Directory
+- PWD: null
+  opts:
+    description: The expanded absolute path, exported as `PWD` so that subsequent
+      Steps and scripts see the new Working Directory.
+    summary: The expanded absolute path, also exported as `PWD`.
+    title: Current Working Directory

@@ -1,0 +1,42 @@
+title: Semaloop Submit Build
+summary: |
+  Submits an iOS build to Semaloop and enqueues tests.
+description: |
+  Submits an iOS build to Semaloop and enqueues tests.
+website: https://github.com/semaloop/bitrise-step-semaloop-submit-build
+source_code_url: https://github.com/semaloop/bitrise-step-semaloop-submit-build
+support_url: https://github.com/semaloop/bitrise-step-semaloop-submit-build/issues
+published_at: 2026-04-30T11:11:34.438628+01:00
+source:
+  git: https://github.com/semaloop/bitrise-step-semaloop-submit-build.git
+  commit: 0954ecc7ef1948e7c1ca29aa415f9c08752b40ab
+project_type_tags:
+- ios
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- api_key: $SEMALOOP_API_KEY
+  opts:
+    is_required: true
+    is_sensitive: true
+    title: Semaloop API key
+- app_path: $BITRISE_APP_PATH
+  opts:
+    is_required: false
+    summary: Direct path to a simulator `.app` bundle. Takes precedence over `test_bundle_path`.
+    title: Simulator .app path
+- opts:
+    is_required: false
+    summary: Directory to search for a simulator `.app` bundle (e.g. the `BITRISE_TEST_BUNDLE_PATH`
+      output of the Xcode Build for Testing step). Ignored if `app_path` is set.
+    title: Test bundle directory
+  test_bundle_path: $BITRISE_TEST_BUNDLE_PATH
+- ipa_path: $BITRISE_IPA_PATH
+  opts:
+    is_required: false
+    summary: Path to the signed .ipa file. Produced by the Xcode Archive & Export
+      step.
+    title: Device .ipa path

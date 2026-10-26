@@ -1,0 +1,143 @@
+title: Export test results to Test Reports
+summary: |
+  This Step is used to search for test results and export them for the **Deploy to Bitrise.io** Step which can export the results to the Test Reports.
+description: |
+  Not all testing Steps automatically export their results to the Test Reports. This Step is designed to export the results of those Steps that do not do this automatically. The Step creates the required `test-info.json` file and deploys the test results in the correct directory for export.
+
+  ### Configuring the Step
+
+  To use this Step to export the results of a testing Step - for example, **Flutter Test** -, you need to make sure that:
+
+  - The Step knows which folder to look for your test results.
+  - The Step knows which file to look for.
+  - The Step exports to the correct directory.
+
+  1. In the **The name of the test** input, set the name you want to see in the Test Reports. Each exported results file has a separate tab with the name defined here.
+
+  2. In the **Test result base path** input, set the path where your test results can be found.
+
+     This input determines where Bitrise will look for your test results. We recommend setting a folder here, though you can also set a specific file path.
+
+  3. In the **Test result search pattern** input, set a glob pattern that matches your test result files.
+
+     This search pattern is used to search every file and folder of the provided base path which was set in the **Test result base path** input. If every match is an XML file, the Step exports all the JUnit XMLs among them into the same test report, for example the separate XML that Gradle writes for each test class, and skips the other XML files with a warning. If the matches include a folder or another kind of file, you will receive a warning and the Step will export the first match.
+
+     If you set a specific file path in the previous input, just set `*` here.
+
+  4. In the **Step's test result directory** input, make sure the path points to a valid directory.
+
+     By default, do NOT modify this input’s value. It should be set to the $BITRISE_TEST_RESULT_DIR Env Var.
+
+  5. Make sure you have a Deploy to Bitrise.io Step in your Workflow. This step is responsible for deploying the exported files from the test result directory to the Test Reports.
+
+  ### Attachments
+
+  If the exported file is a JUnit XML, the Step also exports the screenshots, recordings and logs that belong to its test cases, so they show up under the test in the Test Reports. An attachment belongs to a test case if its file name follows the `<classname>__<name>[__run<k>]__<label>.<ext>` convention, for example `com.example.LoginTest__emptyState__1.png`.
+
+  The Step looks for these files only under the **Test result base path**, so make sure it covers the folder where your tests save them. Files tracked by git, such as committed reference images, are never exported.
+
+  ### Troubleshooting
+
+  - You always need a **Deploy to Bitrise.io** Step in your Workflow to export test results to the Test Reports. If you can't see your results in Test Reports, check that you have the Step in your Workflow.
+
+  - If the pattern set in the **Test result search pattern** input matches more than one file, and not all of them are XML files (for example a folder or an `.xcresult` bundle is among them), you will receive a warning and only the first match is exported. Make the pattern match a single file, or XML files only.
+
+  - If either the **Test result base path** input or the **Test result search pattern** input isn't set correctly or if either is left empty, the Step will fail.
+
+  ### Useful links
+
+  [Test reports](https://devcenter.bitrise.io/testing/test-reports/)
+  [Exporting custom tests to test reports](https://devcenter.bitrise.io/testing/exporting-to-test-reports-from-custom-script-steps/)
+
+  ### Related Steps
+
+  [Android Unit Test](https://www.bitrise.io/integrations/steps/android-unit-test)
+  [Xcode Test for iOS](https://www.bitrise.io/integrations/steps/xcode-test)
+website: https://github.com/bitrise-steplib/step-custom-test-results-export
+source_code_url: https://github.com/bitrise-steplib/step-custom-test-results-export
+support_url: https://github.com/bitrise-steplib/step-custom-test-results-export/issues
+published_at: 2026-10-20T08:55:44.044211025Z
+source:
+  git: https://github.com/bitrise-steplib/step-custom-test-results-export.git
+  commit: bbae546f1d67d3c8f1e0b752121be55dfbc343a6
+executables:
+  darwin-amd64:
+    storage_uri: steps/custom-test-results-export/2.0.0/bin/custom-test-results-export-darwin-amd64
+    hash: sha256-78327bdb5d8a23e061a47e125e3b87bb9d8ff9dfb3064838bd00ebcd5198d3b2
+  darwin-arm64:
+    storage_uri: steps/custom-test-results-export/2.0.0/bin/custom-test-results-export-darwin-arm64
+    hash: sha256-90af6a6625489c8a2804aac7e0238734a67b0e44caaa6d0a8d2288e2c958472a
+  linux-amd64:
+    storage_uri: steps/custom-test-results-export/2.0.0/bin/custom-test-results-export-linux-amd64
+    hash: sha256-2d3c3b632a4029801d5eb98b5207c51673b33acf49e56e137f7838f6ba262351
+  linux-arm64:
+    storage_uri: steps/custom-test-results-export/2.0.0/bin/custom-test-results-export-linux-arm64
+    hash: sha256-7db2609c8690c41b80d5141352af909764746a81b289a3689221e77a8823eb39
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/step-custom-test-results-export
+is_requires_admin_user: true
+is_always_run: true
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_expand: true
+    is_required: true
+    summary: Test name displayed in the Test Reports.
+    title: The name of the test
+    value_options: []
+  test_name: null
+- base_path: $BITRISE_SOURCE_DIR
+  opts:
+    description: |
+      You can provide a path to a single file or a directory path and filter for files using the **Test result search pattern** input.
+
+      This is the base path where the Step will look for your test results and their attachments. We recommend using a relative path to the results:
+
+      `app/build/test-results/testDemoDebugUnitTest/`
+
+      or
+
+      `./app/build/test-results/testDemoDebugUnitTest/`
+
+      If your tests save attachments, such as screenshots, outside this folder, set a folder that contains both, for example `app/build/`. Then make the **Test result search pattern** specific enough to match only the test results, for example `*/test-results/testDemoDebugUnitTest/TEST-*.xml`.
+    is_expand: true
+    is_required: true
+    summary: Path where the Step should look for custom test result files
+    title: Test result base path
+    value_options: []
+- opts:
+    description: |
+      This glob should match your test result files within the provided base path.
+      If it matches more than one file and every match is an XML file, the Step exports all the JUnit XMLs among them into the same test report. XML files that aren't JUnit XMLs are skipped with a warning. So is a file with the same name as one that is already exported, such as the same test class from another Gradle task, so match the results of a single test task.
+      If the matches include a folder or another kind of file, the Step will produce a warning displaying all matches, and export only the first one.
+      The matched file should be in a supported format. If you set a specific file path in the **Test result base path** input, set this value to `*`.
+
+      **Examples**:
+
+      Matching all files within the base path: `*`
+
+      Matching the JUnit XMLs of a Gradle test task, also when the base path is a wider folder, such as `app/build/`: `*/test-results/testDemoDebugUnitTest/TEST-*.xml`
+    is_expand: true
+    is_required: true
+    summary: A glob pattern that matches the test results within the base path.
+    title: Test result search pattern
+    value_options: []
+  search_pattern: null
+- bitrise_test_result_dir: $BITRISE_TEST_RESULT_DIR
+  opts:
+    description: Root directory for all test results created by the Bitrise CLI
+    is_required: true
+    title: Step's test result directory
+- opts:
+    category: Debug
+    description: Enable verbose logging?
+    is_required: true
+    title: Enable verbose logging?
+    value_options:
+    - "yes"
+    - "no"
+  verbose_log: "no"

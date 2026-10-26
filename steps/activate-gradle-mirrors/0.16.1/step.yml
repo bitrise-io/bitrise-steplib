@@ -1,0 +1,50 @@
+title: Activate Gradle Mirrors
+summary: Activates Bitrise repository mirrors for subsequent Gradle builds in the
+  workflow
+description: |
+  This step installs a Gradle init script that redirects repository requests to
+  Bitrise-hosted mirrors for faster, more reliable dependency resolution in
+  subsequent Gradle invocations.
+
+  The step is gated by the `BITRISE_MAVENCENTRAL_PROXY_ENABLED` environment
+  variable and only activates when run in a Bitrise datacenter that has a
+  mirror deployment. In every other case it logs an info message and exits
+  successfully.
+website: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+support_url: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+published_at: 2026-10-08T10:37:48.147127642Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors.git
+  commit: e1dd124969521ad5b3a18cdedcf55d72472b85eb
+executables:
+  darwin-amd64:
+    storage_uri: steps/activate-gradle-mirrors/0.16.1/bin/activate-gradle-mirrors-darwin-amd64
+    hash: sha256-b1f17c725d53200a7d6e038c7e46775e000937bad274b6baafe7e342dc2ddef3
+  darwin-arm64:
+    storage_uri: steps/activate-gradle-mirrors/0.16.1/bin/activate-gradle-mirrors-darwin-arm64
+    hash: sha256-31c26a9397a3a41f6ab8da4ddca3f0304e6b3acfc90e690cf5e74349a6c4193f
+  linux-amd64:
+    storage_uri: steps/activate-gradle-mirrors/0.16.1/bin/activate-gradle-mirrors-linux-amd64
+    hash: sha256-a01badc3c1de016ea891cf12d89b2377b2d68446470c8e9b9981df972d8c8149
+  linux-arm64:
+    storage_uri: steps/activate-gradle-mirrors/0.16.1/bin/activate-gradle-mirrors-linux-arm64
+    hash: sha256-d51413ade283b03f78a664ed6e8eadbf1f27b45d9d5b6fd1243f302424c4a5a3
+project_type_tags:
+- android
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-activate-gradle-mirrors
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"

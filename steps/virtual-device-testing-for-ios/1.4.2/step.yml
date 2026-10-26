@@ -1,0 +1,209 @@
+title: iOS Device Testing
+summary: Run iOS XCUITests on devices
+description: |-
+  Run iOS XCUItests on physical devices with Google's Firebase Test Lab. You do not have to set up and register your own devices and you don't need your own Firebase account.
+
+  We'll go over the most important configuration information for the Step. For more information, check out our [detailed guide](https://devcenter.bitrise.io/en/testing/device-testing-for-ios.html).
+
+  ### Configuring the Step
+
+  To use the Step, you need to build an IPA file with Xcode's `build-for-testing` action. You can use our dedicated Step:
+
+  1. Add the **Xcode Build for testing for iOS** Step to your Workflow.
+
+     The Step exports a .zip file that contains your test directory (by default, it’s `Debug-iphoneos`) and the xctestrun file.
+  1. Add the **iOS Device Testing** Step to the Workflow.
+  1. In the **Test devices** input field, specify the devices on which you want to test the app. The input's description lists the devices and OS versions that were available on 2026-07-24 — see **Checking the current device list** below if you need an up-to-date list.
+  1. Optionally, you can set a test timeout and configure file download in the **Debug** input group. The path to the downloaded files will be exported as an Environment Variable and it can be used by subsequent Steps.
+  1. Make sure you have the **Deploy to Bitrise.io** Step in your Workflow, with version 1.4.1 or newer. With the older versions of the Step, you won’t be able to check your results on the Test Reports page!
+
+  Please note you should not change the value of the **API token** and the **Test API's base URL** input.
+
+  ### Checking the current device list
+
+  The device tables in the **Test devices** input description were generated on **2026-07-24**. Google regularly adds and retires Firebase Test Lab devices, so they can go out of date. Three ways to check the current catalog:
+
+  - **Firebase console** — open [Test Lab](https://console.firebase.google.com/project/_/testlab) and start a test run; the available devices are listed in the **Select dimensions** step.
+  - **Google APIs Explorer** — no CLI and no Firebase project needed: call [`testEnvironmentCatalog.get` with `environmentType=IOS`](https://developers.google.com/apis-explorer/#p/testing/v1/testing.testEnvironmentCatalog.get?environmentType=IOS).
+  - **gcloud CLI** — install the [Google Cloud CLI](https://cloud.google.com/sdk/docs/install) (version 417.0.0 or newer), run `gcloud auth login`, set a Google Cloud project, then:
+
+    ```
+    gcloud firebase test ios models list
+    gcloud firebase test ios list-device-capacities
+    ```
+
+  ### Troubleshooting
+
+  If you get the **Build already exists** error, it is because you have more than one instance of the Step in your Workflow. This doesn't work as Bitrise sends the build slug to Firebase and having the Step more than once in the same Workflow results in sending the same build slug multiple times.
+
+  ### Useful links
+
+  [Device testing for iOS](https://devcenter.bitrise.io/en/testing/device-testing-for-ios.html)
+
+  ### Related Steps
+
+  [Xcode Build for testing for iOS](https://www.bitrise.io/integrations/steps/xcode-build-for-test)
+  [Xcode Test for iOS](https://www.bitrise.io/integrations/steps/xcode-test)
+website: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+source_code_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+support_url: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios/issues
+published_at: 2026-07-27T17:16:34.325707301Z
+source:
+  git: https://github.com/bitrise-steplib/steps-virtual-device-testing-for-ios.git
+  commit: ee3bf8883f1d70307a2ec4fa2a4641d16181d545
+executables:
+  darwin-amd64:
+    storage_uri: steps/virtual-device-testing-for-ios/1.4.2/bin/virtual-device-testing-for-ios-darwin-amd64
+    hash: sha256-1bba58ae1e7a1b3c9d9f6de23ada85dd1a68555bb9e77e6d0a64dc24d5bae274
+  darwin-arm64:
+    storage_uri: steps/virtual-device-testing-for-ios/1.4.2/bin/virtual-device-testing-for-ios-darwin-arm64
+    hash: sha256-9068c05e3aff4ab5accb6b5d80769dbf4e86906c51566dacfc6e88060d2f9fba
+  linux-amd64:
+    storage_uri: steps/virtual-device-testing-for-ios/1.4.2/bin/virtual-device-testing-for-ios-linux-amd64
+    hash: sha256-84fb0387826f4dd03e2a56a053bb13a45c2bf276dbce9ab254a73287f1d16984
+  linux-arm64:
+    storage_uri: steps/virtual-device-testing-for-ios/1.4.2/bin/virtual-device-testing-for-ios-linux-arm64
+    hash: sha256-697d7f325cc7e94f4bc80d0aa914a3b352ee95f43a5643cff54189b3e9324e88
+project_type_tags:
+- cordova
+- flutter
+- ionic
+- ios
+- kotlin-multiplatform
+- react-native
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-virtual-device-testing-for-ios
+is_always_run: false
+is_skippable: false
+run_if: .IsCI
+meta:
+  bitrise.io:
+    addons_required:
+    - addons-testing
+inputs:
+- opts:
+    description: |
+      Open finder, and navigate to the directory you designated for Derived Data output.
+      Open the folder for your project, then the Build/Products folders inside it.
+      You should see a folder Debug-iphoneos and PROJECT_NAME_iphoneos_DEVELOPMENT_TARGET-arm64.xctestrun. Select them both, then right-click on one of them and select Compress 2 items.
+    is_required: true
+    summary: |
+      The path to the zip file which contains the folder Debug-iphoneos and PROJECT_NAME_iphoneos_DEVELOPMENT_TARGET-arm64.xctestrun.
+    title: Zip path
+  zip_path: $BITRISE_TEST_BUNDLE_ZIP_PATH
+- opts:
+    description: |
+      One device configuration per line, each in the `deviceID,version,language,orientation` format. See table below for the available devices.
+
+      For example:
+      ```
+      iphonese3,26.3,en,portrait
+      iphone8,16.6,en,landscape
+      ```
+
+      Available devices, OS versions and their capacity (generated on 2026-07-27):
+      ```
+      ┌─────────────┬────────────────────────┬───────────────┬─────────────────┬─────────┐
+      │   MODEL_ID  │       MODEL_NAME       │ OS_VERSION_ID │ DEVICE_CAPACITY │   TAGS  │
+      ├─────────────┼────────────────────────┼───────────────┼─────────────────┼─────────┤
+      │ ipad10      │ iPad (10th generation) │ 16.6          │ Medium          │         │
+      │ iphone11pro │ iPhone 11 Pro          │ 16.6          │ Medium          │         │
+      │ iphone14pro │ iPhone 14 Pro          │ 16.6          │ Medium          │ default │
+      │ iphone16pro │ iPhone 16 Pro          │ 18.3          │ Medium          │         │
+      │ iphone8     │ iPhone 8               │ 16.6          │ Medium          │         │
+      │ iphonese3   │ iPhone SE 3            │ 18.4          │ Medium          │         │
+      │ iphonese3   │ iPhone SE 3            │ 26.3          │ Medium          │         │
+      └─────────────┴────────────────────────┴───────────────┴─────────────────┴─────────┘
+      ```
+
+      For the authoritative list, see [Available devices in Test Lab](https://firebase.google.com/docs/test-lab/ios/available-testing-devices).
+    is_required: true
+    summary: One device configuration per line, each in the `deviceID,version,language,orientation`
+      format. See table below for the available devices.
+    title: Test devices
+  test_devices: iphone16pro,18.3,en,portrait
+- num_flaky_test_attempts: "0"
+  opts:
+    description: |-
+      Specifies the number of times a test execution should be reattempted if one or more of its test cases fail for any reason.
+
+      An execution that initially fails but succeeds on any reattempt is reported as FLAKY.
+      The maximum number of reruns allowed is 10. (Default: 0, which implies no reruns.)
+    is_required: true
+    summary: Specifies the number of times a test execution should be reattempted
+      if one or more of its test cases fail for any reason.
+    title: Number of times a test execution is reattempted
+- opts:
+    category: Debug
+    description: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    summary: |
+      Max time a test execution is allowed to run before it is automatically canceled. The default value is 900 (15 min).  Duration in seconds with up to nine fractional digits. Example: "3.5".
+    title: Test timeout
+  test_timeout: 900
+- download_test_results: "false"
+  opts:
+    category: Debug
+    description: |
+      If this input is set to `true` all files generated in the test run will be downloaded. Otherwise, no any file will be downloaded.
+    is_required: true
+    summary: |
+      If this input is set to `true` all files generated in the test run will be downloaded. Otherwise, no any file will be downloaded.
+    title: Download files
+    value_options:
+    - "false"
+    - "true"
+- api_base_url: https://vdt.bitrise.io/test
+  opts:
+    category: Debug
+    description: |
+      The URL where test API is accessible.
+    is_dont_change_value: true
+    is_required: true
+    summary: The URL where test API is accessible.
+    title: Test API's base URL
+- api_token: $ADDON_VDTESTING_API_TOKEN
+  opts:
+    category: Debug
+    description: |
+      The token required to authenticate with the API.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The token required to authenticate with the API.
+    title: API Token
+- opts:
+    category: Debug
+    summary: JSON list of tests added to quarantine on Bitrise.io, quarantined tests
+      are excluded from test runs.
+    title: Quarantined tests
+  quarantined_tests: $BITRISE_QUARANTINED_TESTS_JSON
+outputs:
+- VDTESTING_DOWNLOADED_FILES_DIR: null
+  opts:
+    description: The directory containing the downloaded files if you have set `download_test_results`
+      inputs above.
+    summary: The directory containing the downloaded files if you have set `download_test_results`
+      inputs above.
+    title: Downloaded files directory
+- BITRISE_FLAKY_TEST_CASES: null
+  opts:
+    description: |-
+      A list of flaky test cases. A test case is considered flaky if it has failed at least once, but passed at least once as well.
+
+      The list contains the test cases in the following format:
+      ```
+      - TestSuit_1.TestClass_1.TestName_1
+      - TestSuit_1.TestClass_1.TestName_2
+      - TestSuit_1.TestClass_2.TestName_1
+      - TestSuit_2.TestClass_1.TestName_1
+      ...
+      ```
+
+      To export `BITRISE_FLAKY_TEST_CASES` Step Output `download_test_results` Step Input should be set to `true`.
+    summary: A list of flaky test cases. A test case is considered flaky if it has
+      failed at least once, but passed at least once as well.
+    title: List of flaky test cases

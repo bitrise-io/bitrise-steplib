@@ -1,0 +1,289 @@
+title: Device Preview
+summary: Run this build on an iOS Simulator or Android Emulator straight from your
+  pull request.
+description: |-
+  Creates a shareable Device Preview link for an app artifact from this build. Opening the link boots a
+  fresh iOS Simulator or Android Emulator in the browser, installs the app and launches it — nothing to
+  download, and no local Xcode or Android SDK needed.
+
+  The link is exported as `$BITRISE_DEVICE_PREVIEW_URL`, so you can use it anywhere later in the Workflow:
+  post it to Slack, attach it to a GitHub check, drop it into release notes, or feed it to your own
+  notification tooling. Set `post_pr_comment` to `true` and the Step also posts it as a pull request
+  comment for you.
+
+  ### Supported artifacts
+
+  - **iOS** — a zipped simulator `.app` bundle, for example the `$BITRISE_APP_DIR_PATH.zip` produced by the
+    **Xcode build for simulator** Step. A Simulator cannot run a device build, so `.ipa` files are rejected.
+  - **Android** — an `.apk`. Android App Bundles (`.aab`) cannot be installed directly and are rejected.
+
+  If the file was already uploaded by an earlier **Deploy to Bitrise.io** Step, this Step reuses that
+  artifact instead of uploading it again.
+
+  ### Good to know
+
+  - The Step fails the build if it cannot create a link. Set `is_skippable: true` on the Step in your
+    Workflow if you would rather a preview problem did not stop the build.
+  - Links expire after 24 hours by default, and 72 hours is the maximum.
+  - Each open of a link starts its own session, which shuts down automatically once nobody is watching it.
+website: https://github.com/bitrise-steplib/steps-device-preview
+source_code_url: https://github.com/bitrise-steplib/steps-device-preview
+support_url: https://github.com/bitrise-steplib/steps-device-preview/issues
+published_at: 2026-09-24T14:52:54.040370111Z
+source:
+  git: https://github.com/bitrise-steplib/steps-device-preview.git
+  commit: 14e9fa39e61bf668eacb7da81947bfd04dbe2632
+executables:
+  darwin-amd64:
+    storage_uri: steps/device-preview/1.1.0/bin/device-preview-darwin-amd64
+    hash: sha256-8fc2f40c68e70d85db1c59b616c2206d43e0f1fc961fe22e5e0871a8354e72d2
+  darwin-arm64:
+    storage_uri: steps/device-preview/1.1.0/bin/device-preview-darwin-arm64
+    hash: sha256-26adfa77a9844133f00c078b274be9b7b416d6bda08861d114667e00590ccf40
+  linux-amd64:
+    storage_uri: steps/device-preview/1.1.0/bin/device-preview-linux-amd64
+    hash: sha256-54c6516087a4f2b966c5a959ba993be0e286fc0ce35ab9a6d854697767473570
+  linux-arm64:
+    storage_uri: steps/device-preview/1.1.0/bin/device-preview-linux-arm64
+    hash: sha256-fbbf043d98b621ccf17febcecd81e072ec492f142689a74ce6b62b983047a7a8
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-device-preview
+inputs:
+- app_path: $BITRISE_APP_DIR_PATH.zip
+  opts:
+    description: |-
+      Path to the app to open on a device. It can be:
+
+      - a zipped iOS simulator app bundle, for example `$BITRISE_APP_DIR_PATH.zip` from the
+        **Xcode build for simulator** Step
+      - an iOS simulator `.app` directory, which the Step zips for you
+      - an Android `.apk`
+
+      Device builds (`.ipa`) and Android App Bundles (`.aab`) cannot be installed on a
+      Simulator or Emulator, so the Step rejects them.
+    is_required: true
+    summary: Path to the app to open on a device.
+    title: App to preview
+- opts:
+    description: |-
+      `auto` detects the platform from the app itself, which is what you usually want.
+
+      Set it to `ios` or `android` to double-check the app you are passing in: the Step fails if
+      the file turns out to be for the other platform.
+    is_required: true
+    summary: Detect the platform from the app itself, or pin it to `ios` or `android`.
+    title: Platform
+    value_options:
+    - auto
+    - ios
+    - android
+  platform: auto
+- opts:
+    description: |-
+      ID or name of a Bitrise Remote Dev Environments warm pool to serve the link's opens from.
+      Each open claims one of the pool's pre-booted device sessions when one is available, so the
+      click-to-app time is the app download rather than a VM boot; when none is available a
+      session is created from the pool's configuration. The pool must be workspace-owned and its
+      configuration must boot a device of the app's platform.
+
+      The pool fixes the device and the machine, so `device_model`, `os_version`, `stack`,
+      `machine_type`, `system_image` and the emulator inputs cannot be set with it — the Step
+      fails before uploading anything if they are. Deleting the pool invalidates the links minted
+      with it.
+
+      Warm pools are created in the Bitrise web UI or with `bitrise-cli rde warm-pool create`.
+    summary: Serve the link's opens from a warm pool of pre-booted devices. Empty
+      boots a device per open using the device inputs below.
+    title: Warm pool
+  warm_pool_id: ""
+- device_model: ""
+  opts:
+    description: |-
+      Device to boot, for example `iPhone 15` on iOS or `pixel_7` on Android. Empty uses the
+      platform default.
+
+      The value is not validated when the link is created, so a name that does not exist only
+      surfaces when someone opens the link.
+    summary: Device to boot, for example `iPhone 15` or `pixel_7`. Empty uses the
+      platform default.
+    title: Device model
+- opts:
+    description: |-
+      OS version to boot, for example `17.5`. Empty uses the platform default.
+
+      iOS only: on Android the OS version comes from the system image, so set `system_image`
+      instead. The Step fails if it is set for an Android app.
+    summary: OS version to boot, for example `17.5`. Empty uses the platform default.
+    title: OS version
+  os_version: ""
+- opts:
+    category: Device configuration
+    description: |-
+      Bitrise stack the preview sessions run on, for example `linux-docker-android-22.04`. Empty
+      uses the default for the platform, which is what you usually want.
+
+      The value is validated when the link is created: a stack that does not exist, cannot be
+      provisioned, or does not match the app's platform fails the Step with the backend's
+      message. The available stacks can be listed via the Bitrise API using a Workspace API
+      token (`GET /v1/workspaces/{workspace}/stacks`).
+
+      There is deliberately no cluster input — the cluster is derived from the stack and
+      machine type combination, the same way session creation derives it.
+    summary: Bitrise stack the preview sessions run on. Empty uses the default for
+      the platform.
+    title: Stack
+  stack: ""
+- machine_type: ""
+  opts:
+    category: Device configuration
+    description: |-
+      Machine type the preview sessions run on, for example `g2.linux.x-large`. Empty uses the
+      default for the platform.
+
+      The value is validated when the link is created: a machine type that does not exist or is
+      too small to run a preview device (an Android emulator needs at least 4 CPUs and 8 GB RAM)
+      fails the Step with the backend's message. The available machine types can be listed via
+      the Bitrise API using a Workspace API token
+      (`GET /v1/workspaces/{workspace}/machine-types`).
+    summary: Machine type the preview sessions run on. Empty uses the default for
+      the platform.
+    title: Machine type
+- opts:
+    category: Device configuration
+    description: |-
+      Android only: the sdkmanager system image package the emulator boots, for example
+      `system-images;android-34;google_apis;x86_64`. Empty uses the platform default.
+
+      Only images pre-installed on the stack can boot — they are never downloaded when the
+      device starts. Asking for an image the stack does not have falls back to the closest
+      installed one, with a notice shown to the viewer.
+    summary: Android emulator system image package. Empty uses the platform default.
+    title: Android system image
+  system_image: ""
+- emulator_ram_mb: ""
+  opts:
+    category: Device configuration
+    description: |-
+      Android only: RAM given to the emulator, in MB. Empty sizes it to the host machine
+      (a quarter of the host's RAM, clamped), which is what you usually want.
+
+      When set it must be at least 1024, and it is checked against the machine type the link's
+      sessions run on when the link is created — asking for more RAM than the machine has fails
+      the Step.
+    summary: Android emulator RAM in MB. Empty sizes it to the host machine.
+    title: Emulator RAM (MB)
+- emulator_cores: ""
+  opts:
+    category: Device configuration
+    description: |-
+      Android only: CPU cores given to the emulator. Empty sizes it to the host machine (half
+      of the host's cores, clamped), which is what you usually want.
+
+      Checked against the machine type the link's sessions run on when the link is created —
+      asking for more cores than the machine has fails the Step.
+    summary: Android emulator CPU core count. Empty sizes it to the host machine.
+    title: Emulator CPU cores
+- emulator_cold_boot: "false"
+  opts:
+    category: Device configuration
+    description: |-
+      Android only: boot the emulator cold (`-no-snapshot-load`) on every open of the link, and
+      never save a quickboot snapshot. Every open then exercises a full first boot, which is
+      slower but closer to what a fresh device does.
+    is_required: true
+    summary: Boot the Android emulator cold on every open, instead of from a snapshot.
+    title: Cold-boot the emulator?
+    value_options:
+    - "false"
+    - "true"
+- link_ttl_hours: ""
+  opts:
+    description: |-
+      Link lifetime in hours. Empty uses the default of 24 hours, and 72 hours is the maximum.
+
+      Short lifetimes are the main protection against a leaked link being used, so prefer the
+      shortest one that still fits how your team reviews.
+    summary: Link lifetime in hours. Empty uses the default of 24 hours; 72 is the
+      maximum.
+    title: How long the link should work for
+- auto_terminate_minutes: ""
+  opts:
+    description: |-
+      How long a device session spawned by the link stays up after its last viewer disconnects,
+      in minutes. Empty uses the default of 60 minutes.
+
+      When set it must be at least 10 minutes — a shorter window would shut sessions down before
+      the device finishes booting — and at most the maximum session lifetime, which bounds a
+      session's total runtime no matter what: auto-terminate can be tuned but never turned off.
+    summary: How long a device session stays up after its last viewer leaves. Empty
+      uses the default of 60 minutes.
+    title: Minutes before an unwatched device shuts down
+- opts:
+    description: |-
+      Post the link as a comment on the pull request this build belongs to.
+
+      Off by default, so adding the Step to a busy Workflow cannot start commenting on everyone's
+      pull requests until you opt in. Ignored when the build is not a pull request build. The link
+      is always exported as `$BITRISE_DEVICE_PREVIEW_URL` either way, so you can share it however
+      you like.
+    is_required: true
+    summary: Post the link as a comment on the pull request this build belongs to.
+    title: Post the link as a pull request comment?
+    value_options:
+    - "false"
+    - "true"
+  post_pr_comment: "false"
+- opts:
+    category: Debug
+    description: |-
+      Used to find the app among the artifacts a previous **Deploy to Bitrise.io** Step already
+      uploaded, so the same file is not uploaded twice. When the app is not found here, the Step
+      uploads it itself.
+    is_dont_change_value: true
+    summary: Used to reuse an artifact a previous Deploy to Bitrise.io Step already
+      uploaded.
+    title: Artifacts already deployed by this build
+  permanent_download_url_map: $BITRISE_PERMANENT_DOWNLOAD_URL_MAP
+- opts:
+    category: Debug
+    is_required: true
+    summary: Enable verbose logging.
+    title: Enable verbose logging
+    value_options:
+    - "false"
+    - "true"
+  verbose: "false"
+- build_url: $BITRISE_BUILD_URL
+  opts:
+    category: Debug
+    description: Unique build URL of this build on Bitrise.io. Set automatically.
+    is_dont_change_value: true
+    is_required: true
+    summary: Unique build URL of this build on Bitrise.io.
+    title: Bitrise build URL
+- build_api_token: $BITRISE_BUILD_API_TOKEN
+  opts:
+    category: Debug
+    description: The build's API token for this build on Bitrise.io. Set automatically.
+    is_dont_change_value: true
+    is_required: true
+    is_sensitive: true
+    summary: The build's API token for this build on Bitrise.io.
+    title: Bitrise build API token
+outputs:
+- BITRISE_DEVICE_PREVIEW_URL: null
+  opts:
+    summary: The shareable link that opens this build on a device.
+    title: Device Preview link
+- BITRISE_DEVICE_PREVIEW_EXPIRES_AT: null
+  opts:
+    summary: When the Device Preview link stops working, as an RFC 3339 timestamp.
+    title: Device Preview link expiry

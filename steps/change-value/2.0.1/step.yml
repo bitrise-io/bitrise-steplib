@@ -1,0 +1,93 @@
+title: Change value in file
+summary: Changes a selected value in a targeted file.
+description: |-
+  This Step changes a selected value in a targeted file, for example, constants.
+
+  ### Configuring the Step
+
+  1. Set the **File path** in which you want to change a value.
+  2. Set the **Current value** which needs to be changed.
+  3. Set the **New value**.
+
+  ### Troubleshooting
+  Please make sure that your targeted file path is correct, existing and relative from the root folder.
+  Please make sure that you set a correct **Current value** which exists in the targeted file. You must define this value.
+  Please make sure that you define the New value.
+
+  ### Related Steps
+  - [Change Working Directory for subsequent Steps](https://www.bitrise.io/integrations/steps/change-workdir)
+website: https://github.com/bitrise-steplib/steps-change-value
+source_code_url: https://github.com/bitrise-steplib/steps-change-value
+support_url: https://github.com/bitrise-steplib/steps-change-value/issues
+published_at: 2026-06-26T09:01:57.144320605Z
+source:
+  git: https://github.com/bitrise-steplib/steps-change-value.git
+  commit: 05bc1613b80347f7053712a0ea11f0dde12e064c
+executables:
+  darwin-amd64:
+    storage_uri: steps/change-value/2.0.1/bin/change-value-darwin-amd64
+    hash: sha256-0118a843e2fea01395c93b79b3fd510dba2df7837306d7344877ad019032b3c0
+  darwin-arm64:
+    storage_uri: steps/change-value/2.0.1/bin/change-value-darwin-arm64
+    hash: sha256-6c76262b03f131d7ea4f7419d4c449a7cf9115c6d4e5badd2736062853a15eee
+  linux-amd64:
+    storage_uri: steps/change-value/2.0.1/bin/change-value-linux-amd64
+    hash: sha256-46ae7702f4e9873ec8a2b98fcae9736ab05392e38e5de8fca6fd5db60bd96618
+  linux-arm64:
+    storage_uri: steps/change-value/2.0.1/bin/change-value-linux-arm64
+    hash: sha256-58a92ba5f916cd489b7ae8ff961745ea16979d0c30d9a81e2afad7ed84950a09
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/steps-change-value
+inputs:
+- file: null
+  opts:
+    description: Path to the file in which the value replacement will be performed.
+      The path must be relative to the repository root.
+    is_required: true
+    summary: The target file path in which you want to change a value.
+    title: File path
+- old_value: null
+  opts:
+    description: The exact string to search for and replace in the target file. The
+      step fails if this value is not found and Mark the Step as Failed if not found
+      is enabled.
+    is_required: true
+    summary: The current value which needs to be changed in the target file.
+    title: Current value
+- new_value: null
+  opts:
+    description: The string that replaces all occurrences of the current value in
+      the target file.
+    is_required: true
+    summary: The new value you want to write to the target file.
+    title: New value
+- opts:
+    description: When enabled, prints the full file content to the build log before
+      and after the replacement.
+    title: Print file content before and after the value change
+    value_options:
+    - "true"
+    - "false"
+  show_file: "false"
+- notfound_exit: "true"
+  opts:
+    description: When enabled, the step fails if the current value is not found in
+      the target file. Disable this to allow the step to succeed even if no replacement
+      was made.
+    title: Mark the Step as "Failed" if the selected value isn't found
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    description: |-
+      When enabled, the step retries reading and writing the target file with `sudo` if it hits a permission error.
+
+      This is required on stacks where the step runs as the non-root user and the target file is owned by `root`. Disable this if `sudo` is unavailable in your environment or you want permission errors to fail the step directly.
+    title: Use sudo when elevated permissions are required
+    value_options:
+    - "true"
+    - "false"
+  use_sudo: "true"

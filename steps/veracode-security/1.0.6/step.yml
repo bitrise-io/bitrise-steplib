@@ -1,0 +1,79 @@
+title: Veracode Security
+summary: |
+  This step uploads your app to Veracode Security for app security testing.
+description: |
+  This setp uploads your app to Veracode Security for app security testing.
+website: https://github.com/ryanphillipthomas/veracode-security
+source_code_url: https://github.com/ryanphillipthomas/veracode-security
+support_url: https://github.com/ryanphillipthomas/veracode-security/issues
+published_at: 2026-08-11T18:14:55.015481-05:00
+source:
+  git: https://github.com/ryanphillipthomas/veracode-security.git
+  commit: 1604869ced89dd05d46e1c2f9e45bcffa1204cda
+host_os_tags:
+- osx-10.10
+- ubuntu-16.04
+project_type_tags:
+- ios
+- macos
+- android
+type_tags:
+- test
+- security
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Your Veracode API Credentials ID
+      [https://help.veracode.com/r/c_api_credentials3](https://help.veracode.com/r/c_api_credentials3)
+    is_required: true
+    is_sensitive: true
+    title: Veracode API Credentials ID
+  veracode_api_id: null
+- opts:
+    description: |-
+      Your Veracode API Secret Key
+      [https://help.veracode.com/r/c_api_credentials3](https://help.veracode.com/r/c_api_credentials3)
+    is_required: true
+    is_sensitive: true
+    title: Veracode API Secret Key
+  veracode_api_secret: null
+- opts:
+    description: |-
+      Your Veracode Application Name
+      [https://help.veracode.com/r/r_applications_info](https://help.veracode.com/r/r_applications_info)
+    is_required: true
+    title: Veracode Application Name
+  veracode_app_name: null
+- opts:
+    description: Your Application Version
+    is_required: true
+    title: Application Version
+  veracode_app_version: null
+- opts:
+    is_required: false
+    title: Your Veracode Sandbox Name
+  veracode_sandbox: null
+- file_upload_path: null
+  opts:
+    is_required: true
+    title: File Upload Path
+- auto_scan: "true"
+  opts:
+    description: |-
+      Automatically starts a staic scan after pre-scan is complete
+      [https://help.veracode.com/r/r_applications_info](https://help.veracode.com/r/r_applications_info)
+    is_required: true
+    title: Auto Scan
+    value_options:
+    - "false"
+    - "true"
+- ios_archive: null
+  opts:
+    is_required: false
+    title: iOS Archive Directory
