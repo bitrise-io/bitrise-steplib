@@ -1,0 +1,117 @@
+title: Maestro Test
+summary: Runs Maestro flows on an Android emulator or iOS simulator and exports the
+  results to Test Reports.
+description: |-
+  Runs your [Maestro](https://maestro.dev) flows locally on the build machine and exports the results.
+
+  The Step installs the Maestro CLI, installs your app on the device, runs `maestro test`, and exports:
+  - the results to the Test Reports page, with each flow's screenshots, `startRecording` videos and logs attached to its test case
+  - the Maestro test output folder as a zip artifact
+
+  Add **Deploy to Bitrise.io** after this Step to upload the results.
+
+  #### Device
+
+  The Step runs the flows on a device that is already running. Start one before this Step with **AVD Manager** (Android) or **Xcode Start Simulator** (iOS).
+
+  Only one device of the app's platform may run: the Step fails before installing the app if it finds none or several. To run the flows on several devices, use parallel Pipeline Workflows, see the examples below.
+
+  #### Flow variables
+
+  Maestro passes every environment variable with the `MAESTRO_` prefix to the flows, so an Env Var or Secret named `MAESTRO_USERNAME` is available as `${MAESTRO_USERNAME}`.
+
+  #### Useful links
+
+  - [Running Maestro tests on Bitrise](https://docs.bitrise.io/en/bitrise-ci/testing/running-maestro-tests-on-bitrise)
+website: https://github.com/bitrise-steplib/bitrise-step-maestro-test
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-maestro-test
+support_url: https://github.com/bitrise-steplib/bitrise-step-maestro-test/issues
+published_at: 2026-10-27T10:09:12.663151+01:00
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-maestro-test.git
+  commit: 351c1a4a97f23113dc33a7fbe2953fbf426a2a55
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+type_tags:
+- test
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-maestro-test
+is_skippable: false
+inputs:
+- flow_path: .maestro
+  opts:
+    description: Maestro flow files or folders containing flow files, one per line.
+      If a folder has a `config.yaml`, Maestro uses it.
+    is_required: true
+    summary: Maestro flow files or folders containing flow files, one per line.
+    title: Flow path
+- app_path: ""
+  opts:
+    description: |-
+      The .apk (Android) or simulator .app (iOS) to install before the flows run. The Step runs the flows on Android or iOS based on this file.
+
+      If you build the app with the official Bitrise Steps, use their output: `$BITRISE_APK_PATH` after **Android Build**, or `$BITRISE_APP_DIR_PATH` after **Xcode Build for Simulator**.
+
+      An Android App Bundle (.aab) cannot be installed on an emulator. Convert it with **Export Universal APK** before this Step and use its `$BITRISE_APK_PATH`.
+    is_required: true
+    summary: The .apk (Android) or simulator .app (iOS) to install before the flows
+      run.
+    title: App path
+- include_tags: ""
+  opts:
+    is_required: false
+    summary: Run only the flows that have at least one of these tags (comma or newline
+      separated).
+    title: Include tags
+- exclude_tags: ""
+  opts:
+    is_required: false
+    summary: Skip the flows that have any of these tags (comma or newline separated).
+    title: Exclude tags
+- opts:
+    is_required: true
+    summary: The name the results are shown under on the Test Reports page.
+    title: Test name
+  test_name: Maestro
+- maestro_version: 2.11.0
+  opts:
+    category: Debugging
+    description: |-
+      The Maestro CLI version to install. The default is the version this Step release was tested with.
+
+      Change it only when you need a different version before a new Step release ships it. Untested versions can run your flows, but the Step's test output handling is only guaranteed for the tested version.
+
+      Use the version number from a [Maestro release](https://github.com/mobile-dev-inc/maestro/releases) tag without the `cli-` prefix, `2.1.0` or newer.
+    is_required: true
+    summary: The Maestro CLI version to install. The default is the version this Step
+      release was tested with.
+    title: Maestro CLI version
+- additional_args: ""
+  opts:
+    category: Debugging
+    description: Extra arguments appended to the `maestro test` command, for example
+      `--no-reinstall-driver`.
+    is_required: false
+    summary: Extra arguments appended to the `maestro test` command.
+    title: Additional maestro test arguments
+- bitrise_test_result_dir: $BITRISE_TEST_RESULT_DIR
+  opts:
+    category: Debugging
+    is_dont_change_value: true
+    is_required: true
+    summary: The per-step folder the Bitrise CLI creates for test results.
+    title: Step's test result directory
+outputs:
+- MAESTRO_JUNIT_PATH: null
+  opts:
+    summary: Path to the JUnit report written by Maestro.
+    title: JUnit report path
+- MAESTRO_TEST_OUTPUT_ZIP_PATH: null
+  opts:
+    summary: Path to the zipped Maestro test output folder (screenshots, logs, recordings)
+      in the deploy directory.
+    title: Test output zip path
