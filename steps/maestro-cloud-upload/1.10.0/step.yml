@@ -60,7 +60,6 @@ host_os_tags:
 project_type_tags:
 - ios
 - android
-- xamarin
 - react-native
 - cordova
 - ionic
