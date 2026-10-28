@@ -1,0 +1,338 @@
+title: Shorebird Release
+summary: Builds and publishes a new Shorebird release for iOS and/or Android.
+description: |
+  Runs [`shorebird release`](https://docs.shorebird.dev/code-push/release/) - a drop-in replacement for
+  `flutter build` that compiles your app and uploads its Dart artifacts to Shorebird's servers as the
+  baseline future patches diff against. You still need to upload the generated artifact
+  (`.ipa`/`.apk`/`.aab`) to the App Store / Play Store yourself (or via a follow-up deploy Step) - Shorebird
+  doesn't do that part.
+
+  ### Flutter version
+
+  Shorebird maintains its own private Flutter cache, independent of any system-installed Flutter. Leave
+  **Flutter version** empty to auto-detect the version of the system Flutter already on `PATH` (via
+  `flutter --version --machine`) and pass it through, keeping the Shorebird-built binary in lockstep with
+  whatever Flutter version the rest of your workflow uses - or set it explicitly to pin a version. If
+  Flutter isn't installed/found on `PATH` at all and no version is set explicitly, the Step fails with a
+  clear error - a Flutter Install (or FVM) Step must run before this one in that case.
+
+  ### Releasing for multiple platforms
+
+  Set **Platform** to `both` to release iOS and Android in one Step run - each platform is built and
+  published as its own `shorebird release` invocation, registered together as one version release.
+  Releasing for iOS (or both iOS and Android together) requires a macOS runner.
+
+  ### Building a smaller Android APK for one architecture
+
+  By default, three Android ABIs are compiled (`arm`, `arm64`, `x86_64`). Use **Android target platform(s)**
+  to restrict this to one or more specific architectures. Note this only applies to `release` - patches
+  never need it.
+
+  ### Signing issues
+
+  If you hit iOS provisioning/certificate errors: for local builds, enable "Automatically manage signing"
+  in Xcode's Signing & Capabilities tab. For CI, set up an `ExportOptions.plist` describing your export
+  method, provisioning profiles, signing certificate, signing style, and team ID, and point **Export options
+  plist path** at it.
+
+  ### Side-loading and MDM
+
+  Shorebird doesn't require App Store or Play Store publishing - it works with side-loading and MDM
+  distribution on Android (and enterprise iOS programs work similarly). Set **Android artifact type** to
+  `apk` to produce a directly installable `.apk` instead of an `.aab`.
+
+  ### Managing releases after publishing
+
+  This Step only creates new releases. To list, inspect, or delete existing releases, use the
+  `shorebird releases` CLI commands directly, or the [Shorebird console](https://console.shorebird.dev).
+  Deleting a release from the console is irreversible and removes all of its patches.
+
+  ### Configuring the Step
+  1. In **Project Location** the root directory of your Flutter project is automatically filled out. It must
+     contain a `shorebird.yaml` (created by running `shorebird init` locally and committing the result) -
+     this Step fails fast with a clear error if it's missing.
+  2. Set **Shorebird API token** to a Shorebird Console API key, stored as a Bitrise Secret.
+  3. Select **Platform**, leave **Flutter version** empty (or pin one explicitly).
+  4. For Android, pick **Android artifact type** and adjust **Android output pattern** if your build output
+     goes somewhere non-default.
+  5. For iOS, configure **Codesign iOS build?**, **Export method**, and **Export options plist path** as
+     needed, and adjust **iOS output pattern** if needed.
+
+  ### Useful links
+  - [Shorebird](https://shorebird.dev)
+  - [Creating a release](https://docs.shorebird.dev/code-push/release/)
+  - [Managing releases](https://docs.shorebird.dev/code-push/release/#manage-releases)
+  - [Code signing](https://devcenter.bitrise.io/code-signing/code-signing-index/)
+website: https://github.com/uptech/bitrise-step-shorebird-release
+source_code_url: https://github.com/uptech/bitrise-step-shorebird-release
+support_url: https://github.com/uptech/bitrise-step-shorebird-release/issues
+published_at: 2026-09-17T13:17:35.960798-07:00
+source:
+  git: https://github.com/uptech/bitrise-step-shorebird-release.git
+  commit: 110137c82f1106b459eb8c30f36e61548089b428
+project_type_tags:
+- flutter
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/uptech/shorebird-release-step
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      The root dir of your Flutter project. Must contain a `shorebird.yaml` (created by running `shorebird init`
+      locally and committing the result) - the Step fails with a clear error if it's missing.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Exported as the `SHOREBIRD_TOKEN` env var before invoking the Shorebird CLI. The Step fails fast if
+      this is empty.
+
+      Create an API key in the Shorebird Console under Account -> API Keys, and store it as a Bitrise Secret
+      (mark it sensitive).
+    is_required: true
+    is_sensitive: true
+    summary: Auth token used by the Shorebird CLI (from a Shorebird Console API key)
+    title: Shorebird API token
+  shorebird_token: $SHOREBIRD_TOKEN
+- opts:
+    description: |-
+      The selected platform will be released, or both iOS and Android if you select both. Releasing for iOS
+      requires a macOS runner.
+    is_required: true
+    summary: The selected platform will be released, or both iOS and Android if you
+      select both
+    title: Platform
+    value_options:
+    - both
+    - ios
+    - android
+  platform: both
+- flutter_version: ""
+  opts:
+    category: Options
+    description: |-
+      Maps to `--flutter-version`. Shorebird manages its own private Flutter cache under `~/.shorebird`,
+      independent of any system-installed Flutter. Leaving this empty makes the Step auto-detect the version
+      of the system Flutter already on `PATH` (via `flutter --version --machine`) and pass that value
+      through. If Flutter isn't installed/found on `PATH` at all, the Step fails with a clear error - a
+      Flutter Install (or FVM) Step **must** run before this Step in that case.
+    is_required: true
+    summary: e.g. 3.24.0. Leave empty to auto-detect from the installed system Flutter.
+    title: Flutter version
+- flavor: ""
+  opts:
+    category: Options
+    description: Maps to `--flavor`.
+    summary: The product flavor to use when building.
+    title: Flavor
+- opts:
+    category: Options
+    description: Maps to `-t`/`--target`, e.g. `lib/main_prod.dart`.
+    summary: The main entrypoint file of the application.
+    title: Target (main entrypoint)
+  target: ""
+- build_name: ""
+  opts:
+    category: Options
+    description: Maps to `--build-name`.
+    summary: Override the version name, e.g. 1.2.3.
+    title: Build name
+- build_number: ""
+  opts:
+    category: Options
+    description: Maps to `--build-number`, e.g. `$BITRISE_BUILD_NUMBER`.
+    summary: Override the version code / build number, e.g. 42.
+    title: Build number
+- dry_run: "false"
+  opts:
+    category: Options
+    description: Maps to `-n`/`--dry-run`.
+    is_required: true
+    summary: Build and validate the release but do not upload it. Ideal for CI validation.
+    title: Dry run?
+    value_options:
+    - "true"
+    - "false"
+- obfuscate: "false"
+  opts:
+    category: Options
+    description: Maps to `--obfuscate`.
+    is_required: true
+    summary: Must be used together with Split debug info directory.
+    title: Obfuscate Dart code?
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Options
+    description: Maps to `--split-debug-info=<dir>`.
+    summary: Output debug symbol files to this directory when obfuscating.
+    title: Split debug info directory
+  split_debug_info: ""
+- dart_defines: ""
+  opts:
+    category: Options
+    description: |-
+      Separate multiple defines with a newline, e.g.:
+      ```
+      API_URL=https://example.com
+      ENABLE_FOO=true
+      ```
+    summary: One KEY=VALUE per line, appended as repeated --dart-define flags
+    title: Dart defines
+- dart_define_files: ""
+  opts:
+    category: Options
+    description: Separate multiple file paths with a newline.
+    summary: One file path per line, appended as repeated --dart-define-from-file
+      flags
+    title: Dart define files
+- additional_params: ""
+  opts:
+    category: Options
+    description: |-
+      Appended directly to the `shorebird release` invocation. Use this for advanced/rarely-needed flags
+      this Step doesn't have a dedicated input for, e.g. `--public-key-cmd=...`.
+    summary: Escape hatch for shorebird release flags not otherwise exposed by this
+      Step
+    title: Additional parameters
+- ios_codesign: "true"
+  opts:
+    category: iOS-specific options
+    is_required: true
+    summary: Maps to --codesign (true) / --no-codesign (false)
+    title: Codesign iOS build?
+    value_options:
+    - "true"
+    - "false"
+- ios_codesign_identity: ""
+  opts:
+    category: iOS-specific options
+    description: Override codesign identity in .flutter_settings.
+    summary: Override codesign identity in .flutter_settings
+    title: Codesign Identity
+- ios_export_method: app-store
+  opts:
+    category: iOS-specific options
+    description: Maps to `--export-method`.
+    is_required: true
+    summary: Distribution method for the iOS archive export step.
+    title: Export method
+    value_options:
+    - app-store
+    - ad-hoc
+    - development
+    - enterprise
+- ios_export_options_plist: ""
+  opts:
+    category: iOS-specific options
+    description: Maps to `--export-options-plist`. See "Signing issues" above.
+    summary: Path to a custom ExportOptions.plist for the iOS archive export step.
+    title: Export options plist path
+- ios_additional_params: --release
+  opts:
+    category: iOS-specific options
+    summary: Raw `flutter build` args, appended after a literal `--` separator to
+      the iOS invocation.
+    title: Additional Flutter build parameters (iOS)
+- ios_output_pattern: '*build/ios/ipa/*.ipa'
+  opts:
+    category: iOS-specific options
+    description: Separate multiple patterns with a newline.
+    is_required: true
+    summary: Pattern to find the built .ipa, relative to $BITRISE_SOURCE_DIR.
+    title: Output pattern
+- android_output_type: apk
+  opts:
+    category: Android options
+    is_required: true
+    summary: apk maps to --artifact=apk (default), appbundle maps to --artifact=aab.
+    title: Android artifact type
+    value_options:
+    - apk
+    - appbundle
+- android_target_platform: ""
+  opts:
+    category: Android options
+    description: |-
+      Maps to `--target-platform`. Separate multiple values with a newline. See "Building a smaller Android
+      APK for one architecture" above.
+    summary: One or more of android-arm, android-arm64, android-x64. Blank builds
+      all three (the default).
+    title: Android target platform(s)
+- android_additional_params: --release
+  opts:
+    category: Android options
+    summary: Raw `flutter build` args, appended after a literal `--` separator to
+      the Android invocation.
+    title: Additional Flutter build parameters (Android)
+- android_output_pattern: |-
+    *build/app/outputs/apk/*/*.apk
+    *build/app/outputs/bundle/*/*.aab
+  opts:
+    category: Android options
+    description: |-
+      Separate multiple patterns with a newline. Only the selected **Android artifact type** is exported,
+      even if the pattern matches both apk and aab files.
+    is_required: true
+    summary: Pattern(s) to find built APK/AAB artifacts, relative to $BITRISE_SOURCE_DIR.
+    title: Output (.apk, .aab) pattern
+- cache_level: all
+  opts:
+    description: |-
+      If enabled, will cache:
+      - pub packages
+      - Android (gradle) cache
+      - Carthage / Cocoapods dependencies
+      - the installed Shorebird CLI (`~/.shorebird`)
+    is_required: true
+    summary: Enable or disable caching
+    title: Build cache
+    value_options:
+    - all
+    - none
+- is_debug_mode: "false"
+  opts:
+    is_required: true
+    summary: If debug mode is enabled, the step will print verbose logs
+    title: Debug mode?
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    summary: The created .apk file's path.
+    title: The created .apk file's path
+- BITRISE_APK_PATH_LIST: null
+  opts:
+    summary: All created .apk file paths, separated by |.
+    title: All created .apk file's path list
+- BITRISE_AAB_PATH: null
+  opts:
+    summary: Path of the generated (and copied) AAB file - after filtering.
+    title: Path of the generated AAB
+- BITRISE_AAB_PATH_LIST: null
+  opts:
+    summary: List of the generated (and copied) AAB file paths - after filtering,
+      separated by |.
+    title: List of the generated AAB file paths
+- BITRISE_IPA_PATH: null
+  opts:
+    summary: The created .ipa file's path.
+    title: The created .ipa file's path
+- SHOREBIRD_RELEASE_VERSION: null
+  opts:
+    description: |-
+      The release version created. Best-effort parsed from the Shorebird CLI's stdout/stderr - may be empty
+      if parsing fails, since Shorebird does not currently offer a machine-readable output format for
+      `release`.
+    summary: The release version created. Best-effort parsed from CLI stdout/stderr.
+    title: Shorebird release version
