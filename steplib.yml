@@ -4,6 +4,6 @@ steplib_source: https://github.com/bitrise-io/bitrise-steplib.git
 assets_download_base_uri: https://bitrise-steplib-collection.s3.amazonaws.com/steps
 download_locations:
   - type: zip
-    src: https://bitrise-steplib-collection.s3.amazonaws.com/step-archives/
+    src: https://steplib.bitrise.io/step-archives/
   - type: git
     src: source/git
