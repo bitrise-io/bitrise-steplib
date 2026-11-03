@@ -1,0 +1,79 @@
+title: Restore Dart Cache
+summary: Restores Dart (Flutter) dependencies. This Step needs to be used in combination
+  with **Save Dart Cache**.
+description: |
+  Restores Dart (Flutter) dependencies. This Step needs to be used in combination with **Save Dart Cache**.
+
+  This Step is based on [key-based caching](https://docs.bitrise.io/en/bitrise-ci/dependencies-and-caching/key-based-caching.html) and sets up the cache key and path automatically for Dart dependencies. If you'd like to change the cache keys, you might want to use the generic [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache) Step instead.
+
+  #### Related steps
+
+  [Save Dart cache](https://github.com/bitrise-steplib/bitrise-step-save-dart-cache/)
+
+  [Restore cache](https://github.com/bitrise-steplib/bitrise-step-restore-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-restore-dart-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-restore-dart-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-restore-dart-cache/issues
+published_at: 2026-11-03T12:41:45.006008949Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-restore-dart-cache.git
+  commit: 8480e0033e170f3dbcd47cc02612dbbe88fd9206
+executables:
+  darwin-amd64:
+    storage_uri: steps/restore-dart-cache/3.0.2/bin/restore-dart-cache-darwin-amd64
+    hash: sha256-f27afac1191289aceff4eb09c725eca45f487c7dca12be4c7d2d3b5879ae258f
+  darwin-arm64:
+    storage_uri: steps/restore-dart-cache/3.0.2/bin/restore-dart-cache-darwin-arm64
+    hash: sha256-9125a1bf5b85270e16f038b60e86ad853e58b7c1d7a46bc5de811a6092a594d9
+  linux-amd64:
+    storage_uri: steps/restore-dart-cache/3.0.2/bin/restore-dart-cache-linux-amd64
+    hash: sha256-01781acf07f11503e177b82a63f6ff9e554147207f9d17e3c5a61a6569d80358
+  linux-arm64:
+    storage_uri: steps/restore-dart-cache/3.0.2/bin/restore-dart-cache-linux-arm64
+    hash: sha256-daf0cb4178534225cdbfb603385aaac395870a6cd0771ebc4119d87d26d91f8e
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-restore-dart-cache
+deps:
+  brew:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- opts:
+    category: Debugging
+    description: |-
+      Number of retries to attempt when downloading a cache archive fails.
+
+      The value 0 means no retries are attempted.
+    is_required: true
+    summary: Number of retries to attempt when downloading a cache archive fails.
+    title: Number of retries
+  retries: 3
+- opts:
+    category: Debugging
+    description: Timeout in seconds
+    is_required: true
+    summary: Timeout in seconds
+    title: Timeout
+  timeout: 600
+outputs:
+- BITRISE_CACHE_HIT: null
+  opts:
+    description: |-
+      Indicates if a cache entry was restored. Possible values:
+
+      - `exact`: Exact cache hit for the first requested cache key
+      - `partial`: Cache hit for a key other than the first
+      - `false` No cache hit, nothing was restored
+    title: Cache hit
