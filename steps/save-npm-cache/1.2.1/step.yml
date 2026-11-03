@@ -1,0 +1,62 @@
+title: Save NPM Cache
+summary: Saves node_modules dependencies, used by NPM and Yarn. This Step needs to
+  be used in combination with **Restore NPM Cache**.
+description: |
+  Saves node_modules dependencies. This Step needs to be used in combination with **Restore NPM Cache**.
+
+  This Step is based on [key-based caching](https://devcenter.bitrise.io/en/builds/caching/key-based-caching.html) and sets up the cache key and path automatically for NPM dependencies. If you'd like to change the cache key (or paths to cache), you might want to use the generic [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache) Step instead.
+
+  Note: NPM and Yarn package managers are both supported.
+
+  #### Related steps
+
+  [Restore NPM cache](https://github.com/bitrise-steplib/bitrise-step-restore-npm-cache/)
+
+  [Save cache](https://github.com/bitrise-steplib/bitrise-step-save-cache/)
+website: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache
+support_url: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache/issues
+published_at: 2026-11-03T12:41:22.123805187Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-save-npm-cache.git
+  commit: c5280edfc339710f5e1161f52be868f72714d339
+executables:
+  darwin-amd64:
+    storage_uri: steps/save-npm-cache/1.2.1/bin/save-npm-cache-darwin-amd64
+    hash: sha256-9a1a3ba90a4ec2e4810555ada30369d5304b09c2fb2d4c3ab8f14fa5ba0b54a7
+  darwin-arm64:
+    storage_uri: steps/save-npm-cache/1.2.1/bin/save-npm-cache-darwin-arm64
+    hash: sha256-99c0ee3a2e58ef0b41b513c7a82c2269a18546ba169614bf940158154ab7b9f8
+  linux-amd64:
+    storage_uri: steps/save-npm-cache/1.2.1/bin/save-npm-cache-linux-amd64
+    hash: sha256-f64253eba7c2f169b90039933078839dafcb3263c2dff51dce3d0968b9b9e24d
+  linux-arm64:
+    storage_uri: steps/save-npm-cache/1.2.1/bin/save-npm-cache-linux-arm64
+    hash: sha256-d8bf515037cf8caf0490be10dca29ab8074a3d0efd981cfe100e17059734c35f
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-save-npm-cache
+deps:
+  brew:
+  - name: zstd
+  apt_get:
+  - name: zstd
+is_skippable: true
+run_if: .IsCI
+inputs:
+- opts:
+    is_required: true
+    summary: Enable logging additional information for troubleshooting
+    title: Verbose logging
+    value_options:
+    - "true"
+    - "false"
+  verbose: "false"
+- compression_level: 3
+  opts:
+    is_required: false
+    summary: Zstd compression level to control speed / archive size. Set to 1 for
+      fastest option. Valid values are between 1 and 19. Defaults to 3.
+    title: Compression level
