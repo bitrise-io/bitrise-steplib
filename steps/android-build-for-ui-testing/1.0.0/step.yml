@@ -1,0 +1,105 @@
+title: Android Build for UI Testing
+summary: Builds your Android project with Gradle with the belonging AndroidTest variant.
+description: |-
+  [This Step](https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing) generates all the APKs you need to run instrumentation tests for your Android app: both an APK from your app and the belonging test APK, for example,  `:app:assembleDemoDebug`, `:app:assembleDemoDebugAndroidTest`
+
+   ### Configuring the Step
+   1. Add the **Project Location** which is the root directory of your Android project.
+   2. Set the **Module** you want to build. To see your available modules, open your project in Android Studio and go to **Project Structure** and see the list on the left.
+   3. Set the **Variant** you want to build. To see your available variants, open your project in Android Studio and go to **Project Structure** and then the **variants** section.
+   Under **Options**:
+   4. Set the **APK location pattern**: Once the build has run, the Step finds the APK files with the given pattern.
+   5. If you wish to pass any extra Gradle arguments to the gradle task, you can add those in the **Additional Gradle Arguments** input.
+
+   ### Useful links
+  - [Testing with Bitrise](https://devcenter.bitrise.io/testing/testing-index/)
+  - [Deploying an Android app with Bitrise](https://devcenter.bitrise.io/deploy/android-deploy/android-deployment-index/)
+
+  ### Related Steps
+  - [Android Build](https://www.bitrise.io/integrations/steps/android-build)
+  - [Gradle Runner](https://www.bitrise.io/integrations/steps/gradle-runner)
+website: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+source_code_url: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+support_url: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing/issues
+published_at: 2026-10-31T14:30:07.838594929Z
+source:
+  git: https://github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing.git
+  commit: 0002e661f6e675db5d8b51e5f3b71d04fcba25b5
+executables:
+  darwin-amd64:
+    storage_uri: steps/android-build-for-ui-testing/1.0.0/bin/android-build-for-ui-testing-darwin-amd64
+    hash: sha256-e0faa8975dabe09d5552d35d32ca21af5f1057bd929dcd6a1fbe503f9e473c0e
+  darwin-arm64:
+    storage_uri: steps/android-build-for-ui-testing/1.0.0/bin/android-build-for-ui-testing-darwin-arm64
+    hash: sha256-2be98ec0a8c9b5ad3234853647fc8eff7d3459c5f521636462d1d5ab80e877f0
+  linux-amd64:
+    storage_uri: steps/android-build-for-ui-testing/1.0.0/bin/android-build-for-ui-testing-linux-amd64
+    hash: sha256-6c1d43fb6942ce24ec3a35ac05e7e5cede0a9db7daafa83b0a48a5a9138785b0
+  linux-arm64:
+    storage_uri: steps/android-build-for-ui-testing/1.0.0/bin/android-build-for-ui-testing-linux-arm64
+    hash: sha256-3ac3ce69ec329aea542b2930163c33aef60612f0005b2a814336fcc9abeceaeb
+project_type_tags:
+- android
+- cordova
+- flutter
+- ionic
+- kotlin-multiplatform
+- react-native
+type_tags:
+- build
+toolkit:
+  go:
+    package_name: github.com/bitrise-steplib/bitrise-step-android-build-for-ui-testing
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+run_if: ""
+inputs:
+- opts:
+    is_required: true
+    summary: The root directory of your android project, for example, where your root
+      build gradle file exist (also gradlew, settings.gradle, etc...)
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- module: ""
+  opts:
+    description: |
+      Set the module to build. Valid syntax examples: `app`, `feature:nested-module`
+
+      To see your available modules please open your project in Android Studio and go in [Project Structure] and see the list on the left.
+    is_required: true
+    summary: 'Set the module to build. Valid syntax examples: `app`, `feature:nested-module`'
+    title: Module
+- opts:
+    is_required: true
+    summary: |
+      Set the variant that you want to build. To see your available variants please open your project in Android Studio and go in [Project Structure] -> variants section.
+    title: Variant
+  variant: ""
+- apk_path_pattern: '*/build/outputs/apk/*.apk'
+  opts:
+    category: Options
+    is_required: true
+    summary: Will find the APK files with the given pattern.
+    title: APK location pattern
+- arguments: null
+  opts:
+    category: Options
+    is_required: false
+    summary: Extra arguments passed to the gradle task
+    title: Additional Gradle Arguments
+outputs:
+- BITRISE_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated APK
+      after filtering based on the filter inputs.
+    summary: Path of the generated (and copied) APK - after filtering.
+    title: Path of the generated APK
+- BITRISE_TEST_APK_PATH: null
+  opts:
+    description: |-
+      This output will include the path of the generated test APK
+      after filtering based on the filter inputs.
+    summary: Path of the generated (and copied) test APK - after filtering.
+    title: Path of the generated test APK
