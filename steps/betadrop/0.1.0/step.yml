@@ -1,0 +1,95 @@
+title: BetaDrop Upload
+summary: Upload an .ipa or .apk to BetaDrop and get an over-the-air install link.
+description: |-
+  Publishes the build an earlier step produced to [BetaDrop](https://betadrop.app) and exports the
+  install link. Testers open it on their phone and install from the browser — no TestFlight review,
+  no Play track, no tester accounts.
+
+  Optionally checks the build will install from a link before uploading it, points a standing link
+  at it so testers keep one URL, and limits how long or how widely the link works.
+
+  Create an API token at betadrop.app → Settings → Developer → API tokens and add it as a Secret.
+website: https://betadrop.app/integrations/bitrise/
+source_code_url: https://github.com/betadrop-app/bitrise-step-betadrop
+support_url: https://github.com/betadrop-app/bitrise-step-betadrop/issues
+published_at: 2026-11-10T05:22:35.813097+05:30
+source:
+  git: https://github.com/betadrop-app/bitrise-step-betadrop.git
+  commit: 46854208779cfd977f8bc224a6e48ea06b8322b7
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+- xamarin
+- cordova
+- ionic
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: node
+  apt_get:
+  - name: nodejs
+is_always_run: false
+is_skippable: false
+inputs:
+- api_token: null
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: A BetaDrop API token (bd_live_…). Store it as a Secret.
+    title: API token
+- file_path: $BITRISE_IPA_PATH$BITRISE_APK_PATH
+  opts:
+    description: |-
+      With both $BITRISE_IPA_PATH and $BITRISE_APK_PATH empty or unset, set this explicitly.
+      A pipe-separated list (Android Build can export several) must contain exactly one file.
+    is_required: true
+    summary: The .ipa or .apk. Defaults to the output of Xcode Archive or Android
+      Build.
+    title: Build path
+- notes: $BITRISE_GIT_MESSAGE
+  opts:
+    summary: Shown to testers on the install page.
+    title: Release notes
+- opts:
+    summary: Slug of a standing link to point at this build, so testers keep one URL.
+      Claim the name in the dashboard first.
+    title: Standing link
+  standing_link: null
+- expires_in_days: null
+  opts:
+    summary: Stop the install link working after this many days.
+    title: Expire after days
+- max_downloads: null
+  opts:
+    summary: Stop the install link after this many downloads.
+    title: Expire after downloads
+- max_devices: null
+  opts:
+    summary: Stop the install link after this many different devices.
+    title: Expire after devices
+- inspect: "false"
+  opts:
+    summary: Fail the step, with nothing uploaded, if the build will not install from
+      a link.
+    title: Check the build first
+    value_options:
+    - "true"
+    - "false"
+- cli_version: 0.4.0
+  opts:
+    summary: The @betadrop/cli version to run. 0.4.0 or newer.
+    title: CLI version
+outputs:
+- BETADROP_INSTALL_URL: null
+  opts:
+    title: Install link
+- BETADROP_STANDING_LINK_URL: null
+  opts:
+    summary: Empty unless a standing link was set.
+    title: Standing link URL
