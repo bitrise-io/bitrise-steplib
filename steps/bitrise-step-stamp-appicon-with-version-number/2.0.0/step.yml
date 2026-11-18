@@ -1,0 +1,143 @@
+title: Stamp icons with version number
+summary: |
+  Stamps the version number and build number on all app icons in a directory.
+description: |
+  Stamps version `version (build number)` to the bottom of every `.png` icon in the given directory.
+
+  Useful for making test, beta, and internal builds instantly recognizable on a device's home screen by their icon.
+
+  If no icon directory is given, the Step auto-detects iOS `.appiconset`, Android `mipmap-*`/`drawable-*`, and macOS `.iconset` directories, so it works for iOS, Android, Flutter, and React Native projects with no configuration.
+
+  ### Configuring the Step
+
+  1. Set the **Path to icons** input to the directory containing the icons you want to stamp.
+  2. Set the **Version number or string** input to the version to display (for example `1.2` or `Dev`).
+  3. Set the **Build number** input to the build number to display. Defaults to `$BITRISE_BUILD_NUMBER`.
+  4. Optionally adjust the foreground (text) and background colors of the stamp, or provide a custom font file.
+
+  ### Troubleshooting
+
+  The Step has no external tool dependencies: image processing is implemented in pure Go with an embedded font, so it produces identical results on every supported OS without ImageMagick or Ghostscript.
+website: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
+source_code_url: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
+support_url: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number/issues
+published_at: 2026-10-26T11:52:07.822804+01:00
+source:
+  git: https://github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number.git
+  commit: 72792d1843c28b3fe82950a5b2806789d08f7493
+host_os_tags:
+- osx
+- ubuntu
+type_tags:
+- utility
+toolkit:
+  go:
+    package_name: github.com/ollitapa/bitrise-step-stamp-appicon-with-version-number
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: "true"
+inputs:
+- opts:
+    description: |
+      Path to the directory containing the icons to stamp, for example `Project/General.xcassets/AppIcon.appiconset` or `android/app/src/main/res/mipmap-hdpi`.
+
+      If empty, the Step searches the source directory (`$BITRISE_SOURCE_DIR`, or the working directory locally) for icon directories: `*.xcassets/*.appiconset` (iOS), `mipmap-*` and `drawable-*` (Android), and `*.iconset` (macOS), and stamps all of them.
+    is_expand: true
+    is_required: false
+    summary: Path to the directory containing the icons to stamp; auto-detected if
+      empty
+    title: Path to icons of the project
+    value_options: []
+  stamp_path_to_icons: null
+- opts:
+    description: |
+      Version number or string to stamp on the icons, for example `0.1` or `Dev`.
+    is_expand: true
+    is_required: true
+    summary: Version number or string to stamp on the icons
+    title: Version number or string
+    value_options: []
+  stamp_version: null
+- opts:
+    description: |
+      Template for the stamp text. Use `%version%` and `%build%` placeholders, for example `%version% (%build%)`, `Dev %version%`, or `QA %build%`. Newlines are replaced with spaces.
+
+      If empty, the Step stamps `- version(build)` with the version and build number inputs.
+    is_expand: true
+    is_required: false
+    summary: Custom text template for the stamp; empty uses the default "version (build)"
+      format
+    title: Stamp text template
+    value_options: []
+  stamp_text: null
+- opts:
+    description: |
+      Position of the stamp banner on the icon: `north` (top), `south` (bottom), or `center`. Defaults to `south`.
+    is_expand: true
+    is_required: false
+    summary: Where the stamp banner is placed on the icon
+    title: Stamp position
+    value_options:
+    - north
+    - south
+    - center
+  stamp_position: south
+- opts:
+    description: |
+      Height of the stamp banner as a ratio of the icon height, between `0` and `1`. Defaults to `0.3` (30% of the icon height).
+    is_expand: true
+    is_required: false
+    summary: Height of the stamp banner as a ratio of the icon height (0-1)
+    title: Banner height ratio
+    value_options: []
+  stamp_banner_height_ratio: "0.3"
+- opts:
+    description: |
+      Build number to stamp on the icon. Defaults to `$BITRISE_BUILD_NUMBER`.
+    is_expand: true
+    is_required: true
+    summary: Build number to stamp on the icon
+    title: Build number to stamp on the icon
+    value_options: []
+  stamp_build_number: $BITRISE_BUILD_NUMBER
+- foreground_color: white
+  opts:
+    description: |
+      Foreground (text) color of the stamp, for example `white` or `#333333`. Accepts `#RGB`, `#RRGGBB`, `#RRGGBBAA` hex values and common color names. Defaults to `white`.
+    is_expand: true
+    is_required: true
+    summary: Text color of the stamp
+    title: Foreground color of the stamp
+    value_options: []
+- background_color: '#0008'
+  opts:
+    description: |
+      Background color of the stamp banner, for example `#0008` for translucent black. Accepts `#RGB`, `#RRGGBB`, `#RRGGBBAA` hex values and common color names. Defaults to `#0008`.
+    is_expand: true
+    is_required: true
+    summary: Background color of the stamp banner
+    title: Background color of the stamp
+    value_options: []
+- opts:
+    description: |
+      Path to a font file (`.ttf` or `.otf`) used to render the stamp text. If empty, the Step uses its bundled font, so no system font is required.
+    is_expand: true
+    is_required: false
+    summary: Path to a font file used for the stamp text
+    title: Font file for the stamp text
+    value_options: []
+  stamp_font: ""
+outputs:
+- opts:
+    description: |
+      Number of `.png` icons that were stamped by this Step.
+    summary: Number of icons that were stamped by this Step
+    title: Number of stamped icons
+  stamped_icon_count: null
+- opts:
+    description: |
+      Newline-separated list of the icon file paths that were stamped by this Step.
+    summary: Newline-separated list of the stamped icon file paths
+    title: Paths of stamped icons
+  stamped_icon_paths: null
