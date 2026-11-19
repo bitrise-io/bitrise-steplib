@@ -1,0 +1,225 @@
+title: TestingBot App Upload
+summary: Uploads an Android or iOS app to TestingBot storage and exports its tb://
+  app URL.
+description: |
+  Uploads your app (`.apk`, `.aab`, `.ipa`, `.app`, `.zip`) to [TestingBot](https://testingbot.com)
+  storage and exports the resulting `tb://` identifier, so later Steps and your
+  Appium tests can use it straight away.
+
+  If you don't set an app path, the Step picks up the artifact of the preceding
+  build Step automatically (`$BITRISE_APK_PATH`, `$BITRISE_AAB_PATH`,
+  `$BITRISE_IPA_PATH` or `$BITRISE_APP_DIR_PATH`).
+
+  ### Configuring the Step
+
+  1. Add your TestingBot **key** and **secret** as Bitrise Secrets, and reference
+     them from the `testingbot_key` / `testingbot_secret` inputs. You can find
+     both in the [TestingBot member area](https://testingbot.com/members/user/api).
+  2. Add this Step after the Step that builds your app.
+  3. Use the exported `$TESTINGBOT_APP_URL` as the `appium:app` capability in
+     your tests.
+
+  ### Keeping a stable app identifier
+
+  By default every upload gets a fresh `tb://` identifier, which means your test
+  code has to read `$TESTINGBOT_APP_URL` from the environment. If you would
+  rather hard-code the identifier once and never touch it again, set `app_key` to
+  a name of your choice — each build then replaces the binary stored under that
+  name while `tb://<your-name>` stays the same.
+
+  ### Upgrading from 0.0.1
+
+  The app path input is now called `app_path`, matching the TestingBot App
+  Automate Steps. Rename it when you move to 1.0.0:
+
+  ```yaml
+  - testingbot-upload-app:
+      inputs:
+      - app_path: $BITRISE_APK_PATH   # was: apk_ipa_filepath
+  ```
+
+  You can also just delete the line — the Step finds the preceding build
+  Step's artifact on its own.
+
+  ### Troubleshooting
+
+  - **HTTP 401** — the key/secret pair is wrong, or the Secret isn't exposed to
+    the Workflow.
+  - **HTTP 403** — the account is read-only; check the subscription state.
+  - Uploads are **deleted automatically after 62 days**. Re-upload on each build
+    (which is what this Step is for) rather than relying on an old identifier.
+
+  ### Useful links
+
+  - [TestingBot REST API](https://testingbot.com/support/api)
+  - [Uploading an app](https://testingbot.com/support/app-automate/help/upload)
+  - [Appium on TestingBot](https://testingbot.com/support/app-automate/appium)
+website: https://github.com/testingbot/bitrise-step-testingbot-app-upload
+source_code_url: https://github.com/testingbot/bitrise-step-testingbot-app-upload
+support_url: https://github.com/testingbot/bitrise-step-testingbot-app-upload/issues
+published_at: 2026-08-12T09:57:22.604835+02:00
+source:
+  git: https://github.com/testingbot/bitrise-step-testingbot-app-upload.git
+  commit: 9227544b1a6f9b8ac0b0ebe536d65dfc2b683895
+project_type_tags:
+- ios
+- android
+- react-native
+- cordova
+- ionic
+- flutter
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  apt_get:
+  - name: curl
+  - name: jq
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Your TestingBot API key, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API key.
+    title: TestingBot API key
+  testingbot_key: $TESTINGBOT_KEY
+- opts:
+    description: |-
+      Your TestingBot API secret, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API secret.
+    title: TestingBot API secret
+  testingbot_secret: $TESTINGBOT_SECRET
+- app_path: null
+  opts:
+    description: |-
+      Local path to the app binary (`.apk`, `.aab`, `.ipa`, `.app`, `.zip`).
+
+      Leave empty to use the artifact produced by the preceding build Step.
+      The Step looks at, in order:
+
+      - `$BITRISE_APK_PATH`
+      - `$BITRISE_AAB_PATH`
+      - `$BITRISE_IPA_PATH`
+      - `$BITRISE_APP_DIR_PATH`
+    is_expand: true
+    is_required: false
+    summary: Path to the app to upload. Auto-detected when left empty.
+    title: App path
+- app_url: null
+  opts:
+    description: |-
+      A public `https://` URL that TestingBot downloads the binary from,
+      instead of this Step uploading a local file.
+
+      Useful when the artifact already lives somewhere reachable — it saves
+      pushing the binary out of the build machine a second time. Takes
+      precedence over `app_path`.
+    is_expand: true
+    is_required: false
+    summary: Have TestingBot fetch the app from a URL instead of uploading it.
+    title: Public app URL
+- app_key: null
+  opts:
+    description: |-
+      When set, the app is stored under this name and the exported identifier
+      is always `tb://<app_key>`, no matter how often you re-upload.
+
+      That lets you hard-code the `appium:app` capability in your test code
+      once. Leave empty to get a new identifier per upload.
+    is_expand: true
+    is_required: false
+    summary: Reuse one tb:// identifier across builds instead of a fresh one each
+      time.
+    title: Stable app identifier
+- opts:
+    category: Upload options
+    description: |-
+      TestingBot extracts an uploaded app's version, minimum OS version and
+      icon in the background. The stored app reports `state: PROCESSING` until
+      that finishes, then `state: DONE`.
+
+      With this enabled the Step polls until the state is `DONE`, so
+      `$TESTINGBOT_APP_VERSION` is either the real version or a genuine
+      absence — not just "not extracted yet".
+
+      Turn it off if you only need `$TESTINGBOT_APP_URL` and don't want to wait.
+      The identifier is usable for testing either way; check
+      `$TESTINGBOT_APP_STATE` to see which you got.
+    is_required: true
+    summary: Wait until TestingBot has finished reading the app's version and icon.
+    title: Wait for metadata extraction
+    value_options:
+    - "true"
+    - "false"
+  wait_for_processing: "true"
+- opts:
+    category: Upload options
+    description: |-
+      How long to wait for `state` to become `DONE`, in seconds. Extraction
+      normally takes a few seconds.
+
+      Running out of time is **not** a Step failure — the app is uploaded and
+      testable regardless. The Step warns, exports
+      `$TESTINGBOT_APP_STATE=PROCESSING` and carries on.
+
+      Only used when `wait_for_processing` is enabled.
+    is_required: true
+    summary: Seconds to wait for metadata extraction before giving up on it.
+    title: Metadata timeout
+  processing_timeout: "300"
+outputs:
+- TESTINGBOT_APP_URL: null
+  opts:
+    description: |-
+      The `tb://...` identifier of the uploaded app. Pass it as the
+      `appium:app` capability, or to one of the TestingBot App Automate Steps.
+    summary: The `tb://` identifier of the uploaded app.
+    title: TestingBot app URL
+- TESTINGBOT_APP_ID: null
+  opts:
+    summary: The numeric storage ID of the uploaded app.
+    title: TestingBot app ID
+- TESTINGBOT_APP_VERSION: null
+  opts:
+    description: |-
+      The `versionName` (Android) or `CFBundleShortVersionString` (iOS) that
+      TestingBot extracted from the uploaded binary.
+    summary: Version string read out of the binary by TestingBot.
+    title: App version
+- TESTINGBOT_APP_TYPE: null
+  opts:
+    summary: The platform TestingBot detected, for example `ANDROID` or `IOS`.
+    title: App platform
+- TESTINGBOT_APP_STATE: null
+  opts:
+    description: |-
+      `DONE` once TestingBot has extracted the app's version, minimum OS
+      version and icon; `PROCESSING` while that is still running.
+
+      This is only ever `PROCESSING` when `wait_for_processing` is off or its
+      timeout ran out. The app is uploaded and testable in either case.
+    summary: Whether TestingBot finished reading the binary — `DONE`, or `PROCESSING`
+      if not.
+    title: Metadata state
+- TESTINGBOT_APP_DOWNLOAD_URL: null
+  opts:
+    summary: Signed URL to download the stored binary again.
+    title: App download URL
