@@ -1,0 +1,383 @@
+title: Check App Store and Google Play Compliance with Appflight
+summary: |-
+  Scans an iOS or Android project for store review risks before submission, writes a
+  JSON report as a build artifact, and fails the build on findings at or above a
+  severity threshold.
+description: |-
+  Runs the [Appflight CLI](https://www.npmjs.com/package/appflight) against an
+  iOS or Android project and gates the build on App Store or Google Play review risks.
+
+  The step installs a **pinned** version of the `appflight` npm package onto the
+  build machine, runs the deterministic check, and writes a machine-readable
+  JSON report to `$BITRISE_DEPLOY_DIR` so it is exported as a build artifact.
+
+  ### What the checks cover
+
+  iOS (rules enabled in appflight 0.12.0): privacy manifests
+  (`PrivacyInfo.xcprivacy`) and Required Reason APIs, `NSUsageDescription`
+  permission strings and API/permission mismatches, App Tracking Transparency,
+  tracking SDKs versus the privacy manifest's tracking declaration, App
+  Transport Security and insecure HTTP URLs, deprecated `UIWebView`, export
+  compliance, in-app purchase restore, hardcoded secrets, credentials and IP
+  addresses, dynamic code execution, references to other platforms, and
+  placeholder text. Private API usage is not checked in this release.
+
+  Android uses an isolated rule engine. Enabled in appflight 0.12.0: target API
+  level against Google Play's deadlines, Play Billing Library deprecation (see
+  `prove_billing`), restricted-permission declaration reminders, cleartext
+  traffic, and release debug/test flags. Data Safety and placeholder-resource
+  checks are not enabled in this release.
+
+  ### Data boundary
+
+  The default (free) deterministic scan analyzes the project on the build
+  machine and sends **no source code or project data to Appflight**. By
+  default the CLI does send one anonymous, code-free usage event per invocation
+  (a random install ID, the finding count, the ruleset version and the
+  command); set `APPFLIGHT_TELEMETRY=0` to turn it off. Android scans execute
+  the repository Gradle wrapper and trusted build logic with the worker's OS
+  permissions; Appflight does not add an OS sandbox. Gradle is offline by
+  default, but host egress policy is required to block arbitrary build logic.
+  The wrapper runs `check` twice for log and JSON output, so Android build logic
+  is evaluated twice per step invocation.
+  Setting `deep: true` enables the
+  paid AI tier, which **does** send allowlisted findings and a platform facts
+  digest to the Appflight API, and requires an API token. iOS may also send
+  redacted code excerpts; Android v1 sends none.
+
+  See the repository README for the full field list and the security review
+  notes.
+
+  ### Exit behaviour
+
+  - `0` — no findings at or above the `fail_on` threshold; build passes.
+  - `1` — findings at or above the threshold; **build fails** (the gate working).
+  - `2` — tool or usage error; **build fails** with a distinct message so a
+    broken invocation is never silently read as "clean".
+
+  A passing build means only that no finding met the threshold. Whether the
+  analysis was complete is reported separately in `APPFLIGHT_EVALUATION_STATUS`;
+  Android analysis is currently always reported as incomplete.
+website: https://github.com/Azura2025/bitrise-step-appflight
+source_code_url: https://github.com/Azura2025/bitrise-step-appflight
+support_url: https://github.com/Azura2025/bitrise-step-appflight/issues
+published_at: 2026-10-06T17:51:57.142404461Z
+source:
+  git: https://github.com/Azura2025/bitrise-step-appflight.git
+  commit: 8da470efcae60afe437a2302b0dd4e6b37a6fa7b
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+- cordova
+- ionic
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      The app directory to scan, relative to the build's working directory or
+      absolute.
+
+      Point this at a **single app root**. Scanning a parent directory that
+      contains multiple independent app roots is a tool error (exit `2`) —
+      add one step instance per app instead.
+    is_required: true
+    summary: Directory to scan.
+    title: Project path
+  project_path: .
+- opts:
+    description: |-
+      Use `ios` or `android` for a mixed React Native/Flutter repository.
+      `auto` fails closed when both platforms are present; v1 never combines
+      the two engines or rule namespaces.
+    is_required: true
+    summary: Auto-detect one platform, or select iOS/Android explicitly.
+    title: Project platform
+    value_options:
+    - auto
+    - ios
+    - android
+  platform: auto
+- android_module: ""
+  opts:
+    description: |-
+      Required when the selected Android root contains more than one
+      application module. Passed to `appflight check --module`.
+    is_required: false
+    summary: Optional Gradle module selector, for example :app.
+    title: Android application module
+- android_variant: ""
+  opts:
+    description: |-
+      Required when more than one release flavor is available. Passed to
+      `appflight check --variant`.
+    is_required: false
+    summary: Optional variant selector, for example prodRelease.
+    title: Android release variant
+- distribution: ""
+  opts:
+    description: |-
+      Sets `policyContext.distribution` without a checked-in
+      `appflight.play.json`. Without a distribution declaration, dependent
+      Play rules report `play_distribution_unknown`. Declaring google_play
+      enables evaluation when the remaining release and form-factor evidence
+      is available; it does not guarantee complete analysis.
+
+      Leave empty to use the value in `appflight.play.json`. When both are
+      set this input wins and the report records the override under
+      `policyContextOverrides`, so a verdict never rests silently on a
+      declaration that differs from the one in the repository.
+
+      The remaining policy fields stay in the file, reachable through
+      `policy_context_file`.
+
+      **Target API also needs form factors.** Unless the merged release
+      manifest requires a TV, Wear, Automotive or XR hardware feature,
+      `google_play` alone leaves the target API rule not fully evaluated
+      ("Explicitly select policyContext.formFactors"): Appflight never assumes
+      a phone release. Set the `form_factors` input, or declare `formFactors`
+      in `appflight.play.json` or `policy_context_file`.
+
+      Accepted values: `google_play`, `non_play`, or empty. Any other value
+      fails the step before anything is installed.
+    is_required: false
+    summary: Whether this build ships through Google Play.
+    title: Play distribution
+- form_factors: ""
+  opts:
+    description: |-
+      Passed as `appflight check --form-factors` (appflight 0.12.0+, Android
+      only). Allowed values: `phone`, `wear`, `automotive`, `tv`, `xr`, comma
+      separated without spaces.
+
+      Without declared form factors, target API is evaluated only when the
+      merged release manifest requires a TV, Wear, Automotive or XR hardware
+      feature; a phone release is never assumed. A value that contradicts a
+      required manifest feature leaves target API not fully evaluated
+      (`form_factor_conflict`).
+
+      Leave empty to use `formFactors` from `appflight.play.json` or
+      `policy_context_file`. When both are set this input wins and the report
+      records the override under `policyContextOverrides`.
+    is_required: false
+    summary: Comma-separated form factors this release ships to, for example phone
+      or phone,wear.
+    title: Play form factors
+- opts:
+    description: |-
+      Path to a JSON file holding a `policyContext` object (`distribution`,
+      `mode`, `formFactors`, `publishedRelease`, `privateDistribution`,
+      `extensions`). Passed to `appflight check --policy-context`.
+
+      A relative path is resolved from the Android project root the CLI
+      selects: `project_path` itself, or its `android/` directory when
+      `project_path` is a React Native or Flutter repository. An absolute
+      path such as `$BITRISE_SOURCE_DIR/ci/policy-context.json` avoids the
+      ambiguity.
+
+      `distribution` and `form_factors` have inputs of their own; the other
+      fields live here. When an input and this file set the same field, the
+      input wins and the report records the override.
+    is_required: false
+    summary: Optional path to a JSON policyContext, for the fields that have no input.
+    title: Policy context file
+  policy_context_file: ""
+- opts:
+    description: |-
+      Passes `appflight check --prove-billing` (appflight 0.12.0+). For a
+      Google Play submission release that resolves the Play Billing Library,
+      the CLI compiles the selected release build and proves which Billing
+      classes ship before reporting the resolved Billing version against
+      Google's deadlines. Apps that do not resolve Play Billing, and releases
+      not declared for Google Play, compile nothing extra.
+
+      Without the flag, a Google Play release that resolves Play Billing
+      reports Billing as not fully evaluated. An app without Play Billing
+      reads not applicable either way, provided its runtime dependency graph
+      resolves completely.
+
+      Applies only to Android scans: `platform: android`, or `platform: auto`
+      with a Gradle wrapper in `project_path`. iOS scans never receive the
+      flag, and neither does a pin below 0.12.0. When the compile runs it adds
+      build time (several minutes on a cold build), and this two-pass step
+      runs it in both passes; run the step after the app's own Gradle build
+      so outputs are cached. Set `no` to skip the proof.
+    is_required: true
+    summary: Proves which Play Billing classes ship; compiles the release build only
+      for Google Play releases that resolve Play Billing.
+    title: Prove Play Billing classes
+    value_options:
+    - "yes"
+    - "no"
+  prove_billing: "yes"
+- billing_closure_timeout_minutes: "15"
+  opts:
+    description: |-
+      Passed to `appflight check --billing-closure-timeout`, in minutes
+      (more than 0 and at most 1440; the CLI rejects other values as a usage
+      error, exit `2`). The limit applies to the compile in each pass and is
+      separate from the CLI's five-minute Gradle facts limit. When it fires
+      the scan still completes and Billing is reported as not fully evaluated
+      with a `billing_closure_timeout` reason; it is not a tool error.
+    is_required: false
+    summary: Limit for the Billing proof compile, separate from the Gradle facts limit.
+    title: Billing proof time limit (minutes)
+- allow_gradle_network: "false"
+  opts:
+    description: |-
+      Android analysis executes repository build logic with the Bitrise
+      worker's OS permissions. The default keeps Gradle dependency resolution
+      offline. This setting allows resolution of missing plugins/dependencies;
+      neither value is an OS network sandbox for arbitrary build logic.
+    is_required: true
+    summary: Removes Gradle's default --offline flag.
+    title: Allow Gradle network resolution
+    value_options:
+    - "false"
+    - "true"
+- appflight_version: 0.12.0
+  opts:
+    description: |-
+      The exact version of the `appflight` npm package to install on every
+      run. Fetching the pinned release per run avoids relying on a stale
+      preinstalled or cached compliance ruleset while keeping verdicts
+      reproducible for a reviewed version.
+
+      **Pinning is deliberate.** This input intentionally does not accept or
+      default to `latest`. A pinned version always applies the same rules, so
+      a rule added upstream never turns a green nightly build red without a
+      reviewed change in your repository. Rules with deadlines (for example
+      Google Play's target API and Billing Library deadlines) are judged
+      against the scan date, so a verdict can change when a deadline passes.
+
+      Bump this value as an explicit, reviewable commit when you want new
+      rules. Before upgrading, run the new version once with `fail_on: none`
+      to see which findings it adds, so they land on your schedule.
+    is_required: true
+    summary: Exact npm version of the appflight CLI to install.
+    title: Appflight CLI version
+- fail_on: critical
+  opts:
+    description: |-
+      Maps directly to the CLI's `--fail-on` flag. A finding fails the build
+      when its severity ranks at or above this level
+      (`critical` > `warning` > `suggestion`).
+
+      - `critical` — only CRITICAL findings fail the build. **Step default**,
+        chosen so the gate can be adopted on an existing pipeline without an
+        immediate red build.
+      - `warning` — CRITICAL or WARNING findings fail the build. This is the
+        CLI's own default and the recommended steady state.
+      - `suggestion` — any finding fails the build. Strictest.
+      - `none` — never fail on findings. Report-only; the JSON artifact is
+        still written. Useful for a first observation period.
+
+      Findings below the threshold still appear in the log and in the JSON
+      artifact; they just do not fail the build.
+    is_required: true
+    summary: Lowest severity that fails the build.
+    title: Fail on severity
+    value_options:
+    - critical
+    - warning
+    - suggestion
+    - none
+- deep: "false"
+  opts:
+    description: |-
+      When `true`, adds the CLI's `--deep` flag, which runs paid AI reasoning
+      over the deterministic findings.
+
+      **This changes the data boundary.** With `deep: false` (the default),
+      the CLI sends no source code or project data to Appflight. Android
+      build logic still runs with the worker's permissions as described above.
+      With `deep: true`, the CLI sends allowlisted
+      deterministic findings and a facts digest to the Appflight API. iOS
+      may also send a small set of **redacted** code excerpts; Android v1
+      always sends an empty excerpt list.
+
+      Requires `api_token`. If `deep` is `true` and no token is provided the
+      step fails immediately with a clear message rather than silently
+      running a deterministic-only scan.
+
+      Leave this off unless your security review has explicitly approved
+      the platform-specific transfer to a third-party service.
+    is_required: true
+    summary: Paid AI reasoning. Sends allowlisted findings and platform facts.
+    title: Enable AI analysis (--deep)
+    value_options:
+    - "false"
+    - "true"
+- api_token: ""
+  opts:
+    description: |-
+      The Appflight access token used to authenticate the paid `--deep` tier.
+      Exported to the CLI as `APPFLIGHT_TOKEN`.
+
+      Generate a named, revocable CI token on a trusted workstation:
+
+      `appflight login`
+
+      `appflight token create --name "Bitrise nightly" --print-token`
+
+      Store the printed token as a **Bitrise secret environment variable**,
+      then reference the secret here (for example `$APPFLIGHT_API_TOKEN`).
+      Never commit the token to `bitrise.yml`.
+
+      In the Bitrise Secret settings, enable **Replace variables in inputs**
+      so the token value reaches this input instead of the literal variable
+      name. Pass the raw token only, without quotes or a `Bearer` prefix.
+
+      The CI token is scoped to deep analysis and does not expire on a
+      calendar. It remains subject to the account's live paid entitlement
+      and quota, and can be revoked with `appflight token revoke <token-id>`.
+
+      Ignored when `deep` is `false`.
+    is_expand: true
+    is_required: false
+    is_sensitive: true
+    summary: Required only when deep is true. Provide via a Bitrise secret.
+    title: Appflight API token
+outputs:
+- APPFLIGHT_FINDING_COUNT: null
+  opts:
+    description: |-
+      The total number of findings in the report, across every severity —
+      including findings below the `fail_on` threshold. Set to `0` when no
+      findings were observed, and to `unknown` on a tool error. Zero does not
+      establish complete coverage or a clean result.
+
+      Exported whether the step passes or fails, so a later step (a Slack
+      notification, for example) can read it on a failed build.
+    summary: Total number of findings reported by the scan.
+    title: Total finding count
+- APPFLIGHT_EVALUATION_STATUS: null
+  opts:
+    description: |-
+      Whether the analysis covered everything it would need for a clean
+      result, independent of `fail_on`. Android analysis is currently always
+      `incomplete`, because the CLI reads only part of the project's files.
+      `unknown` on a tool error or an unreadable report.
+    summary: complete, incomplete, or unknown; independent of the severity gate.
+    title: Analysis evaluation status
+- APPFLIGHT_VERDICT: null
+  opts:
+    summary: clear, findings, not_fully_evaluated, or unknown when unavailable.
+    title: Analysis verdict
+- APPFLIGHT_REPORT_PATH: null
+  opts:
+    description: |-
+      Absolute path to the written JSON report, normally
+      `$BITRISE_DEPLOY_DIR/appflight-report.json`. The file is placed in the
+      deploy directory so the Deploy to Bitrise.io step exports it as a build
+      artifact. Empty when no report was produced (a tool error).
+    summary: Absolute path to the JSON report artifact.
+    title: JSON report path
