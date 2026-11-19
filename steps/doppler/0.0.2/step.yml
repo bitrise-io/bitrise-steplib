@@ -1,0 +1,44 @@
+title: Doppler
+summary: |
+  This step will fetch env variables from doppler for your project
+description: |
+  This step will fetch env variables from doppler for your project
+website: https://github.com/hvalec427/bitrise-doppler
+source_code_url: https://github.com/hvalec427/bitrise-doppler
+support_url: https://github.com/hvalec427/bitrise-doppler/issues
+published_at: 2025-09-09T09:40:46.630819+02:00
+source:
+  git: https://github.com/hvalec427/bitrise-doppler.git
+  commit: 0e682fdffab7e1f97e4b250d127d55ba30e4fd2c
+type_tags:
+- utility
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- DOPPLER_TOKEN: $DOPPLER_TOKEN
+  opts:
+    description: |
+      The Doppler service token used to authenticate and fetch secrets. This should be set as a Bitrise Secret for security.
+    is_expand: true
+    is_required: true
+    summary: Doppler service token for authentication.
+    title: Doppler Token
+- DOPPLER_PROJECT: $DOPPLER_PROJECT
+  opts:
+    description: |
+      The name of the Doppler project from which to fetch secrets. Example: `serbus-mobile`.
+      If not set, Doppler will use the default project associated with the token.
+    is_expand: true
+    is_required: false
+    summary: Doppler project name (optional, but recommended).
+    title: Doppler Project
+- DOPPLER_CONFIG: $DOPPLER_CONFIG
+  opts:
+    description: |
+      The Doppler config (environment) to use when fetching secrets. Example: `prd`.
+      If not set, Doppler will use the default config associated with the token.
+    is_expand: true
+    is_required: false
+    summary: Doppler config/environment name (optional, but recommended).
+    title: Doppler Config
