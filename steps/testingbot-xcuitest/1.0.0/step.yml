@@ -1,0 +1,352 @@
+title: TestingBot App Automate - XCUITest
+summary: Runs your XCUITest suite on real iOS devices and simulators at TestingBot.
+description: |
+  Uploads your app and XCUITest suite to [TestingBot](https://testingbot.com),
+  runs the suite on the devices you pick, streams progress into the build log,
+  and **fails the Bitrise build when a test fails**.
+
+  The JUnit report is downloaded and exported to Bitrise's own **Test Reports**
+  tab, so failures are visible without digging through the log.
+
+  ### Configuring the Step
+
+  1. Add your TestingBot **key** and **secret** as Bitrise Secrets, and reference
+     them from the `testingbot_key` / `testingbot_secret` inputs. Both are in the
+     [TestingBot member area](https://testingbot.com/members/user/api).
+  2. Add an `Xcode Build for testing` Step before this one. It produces the test
+     bundle this Step needs.
+  3. Set `device` to the device you want. Wildcards and regular expressions work:
+     `iPhone 16`, `iPhone.*`, `iPhone 1[56]`, or `*` for any available device.
+  4. Add `Deploy to Bitrise.io` after this Step to publish the test report.
+
+  ### About the test bundle
+
+  TestingBot expects the XCUITest suite as a zip containing the `*-Runner.app`.
+  `Xcode Build for testing` exports a **directory** instead, so this Step finds
+  the runner inside it and zips it for you. You can also point `test_app_path`
+  straight at a `.zip` or a `*-Runner.app` if you build it yourself.
+
+  ### Requirements
+
+  This Step drives the [TestingBot CLI](https://github.com/testingbot/testingbotctl),
+  which needs **Node.js 20 or newer**. Every current Bitrise Stack ships one; if
+  yours doesn't, add an `Install Node.js` Step before this one.
+
+  ### Troubleshooting
+
+  - **`No *-Runner.app was found`** — the `Xcode Build for testing` Step needs to
+    build for a **device** destination, not a simulator, for a real-device run.
+  - **The build passes even though tests failed** — check that
+    `fail_on_test_failure` is on (it is by default).
+  - **No results on the Test Reports tab** — add the `Deploy to Bitrise.io` Step
+    after this one.
+
+  ### Useful links
+
+  - [XCUITest on TestingBot](https://testingbot.com/support/xcuitest)
+  - [XCUITest test reports](https://testingbot.com/support/xcuitest/test-reports.html)
+  - [TestingBot CLI](https://github.com/testingbot/testingbotctl)
+  - [Available devices](https://testingbot.com/devices)
+website: https://github.com/testingbot/bitrise-step-testingbot-xcuitest
+source_code_url: https://github.com/testingbot/bitrise-step-testingbot-xcuitest
+support_url: https://github.com/testingbot/bitrise-step-testingbot-xcuitest/issues
+published_at: 2026-08-12T11:27:54.525532+02:00
+source:
+  git: https://github.com/testingbot/bitrise-step-testingbot-xcuitest.git
+  commit: 07b94d2c81e21170f45bc87336f8361d20cd20f6
+project_type_tags:
+- ios
+- react-native
+- flutter
+- cordova
+- ionic
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Your TestingBot API key, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API key.
+    title: TestingBot API key
+  testingbot_key: $TESTINGBOT_KEY
+- opts:
+    description: |-
+      Your TestingBot API secret, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API secret.
+    title: TestingBot API secret
+  testingbot_secret: $TESTINGBOT_SECRET
+- device: '*'
+  opts:
+    description: |-
+      The device to run the suite on.
+
+      Exact names work (`iPhone 16`), and so do wildcards and regular
+      expressions, which is usually what you want in CI so a busy device
+      doesn't block the build:
+
+      - `iPhone.*` — any iPhone
+      - `iPhone 1[56]` — an iPhone 15 or 16
+      - `iPad.*` — any iPad
+      - `*` — any available device
+
+      See the [device list](https://testingbot.com/devices).
+    is_expand: true
+    is_required: true
+    summary: Which device to run on. Wildcards and regular expressions are supported.
+    title: Device
+- app_path: null
+  opts:
+    description: |-
+      Path to the application IPA.
+
+      Leave empty to use `$BITRISE_IPA_PATH` from the preceding
+      `Xcode Archive & Export` Step, falling back to `$BITRISE_APP_DIR_PATH`.
+    is_expand: true
+    summary: Path to the app under test. Auto-detected when left empty.
+    title: App IPA path
+- opts:
+    description: |-
+      The XCUITest suite. Accepts a `.zip`, a `*-Runner.app`, or the test
+      bundle **directory** that `Xcode Build for testing` exports — in which
+      case the Step finds the runner inside it and zips it for you.
+
+      Leave empty to use `$BITRISE_TEST_BUNDLE_PATH`.
+    is_expand: true
+    summary: Path to the XCUITest bundle. Auto-detected when left empty.
+    title: Test bundle path
+  test_app_path: null
+- opts:
+    category: Device
+    is_expand: true
+    summary: iOS version, for example `17.2` or `18.0`.
+    title: iOS version
+  platform_version: null
+- opts:
+    category: Device
+    description: |-
+      Run on a physical device.
+
+      TestingBot runs XCUITest on **real devices only**, so leave this on.
+      Turning it off makes the run wait for a result that never arrives.
+
+      Build the app and the test bundle for a device destination —
+      `generic/platform=iOS`, not `iOS Simulator`. A simulator build is
+      rejected by the device.
+    summary: Run on a physical device. TestingBot runs XCUITest on real devices only.
+    title: Use a real device
+    value_options:
+    - "true"
+    - "false"
+  real_device: "true"
+- opts:
+    category: Device
+    summary: Only allocate iPad devices.
+    title: iPads only
+    value_options:
+    - "true"
+    - "false"
+  tablet_only: "false"
+- opts:
+    category: Device
+    summary: Only allocate iPhone devices.
+    title: iPhones only
+    value_options:
+    - "true"
+    - "false"
+  phone_only: "false"
+- opts:
+    category: Device
+    summary: 'Screen orientation: PORTRAIT or LANDSCAPE. Device default when empty.'
+    title: Orientation
+  orientation: null
+- locale: null
+  opts:
+    category: Localization
+    is_expand: true
+    summary: Device locale, for example `US` or `DE`.
+    title: Device locale
+- language: null
+  opts:
+    category: Localization
+    is_expand: true
+    summary: App language as an ISO 639-1 code, for example `en` or `de`.
+    title: App language
+- opts:
+    category: Localization
+    is_expand: true
+    summary: Device time zone, for example `Europe/Brussels`.
+    title: Time zone
+  timezone: null
+- build_name: null
+  opts:
+    category: Test configuration
+    description: |-
+      Identifier used to group the test sessions of one build together in the
+      TestingBot dashboard.
+
+      Leave empty to name the build after the Bitrise app title and build
+      number, for example `My App #42`.
+    is_expand: true
+    summary: Groups this run with others in the TestingBot dashboard.
+    title: Build name
+- opts:
+    category: Test configuration
+    description: |-
+      Shown in the TestingBot dashboard, and used as the tab name on Bitrise's
+      Test Reports page. Give parallel Steps distinct names so their reports
+      don't collide.
+    is_expand: true
+    is_required: true
+    summary: Name for this run, also used as the Test Reports tab title.
+    title: Test name
+  test_name: XCUITest
+- fail_on_test_failure: "true"
+  opts:
+    category: Test configuration
+    description: |-
+      When enabled (the default) a failing test fails the Step, and so the
+      build.
+
+      Turn it off for a report-only run — the Step then succeeds regardless,
+      and you can branch on the exported `$TESTINGBOT_TEST_STATUS`.
+    is_required: true
+    summary: Mark the Bitrise build failed if any test fails.
+    title: Fail the build when tests fail
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Test configuration
+    description: |-
+      Start the run and return without waiting for it to finish.
+
+      Nothing is polled, no report is downloaded, and the Step cannot fail on
+      a test failure — check the TestingBot dashboard instead.
+    summary: Start the tests and finish the Step immediately.
+    title: Don't wait for results
+    value_options:
+    - "true"
+    - "false"
+  run_async: "false"
+- opts:
+    category: Network and location
+    summary: 'Simulate a slower network: `4G`, `3G`, `Edge` or `airplane`.'
+    title: Network throttling
+  throttle_network: null
+- geo_country_code: null
+  opts:
+    category: Network and location
+    is_expand: true
+    summary: Route device traffic through a country, as an ISO code such as `US` or
+      `DE`.
+    title: Geolocation country
+- opts:
+    category: Network and location
+    description: |-
+      Starts a TestingBot Tunnel for the duration of the run, so the app can
+      reach a staging environment that isn't publicly routable.
+
+      Cannot be combined with `run_async`.
+    summary: Open a TestingBot Tunnel for this run.
+    title: Start a tunnel
+    value_options:
+    - "true"
+    - "false"
+  tunnel: "false"
+- opts:
+    category: Network and location
+    description: |-
+      Identifier of the tunnel to use.
+
+      Defaults to the tunnel opened by the `TestingBot Tunnel` Step earlier in
+      the Workflow, which exports `$TESTINGBOT_TUNNEL_IDENTIFIER`. Set it
+      explicitly only when you run several tunnels in parallel.
+    is_expand: true
+    summary: Name of the tunnel to route through.
+    title: Tunnel identifier
+  tunnel_identifier: $TESTINGBOT_TUNNEL_IDENTIFIER
+- export_to_test_reports: "true"
+  opts:
+    category: Reports
+    description: |-
+      Downloads the JUnit report and lays it out for Bitrise's Test Reports
+      add-on.
+
+      You still need the `Deploy to Bitrise.io` Step afterwards — that Step is
+      what uploads what this one exports.
+    summary: Publish the JUnit report to Bitrise's Test Reports tab.
+    title: Export to Test Reports
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Reports
+    description: |-
+      Directory the JUnit report is downloaded into. Defaults to a temporary
+      directory. The path is exported as `$TESTINGBOT_JUNIT_REPORT_PATH`.
+    is_expand: true
+    summary: Where to write the downloaded JUnit report.
+    title: Report output directory
+  report_output_dir: null
+- cli_version: 1.1.1
+  opts:
+    category: Debug
+    description: |-
+      The [TestingBot CLI](https://github.com/testingbot/testingbotctl) version
+      this Step runs. Pinned so builds stay reproducible; set `latest` to
+      always take the newest release.
+    is_required: true
+    summary: Version of `@testingbot/cli` to run.
+    title: TestingBot CLI version
+- additional_args: null
+  opts:
+    category: Debug
+    description: |-
+      Appended verbatim to the `testingbot xcuitest` command, so you can use a
+      CLI option this Step doesn't expose yet without waiting for a release.
+
+      See `npx @testingbot/cli xcuitest --help`.
+    is_expand: true
+    summary: Extra flags passed straight to the TestingBot CLI.
+    title: Additional CLI arguments
+- opts:
+    category: Debug
+    summary: Suppress the CLI's live progress output.
+    title: Quiet output
+    value_options:
+    - "true"
+    - "false"
+  quiet: "false"
+outputs:
+- TESTINGBOT_TEST_STATUS: null
+  opts:
+    description: |-
+      `passed` or `failed`. Useful when `fail_on_test_failure` is off and you
+      want to branch on the result yourself.
+    summary: '`passed` or `failed`.'
+    title: Test status
+- TESTINGBOT_BUILD_NAME: null
+  opts:
+    summary: The build identifier the sessions were grouped under.
+    title: Build name
+- TESTINGBOT_JUNIT_REPORT_PATH: null
+  opts:
+    summary: Path to the downloaded JUnit XML report.
+    title: JUnit report path
