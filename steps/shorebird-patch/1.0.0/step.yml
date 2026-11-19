@@ -1,0 +1,286 @@
+title: Shorebird Patch
+summary: Publishes a Shorebird OTA code push patch for an existing release.
+description: |
+  Runs [`shorebird patch`](https://docs.shorebird.dev/code-push/patch/) to publish an OTA update to an
+  existing Shorebird release. This Step never produces a build artifact and never uploads anything to an
+  app store - it only pushes a small code diff to Shorebird's servers.
+
+  ### Pre-patch checklist
+
+  Before patching, make sure:
+  - There are no native code changes since the release you're patching (native code cannot be included in
+    a patch)
+  - There are no asset changes since that release (assets cannot be included in a patch either)
+  - Your Flutter version matches - patches always build with the Flutter version the target release used;
+    there's no way to change it via this Step
+
+  Shorebird compares your local build against the stored release artifacts and will refuse to publish if it
+  detects native or asset differences, unless you explicitly override this with **Allow native diffs?** /
+  **Allow asset diffs?** below.
+
+  ### Patching multiple platforms
+
+  Set **Platform** to `both` to patch iOS and Android in one Step run - each platform is built and published
+  as its own `shorebird patch` invocation, targeting the same release.
+
+  ### Patch performance
+
+  Patching has no performance effect on Android. On iOS and macOS, code that hasn't changed since the
+  release still runs at full native speed; only the changed code runs through a Dart interpreter (slower).
+  This is typically undetectable except in performance-sensitive code paths - consider publishing to the
+  `staging` track first (**Deployment track**) to test before promoting to `stable`.
+
+  ### Managing patches after publishing
+
+  This Step only publishes new patches. To list, inspect, promote, or change the track of existing patches,
+  use the `shorebird patches` CLI commands directly, or the [Shorebird console](https://console.shorebird.dev).
+
+  ### Configuring the Step
+  1. In **Project Location** the root directory of your Flutter project is automatically filled out. It must
+     contain a `shorebird.yaml` (created by running `shorebird init` locally and committing the result) -
+     this Step fails fast with a clear error if it's missing.
+  2. Set **Shorebird API token** to a Shorebird Console API key, stored as a Bitrise Secret.
+  3. Set **Target release version** to the release this patch targets (`latest` for the most recently
+     created release), and **Platform**.
+  4. Configure **Deployment track**, **Flavor**, and any iOS-specific options as needed.
+
+  ### Troubleshooting
+
+  If `shorebird patch` reports native or asset diffs you believe are false positives, double check you're
+  patching against the correct **Target release version** and **Flavor** before reaching for **Allow native
+  diffs?** / **Allow asset diffs?** - publishing a patch with real native/asset changes can crash the app on
+  devices that install it.
+
+  ### Useful links
+  - [Shorebird](https://shorebird.dev)
+  - [Creating a patch](https://docs.shorebird.dev/code-push/patch/)
+  - [Managing patches](https://docs.shorebird.dev/code-push/patch/#manage-patches)
+  - [Shorebird FAQ](https://docs.shorebird.dev/code-push/faq/)
+website: https://github.com/uptech/bitrise-step-shorebird-patch
+source_code_url: https://github.com/uptech/bitrise-step-shorebird-patch
+support_url: https://github.com/uptech/bitrise-step-shorebird-patch/issues
+published_at: 2026-09-17T13:33:38.341034-07:00
+source:
+  git: https://github.com/uptech/bitrise-step-shorebird-patch.git
+  commit: ff027f0f692dfba19d5da8c465f4aef9830d1c7d
+project_type_tags:
+- flutter
+type_tags:
+- deploy
+toolkit:
+  go:
+    package_name: github.com/uptech/shorebird-patch-step
+is_requires_admin_user: true
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      The root dir of your Flutter project. Must contain a `shorebird.yaml` (created by running `shorebird init`
+      locally and committing the result) - the Step fails with a clear error if it's missing.
+    is_required: true
+    summary: The root dir of your Flutter project.
+    title: Project Location
+  project_location: $BITRISE_SOURCE_DIR
+- opts:
+    description: |-
+      Exported as the `SHOREBIRD_TOKEN` env var before invoking the Shorebird CLI. The Step fails fast if
+      this is empty.
+
+      Create an API key in the Shorebird Console under Account -> API Keys, and store it as a Bitrise Secret
+      (mark it sensitive).
+    is_required: true
+    is_sensitive: true
+    summary: Auth token used by the Shorebird CLI (from a Shorebird Console API key)
+    title: Shorebird API token
+  shorebird_token: $SHOREBIRD_TOKEN
+- opts:
+    description: The selected platform will be patched, or both iOS and Android if
+      you select both.
+    is_required: true
+    summary: The selected platform will be patched, or both iOS and Android if you
+      select both
+    title: Platform
+    value_options:
+    - both
+    - ios
+    - android
+  platform: both
+- opts:
+    category: Options
+    description: Maps to `--release-version`.
+    is_required: true
+    summary: Which release this patch targets, e.g. `1.0.0+1`. "latest" targets the
+      most recently created release.
+    title: Target release version
+  release_version: latest
+- flavor: ""
+  opts:
+    category: Options
+    description: Maps to `--flavor`.
+    summary: The product flavor to use when building.
+    title: Flavor
+- opts:
+    category: Options
+    description: Maps to `-t`/`--target`, e.g. `lib/main_prod.dart`.
+    summary: The main entrypoint file of the application.
+    title: Target (main entrypoint)
+  target: ""
+- opts:
+    category: Options
+    description: |-
+      Maps to `--track`. Use `staging` to publish to a staging track first, so you can test the patch before
+      promoting it to `stable`.
+    is_required: true
+    summary: The deployment track to publish to.
+    title: Deployment track
+    value_options:
+    - stable
+    - beta
+    - staging
+  track: stable
+- dry_run: "false"
+  opts:
+    category: Options
+    description: Maps to `-n`/`--dry-run`.
+    is_required: true
+    summary: Build and validate the patch but do not upload it. Ideal as a CI sanity
+      check.
+    title: Dry run?
+    value_options:
+    - "true"
+    - "false"
+- allow_asset_diffs: "false"
+  opts:
+    category: Options
+    description: Maps to `--allow-asset-diffs`.
+    is_required: true
+    summary: Publish even if asset differences are detected. Not recommended.
+    title: Allow asset diffs?
+    value_options:
+    - "true"
+    - "false"
+- allow_native_diffs: "false"
+  opts:
+    category: Options
+    description: Maps to `--allow-native-diffs`.
+    is_required: true
+    summary: Publish even if native code differences are detected. Not recommended.
+    title: Allow native diffs?
+    value_options:
+    - "true"
+    - "false"
+- dart_defines: ""
+  opts:
+    category: Options
+    description: |-
+      Separate multiple defines with a newline, e.g.:
+      ```
+      API_URL=https://example.com
+      ENABLE_FOO=true
+      ```
+    summary: One KEY=VALUE per line, appended as repeated --dart-define flags
+    title: Dart defines
+- dart_define_files: ""
+  opts:
+    category: Options
+    description: Separate multiple file paths with a newline.
+    summary: One file path per line, appended as repeated --dart-define-from-file
+      flags
+    title: Dart define files
+- additional_params: ""
+  opts:
+    category: Options
+    description: |-
+      Appended directly to the `shorebird patch` invocation. Use this for advanced/rarely-needed flags this
+      Step doesn't have a dedicated input for, e.g. `--private-key=...`, `--public-key-cmd=...`,
+      `--sign-cmd=...`.
+    summary: Escape hatch for shorebird patch flags not otherwise exposed by this
+      Step
+    title: Additional parameters
+- ios_codesign: "true"
+  opts:
+    category: iOS-specific options
+    is_required: true
+    summary: Maps to --codesign (true) / --no-codesign (false)
+    title: Codesign iOS build?
+    value_options:
+    - "true"
+    - "false"
+- ios_codesign_identity: ""
+  opts:
+    category: iOS-specific options
+    description: Override codesign identity in .flutter_settings.
+    summary: Override codesign identity in .flutter_settings
+    title: Codesign Identity
+- ios_export_method: ""
+  opts:
+    category: iOS-specific options
+    description: Maps to `--export-method`. Leave empty to use Shorebird's own default.
+    summary: Distribution method for the iOS archive export step. One of app-store,
+      ad-hoc, development, enterprise.
+    title: Export method
+- ios_export_options_plist: ""
+  opts:
+    category: iOS-specific options
+    description: Maps to `--export-options-plist`.
+    summary: Path to a custom ExportOptions.plist for the iOS archive export step.
+    title: Export options plist path
+- ios_min_link_percentage: ""
+  opts:
+    category: iOS-specific options
+    description: Maps to `--min-link-percentage`. iOS only.
+    summary: Minimum % of Dart code that must be linked (not interpreted) for the
+      patch to publish.
+    title: Minimum link percentage
+- ios_additional_params: ""
+  opts:
+    category: iOS-specific options
+    summary: Raw `flutter build` args, appended after a literal `--` separator to
+      the iOS invocation.
+    title: Additional Flutter build parameters (iOS)
+- android_additional_params: ""
+  opts:
+    category: Android options
+    summary: Raw `flutter build` args, appended after a literal `--` separator to
+      the Android invocation.
+    title: Additional Flutter build parameters (Android)
+- cache_level: all
+  opts:
+    description: |-
+      If enabled, will cache:
+      - pub packages
+      - Android (gradle) cache
+      - Carthage / Cocoapods dependencies
+      - the installed Shorebird CLI (`~/.shorebird`)
+    is_required: true
+    summary: Enable or disable caching
+    title: Build cache
+    value_options:
+    - all
+    - none
+- is_debug_mode: "false"
+  opts:
+    is_required: true
+    summary: If debug mode is enabled, the step will print verbose logs
+    title: Debug mode?
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- SHOREBIRD_RELEASE_VERSION: null
+  opts:
+    description: |-
+      The release version this patch targeted. Best-effort parsed from the Shorebird CLI's stdout/stderr -
+      may be empty if parsing fails, since Shorebird does not currently offer a machine-readable output
+      format for `patch`.
+    summary: The release version this patch targeted. Best-effort parsed from CLI
+      stdout/stderr.
+    title: Shorebird release version
+- SHOREBIRD_PATCH_NUMBER: null
+  opts:
+    description: |-
+      The newly created patch number. Best-effort parsed from the Shorebird CLI's stdout/stderr - may be
+      empty if parsing fails, or if `dry_run` was enabled (a dry run never actually creates a patch).
+    summary: The newly created patch number. Best-effort parsed from CLI stdout/stderr.
+    title: Shorebird patch number
