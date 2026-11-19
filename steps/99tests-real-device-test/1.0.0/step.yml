@@ -1,0 +1,122 @@
+title: 99tests real-device test
+summary: Creates a 99tests job so people test this build on real phones and browsers, and returns the checkout link.
+description: |-
+  [99tests](https://99tests.com) runs a human test of your app or website on phones, laptops and browsers that testers own, and returns findings a reviewer has verified.
+
+  This Step creates a test job for the package you choose and gives you back a checkout link. It never charges anything. Someone on your team opens the link and pays in a browser. The page they return to shows a status token for the job. They then submit the build link, test cases and target devices to 99tests. The invoice, the status link and the report are emailed to the address you set.
+
+  ### Configuring the Step
+
+  1. Choose a **Package**. Scope, turnaround and prices are on the [pricing page](https://99tests.com/pricing).
+  2. Set **Email** to the address that should receive the invoice, status link and report.
+  3. Optionally set **Country** to bill in that country's currency.
+  4. Add a later Step, for example **Send a Slack message**, that posts `$NINETYNINETESTS_CHECKOUT_URL` to whoever approves the spend.
+
+  Every run creates a new unpaid job. Put this Step in a release or manually triggered Workflow, not in one that runs on every push.
+
+  ### Troubleshooting
+
+  - If the Step fails with "No checkout link in the reply", set **Print the full reply in the log** to `yes`, run it again and read what the server said.
+  - A timeout does not mean that nothing happened. Check the inbox of the email address before you run the Step again, so that you do not create a second job.
+
+  ### Useful links
+
+  - [What a 99tests report looks like](https://99tests.com/sample-report/)
+  - [Pricing](https://99tests.com/pricing)
+  - [99tests MCP server](https://99tests.com/mcp-server), the same service for coding agents
+website: https://99tests.com
+source_code_url: https://github.com/99tests/bitrise-step-99tests-real-device-test
+support_url: https://github.com/99tests/bitrise-step-99tests-real-device-test/issues
+type_tags:
+  - test
+is_requires_admin_user: false
+is_always_run: false
+is_skippable: false
+run_if: ""
+deps:
+  brew:
+  - name: curl
+  - name: jq
+  apt_get:
+  - name: curl
+  - name: jq
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+  - package: starter
+    opts:
+      title: Package
+      summary: The 99tests package to create the job for.
+      description: |-
+        One of `starter`, `standard` or `deep`.
+
+        Scope, turnaround and prices are on the [pricing page](https://99tests.com/pricing).
+      is_required: true
+      value_options:
+      - starter
+      - standard
+      - deep
+  - email:
+    opts:
+      title: Email
+      summary: The address that receives the invoice, status link and report.
+      description: |-
+        99tests sends the invoice, the status link and the report to this address.
+
+        The Step prints the address masked, for example `q***@example.com`.
+      is_required: true
+  - country:
+    opts:
+      title: Country
+      summary: Optional two-letter country code. It sets the billing currency.
+      description: |-
+        An ISO 3166-1 alpha-2 country code such as `IN` or `US`. 99tests uses it to choose the currency.
+
+        Leave it empty to let 99tests decide.
+      is_required: false
+  - build_url: $BITRISE_PUBLIC_INSTALL_PAGE_URL
+    opts:
+      title: Build link
+      summary: Optional link to the build that should be tested. It is printed next to the checkout link.
+      description: |-
+        The link that testers should install or open. For example the public install page from the **Deploy to Bitrise.io** Step, a TestFlight link or a staging URL.
+
+        This Step does not send the link to 99tests. It prints the link next to the checkout link and adds it to `$NINETYNINETESTS_JOB_DETAILS`, so that the person who pays can submit it after checkout.
+      is_required: false
+  - show_reply: "no"
+    opts:
+      category: Debug
+      title: Print the full reply in the log
+      summary: Prints everything the 99tests server answered.
+      description: |-
+        The reply holds the order number and the checkout link. Keep this at `no` unless you are looking into a problem.
+      is_required: true
+      value_options:
+      - "no"
+      - "yes"
+  - api_url: https://99tests.com/api/mcp
+    opts:
+      category: Debug
+      title: 99tests API address
+      summary: Change this only to test the Step against another server.
+      description: |-
+        The address of the 99tests MCP endpoint. It must start with `https://`.
+      is_required: true
+outputs:
+  - NINETYNINETESTS_CHECKOUT_URL:
+    opts:
+      title: Checkout link
+      summary: Open this link in a browser to pay for the job.
+  - NINETYNINETESTS_ORDER_ID:
+    opts:
+      title: Order number
+      summary: The 99tests order number, for example 99T-2484.
+  - NINETYNINETESTS_JOB_DETAILS:
+    opts:
+      title: Job details
+      summary: The full text of the 99tests reply, followed by the build link if you set one.
+published_at: 2026-11-11T15:15:43+05:30
+source:
+  git: https://github.com/99tests/bitrise-step-99tests-real-device-test.git
+  commit: 80e554b925981f25d2b75039cad0459461ff25b9
