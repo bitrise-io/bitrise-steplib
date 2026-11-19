@@ -1,0 +1,110 @@
+title: AppForShare upload
+summary: Upload an iOS or Android build to AppForShare and get an install link for
+  your testers.
+description: |-
+  Uploads the .ipa, .apk or .aab your workflow built to [AppForShare](https://appforshare.io) and gives you an install
+  link (and a QR code on the page) for testers. Optionally puts the build into a channel with a stable link, shares it
+  with tester groups and testers, emails the link to up to 5 addresses, and fails the step when the store readiness
+  check says the build is blocked.
+
+  Set up:
+  1. Create an API token in AppForShare under Settings, API tokens (Pro and Team).
+  2. Add it as a Bitrise Secret named `APPFORSHARE_TOKEN`.
+  3. Add this step after the step that builds your app (Xcode Archive, Android Build or Gradle Runner).
+
+  The file defaults to `$BITRISE_IPA_PATH`, then `$BITRISE_AAB_PATH`, then `$BITRISE_APK_PATH`.
+website: https://appforshare.io/docs/ci/bitrise
+source_code_url: https://github.com/appforshare/bitrise-step-appforshare-upload
+support_url: https://github.com/appforshare/bitrise-step-appforshare-upload/issues
+published_at: 2026-11-03T03:41:13.022884116Z
+source:
+  git: https://github.com/appforshare/bitrise-step-appforshare-upload.git
+  commit: 803d6aa9c1e99e0fae17d8f9597103c3657a3fa3
+project_type_tags:
+- ios
+- android
+- react-native
+- flutter
+- cordova
+- ionic
+- xamarin
+type_tags:
+- deploy
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: false
+is_skippable: false
+inputs:
+- file_path: ""
+  opts:
+    is_required: false
+    summary: The .ipa, .apk or .aab to upload. Empty = $BITRISE_IPA_PATH, then $BITRISE_AAB_PATH,
+      then $BITRISE_APK_PATH.
+    title: Build file
+- api_token: $APPFORSHARE_TOKEN
+  opts:
+    is_required: true
+    is_sensitive: true
+    summary: Your AppForShare API token. Keep it in a Secret.
+    title: API token
+- opts:
+    summary: Shown to testers on the install page (Pro and Team).
+    title: Release notes
+  release_notes: ""
+- channel: ""
+  opts:
+    summary: Put the build into this channel when ready, for example Beta. Created
+      on first use (Pro and Team).
+    title: Channel
+- groups: ""
+  opts:
+    summary: Share the build with these tester groups when ready, comma separated
+      (Team).
+    title: Tester groups
+- opts:
+    summary: Share the build with these tester emails when ready, comma separated
+      (Team).
+    title: Testers
+  testers: ""
+- email: ""
+  opts:
+    summary: Email the install link to up to 5 addresses when ready, comma separated
+      (Pro and Team).
+    title: Email the link to
+- opts:
+    is_sensitive: true
+    summary: Protect the install link with a password (4 to 128 characters).
+    title: Link password
+  password: ""
+- fail_on: "off"
+  opts:
+    summary: off never fails. blocked fails the step when the store readiness check
+      is blocked. review also fails on needs review. The build stays uploaded.
+    title: Fail on store readiness
+    value_options:
+    - "off"
+    - blocked
+    - review
+- api_url: https://appforshare.io
+  opts:
+    summary: Leave as is unless AppForShare support gave you another address.
+    title: API URL
+outputs:
+- APPFORSHARE_URL: null
+  opts:
+    summary: The install page of the uploaded build, with a QR code for testers.
+    title: Install link
+- APPFORSHARE_SLUG: null
+  opts:
+    summary: The short code at the end of the install link.
+    title: Share code of the build
+- APPFORSHARE_CHANNEL_URL: null
+  opts:
+    summary: Set when the channel input is used. Always opens the newest build in
+      that channel.
+    title: Stable link of the channel
+- APPFORSHARE_READINESS: null
+  opts:
+    summary: ready, review, blocked or unknown.
+    title: Store readiness status
