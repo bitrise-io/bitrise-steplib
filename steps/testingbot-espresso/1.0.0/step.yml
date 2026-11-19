@@ -1,0 +1,395 @@
+title: TestingBot App Automate - Espresso
+summary: Runs your Espresso test suite on real Android devices and emulators at TestingBot.
+description: |
+  Uploads your app and Espresso test APK to [TestingBot](https://testingbot.com),
+  runs the suite on the devices you pick, streams progress into the build log,
+  and **fails the Bitrise build when a test fails**.
+
+  The JUnit report is downloaded and exported to Bitrise's own **Test Reports**
+  tab, so failures are visible without digging through the log.
+
+  If you don't set the app paths, the Step picks up the artifacts of the
+  preceding build Step automatically (`$BITRISE_APK_PATH` and
+  `$BITRISE_TEST_APK_PATH`).
+
+  ### Configuring the Step
+
+  1. Add your TestingBot **key** and **secret** as Bitrise Secrets, and reference
+     them from the `testingbot_key` / `testingbot_secret` inputs. Both are in the
+     [TestingBot member area](https://testingbot.com/members/user/api).
+  2. Add an `Android Build` Step before this one that assembles both the app and
+     the `androidTest` APK.
+  3. Set `device` to the device you want. Wildcards and regular expressions work:
+     `Pixel 8`, `Pixel.*`, `Galaxy S2[34]`, or `*` for any available device.
+  4. Add `Deploy to Bitrise.io` after this Step to publish the test report.
+
+  ### Requirements
+
+  This Step drives the [TestingBot CLI](https://github.com/testingbot/testingbotctl),
+  which needs **Node.js 20 or newer**. Every current Bitrise Stack ships one; if
+  yours doesn't, add an `Install Node.js` Step before this one.
+
+  ### Troubleshooting
+
+  - **The build passes even though tests failed** — check that
+    `fail_on_test_failure` is on (it is by default).
+  - **No results on the Test Reports tab** — add the `Deploy to Bitrise.io` Step
+    after this one. It is what actually publishes what this Step exports.
+  - **`Could not find the test bundle`** — your `Android Build` Step needs to
+    build the `androidTest` variant so `$BITRISE_TEST_APK_PATH` is set.
+
+  ### Useful links
+
+  - [Espresso testing on TestingBot](https://testingbot.com/support/app-automate/espresso)
+  - [TestingBot CLI](https://github.com/testingbot/testingbotctl)
+  - [Available devices](https://testingbot.com/devices)
+website: https://github.com/testingbot/bitrise-step-testingbot-espresso
+source_code_url: https://github.com/testingbot/bitrise-step-testingbot-espresso
+support_url: https://github.com/testingbot/bitrise-step-testingbot-espresso/issues
+published_at: 2026-08-12T11:27:06.641434+02:00
+source:
+  git: https://github.com/testingbot/bitrise-step-testingbot-espresso.git
+  commit: 063623da37a184f8072972488ff4572cd1db6f1a
+project_type_tags:
+- android
+- react-native
+- flutter
+- cordova
+- ionic
+type_tags:
+- test
+toolkit:
+  bash:
+    entry_file: step.sh
+is_always_run: false
+is_skippable: false
+inputs:
+- opts:
+    description: |-
+      Your TestingBot API key, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API key.
+    title: TestingBot API key
+  testingbot_key: $TESTINGBOT_KEY
+- opts:
+    description: |-
+      Your TestingBot API secret, from the
+      [member area](https://testingbot.com/members/user/api).
+
+      Store it as a Bitrise Secret and reference it here.
+    is_expand: true
+    is_required: true
+    is_sensitive: true
+    summary: Your TestingBot API secret.
+    title: TestingBot API secret
+  testingbot_secret: $TESTINGBOT_SECRET
+- device: '*'
+  opts:
+    description: |-
+      The device to run the suite on.
+
+      Exact names work (`Pixel 8`), and so do wildcards and regular
+      expressions, which is usually what you want in CI so a busy device
+      doesn't block the build:
+
+      - `Pixel.*` — any Pixel
+      - `Galaxy S2[34]` — a Galaxy S23 or S24
+      - `^Galaxy(?!.*23).*$` — any Galaxy that isn't an S23
+      - `*` — any available device
+
+      See the [device list](https://testingbot.com/devices).
+    is_expand: true
+    is_required: true
+    summary: Which device to run on. Wildcards and regular expressions are supported.
+    title: Device
+- app_path: null
+  opts:
+    description: |-
+      Path to the application APK.
+
+      Leave empty to use `$BITRISE_APK_PATH` from the preceding
+      `Android Build` Step.
+    is_expand: true
+    summary: Path to the app under test. Auto-detected when left empty.
+    title: App APK path
+- opts:
+    description: |-
+      Path to the APK holding your Espresso tests.
+
+      Leave empty to use `$BITRISE_TEST_APK_PATH` from the preceding
+      `Android Build` Step. That Step needs to build the `androidTest` variant
+      for this to be set.
+    is_expand: true
+    summary: Path to the Espresso test APK. Auto-detected when left empty.
+    title: Test APK path
+  test_app_path: null
+- opts:
+    category: Device
+    description: |-
+      Android OS version to run on, for example `12`, `13` or `14`. Leave
+      empty to let TestingBot choose.
+    is_expand: true
+    summary: Android OS version, for example `14`.
+    title: Android version
+  platform_version: null
+- opts:
+    category: Device
+    description: |-
+      Run on a physical device. Emulators are faster and cheaper for most
+      suites; real devices matter for hardware-dependent behaviour.
+    summary: Run on a physical device rather than an emulator.
+    title: Use a real device
+    value_options:
+    - "true"
+    - "false"
+  real_device: "false"
+- opts:
+    category: Device
+    summary: Only allocate tablet devices.
+    title: Tablets only
+    value_options:
+    - "true"
+    - "false"
+  tablet_only: "false"
+- opts:
+    category: Device
+    summary: Only allocate phone devices.
+    title: Phones only
+    value_options:
+    - "true"
+    - "false"
+  phone_only: "false"
+- locale: null
+  opts:
+    category: Localization
+    is_expand: true
+    summary: Device locale, for example `en_US` or `de_DE`.
+    title: Device locale
+- language: null
+  opts:
+    category: Localization
+    is_expand: true
+    summary: App language as an ISO 639-1 code, for example `en` or `de`.
+    title: App language
+- opts:
+    category: Localization
+    is_expand: true
+    summary: Device time zone, for example `Europe/Brussels`.
+    title: Time zone
+  timezone: null
+- build_name: null
+  opts:
+    category: Test configuration
+    description: |-
+      Identifier used to group the test sessions of one build together in the
+      TestingBot dashboard.
+
+      Leave empty to name the build after the Bitrise app title and build
+      number, for example `My App #42`.
+    is_expand: true
+    summary: Groups this run with others in the TestingBot dashboard.
+    title: Build name
+- opts:
+    category: Test configuration
+    description: |-
+      Shown in the TestingBot dashboard, and used as the tab name on Bitrise's
+      Test Reports page. Give parallel Steps distinct names so their reports
+      don't collide.
+    is_expand: true
+    is_required: true
+    summary: Name for this run, also used as the Test Reports tab title.
+    title: Test name
+  test_name: Espresso
+- opts:
+    category: Test configuration
+    description: |-
+      Custom instrumentation runner, if you don't use the default
+      `androidx.test.runner.AndroidJUnitRunner`.
+    is_expand: true
+    summary: Custom test instrumentation runner.
+    title: Instrumentation runner
+  test_runner: null
+- filter_size: null
+  opts:
+    category: Test configuration
+    description: Comma-separated list of test sizes to run, for example `small,medium`.
+    is_expand: true
+    summary: 'Run only tests of these sizes: `small`, `medium`, `large`.'
+    title: Test sizes
+- fail_on_test_failure: "true"
+  opts:
+    category: Test configuration
+    description: |-
+      When enabled (the default) a failing test fails the Step, and so the
+      build.
+
+      Turn it off for a report-only run — the Step then succeeds regardless,
+      and you can branch on the exported `$TESTINGBOT_TEST_STATUS`.
+    is_required: true
+    summary: Mark the Bitrise build failed if any test fails.
+    title: Fail the build when tests fail
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Test configuration
+    description: |-
+      Start the run and return without waiting for it to finish.
+
+      Nothing is polled, no report is downloaded, and the Step cannot fail on
+      a test failure — check the TestingBot dashboard instead.
+    summary: Start the tests and finish the Step immediately.
+    title: Don't wait for results
+    value_options:
+    - "true"
+    - "false"
+  run_async: "false"
+- filter_class: null
+  opts:
+    category: Test filtering
+    description: |-
+      Run only the tests in these classes, for example
+      `com.example.LoginTest,com.example.HomeTest`.
+    is_expand: true
+    summary: Comma-separated, fully qualified class names.
+    title: Only these classes
+- filter_not_class: null
+  opts:
+    category: Test filtering
+    is_expand: true
+    summary: Comma-separated, fully qualified class names to skip.
+    title: Exclude these classes
+- filter_package: null
+  opts:
+    category: Test filtering
+    is_expand: true
+    summary: Comma-separated package names.
+    title: Only these packages
+- filter_not_package: null
+  opts:
+    category: Test filtering
+    is_expand: true
+    summary: Comma-separated package names to skip.
+    title: Exclude these packages
+- filter_annotation: null
+  opts:
+    category: Test filtering
+    is_expand: true
+    summary: Comma-separated annotations, for example `com.example.SmokeTest`.
+    title: Only these annotations
+- filter_not_annotation: null
+  opts:
+    category: Test filtering
+    is_expand: true
+    summary: Comma-separated annotations to skip.
+    title: Exclude these annotations
+- opts:
+    category: Network and location
+    summary: 'Simulate a slower network: `4G`, `3G`, `Edge` or `airplane`.'
+    title: Network throttling
+  throttle_network: null
+- geo_country_code: null
+  opts:
+    category: Network and location
+    is_expand: true
+    summary: Route device traffic through a country, as an ISO code such as `US` or
+      `DE`.
+    title: Geolocation country
+- opts:
+    category: Network and location
+    description: |-
+      Starts a TestingBot Tunnel for the duration of the run, so the app can
+      reach a staging environment that isn't publicly routable.
+
+      Cannot be combined with `run_async`.
+    summary: Open a TestingBot Tunnel for this run.
+    title: Start a tunnel
+    value_options:
+    - "true"
+    - "false"
+  tunnel: "false"
+- opts:
+    category: Network and location
+    description: |-
+      Identifier of the tunnel to use.
+
+      Defaults to the tunnel opened by the `TestingBot Tunnel` Step earlier in
+      the Workflow, which exports `$TESTINGBOT_TUNNEL_IDENTIFIER`. Set it
+      explicitly only when you run several tunnels in parallel.
+    is_expand: true
+    summary: Name of the tunnel to route through.
+    title: Tunnel identifier
+  tunnel_identifier: $TESTINGBOT_TUNNEL_IDENTIFIER
+- export_to_test_reports: "true"
+  opts:
+    category: Reports
+    description: |-
+      Downloads the JUnit report and lays it out for Bitrise's Test Reports
+      add-on.
+
+      You still need the `Deploy to Bitrise.io` Step afterwards — that Step is
+      what uploads what this one exports.
+    summary: Publish the JUnit report to Bitrise's Test Reports tab.
+    title: Export to Test Reports
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    category: Reports
+    description: |-
+      Directory the JUnit report is downloaded into. Defaults to a temporary
+      directory. The path is exported as `$TESTINGBOT_JUNIT_REPORT_PATH`.
+    is_expand: true
+    summary: Where to write the downloaded JUnit report.
+    title: Report output directory
+  report_output_dir: null
+- cli_version: 1.1.1
+  opts:
+    category: Debug
+    description: |-
+      The [TestingBot CLI](https://github.com/testingbot/testingbotctl) version
+      this Step runs. Pinned so builds stay reproducible; set `latest` to
+      always take the newest release.
+    is_required: true
+    summary: Version of `@testingbot/cli` to run.
+    title: TestingBot CLI version
+- additional_args: null
+  opts:
+    category: Debug
+    description: |-
+      Appended verbatim to the `testingbot espresso` command, so you can use a
+      CLI option this Step doesn't expose yet without waiting for a release.
+
+      See `npx @testingbot/cli espresso --help`.
+    is_expand: true
+    summary: Extra flags passed straight to the TestingBot CLI.
+    title: Additional CLI arguments
+- opts:
+    category: Debug
+    summary: Suppress the CLI's live progress output.
+    title: Quiet output
+    value_options:
+    - "true"
+    - "false"
+  quiet: "false"
+outputs:
+- TESTINGBOT_TEST_STATUS: null
+  opts:
+    description: |-
+      `passed` or `failed`. Useful when `fail_on_test_failure` is off and you
+      want to branch on the result yourself.
+    summary: '`passed` or `failed`.'
+    title: Test status
+- TESTINGBOT_BUILD_NAME: null
+  opts:
+    summary: The build identifier the sessions were grouped under.
+    title: Build name
+- TESTINGBOT_JUNIT_REPORT_PATH: null
+  opts:
+    summary: Path to the downloaded JUnit XML report.
+    title: JUnit report path
