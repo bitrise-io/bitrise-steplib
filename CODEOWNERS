@@ -15,7 +15,6 @@ steps/restore-dart-cache @bitrise-io/advanced-ci-value-stream-members
 steps/restore-gradle-cache @bitrise-io/advanced-ci-value-stream-members
 steps/restore-gradle-configuration-cache @bitrise-io/advanced-ci-value-stream-members
 steps/restore-npm-cache @bitrise-io/advanced-ci-value-stream-members
-steps/restore-s3-cache @bitrise-io/advanced-ci-value-stream-members
 steps/restore-spm-cache @bitrise-io/advanced-ci-value-stream-members
 steps/save-cache @bitrise-io/advanced-ci-value-stream-members
 steps/save-carthage-cache @bitrise-io/advanced-ci-value-stream-members
@@ -24,5 +23,4 @@ steps/save-dart-cache @bitrise-io/advanced-ci-value-stream-members
 steps/save-gradle-cache @bitrise-io/advanced-ci-value-stream-members
 steps/save-gradle-configuration-cache @bitrise-io/advanced-ci-value-stream-members
 steps/save-npm-cache @bitrise-io/advanced-ci-value-stream-members
-steps/save-s3-cache @bitrise-io/advanced-ci-value-stream-members
 steps/save-spm-cache @bitrise-io/advanced-ci-value-stream-members
