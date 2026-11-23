@@ -1,0 +1,10 @@
+# Global codeowners
+* @mobile-pillar-members
+
+# Granular codeowners
+steps/activate-build-cache-for-bazel @advanced-ci-value-stream-members
+steps/activate-build-cache-for-gradle @advanced-ci-value-stream-members
+steps/activate-build-cache-for-react-native @advanced-ci-value-stream-members
+steps/activate-build-cache-for-tuist @advanced-ci-value-stream-members
+steps/activate-build-cache-for-xcode @advanced-ci-value-stream-members
+steps/activate-gradle-mirrors @advanced-ci-value-stream-members
