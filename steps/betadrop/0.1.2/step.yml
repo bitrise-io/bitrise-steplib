@@ -12,10 +12,10 @@ description: |-
 website: https://betadrop.app/integrations/bitrise/
 source_code_url: https://github.com/betadrop-app/bitrise-step-betadrop
 support_url: https://github.com/betadrop-app/bitrise-step-betadrop/issues
-published_at: 2026-11-22T20:43:28+05:30
+published_at: 2026-11-24T19:32:53+05:30
 source:
   git: https://github.com/betadrop-app/bitrise-step-betadrop.git
-  commit: 7feeec8349c236135a2f79fdfe76240be9a062f5
+  commit: d9717a8364355b8c15a44694af900cf0467e3fdd
 project_type_tags:
 - ios
 - android
@@ -81,7 +81,7 @@ inputs:
     value_options:
     - "true"
     - "false"
-- cli_version: 0.4.0
+- cli_version: 0.5.0
   opts:
     summary: The @betadrop/cli version to run. 0.4.0 or newer.
     title: CLI version
