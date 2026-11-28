@@ -1,0 +1,80 @@
+title: SaaSCity Launch Check
+summary: Audits a web or app landing page for HTTP 200, robots.txt, sitemap.xml, and Open Graph tags.
+description: |-
+  Audits a deployed SaaS or mobile-app landing page during Bitrise CI/CD workflows.
+
+  Verifies:
+  - Homepage HTTP 200 response
+  - Open Graph metadata (`og:title`, `og:description`, `og:image`)
+  - `/robots.txt` availability and accidental staging `Disallow: /` regressions
+  - `/sitemap.xml` availability and valid XML root
+
+  Built by [SaaSCity](https://saascity.io). Free launch tools: [robots.txt generator](https://saascity.io/free-tools/robots-txt-generator), [domain rating checker](https://saascity.io/free-tools/domain-rating-checker), and [SaaSCity MCP](https://saascity.io/mcp).
+website: https://saascity.io
+source_code_url: https://github.com/nyyhao/bitrise-step-saascity-launch-check
+support_url: https://github.com/nyyhao/bitrise-step-saascity-launch-check/issues
+published_at: 2026-11-28T04:24:05Z
+source:
+  git: https://github.com/nyyhao/bitrise-step-saascity-launch-check.git
+  commit: d2555e4c2cecd2bba9fff2175475793c3ff707ea
+asset_urls:
+  icon.svg: https://raw.githubusercontent.com/bitrise-io/bitrise-steplib/master/steps/saascity-launch-check/assets/icon.svg
+type_tags:
+- utility
+is_always_run: false
+is_skippable: false
+deps:
+  brew:
+  - name: curl
+  apt_get:
+  - name: curl
+toolkit:
+  bash:
+    entry_file: step.sh
+inputs:
+- site_url: ""
+  opts:
+    is_required: true
+    summary: The deployed landing page URL to audit (e.g. https://saascity.io).
+    title: Site URL
+- check_robots: "true"
+  opts:
+    summary: Verify /robots.txt returns HTTP 200 and does not block all crawlers.
+    title: Check robots.txt
+    value_options:
+    - "true"
+    - "false"
+- check_sitemap: "true"
+  opts:
+    summary: Verify /sitemap.xml returns HTTP 200 with a valid XML root element.
+    title: Check sitemap.xml
+    value_options:
+    - "true"
+    - "false"
+- check_og: "true"
+  opts:
+    summary: Verify og:title, og:description, and og:image tags are present in static HTML.
+    title: Check Open Graph meta tags
+    value_options:
+    - "true"
+    - "false"
+- opts:
+    summary: Per-request curl timeout in seconds.
+    title: Request timeout (seconds)
+  timeout_seconds: "10"
+- fail_on_error: "true"
+  opts:
+    summary: Exit non-zero if any enabled launch-readiness check fails.
+    title: Fail step on error
+    value_options:
+    - "true"
+    - "false"
+outputs:
+- SAASCITY_LAUNCH_SCORE: null
+  opts:
+    summary: Percentage of enabled launch-readiness checks that passed.
+    title: Launch readiness score (0-100)
+- SAASCITY_LAUNCH_STATUS: null
+  opts:
+    summary: Either 'passed' or 'failed'.
+    title: Launch readiness status
